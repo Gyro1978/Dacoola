@@ -17,8 +17,9 @@ import shutil
 from jinja2 import Environment, FileSystemLoader
 import markdown
 import re # Needed for slug generation
+import requests # Added requests import
 from dotenv import load_dotenv
-from datetime import datetime, timezone
+from datetime import datetime, timezone # Make sure timezone is imported
 from urllib.parse import urljoin # To create absolute URLs
 
 # --- Import Agent and Scraper Functions ---
@@ -49,12 +50,43 @@ AUTHOR_NAME_DEFAULT = os.getenv('AUTHOR_NAME', 'AI News Team')
 YOUR_WEBSITE_NAME = os.getenv('YOUR_WEBSITE_NAME', 'Dacoola') # Default name
 YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '') # Get logo URL
 YOUR_SITE_BASE_URL = os.getenv('YOUR_SITE_BASE_URL', '') # e.g., https://www.dacoola.com
+
+# --- Setup Logging (before checking env vars so warnings are logged) ---
+log_file_path = os.path.join(PROJECT_ROOT_FOR_PATH, 'dacoola.log')
+# Ensure log directory exists if it's not the project root
+try:
+    os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
+    log_handlers = [
+        # Try setting encoding for StreamHandler too, might help on some terminals
+        logging.StreamHandler(sys.stdout), # .reconfigure(encoding='utf-8') # Python 3.9+
+        logging.FileHandler(log_file_path, encoding='utf-8') # Specify UTF-8 for file handler
+    ]
+except OSError as e:
+    print(f"Error creating log directory/file: {e}. Logging to console only.")
+    log_handlers = [logging.StreamHandler(sys.stdout)]
+# Setup basicConfig with handlers
+logging.basicConfig(
+    level=logging.INFO, # Keep as INFO for production, DEBUG for testing
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=log_handlers,
+    force=True # Added force=True to allow reconfiguring if needed
+)
+# Set encoding for the root logger's stream handlers if possible (Python 3.9+)
+# for handler in logging.getLogger().handlers:
+#      if isinstance(handler, logging.StreamHandler):
+#           try:
+#                handler.reconfigure(encoding='utf-8')
+#           except AttributeError: # Older Python versions might not have reconfigure
+#                pass
+logger = logging.getLogger('main_orchestrator')
+
+
+# --- Log env var warnings AFTER logger is set up ---
 if not YOUR_SITE_BASE_URL:
-    logging.warning("YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.")
-# *** ADD TTS API KEY CHECK ***
+    logger.warning("YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.")
 CAMB_AI_API_KEY = os.getenv('CAMB_AI_API_KEY')
 if not CAMB_AI_API_KEY:
-     logging.warning("CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.")
+     logger.warning("CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.")
 
 
 # --- Configuration ---
@@ -65,42 +97,28 @@ PUBLIC_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'public')
 OUTPUT_HTML_DIR = os.path.join(PUBLIC_DIR, 'articles')
 TEMPLATE_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'templates')
 SITE_DATA_FILE = os.path.join(PUBLIC_DIR, 'site_data.json')
-# *** ADD AUDIO OUTPUT DIR ***
-OUTPUT_AUDIO_DIR = os.path.join(PUBLIC_DIR, 'audio') # Audio files saved here
-# *** ADD ALL ARTICLES FILE PATH ***
+OUTPUT_AUDIO_DIR = os.path.join(PUBLIC_DIR, 'audio')
 ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
 
-# --- Setup Logging ---
-log_file_path = os.path.join(PROJECT_ROOT_FOR_PATH, 'dacoola.log')
-logging.basicConfig(
-    level=logging.INFO, # Changed to INFO for build logs
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler(log_file_path)
-    ]
-)
-logger = logging.getLogger('main_orchestrator')
 
 # --- Jinja2 Setup ---
 try:
     # Add escapejs filter for JSON-LD safety
     def escapejs_filter(value):
         if value is None: return ''
-        # Basic JS string escaping
         value = str(value)
         value = value.replace('\\', '\\\\')
         value = value.replace("'", "\\'")
         value = value.replace('"', '\\"')
         value = value.replace('\n', '\\n')
-        value = value.replace('\r', '') # Remove carriage returns
-        value = value.replace('/', '\\/') # Escape forward slash for script tags
-        value = value.replace('<', '\\u003c') # Escape <
-        value = value.replace('>', '\\u003e') # Escape >
+        value = value.replace('\r', '')
+        value = value.replace('/', '\\/')
+        value = value.replace('<', '\\u003c')
+        value = value.replace('>', '\\u003e')
         return value
 
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), autoescape=True)
-    env.filters['escapejs'] = escapejs_filter # Register the filter
+    env.filters['escapejs'] = escapejs_filter
     logger.info(f"Jinja2 environment loaded from {TEMPLATE_DIR}")
 except Exception as e:
     logger.exception(f"CRITICAL: Failed to initialize Jinja2 from {TEMPLATE_DIR}. Exiting.")
@@ -108,11 +126,15 @@ except Exception as e:
 
 # --- Helper Functions ---
 def ensure_directories():
-    os.makedirs(SCRAPED_ARTICLES_DIR, exist_ok=True)
-    os.makedirs(PROCESSED_JSON_DIR, exist_ok=True)
-    os.makedirs(OUTPUT_HTML_DIR, exist_ok=True)
-    os.makedirs(OUTPUT_AUDIO_DIR, exist_ok=True)
-    logger.info("Ensured data, public, and audio directories exist.")
+    try:
+        os.makedirs(SCRAPED_ARTICLES_DIR, exist_ok=True)
+        os.makedirs(PROCESSED_JSON_DIR, exist_ok=True)
+        os.makedirs(OUTPUT_HTML_DIR, exist_ok=True)
+        os.makedirs(OUTPUT_AUDIO_DIR, exist_ok=True)
+        logger.info("Ensured data, public, and audio directories exist.")
+    except OSError as e:
+        logger.exception(f"CRITICAL: Could not create necessary directories: {e}")
+        sys.exit(1)
 
 def load_article_data(filepath):
     try:
@@ -142,11 +164,40 @@ def remove_scraped_file(filepath):
 
 def format_tags_html(tags_list):
     if not tags_list or not isinstance(tags_list, list): return ""
-    # Link each tag to the topic page (topic.html) with the tag as a query parameter
-    # This assumes you might want to filter by tags on a generic page later.
-    # Adjust the href if you have a different structure for tag pages.
-    return " ".join([f'<span class="tag-item"><a href="/topic.html?name={tag.replace(" ", "+")}">{tag}</a></span>' for tag in tags_list])
+    try:
+        # Link to absolute path /topic.html assuming public is web root
+        # Ensure tag names are URL-encoded using requests.utils.quote
+        return " ".join([f'<span class="tag-item"><a href="/topic.html?name={requests.utils.quote(str(tag))}">{tag}</a></span>' for tag in tags_list])
+    except Exception as e:
+        logger.error(f"Error formatting tags: {tags_list} - {e}")
+        return "" # Return empty string on error
 
+# <<< --- FIX: Moved get_sort_key function here and made more robust --- >>>
+def get_sort_key(x):
+    """Helper function to extract a timezone-aware datetime object for sorting articles."""
+    fallback_date = datetime(1970, 1, 1, tzinfo=timezone.utc) # Ensure fallback is offset-aware
+    date_str = x.get('published_iso') # Don't provide default here
+    if not date_str: # Handle None or empty string
+        return fallback_date
+
+    try:
+        # Handle potential 'Z' timezone indicator
+        if date_str.endswith('Z'):
+            date_str = date_str[:-1] + '+00:00'
+        dt = datetime.fromisoformat(date_str)
+        # If parsed dt is naive, assume UTC (or local time if appropriate, but UTC is safer)
+        if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
+            logger.debug(f"Date '{date_str}' was naive, assuming UTC.")
+            return dt.replace(tzinfo=timezone.utc)
+        return dt # Already timezone-aware
+    except (ValueError, TypeError):
+         # Attempt to parse date-only format, assuming UTC
+         try:
+             dt = datetime.strptime(date_str, '%Y-%m-%d')
+             return dt.replace(tzinfo=timezone.utc) # Make it timezone-aware
+         except: # Fallback for any other error
+             logger.warning(f"Could not parse date '{date_str}' for sorting, using fallback.")
+             return fallback_date
 
 def render_post_page(template_variables, output_filename):
     try:
@@ -154,33 +205,41 @@ def render_post_page(template_variables, output_filename):
         html_content = template.render(template_variables)
         safe_filename = output_filename
         if not safe_filename: safe_filename = template_variables.get('id', 'untitled')
+        safe_filename = re.sub(r'[<>:"/\\|?*\.]+', '', safe_filename)
+        safe_filename = safe_filename[:100]
+        if not safe_filename: safe_filename = template_variables.get('id', 'untitled_fallback')
+
         output_path = os.path.join(OUTPUT_HTML_DIR, f"{safe_filename}.html")
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        # Ensure writing with UTF-8
         with open(output_path, 'w', encoding='utf-8') as f: f.write(html_content)
         logger.info(f"Rendered HTML: {output_path}")
         return output_path
-    except Exception as e: logger.exception(f"CRITICAL Error rendering template {output_filename}: {e}"); return None
+    except Exception as e: logger.exception(f"CRITICAL Error rendering template for ID {template_variables.get('id','N/A')}: {e}"); return None
 
 # --- Site Data Management ---
 def load_recent_articles_for_comparison():
+    articles_for_comparison = []
     try:
         if os.path.exists(SITE_DATA_FILE):
             with open(SITE_DATA_FILE, 'r', encoding='utf-8') as f:
                 site_data = json.load(f)
                 if isinstance(site_data.get('articles'), list):
-                    # Return only titles and short summaries needed for the check
-                    # Also use the original summary if summary_short isn't available
-                    return [{"title": a.get("title"),
-                             "summary_short": a.get("summary_short", a.get("summary", ""))[:300]} # Limit length here
-                            for a in site_data["articles"][:50] if a.get("title")] # Limit context size
-    except Exception as e: logger.warning(f"Could not load recent articles from {SITE_DATA_FILE} for comparison: {e}")
-    return []
+                    for a in site_data["articles"][:50]: # Limit context size
+                         if a and a.get("title"): # Check if article entry exists and has a title
+                             articles_for_comparison.append({
+                                 "title": a.get("title"),
+                                 "summary_short": a.get("summary_short", a.get("summary", ""))[:300]
+                             })
+    except Exception as e: logger.warning(f"Could not load/process recent articles from {SITE_DATA_FILE} for comparison: {e}")
+    return articles_for_comparison
+
 
 def update_site_data(new_article_info):
     site_data = {"articles": []}
     all_articles_data = {"articles": []}
 
-    # Load existing site_data (for homepage limit)
+    # Load existing site_data
     try:
         if os.path.exists(SITE_DATA_FILE):
             with open(SITE_DATA_FILE, 'r', encoding='utf-8') as f:
@@ -190,7 +249,7 @@ def update_site_data(new_article_info):
                      site_data = {"articles": []}
     except Exception as e: logger.warning(f"Could not load {SITE_DATA_FILE}: {e}. Starting fresh."); site_data = {"articles": []}
 
-    # Load existing full articles list (for appending/updating)
+    # Load existing all_articles_data
     try:
         if os.path.exists(ALL_ARTICLES_FILE):
             with open(ALL_ARTICLES_FILE, 'r', encoding='utf-8') as f:
@@ -200,77 +259,65 @@ def update_site_data(new_article_info):
                      all_articles_data = {"articles": []}
     except Exception as e: logger.warning(f"Could not load {ALL_ARTICLES_FILE}: {e}. Starting fresh."); all_articles_data = {"articles": []}
 
-
     article_id = new_article_info.get('id')
     site_data_found = False
     all_articles_found = False
 
-    # Create a consistent, minimal representation for the site data files
-    # Ensure all required keys for the frontend are present, even if None initially
     minimal_entry = {
         "id": new_article_info.get('id'),
         "title": new_article_info.get('title'),
-        "link": new_article_info.get('link'), # Should be the relative path like 'articles/slug.html'
+        "link": new_article_info.get('link'), # Relative path like 'articles/slug.html'
         "published_iso": new_article_info.get('published_iso'),
         "summary_short": new_article_info.get('summary_short'),
         "image_url": new_article_info.get('image_url'),
         "topic": new_article_info.get('topic'),
         "is_breaking": new_article_info.get('is_breaking', False),
         "tags": new_article_info.get('tags', []),
-        "audio_url": new_article_info.get('audio_url'),
-        "trend_score": new_article_info.get('trend_score', 0) # Add trend score
+        "audio_url": new_article_info.get('audio_url'), # Should be relative like 'audio/file.mp3'
+        "trend_score": new_article_info.get('trend_score', 0)
     }
 
-    # Update/Add to homepage list (site_data)
+    # Update/Add to site_data
     if article_id:
-        for i, existing_article in enumerate(site_data["articles"]):
-            if existing_article.get('id') == article_id:
-                # Update existing entry with potentially new info, ensuring all keys are present
-                updated_entry = {**existing_article, **minimal_entry}
-                site_data["articles"][i] = updated_entry
-                site_data_found = True; logger.debug(f"Updating {article_id} in site_data.json"); break
-    if not site_data_found and article_id:
-        site_data["articles"].append(minimal_entry); logger.debug(f"Adding {article_id} to site_data.json")
+        # Use list comprehension for potentially cleaner update/add
+        existing_ids_site = {a.get('id') for a in site_data.get("articles", []) if a}
+        if article_id in existing_ids_site:
+             site_data["articles"] = [
+                 {**a, **minimal_entry} if a.get('id') == article_id else a
+                 for a in site_data.get("articles", []) if a # Ensure 'a' is not None
+             ]
+             site_data_found = True
+             logger.debug(f"Updating {article_id} in site_data.json")
+        else:
+             site_data.setdefault("articles", []).append(minimal_entry)
+             logger.debug(f"Adding {article_id} to site_data.json")
 
-    # Update/Add to full list (all_articles_data)
+
+    # Update/Add to all_articles_data
     if article_id:
-        for i, existing_article in enumerate(all_articles_data["articles"]):
-            if existing_article.get('id') == article_id:
-                # Update existing entry, ensuring all keys are present
-                updated_entry = {**existing_article, **minimal_entry}
-                all_articles_data["articles"][i] = updated_entry
-                all_articles_found = True; logger.debug(f"Updating {article_id} in all_articles.json"); break
-    if not all_articles_found and article_id:
-        all_articles_data["articles"].append(minimal_entry); logger.debug(f"Adding {article_id} to all_articles.json")
+        existing_ids_all = {a.get('id') for a in all_articles_data.get("articles", []) if a}
+        if article_id in existing_ids_all:
+            all_articles_data["articles"] = [
+                 {**a, **minimal_entry} if a.get('id') == article_id else a
+                 for a in all_articles_data.get("articles", []) if a
+            ]
+            all_articles_found = True
+            logger.debug(f"Updating {article_id} in all_articles.json")
+        else:
+            all_articles_data.setdefault("articles", []).append(minimal_entry)
+            logger.debug(f"Adding {article_id} to all_articles.json")
 
 
-    # Sort both lists by date
-    def get_sort_key(x):
-        date_str = x.get('published_iso', '1970-01-01T00:00:00')
-        if not date_str: # Handle None case
-            return datetime(1970, 1, 1, tzinfo=timezone.utc)
-        try:
-            # Handle potential 'Z' timezone indicator
-            if date_str.endswith('Z'):
-                date_str = date_str[:-1] + '+00:00'
-            return datetime.fromisoformat(date_str)
-        except (ValueError, TypeError):
-             try: return datetime.strptime(date_str, '%Y-%m-%d').replace(tzinfo=timezone.utc)
-             except: return datetime(1970, 1, 1, tzinfo=timezone.utc)
-
+    # Sort both lists by date (using the moved get_sort_key function)
     site_data["articles"].sort(key=get_sort_key, reverse=True)
     all_articles_data["articles"].sort(key=get_sort_key, reverse=True)
-
-    # Apply limit ONLY to site_data
     site_data["articles"] = site_data["articles"][:MAX_HOME_PAGE_ARTICLES]
 
-    # Save site_data.json
     try:
         with open(SITE_DATA_FILE, 'w', encoding='utf-8') as f: json.dump(site_data, f, indent=2, ensure_ascii=False)
         logger.info(f"Updated {SITE_DATA_FILE} ({len(site_data['articles'])} articles).")
     except Exception as e: logger.error(f"Failed to save {SITE_DATA_FILE}: {e}")
 
-    # Save all_articles.json
     try:
         with open(ALL_ARTICLES_FILE, 'w', encoding='utf-8') as f: json.dump(all_articles_data, f, indent=2, ensure_ascii=False)
         logger.info(f"Updated {ALL_ARTICLES_FILE} ({len(all_articles_data['articles'])} articles).")
@@ -279,7 +326,6 @@ def update_site_data(new_article_info):
 
 # --- Main Processing Pipeline ---
 def process_single_article(json_filepath, recent_articles_context):
-    """Processes one scraped article JSON file through the entire pipeline."""
     logger.info(f"--- Processing article file: {os.path.basename(json_filepath)} ---")
     article_data = load_article_data(json_filepath)
     if not article_data: return False
@@ -288,17 +334,18 @@ def process_single_article(json_filepath, recent_articles_context):
     processed_file_path = os.path.join(PROCESSED_JSON_DIR, os.path.basename(json_filepath))
 
     try:
-        # == Step 0: Check if already processed ==
         if os.path.exists(processed_file_path):
-             logger.info(f"Article {article_id} already processed (JSON exists). Skipping pipeline.")
+             logger.info(f"Article {article_id} already processed. Skipping.")
              remove_scraped_file(json_filepath)
              return False
 
-        # == Step 1: Filter Agent ==
         article_data = run_filter_agent(article_data)
-        if not article_data or not article_data.get('filter_verdict'):
-             logger.error(f"Filter Agent failed for {article_id}. Error: {article_data.get('filter_error', 'Unknown')}")
-             return False
+        # Corrected: Check if article_data is not None before accessing keys
+        if not article_data or article_data.get('filter_verdict') is None:
+             filter_error = article_data.get('filter_error', 'Unknown error') if article_data else 'Article data became None after filter agent'
+             logger.error(f"Filter Agent failed for {article_id}. Error: {filter_error}")
+             return False # Skip this article if filter fails critically
+
         filter_verdict = article_data['filter_verdict']
         importance_level = filter_verdict.get('importance_level')
         assigned_topic = filter_verdict.get('topic')
@@ -315,7 +362,6 @@ def process_single_article(json_filepath, recent_articles_context):
         primary_keyword = filter_verdict.get('primary_topic_keyword', article_data.get('title',''))
         article_data['primary_keyword'] = primary_keyword
 
-        # == Step 2: Similarity Check ==
         similarity_result = run_similarity_check_agent(article_data, recent_articles_context)
         if similarity_result and similarity_result.get('is_semantic_duplicate'):
             logger.info(f"Article {article_id} is SEMANTIC DUPLICATE. Skipping. Reason: {similarity_result.get('reasoning')}")
@@ -324,7 +370,6 @@ def process_single_article(json_filepath, recent_articles_context):
         elif similarity_result is None: logger.warning(f"Similarity check failed for {article_id}. Proceeding cautiously.")
         else: logger.info(f"Article {article_id} passed similarity check.")
 
-        # == Step 3: Image Scraper / Finder ==
         scraped_image_url = None
         source_url = article_data.get('link')
         if source_url:
@@ -339,105 +384,101 @@ def process_single_article(json_filepath, recent_articles_context):
             logger.error(f"Failed to find image for {article_id}. Skipping.")
             return False
 
-        # == Step 4: SEO Article Generator ==
         article_data = run_seo_article_agent(article_data)
-        if not article_data or not article_data.get('seo_agent_results'):
-            logger.error(f"SEO Agent failed for {article_id}. Error: {article_data.get('seo_agent_error', 'Unknown')}")
-            # Decide if SEO failure is critical. For now, proceed but log.
-            # return False # Uncomment if SEO must succeed
-            seo_results = {} # Use an empty dict if SEO failed
-        else:
-            seo_results = article_data['seo_agent_results']
+        seo_results = article_data.get('seo_agent_results') if article_data else None
+        if not seo_results:
+            seo_error = article_data.get('seo_agent_error', 'Unknown error') if article_data else 'Article data became None after SEO agent'
+            logger.error(f"SEO Agent failed for {article_id}. Error: {seo_error}")
+            seo_results = {}
 
-        # == Step 5: Tags Generator ==
         article_data = run_tags_generator_agent(article_data)
-        if article_data.get('tags_agent_error'):
-             logger.warning(f"Tags Agent failed/skipped for {article_id}. Error: {article_data.get('tags_agent_error')}")
-        article_data['generated_tags'] = article_data.get('generated_tags', [])
+        tags_error = article_data.get('tags_agent_error') if article_data else 'Article data became None after Tags agent'
+        if tags_error:
+             logger.warning(f"Tags Agent failed/skipped for {article_id}. Error: {tags_error}")
+        # Ensure 'generated_tags' exists and is a list AFTER the agent call
+        article_data['generated_tags'] = article_data.get('generated_tags', []) if article_data and isinstance(article_data.get('generated_tags'), list) else []
 
-        # == Step 6: Calculate Trend Score (Proxy) ==
+
         trend_score = 0
         importance_level = article_data.get('filter_verdict', {}).get('importance_level')
-        tags_count = len(article_data.get('generated_tags', []))
+        tags_count = len(article_data.get('generated_tags', [])) # Now safe
         publish_date_iso = article_data.get('published_iso')
 
-        if importance_level == "Interesting":
-            trend_score += 5 # Base score
-        elif importance_level == "Breaking":
-            trend_score += 10 # Higher base score for breaking
+        if importance_level == "Interesting": trend_score += 5
+        elif importance_level == "Breaking": trend_score += 10
+        trend_score += tags_count * 0.5
 
-        trend_score += tags_count * 0.5 # Points per tag
-
-        # Add recency factor
         if publish_date_iso:
             try:
-                publish_dt = get_sort_key(article_data) # Use the same robust date parsing
-                now = datetime.now(timezone.utc)
+                publish_dt = get_sort_key(article_data) # Use moved function
+                now = datetime.now(timezone.utc) # Ensure 'now' is offset-aware
+                # Ensure publish_dt is offset-aware before subtracting
+                if publish_dt.tzinfo is None or publish_dt.tzinfo.utcoffset(publish_dt) is None:
+                     logger.warning(f"Making publish_dt timezone-aware for trend score calc (assuming UTC): {publish_dt}")
+                     publish_dt = publish_dt.replace(tzinfo=timezone.utc)
+
                 days_old = (now - publish_dt).total_seconds() / (60 * 60 * 24)
-
-                # More aggressive curve: peaks quickly, drops faster
-                if days_old < 0: recency_factor = 0 # Ignore future dates
-                elif days_old <= 1: recency_factor = 1.0 # Max bonus for first day
-                elif days_old <= 3: recency_factor = 1.0 - (days_old - 1) / 2 # Linear drop over next 2 days
-                else: recency_factor = 0 # Zero bonus after 3 days
-
-                trend_score += recency_factor * 5 # Add recency bonus (max 5 points)
-            except Exception as e:
-                logger.warning(f"Could not calculate recency for trend score {article_id}: {e}")
-
-        article_data['trend_score'] = round(max(0, trend_score), 2) # Store the score, ensure non-negative
+                if days_old < 0: recency_factor = 0
+                elif days_old <= 1: recency_factor = 1.0
+                elif days_old <= 3: recency_factor = 1.0 - (days_old - 1) / 2
+                else: recency_factor = 0
+                trend_score += recency_factor * 5
+            except Exception as e: logger.warning(f"Could not calculate recency for trend score {article_id}: {e}")
+        article_data['trend_score'] = round(max(0, trend_score), 2)
         logger.debug(f"Calculated trend score for {article_id}: {article_data['trend_score']}")
 
-
-        # == Step 7: TTS Generation ==
-        article_data['audio_url'] = None # Ensure key exists
+        article_data['audio_url'] = None
         if CAMB_AI_API_KEY:
             logger.info(f"Attempting TTS generation for {article_id}...")
-            article_text_for_tts = seo_results.get('generated_article_body_md', '') # Use SEO result if available
+            article_text_for_tts = seo_results.get('generated_article_body_md', '')
             if article_text_for_tts:
                 article_data = run_tts_generator_agent(article_data, article_text_for_tts, OUTPUT_AUDIO_DIR)
-                if article_data.get('tts_agent_error'): logger.error(f"TTS Agent failed for {article_id}. Error: {article_data.get('tts_agent_error')}")
-                elif article_data.get('audio_url'): logger.info(f"TTS successful for {article_id}. Path: {article_data.get('audio_url')}")
+                tts_error = article_data.get('tts_agent_error') if article_data else 'Article data became None after TTS agent'
+                if tts_error: logger.error(f"TTS Agent failed for {article_id}. Error: {tts_error}")
+                elif article_data.get('audio_url'): logger.info(f"TTS successful for {article_id}. Path: {article_data['audio_url']}")
                 else: logger.warning(f"TTS Agent ran but did not return an audio_url for {article_id}.")
             else: logger.warning(f"No article body found for TTS generation for {article_id}.")
         else: logger.info("Skipping TTS generation - CAMB_AI_API_KEY not set.")
 
-
-        # == Step 8: Prepare HTML Vars ==
-        # Using original RSS title for slug ensures consistency if SEO title changes later
         original_title = article_data.get('title', 'article-' + article_id)
         slug = original_title.lower().replace(' ', '-').replace('_', '-')
         slug = "".join(c for c in slug if c.isalnum() or c == '-')
-        slug = re.sub('-+', '-', slug).strip('-')[:80] # Limit slug length
-        if not slug: slug = 'article-' + article_id # Fallback slug
+        slug = re.sub('-+', '-', slug).strip('-')[:80]
+        if not slug: slug = 'article-' + article_id
         article_data['slug'] = slug
 
-        # Relative path for use within the site (JS, links from homepage, etc.)
         article_relative_path = f"articles/{slug}.html"
-        # Absolute path for canonical/OG tags
         canonical_url = urljoin(YOUR_SITE_BASE_URL + '/', article_relative_path) if YOUR_SITE_BASE_URL else article_relative_path
 
-        body_md = seo_results.get('generated_article_body_md', article_data.get('summary','*Content generation failed or incomplete.*')) # Fallback
-        # Convert Markdown to HTML
+        body_md = seo_results.get('generated_article_body_md', article_data.get('summary','*Content generation failed or incomplete.*'))
         try:
-            body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables', 'nl2br']) # Added nl2br for line breaks
+            body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables', 'nl2br'])
         except Exception as md_err:
             logger.error(f"Markdown conversion failed for {article_id}: {md_err}")
-            body_html = f"<p><i>Content rendering error.</i></p><pre>{body_md}</pre>" # Show raw on error
+            body_html = f"<p><i>Content rendering error.</i></p><pre>{body_md}</pre>"
 
         tags_list = article_data.get('generated_tags', [])
-        tags_html = format_tags_html(tags_list) # Uses the updated function with links
+        tags_html = format_tags_html(tags_list)
         publish_date_iso = article_data.get('published_iso', datetime.now(timezone.utc).isoformat())
         try:
-             publish_dt = get_sort_key(article_data) # Use robust date parsing
+             publish_dt = get_sort_key(article_data) # Use moved function
              publish_date_formatted = publish_dt.strftime('%B %d, %Y')
-        except: publish_date_formatted = datetime.now(timezone.utc).strftime('%B %d, %Y') # Fallback
+        except: publish_date_formatted = datetime.now(timezone.utc).strftime('%B %d, %Y')
 
-        # Use SEO title tag if available, otherwise fallback to original title
         page_title = seo_results.get('generated_title_tag', article_data.get('title', 'AI News'))
-        # Use SEO meta description if available, otherwise fallback to summary
         meta_description = seo_results.get('generated_meta_description', article_data.get('summary', '')[:160])
 
+        absolute_audio_path = article_data.get('audio_url')
+        relative_audio_url = None
+        if absolute_audio_path and os.path.isabs(absolute_audio_path):
+             try:
+                  relative_audio_url = os.path.relpath(absolute_audio_path, PUBLIC_DIR).replace('\\', '/')
+                  logger.debug(f"Calculated relative audio URL: {relative_audio_url}")
+             except ValueError as e:
+                  logger.error(f"Could not make audio path relative for {article_id} (path: {absolute_audio_path}, public_dir: {PUBLIC_DIR}): {e}")
+                  relative_audio_url = None
+        elif absolute_audio_path:
+             relative_audio_url = absolute_audio_path
 
         template_vars = {
             'PAGE_TITLE': page_title,
@@ -448,47 +489,43 @@ def process_single_article(json_filepath, recent_articles_context):
             'SITE_NAME': YOUR_WEBSITE_NAME,
             'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
             'IMAGE_URL': article_data.get('selected_image_url'),
-            'IMAGE_ALT_TEXT': page_title, # Use page title for alt text
+            'IMAGE_ALT_TEXT': page_title,
             'META_KEYWORDS_LIST': tags_list,
             'PUBLISH_ISO_FOR_META': publish_date_iso,
             'JSON_LD_SCRIPT_BLOCK': seo_results.get('generated_json_ld', ''),
-            'ARTICLE_HEADLINE': article_data.get('title'), # Use original title as headline
+            'ARTICLE_HEADLINE': article_data.get('title'),
             'PUBLISH_DATE': publish_date_formatted,
             'ARTICLE_BODY_HTML': body_html,
             'ARTICLE_TAGS_HTML': tags_html,
             'SOURCE_ARTICLE_URL': article_data.get('link', '#'),
-            'ARTICLE_TITLE': article_data.get('title'), # Keep original title available
+            'ARTICLE_TITLE': article_data.get('title'),
             'id': article_id,
             'CURRENT_ARTICLE_ID': article_id,
             'CURRENT_ARTICLE_TOPIC': article_data.get('topic', ''),
             'CURRENT_ARTICLE_TAGS_JSON': json.dumps(tags_list),
-            # Make audio URL relative to the public root
-            'AUDIO_URL': article_data.get('audio_url').replace(PUBLIC_DIR, '').replace('\\', '/') if article_data.get('audio_url') else None
+            'AUDIO_URL': relative_audio_url
         }
 
-        # == Step 9: Render HTML ==
         generated_html_path = render_post_page(template_vars, slug)
 
         if generated_html_path:
-            # == Step 10: Update Site Data ==
-            # Prepare the entry for the JSON files (site_data.json, all_articles.json)
             site_data_entry = {
                 "id": article_id,
                 "title": article_data.get('title'),
-                "link": article_relative_path, # Use RELATIVE path for JS fetches
+                "link": article_relative_path,
                 "published_iso": article_data.get('published_iso'),
-                "summary_short": meta_description, # Use the determined meta description
+                "summary_short": meta_description,
                 "image_url": article_data.get('selected_image_url'),
                 "topic": article_data.get('topic', 'News'),
                 "is_breaking": article_data.get('is_breaking', False),
                 "tags": article_data.get('generated_tags', []),
-                # Make audio URL relative for the JSON data too
-                "audio_url": template_vars['AUDIO_URL'],
+                "audio_url": relative_audio_url,
                 "trend_score": article_data.get('trend_score', 0)
             }
+            article_data['audio_url'] = relative_audio_url # Save relative path to processed JSON too
+
             update_site_data(site_data_entry)
 
-            # == Step 11: Save Final Processed Data & Remove Original ==
             if save_processed_data(processed_file_path, article_data):
                  remove_scraped_file(json_filepath)
                  logger.info(f"--- Successfully processed article: {article_id} ---")
@@ -519,29 +556,31 @@ def retry_failed_tts():
      for filepath in processed_files:
           try:
                article_data = load_article_data(filepath)
-               # Retry if audio_url is missing/None AND there was NO previous TTS error recorded
                if (article_data and not article_data.get('audio_url')
                     and article_data.get('seo_agent_results')
-                    and article_data.get('tts_agent_error') is None): # Only retry if no error previously
+                    and article_data.get('tts_agent_error') is None):
 
                     article_id = article_data.get('id')
                     logger.info(f"Retrying TTS generation for article {article_id} from {os.path.basename(filepath)}")
 
                     article_text_for_tts = article_data.get('seo_agent_results', {}).get('generated_article_body_md', '')
                     if article_text_for_tts:
-                         # Run TTS agent again
                          article_data = run_tts_generator_agent(article_data, article_text_for_tts, OUTPUT_AUDIO_DIR)
-                         # Make audio URL relative before saving/updating
                          relative_audio_url = None
-                         if article_data.get('audio_url'):
-                              relative_audio_url = article_data.get('audio_url').replace(PUBLIC_DIR, '').replace('\\', '/')
-                              article_data['audio_url'] = relative_audio_url # Update the dict with relative path
+                         absolute_audio_path_retry = article_data.get('audio_url')
+                         if absolute_audio_path_retry and os.path.isabs(absolute_audio_path_retry):
+                              try:
+                                   relative_audio_url = os.path.relpath(absolute_audio_path_retry, PUBLIC_DIR).replace('\\', '/')
+                                   article_data['audio_url'] = relative_audio_url
+                              except ValueError as e:
+                                   logger.error(f"Could not make TTS retry path relative for {article_id}: {e}")
+                                   article_data['audio_url'] = None
+                         elif absolute_audio_path_retry:
+                             relative_audio_url = absolute_audio_path_retry
 
                          if save_processed_data(filepath, article_data):
-                              # Check for success AFTER saving the updated processed data (which now includes error status if failed)
                               if not article_data.get('tts_agent_error') and relative_audio_url:
                                    logger.info(f"TTS Retry Successful for {article_id}. Updating site_data.")
-                                   # Update only the necessary fields in site_data
                                    site_data_entry = {"id": article_id, "audio_url": relative_audio_url}
                                    update_site_data(site_data_entry)
                                    retried_count += 1
@@ -553,11 +592,10 @@ def retry_failed_tts():
                               failed_count += 1
                     else:
                          logger.warning(f"No article body found in processed JSON for {article_id}, cannot retry TTS.")
-                         # Record an error state so we don't retry again
-                         article_data['tts_agent_error'] = "Missing article body for TTS"
+                         article_data['tts_agent_error'] = "Missing article body for TTS retry"
                          save_processed_data(filepath, article_data)
                          failed_count += 1
-                    time.sleep(2) # Avoid hammering API during retries
+                    time.sleep(2)
 
           except Exception as retry_e:
                logger.exception(f"Error during TTS retry check for file {filepath}: {retry_e}")
@@ -574,26 +612,22 @@ if __name__ == "__main__":
     try: scraper_processed_ids = load_processed_ids()
     except Exception as load_e: logger.exception(f"Error loading processed IDs: {load_e}")
 
-    # Run TTS retry logic once at the start of the build
     retry_failed_tts()
 
     logger.info("--- Running Processing Cycle ---")
-    # 1. Run Scraper
     try:
         new_articles_count = scrape_news(NEWS_FEED_URLS, scraper_processed_ids)
         logger.info(f"Scraper run completed. Found {new_articles_count} new JSON files potentially.")
     except NameError:
          logger.error("NEWS_FEED_URLS not defined. Cannot run scraper.")
-         sys.exit(1) # Exit if scraper config fails
+         sys.exit(1)
     except Exception as scrape_e:
         logger.exception(f"Scraper failed: {scrape_e}")
-        sys.exit(1) # Exit if scraper fails
+        sys.exit(1)
 
-    # 2. Load context for similarity check *after* scraping
     recent_articles_context = load_recent_articles_for_comparison()
     logger.info(f"Loaded {len(recent_articles_context)} recent articles for duplicate checking.")
 
-    # 3. Process newly scraped JSON files
     json_files = []
     try: json_files = glob.glob(os.path.join(SCRAPED_ARTICLES_DIR, '*.json'))
     except Exception as glob_e: logger.exception(f"Error listing JSON files: {glob_e}")
@@ -602,21 +636,17 @@ if __name__ == "__main__":
     else:
         logger.info(f"Found {len(json_files)} scraped articles to process.")
         processed_count = 0; failed_skipped_count = 0
-        try: json_files.sort(key=os.path.getmtime) # Process older scraped files first
+        try: json_files.sort(key=os.path.getmtime)
         except Exception as sort_e: logger.warning(f"Could not sort JSON files: {sort_e}")
 
         for filepath in json_files:
-            # IMPORTANT: Reload context *before* processing each article
-            # This ensures that duplicates found earlier in *this same run* are considered
             current_recent_context = load_recent_articles_for_comparison()
-
             if process_single_article(filepath, current_recent_context):
                 processed_count += 1
             else:
                  failed_skipped_count += 1
-            time.sleep(1) # Keep short sleep between API-heavy processing steps
+            time.sleep(1) # Be nice to APIs
 
         logger.info(f"Processing cycle complete. Successful: {processed_count}, Failed/Skipped: {failed_skipped_count}")
 
     logger.info("--- === Dacoola AI News Orchestrator Single Run Finished === ---")
-    # Script will now exit naturally

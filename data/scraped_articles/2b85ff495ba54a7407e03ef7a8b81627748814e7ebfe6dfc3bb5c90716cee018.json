@@ -1,9 +1,0 @@
-{
-    "id": "2b85ff495ba54a7407e03ef7a8b81627748814e7ebfe6dfc3bb5c90716cee018",
-    "title": "Amazon’s SWE-PolyBench just exposed the dirty secret about your AI coding assistant",
-    "link": "https://venturebeat.com/ai/amazon-swe-polybench-just-exposed-the-dirty-secret-about-your-ai-coding-assistant/",
-    "published_iso": "2025-04-23T19:00:00",
-    "summary": "<img alt=\"Credit: VentureBeat made with Midjourney\" class=\"attachment-single-feed size-single-feed wp-post-image\" height=\"324\" src=\"https://venturebeat.com/wp-content/uploads/2025/04/nuneybits_Vector_art_of_a_rectro_computer_showing_computer_code_123735a8-fce0-4b93-9664-a3b0b18c08df.webp?w=578\" width=\"578\" /><hr />Amazon launches SWE-PolyBench, a groundbreaking multi-language benchmark that exposes critical limitations in AI coding assistants across Python, JavaScript, TypeScript, and Java while introducing new metrics beyond simple pass rates for real-world development tasks.<a href=\"https://venturebeat.com/ai/amazon-swe-polybench-just-exposed-the-dirty-secret-about-your-ai-coding-assistant/\" target=\"_blank\">Read More</a>",
-    "source_feed": "https://venturebeat.com/category/ai/feed/",
-    "scraped_at_iso": "2025-05-01T02:20:48.426563"
-}

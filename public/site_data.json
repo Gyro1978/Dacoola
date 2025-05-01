@@ -1,6 +1,53 @@
 {
   "articles": [
     {
+      "id": "9df3d8e0130ec5d428f4b88feeafa658253ead0117476b1139dcaaab59da3c55",
+      "title": "New Federal Circuit Decision - Expect Getting AI/Machine Learning Patents Past 101 to Get Tougher - Quarles",
+      "link": "articles/new-federal-circuit-decision-expect-getting-aimachine-learning-patents-past-101-.html",
+      "published_iso": "2025-05-01T21:15:54",
+      "summary_short": "A new Federal Circuit decision tightens AI patentability ruling, making it tougher to secure AI and machine learning patents under Section 101.",
+      "image_url": "https://norrismclaughlin.com/mtym/wp-content/uploads/sites/8/2022/12/MTYM-Blog-Thumbnail.png",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Federal Circuit decision",
+        "AI patentability",
+        "machine learning patents",
+        "Section 101 Patent Act",
+        "patent eligibility",
+        "AI-driven inventions",
+        "legal scrutiny",
+        "tech startups",
+        "patent applications",
+        "AI research"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "93cde970ee35b82e8d0280722bad5bbe9cef858b6e213de32662dd4218babbd8",
+      "title": "Zuckerberg Says in Response to Loneliness Epidemic, He Will Create Most of Your Friends Using Artificial Intelligence - futurism.com",
+      "link": "articles/zuckerberg-says-in-response-to-loneliness-epidemic-he-will-create-most-of-your-f.html",
+      "published_iso": "2025-05-01T16:13:45",
+      "summary_short": "Mark Zuckerberg proposes AI friends to combat loneliness, leveraging artificial intelligence for social connections.",
+      "image_url": "https://media.abc10.com/assets/KXTV/images/f028090e-5678-4958-9f3b-eb48ccd49e9f/f028090e-5678-4958-9f3b-eb48ccd49e9f_1920x1080.jpg",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "AI friends",
+        "loneliness epidemic",
+        "Mark Zuckerberg",
+        "Meta AI",
+        "artificial intelligence companionship",
+        "social isolation",
+        "AI ethics",
+        "digital relationships",
+        "human-AI interaction"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
       "id": "037705e09113b0b95778bd12da8f50bf77de3d550c57d812433d012f36185a19",
       "title": "Meta forecasted it would make $1.4T in revenue from generative AI by 2035",
       "link": "articles/meta-forecasted-it-would-make-14t-in-revenue-from-generative-ai-by-2035.html",
@@ -391,50 +438,6 @@
         "electric vehicles",
         "trade policies",
         "cost efficiency"
-      ],
-      "audio_url": null
-    },
-    {
-      "id": "8c8c5593259ced8b081720b422d6ec42e711bb3afe00091d53c040b27b4a260f",
-      "title": "If you own Ray-Ban Meta glasses, you should double-check your privacy settings",
-      "link": "articles/if-you-own-ray-ban-meta-glasses-you-should-double-check-your-privacy-settings.html",
-      "published_iso": "2025-04-30T18:29:12",
-      "summary_short": "Meta's updated AI privacy policy grants more data control for Ray-Ban Meta glasses, enabling AI features by default. Check your settings now.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2024/09/GettyImages-2173579243.jpg?resize=1200,799",
-      "topic": "Ethics",
-      "is_breaking": false,
-      "tags": [
-        "Meta AI privacy policy",
-        "Ray-Ban Meta smart glasses",
-        "AI data collection",
-        "smart glasses privacy",
-        "Meta user data",
-        "AI model training",
-        "privacy settings",
-        "AI features default",
-        "tech policy updates",
-        "wearable technology privacy"
-      ],
-      "audio_url": null
-    },
-    {
-      "id": "e05d50f6cae85bf46a4caa23a99f638bafd3e4a8846be49fdb764ab0ec3013f2",
-      "title": "Apple notifies new victims of spyware attacks across the world",
-      "link": "articles/apple-notifies-new-victims-of-spyware-attacks-across-the-world.html",
-      "published_iso": "2025-04-30T18:01:17",
-      "summary_short": "Apple has notified additional victims of spyware attacks worldwide, with two individuals confirming alerts. Learn more about the ongoing threat.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2025/04/apple-logo-pedestrian.jpg?resize=1200,798",
-      "topic": "Society",
-      "is_breaking": false,
-      "tags": [
-        "Apple spyware attacks",
-        "cybersecurity threats",
-        "digital security measures",
-        "global cyber intrusions",
-        "Apple security alerts",
-        "spyware victims",
-        "sophisticated cyber attacks",
-        "Apple user notifications"
       ],
       "audio_url": null
     }

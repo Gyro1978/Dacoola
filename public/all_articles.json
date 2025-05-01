@@ -1,6 +1,53 @@
 {
   "articles": [
     {
+      "id": "9df3d8e0130ec5d428f4b88feeafa658253ead0117476b1139dcaaab59da3c55",
+      "title": "New Federal Circuit Decision - Expect Getting AI/Machine Learning Patents Past 101 to Get Tougher - Quarles",
+      "link": "articles/new-federal-circuit-decision-expect-getting-aimachine-learning-patents-past-101-.html",
+      "published_iso": "2025-05-01T21:15:54",
+      "summary_short": "A new Federal Circuit decision tightens AI patentability ruling, making it tougher to secure AI and machine learning patents under Section 101.",
+      "image_url": "https://norrismclaughlin.com/mtym/wp-content/uploads/sites/8/2022/12/MTYM-Blog-Thumbnail.png",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Federal Circuit decision",
+        "AI patentability",
+        "machine learning patents",
+        "Section 101 Patent Act",
+        "patent eligibility",
+        "AI-driven inventions",
+        "legal scrutiny",
+        "tech startups",
+        "patent applications",
+        "AI research"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "93cde970ee35b82e8d0280722bad5bbe9cef858b6e213de32662dd4218babbd8",
+      "title": "Zuckerberg Says in Response to Loneliness Epidemic, He Will Create Most of Your Friends Using Artificial Intelligence - futurism.com",
+      "link": "articles/zuckerberg-says-in-response-to-loneliness-epidemic-he-will-create-most-of-your-f.html",
+      "published_iso": "2025-05-01T16:13:45",
+      "summary_short": "Mark Zuckerberg proposes AI friends to combat loneliness, leveraging artificial intelligence for social connections.",
+      "image_url": "https://media.abc10.com/assets/KXTV/images/f028090e-5678-4958-9f3b-eb48ccd49e9f/f028090e-5678-4958-9f3b-eb48ccd49e9f_1920x1080.jpg",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "AI friends",
+        "loneliness epidemic",
+        "Mark Zuckerberg",
+        "Meta AI",
+        "artificial intelligence companionship",
+        "social isolation",
+        "AI ethics",
+        "digital relationships",
+        "human-AI interaction"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
       "id": "037705e09113b0b95778bd12da8f50bf77de3d550c57d812433d012f36185a19",
       "title": "Meta forecasted it would make $1.4T in revenue from generative AI by 2035",
       "link": "articles/meta-forecasted-it-would-make-14t-in-revenue-from-generative-ai-by-2035.html",
@@ -439,6 +486,30 @@
       "audio_url": null
     },
     {
+      "id": "a4c561cf3a31f0292c042aa67cc4a07b21776d35c06459a63ddfe56a86db2110",
+      "title": "How to tackle deceptive artificial intelligence - The Economist",
+      "link": "articles/how-to-tackle-deceptive-artificial-intelligence-the-economist.html",
+      "published_iso": "2025-04-30T08:30:00",
+      "summary_short": "Explore the ethical dilemmas of deceptive AI and strategies to mitigate risks in this analysis from The Economist.",
+      "image_url": "https://i0.wp.com/ajithp.com/wp-content/uploads/2024/05/image-39.png?fit=1792%2C1024&ssl=1",
+      "topic": "Ethics",
+      "is_breaking": false,
+      "tags": [
+        "deceptive artificial intelligence",
+        "AI ethics",
+        "AI transparency",
+        "AI accountability",
+        "AI regulation",
+        "ethical AI development",
+        "AI governance",
+        "trust in AI",
+        "AI manipulation",
+        "responsible AI deployment"
+      ],
+      "audio_url": null,
+      "trend_score": 13.65
+    },
+    {
       "id": "4860c6f3cd4ebe3da43f1121424fc2f94c1b71927359b860d9e2725a28fbad34",
       "title": "Alibaba launches open source Qwen3 model that surpasses OpenAI o1 and DeepSeek R1",
       "link": "articles/alibaba-launches-open-source-qwen3-model-that-surpasses-openai-o1-and-deepseek-r.html",
@@ -480,6 +551,101 @@
         "AI adoption"
       ],
       "audio_url": null
+    },
+    {
+      "id": "e9b012026dc03486898246459b052ed85492b16fe8592efbfc2429b128531197",
+      "title": "Beyond A2A and MCP: How LOKA’s Universal Agent Identity Layer changes the game",
+      "link": "articles/beyond-a2a-and-mcp-how-lokas-universal-agent-identity-layer-changes-the-game.html",
+      "published_iso": "2025-04-28T20:35:56",
+      "summary_short": "<img alt=\"Talker-reasoner agent\" class=\"attachment-single-feed size-single-feed wp-post-image\" height=\"325\" src=\"https://venturebeat.com/wp-content/uploads/2024",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2024/10/Talker-reasoner-agent.jpg?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [],
+      "audio_url": null,
+      "trend_score": 5.0
+    },
+    {
+      "id": "2ff8496a4eca11aa9d2c5e4e6c17d568817b651892f374969537fde7ea9fe7e7",
+      "title": "30 seconds vs. 3: The d1 reasoning framework that’s slashing AI response times",
+      "link": "articles/30-seconds-vs-3-the-d1-reasoning-framework-thats-slashing-ai-response-times.html",
+      "published_iso": "2025-04-28T19:31:21",
+      "summary_short": "<img alt=\"Image credit: VentureBeat with Ideogram\" class=\"attachment-single-feed size-single-feed wp-post-image\" height=\"324\" src=\"https://venturebeat.com/wp-co",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/Robot-scrabble.webp?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [],
+      "audio_url": null,
+      "trend_score": 5.0
+    },
+    {
+      "id": "5d4a51d9943e79c4f1a791e2ebc93bdc24e28f10e34907bdb45975b8caeb0abb",
+      "title": "Writer releases Palmyra X5, delivers near GPT-4.1 performance at 75% lower cost",
+      "link": "articles/writer-releases-palmyra-x5-delivers-near-gpt-41-performance-at-75-lower-cost.html",
+      "published_iso": "2025-04-28T17:30:00",
+      "summary_short": "Writer's Palmyra X5 AI model delivers near GPT-4 performance at 75% lower cost, processing 1,500 pages per task for enterprise automation.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/nuneybits_Vector_art_of_a_typewriter_positioned_at_a_desk_in_fr_e5d45d8b-101f-4395-bc8f-8454c4b46c6d.webp?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI Model Release",
+        "Palmyra X5",
+        "GPT-4.1",
+        "Enterprise AI",
+        "Cost-Effective AI",
+        "Text Processing",
+        "AI Automation",
+        "AI ROI",
+        "Scalable AI Solutions",
+        "Writer AI"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
+      "id": "51c0c65bcf80ac62a15fdd2a7213c63fafaa7b7b03243eb0a697aaf68e750157",
+      "title": "Does RAG make LLMs less safe?  Bloomberg research reveals hidden dangers",
+      "link": "articles/does-rag-make-llms-less-safe-bloomberg-research-reveals-hidden-dangers.html",
+      "published_iso": "2025-04-28T10:00:00",
+      "summary_short": "New research suggests RAG may introduce hidden safety risks for LLMs, despite improving accuracy. Learn about the potential dangers.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/ai-bypassing-guardrails-smk.jpg?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "RAG safety risks",
+        "Retrieval-Augmented Generation",
+        "AI safety protocols",
+        "enterprise AI deployments",
+        "AI model vulnerabilities",
+        "external data retrieval",
+        "AI bias concerns",
+        "Bloomberg AI research",
+        "AI accuracy vs safety"
+      ],
+      "audio_url": null,
+      "trend_score": 9.5
+    },
+    {
+      "id": "bf1e6e6bf6737a2cc308a61ae5a8038e34fd3495a56249f85f9901626b81b79f",
+      "title": "Is your AI product actually working? How to develop the right metric system",
+      "link": "articles/is-your-ai-product-actually-working-how-to-develop-the-right-metric-system.html",
+      "published_iso": "2025-04-27T19:15:00",
+      "summary_short": "Learn how to develop the right AI product metrics to accurately assess performance and ensure success in your AI initiatives.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/DDM-Robot.webp?w=1024?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "AI product metrics",
+        "AI performance evaluation",
+        "business goals alignment",
+        "AI use cases",
+        "data-driven decisions",
+        "AI model optimization",
+        "AI investment justification",
+        "metric system framework"
+      ],
+      "audio_url": null,
+      "trend_score": 9.0
     }
   ]
 }

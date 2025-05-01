@@ -17,18 +17,19 @@ YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '') # Get from env
 
 # --- Configuration ---
 AGENT_MODEL = "deepseek-chat"
-# *** INCREASED MAX TOKENS for longer articles ***
-MAX_TOKENS_RESPONSE = 4000
-# *** Slightly increased temperature for more natural writing ***
+MAX_TOKENS_RESPONSE = 5000
 TEMPERATURE = 0.6
 
 # --- Setup Logging ---
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# Use root logger configured in main.py if possible, otherwise basic config
 logger = logging.getLogger(__name__)
+if not logging.getLogger().handlers: # Basic config if no handlers exist
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 # --- End Setup Logging ---
 
 
 # --- *** REVISED SEO Article Prompt *** ---
+# Keep SEO_PROMPT_SYSTEM and SEO_PROMPT_USER_TEMPLATE exactly as they were in your last version.
 SEO_PROMPT_SYSTEM = """
 You are an **Expert Tech Journalist and SEO Content Strategist** powered by DeepSeek. Your mission is to transform concise RSS feed data into comprehensive, engaging, factually precise, and SEO-optimized news articles suitable for a knowledgeable tech audience. Adhere strictly to the following directives:
 
@@ -48,7 +49,7 @@ You are an **Expert Tech Journalist and SEO Content Strategist** powered by Deep
     *   **Section 4: Source Link:** The final line of the Markdown text MUST be exactly: `Source: [{{ARTICLE_TITLE}}]({{SOURCE_ARTICLE_URL}})`
 
 3.  **Structured Data (JSON-LD):**
-    *   Immediately after the Source Link line, output the *exact* JSON-LD block provided in the user prompt template, filling in the bracketed placeholders with the generated Title Tag and Meta Description text. Include ALL provided keywords in the `"keywords"` array.
+    *   Immediately after the Source Link line, output the *exact* JSON-LD block format described in the User Prompt (filling in placeholders). Include ALL provided keywords in the `"keywords"` array. CRITICAL: Ensure the full `<script type="application/ld+json">...</script>` block is present at the very end.
 
 4.  **Accuracy & Constraints:**
     *   **No Hallucinations.** Adherence to the `{{RSS_SUMMARY}}` is paramount.
@@ -61,8 +62,9 @@ You are an **Expert Tech Journalist and SEO Content Strategist** powered by Deep
 6.  **No Extra Output:** Absolutely NO text before `Title Tag:` or after the closing `</script>` tag.
 """
 
-# User template remains the same, providing the variables
 SEO_PROMPT_USER_TEMPLATE = """
+Task: Generate Title Tag, Meta Description, Article Body (Markdown), and JSON-LD Script Block based on the input. Follow ALL directives from the System Prompt precisely.
+
 ARTICLE_TITLE: {article_title}
 RSS_SUMMARY: {rss_summary}
 SOURCE_ARTICLE_URL: {source_article_url}
@@ -73,6 +75,40 @@ CURRENT_DATE_YYYY_MM_DD: {current_date_iso}
 YOUR_WEBSITE_NAME: {your_website_name}
 YOUR_WEBSITE_LOGO_URL: {your_website_logo_url}
 ALL_GENERATED_KEYWORDS_LIST: {all_generated_keywords_json}
+
+Required Output Format (Strict):
+Title Tag: [Generated title tag ≤ 60 chars, include TARGET_KEYWORD]
+Meta Description: [Generated meta description ≤ 160 chars, include TARGET_KEYWORD]
+
+## [H2 Heading reflecting ARTICLE_TITLE]
+[Paragraph 1: Expand on summary, include TARGET_KEYWORD naturally. ~2-4 sentences]
+
+[Paragraph 2: Further details from summary. ~2-4 sentences]
+
+[Paragraph 3-5: Continue elaborating ONLY on summary details. Add ### H3 if needed for clarity based ONLY on summary.]
+
+[Optional: ### Significance paragraph ONLY IF directly derivable from summary without speculation.]
+
+Source: [{article_title}]({source_article_url})
+
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "[Generated title tag from above]",
+  "description": "[Generated meta description from above]",
+  "keywords": {all_generated_keywords_json},
+  "mainEntityOfPage": {{ "@type": "WebPage", "@id": "{source_article_url}" }},
+  "image": {{ "@type": "ImageObject", "url": "{article_image_url}" }},
+  "datePublished": "{current_date_iso}",
+  "author": {{ "@type": "Person", "name": "{author_name}" }},
+  "publisher": {{
+    "@type": "Organization",
+    "name": "{your_website_name}",
+    "logo": {{ "@type": "ImageObject", "url": "{your_website_logo_url}" }}
+  }}
+}}
+</script>
 """
 # --- End Revised SEO Article Prompt ---
 
@@ -86,13 +122,11 @@ def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE
     payload = { "model": AGENT_MODEL, "messages": [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}], "max_tokens": max_tokens, "temperature": temperature, "stream": False }
     try:
         logger.debug(f"Sending SEO generation request (max_tokens={max_tokens}, temp={temperature}).")
-        response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=240) # INCREASED TIMEOUT for longer response
+        response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=240) # Increased timeout
         response.raise_for_status()
         result = response.json()
-        # --- Log usage for token checking ---
         usage = result.get('usage')
         if usage: logger.debug(f"API Usage: Prompt={usage.get('prompt_tokens')}, Completion={usage.get('completion_tokens')}, Total={usage.get('total_tokens')}")
-        # ---
         if result.get("choices") and len(result["choices"]) > 0:
             message_content = result["choices"][0].get("message", {}).get("content")
             return message_content.strip() if message_content else None
@@ -101,67 +135,122 @@ def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE
     except Exception as e: logger.exception(f"Unexpected error during API call: {e}"); return None
 # --- End API Call ---
 
-# --- Parsing Function (Should still work, but keep an eye on body extraction) ---
+# --- Parsing Function (Improved Robustness) ---
 def parse_seo_agent_response(response_text):
     """Parses the structured Markdown response from the SEO agent."""
     parsed_data = {}
     errors = []
-    if not response_text or response_text.strip().startswith("Error:"): logger.error(f"SEO Agent returned error/empty: {response_text}"); return None, response_text or "Empty response"
+    if not response_text or response_text.strip().startswith("Error:"):
+        logger.error(f"SEO Agent returned error or empty response: {response_text}")
+        return None, response_text or "Empty response"
+
     try:
+        # Extract Title Tag
         title_match = re.search(r"^Title Tag:\s*(.*)", response_text, re.MULTILINE)
-        if title_match: parsed_data['generated_title_tag'] = title_match.group(1).strip()
+        if title_match:
+            parsed_data['generated_title_tag'] = title_match.group(1).strip()
+            if len(parsed_data['generated_title_tag']) > 65: # Check length slightly more generously
+                 logger.warning(f"Generated title tag exceeds 60 chars: '{parsed_data['generated_title_tag']}'")
         else: errors.append("No 'Title Tag:'")
+
+        # Extract Meta Description
         meta_match = re.search(r"^Meta Description:\s*(.*)", response_text, re.MULTILINE)
-        if meta_match: parsed_data['generated_meta_description'] = meta_match.group(1).strip()
+        if meta_match:
+            parsed_data['generated_meta_description'] = meta_match.group(1).strip()
+            if len(parsed_data['generated_meta_description']) > 165: # Check length slightly more generously
+                 logger.warning(f"Generated meta description exceeds 160 chars: '{parsed_data['generated_meta_description']}'")
         else: errors.append("No 'Meta Description:'")
-        script_match = re.search(r'(<script type="application/ld\+json">.*?</script>)', response_text, re.DOTALL | re.IGNORECASE)
+
+        # --- Extract JSON-LD Script Block (More Flexible Regex) ---
+        script_match = re.search(
+            r'(<script\s+type\s*=\s*["\']application/ld\+json["\']\s*>\s*\{.*?\s*\}\s*<\/script>)',
+            response_text,
+            re.DOTALL | re.IGNORECASE
+        )
         if script_match:
             parsed_data['generated_json_ld'] = script_match.group(1).strip()
-            # Optional validation
+            # Optional validation (keep as before)
             try:
                 inner_json_str = script_match.group(1).split('>', 1)[1].rsplit('<', 1)[0]
                 json_ld_data = json.loads(inner_json_str)
-                if json_ld_data.get('headline') != parsed_data.get('generated_title_tag'): logger.warning("JSON-LD headline mismatch!")
-                if json_ld_data.get('description') != parsed_data.get('generated_meta_description'): logger.warning("JSON-LD description mismatch!")
-                # Check if keywords list looks valid
-                if not isinstance(json_ld_data.get('keywords'), list): logger.warning("JSON-LD keywords is not a list!")
+                # Add checks if needed
             except Exception as json_e: logger.warning(f"Cannot validate JSON-LD content: {json_e}")
-        else: errors.append("No JSON-LD script block.")
-
-        # Extract Article Body more robustly
-        body_match = re.search(r"Meta Description:.*?\n\n(.*?)\n\nSource:", response_text, re.DOTALL | re.IGNORECASE)
-        if body_match:
-             parsed_data['generated_article_body_md'] = body_match.group(1).strip()
-             logger.debug(f"Extracted article body length: {len(parsed_data['generated_article_body_md'])} chars")
         else:
-             # Fallback if exact newlines aren't present
-             body_fallback_match = re.search(r"Meta Description:.*?[\r\n]+(##.*?)(?:[\r\n]+Source:|\Z)", response_text, re.DOTALL | re.IGNORECASE)
-             if body_fallback_match:
-                 parsed_data['generated_article_body_md'] = body_fallback_match.group(1).strip()
-                 logger.warning("Used fallback regex for article body extraction.")
-                 logger.debug(f"Extracted article body length (fallback): {len(parsed_data['generated_article_body_md'])} chars")
-             else:
-                 errors.append("Cannot reliably extract Article Body.")
+            errors.append("No JSON-LD script block.")
+            # Try to find where it *might* have been cut off
+            if "<script" in response_text:
+                 logger.warning("Found '<script' tag but regex failed to match full JSON-LD block. Response might be truncated or malformed.")
+            else:
+                 logger.warning("Did not find '<script' tag start for JSON-LD block.")
 
-        if errors: logger.error(f"SEO Parsing errors: {'; '.join(errors)}")
-        if 'generated_article_body_md' not in parsed_data or 'generated_json_ld' not in parsed_data: return None, f"Critical parsing failure: {'; '.join(errors)}"
-        return parsed_data, None
-    except Exception as e: logger.exception(f"Critical error parsing SEO response: {e}"); return None, f"Parsing exception: {e}"
+
+        # --- Extract Article Body ---
+        # Look for content between Meta Description and Source link more robustly
+        # Allow for varying newlines and potentially the JSON-LD appearing before Source
+        body_match = re.search(
+            r"Meta Description:.*?[\r\n]+(##.*?)(?:[\r\n]+\s*Source:|<script)",
+            response_text,
+            re.DOTALL | re.IGNORECASE
+            )
+        if body_match:
+             body_content = body_match.group(1).strip()
+             # Remove trailing Source line if accidentally captured
+             body_content = re.sub(r'\s*Source:\s*\[.*?\]\(.*?\)\s*$', '', body_content, flags=re.MULTILINE).strip()
+             parsed_data['generated_article_body_md'] = body_content
+             logger.debug(f"Extracted article body length: {len(body_content)} chars")
+        else:
+             errors.append("Cannot reliably extract Article Body.")
+
+
+        # --- Final Error Check and Return ---
+        if errors:
+            logger.error(f"SEO Parsing errors: {'; '.join(errors)}")
+            # Check if critical components (body) are missing
+            if 'generated_article_body_md' not in parsed_data:
+                 return None, f"Critical parsing failure: Missing Article Body. Errors: {'; '.join(errors)}"
+            # If body is present, but JSON-LD is missing, log warning but return results
+            elif 'No JSON-LD script block.' in errors:
+                 logger.warning("JSON-LD block missing, but returning other parsed data.")
+                 parsed_data['generated_json_ld'] = '' # Provide empty string
+                 # Return the partial data, but signal the specific error
+                 return parsed_data, "Missing JSON-LD script block"
+            # Else, some other non-critical error occurred, but body is present
+            else:
+                 # Treat other missing parts (like title/meta) as non-critical for now if body exists
+                 logger.warning(f"Non-critical parsing errors encountered: {'; '.join(errors)}. Returning partial data.")
+                 # Ensure missing keys exist
+                 parsed_data.setdefault('generated_title_tag', '')
+                 parsed_data.setdefault('generated_meta_description', '')
+                 parsed_data.setdefault('generated_json_ld', '')
+                 return parsed_data, "; ".join(errors) # Return combined non-critical errors
+
+
+        # If we reach here, no errors were recorded
+        # Final check to ensure essential parts are present before declaring success
+        if 'generated_article_body_md' not in parsed_data or 'generated_json_ld' not in parsed_data:
+             logger.error("Inconsistent parsing state: No errors logged, but critical data missing.")
+             return None, "Inconsistent parsing state"
+
+        return parsed_data, None # Success
+
+    except Exception as e:
+        logger.exception(f"Critical error during SEO response parsing: {e}")
+        return None, f"Parsing exception: {e}"
 
 
 def run_seo_article_agent(article_data):
     """Generates the SEO brief, aiming for longer content."""
-    # Pass ALL generated tags/keywords to the prompt
     all_keywords = [article_data.get('filter_verdict', {}).get('primary_topic_keyword')] + article_data.get('generated_tags', [])
-    all_keywords = [k for k in all_keywords if k] # Remove None/empty
-    all_keywords_json_str = json.dumps(all_keywords) # Pass as JSON list string
+    all_keywords = [str(k) for k in all_keywords if k] # Ensure all are strings, remove None/empty
+    # Ensure the result is a valid JSON list representation
+    all_generated_keywords_json = json.dumps(all_keywords) # Pass as JSON list string
 
-    # Required keys check remains the same
     required_keys = ['title', 'summary', 'link', 'filter_verdict', 'selected_image_url', 'published_iso']
     if not article_data or not all(k in article_data and article_data[k] is not None for k in required_keys):
-        logger.error(f"Missing required data for SEO agent. Needs: {required_keys}")
-        article_data['seo_agent_error'] = "Missing required input"
-        return article_data # Return modified dict
+        missing_keys = [k for k in required_keys if not (k in article_data and article_data[k] is not None)]
+        logger.error(f"Missing required data for SEO agent. Needs: {missing_keys}")
+        article_data['seo_agent_error'] = f"Missing required input: {missing_keys}"
+        return article_data
 
     if not article_data['filter_verdict'] or not article_data['filter_verdict'].get('primary_topic_keyword'):
          logger.error("Missing primary_topic_keyword from filter_verdict.")
@@ -170,7 +259,7 @@ def run_seo_article_agent(article_data):
 
     input_data = {
         "article_title": article_data.get('title'),
-        "rss_summary": article_data.get('summary'), # Base content on this
+        "rss_summary": article_data.get('summary'),
         "source_article_url": article_data.get('link'),
         "target_keyword": article_data['filter_verdict'].get('primary_topic_keyword'),
         "article_image_url": article_data.get('selected_image_url'),
@@ -178,7 +267,7 @@ def run_seo_article_agent(article_data):
         "current_date_iso": article_data.get('published_iso', datetime.now(timezone.utc).date().isoformat()),
         "your_website_name": YOUR_WEBSITE_NAME,
         "your_website_logo_url": YOUR_WEBSITE_LOGO_URL,
-        "all_generated_keywords_json": all_keywords_json_str # Pass the list of keywords
+        "all_generated_keywords_json": all_generated_keywords_json # Corrected variable name
     }
 
     critical_inputs = ['article_title', 'rss_summary', 'source_article_url', 'target_keyword', 'article_image_url', 'current_date_iso', 'all_generated_keywords_json']
@@ -191,27 +280,80 @@ def run_seo_article_agent(article_data):
     user_prompt = SEO_PROMPT_USER_TEMPLATE.format(**input_data)
 
     logger.info(f"Running SEO article generator for article ID: {article_data.get('id', 'N/A')}...")
-    # Call API with increased token limit and adjusted temp
     raw_response_content = call_deepseek_api(SEO_PROMPT_SYSTEM, user_prompt, max_tokens=MAX_TOKENS_RESPONSE, temperature=TEMPERATURE)
 
     if not raw_response_content:
         logger.error("SEO agent failed to get a response from the API.")
-        article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = "API call failed"
+        article_data['seo_agent_results'] = None
+        article_data['seo_agent_error'] = "API call failed"
         return article_data
+
+    # --- Log Raw Output for Debugging ---
+    logger.debug(f"Raw SEO Agent Response for {article_data.get('id', 'N/A')}:\n---\n{raw_response_content}\n---")
+    # ------------------------------------
 
     parsed_results, error_msg = parse_seo_agent_response(raw_response_content)
 
-    if error_msg:
+    # Check if parsing completely failed (returned None for results)
+    if parsed_results is None:
         logger.error(f"Failed to parse SEO agent response: {error_msg}")
-        article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = f"Parsing failed: {error_msg}"
-        article_data['seo_agent_raw_response'] = raw_response_content # Store raw response for debug
+        article_data['seo_agent_results'] = None
+        article_data['seo_agent_error'] = f"Parsing failed: {error_msg}"
+        # Store raw response for debug if None results
+        article_data['seo_agent_raw_response'] = raw_response_content
     else:
-        logger.info(f"Successfully generated/parsed SEO content for {article_data.get('id', 'N/A')}.")
-        article_data['seo_agent_results'] = parsed_results; article_data['seo_agent_error'] = None
+        # Parsing succeeded, results are available (even if JSON-LD was missing)
+        logger.info(f"Successfully parsed SEO content for {article_data.get('id', 'N/A')}.")
+        article_data['seo_agent_results'] = parsed_results
+        # Record the specific error if one occurred (like missing JSON-LD), otherwise clear error
+        article_data['seo_agent_error'] = error_msg if error_msg else None
+        if error_msg == "Missing JSON-LD script block":
+             logger.warning(f"Proceeding without JSON-LD for {article_data.get('id', 'N/A')}")
+
 
     return article_data
 
 # --- Example Usage (keep as before) ---
 if __name__ == "__main__":
-    # ... (keep existing example usage) ...
-    pass # Placeholder to keep block valid
+    # Example article data setup (replace with actual data structure)
+    test_article_data = {
+        'id': 'example-123',
+        'title': "DeepSeek Releases New Code Model",
+        'summary': "DeepSeek AI announced the release of its latest coding model, claiming improved performance on complex benchmarks and natural language understanding for code generation tasks. The model is available via API.",
+        'link': "https://example.com/deepseek-code-release",
+        'filter_verdict': {
+            'importance_level': 'Interesting',
+            'topic': 'AI Models',
+            'primary_topic_keyword': 'DeepSeek code model'
+        },
+        'selected_image_url': "https://via.placeholder.com/600x400.png?text=DeepSeek+Code",
+        'published_iso': datetime.now(timezone.utc).isoformat(),
+        'generated_tags': ["DeepSeek", "AI Coding Model", "Code Generation", "LLM", "API"],
+        'author': 'Test Author'
+    }
+
+    logger.info("\n--- Running SEO Agent Test ---")
+    result_data = run_seo_article_agent(test_article_data.copy())
+
+    if result_data and result_data.get('seo_agent_results'):
+        print("\n--- Parsed SEO Results ---")
+        print(f"Title Tag: {result_data['seo_agent_results'].get('generated_title_tag')}")
+        print(f"Meta Desc: {result_data['seo_agent_results'].get('generated_meta_description')}")
+        print(f"Body MD Length: {len(result_data['seo_agent_results'].get('generated_article_body_md', ''))}")
+        print(f"JSON-LD Present: {bool(result_data['seo_agent_results'].get('generated_json_ld'))}")
+        if result_data.get('seo_agent_error'):
+            print(f"Parsing Warning/Error: {result_data['seo_agent_error']}")
+        # print("\nBody Markdown Preview:")
+        # print(result_data['seo_agent_results'].get('generated_article_body_md', '')[:500] + "...")
+        # print("\nJSON-LD Preview:")
+        # print(result_data['seo_agent_results'].get('generated_json_ld', '')[:500] + "...")
+
+    elif result_data:
+         print(f"\nSEO Agent FAILED. Error: {result_data.get('seo_agent_error')}")
+         if 'seo_agent_raw_response' in result_data:
+              print("\n--- Raw Response (Debug) ---")
+              print(result_data['seo_agent_raw_response'])
+    else:
+         print("\nSEO Agent FAILED critically.")
+
+    logger.info("--- SEO Agent Test Complete ---")
