@@ -55,7 +55,7 @@ jobs:
           # Check if specific files/dirs exist before adding
           if [ -d "public" ]; then git add public/; fi
           if [ -f "data/processed_article_ids.txt" ]; then git add data/processed_article_ids.txt; fi
-          if [ -f "dacoola.log" ]; then git add dacola.log; fi
+          if [ -f "dacoola.log" ]; then git add dacola.log; fi # Only add if it exists
           if [ -d "data/processed_json" ]; then git add data/processed_json/; fi
 
           # Check if there are changes to commit
