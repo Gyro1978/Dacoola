@@ -2,7 +2,7 @@ name: Hourly News Update and Deploy
 
 on:
   schedule:
-    # Runs every hour at the beginning of the hour
+    # Runs every 5 minutes (Adjusted for reliability)
     - cron: "*/5 * * * *"
   workflow_dispatch: # Allows manual triggering
 
@@ -17,9 +17,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        # Fetch all history for accurate change detection if needed (optional)
-        # with:
-        #   fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -36,45 +33,44 @@ jobs:
           # Pass secrets securely as environment variables
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
-          CAMB_AI_API_KEY: ${{ secrets.CAMB_AI_API_KEY }} # Will be empty if secret not set
-          # Pass other secrets from your screenshot
+          CAMB_AI_API_KEY: ${{ secrets.CAMB_AI_API_KEY }}
+          # Pass other secrets
           YOUR_WEBSITE_NAME: ${{ secrets.YOUR_WEBSITE_NAME }}
           YOUR_WEBSITE_LOGO_URL: ${{ secrets.YOUR_WEBSITE_LOGO_URL }}
           MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES }}
           MAX_LATEST_NEWS: ${{ secrets.MAX_LATEST_NEWS }}
           CHECK_INTERVAL_SECONDS: ${{ secrets.CHECK_INTERVAL_SECONDS }}
-          # Pass YOUR_SITE_BASE_URL (assuming it might be a secret or variable)
           YOUR_SITE_BASE_URL: ${{ secrets.YOUR_SITE_BASE_URL || vars.YOUR_SITE_BASE_URL || '' }}
         run: python src/main.py
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name 'GitHub Actions Bot'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com' # Standard bot email
-          # Add all changes in public/, the specific data file, and the log file
-          # Check if specific files/dirs exist before adding
-          if [ -d "public" ]; then git add public/; fi
-          if [ -f "data/processed_article_ids.txt" ]; then git add data/processed_article_ids.txt; fi
-          if [ -f "dacoola.log" ]; then git add dacola.log; fi # Only add if it exists
-          if [ -d "data/processed_json" ]; then git add data/processed_json/; fi
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-          # Check if there are changes to commit
+          # --- CORRECTED: Only add specific output dirs/files expected to change ---
+          git add public/ data/processed_json/ data/processed_article_ids.txt
+          # Optionally add the log file ONLY if it exists
+          if [ -f "dacoola.log" ]; then git add dacola.log; fi
+          # -----------------------------------------------------------------------
+
+          # Check if there are staged changes
           if git diff --staged --quiet; then
             echo "No content changes to commit."
           else
             echo "Content changes detected. Committing..."
             git commit -m "Automated hourly news update [skip ci]"
-            # Retry push
+            # Retry push logic...
             retry_count=0
             max_retries=3
-            until git push origin ${{ github.ref_name }} || [ $retry_count -eq $max_retries ]; do # Push to current branch
+            until git push origin ${{ github.ref_name }} || [ $retry_count -eq $max_retries ]; do
               retry_count=$((retry_count+1))
               echo "Push failed. Retrying (${retry_count}/${max_retries})..."
               sleep 5
             done
             if [ $retry_count -eq $max_retries ]; then
               echo "Push failed after $max_retries attempts."
-              exit 1 # Fail the workflow if push fails repeatedly
+              exit 1
             fi
             echo "Changes pushed successfully."
           fi
@@ -82,7 +78,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # --- DEPLOYMENT STEP ---
-      # *** Option 1: Deploy to GitHub Pages is ACTIVE ***
+      # Option 1: Deploy to GitHub Pages is ACTIVE
 
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
@@ -90,39 +86,13 @@ jobs:
           path: ./public # Upload the public directory content
 
       - name: Deploy to GitHub Pages
-        id: deployment # Add an ID to the step
+        id: deployment
         uses: actions/deploy-pages@v4
-        # This action uses the artifact uploaded in the previous step
 
-      # Option 2: Deploy via rsync/scp to a traditional server (Keep commented out)
-      #   - Requires secrets: SERVER_SSH_KEY, REMOTE_HOST, REMOTE_USER, TARGET_DIR
-      # - name: Deploy to Server via rsync
-      #   uses: easingthemes/ssh-deploy@v5.1.0
-      #   with:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-      #     ARGS: "-rlgoDzvc -i --delete"
-      #     SOURCE: "public/"
-      #     REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-      #     REMOTE_USER: ${{ secrets.REMOTE_USER }}
-      #     TARGET: ${{ secrets.TARGET_DIR }}
-
-      # Option 3: Deploy using Netlify CLI (Keep commented out)
-      #   - Requires secrets: NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID
-      # - name: Deploy to Netlify
-      #   uses: netlify/actions/cli@master
-      #   with:
-      #     args: deploy --dir=public --prod
-      #   env:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-
-      # Option 4: Deploy using Vercel CLI (Keep commented out)
-      #   - Requires secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
-      # - name: Install Vercel CLI
-      #   run: npm install --global vercel@latest
-      # - name: Pull Vercel Environment Information
-      #   run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      # - name: Build Project Artifacts
-      #   run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      # - name: Deploy Project Artifacts to Vercel
-      #   run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+      # Other options remain commented out...
+      # Option 2: Deploy via rsync/scp
+      # - name: Deploy to Server via rsync ...
+      # Option 3: Deploy using Netlify CLI
+      # - name: Deploy to Netlify ...
+      # Option 4: Deploy using Vercel CLI
+      # - name: Install Vercel CLI ...
