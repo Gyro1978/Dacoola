@@ -1,0 +1,44 @@
+{
+    "id": "dee078ccacaf79c59459d20620d7527aea85f9315ee5f5154802be8ec8f4a8dd",
+    "title": "The future of AI processing",
+    "link": "https://www.technologyreview.com/2025/04/22/1114962/the-future-of-ai-processing/",
+    "published_iso": "2025-04-22T13:30:00",
+    "summary": "<p>Artificial Intelligence (AI) is emerging in everyday use cases, thanks to advances in foundational models, more powerful chip technology, and abundant data. To become truly embedded and seamless, AI computation must now be distributed—and much of it will take place on device and at the edge.&nbsp;</p>\n\n\n\n<p>To support this evolution, computation for running AI workloads must be allocated to the right hardware based on a range of factors, including performance, latency, and power efficiency. Heterogeneous compute enables organizations to allocate workloads dynamically across various computing cores like central processing units (CPUs), graphics processing units (GPUs), neural processing units (NPUs), and other AI accelerators. By assigning workloads to the processors best suited to different purposes, organizations can better balance latency, security, and energy usage in their systems.&nbsp;</p>\n\n\n\n<figure class=\"wp-block-image size-large is-resized\"><a href=\"https://technologyreview.tradepub.com/free/w_defa8364/prgm.cgi\" rel=\" noreferrer noopener\" target=\"_blank\"><img alt=\"\" class=\"wp-image-1115024\" height=\"3189\" src=\"https://wp.technologyreview.com/wp-content/uploads/2025/04/MITTR-ARM25_V7Cover.png?w=1555\" style=\"width: 385px; height: auto;\" width=\"2480\" /></a></figure>\n\n\n\n<div class=\"wp-block-buttons is-content-justification-left is-layout-flex wp-container-core-buttons-is-layout-1 wp-block-buttons-is-layout-flex\">\n<div class=\"wp-block-button has-custom-font-size is-style-fill is-style-fill--1\" style=\"font-size: 16px;\"><a class=\"wp-block-button__link has-mittr-white-color has-text-color has-background wp-element-button\" href=\"https://technologyreview.tradepub.com/free/w_defa8364/prgm.cgi\" rel=\"noreferrer noopener\" style=\"border-radius: 4px; background-color: #183db8;\" target=\"_blank\">DOWNLOAD THE FULL REPORT</a></div>\n</div>\n\n\n\n<p>Key findings from the report are as follows:&nbsp;</p>\n\n\n\n<p>• <strong>More AI is moving to inference and the edge.</strong> As AI technology advances, inference—a model’s ability to make predictions based on its training—can now be run closer to users and not just in the cloud. This has advanced the deployment of AI to a range of different edge devices, including smartphones, cars, and industrial internet of things (IIoT). Edge processing reduces the reliance on cloud to offer faster response times and enhanced privacy. Going forward, hardware for on-device AI will only improve in areas like memory capacity and energy efficiency.&nbsp;</p>\n\n\n\n<p><strong>• To deliver pervasive AI, organizations are adopting heterogeneous compute. </strong>To commercialize the full panoply of AI use cases, processing and compute must be performed on the right hardware. A heterogeneous approach unlocks a solid, adaptable foundation for the deployment and advancement of AI use cases for everyday life, work, and play. It also allows organizations to prepare for the future of distributed AI in a way that is reliable, efficient, and secure. But there are many trade-offs between cloud and edge computing that require careful consideration based on industry-specific needs.&nbsp;</p>\n\n\n\n<figure class=\"wp-block-image size-full\"><a href=\"https://technologyreview.tradepub.com/free/w_defa8364/prgm.cgi\" rel=\" noreferrer noopener\" target=\"_blank\"><img alt=\"\" class=\"wp-image-1114963\" height=\"984\" src=\"https://wp.technologyreview.com/wp-content/uploads/2025/04/MITTR-ARM_IanQuote_WEB.png\" width=\"2480\" /></a></figure>\n\n\n\n<p>• <strong>Companies face challenges in managing system complexity and ensuring current architectures can adapt to future needs.</strong> Despite progress in microchip architectures, such as the latest high-performance CPU architectures optimized for AI, software and tooling both need to improve to deliver a compute platform that supports pervasive machine learning, generative AI, and new specializations. Experts stress the importance of developing adaptable architectures that cater to current machine learning demands, while allowing room for technological shifts. The benefits of distributed compute need to outweigh the downsides in terms of complexity across platforms.&nbsp;</p>\n\n\n\n<p><a href=\"https://technologyreview.tradepub.com/free/w_defa8364/prgm.cgi\" rel=\"noreferrer noopener\" target=\"_blank\">Download the full report</a>.</p>\n\n\n\n<p><em>This content was produced by Insights, the custom content arm of MIT Technology Review. It was not written by MIT Technology Review’s editorial staff.</em> </p>\n\n\n\n<p><em>This content was researched, designed, and written entirely by human writers, editors, analysts, and illustrators. This includes the writing of surveys and collection of data for surveys. AI tools that may have been used were limited to secondary production processes that passed thorough human review.</em></p>",
+    "source_feed": "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
+    "scraped_at_iso": "2025-04-30T23:54:08.462671",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Hardware",
+        "reasoning_summary": "The article discusses significant advancements in AI processing and hardware allocation, which is notable but not urgent or high-impact enough to be 'Breaking'.",
+        "primary_topic_keyword": "AI hardware allocation"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-01T02:21:03.840857+00:00",
+    "topic": "Hardware",
+    "is_breaking": false,
+    "primary_keyword": "AI hardware allocation",
+    "selected_image_url": "https://wp.technologyreview.com/wp-content/uploads/2025/04/MITTR2024_Arm_CoverSocial.png?resize=1200,600",
+    "seo_agent_results": {
+        "generated_title_tag": "AI Hardware Allocation Shifts to Edge and Heterogeneous Compute",
+        "generated_meta_description": "AI hardware allocation is evolving with more processing moving to edge devices and heterogeneous compute for better performance and efficiency.",
+        "generated_json_ld": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"NewsArticle\",\n  \"headline\": \"AI Hardware Allocation Shifts to Edge and Heterogeneous Compute\",\n  \"description\": \"AI hardware allocation is evolving with more processing moving to edge devices and heterogeneous compute for better performance and efficiency.\",\n  \"keywords\": [\"AI hardware allocation\"],\n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.technologyreview.com/2025/04/22/1114962/the-future-of-ai-processing/\" },\n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://wp.technologyreview.com/wp-content/uploads/2025/04/MITTR2024_Arm_CoverSocial.png?resize=1200,600\" },\n  \"datePublished\": \"2025-04-22T13:30:00\",\n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },\n  \"publisher\": { \"@type\": \"Organization\", \"name\": \"Dacoola\", \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" } }\n}\n</script>",
+        "generated_article_body_md": "## The Future of AI Processing  \n\nAI hardware allocation is shifting as more processing moves to inference and the edge, reducing reliance on cloud computing. Advances in chip technology and heterogeneous compute enable dynamic workload distribution across CPUs, GPUs, and NPUs, optimizing performance and energy efficiency.  \n\n### Edge and Heterogeneous Compute Take Center Stage  \n\nEdge processing enhances response times and privacy by running AI models on devices like smartphones and industrial IoT systems. Meanwhile, heterogeneous compute allows organizations to balance latency, security, and power usage by assigning workloads to the best-suited hardware."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "AI processing",
+        "edge computing",
+        "heterogeneous compute",
+        "AI hardware",
+        "inference",
+        "cloud computing",
+        "chip technology",
+        "energy efficiency",
+        "IoT systems",
+        "workload distribution"
+    ],
+    "tags_agent_error": null,
+    "audio_url": null,
+    "tts_agent_error": "Trigger failed: HTTP Error (403) calling TTS Create API: {\"detail\":\"You are not allowed to use this voice_id.\"}",
+    "slug": "the-future-of-ai-processing"
+}

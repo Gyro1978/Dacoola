@@ -1,0 +1,43 @@
+{
+    "id": "57e54f490efc0d5ae7eb359035f38838b44f834e964e4c4dfb7d7ca5f93bb614",
+    "title": "A comprehensive list of 2025 tech layoffs",
+    "link": "https://techcrunch.com/2025/04/30/tech-layoffs-2025-list/",
+    "published_iso": "2025-04-30T22:45:18",
+    "summary": "A complete list of all the known layoffs in tech, from Big Tech to startups, broken down by month throughout 2024.",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-04-30T23:54:07.947710",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Business",
+        "reasoning_summary": "A comprehensive list of tech layoffs is significant for tracking industry trends but lacks immediate urgency or high-impact drama.",
+        "primary_topic_keyword": "tech layoffs"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-04-30T23:54:55.266474+00:00",
+    "topic": "Business",
+    "is_breaking": false,
+    "primary_keyword": "tech layoffs",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2023/02/layoffs-e1684946575831.jpg?w=1200",
+    "seo_agent_results": {
+        "generated_title_tag": "Tech Layoffs 2025: Complete List of Job Cuts in the Industry",
+        "generated_meta_description": "A detailed breakdown of 2025 tech layoffs, including Big Tech and startups, month by month. Stay updated on the latest job cuts.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Tech Layoffs 2025: Complete List of Job Cuts in the Industry\",  \n  \"description\": \"A detailed breakdown of 2025 tech layoffs, including Big Tech and startups, month by month. Stay updated on the latest job cuts.\",  \n  \"keywords\": [\"tech layoffs\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/04/30/tech-layoffs-2025-list/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2023/02/layoffs-e1684946575831.jpg?w=1200\" },  \n  \"datePublished\": \"2025-04-30\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": { \"@type\": \"Organization\", \"name\": \"Dacoola\", \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" } }  \n}  \n</script>",
+        "generated_article_body_md": "## 2025 Tech Layoffs: Full List of Job Cuts  \n\nThe tech industry continues to face significant workforce reductions in 2025, with layoffs affecting both Big Tech companies and startups. This comprehensive list breaks down the job cuts by month, providing a clear overview of the ongoing trend in tech layoffs.  \n\nFrom January to April 2025, major firms and emerging startups alike have announced restructuring efforts, leading to widespread job losses. The data highlights the evolving challenges in the sector as companies adapt to economic pressures."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "2025 tech layoffs",
+        "Big Tech job cuts",
+        "tech industry layoffs",
+        "startup layoffs 2025",
+        "workforce reductions",
+        "tech sector restructuring",
+        "economic pressures tech",
+        "job losses tech",
+        "tech layoffs list"
+    ],
+    "tags_agent_error": null,
+    "audio_url": null,
+    "tts_agent_error": "Trigger failed: HTTP Error (403) calling TTS Create API: {\"detail\":\"You are not allowed to use this voice_id.\"}",
+    "slug": "a-comprehensive-list-of-2025-tech-layoffs"
+}

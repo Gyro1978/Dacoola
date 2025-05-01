@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- *** CORE SEO & Page Info *** -->
+    <!-- Make Title more specific / branded -->
+    <title>Dacoola - AI & Tech News, Analysis, and Updates</title>
+    <!-- Slightly more engaging description -->
+    <meta name="description" content="Stay updated with the latest breaking news, analysis, and trends in Artificial Intelligence (AI) and technology from Dacoola.">
+    <!-- Optional: Add specific keywords for the homepage -->
+    <meta name="keywords" content="AI news, artificial intelligence, tech news, machine learning, deep learning, tech trends, AI startups, technology updates">
+
+    <!-- *** CANONICAL URL (Very Important) *** -->
+    <!-- REPLACE with your actual domain and path to home -->
+    <link rel="canonical" href="https://www.yourdacoolasite.com/home.html">
+    <!-- OR if home.html is served at the root: <link rel="canonical" href="https://www.yourdacoolasite.com/"> -->
+
+    <!-- *** OPEN GRAPH (Facebook, LinkedIn, etc.) *** -->
+    <!-- REPLACE og:title, og:description, og:image, og:url, og:site_name with your actual info -->
+    <meta property="og:title" content="Dacoola - AI & Tech News, Analysis, and Updates">
+    <meta property="og:description" content="Stay updated with the latest breaking news, analysis, and trends in Artificial Intelligence (AI) and technology from Dacoola.">
+    <meta property="og:image" content="https://i.imgur.com/A5Wdp6f.png"> <!-- Your main site logo or a featured image -->
+    <meta property="og:url" content="https://www.yourdacoolasite.com/home.html"> <!-- Use the canonical URL -->
+    <meta property="og:type" content="website"> <!-- Homepage is 'website' type -->
+    <meta property="og:site_name" content="Dacoola">
+
+    <!-- *** TWITTER CARD (X) *** -->
+    <!-- REPLACE with your actual info -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dacoola - AI & Tech News, Analysis, and Updates">
+    <meta name="twitter:description" content="Stay updated with the latest breaking news, analysis, and trends in Artificial Intelligence (AI) and technology from Dacoola.">
+    <meta name="twitter:image" content="https://i.imgur.com/A5Wdp6f.png"> <!-- Your main site logo or featured image -->
+    <!-- Optional: <meta name="twitter:site" content="@YourTwitterHandle"> -->
+
+
+    <!-- *** Stylesheets & Icons *** -->
+    <link rel="stylesheet" href="css/styles.css"> <!-- Path relative to public/ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- *** JSON-LD Structured Data for Website *** -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Dacoola", // REPLACE with your site name
+      "url": "https://www.yourdacoolasite.com/", // REPLACE with your site's base URL
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+            "@type": "EntryPoint",
+             "urlTemplate": "https://www.yourdacoolasite.com/search.html?q={search_term_string}" // REPLACE base URL
+        },
+        "query-input": "required name=search_term_string"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Dacoola", // REPLACE with your site name/org name
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://i.imgur.com/A5Wdp6f.png" // REPLACE with your actual logo URL
+        }
+      }
+    }
+    </script>
+
+</head>
+<body>
+
+    <header id="navbar-placeholder">
+        <!-- Navbar loaded by JS -->
+    </header>
+
+    <main class="container home-container">
+
+        <!-- Breaking News / Trending Banner -->
+        <section id="breaking-news-section" class="home-section">
+            <h2 id="breaking-news-title">Breaking News</h2>
+            <div id="breaking-news-content" class="breaking-news-content slider-container">
+                <p class="placeholder">Loading banner news...</p>
+            </div>
+        </section>
+
+        <!-- Latest News Section -->
+        <section id="latest-news-section" class="home-section">
+            <div class="section-header">
+                <h2>Latest News</h2>
+                <a href="latest.html" class="view-all-button">View All →</a> <!-- Corrected relative link -->
+            </div>
+            <div class="latest-news-grid">
+                <p class="placeholder">Loading latest news...</p>
+            </div>
+        </section>
+
+        <!-- Topics Section -->
+        <section id="topics-section" class="home-section">
+            <h2>Topics</h2>
+            <div class="topics-list">
+                <!-- JS populates this -->
+                <p class="placeholder">Loading topics...</p>
+            </div>
+        </section>
+
+        <!-- Trending News Section -->
+        <section id="trending-news-section" class="home-section">
+             <div class="section-header">
+                <h2>Trending Articles</h2>
+                <!-- No View All Button -->
+            </div>
+            <div class="trending-news-list">
+                <p class="placeholder">Loading trending news...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Link JS -->
+    <script src="js/script.js"></script>
+
+</body>
+</html>

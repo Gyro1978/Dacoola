@@ -1,0 +1,43 @@
+{
+    "id": "6eb495bc6c8debb3525440d3b09e597ab3f0c3e43a55fc30712a9628de94a270",
+    "title": "UiPath’s new orchestrator guides AI agents to follow your enterprise’s rules",
+    "link": "https://venturebeat.com/ai/uipaths-new-orchestrator-guides-ai-agents-to-follow-your-enterprises-rules/",
+    "published_iso": "2025-04-30T21:20:16",
+    "summary": "<img alt=\"data observability, RPA and AI. hyperautomation concept\" class=\"attachment-single-feed size-single-feed wp-post-image\" height=\"325\" src=\"https://venturebeat.com/wp-content/uploads/2022/05/data-observability-e1655328076213.jpg?w=578\" width=\"578\" /><hr />UiPath's agent orchestration layer Maestro moves prompts through three layers: the agent, a human and the robotic process automation system.<a href=\"https://venturebeat.com/ai/uipaths-new-orchestrator-guides-ai-agents-to-follow-your-enterprises-rules/\" target=\"_blank\">Read More</a>",
+    "source_feed": "https://venturebeat.com/category/ai/feed/",
+    "scraped_at_iso": "2025-05-01T01:54:39.762526",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Software",
+        "reasoning_summary": "Significant development in AI agent orchestration by a major player, but not urgent or high-impact enough to be 'Breaking'.",
+        "primary_topic_keyword": "AI agent orchestration"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-01T02:28:21.453244+00:00",
+    "topic": "Software",
+    "is_breaking": false,
+    "primary_keyword": "AI agent orchestration",
+    "selected_image_url": "https://venturebeat.com/wp-content/uploads/2022/05/data-observability-e1655328076213.jpg?w=1024?w=1200&strip=all",
+    "seo_agent_results": {
+        "generated_title_tag": "UiPath’s AI agent orchestration tool Maestro streamlines enterprise automation",
+        "generated_meta_description": "UiPath's Maestro orchestrates AI agents, humans, and RPA systems to ensure enterprise compliance. Learn how this AI agent orchestration works.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"UiPath’s AI agent orchestration tool Maestro streamlines enterprise automation\",  \n  \"description\": \"UiPath's Maestro orchestrates AI agents, humans, and RPA systems to ensure enterprise compliance. Learn how this AI agent orchestration works.\",  \n  \"keywords\": [\"AI agent orchestration\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://venturebeat.com/ai/uipaths-new-orchestrator-guides-ai-agents-to-follow-your-enterprises-rules/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://venturebeat.com/wp-content/uploads/2022/05/data-observability-e1655328076213.jpg?w=1024?w=1200&strip=all\" },  \n  \"datePublished\": \"2025-04-30T21:20:16\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": { \"@type\": \"Organization\", \"name\": \"Dacoola\", \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" } }  \n}  \n</script>",
+        "generated_article_body_md": "## UiPath’s Maestro Orchestrates AI Agents for Enterprise Compliance  \n\nUiPath has introduced Maestro, an AI agent orchestration layer designed to guide automation workflows across enterprises. The system processes prompts through three layers: the AI agent, human oversight, and the robotic process automation (RPA) system.  \n\nMaestro ensures AI agents adhere to organizational rules, improving efficiency and compliance. By integrating human input with automated processes, UiPath aims to enhance hyperautomation capabilities for businesses."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "UiPath",
+        "Maestro",
+        "AI agent orchestration",
+        "enterprise compliance",
+        "robotic process automation",
+        "hyperautomation",
+        "AI workflow automation",
+        "human oversight in AI",
+        "organizational rules compliance"
+    ],
+    "tags_agent_error": null,
+    "audio_url": null,
+    "tts_agent_error": "Trigger failed: HTTP Error (403) calling TTS Create API: {\"detail\":\"You are not allowed to use this voice_id.\"}",
+    "slug": "uipaths-new-orchestrator-guides-ai-agents-to-follow-your-enterprises-rules"
+}

@@ -1,0 +1,44 @@
+{
+    "id": "ea6eda683b90dcb26e42b9f994ed168ee13efaa615d7a0580f5efdc352c1ef29",
+    "title": "Wikipedia says it will use AI, but not to replace human volunteers",
+    "link": "https://techcrunch.com/2025/04/30/wikipedia-says-it-will-use-ai-but-not-to-replace-human-volunteers/",
+    "published_iso": "2025-04-30T14:05:08",
+    "summary": "The nonprofit behind Wikipedia on Wednesday revealed its new AI strategy for the next three years &#8212; and it&#8217;s not replacing the Wikipedia community of editors and volunteers with artificial intelligence, thankfully. Instead, the Wikimedia Foundation says it will use AI to build new features that &#8220;remove technical barriers,&#8221; allowing editors, moderators, and patrollers tools that allow them [&#8230;]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-04-30T23:54:07.998102",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "AI Models",
+        "reasoning_summary": "Significant development in AI strategy by a major nonprofit, but not urgent or high-impact enough to be 'Breaking'.",
+        "primary_topic_keyword": "Wikipedia AI strategy"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-01T00:05:13.224707+00:00",
+    "topic": "AI Models",
+    "is_breaking": false,
+    "primary_keyword": "Wikipedia AI strategy",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2024/11/GettyImages-1873370000.jpg?resize=1200,800",
+    "seo_agent_results": {
+        "generated_title_tag": "Wikipedia AI strategy focuses on enhancing human editors, not replacing them",
+        "generated_meta_description": "Wikipedia's new AI strategy aims to support human volunteers with tools, not replace them. Learn how AI will enhance editing workflows.",
+        "generated_json_ld": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"NewsArticle\",\n  \"headline\": \"Wikipedia AI strategy focuses on enhancing human editors, not replacing them\",\n  \"description\": \"Wikipedia's new AI strategy aims to support human volunteers with tools, not replace them. Learn how AI will enhance editing workflows.\",\n  \"keywords\": [\"Wikipedia AI strategy\"],\n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/04/30/wikipedia-says-it-will-use-ai-but-not-to-replace-human-volunteers/\" },\n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2024/11/GettyImages-1873370000.jpg?resize=1200,800\" },\n  \"datePublished\": \"2025-04-30T14:05:08\",\n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },\n  \"publisher\": { \"@type\": \"Organization\", \"name\": \"Dacoola\", \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" } }\n}\n</script>",
+        "generated_article_body_md": "## Wikipedia’s AI strategy prioritizes human editors over automation  \n\nThe Wikimedia Foundation unveiled its three-year AI strategy, emphasizing that artificial intelligence won’t replace Wikipedia’s volunteer editors. Instead, the Wikipedia AI strategy will focus on developing tools to streamline workflows and remove technical barriers for moderators and contributors.  \n\n### AI as an assistant, not a replacement  \n\nNew AI-powered features will help editors and patrollers work more efficiently, maintaining Wikipedia’s community-driven model. The foundation clarified that human oversight remains central to content accuracy and integrity."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Wikipedia AI strategy",
+        "human editors",
+        "Wikimedia Foundation",
+        "AI-powered tools",
+        "content moderation",
+        "volunteer contributors",
+        "AI automation",
+        "community-driven content",
+        "editor workflows",
+        "content accuracy"
+    ],
+    "tags_agent_error": null,
+    "audio_url": null,
+    "tts_agent_error": "Trigger failed: HTTP Error (403) calling TTS Create API: {\"detail\":\"You are not allowed to use this voice_id.\"}",
+    "slug": "wikipedia-says-it-will-use-ai-but-not-to-replace-human-volunteers"
+}

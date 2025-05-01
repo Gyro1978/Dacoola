@@ -1,0 +1,23 @@
+{
+  "articles": [
+    {
+      "id": "f435f5756eed9e6e6b4a5d269a441e14274262b8726205ede209d501a1549c84",
+      "title": "Sycophancy in GPT-4o: What happened and what we're doing about it",
+      "link": "articles/sycophancy-in-gpt-4o-what-happened-and-what-were-doing-about-it.html",
+      "published_iso": "2025-04-30T03:06:26",
+      "summary_short": "<a href=\"https://news.ycombinator.com/item?id=43840842\">Comments</a>...",
+      "image_url": "https://felpower.com/wp-content/uploads/2024/06/AdobeStock_816612726_Editorial_Use_Only-scaled.jpeg",
+      "tags": [
+        "OpenAI",
+        "GPT-4o",
+        "AI alignment",
+        "sycophantic behavior",
+        "AI bias",
+        "AI improvements",
+        "community feedback",
+        "conversational AI",
+        "AI ethics"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+    "id": "e231162f7e89852de30a9dd2356e41aef9ef23c1ec3f776ba081be6e8fb8015e",
+    "title": "Microsoft expects some AI capacity constraints this quarter",
+    "link": "https://techcrunch.com/2025/04/30/microsoft-expects-some-ai-capacity-constraints-this-quarter/",
+    "published_iso": "2025-04-30T23:02:20",
+    "summary": "An executive cautioned during Microsoft&#8217;s earnings call on Wednesday that customers might face AI service disruptions as demand outstrips the company&#8217;s ability to bring data centers online. Microsoft&#8217;s EVP and CFO Amy Hood said during the company&#8217;s fiscal 2025 third-quarter earnings call that the company may face AI capacity constraints as early as June. &#8220;We [&#8230;]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-04-30T23:54:07.945883",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Compute",
+        "reasoning_summary": "Microsoft's warning about AI capacity constraints is significant but not urgent enough to be 'Breaking'. It highlights a notable issue in AI infrastructure.",
+        "primary_topic_keyword": "AI capacity constraints"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-04-30T23:54:14.118798+00:00",
+    "topic": "Compute",
+    "is_breaking": false,
+    "primary_keyword": "AI capacity constraints",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2024/07/microsoft-logo-office.jpg?resize=1200,798",
+    "seo_agent_results": {
+        "generated_title_tag": "Microsoft warns of AI capacity constraints amid surging demand",
+        "generated_meta_description": "Microsoft anticipates AI capacity constraints this quarter as data center expansion struggles to meet skyrocketing demand for AI services.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Microsoft warns of AI capacity constraints amid surging demand\",  \n  \"description\": \"Microsoft anticipates AI capacity constraints this quarter as data center expansion struggles to meet skyrocketing demand for AI services.\",  \n  \"keywords\": [\"AI capacity constraints\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/04/30/microsoft-expects-some-ai-capacity-constraints-this-quarter/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2024/07/microsoft-logo-office.jpg?resize=1200,798\" },  \n  \"datePublished\": \"2025-04-30T23:02:20\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": { \"@type\": \"Organization\", \"name\": \"Dacoola\", \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" } }  \n}  \n</script>",
+        "generated_article_body_md": "## Microsoft warns of AI capacity constraints amid surging demand  \n\nMicrosoft executives cautioned during Wednesday’s earnings call that customers may face AI service disruptions due to overwhelming demand. EVP and CFO Amy Hood noted AI capacity constraints could emerge as early as June, as data center deployment lags behind growth.  \n\nThe company is racing to expand infrastructure but faces challenges in scaling quickly enough. These constraints highlight the explosive demand for AI services across industries."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Microsoft AI",
+        "AI capacity constraints",
+        "AI demand surge",
+        "data center expansion",
+        "AI service disruptions",
+        "Microsoft earnings",
+        "AI infrastructure",
+        "cloud computing challenges",
+        "AI industry trends",
+        "Amy Hood Microsoft"
+    ],
+    "tags_agent_error": null,
+    "audio_url": null,
+    "tts_agent_error": "Trigger failed: HTTP Error (403) calling TTS Create API: {\"detail\":\"You are not allowed to use this voice_id.\"}",
+    "slug": "microsoft-expects-some-ai-capacity-constraints-this-quarter"
+}

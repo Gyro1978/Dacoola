@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- *** CORE SEO & Page Info *** -->
+    <title>{{ PAGE_TITLE }}</title>
+    <meta name="description" content="{{ META_DESCRIPTION }}">
+    {% if AUTHOR_NAME %}<meta name="author" content="{{ AUTHOR_NAME }}">{% endif %}
+    {% if META_KEYWORDS %}<meta name="keywords" content="{{ META_KEYWORDS }}">{% endif %} <!-- Less important now, but doesn't hurt -->
+
+    <!-- *** CANONICAL URL (Very Important) *** -->
+    <!-- Tells search engines the main URL for this content -->
+    <link rel="canonical" href="{{ CANONICAL_URL }}"> <!-- Pass the full URL from main.py -->
+
+    <!-- *** OPEN GRAPH (Facebook, LinkedIn, etc.) *** -->
+    <meta property="og:title" content="{{ PAGE_TITLE }}">
+    <meta property="og:description" content="{{ META_DESCRIPTION }}">
+    <meta property="og:image" content="{{ IMAGE_URL }}"> <!-- Use the selected image -->
+    <meta property="og:url" content="{{ CANONICAL_URL }}"> <!-- Use the canonical URL -->
+    <meta property="og:type" content="article"> <!-- Indicate it's an article -->
+    <meta property="og:site_name" content="{{ SITE_NAME }}"> <!-- Your website name -->
+    {% if PUBLISH_ISO_FOR_META %} <!-- Pass the raw ISO date if available -->
+    <meta property="article:published_time" content="{{ PUBLISH_ISO_FOR_META }}">
+    {% endif %}
+    {% for tag in META_KEYWORDS_LIST %} <!-- Add tags/keywords as OG article tags -->
+    <meta property="article:tag" content="{{ tag }}">
+    {% endfor %}
+
+
+    <!-- *** TWITTER CARD (X) *** -->
+    <meta name="twitter:card" content="summary_large_image"> <!-- Use large image summary card -->
+    <meta name="twitter:title" content="{{ PAGE_TITLE }}">
+    <meta name="twitter:description" content="{{ META_DESCRIPTION }}">
+    <meta name="twitter:image" content="{{ IMAGE_URL }}">
+    <!-- Optional: Add twitter:site and twitter:creator if you have Twitter handles -->
+    <!-- <meta name="twitter:site" content="@YourSiteHandle"> -->
+    <!-- <meta name="twitter:creator" content="@AuthorHandle"> -->
+
+
+    <!-- *** Stylesheets & Icons *** -->
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Adjust path relative to generated article location -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- *** JSON-LD Structured Data (Updated Placeholder Suggestion) *** -->
+    <!-- Note: Actual generation happens in Python. This shows the structure. -->
+    <!-- Ensure Python passes a JSON list string for keywords -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "{{ PAGE_TITLE | escapejs }}", {# Use escapejs filter for safety #}
+      "description": "{{ META_DESCRIPTION | escapejs }}",
+      "keywords": {{ META_KEYWORDS_LIST | tojson | safe }}, {# Pass Python list, convert to JSON array #}
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ CANONICAL_URL | escapejs }}" },
+      "image": { "@type": "ImageObject", "url": "{{ IMAGE_URL | escapejs }}" },
+      "datePublished": "{{ PUBLISH_ISO_FOR_META }}", {# Pass raw ISO date #}
+      "author": { "@type": "Person", "name": "{{ AUTHOR_NAME | default('AI News Team') | escapejs }}" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ SITE_NAME | escapejs }}",
+        "logo": { "@type": "ImageObject", "url": "{{ YOUR_WEBSITE_LOGO_URL | escapejs }}" } {# Get logo from env #}
+      }
+    }
+    </script>
+
+</head>
+<body>
+
+    <header id="navbar-placeholder">
+        <!-- For now, maybe just paste the navbar.html content here directly -->
+        <!-- Or we adapt script.js to load it -->
+    </header>
+
+    <div class="main-content-grid">
+
+        <!-- Left Sidebar: Related News (Filled by JS) -->
+        <aside class="sidebar related-news">
+            <h2>Related News</h2>
+            <div id="related-news-content">
+                <!-- JS will populate this list -->
+            </div>
+        </aside>
+
+        <!-- Center Column: Main Article -->
+             <article class="main-article"
+                data-article-id="{{ CURRENT_ARTICLE_ID }}"
+                data-article-topic="{{ CURRENT_ARTICLE_TOPIC }}"
+                data-article-tags='{{ CURRENT_ARTICLE_TAGS_JSON | safe }}'>
+          
+            <header>
+                <h1 id="article-headline">{{ARTICLE_HEADLINE}}</h1>
+                <div class="article-meta-container">
+                    <div class="article-meta">
+                        Published on <span id="publish-date">{{PUBLISH_DATE}}</span>
+                        by <span id="author-name">{{AUTHOR_NAME}}</span>
+                    </div>
+                    <!-- Conditionally add button based on AUDIO_URL being present -->
+                    {% if AUDIO_URL %}
+                    <div class="article-actions">
+                        <!-- Button for page-specific player - remove if using global -->
+                       <!-- <button class="tts-button" data-audio-url="../{{ AUDIO_URL }}" title="Listen to article">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div id="audio-player-container"></div> -->
+                    </div>
+                    {% endif %}
+                </div>
+            </header>
+
+            <figure class="article-image-container">
+                <img id="article-image" src="{{IMAGE_URL}}" alt="{{IMAGE_ALT_TEXT}}">
+            </figure>
+
+            <section id="article-body">
+                {{ ARTICLE_BODY_HTML | safe }}
+                 <div class="source-link-container">
+                    <a href="{{SOURCE_ARTICLE_URL}}" class="source-button" target="_blank" rel="noopener noreferrer">
+                        Read Original Source <i class="fas fa-external-link-alt fa-xs"></i>
+                    </a>
+                 </div>
+            </section>
+
+            <footer>
+                <div class="tags">
+                    Tags: <span id="article-tags">{{ ARTICLE_TAGS_HTML | safe }}</span>
+                </div>
+            </footer>
+
+        </article>
+
+        <!-- Right Sidebar: Latest News (Filled by JS) -->
+        <aside class="sidebar latest-news">
+            <h2>Latest News</h2>
+            <div id="latest-news-content">
+                <!-- JS will populate this list -->
+            </div>
+        </aside>
+
+    </div> <!-- End main-content-grid -->
+
+    <!-- *** GLOBAL FIXED TTS PLAYER BUTTON & ELEMENT *** -->
+    <div class="article-card-actions">
+        <button id="global-tts-player-button" title="Listen to article">
+            <i class="fas fa-headphones"></i> <!-- Headphones Icon -->
+        </button>
+        <!-- Also need the hidden audio element managed by JS -->
+        <audio id="global-audio-player" preload="none"></audio>
+    </div>
+
+
+    <!-- Link JS -->
+    <script src="../js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+    "id": "cd1c316194d3b74c5e428cb7c277bc06aa9efe9fa3ba6757e344bca284e860da",
+    "title": "DOGE Put a College Student in Charge of Using AI to Rewrite Regulations",
+    "link": "https://www.wired.com/story/doge-college-student-ai-rewrite-regulations-deregulation/",
+    "published_iso": "2025-04-30T19:34:24",
+    "summary": "A DOGE operative has been tasked with using AI to propose rewrites to the Department of Housing and Urban Development’s regulations—an effort sources are told will roll out across government.",
+    "source_feed": "https://www.wired.com/feed/tag/ai/latest/rss",
+    "scraped_at_iso": "2025-04-30T23:54:08.159568",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Regulation",
+        "reasoning_summary": "Significant development involving AI in government regulation rewrites, but not urgent or high-impact enough to be 'Breaking'.",
+        "primary_topic_keyword": "AI in regulation"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-01T00:06:51.137570+00:00",
+    "topic": "Regulation",
+    "is_breaking": false,
+    "primary_keyword": "AI in regulation",
+    "selected_image_url": "https://media.wired.com/photos/680fd900cff726aaf024901e/191:100/w_1280,c_limit/politics_HUD_GettyImages-2201176867.jpg",
+    "seo_agent_results": {
+        "generated_title_tag": "AI in Regulation: DOGE Taps College Student for HUD Rewrites",
+        "generated_meta_description": "A DOGE operative is using AI to propose regulatory rewrites for HUD, signaling a broader government push for AI in regulation.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"AI in Regulation: DOGE Taps College Student for HUD Rewrites\",  \n  \"description\": \"A DOGE operative is using AI to propose regulatory rewrites for HUD, signaling a broader government push for AI in regulation.\",  \n  \"keywords\": [\"AI in regulation\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.wired.com/story/doge-college-student-ai-rewrite-regulations-deregulation/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://media.wired.com/photos/680fd900cff726aaf024901e/191:100/w_1280,c_limit/politics_HUD_GettyImages-2201176867.jpg\" },  \n  \"datePublished\": \"2025-04-30T19:34:24\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": { \"@type\": \"Organization\", \"name\": \"Dacoola\", \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" } }  \n}  \n</script>",
+        "generated_article_body_md": "## DOGE Assigns College Student to Rewrite HUD Regulations Using AI  \n\nA DOGE operative has been tasked with leveraging AI to propose rewrites for the Department of Housing and Urban Development’s (HUD) regulations. This initiative marks a pilot effort that could expand across government agencies, highlighting the growing role of AI in regulation.  \n\nSources indicate the project aims to streamline bureaucratic processes while maintaining compliance. The move reflects a broader trend of integrating AI into regulatory frameworks to improve efficiency."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "DOGE",
+        "HUD regulations",
+        "AI in government",
+        "regulatory compliance",
+        "bureaucratic efficiency",
+        "AI pilot program",
+        "Department of Housing and Urban Development",
+        "AI integration",
+        "government AI initiatives"
+    ],
+    "tags_agent_error": null,
+    "audio_url": null,
+    "tts_agent_error": "Trigger failed: HTTP Error (403) calling TTS Create API: {\"detail\":\"You are not allowed to use this voice_id.\"}",
+    "slug": "doge-put-a-college-student-in-charge-of-using-ai-to-rewrite-regulations"
+}

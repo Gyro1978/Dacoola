@@ -1,0 +1,44 @@
+{
+    "id": "8c8c5593259ced8b081720b422d6ec42e711bb3afe00091d53c040b27b4a260f",
+    "title": "If you own Ray-Ban Meta glasses, you should double-check your privacy settings",
+    "link": "https://techcrunch.com/2025/04/30/if-you-own-ray-ban-meta-glasses-you-should-double-check-your-privacy-settings/",
+    "published_iso": "2025-04-30T18:29:12",
+    "summary": "Meta has updated the privacy policy for its AI glasses, Ray-Ban Meta, giving the tech giant more power over what data it can store and use to train its AI models. The company emailed Ray-Ban Meta owners on Tuesday with a notice that AI features will now be enabled on the glasses by default, according [&#8230;]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-04-30T23:54:07.979748",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Ethics",
+        "reasoning_summary": "Significant update to privacy policy affecting user data and AI training, but not urgent enough to be breaking news.",
+        "primary_topic_keyword": "AI privacy policy"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-04-30T23:59:47.395079+00:00",
+    "topic": "Ethics",
+    "is_breaking": false,
+    "primary_keyword": "AI privacy policy",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2024/09/GettyImages-2173579243.jpg?resize=1200,799",
+    "seo_agent_results": {
+        "generated_title_tag": "AI Privacy Policy Update for Ray-Ban Meta Glasses Owners",
+        "generated_meta_description": "Meta's updated AI privacy policy grants more data control for Ray-Ban Meta glasses, enabling AI features by default. Check your settings now.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"AI Privacy Policy Update for Ray-Ban Meta Glasses Owners\",  \n  \"description\": \"Meta's updated AI privacy policy grants more data control for Ray-Ban Meta glasses, enabling AI features by default. Check your settings now.\",  \n  \"keywords\": [\"AI privacy policy\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/04/30/if-you-own-ray-ban-meta-glasses-you-should-double-check-your-privacy-settings/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2024/09/GettyImages-2173579243.jpg?resize=1200,799\" },  \n  \"datePublished\": \"2025-04-30T18:29:12\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": { \"@type\": \"Organization\", \"name\": \"Dacoola\", \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" } }  \n}  \n</script>",
+        "generated_article_body_md": "## Meta Updates AI Privacy Policy for Ray-Ban Glasses  \n\nMeta has revised its **AI privacy policy** for Ray-Ban Meta smart glasses, expanding its authority over stored data and AI model training. Owners received an email Tuesday notifying them that AI features will now be enabled by default.  \n\nThe change means users must manually adjust settings if they wish to limit data collection. Meta's move aligns with broader efforts to enhance AI capabilities through user interactions."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Meta AI privacy policy",
+        "Ray-Ban Meta smart glasses",
+        "AI data collection",
+        "smart glasses privacy",
+        "Meta user data",
+        "AI model training",
+        "privacy settings",
+        "AI features default",
+        "tech policy updates",
+        "wearable technology privacy"
+    ],
+    "tags_agent_error": null,
+    "audio_url": null,
+    "tts_agent_error": "Trigger failed: HTTP Error (403) calling TTS Create API: {\"detail\":\"You are not allowed to use this voice_id.\"}",
+    "slug": "if-you-own-ray-ban-meta-glasses-you-should-double-check-your-privacy-settings"
+}
