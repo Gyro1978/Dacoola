@@ -9960,3 +9960,372 @@ TypeError: object of type 'NoneType' has no len()
 2025-05-01 23:43:50,317 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
 2025-05-01 23:43:50,318 - main_orchestrator - INFO - No new scraped articles to process.
 2025-05-01 23:43:50,318 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 01:13:28,513 - INFO - Use pytorch device_name: cpu
+2025-05-02 01:13:28,514 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 01:13:28,517 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 01:13:28,688 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 01:13:28,794 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 01:13:28,900 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 01:13:29,009 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 01:13:29,111 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 01:13:31,148 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 01:13:31,157 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 01:13:31,202 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 01:13:31,202 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 01:13:31,202 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 01:13:31,202 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 01:13:31,204 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 01:13:31,305 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 01:13:31,305 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 01:13:31,305 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 01:13:31,305 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 01:13:31,386 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 01:13:31,386 - root - INFO - Found new article: Amazon CEO says 100,000 users now have Alexa+ (ID: 055899c18334cbe8aaeac64be81f5a4d5ec7c91c4a7cd016c68de7d33a8b95ed)
+2025-05-02 01:13:31,387 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\055899c18334cbe8aaeac64be81f5a4d5ec7c91c4a7cd016c68de7d33a8b95ed.json (Title: Amazon CEO says 100,000 users now have Alexa+)
+2025-05-02 01:13:31,387 - root - INFO - Successfully saved new article: Amazon CEO says 100,000 users now have Alexa+
+2025-05-02 01:13:31,387 - root - INFO - Found new article: Reddit’s AI play is for the Google crowd, not just the community scrollers (ID: ffc6e4e2e3ac346457fb832394c2c73c3670069b7bd8515747ea2b94782e637b)
+2025-05-02 01:13:31,388 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\ffc6e4e2e3ac346457fb832394c2c73c3670069b7bd8515747ea2b94782e637b.json (Title: Reddit’s AI play is for the Google crowd, not just the community scrollers)
+2025-05-02 01:13:31,388 - root - INFO - Successfully saved new article: Reddit’s AI play is for the Google crowd, not just the community scrollers
+2025-05-02 01:13:31,388 - root - INFO - Found new article: Despite paying $900M in tariffs, Apple’s Tim Cook isn’t announcing price increases — yet (ID: 34d742d5d9dcb79ccab79df884930baab08517a83e13032ea815db5e0defc950)
+2025-05-02 01:13:31,389 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\34d742d5d9dcb79ccab79df884930baab08517a83e13032ea815db5e0defc950.json (Title: Despite paying $900M in tariffs, Apple’s Tim Cook isn’t announcing price increases — yet)
+2025-05-02 01:13:31,390 - root - INFO - Successfully saved new article: Despite paying $900M in tariffs, Apple’s Tim Cook isn’t announcing price increases — yet
+2025-05-02 01:13:31,390 - root - INFO - Found new article: Apple CEO Tim Cook says tariffs to add $900M in costs in Q3, but future uncertain (ID: d3cca1a4a8947914c3f0f09ff70f5c1f4a31d10f7878eb24878ca353b126c5c0)
+2025-05-02 01:13:31,411 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\d3cca1a4a8947914c3f0f09ff70f5c1f4a31d10f7878eb24878ca353b126c5c0.json (Title: Apple CEO Tim Cook says tariffs to add $900M in costs in Q3, but future uncertain)
+2025-05-02 01:13:31,411 - root - INFO - Successfully saved new article: Apple CEO Tim Cook says tariffs to add $900M in costs in Q3, but future uncertain
+2025-05-02 01:13:31,411 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 4 new articles.
+2025-05-02 01:13:31,412 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 01:13:31,497 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 01:13:31,497 - root - INFO - Found new article: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Taylor Swift’ (ID: add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef)
+2025-05-02 01:13:31,498 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef.json (Title: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Taylor Swift’)
+2025-05-02 01:13:31,499 - root - INFO - Successfully saved new article: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Taylor Swift’
+2025-05-02 01:13:31,499 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 1 new articles.
+2025-05-02 01:13:31,499 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 01:13:31,701 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 01:13:31,701 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 01:13:31,701 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 01:13:31,797 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 01:13:31,798 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 01:13:31,798 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 01:13:31,898 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 01:13:31,899 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 01:13:31,899 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 01:13:31,995 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 01:13:31,996 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 01:13:32,620 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 102 entries.
+2025-05-02 01:13:32,620 - root - INFO - Found new article: Better Artificial Intelligence Stock: SoundHound AI vs. Palantir - Yahoo Finance (ID: 01d46d117b21aeba484093892458601f6d57c66a5b45ba365af2ecfc860ebc71)
+2025-05-02 01:13:32,622 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\01d46d117b21aeba484093892458601f6d57c66a5b45ba365af2ecfc860ebc71.json (Title: Better Artificial Intelligence Stock: SoundHound AI vs. Palantir - Yahoo Finance)
+2025-05-02 01:13:32,622 - root - INFO - Successfully saved new article: Better Artificial Intelligence Stock: SoundHound AI vs. Palantir - Yahoo Finance
+2025-05-02 01:13:32,622 - root - INFO - Found new article: IBM and the EY organization debut artificial intelligence-powered global tax compliance solutions - PR Newswire (ID: b67d2155f3f0ec258ad9d776b318e3fae5bb43965bb3ff99bfbf86cc872c0782)
+2025-05-02 01:13:32,623 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\b67d2155f3f0ec258ad9d776b318e3fae5bb43965bb3ff99bfbf86cc872c0782.json (Title: IBM and the EY organization debut artificial intelligence-powered global tax compliance solutions - PR Newswire)
+2025-05-02 01:13:32,623 - root - INFO - Successfully saved new article: IBM and the EY organization debut artificial intelligence-powered global tax compliance solutions - PR Newswire
+2025-05-02 01:13:32,624 - root - INFO - Found new article: The Missing AI Skill That's Hindering Government Innovation - GovTech (ID: 90023b09e0c931575aa060fe471458d23ca40668c50119fab912cf3d30ec607f)
+2025-05-02 01:13:32,625 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\90023b09e0c931575aa060fe471458d23ca40668c50119fab912cf3d30ec607f.json (Title: The Missing AI Skill That's Hindering Government Innovation - GovTech)
+2025-05-02 01:13:32,625 - root - INFO - Successfully saved new article: The Missing AI Skill That's Hindering Government Innovation - GovTech
+2025-05-02 01:13:32,626 - root - INFO - Found new article: BBC and Agatha Christie estate respond to 'deepfake' controversy - Mashable (ID: aad5260fc0676703e43ab17ccb94722c325992930fb4264418c7bbc55d32822b)
+2025-05-02 01:13:32,626 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\aad5260fc0676703e43ab17ccb94722c325992930fb4264418c7bbc55d32822b.json (Title: BBC and Agatha Christie estate respond to 'deepfake' controversy - Mashable)
+2025-05-02 01:13:32,627 - root - INFO - Successfully saved new article: BBC and Agatha Christie estate respond to 'deepfake' controversy - Mashable
+2025-05-02 01:13:32,627 - root - INFO - Found new article: IBM's New AI Tax Solution Promises to Automate 80% of Foreign Tax Compliance - See How It Works - Stock Titan (ID: a0ab844c8ec1eafbe1d878376e45a93e2f1b6adbb29f8bf1dd9a5cc8485059f0)
+2025-05-02 01:13:32,628 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\a0ab844c8ec1eafbe1d878376e45a93e2f1b6adbb29f8bf1dd9a5cc8485059f0.json (Title: IBM's New AI Tax Solution Promises to Automate 80% of Foreign Tax Compliance - See How It Works - Stock Titan)
+2025-05-02 01:13:32,628 - root - INFO - Successfully saved new article: IBM's New AI Tax Solution Promises to Automate 80% of Foreign Tax Compliance - See How It Works - Stock Titan
+2025-05-02 01:13:32,628 - root - INFO - Found new article: Stuart J. Russell wins 2025 AAAI Award for Artificial Intelligence for the Benefit of Humanity - Robohub (ID: 9c29c07f2d917b93d4a82383fa3d2fa50bd2ec365a8bf051b7999930f9509914)
+2025-05-02 01:13:32,628 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\9c29c07f2d917b93d4a82383fa3d2fa50bd2ec365a8bf051b7999930f9509914.json (Title: Stuart J. Russell wins 2025 AAAI Award for Artificial Intelligence for the Benefit of Humanity - Robohub)
+2025-05-02 01:13:32,629 - root - INFO - Successfully saved new article: Stuart J. Russell wins 2025 AAAI Award for Artificial Intelligence for the Benefit of Humanity - Robohub
+2025-05-02 01:13:32,629 - root - INFO - Found new article: Huawei’s AI chips raise concerns in Nvidia’s closed-door meeting - USA Today (ID: 513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a)
+2025-05-02 01:13:32,630 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a.json (Title: Huawei’s AI chips raise concerns in Nvidia’s closed-door meeting - USA Today)
+2025-05-02 01:13:32,630 - root - INFO - Successfully saved new article: Huawei’s AI chips raise concerns in Nvidia’s closed-door meeting - USA Today
+2025-05-02 01:13:32,630 - root - INFO - Found new article: IBM and the EY organization debut artificial intelligence-powered global tax compliance solutions | IBM Stock News - GuruFocus (ID: 82da7ee78dfbcba6d24aee7ab1dd8d214d76093c5a57547f12a2467925de3512)
+2025-05-02 01:13:32,631 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\82da7ee78dfbcba6d24aee7ab1dd8d214d76093c5a57547f12a2467925de3512.json (Title: IBM and the EY organization debut artificial intelligence-powered global tax compliance solutions | IBM Stock News - GuruFocus)
+2025-05-02 01:13:32,631 - root - INFO - Successfully saved new article: IBM and the EY organization debut artificial intelligence-powered global tax compliance solutions | IBM Stock News - GuruFocus
+2025-05-02 01:13:32,632 - root - INFO - Found new article: Why Nvidia Stock Bounded Higher Thursday - The Motley Fool (ID: 4b4dc4cc464b210c9cea5bd6b0536926973df8f59b462e3ccac4ba6550f62bc8)
+2025-05-02 01:13:32,632 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\4b4dc4cc464b210c9cea5bd6b0536926973df8f59b462e3ccac4ba6550f62bc8.json (Title: Why Nvidia Stock Bounded Higher Thursday - The Motley Fool)
+2025-05-02 01:13:32,632 - root - INFO - Successfully saved new article: Why Nvidia Stock Bounded Higher Thursday - The Motley Fool
+2025-05-02 01:13:32,633 - root - INFO - Found new article: Meta and Microsoft Just Shared Great News for Artificial Intelligence (AI) Stocks - MSN (ID: 2210df5733d1cb3bf6a0332b02bad7debc640b418d7c9b41e2a2ae1e1f695c65)
+2025-05-02 01:13:32,633 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\2210df5733d1cb3bf6a0332b02bad7debc640b418d7c9b41e2a2ae1e1f695c65.json (Title: Meta and Microsoft Just Shared Great News for Artificial Intelligence (AI) Stocks - MSN)
+2025-05-02 01:13:32,633 - root - INFO - Successfully saved new article: Meta and Microsoft Just Shared Great News for Artificial Intelligence (AI) Stocks - MSN
+2025-05-02 01:13:32,634 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 10 new articles.
+2025-05-02 01:13:32,634 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 01:13:33,281 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 01:13:33,281 - root - INFO - Found new article: The Day Anubis Saved Our Websites from a DDoS Attack (ID: 499159fee7089ef7ee015e5f05c4e472f8c575ba9b5b3df24a238c9128d0405c)
+2025-05-02 01:13:33,282 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\499159fee7089ef7ee015e5f05c4e472f8c575ba9b5b3df24a238c9128d0405c.json (Title: The Day Anubis Saved Our Websites from a DDoS Attack)
+2025-05-02 01:13:33,283 - root - INFO - Successfully saved new article: The Day Anubis Saved Our Websites from a DDoS Attack
+2025-05-02 01:13:33,283 - root - INFO - Found new article: Ask HN: Who is hiring? (May 2025) (ID: 587102b753096ba4124930bf48456c137fefcbb14202ce7acce5931ecc1b5c4f)
+2025-05-02 01:13:33,283 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\587102b753096ba4124930bf48456c137fefcbb14202ce7acce5931ecc1b5c4f.json (Title: Ask HN: Who is hiring? (May 2025))
+2025-05-02 01:13:33,284 - root - INFO - Successfully saved new article: Ask HN: Who is hiring? (May 2025)
+2025-05-02 01:13:33,284 - root - INFO - Found new article: Google Wallet launches new age and identity verification features (ZK proofs) (ID: 93a756415323b5c0d63e9c5657f997f68f76a158cd7e1d59d96b3f0a0f64e065)
+2025-05-02 01:13:33,285 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\93a756415323b5c0d63e9c5657f997f68f76a158cd7e1d59d96b3f0a0f64e065.json (Title: Google Wallet launches new age and identity verification features (ZK proofs))
+2025-05-02 01:13:33,285 - root - INFO - Successfully saved new article: Google Wallet launches new age and identity verification features (ZK proofs)
+2025-05-02 01:13:33,285 - root - INFO - Found new article: Ask HN: Who wants to be hired? (May 2025) (ID: a7955e185ca5ec18c5b2d079742e05da32d87086de7a3cfaa953b7c622cc47f2)
+2025-05-02 01:13:33,286 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\a7955e185ca5ec18c5b2d079742e05da32d87086de7a3cfaa953b7c622cc47f2.json (Title: Ask HN: Who wants to be hired? (May 2025))
+2025-05-02 01:13:33,286 - root - INFO - Successfully saved new article: Ask HN: Who wants to be hired? (May 2025)
+2025-05-02 01:13:33,286 - root - INFO - Found new article: Deno's Decline (ID: d73adb9c06d9ee1c6dd017c6cc1b549c2ba2ff4ab16fb92cccfe0bc3cbb25551)
+2025-05-02 01:13:33,287 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\d73adb9c06d9ee1c6dd017c6cc1b549c2ba2ff4ab16fb92cccfe0bc3cbb25551.json (Title: Deno's Decline)
+2025-05-02 01:13:33,288 - root - INFO - Successfully saved new article: Deno's Decline
+2025-05-02 01:13:33,288 - root - INFO - Found new article: Ancient DNA Unveils the Cosmopolitan Heart of the Phoenician-Punic Civilization (ID: 82ee882d57756fbeac60f9ef812682c9404cd783ff64d5ace53abb7e9945ddf9)
+2025-05-02 01:13:33,288 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\82ee882d57756fbeac60f9ef812682c9404cd783ff64d5ace53abb7e9945ddf9.json (Title: Ancient DNA Unveils the Cosmopolitan Heart of the Phoenician-Punic Civilization)
+2025-05-02 01:13:33,289 - root - INFO - Successfully saved new article: Ancient DNA Unveils the Cosmopolitan Heart of the Phoenician-Punic Civilization
+2025-05-02 01:13:33,289 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 6 new articles.
+2025-05-02 01:13:33,289 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 01:13:33,878 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 01:13:33,878 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 01:13:34,112 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 01:13:34,112 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 01:13:34,112 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 01:13:34,480 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 307
+2025-05-02 01:13:34,480 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 01:13:34,920 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 01:13:34,920 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 01:13:35,059 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 01:13:35,059 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 01:13:35,173 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 01:13:35,173 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 01:13:35,173 - root - INFO - Scrape run finished. Total new articles saved this run: 21.
+2025-05-02 01:13:35,173 - main_orchestrator - INFO - Scraper run completed. Found 21 new JSON files potentially.
+2025-05-02 01:13:35,200 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 01:13:35,201 - main_orchestrator - INFO - Found 21 scraped articles to process.
+2025-05-02 01:13:35,203 - main_orchestrator - INFO - --- Processing article file: 055899c18334cbe8aaeac64be81f5a4d5ec7c91c4a7cd016c68de7d33a8b95ed.json ---
+2025-05-02 01:13:35,217 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 055899c18334cbe8aaeac64be81f5a4d5ec7c91c4a7cd016c68de7d33a8b95ed Title: Amazon CEO says 100,000 users now have Alexa+...
+2025-05-02 01:13:41,483 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Software', keyword='Alexa+ user count'
+2025-05-02 01:13:41,483 - main_orchestrator - INFO - Article 055899c18334cbe8aaeac64be81f5a4d5ec7c91c4a7cd016c68de7d33a8b95ed is Boring. Skipping.
+2025-05-02 01:13:42,485 - main_orchestrator - INFO - --- Processing article file: ffc6e4e2e3ac346457fb832394c2c73c3670069b7bd8515747ea2b94782e637b.json ---
+2025-05-02 01:13:42,500 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ffc6e4e2e3ac346457fb832394c2c73c3670069b7bd8515747ea2b94782e637b Title: Reddit’s AI play is for the Google crowd, not just the commu...
+2025-05-02 01:13:48,458 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='Reddit user segmentation'
+2025-05-02 01:13:48,458 - main_orchestrator - INFO - Article ffc6e4e2e3ac346457fb832394c2c73c3670069b7bd8515747ea2b94782e637b is Boring. Skipping.
+2025-05-02 01:13:49,460 - main_orchestrator - INFO - --- Processing article file: 34d742d5d9dcb79ccab79df884930baab08517a83e13032ea815db5e0defc950.json ---
+2025-05-02 01:13:49,474 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 34d742d5d9dcb79ccab79df884930baab08517a83e13032ea815db5e0defc950 Title: Despite paying $900M in tariffs, Apple’s Tim Cook isn’t anno...
+2025-05-02 01:13:55,534 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='Apple tariff discussion'
+2025-05-02 01:13:55,534 - main_orchestrator - INFO - Article 34d742d5d9dcb79ccab79df884930baab08517a83e13032ea815db5e0defc950 is Boring. Skipping.
+2025-05-02 01:13:56,535 - main_orchestrator - INFO - --- Processing article file: d3cca1a4a8947914c3f0f09ff70f5c1f4a31d10f7878eb24878ca353b126c5c0.json ---
+2025-05-02 01:13:56,546 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d3cca1a4a8947914c3f0f09ff70f5c1f4a31d10f7878eb24878ca353b126c5c0 Title: Apple CEO Tim Cook says tariffs to add $900M in costs in Q3,...
+2025-05-02 01:14:02,643 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='Apple tariffs impact'
+2025-05-02 01:14:02,643 - main_orchestrator - INFO - Article d3cca1a4a8947914c3f0f09ff70f5c1f4a31d10f7878eb24878ca353b126c5c0 is Boring. Skipping.
+2025-05-02 01:14:03,644 - main_orchestrator - INFO - --- Processing article file: add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef.json ---
+2025-05-02 01:14:03,655 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef Title: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Tay...
+2025-05-02 01:14:10,015 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Interesting, topic='Regulation', keyword='Meta AI copyright case'
+2025-05-02 01:14:10,015 - main_orchestrator - INFO - Article add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef is Interesting (Topic: Regulation). Checking duplicates...
+2025-05-02 01:14:10,015 - src.agents.similarity_check_agent - INFO - Running similarity check for article: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Tay...
+2025-05-02 01:14:15,936 - src.agents.similarity_check_agent - INFO - Similarity check result: is_duplicate=False. Reason: The New Candidate Article discusses Meta's AI copyright case, which is not covered in any of the Recently Published Articles.
+2025-05-02 01:14:15,936 - main_orchestrator - INFO - Article add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef passed similarity check.
+2025-05-02 01:14:15,936 - src.scrapers.image_scraper - INFO - Attempting to scrape image from source: https://www.wired.com/story/meta-lawsuit-copyright-hearing-artificial-intelligence/
+2025-05-02 01:14:16,015 - src.scrapers.image_scraper - INFO - Found og:image: https://media.wired.com/photos/68127a1cc6e866c6748464f3/191:100/w_1280,c_limit/Meta-Kadrey-Hearing-Business-1498692170.jpg
+2025-05-02 01:14:16,016 - main_orchestrator - INFO - Using scraped image for add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef
+2025-05-02 01:14:16,016 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef...
+2025-05-02 01:14:43,809 - src.agents.seo_article_generator_agent - INFO - Successfully parsed SEO content for add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef.
+2025-05-02 01:14:43,810 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef...
+2025-05-02 01:14:48,708 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef
+2025-05-02 01:14:48,708 - main_orchestrator - INFO - Skipping TTS generation - CAMB_AI_API_KEY not set.
+2025-05-02 01:14:48,777 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\a-judge-says-metas-ai-copyright-case-is-about-the-next-taylor-swift.html
+2025-05-02 01:14:48,806 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\site_data.json (20 articles).
+2025-05-02 01:14:48,808 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\all_articles.json (31 articles).
+2025-05-02 01:14:48,811 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef.json
+2025-05-02 01:14:48,812 - main_orchestrator - INFO - --- Successfully processed article: add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef ---
+2025-05-02 01:14:49,813 - main_orchestrator - INFO - --- Processing article file: 01d46d117b21aeba484093892458601f6d57c66a5b45ba365af2ecfc860ebc71.json ---
+2025-05-02 01:14:49,825 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 01d46d117b21aeba484093892458601f6d57c66a5b45ba365af2ecfc860ebc71 Title: Better Artificial Intelligence Stock: SoundHound AI vs. Pala...
+2025-05-02 01:14:56,422 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='AI stock comparison'
+2025-05-02 01:14:56,422 - main_orchestrator - INFO - Article 01d46d117b21aeba484093892458601f6d57c66a5b45ba365af2ecfc860ebc71 is Boring. Skipping.
+2025-05-02 01:14:57,423 - main_orchestrator - INFO - --- Processing article file: b67d2155f3f0ec258ad9d776b318e3fae5bb43965bb3ff99bfbf86cc872c0782.json ---
+2025-05-02 01:14:57,434 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: b67d2155f3f0ec258ad9d776b318e3fae5bb43965bb3ff99bfbf86cc872c0782 Title: IBM and the EY organization debut artificial intelligence-po...
+2025-05-02 01:15:04,547 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='IBM EY tax AI'
+2025-05-02 01:15:04,547 - main_orchestrator - INFO - Article b67d2155f3f0ec258ad9d776b318e3fae5bb43965bb3ff99bfbf86cc872c0782 is Boring. Skipping.
+2025-05-02 01:15:05,548 - main_orchestrator - INFO - --- Processing article file: 90023b09e0c931575aa060fe471458d23ca40668c50119fab912cf3d30ec607f.json ---
+2025-05-02 01:15:05,560 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 90023b09e0c931575aa060fe471458d23ca40668c50119fab912cf3d30ec607f Title: The Missing AI Skill That's Hindering Government Innovation ...
+2025-05-02 01:15:14,149 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Society', keyword='AI skills in government'
+2025-05-02 01:15:14,150 - main_orchestrator - INFO - Article 90023b09e0c931575aa060fe471458d23ca40668c50119fab912cf3d30ec607f is Boring. Skipping.
+2025-05-02 01:15:15,152 - main_orchestrator - INFO - --- Processing article file: aad5260fc0676703e43ab17ccb94722c325992930fb4264418c7bbc55d32822b.json ---
+2025-05-02 01:15:15,163 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: aad5260fc0676703e43ab17ccb94722c325992930fb4264418c7bbc55d32822b Title: BBC and Agatha Christie estate respond to 'deepfake' controv...
+2025-05-02 01:15:22,782 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Society', keyword='Deepfake controversy'
+2025-05-02 01:15:22,782 - main_orchestrator - INFO - Article aad5260fc0676703e43ab17ccb94722c325992930fb4264418c7bbc55d32822b is Boring. Skipping.
+2025-05-02 01:15:23,783 - main_orchestrator - INFO - --- Processing article file: a0ab844c8ec1eafbe1d878376e45a93e2f1b6adbb29f8bf1dd9a5cc8485059f0.json ---
+2025-05-02 01:15:23,798 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a0ab844c8ec1eafbe1d878376e45a93e2f1b6adbb29f8bf1dd9a5cc8485059f0 Title: IBM's New AI Tax Solution Promises to Automate 80% of Foreig...
+2025-05-02 01:15:29,732 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='IBM AI tax solution'
+2025-05-02 01:15:29,732 - main_orchestrator - INFO - Article a0ab844c8ec1eafbe1d878376e45a93e2f1b6adbb29f8bf1dd9a5cc8485059f0 is Boring. Skipping.
+2025-05-02 01:15:30,733 - main_orchestrator - INFO - --- Processing article file: 9c29c07f2d917b93d4a82383fa3d2fa50bd2ec365a8bf051b7999930f9509914.json ---
+2025-05-02 01:15:30,744 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 9c29c07f2d917b93d4a82383fa3d2fa50bd2ec365a8bf051b7999930f9509914 Title: Stuart J. Russell wins 2025 AAAI Award for Artificial Intell...
+2025-05-02 01:15:37,200 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='AAAI award announcement'
+2025-05-02 01:15:37,200 - main_orchestrator - INFO - Article 9c29c07f2d917b93d4a82383fa3d2fa50bd2ec365a8bf051b7999930f9509914 is Boring. Skipping.
+2025-05-02 01:15:38,202 - main_orchestrator - INFO - --- Processing article file: 513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a.json ---
+2025-05-02 01:15:38,219 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a Title: Huawei’s AI chips raise concerns in Nvidia’s closed-door mee...
+2025-05-02 01:15:44,818 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Interesting, topic='Hardware', keyword='Huawei AI chips'
+2025-05-02 01:15:44,818 - main_orchestrator - INFO - Article 513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a is Interesting (Topic: Hardware). Checking duplicates...
+2025-05-02 01:15:44,818 - src.agents.similarity_check_agent - INFO - Running similarity check for article: Huawei’s AI chips raise concerns in Nvidia’s closed-door mee...
+2025-05-02 01:15:50,114 - src.agents.similarity_check_agent - INFO - Similarity check result: is_duplicate=False. Reason: No recently published article discusses Huawei's AI chips raising concerns in Nvidia’s closed-door meeting.
+2025-05-02 01:15:50,114 - main_orchestrator - INFO - Article 513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a passed similarity check.
+2025-05-02 01:15:50,114 - src.scrapers.image_scraper - INFO - Attempting to scrape image from source: https://news.google.com/rss/articles/CBMiowFBVV95cUxNM0w1djJ1Y2l5WXBITWNiT1E3MWR1clZmbDV0TDN1LXJhTFlEbV9CUVNEdV9TNVhFQ3RfcDZhd3pOM0JaX1pVeERVQlNmMXZ0c2lwRVVJZTQwSFJJRlV3SW5wWlhnakZDdHBTMmR5dDlwN2ZzS3ZlVTBpR0hXTTBVODJyYlFmcENUYWxGUHJPb20yRHhlMjNESFEzQU1ONmkzSVZj?oc=5
+2025-05-02 01:15:50,313 - src.scrapers.image_scraper - WARNING - No suitable meta image tag found at https://news.google.com/rss/articles/CBMiowFBVV95cUxNM0w1djJ1Y2l5WXBITWNiT1E3MWR1clZmbDV0TDN1LXJhTFlEbV9CUVNEdV9TNVhFQ3RfcDZhd3pOM0JaX1pVeERVQlNmMXZ0c2lwRVVJZTQwSFJJRlV3SW5wWlhnakZDdHBTMmR5dDlwN2ZzS3ZlVTBpR0hXTTBVODJyYlFmcENUYWxGUHJPb20yRHhlMjNESFEzQU1ONmkzSVZj?oc=5
+2025-05-02 01:15:50,313 - main_orchestrator - INFO - Image scraping failed/no image, using API search for 513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a...
+2025-05-02 01:15:50,314 - src.scrapers.image_scraper - INFO - Finding best image for query: 'Huawei AI chips' (CLIP Enabled: True)
+2025-05-02 01:15:53,501 - src.scrapers.image_scraper - INFO - SerpApi found 5 relevant images for query: 'Huawei AI chips'
+2025-05-02 01:15:53,501 - src.scrapers.image_scraper - INFO - CLIP filtering 5 images against prompt: 'Huawei AI chips'
+2025-05-02 01:15:58,004 - src.scrapers.image_scraper - INFO - CLIP selected best image: https://i.cdn.newsbytesapp.com/images/l83220250428104812.jpeg with score 0.3332
+2025-05-02 01:15:58,005 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a...
+2025-05-02 01:16:35,040 - src.agents.seo_article_generator_agent - INFO - Successfully parsed SEO content for 513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a.
+2025-05-02 01:16:35,041 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a...
+2025-05-02 01:16:40,531 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a
+2025-05-02 01:16:40,532 - main_orchestrator - INFO - Skipping TTS generation - CAMB_AI_API_KEY not set.
+2025-05-02 01:16:40,538 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\huaweis-ai-chips-raise-concerns-in-nvidias-closed-door-meeting-usa-today.html
+2025-05-02 01:16:40,540 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\site_data.json (20 articles).
+2025-05-02 01:16:40,541 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\all_articles.json (32 articles).
+2025-05-02 01:16:40,543 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a.json
+2025-05-02 01:16:40,544 - main_orchestrator - INFO - --- Successfully processed article: 513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a ---
+2025-05-02 01:16:41,545 - main_orchestrator - INFO - --- Processing article file: 82da7ee78dfbcba6d24aee7ab1dd8d214d76093c5a57547f12a2467925de3512.json ---
+2025-05-02 01:16:41,559 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 82da7ee78dfbcba6d24aee7ab1dd8d214d76093c5a57547f12a2467925de3512 Title: IBM and the EY organization debut artificial intelligence-po...
+2025-05-02 01:16:49,690 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='IBM EY tax AI'
+2025-05-02 01:16:49,691 - main_orchestrator - INFO - Article 82da7ee78dfbcba6d24aee7ab1dd8d214d76093c5a57547f12a2467925de3512 is Boring. Skipping.
+2025-05-02 01:16:50,692 - main_orchestrator - INFO - --- Processing article file: 4b4dc4cc464b210c9cea5bd6b0536926973df8f59b462e3ccac4ba6550f62bc8.json ---
+2025-05-02 01:16:50,703 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 4b4dc4cc464b210c9cea5bd6b0536926973df8f59b462e3ccac4ba6550f62bc8 Title: Why Nvidia Stock Bounded Higher Thursday - The Motley Fool...
+2025-05-02 01:16:56,773 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='Nvidia stock update'
+2025-05-02 01:16:56,773 - main_orchestrator - INFO - Article 4b4dc4cc464b210c9cea5bd6b0536926973df8f59b462e3ccac4ba6550f62bc8 is Boring. Skipping.
+2025-05-02 01:16:57,774 - main_orchestrator - INFO - --- Processing article file: 2210df5733d1cb3bf6a0332b02bad7debc640b418d7c9b41e2a2ae1e1f695c65.json ---
+2025-05-02 01:16:57,786 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 2210df5733d1cb3bf6a0332b02bad7debc640b418d7c9b41e2a2ae1e1f695c65 Title: Meta and Microsoft Just Shared Great News for Artificial Int...
+2025-05-02 01:17:06,115 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='AI stocks news'
+2025-05-02 01:17:06,115 - main_orchestrator - INFO - Article 2210df5733d1cb3bf6a0332b02bad7debc640b418d7c9b41e2a2ae1e1f695c65 is Boring. Skipping.
+2025-05-02 01:17:07,117 - main_orchestrator - INFO - --- Processing article file: 499159fee7089ef7ee015e5f05c4e472f8c575ba9b5b3df24a238c9128d0405c.json ---
+2025-05-02 01:17:07,128 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 499159fee7089ef7ee015e5f05c4e472f8c575ba9b5b3df24a238c9128d0405c Title: The Day Anubis Saved Our Websites from a DDoS Attack...
+2025-05-02 01:17:13,496 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='DDoS attack comments'
+2025-05-02 01:17:13,497 - main_orchestrator - INFO - Article 499159fee7089ef7ee015e5f05c4e472f8c575ba9b5b3df24a238c9128d0405c is Boring. Skipping.
+2025-05-02 01:17:14,498 - main_orchestrator - INFO - --- Processing article file: 587102b753096ba4124930bf48456c137fefcbb14202ce7acce5931ecc1b5c4f.json ---
+2025-05-02 01:17:14,510 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 587102b753096ba4124930bf48456c137fefcbb14202ce7acce5931ecc1b5c4f Title: Ask HN: Who is hiring? (May 2025)...
+2025-05-02 01:17:20,349 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='HN hiring thread'
+2025-05-02 01:17:20,349 - main_orchestrator - INFO - Article 587102b753096ba4124930bf48456c137fefcbb14202ce7acce5931ecc1b5c4f is Boring. Skipping.
+2025-05-02 01:17:21,350 - main_orchestrator - INFO - --- Processing article file: 93a756415323b5c0d63e9c5657f997f68f76a158cd7e1d59d96b3f0a0f64e065.json ---
+2025-05-02 01:17:21,364 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 93a756415323b5c0d63e9c5657f997f68f76a158cd7e1d59d96b3f0a0f64e065 Title: Google Wallet launches new age and identity verification fea...
+2025-05-02 01:17:27,042 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Software', keyword='Google Wallet update'
+2025-05-02 01:17:27,042 - main_orchestrator - INFO - Article 93a756415323b5c0d63e9c5657f997f68f76a158cd7e1d59d96b3f0a0f64e065 is Boring. Skipping.
+2025-05-02 01:17:28,043 - main_orchestrator - INFO - --- Processing article file: a7955e185ca5ec18c5b2d079742e05da32d87086de7a3cfaa953b7c622cc47f2.json ---
+2025-05-02 01:17:28,057 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a7955e185ca5ec18c5b2d079742e05da32d87086de7a3cfaa953b7c622cc47f2 Title: Ask HN: Who wants to be hired? (May 2025)...
+2025-05-02 01:17:36,985 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='Job seeking post'
+2025-05-02 01:17:36,986 - main_orchestrator - INFO - Article a7955e185ca5ec18c5b2d079742e05da32d87086de7a3cfaa953b7c622cc47f2 is Boring. Skipping.
+2025-05-02 01:17:37,987 - main_orchestrator - INFO - --- Processing article file: d73adb9c06d9ee1c6dd017c6cc1b549c2ba2ff4ab16fb92cccfe0bc3cbb25551.json ---
+2025-05-02 01:17:38,001 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d73adb9c06d9ee1c6dd017c6cc1b549c2ba2ff4ab16fb92cccfe0bc3cbb25551 Title: Deno's Decline...
+2025-05-02 01:17:44,517 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='Deno's Decline'
+2025-05-02 01:17:44,518 - main_orchestrator - INFO - Article d73adb9c06d9ee1c6dd017c6cc1b549c2ba2ff4ab16fb92cccfe0bc3cbb25551 is Boring. Skipping.
+2025-05-02 01:17:45,519 - main_orchestrator - INFO - --- Processing article file: 82ee882d57756fbeac60f9ef812682c9404cd783ff64d5ace53abb7e9945ddf9.json ---
+2025-05-02 01:17:45,529 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 82ee882d57756fbeac60f9ef812682c9404cd783ff64d5ace53abb7e9945ddf9 Title: Ancient DNA Unveils the Cosmopolitan Heart of the Phoenician...
+2025-05-02 01:17:52,133 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='Ancient DNA study'
+2025-05-02 01:17:52,133 - main_orchestrator - INFO - Article 82ee882d57756fbeac60f9ef812682c9404cd783ff64d5ace53abb7e9945ddf9 is Boring. Skipping.
+2025-05-02 01:17:53,134 - main_orchestrator - INFO - Processing cycle complete. Successful: 2, Failed/Skipped: 19
+2025-05-02 01:17:53,134 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 01:50:08,546 - INFO - Use pytorch device_name: cpu
+2025-05-02 01:50:08,546 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 01:50:08,549 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 01:50:08,706 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 01:50:08,809 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 01:50:08,920 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 01:50:09,023 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 01:50:09,134 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 01:50:10,125 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 01:50:10,136 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 01:50:10,221 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 01:50:10,221 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 01:50:10,222 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 01:50:10,222 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 01:50:10,223 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 01:50:10,250 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 01:50:10,250 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 01:50:10,250 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 01:50:10,250 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 01:50:10,332 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 01:50:10,332 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 01:50:10,332 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 01:50:10,414 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 01:50:10,414 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 01:50:10,414 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 01:50:10,561 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 01:50:10,561 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 01:50:10,561 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 01:50:10,671 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 01:50:10,671 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 01:50:10,671 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 01:50:10,816 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 01:50:10,817 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 01:50:10,817 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 01:50:10,909 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 01:50:10,909 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 01:50:11,417 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 102 entries.
+2025-05-02 01:50:11,417 - root - INFO - Found new article: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Taylor Swift’ - WIRED (ID: c221aaae817be312b2d4fe6c8319852d94b56606ae171e64692575106864a828)
+2025-05-02 01:50:11,437 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\c221aaae817be312b2d4fe6c8319852d94b56606ae171e64692575106864a828.json (Title: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Taylor Swift’ - WIRED)
+2025-05-02 01:50:11,438 - root - INFO - Successfully saved new article: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Taylor Swift’ - WIRED
+2025-05-02 01:50:11,438 - root - INFO - Found new article: New free guide helps older adults harness the power of artificial intelligence to enrich their lives - Boise State University (ID: 97c428bcbda319217a0223d8bdde93c5195cece31ea352b723023430ff4a569f)
+2025-05-02 01:50:11,439 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\97c428bcbda319217a0223d8bdde93c5195cece31ea352b723023430ff4a569f.json (Title: New free guide helps older adults harness the power of artificial intelligence to enrich their lives - Boise State University)
+2025-05-02 01:50:11,440 - root - INFO - Successfully saved new article: New free guide helps older adults harness the power of artificial intelligence to enrich their lives - Boise State University
+2025-05-02 01:50:11,440 - root - INFO - Found new article: Nvidia Is Jumping Today -- Is the Artificial Intelligence (AI) Stock a Buy? - The Motley Fool (ID: 75eb6dd3fb6113c8653336baff4519dcc7857dd4068426fed3fb7cb7ca286a79)
+2025-05-02 01:50:11,441 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\75eb6dd3fb6113c8653336baff4519dcc7857dd4068426fed3fb7cb7ca286a79.json (Title: Nvidia Is Jumping Today -- Is the Artificial Intelligence (AI) Stock a Buy? - The Motley Fool)
+2025-05-02 01:50:11,441 - root - INFO - Successfully saved new article: Nvidia Is Jumping Today -- Is the Artificial Intelligence (AI) Stock a Buy? - The Motley Fool
+2025-05-02 01:50:11,442 - root - INFO - Found new article: Nvidia Is Jumping Today -- Is the Artificial Intelligence (AI) Stock a Buy? - Mitrade (ID: c91046a2490c644589eb745c39468f277c16b4e4e95424b087391b1452bc9559)
+2025-05-02 01:50:11,451 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\c91046a2490c644589eb745c39468f277c16b4e4e95424b087391b1452bc9559.json (Title: Nvidia Is Jumping Today -- Is the Artificial Intelligence (AI) Stock a Buy? - Mitrade)
+2025-05-02 01:50:11,452 - root - INFO - Successfully saved new article: Nvidia Is Jumping Today -- Is the Artificial Intelligence (AI) Stock a Buy? - Mitrade
+2025-05-02 01:50:11,452 - root - INFO - Found new article: Proving Grounds: Governments Build Sandboxes to Test AI - GovTech (ID: 645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9)
+2025-05-02 01:50:11,453 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9.json (Title: Proving Grounds: Governments Build Sandboxes to Test AI - GovTech)
+2025-05-02 01:50:11,453 - root - INFO - Successfully saved new article: Proving Grounds: Governments Build Sandboxes to Test AI - GovTech
+2025-05-02 01:50:11,454 - root - INFO - Found new article: 3 Reasons Amazon Stock Is Still a Top Artificial Intelligence Buy Right Now - MSN (ID: fdb7ecbbafd02bd520d7c50b976b8ab3e49446a7d47a4babe22f8570a9b33895)
+2025-05-02 01:50:11,455 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\fdb7ecbbafd02bd520d7c50b976b8ab3e49446a7d47a4babe22f8570a9b33895.json (Title: 3 Reasons Amazon Stock Is Still a Top Artificial Intelligence Buy Right Now - MSN)
+2025-05-02 01:50:11,455 - root - INFO - Successfully saved new article: 3 Reasons Amazon Stock Is Still a Top Artificial Intelligence Buy Right Now - MSN
+2025-05-02 01:50:11,456 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 6 new articles.
+2025-05-02 01:50:11,456 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 01:50:12,109 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 01:50:12,109 - root - INFO - Found new article: LLMs for Engineering: Teaching Models to Design High Powered Rockets (ID: 5091e526bb0c47560bcada16752136b2b09077e58c0acf2291f0f112a32c55c4)
+2025-05-02 01:50:12,110 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\5091e526bb0c47560bcada16752136b2b09077e58c0acf2291f0f112a32c55c4.json (Title: LLMs for Engineering: Teaching Models to Design High Powered Rockets)
+2025-05-02 01:50:12,111 - root - INFO - Successfully saved new article: LLMs for Engineering: Teaching Models to Design High Powered Rockets
+2025-05-02 01:50:12,111 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 1 new articles.
+2025-05-02 01:50:12,111 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 01:50:12,595 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 01:50:12,595 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 01:50:12,817 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 01:50:12,817 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 01:50:12,818 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 01:50:12,901 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 01:50:12,901 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 01:50:12,901 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 01:50:13,388 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 01:50:13,388 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 01:50:13,531 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 01:50:13,531 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 01:50:13,644 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 01:50:13,645 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 01:50:13,645 - root - INFO - Scrape run finished. Total new articles saved this run: 7.
+2025-05-02 01:50:13,645 - main_orchestrator - INFO - Scraper run completed. Found 7 new JSON files potentially.
+2025-05-02 01:50:13,656 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 01:50:13,657 - main_orchestrator - INFO - Found 7 scraped articles to process.
+2025-05-02 01:50:13,658 - main_orchestrator - INFO - --- Processing article file: c221aaae817be312b2d4fe6c8319852d94b56606ae171e64692575106864a828.json ---
+2025-05-02 01:50:13,667 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c221aaae817be312b2d4fe6c8319852d94b56606ae171e64692575106864a828 Title: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Tay...
+2025-05-02 01:50:20,674 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Ethics', keyword='Meta AI copyright case'
+2025-05-02 01:50:20,674 - main_orchestrator - INFO - Article c221aaae817be312b2d4fe6c8319852d94b56606ae171e64692575106864a828 is Boring. Skipping.
+2025-05-02 01:50:21,677 - main_orchestrator - INFO - --- Processing article file: 97c428bcbda319217a0223d8bdde93c5195cece31ea352b723023430ff4a569f.json ---
+2025-05-02 01:50:21,694 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 97c428bcbda319217a0223d8bdde93c5195cece31ea352b723023430ff4a569f Title: New free guide helps older adults harness the power of artif...
+2025-05-02 01:50:28,311 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Society', keyword='AI guide for seniors'
+2025-05-02 01:50:28,311 - main_orchestrator - INFO - Article 97c428bcbda319217a0223d8bdde93c5195cece31ea352b723023430ff4a569f is Boring. Skipping.
+2025-05-02 01:50:29,313 - main_orchestrator - INFO - --- Processing article file: 75eb6dd3fb6113c8653336baff4519dcc7857dd4068426fed3fb7cb7ca286a79.json ---
+2025-05-02 01:50:29,335 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 75eb6dd3fb6113c8653336baff4519dcc7857dd4068426fed3fb7cb7ca286a79 Title: Nvidia Is Jumping Today -- Is the Artificial Intelligence (A...
+2025-05-02 01:50:35,385 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='Nvidia stock analysis'
+2025-05-02 01:50:35,385 - main_orchestrator - INFO - Article 75eb6dd3fb6113c8653336baff4519dcc7857dd4068426fed3fb7cb7ca286a79 is Boring. Skipping.
+2025-05-02 01:50:36,387 - main_orchestrator - INFO - --- Processing article file: c91046a2490c644589eb745c39468f277c16b4e4e95424b087391b1452bc9559.json ---
+2025-05-02 01:50:36,408 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c91046a2490c644589eb745c39468f277c16b4e4e95424b087391b1452bc9559 Title: Nvidia Is Jumping Today -- Is the Artificial Intelligence (A...
+2025-05-02 01:50:42,710 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='Nvidia stock update'
+2025-05-02 01:50:42,710 - main_orchestrator - INFO - Article c91046a2490c644589eb745c39468f277c16b4e4e95424b087391b1452bc9559 is Boring. Skipping.
+2025-05-02 01:50:43,711 - main_orchestrator - INFO - --- Processing article file: 645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9.json ---
+2025-05-02 01:50:43,722 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9 Title: Proving Grounds: Governments Build Sandboxes to Test AI - Go...
+2025-05-02 01:50:51,418 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Interesting, topic='Regulation', keyword='AI testing sandboxes'
+2025-05-02 01:50:51,418 - main_orchestrator - INFO - Article 645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9 is Interesting (Topic: Regulation). Checking duplicates...
+2025-05-02 01:50:51,418 - src.agents.similarity_check_agent - INFO - Running similarity check for article: Proving Grounds: Governments Build Sandboxes to Test AI - Go...
+2025-05-02 01:50:57,055 - src.agents.similarity_check_agent - INFO - Similarity check result: is_duplicate=False. Reason: The New Candidate Article discusses governments building sandboxes to test AI, which is not covered in any of the Recently Published Articles.
+2025-05-02 01:50:57,055 - main_orchestrator - INFO - Article 645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9 passed similarity check.
+2025-05-02 01:50:57,055 - src.scrapers.image_scraper - INFO - Attempting to scrape image from source: https://news.google.com/rss/articles/CBMipAFBVV95cUxQaEQwdEpuR25PV0xucWpvT2ZHYlJSeUpBajJScWZBRjlkdzA0ZTdkNHNZcl9rS0VPUVJtbHNiODNISGU0RUdoZHozTUlOQXFmd2tSbk5Vcy02M3hhTm9wOUozdXduRWcxeHFqVmtpdkJRSzhpT3RUWHh4Z2xlZFVCMzZzeXN3Y2tQTlNwdlhlbE5xRmhxUDlMQU9ncVhPTVB1MmxkTg?oc=5
+2025-05-02 01:50:57,294 - src.scrapers.image_scraper - WARNING - No suitable meta image tag found at https://news.google.com/rss/articles/CBMipAFBVV95cUxQaEQwdEpuR25PV0xucWpvT2ZHYlJSeUpBajJScWZBRjlkdzA0ZTdkNHNZcl9rS0VPUVJtbHNiODNISGU0RUdoZHozTUlOQXFmd2tSbk5Vcy02M3hhTm9wOUozdXduRWcxeHFqVmtpdkJRSzhpT3RUWHh4Z2xlZFVCMzZzeXN3Y2tQTlNwdlhlbE5xRmhxUDlMQU9ncVhPTVB1MmxkTg?oc=5
+2025-05-02 01:50:57,294 - main_orchestrator - INFO - Image scraping failed/no image, using API search for 645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9...
+2025-05-02 01:50:57,294 - src.scrapers.image_scraper - INFO - Finding best image for query: 'AI testing sandboxes' (CLIP Enabled: True)
+2025-05-02 01:50:59,677 - src.scrapers.image_scraper - INFO - SerpApi found 5 relevant images for query: 'AI testing sandboxes'
+2025-05-02 01:50:59,677 - src.scrapers.image_scraper - INFO - CLIP filtering 5 images against prompt: 'AI testing sandboxes'
+2025-05-02 01:50:59,863 - src.scrapers.image_scraper - WARNING - Failed to download image https://testgrid.io/blog/wp-content/uploads/2025/02/Sandbox-testing.jpg: HTTPSConnectionPool(host='testgrid.io', port=443): Max retries exceeded with url: /blog/wp-content/uploads/2025/02/Sandbox-testing.jpg (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1018)')))
+2025-05-02 01:51:02,231 - src.scrapers.image_scraper - WARNING - No images met the minimum CLIP score (0.25). Falling back to highest scoring raw image.
+2025-05-02 01:51:02,231 - src.scrapers.image_scraper - INFO - Fallback: Using image https://miro.medium.com/v2/resize:fit:1400/0*ThRlmn_QDQBApzrq.jpg with score 0.2141
+2025-05-02 01:51:02,232 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9...
+2025-05-02 01:51:41,201 - src.agents.seo_article_generator_agent - INFO - Successfully parsed SEO content for 645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9.
+2025-05-02 01:51:41,201 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9...
+2025-05-02 01:51:47,314 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9
+2025-05-02 01:51:47,314 - main_orchestrator - INFO - Skipping TTS generation - CAMB_AI_API_KEY not set.
+2025-05-02 01:51:47,374 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\proving-grounds-governments-build-sandboxes-to-test-ai-govtech.html
+2025-05-02 01:51:47,391 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\site_data.json (20 articles).
+2025-05-02 01:51:47,393 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\all_articles.json (33 articles).
+2025-05-02 01:51:47,394 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9.json
+2025-05-02 01:51:47,395 - main_orchestrator - INFO - --- Successfully processed article: 645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9 ---
+2025-05-02 01:51:48,396 - main_orchestrator - INFO - --- Processing article file: fdb7ecbbafd02bd520d7c50b976b8ab3e49446a7d47a4babe22f8570a9b33895.json ---
+2025-05-02 01:51:48,410 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: fdb7ecbbafd02bd520d7c50b976b8ab3e49446a7d47a4babe22f8570a9b33895 Title: 3 Reasons Amazon Stock Is Still a Top Artificial Intelligenc...

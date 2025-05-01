@@ -1,6 +1,52 @@
 {
   "articles": [
     {
+      "id": "513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a",
+      "title": "Huawei’s AI chips raise concerns in Nvidia’s closed-door meeting - USA Today",
+      "link": "articles/huaweis-ai-chips-raise-concerns-in-nvidias-closed-door-meeting-usa-today.html",
+      "published_iso": "2025-05-01T23:01:10",
+      "summary_short": "Huawei’s AI chips reportedly raised concerns during a closed-door Nvidia meeting, signaling growing competition in the semiconductor space.",
+      "image_url": "https://i.cdn.newsbytesapp.com/images/l83220250428104812.jpeg",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "Huawei AI chips",
+        "Nvidia closed-door meeting",
+        "semiconductor industry competition",
+        "AI hardware development",
+        "Huawei semiconductor capabilities",
+        "US trade restrictions",
+        "AI chip landscape",
+        "GPU technology",
+        "global AI processor demand"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef",
+      "title": "A Judge Says Meta’s AI Copyright Case Is About ‘the Next Taylor Swift’",
+      "link": "articles/a-judge-says-metas-ai-copyright-case-is-about-the-next-taylor-swift.html",
+      "published_iso": "2025-05-01T22:47:07",
+      "summary_short": "The Meta AI copyright case intensifies as a judge hints at an impending ruling, shaping the future of AI and intellectual property.",
+      "image_url": "https://media.wired.com/photos/68127a1cc6e866c6748464f3/191:100/w_1280,c_limit/Meta-Kadrey-Hearing-Business-1498692170.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Meta AI copyright case",
+        "AI-generated content",
+        "copyright law",
+        "intellectual property rights",
+        "Taylor Swift comparison",
+        "AI innovation",
+        "legal precedent",
+        "content creators",
+        "AI training practices"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
       "id": "9df3d8e0130ec5d428f4b88feeafa658253ead0117476b1139dcaaab59da3c55",
       "title": "New Federal Circuit Decision - Expect Getting AI/Machine Learning Patents Past 101 to Get Tougher - Quarles",
       "link": "articles/new-federal-circuit-decision-expect-getting-aimachine-learning-patents-past-101-.html",
@@ -46,6 +92,30 @@
       ],
       "audio_url": null,
       "trend_score": 14.5
+    },
+    {
+      "id": "645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9",
+      "title": "Proving Grounds: Governments Build Sandboxes to Test AI - GovTech",
+      "link": "articles/proving-grounds-governments-build-sandboxes-to-test-ai-govtech.html",
+      "published_iso": "2025-05-01T15:34:21",
+      "summary_short": "Governments are creating AI testing sandboxes to evaluate AI systems in controlled environments, ensuring safety and compliance.",
+      "image_url": "https://miro.medium.com/v2/resize:fit:1400/0*ThRlmn_QDQBApzrq.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "AI testing sandboxes",
+        "AI governance",
+        "artificial intelligence regulation",
+        "AI safety",
+        "government AI policies",
+        "AI risk assessment",
+        "ethical AI",
+        "AI deployment strategies",
+        "AI bias detection",
+        "AI security vulnerabilities"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
     },
     {
       "id": "037705e09113b0b95778bd12da8f50bf77de3d550c57d812433d012f36185a19",
