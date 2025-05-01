@@ -33,6 +33,9 @@ try:
     from src.agents.tags_generator_agent import run_tags_generator_agent
     # *** IMPORT TTS AGENT ***
     from src.agents.tts_generator_agent import run_tts_generator_agent
+    # --- Catchy Title Agent Import REMOVED ---
+    # from src.agents.catch_title_generator_agent import run_catch_title_agent # No longer needed
+
 except ImportError as e:
      print(f"FATAL IMPORT ERROR: {e}")
      print("Check file names, function definitions, and __init__.py files.")
@@ -40,7 +43,6 @@ except ImportError as e:
 
 # --- Load Environment Variables ---
 load_dotenv(dotenv_path=os.path.join(PROJECT_ROOT_FOR_PATH, '.env'))
-# CHECK_INTERVAL_SECONDS = int(os.getenv('CHECK_INTERVAL_SECONDS', 900)) # No longer needed for sleep
 MAX_HOME_PAGE_ARTICLES = int(os.getenv('MAX_HOME_PAGE_ARTICLES', 20))
 AUTHOR_NAME_DEFAULT = os.getenv('AUTHOR_NAME', 'AI News Team')
 # *** ADDED Site Config Vars ***
@@ -140,7 +142,11 @@ def remove_scraped_file(filepath):
 
 def format_tags_html(tags_list):
     if not tags_list or not isinstance(tags_list, list): return ""
-    return " ".join([f'<span class="tag-item"><a href="#">{tag}</a></span>' for tag in tags_list])
+    # Link each tag to the topic page (topic.html) with the tag as a query parameter
+    # This assumes you might want to filter by tags on a generic page later.
+    # Adjust the href if you have a different structure for tag pages.
+    return " ".join([f'<span class="tag-item"><a href="/topic.html?name={tag.replace(" ", "+")}">{tag}</a></span>' for tag in tags_list])
+
 
 def render_post_page(template_variables, output_filename):
     try:
@@ -162,8 +168,10 @@ def load_recent_articles_for_comparison():
             with open(SITE_DATA_FILE, 'r', encoding='utf-8') as f:
                 site_data = json.load(f)
                 if isinstance(site_data.get('articles'), list):
-                    # Return only titles and summaries needed for the check
-                    return [{"title": a.get("title"), "summary_short": a.get("summary_short")}
+                    # Return only titles and short summaries needed for the check
+                    # Also use the original summary if summary_short isn't available
+                    return [{"title": a.get("title"),
+                             "summary_short": a.get("summary_short", a.get("summary", ""))[:300]} # Limit length here
                             for a in site_data["articles"][:50] if a.get("title")] # Limit context size
     except Exception as e: logger.warning(f"Could not load recent articles from {SITE_DATA_FILE} for comparison: {e}")
     return []
@@ -197,30 +205,56 @@ def update_site_data(new_article_info):
     site_data_found = False
     all_articles_found = False
 
+    # Create a consistent, minimal representation for the site data files
+    # Ensure all required keys for the frontend are present, even if None initially
+    minimal_entry = {
+        "id": new_article_info.get('id'),
+        "title": new_article_info.get('title'),
+        "link": new_article_info.get('link'), # Should be the relative path like 'articles/slug.html'
+        "published_iso": new_article_info.get('published_iso'),
+        "summary_short": new_article_info.get('summary_short'),
+        "image_url": new_article_info.get('image_url'),
+        "topic": new_article_info.get('topic'),
+        "is_breaking": new_article_info.get('is_breaking', False),
+        "tags": new_article_info.get('tags', []),
+        "audio_url": new_article_info.get('audio_url'),
+        "trend_score": new_article_info.get('trend_score', 0) # Add trend score
+    }
+
     # Update/Add to homepage list (site_data)
     if article_id:
         for i, existing_article in enumerate(site_data["articles"]):
             if existing_article.get('id') == article_id:
-                updated_entry = {**existing_article, **new_article_info}
+                # Update existing entry with potentially new info, ensuring all keys are present
+                updated_entry = {**existing_article, **minimal_entry}
                 site_data["articles"][i] = updated_entry
                 site_data_found = True; logger.debug(f"Updating {article_id} in site_data.json"); break
-    if not site_data_found and article_id: site_data["articles"].append(new_article_info); logger.debug(f"Adding {article_id} to site_data.json")
+    if not site_data_found and article_id:
+        site_data["articles"].append(minimal_entry); logger.debug(f"Adding {article_id} to site_data.json")
 
     # Update/Add to full list (all_articles_data)
     if article_id:
         for i, existing_article in enumerate(all_articles_data["articles"]):
             if existing_article.get('id') == article_id:
-                updated_entry = {**existing_article, **new_article_info}
+                # Update existing entry, ensuring all keys are present
+                updated_entry = {**existing_article, **minimal_entry}
                 all_articles_data["articles"][i] = updated_entry
                 all_articles_found = True; logger.debug(f"Updating {article_id} in all_articles.json"); break
-    if not all_articles_found and article_id: all_articles_data["articles"].append(new_article_info); logger.debug(f"Adding {article_id} to all_articles.json")
+    if not all_articles_found and article_id:
+        all_articles_data["articles"].append(minimal_entry); logger.debug(f"Adding {article_id} to all_articles.json")
 
 
     # Sort both lists by date
     def get_sort_key(x):
         date_str = x.get('published_iso', '1970-01-01T00:00:00')
-        try: return datetime.fromisoformat(date_str.replace('Z', '+00:00'))
-        except:
+        if not date_str: # Handle None case
+            return datetime(1970, 1, 1, tzinfo=timezone.utc)
+        try:
+            # Handle potential 'Z' timezone indicator
+            if date_str.endswith('Z'):
+                date_str = date_str[:-1] + '+00:00'
+            return datetime.fromisoformat(date_str)
+        except (ValueError, TypeError):
              try: return datetime.strptime(date_str, '%Y-%m-%d').replace(tzinfo=timezone.utc)
              except: return datetime(1970, 1, 1, tzinfo=timezone.utc)
 
@@ -309,11 +343,8 @@ def process_single_article(json_filepath, recent_articles_context):
         article_data = run_seo_article_agent(article_data)
         if not article_data or not article_data.get('seo_agent_results'):
             logger.error(f"SEO Agent failed for {article_id}. Error: {article_data.get('seo_agent_error', 'Unknown')}")
-            # Don't return False here, maybe we can proceed without SEO data?
-            # Or maybe we should? Decide based on how critical SEO data is.
-            # For now, let's log the error and continue, but the post might be incomplete.
-            # If SEO is mandatory, uncomment the next line:
-            # return False
+            # Decide if SEO failure is critical. For now, proceed but log.
+            # return False # Uncomment if SEO must succeed
             seo_results = {} # Use an empty dict if SEO failed
         else:
             seo_results = article_data['seo_agent_results']
@@ -324,115 +355,140 @@ def process_single_article(json_filepath, recent_articles_context):
              logger.warning(f"Tags Agent failed/skipped for {article_id}. Error: {article_data.get('tags_agent_error')}")
         article_data['generated_tags'] = article_data.get('generated_tags', [])
 
-        # == Step 6.5: Calculate Trend Score (Proxy) ==
+        # == Step 6: Calculate Trend Score (Proxy) ==
         trend_score = 0
         importance_level = article_data.get('filter_verdict', {}).get('importance_level')
         tags_count = len(article_data.get('generated_tags', []))
         publish_date_iso = article_data.get('published_iso')
 
         if importance_level == "Interesting":
-            trend_score += 10
+            trend_score += 5 # Base score
         elif importance_level == "Breaking":
-            trend_score += 5 # Less weight maybe? Or more? Adjust as needed.
+            trend_score += 10 # Higher base score for breaking
 
-        trend_score += tags_count # Add points for tags
+        trend_score += tags_count * 0.5 # Points per tag
 
-        # Add recency factor (penalize very new and very old slightly)
+        # Add recency factor
         if publish_date_iso:
             try:
-                publish_dt = datetime.fromisoformat(publish_date_iso.replace('Z', '+00:00'))
+                publish_dt = get_sort_key(article_data) # Use the same robust date parsing
                 now = datetime.now(timezone.utc)
                 days_old = (now - publish_dt).total_seconds() / (60 * 60 * 24)
-                # Simple curve: peaks around 1-3 days old, drops off
-                recency_factor = max(0, 1 - abs(days_old - 2) / 5) # Peaks at day 2, zero after ~7 days / before -3 days
-                trend_score += recency_factor * 5 # Add small recency bonus
-            except Exception as e:
-                logger.warning(f"Could not calculate recency for trend score: {e}")
 
-        article_data['trend_score'] = round(trend_score, 2) # Store the score
+                # More aggressive curve: peaks quickly, drops faster
+                if days_old < 0: recency_factor = 0 # Ignore future dates
+                elif days_old <= 1: recency_factor = 1.0 # Max bonus for first day
+                elif days_old <= 3: recency_factor = 1.0 - (days_old - 1) / 2 # Linear drop over next 2 days
+                else: recency_factor = 0 # Zero bonus after 3 days
+
+                trend_score += recency_factor * 5 # Add recency bonus (max 5 points)
+            except Exception as e:
+                logger.warning(f"Could not calculate recency for trend score {article_id}: {e}")
+
+        article_data['trend_score'] = round(max(0, trend_score), 2) # Store the score, ensure non-negative
         logger.debug(f"Calculated trend score for {article_id}: {article_data['trend_score']}")
 
-        # == Step 6: TTS Generation ==
-        article_data['audio_url'] = None
+
+        # == Step 7: TTS Generation ==
+        article_data['audio_url'] = None # Ensure key exists
         if CAMB_AI_API_KEY:
             logger.info(f"Attempting TTS generation for {article_id}...")
             article_text_for_tts = seo_results.get('generated_article_body_md', '') # Use SEO result if available
             if article_text_for_tts:
                 article_data = run_tts_generator_agent(article_data, article_text_for_tts, OUTPUT_AUDIO_DIR)
                 if article_data.get('tts_agent_error'): logger.error(f"TTS Agent failed for {article_id}. Error: {article_data.get('tts_agent_error')}")
-                else: logger.info(f"TTS successful for {article_id}. Path: {article_data.get('audio_url')}")
+                elif article_data.get('audio_url'): logger.info(f"TTS successful for {article_id}. Path: {article_data.get('audio_url')}")
+                else: logger.warning(f"TTS Agent ran but did not return an audio_url for {article_id}.")
             else: logger.warning(f"No article body found for TTS generation for {article_id}.")
         else: logger.info("Skipping TTS generation - CAMB_AI_API_KEY not set.")
 
 
-        # == Step 7: Prepare HTML Vars ==
-        slug = article_data.get('title', 'article-' + article_id)
-        slug = slug.lower().replace(' ', '-').replace('_', '-')
+        # == Step 8: Prepare HTML Vars ==
+        # Using original RSS title for slug ensures consistency if SEO title changes later
+        original_title = article_data.get('title', 'article-' + article_id)
+        slug = original_title.lower().replace(' ', '-').replace('_', '-')
         slug = "".join(c for c in slug if c.isalnum() or c == '-')
-        slug = re.sub('-+', '-', slug).strip('-')[:80]
-        if not slug: slug = 'article-' + article_id
+        slug = re.sub('-+', '-', slug).strip('-')[:80] # Limit slug length
+        if not slug: slug = 'article-' + article_id # Fallback slug
         article_data['slug'] = slug
 
+        # Relative path for use within the site (JS, links from homepage, etc.)
         article_relative_path = f"articles/{slug}.html"
+        # Absolute path for canonical/OG tags
         canonical_url = urljoin(YOUR_SITE_BASE_URL + '/', article_relative_path) if YOUR_SITE_BASE_URL else article_relative_path
 
-        body_md = seo_results.get('generated_article_body_md', article_data.get('summary','*Content generation incomplete.*')) # Fallback
-        body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables'])
+        body_md = seo_results.get('generated_article_body_md', article_data.get('summary','*Content generation failed or incomplete.*')) # Fallback
+        # Convert Markdown to HTML
+        try:
+            body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables', 'nl2br']) # Added nl2br for line breaks
+        except Exception as md_err:
+            logger.error(f"Markdown conversion failed for {article_id}: {md_err}")
+            body_html = f"<p><i>Content rendering error.</i></p><pre>{body_md}</pre>" # Show raw on error
+
         tags_list = article_data.get('generated_tags', [])
-        tags_html = format_tags_html(tags_list)
+        tags_html = format_tags_html(tags_list) # Uses the updated function with links
         publish_date_iso = article_data.get('published_iso', datetime.now(timezone.utc).isoformat())
         try:
-             publish_dt = datetime.fromisoformat(publish_date_iso.replace('Z', '+00:00'))
+             publish_dt = get_sort_key(article_data) # Use robust date parsing
              publish_date_formatted = publish_dt.strftime('%B %d, %Y')
-        except: publish_date_formatted = datetime.now(timezone.utc).strftime('%B %d, %Y')
+        except: publish_date_formatted = datetime.now(timezone.utc).strftime('%B %d, %Y') # Fallback
 
-        # *** ADDED/UPDATED TEMPLATE VARS for SEO ***
+        # Use SEO title tag if available, otherwise fallback to original title
+        page_title = seo_results.get('generated_title_tag', article_data.get('title', 'AI News'))
+        # Use SEO meta description if available, otherwise fallback to summary
+        meta_description = seo_results.get('generated_meta_description', article_data.get('summary', '')[:160])
+
+
         template_vars = {
-            'PAGE_TITLE': seo_results.get('generated_title_tag', article_data.get('title', 'AI News')),
-            'META_DESCRIPTION': seo_results.get('generated_meta_description', article_data.get('summary', '')[:160]),
+            'PAGE_TITLE': page_title,
+            'META_DESCRIPTION': meta_description,
             'AUTHOR_NAME': article_data.get('author', AUTHOR_NAME_DEFAULT),
-            'META_KEYWORDS': ", ".join(tags_list), # Comma-separated for meta tag
+            'META_KEYWORDS': ", ".join(tags_list),
             'CANONICAL_URL': canonical_url,
             'SITE_NAME': YOUR_WEBSITE_NAME,
             'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
             'IMAGE_URL': article_data.get('selected_image_url'),
-            'IMAGE_ALT_TEXT': seo_results.get('generated_title_tag', article_data.get('title', 'AI News Image')),
-            'META_KEYWORDS_LIST': tags_list, # Python list for JSON-LD/OG
-            'PUBLISH_ISO_FOR_META': publish_date_iso, # Raw ISO date for meta tags
-            'JSON_LD_SCRIPT_BLOCK': seo_results.get('generated_json_ld', ''), # Use SEO result or empty string
-            'ARTICLE_HEADLINE': article_data.get('title'),
-            'PUBLISH_DATE': publish_date_formatted, # Formatted date for display
+            'IMAGE_ALT_TEXT': page_title, # Use page title for alt text
+            'META_KEYWORDS_LIST': tags_list,
+            'PUBLISH_ISO_FOR_META': publish_date_iso,
+            'JSON_LD_SCRIPT_BLOCK': seo_results.get('generated_json_ld', ''),
+            'ARTICLE_HEADLINE': article_data.get('title'), # Use original title as headline
+            'PUBLISH_DATE': publish_date_formatted,
             'ARTICLE_BODY_HTML': body_html,
             'ARTICLE_TAGS_HTML': tags_html,
             'SOURCE_ARTICLE_URL': article_data.get('link', '#'),
-            'ARTICLE_TITLE': article_data.get('title'),
+            'ARTICLE_TITLE': article_data.get('title'), # Keep original title available
             'id': article_id,
             'CURRENT_ARTICLE_ID': article_id,
-            'CURRENT_ARTICLE_TOPIC': article_data.get('topic', ''), # Pass topic
-            'CURRENT_ARTICLE_TAGS_JSON': json.dumps(tags_list), # Pass tags as JSON string
-            'AUDIO_URL': article_data.get('audio_url') # Pass audio URL
+            'CURRENT_ARTICLE_TOPIC': article_data.get('topic', ''),
+            'CURRENT_ARTICLE_TAGS_JSON': json.dumps(tags_list),
+            # Make audio URL relative to the public root
+            'AUDIO_URL': article_data.get('audio_url').replace(PUBLIC_DIR, '').replace('\\', '/') if article_data.get('audio_url') else None
         }
 
-        # == Step 8: Render HTML ==
+        # == Step 9: Render HTML ==
         generated_html_path = render_post_page(template_vars, slug)
 
         if generated_html_path:
-            # == Step 9: Update Site Data ==
+            # == Step 10: Update Site Data ==
+            # Prepare the entry for the JSON files (site_data.json, all_articles.json)
             site_data_entry = {
                 "id": article_id,
                 "title": article_data.get('title'),
-                "link": article_relative_path, # Use relative path for JS fetches
+                "link": article_relative_path, # Use RELATIVE path for JS fetches
                 "published_iso": article_data.get('published_iso'),
-                "summary_short": seo_results.get('generated_meta_description', article_data.get('summary', '')[:160] + '...'),
+                "summary_short": meta_description, # Use the determined meta description
                 "image_url": article_data.get('selected_image_url'),
                 "topic": article_data.get('topic', 'News'),
                 "is_breaking": article_data.get('is_breaking', False),
                 "tags": article_data.get('generated_tags', []),
-                "audio_url": article_data.get('audio_url') # Add audio URL to site data
+                # Make audio URL relative for the JSON data too
+                "audio_url": template_vars['AUDIO_URL'],
+                "trend_score": article_data.get('trend_score', 0)
             }
             update_site_data(site_data_entry)
 
-            # == Step 10: Save Final Processed Data & Remove Original ==
+            # == Step 11: Save Final Processed Data & Remove Original ==
             if save_processed_data(processed_file_path, article_data):
                  remove_scraped_file(json_filepath)
                  logger.info(f"--- Successfully processed article: {article_id} ---")
@@ -463,23 +519,30 @@ def retry_failed_tts():
      for filepath in processed_files:
           try:
                article_data = load_article_data(filepath)
-               # Retry if audio_url is missing AND there was NO previous TTS error recorded
-               # (prevents retrying indefinitely if TTS consistently fails for an article)
+               # Retry if audio_url is missing/None AND there was NO previous TTS error recorded
                if (article_data and not article_data.get('audio_url')
                     and article_data.get('seo_agent_results')
-                    and article_data.get('tts_agent_error') is None):
+                    and article_data.get('tts_agent_error') is None): # Only retry if no error previously
 
                     article_id = article_data.get('id')
                     logger.info(f"Retrying TTS generation for article {article_id} from {os.path.basename(filepath)}")
 
                     article_text_for_tts = article_data.get('seo_agent_results', {}).get('generated_article_body_md', '')
                     if article_text_for_tts:
+                         # Run TTS agent again
                          article_data = run_tts_generator_agent(article_data, article_text_for_tts, OUTPUT_AUDIO_DIR)
+                         # Make audio URL relative before saving/updating
+                         relative_audio_url = None
+                         if article_data.get('audio_url'):
+                              relative_audio_url = article_data.get('audio_url').replace(PUBLIC_DIR, '').replace('\\', '/')
+                              article_data['audio_url'] = relative_audio_url # Update the dict with relative path
+
                          if save_processed_data(filepath, article_data):
-                              if not article_data.get('tts_agent_error') and article_data.get('audio_url'):
+                              # Check for success AFTER saving the updated processed data (which now includes error status if failed)
+                              if not article_data.get('tts_agent_error') and relative_audio_url:
                                    logger.info(f"TTS Retry Successful for {article_id}. Updating site_data.")
                                    # Update only the necessary fields in site_data
-                                   site_data_entry = {"id": article_id, "audio_url": article_data.get('audio_url')}
+                                   site_data_entry = {"id": article_id, "audio_url": relative_audio_url}
                                    update_site_data(site_data_entry)
                                    retried_count += 1
                               else:
@@ -490,6 +553,9 @@ def retry_failed_tts():
                               failed_count += 1
                     else:
                          logger.warning(f"No article body found in processed JSON for {article_id}, cannot retry TTS.")
+                         # Record an error state so we don't retry again
+                         article_data['tts_agent_error'] = "Missing article body for TTS"
+                         save_processed_data(filepath, article_data)
                          failed_count += 1
                     time.sleep(2) # Avoid hammering API during retries
 
@@ -511,8 +577,6 @@ if __name__ == "__main__":
     # Run TTS retry logic once at the start of the build
     retry_failed_tts()
 
-    # Removed the while True: loop here
-
     logger.info("--- Running Processing Cycle ---")
     # 1. Run Scraper
     try:
@@ -525,7 +589,7 @@ if __name__ == "__main__":
         logger.exception(f"Scraper failed: {scrape_e}")
         sys.exit(1) # Exit if scraper fails
 
-    # 2. Load context for similarity check
+    # 2. Load context for similarity check *after* scraping
     recent_articles_context = load_recent_articles_for_comparison()
     logger.info(f"Loaded {len(recent_articles_context)} recent articles for duplicate checking.")
 
@@ -542,18 +606,17 @@ if __name__ == "__main__":
         except Exception as sort_e: logger.warning(f"Could not sort JSON files: {sort_e}")
 
         for filepath in json_files:
-            if process_single_article(filepath, recent_articles_context):
+            # IMPORTANT: Reload context *before* processing each article
+            # This ensures that duplicates found earlier in *this same run* are considered
+            current_recent_context = load_recent_articles_for_comparison()
+
+            if process_single_article(filepath, current_recent_context):
                 processed_count += 1
-                # OPTIONAL: Reload context after each success to prevent duplicates *within the same run*
-                # If processing many files, this adds overhead. If few files, it's safer.
-                # recent_articles_context = load_recent_articles_for_comparison()
             else:
                  failed_skipped_count += 1
-            time.sleep(2) # Keep short sleep between API-heavy processing steps
+            time.sleep(1) # Keep short sleep between API-heavy processing steps
 
         logger.info(f"Processing cycle complete. Successful: {processed_count}, Failed/Skipped: {failed_skipped_count}")
-
-    # Removed the sleep logic and outer loop
 
     logger.info("--- === Dacoola AI News Orchestrator Single Run Finished === ---")
     # Script will now exit naturally
