@@ -60,7 +60,7 @@
     <!-- *** Stylesheets & Icons *** -->
     <link rel="stylesheet" href="../css/styles.css"> <!-- Adjust path relative to generated article location -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="icon" type="image/png" href="../../images/dacoola_image_logo.png"> <!-- Adjust path relative to public root -->
 
     <!-- *** JSON-LD Structured Data (Updated Placeholder Suggestion) *** -->
     <!-- Note: Actual generation happens in Python. This shows the structure. -->
@@ -153,6 +153,14 @@
                 <!-- JS will populate this list -->
             </div>
         </aside>
+
+        <div class="article-card-actions">
+            <button id="global-tts-player-button" title="Listen to article">
+                <i class="fas fa-headphones"></i> <!-- Headphones Icon -->
+            </button>
+            <!-- Also need the hidden audio element managed by JS -->
+            <audio id="global-audio-player" preload="none"></audio>
+        </div>
 
     </div> <!-- End main-content-grid -->
 

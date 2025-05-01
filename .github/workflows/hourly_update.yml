@@ -1,0 +1,100 @@
+name: Hourly News Update and Deploy
+
+on:
+  schedule:
+    # Runs every hour at the beginning of the hour (minute 0)
+    # See: https://crontab.guru/every-hour
+    - cron: "0 * * * *"
+  workflow_dispatch: # Allows manual triggering from the Actions tab
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Allow workflow to write back to the repository
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10" # Or your preferred Python version
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Main Script
+        env:
+          # Pass secrets securely as environment variables to the script
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+          CAMB_AI_API_KEY: ${{ secrets.CAMB_AI_API_KEY }} # Add other env vars from your .env if needed
+          YOUR_WEBSITE_NAME: ${{ vars.YOUR_WEBSITE_NAME || 'Dacoola' }} # Use repo variables or default
+          YOUR_WEBSITE_LOGO_URL: ${{ vars.YOUR_WEBSITE_LOGO_URL || 'https://i.imgur.com/A5Wdp6f.png' }}
+          YOUR_SITE_BASE_URL: ${{ vars.YOUR_SITE_BASE_URL || '' }}
+        run: python src/main.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions-bot@github.com'
+          # Add all changes in public, data/processed_ids, and the log file
+          git add public/ data/processed_article_ids.txt dacola.log
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Automated hourly news update [skip ci]"
+            # Add retry logic for push in case of temporary network issues
+            retry_count=0
+            max_retries=3
+            until git push || [ $retry_count -eq $max_retries ]; do
+              retry_count=$((retry_count+1))
+              echo "Push failed. Retrying (${retry_count}/${max_retries})..."
+              sleep 5
+            done
+            if [ $retry_count -eq $max_retries ]; then
+              echo "Push failed after $max_retries attempts."
+              exit 1
+            fi
+            echo "Changes pushed successfully."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Provided by GitHub Actions
+
+
+      # --- DEPLOYMENT STEP (CHOOSE ONE OR MORE) ---
+
+      # Option 1: Deploy to GitHub Pages (if using it)
+      # Needs setup in repository settings (Pages source branch/folder)
+      # - name: Deploy to GitHub Pages
+      #   uses: actions/deploy-pages@v4
+      #   # Requires build artifacts if not deploying root/main branch directly
+      #   # See docs: https://github.com/actions/deploy-pages
+
+      # Option 2: Deploy via rsync/scp to a traditional server
+      # Requires SSH private key and known_hosts as secrets
+      # - name: Deploy to Server via rsync
+      #   uses: easingthemes/ssh-deploy@v5.1.0 # Or another SSH action
+      #   with:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+      #     ARGS: "-rlgoDzvc -i --delete" # rsync options
+      #     SOURCE: "public/" # Directory to copy FROM the runner
+      #     REMOTE_HOST: ${{ secrets.REMOTE_HOST }} # e.g., yourdomain.com
+      #     REMOTE_USER: ${{ secrets.REMOTE_USER }} # e.g., ubuntu
+      #     TARGET: ${{ secrets.TARGET_DIR }} # e.g., /var/www/html/dacoola
+      #     EXCLUDE: "/dist/, /node_modules/" # Optional excludes
+
+      # Option 3: Deploy using specific hosting provider actions (Netlify, Vercel, AWS S3 etc.)
+      # Example: Netlify Deploy Action (requires NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID as secrets)
+      # - name: Deploy to Netlify
+      #   uses: netlify/actions/cli@master
+      #   with:
+      #     args: deploy --dir=public --prod
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
