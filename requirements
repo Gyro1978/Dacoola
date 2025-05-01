@@ -5,5 +5,5 @@ Jinja2
 Markdown
 beautifulsoup4
 Pillow
-serpapi-google-search
+google-search-results
 sentence-transformers
