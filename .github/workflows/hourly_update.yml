@@ -3,7 +3,7 @@ name: Hourly News Update and Deploy
 on:
   schedule:
     # Runs every hour at the beginning of the hour
-    - cron: "*/30 * * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch: # Allows manual triggering
 
 jobs:
