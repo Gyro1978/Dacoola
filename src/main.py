@@ -40,7 +40,7 @@ except ImportError as e:
 
 # --- Load Environment Variables ---
 load_dotenv(dotenv_path=os.path.join(PROJECT_ROOT_FOR_PATH, '.env'))
-CHECK_INTERVAL_SECONDS = int(os.getenv('CHECK_INTERVAL_SECONDS', 900))
+# CHECK_INTERVAL_SECONDS = int(os.getenv('CHECK_INTERVAL_SECONDS', 900)) # No longer needed for sleep
 MAX_HOME_PAGE_ARTICLES = int(os.getenv('MAX_HOME_PAGE_ARTICLES', 20))
 AUTHOR_NAME_DEFAULT = os.getenv('AUTHOR_NAME', 'AI News Team')
 # *** ADDED Site Config Vars ***
@@ -65,11 +65,13 @@ TEMPLATE_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'templates')
 SITE_DATA_FILE = os.path.join(PUBLIC_DIR, 'site_data.json')
 # *** ADD AUDIO OUTPUT DIR ***
 OUTPUT_AUDIO_DIR = os.path.join(PUBLIC_DIR, 'audio') # Audio files saved here
+# *** ADD ALL ARTICLES FILE PATH ***
+ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
 
 # --- Setup Logging ---
 log_file_path = os.path.join(PROJECT_ROOT_FOR_PATH, 'dacoola.log')
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.INFO, # Changed to INFO for build logs
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(),
@@ -102,7 +104,7 @@ except Exception as e:
     logger.exception(f"CRITICAL: Failed to initialize Jinja2 from {TEMPLATE_DIR}. Exiting.")
     sys.exit(1)
 
-# --- Helper Functions --- (Keep ensure_directories, load_article_data, save_processed_data, remove_scraped_file, format_tags_html, render_post_page mostly the same)
+# --- Helper Functions ---
 def ensure_directories():
     os.makedirs(SCRAPED_ARTICLES_DIR, exist_ok=True)
     os.makedirs(PROCESSED_JSON_DIR, exist_ok=True)
@@ -153,24 +155,22 @@ def render_post_page(template_variables, output_filename):
         return output_path
     except Exception as e: logger.exception(f"CRITICAL Error rendering template {output_filename}: {e}"); return None
 
-# --- Site Data Management --- (Keep load_recent_articles_for_comparison and update_site_data the same)
+# --- Site Data Management ---
 def load_recent_articles_for_comparison():
     try:
         if os.path.exists(SITE_DATA_FILE):
             with open(SITE_DATA_FILE, 'r', encoding='utf-8') as f:
                 site_data = json.load(f)
                 if isinstance(site_data.get('articles'), list):
+                    # Return only titles and summaries needed for the check
                     return [{"title": a.get("title"), "summary_short": a.get("summary_short")}
-                            for a in site_data["articles"] if a.get("title")]
+                            for a in site_data["articles"][:50] if a.get("title")] # Limit context size
     except Exception as e: logger.warning(f"Could not load recent articles from {SITE_DATA_FILE} for comparison: {e}")
     return []
 
-# Add this near the other file paths
-ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
-
 def update_site_data(new_article_info):
     site_data = {"articles": []}
-    all_articles_data = {"articles": []} # <<< For the complete list
+    all_articles_data = {"articles": []}
 
     # Load existing site_data (for homepage limit)
     try:
@@ -225,7 +225,7 @@ def update_site_data(new_article_info):
              except: return datetime(1970, 1, 1, tzinfo=timezone.utc)
 
     site_data["articles"].sort(key=get_sort_key, reverse=True)
-    all_articles_data["articles"].sort(key=get_sort_key, reverse=True) # Sort the full list too
+    all_articles_data["articles"].sort(key=get_sort_key, reverse=True)
 
     # Apply limit ONLY to site_data
     site_data["articles"] = site_data["articles"][:MAX_HOME_PAGE_ARTICLES]
@@ -309,8 +309,14 @@ def process_single_article(json_filepath, recent_articles_context):
         article_data = run_seo_article_agent(article_data)
         if not article_data or not article_data.get('seo_agent_results'):
             logger.error(f"SEO Agent failed for {article_id}. Error: {article_data.get('seo_agent_error', 'Unknown')}")
-            return False
-        seo_results = article_data['seo_agent_results']
+            # Don't return False here, maybe we can proceed without SEO data?
+            # Or maybe we should? Decide based on how critical SEO data is.
+            # For now, let's log the error and continue, but the post might be incomplete.
+            # If SEO is mandatory, uncomment the next line:
+            # return False
+            seo_results = {} # Use an empty dict if SEO failed
+        else:
+            seo_results = article_data['seo_agent_results']
 
         # == Step 5: Tags Generator ==
         article_data = run_tags_generator_agent(article_data)
@@ -350,7 +356,7 @@ def process_single_article(json_filepath, recent_articles_context):
         article_data['audio_url'] = None
         if CAMB_AI_API_KEY:
             logger.info(f"Attempting TTS generation for {article_id}...")
-            article_text_for_tts = seo_results.get('generated_article_body_md', '')
+            article_text_for_tts = seo_results.get('generated_article_body_md', '') # Use SEO result if available
             if article_text_for_tts:
                 article_data = run_tts_generator_agent(article_data, article_text_for_tts, OUTPUT_AUDIO_DIR)
                 if article_data.get('tts_agent_error'): logger.error(f"TTS Agent failed for {article_id}. Error: {article_data.get('tts_agent_error')}")
@@ -370,8 +376,8 @@ def process_single_article(json_filepath, recent_articles_context):
         article_relative_path = f"articles/{slug}.html"
         canonical_url = urljoin(YOUR_SITE_BASE_URL + '/', article_relative_path) if YOUR_SITE_BASE_URL else article_relative_path
 
-        body_md = seo_results.get('generated_article_body_md', '')
-        body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables']) if body_md else '<p>Error: Content generation failed.</p>'
+        body_md = seo_results.get('generated_article_body_md', article_data.get('summary','*Content generation incomplete.*')) # Fallback
+        body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables'])
         tags_list = article_data.get('generated_tags', [])
         tags_html = format_tags_html(tags_list)
         publish_date_iso = article_data.get('published_iso', datetime.now(timezone.utc).isoformat())
@@ -393,7 +399,7 @@ def process_single_article(json_filepath, recent_articles_context):
             'IMAGE_ALT_TEXT': seo_results.get('generated_title_tag', article_data.get('title', 'AI News Image')),
             'META_KEYWORDS_LIST': tags_list, # Python list for JSON-LD/OG
             'PUBLISH_ISO_FOR_META': publish_date_iso, # Raw ISO date for meta tags
-            'JSON_LD_SCRIPT_BLOCK': seo_results.get('generated_json_ld', ''),
+            'JSON_LD_SCRIPT_BLOCK': seo_results.get('generated_json_ld', ''), # Use SEO result or empty string
             'ARTICLE_HEADLINE': article_data.get('title'),
             'PUBLISH_DATE': publish_date_formatted, # Formatted date for display
             'ARTICLE_BODY_HTML': body_html,
@@ -443,7 +449,7 @@ def process_single_article(json_filepath, recent_articles_context):
          return False
 
 
-# --- TTS Retry Logic --- (Keep as before)
+# --- TTS Retry Logic ---
 def retry_failed_tts():
      if not CAMB_AI_API_KEY:
           logger.info("Skipping TTS retry check - CAMB_AI_API_KEY not set.")
@@ -457,6 +463,8 @@ def retry_failed_tts():
      for filepath in processed_files:
           try:
                article_data = load_article_data(filepath)
+               # Retry if audio_url is missing AND there was NO previous TTS error recorded
+               # (prevents retrying indefinitely if TTS consistently fails for an article)
                if (article_data and not article_data.get('audio_url')
                     and article_data.get('seo_agent_results')
                     and article_data.get('tts_agent_error') is None):
@@ -470,6 +478,7 @@ def retry_failed_tts():
                          if save_processed_data(filepath, article_data):
                               if not article_data.get('tts_agent_error') and article_data.get('audio_url'):
                                    logger.info(f"TTS Retry Successful for {article_id}. Updating site_data.")
+                                   # Update only the necessary fields in site_data
                                    site_data_entry = {"id": article_id, "audio_url": article_data.get('audio_url')}
                                    update_site_data(site_data_entry)
                                    retried_count += 1
@@ -482,7 +491,7 @@ def retry_failed_tts():
                     else:
                          logger.warning(f"No article body found in processed JSON for {article_id}, cannot retry TTS.")
                          failed_count += 1
-                    time.sleep(2)
+                    time.sleep(2) # Avoid hammering API during retries
 
           except Exception as retry_e:
                logger.exception(f"Error during TTS retry check for file {filepath}: {retry_e}")
@@ -491,57 +500,60 @@ def retry_failed_tts():
      logger.info(f"--- TTS Retry Check Complete. Successful Retries: {retried_count}, Failures During Retry: {failed_count} ---")
 
 
-# --- Main Orchestration Loop --- (Keep as before)
+# --- Main Orchestration Logic (Runs Once) ---
 if __name__ == "__main__":
-    logger.info("--- === Dacoola AI News Orchestrator Starting === ---")
+    logger.info("--- === Dacoola AI News Orchestrator Starting Single Run === ---")
     ensure_directories()
     scraper_processed_ids = set()
     try: scraper_processed_ids = load_processed_ids()
     except Exception as load_e: logger.exception(f"Error loading processed IDs: {load_e}")
 
+    # Run TTS retry logic once at the start of the build
     retry_failed_tts()
 
-    while True:
-        logger.info("--- Running Orchestration Cycle ---")
-        # 1. Run Scraper
-        try:
-            new_articles_count = scrape_news(NEWS_FEED_URLS, scraper_processed_ids)
-            logger.info(f"Scraper run completed. Found {new_articles_count} new JSON files potentially.")
-        except NameError:
-             logger.error("NEWS_FEED_URLS not defined. Cannot run scraper.")
-             time.sleep(60); continue
-        except Exception as scrape_e:
-            logger.exception(f"Scraper failed: {scrape_e}")
-            time.sleep(60); continue
+    # Removed the while True: loop here
 
-        # 2. Load context for similarity check
-        recent_articles_context = load_recent_articles_for_comparison()
-        logger.info(f"Loaded {len(recent_articles_context)} recent articles for duplicate checking.")
+    logger.info("--- Running Processing Cycle ---")
+    # 1. Run Scraper
+    try:
+        new_articles_count = scrape_news(NEWS_FEED_URLS, scraper_processed_ids)
+        logger.info(f"Scraper run completed. Found {new_articles_count} new JSON files potentially.")
+    except NameError:
+         logger.error("NEWS_FEED_URLS not defined. Cannot run scraper.")
+         sys.exit(1) # Exit if scraper config fails
+    except Exception as scrape_e:
+        logger.exception(f"Scraper failed: {scrape_e}")
+        sys.exit(1) # Exit if scraper fails
 
-        # 3. Process newly scraped JSON files
-        json_files = []
-        try: json_files = glob.glob(os.path.join(SCRAPED_ARTICLES_DIR, '*.json'))
-        except Exception as glob_e: logger.exception(f"Error listing JSON files: {glob_e}")
+    # 2. Load context for similarity check
+    recent_articles_context = load_recent_articles_for_comparison()
+    logger.info(f"Loaded {len(recent_articles_context)} recent articles for duplicate checking.")
 
-        if not json_files: logger.info("No new scraped articles to process.")
-        else:
-            logger.info(f"Found {len(json_files)} scraped articles to process.")
-            processed_count = 0; failed_skipped_count = 0
-            try: json_files.sort(key=os.path.getmtime)
-            except Exception as sort_e: logger.warning(f"Could not sort JSON files: {sort_e}")
+    # 3. Process newly scraped JSON files
+    json_files = []
+    try: json_files = glob.glob(os.path.join(SCRAPED_ARTICLES_DIR, '*.json'))
+    except Exception as glob_e: logger.exception(f"Error listing JSON files: {glob_e}")
 
-            for filepath in json_files:
-                if process_single_article(filepath, recent_articles_context):
-                    processed_count += 1
-                    recent_articles_context = load_recent_articles_for_comparison()
-                else:
-                     failed_skipped_count += 1
-                time.sleep(2)
+    if not json_files: logger.info("No new scraped articles to process.")
+    else:
+        logger.info(f"Found {len(json_files)} scraped articles to process.")
+        processed_count = 0; failed_skipped_count = 0
+        try: json_files.sort(key=os.path.getmtime) # Process older scraped files first
+        except Exception as sort_e: logger.warning(f"Could not sort JSON files: {sort_e}")
 
-            logger.info(f"Processing cycle complete. Successful: {processed_count}, Failed/Skipped: {failed_skipped_count}")
+        for filepath in json_files:
+            if process_single_article(filepath, recent_articles_context):
+                processed_count += 1
+                # OPTIONAL: Reload context after each success to prevent duplicates *within the same run*
+                # If processing many files, this adds overhead. If few files, it's safer.
+                # recent_articles_context = load_recent_articles_for_comparison()
+            else:
+                 failed_skipped_count += 1
+            time.sleep(2) # Keep short sleep between API-heavy processing steps
 
-        # 4. Sleep
-        logger.info(f"--- Cycle Complete. Sleeping for {CHECK_INTERVAL_SECONDS} seconds ---")
-        try: time.sleep(CHECK_INTERVAL_SECONDS)
-        except KeyboardInterrupt: logger.info("Orchestrator stopped manually."); break
-        except Exception as sleep_e: logger.exception(f"Sleep interval error: {sleep_e}")
+        logger.info(f"Processing cycle complete. Successful: {processed_count}, Failed/Skipped: {failed_skipped_count}")
+
+    # Removed the sleep logic and outer loop
+
+    logger.info("--- === Dacoola AI News Orchestrator Single Run Finished === ---")
+    # Script will now exit naturally
