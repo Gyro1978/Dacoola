@@ -34,8 +34,11 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          else echo "requirements.txt not found, skipping dependency installation." ; fi
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            echo "requirements.txt not found, skipping dependency installation."
+          fi
 
       - name: Run Main Script
         env:
@@ -97,13 +100,12 @@ jobs:
           # Use the automatically generated token for commit/push
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # --- DEPLOYMENT STEP (Using Netlify) ---
+      # --- DEPLOYMENT STEP (Using Netlify CLI Directly) ---
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
       - name: Deploy to Netlify
-        # Use the official Netlify CLI action
-        uses: netlify/actions/cli@master
-        with:
-          # Deploy the 'public' directory to the production site
-          args: deploy --dir=public --prod
+        run: netlify deploy --dir=public --prod --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID
         env:
           # Netlify authentication token and site ID from Secrets
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
