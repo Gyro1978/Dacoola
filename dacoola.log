@@ -11945,3 +11945,97 @@ NameError: name 'logger' is not defined
 2025-05-02 07:39:21,946 - main_orchestrator - INFO - Article e0b771efc530cfcc76ceff0782206fdedbc24bf4ab8b89a751013e9d95aa61ec is Boring. Skipping.
 2025-05-02 07:39:22,946 - main_orchestrator - INFO - Processing cycle complete. Successful: 3, Failed/Skipped: 13
 2025-05-02 07:39:22,947 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 09:23:59,920 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 09:23:59,935 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 09:24:02,766 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 09:24:02,843 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative or potentially incorrect.
+2025-05-02 09:24:02,844 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 09:24:02,844 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 09:24:02,844 - main_orchestrator - INFO - Ensured data, processed_json, and public/articles directories exist.
+2025-05-02 09:24:02,867 - main_orchestrator - INFO - --- Running Scraper ---
+2025-05-02 09:24:02,867 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (15 feeds) ---
+2025-05-02 09:24:02,867 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 09:24:02,949 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 09:24:02,950 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a7c28049b72ab500fe3634446854e38670f825d3a1fc9edf9a8c2f7d89f47f71.json (Title: Amazon CEO says 100,000 users now have Alexa+)
+2025-05-02 09:24:02,951 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 92ed8acd902ba8405ee4e2d904f0573597d8639e0762fa22964d81628a53f652.json (Title: Reddit’s AI play is for the Google crowd, not just the community scrollers)
+2025-05-02 09:24:02,953 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 6bc1400e15aff735998a5ceda8c3720fdceba05d0beac6cb8cd44faf6b2e9b62.json (Title: Despite paying $900M in tariffs, Apple’s Tim Cook isn’t announcing price increases — yet)
+2025-05-02 09:24:02,954 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 0fbb48d4413fe863f1c1190b1dace10429e74b2ca6505b9b894700709a5e77bc.json (Title: Apple CEO Tim Cook says tariffs to add $900M in costs in Q3, but future uncertain)
+2025-05-02 09:24:02,955 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ea1c1f9114b587d75646a8dcc01ab7bda63ae817d491e4d26d15693a1c0c4d8b.json (Title: Peacock trained TikTokers to make content, and now four creators are getting original series)
+2025-05-02 09:24:02,956 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170.json (Title: Rising star defense tech startup Mach Industries is raising $100 million, sources say)
+2025-05-02 09:24:02,959 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043.json (Title: Stripe shows iOS developers how to avoid Apple’s App Store commission)
+2025-05-02 09:24:02,959 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 7ca72b9401b7373d4abb997a3c97b6285955d11d241e61362aa51b65f6a7359d.json (Title: Buzzy investing app Dub lands $30M Series A)
+2025-05-02 09:24:02,960 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2.json (Title: FutureHouse releases AI tools it claims can accelerate science)
+2025-05-02 09:24:02,961 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: fb6e62e0c7bea2e5dde361ab614d27d9be22e8487b9c99ca7921fc4832d46efa.json (Title: Fintech Bench conducts layoff while others still work month-to-month)
+2025-05-02 09:24:02,962 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043.json (Title: Ai2’s new small AI model outperforms similarly-sized models from Google, Meta)
+2025-05-02 09:24:02,963 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b.json (Title: Nvidia takes aim at Anthropic’s support of chip export controls)
+2025-05-02 09:24:02,964 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55.json (Title: May Mobility to launch robotaxis on Uber platform this year in Texas)
+2025-05-02 09:24:02,965 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 97d610ee8b7faffb0101402443ea518065b0342e3599a2dceb786893cae9febe.json (Title: Epic Games is launching webshops to allow developers to circumvent app store fees after new ruling)
+2025-05-02 09:24:02,966 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 2883d59c79bc3c0ef91e079b4ddd0c4d322de9a6624d45a313c59a2a2f8e6f27.json (Title: Anthropic lets users connect more apps to Claude)
+2025-05-02 09:24:02,968 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 057dddd019be5f2f2610d8473ded0d8280dc9ffd4e34b4df85e1035d7adbef31.json (Title: Fivetran acquires Census to become end-to-end data movement platform)
+2025-05-02 09:24:02,969 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce.json (Title: Read the juiciest bits from the Apple-Epic court ruling)
+2025-05-02 09:24:02,970 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f741db83524ca4541ccef44127f876aa7fe6d8d51f656d693fbbf795eafe5912.json (Title: Google’s AI Mode gets expanded access and additional functionality)
+2025-05-02 09:24:02,970 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d8fd87e60203c797cb2b1feae7bdd9d30d01c54359da1a27ec07881094aa1fd0.json (Title: ChatGPT: Everything you need to know about the AI-powered chatbot)
+2025-05-02 09:24:02,971 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657.json (Title: Tesla’s board reportedly sought a successor while Musk wheeled around Washington)
+2025-05-02 09:24:02,971 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 20 new articles from this feed.
+2025-05-02 09:24:02,971 - src.scrapers.news_scraper - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 09:24:03,039 - src.scrapers.news_scraper - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Contains 10 entries.
+2025-05-02 09:24:03,040 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 510e8c814ce335d55551010fbc98b2911ce4eb0e06ed88070d0bded51223f5c4.json (Title: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Taylor Swift’)
+2025-05-02 09:24:03,042 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: fc5bef3e883b343172f42686a1bce5afbb8569d7e2ce0da34bbb9e8ddf9c8406.json (Title: Think Twice Before Creating That ChatGPT Action Figure)
+2025-05-02 09:24:03,044 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 65a62dde1e20fc23c9d0099e629bd152f7d3ebe1dfb8944c079bde26d7b0ddf4.json (Title: 2025 Is the Year of the Humanoid Robot Factory Worker)
+2025-05-02 09:24:03,045 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: bb9a99a23cb1014b73d2bdbacfdddd33ea7b78c3049209db533498423b4ddda8.json (Title: North Korea Stole Your Job)
+2025-05-02 09:24:03,046 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 4a192b7f76ab597bc854c012e584bc2c3f1d69c61c6c3dadeb41a87ebb0ce8cb.json (Title: DOGE Put a College Student in Charge of Using AI to Rewrite Regulations)
+2025-05-02 09:24:03,048 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98.json (Title: AI Code Hallucinations Increase the Risk of ‘Package Confusion’ Attacks)
+2025-05-02 09:24:03,050 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111.json (Title: These Startups Are Building Advanced AI Models Without Data Centers)
+2025-05-02 09:24:03,051 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee.json (Title: WhatsApp Is Walking a Tightrope Between AI Features and Privacy)
+2025-05-02 09:24:03,052 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f1d38aa4e29c7f72c90f5f4c99a1d18ce55aefa7956fcb21046236cf0fefc0a3.json (Title: AI Is Using Your Likes to Get Inside Your Head)
+2025-05-02 09:24:03,053 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 1f9f0f5fe79dbf50593f868405acef1f3f975bbaf025100748ba201bbd1d9d69.json (Title: A Philosopher Released an Acclaimed Book About Digital Manipulation. The Author Ended Up Being AI)
+2025-05-02 09:24:03,053 - src.scrapers.news_scraper - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 10 new articles from this feed.
+2025-05-02 09:24:03,053 - src.scrapers.news_scraper - WARNING - Reached max articles per run (30). Stopping feed processing for this run.
+2025-05-02 09:24:03,053 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 30 ---
+2025-05-02 09:24:03,053 - main_orchestrator - INFO - Scraper run completed. Found 30 new JSON files potentially.
+2025-05-02 09:24:03,053 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 09:24:03,073 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 09:24:03,073 - main_orchestrator - INFO - Found 30 scraped articles to process.
+2025-05-02 09:24:03,074 - main_orchestrator - INFO - --- Processing article file: a7c28049b72ab500fe3634446854e38670f825d3a1fc9edf9a8c2f7d89f47f71.json ---
+2025-05-02 09:24:03,086 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a7c28049b72ab500fe3634446854e38670f825d3a1fc9edf9a8c2f7d89f47f71 Title: Amazon CEO says 100,000 users now have Alexa+...
+2025-05-02 09:24:09,587 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a7c28049b72ab500fe3634446854e38670f825d3a1fc9edf9a8c2f7d89f47f71: level=Boring, topic='Software', keyword='Alexa+ rollout'
+2025-05-02 09:24:09,587 - main_orchestrator - INFO - Article a7c28049b72ab500fe3634446854e38670f825d3a1fc9edf9a8c2f7d89f47f71 classified as Boring. Skipping.
+2025-05-02 09:24:10,588 - main_orchestrator - INFO - --- Processing article file: 92ed8acd902ba8405ee4e2d904f0573597d8639e0762fa22964d81628a53f652.json ---
+2025-05-02 09:24:10,601 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 92ed8acd902ba8405ee4e2d904f0573597d8639e0762fa22964d81628a53f652 Title: Reddit’s AI play is for the Google crowd, not just the commu...
+2025-05-02 09:24:17,631 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 92ed8acd902ba8405ee4e2d904f0573597d8639e0762fa22964d81628a53f652: level=Boring, topic='Other', keyword='Reddit user types'
+2025-05-02 09:24:17,631 - main_orchestrator - INFO - Article 92ed8acd902ba8405ee4e2d904f0573597d8639e0762fa22964d81628a53f652 classified as Boring. Skipping.
+2025-05-02 09:24:18,633 - main_orchestrator - INFO - --- Processing article file: 6bc1400e15aff735998a5ceda8c3720fdceba05d0beac6cb8cd44faf6b2e9b62.json ---
+2025-05-02 09:24:18,646 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 6bc1400e15aff735998a5ceda8c3720fdceba05d0beac6cb8cd44faf6b2e9b62 Title: Despite paying $900M in tariffs, Apple’s Tim Cook isn’t anno...
+2025-05-02 09:24:24,919 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 6bc1400e15aff735998a5ceda8c3720fdceba05d0beac6cb8cd44faf6b2e9b62: level=Boring, topic='Business', keyword='Apple tariff discussion'
+2025-05-02 09:24:24,920 - main_orchestrator - INFO - Article 6bc1400e15aff735998a5ceda8c3720fdceba05d0beac6cb8cd44faf6b2e9b62 classified as Boring. Skipping.
+2025-05-02 09:24:25,921 - main_orchestrator - INFO - --- Processing article file: 0fbb48d4413fe863f1c1190b1dace10429e74b2ca6505b9b894700709a5e77bc.json ---
+2025-05-02 09:24:25,931 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 0fbb48d4413fe863f1c1190b1dace10429e74b2ca6505b9b894700709a5e77bc Title: Apple CEO Tim Cook says tariffs to add $900M in costs in Q3,...
+2025-05-02 09:24:33,957 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 0fbb48d4413fe863f1c1190b1dace10429e74b2ca6505b9b894700709a5e77bc: level=Boring, topic='Business', keyword='Apple tariff costs'
+2025-05-02 09:24:33,957 - main_orchestrator - INFO - Article 0fbb48d4413fe863f1c1190b1dace10429e74b2ca6505b9b894700709a5e77bc classified as Boring. Skipping.
+2025-05-02 09:24:34,959 - main_orchestrator - INFO - --- Processing article file: ea1c1f9114b587d75646a8dcc01ab7bda63ae817d491e4d26d15693a1c0c4d8b.json ---
+2025-05-02 09:24:34,970 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ea1c1f9114b587d75646a8dcc01ab7bda63ae817d491e4d26d15693a1c0c4d8b Title: Peacock trained TikTokers to make content, and now four crea...
+2025-05-02 09:24:42,841 - src.agents.filter_news_agent - INFO - Filter verdict received for ID ea1c1f9114b587d75646a8dcc01ab7bda63ae817d491e4d26d15693a1c0c4d8b: level=Boring, topic='Art & Media', keyword='influencer TV series'
+2025-05-02 09:24:42,842 - main_orchestrator - INFO - Article ea1c1f9114b587d75646a8dcc01ab7bda63ae817d491e4d26d15693a1c0c4d8b classified as Boring. Skipping.
+2025-05-02 09:24:43,843 - main_orchestrator - INFO - --- Processing article file: bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170.json ---
+2025-05-02 09:24:43,855 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170 Title: Rising star defense tech startup Mach Industries is raising ...
+2025-05-02 09:24:52,250 - src.agents.filter_news_agent - INFO - Filter verdict received for ID bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170: level=Interesting, topic='Startups', keyword='defense tech funding'
+2025-05-02 09:24:52,250 - main_orchestrator - INFO - Article bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170 classified as Interesting (Topic: Startups).
+2025-05-02 09:24:52,250 - main_orchestrator - INFO - Checking duplicates for bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170...
+2025-05-02 09:24:52,250 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170 Title: Rising star defense tech startup Mach Industries is raising ...
+2025-05-02 09:25:00,986 - src.agents.similarity_check_agent - INFO - Similarity check result for ID bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170: is_duplicate=False. Reason: No recently published article reports on Mach Industries raising $100 million in funding.
+2025-05-02 09:25:00,986 - main_orchestrator - INFO - Article bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170 passed similarity check.
+2025-05-02 09:25:00,986 - main_orchestrator - INFO - Finding image for bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170...
+2025-05-02 09:25:00,986 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/01/rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-say/
+2025-05-02 09:25:01,044 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2025/03/EthanThornton5.jpg?resize=1200,931
+2025-05-02 09:25:01,044 - main_orchestrator - INFO - Using scraped image for bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170: https://techcrunch.com/wp-content/uploads/2025/03/EthanThornton5.jpg?resize=1200,931
+2025-05-02 09:25:01,044 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170...
+2025-05-02 09:25:33,188 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170.
+2025-05-02 09:25:33,188 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170...
+2025-05-02 09:25:40,382 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170
+2025-05-02 09:25:40,429 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources.html
+2025-05-02 09:25:40,451 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 09:25:40,453 - main_orchestrator - INFO - Updated all_articles.json (38 articles).
+2025-05-02 09:25:40,455 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170.json
+2025-05-02 09:25:40,456 - main_orchestrator - INFO - --- Successfully processed article: bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170 ---
+2025-05-02 09:25:41,458 - main_orchestrator - INFO - --- Processing article file: c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043.json ---
+2025-05-02 09:25:41,473 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043 Title: Stripe shows iOS developers how to avoid Apple’s App Store c...

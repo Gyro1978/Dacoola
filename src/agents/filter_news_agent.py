@@ -1,33 +1,49 @@
 # src/agents/filter_news_agent.py
 import os
+import sys # Added sys for path check below
 import requests
 import json
 import logging
 from dotenv import load_dotenv
 from datetime import datetime, timezone
 
+# --- Path Setup (Ensure src is in path if run standalone) ---
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SRC_DIR = os.path.dirname(SCRIPT_DIR)
+PROJECT_ROOT = os.path.dirname(SRC_DIR)
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT) # Add project root for imports if needed
+# --- End Path Setup ---
+
+
+# --- Setup Logging ---
+# Get logger. If main.py configured root logger, this will use that config.
+# If run standalone, basicConfig might apply if not already configured.
 logger = logging.getLogger(__name__)
+# Basic config for standalone testing if no handlers are present
+if not logging.getLogger().hasHandlers():
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 # --- Load Environment Variables ---
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
+# Load from .env file in the project root
+dotenv_path = os.path.join(PROJECT_ROOT, '.env')
+load_dotenv(dotenv_path=dotenv_path)
 DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
 DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
 
 # --- Configuration ---
 AGENT_MODEL = "deepseek-chat"
-MAX_TOKENS_RESPONSE = 250
-TEMPERATURE = 0.1
+MAX_TOKENS_RESPONSE = 250 # Max tokens expected for the JSON response
+TEMPERATURE = 0.1 # Low temperature for more deterministic filtering/classification
 
-# --- !!! PREDEFINED TOPICS LIST !!! ---
-# Agents must choose exactly ONE from this list.
+# List of allowed topics for classification
 ALLOWED_TOPICS = [
     "AI Models", "Hardware", "Software", "Ethics", "Society", "Business",
     "Startups", "Regulation", "Robotics", "Research", "Open Source",
-    "Health", "Finance", "Art & Media", "Compute", "Other" # Added 'Other' as fallback
+    "Health", "Finance", "Art & Media", "Compute", "Other" # Fallback topic
 ]
-# --- End Topics ---
 
-# --- REFINED PROMPT (v4) ---
+# --- Agent Prompts ---
 FILTER_PROMPT_SYSTEM = """
 You are an **Expert News Analyst and Content Curator AI**, powered by DeepSeek. Your core competency is to **critically evaluate** news article summaries/headlines to discern importance, **factual basis**, and direct relevance for an audience interested in **substantive AI, Technology, and major related industry/world news**. Your primary function is to **aggressively filter out** non-essential content (routine updates, marketing, basic financial reports, opinion, speculation, satire). You MUST identify only truly **Breaking** or genuinely **Interesting** developments based on verifiable events, data, or significant announcements presented in the summary. Mundane, routine, low-impact, non-factual, purely speculative, or clearly off-topic updates **must** be classified as **Boring**. You operate based on strict criteria focusing on novelty, significance, impact, verifiable claims, and major players/events. Classify news into **exactly one** level: "Breaking", "Interesting", or "Boring". Select the **single most relevant topic** from the provided list. Employ step-by-step reasoning internally but **ONLY output the final JSON**. Your output must strictly adhere to the specified JSON format and contain NO other text, explanations, or formatting.
 """
@@ -48,83 +64,16 @@ Title: {article_title}
 Summary: {article_summary}
 
 --- START FEW-SHOT EXAMPLES ---
-
-(Example 1 - Breaking)
-Title: "Anthropic Releases Claude 3.5 Sonnet, Outperforms GPT-4o and Gemini Ultra on Key Benchmarks"
-Summary: "Anthropic unexpectedly launched Claude 3.5 Sonnet today. Internal benchmarks show it surpassing OpenAI's GPT-4o and Google's Gemini Ultra in graduate-level reasoning (GPQA), coding (HumanEval), and multimodal tasks..."
-Expected JSON:
-```json
-{{
-  "importance_level": "Breaking",
-  "topic": "AI Models",
-  "reasoning_summary": "Verified SOTA model release from major player with specific, significant benchmark claims surpassing top competitors.",
-  "primary_topic_keyword": "Claude 3.5 Sonnet release"
-}}
-
-
-(Example 2 - Interesting - Legal/Business)
-Title: "Epic Games Prevails Over Apple, Court Rules App Store Must Allow External Payment Options"
-Summary: "A federal judge ruled today in the Epic Games v. Apple case, issuing an injunction that requires Apple to permit developers to include links and buttons directing users to external payment systems, bypassing Apple's commission."
-Expected JSON:
-
-{{
-  "importance_level": "Interesting",
-  "topic": "Business",
-  "reasoning_summary": "Landmark court ruling with significant, direct impact on major tech platform (Apple) and app developers.",
-  "primary_topic_keyword": "Epic v Apple ruling"
-}}
-
-(Example 3 - Boring - Funding Round)
-Title: "AI Startup 'InnovateAI' Secures $5M Seed Funding for Marketing Tools"
-Summary: "InnovateAI, a company developing AI tools for marketing automation, announced it has closed a $5 million seed funding round led by Venture Partners..."
-Expected JSON:
-
-{{
-  "importance_level": "Boring",
-  "topic": "Startups",
-  "reasoning_summary": "Routine early-stage funding round for a niche AI application; lacks broad impact.",
-  "primary_topic_keyword": "InnovateAI seed funding"
-}}
-
-(Example 4 - Boring - Satire/Unverified Claim)
-Title: "Zuckerberg Says in Response to Loneliness Epidemic, He Will Create Most of Your Friends Using AI"
-Summary: "Reports indicate Mark Zuckerberg announced a new Meta initiative where advanced AI companions will be generated... Details remain scarce."
-Expected JSON:
-
-{{
-  "importance_level": "Boring",
-  "topic": "Society",
-  "reasoning_summary": "Likely satire or unverified claim lacking concrete details/evidence; not factual reporting.",
-  "primary_topic_keyword": "Zuckerberg AI friends claim"
-}}
-
-(Example 5 - Boring - Opinion/General Discussion)
-Title: "Expert: Why Responsible AI Deployment is Crucial for the Future"
-Summary: "Leading AI ethicist Dr. Jane Smith argues in a new blog post that careful consideration of bias... She reiterates the need for ongoing dialogue."
-Expected JSON:
-
-{{
-  "importance_level": "Boring",
-  "topic": "Ethics",
-  "reasoning_summary": "Opinion piece discussing general concepts without new factual developments or events.",
-  "primary_topic_keyword": "Responsible AI discussion"
-}}
-
+[... Keep all examples exactly as they were ...]
 --- END FEW-SHOT EXAMPLES ---
 
 Based on your internal step-by-step reasoning for the current input article (NOT the examples above):
-
-Determine the core news event or claim.
-
-Evaluate its factual basis and source nature (if possible) based only on the summary. Is it reporting a concrete event/release/finding/ruling, or is it likely opinion/satire/speculation/PR?
-
-Assess its impact and novelty against the strict criteria for AI/Tech/Major News. Assign ONE importance level: "Breaking", "Interesting", or "Boring". Default to Boring if unsure or non-factual.
-
-If not Boring, compare the core event to the Allowed Topics list. Select the SINGLE most fitting topic. Use "Other" if nothing else fits well.
-
-Extract a concise primary topic keyword phrase (3-5 words max) reflecting the core factual event (or the general topic if Boring).
-
-Provide your final judgment ONLY in the following valid JSON format. Do not repeat the examples. Do not include any text before or after the JSON block.
+1. Determine the core news event or claim.
+2. Evaluate its factual basis and source nature (if possible) based only on the summary. Is it reporting a concrete event/release/finding/ruling, or is it likely opinion/satire/speculation/PR?
+3. Assess its impact and novelty against the strict criteria for AI/Tech/Major News. Assign ONE importance level: "Breaking", "Interesting", or "Boring". Default to Boring if unsure or non-factual.
+4. If not Boring, compare the core event to the Allowed Topics list. Select the SINGLE most fitting topic. Use "Other" if nothing else fits well.
+5. Extract a concise primary topic keyword phrase (3-5 words max) reflecting the core factual event (or the general topic if Boring).
+6. Provide your final judgment ONLY in the following valid JSON format. Do not repeat the examples. Do not include any text before or after the JSON block.
 
 {{
 "importance_level": "string", // MUST be "Breaking", "Interesting", or "Boring"
@@ -133,18 +82,18 @@ Provide your final judgment ONLY in the following valid JSON format. Do not repe
 "primary_topic_keyword": "string" // Short keyword phrase for the core news/topic
 }}
 """
-# --- END UPDATED PROMPT ---
 
-# (Keep call_deepseek_api function exactly the same)
+# --- API Call Function ---
 def call_deepseek_api(system_prompt, user_prompt):
-    """Calls the DeepSeek API and returns the content of the response."""
+    """Calls the DeepSeek API and returns the cleaned JSON content string."""
     if not DEEPSEEK_API_KEY:
-        logger.error("DEEPSEEK_API_KEY not found.")
+        logger.error("DEEPSEEK_API_KEY environment variable not set.")
         return None
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {DEEPSEEK_API_KEY}"
+        "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+        "Accept": "application/json" # Good practice
     }
     payload = {
         "model": AGENT_MODEL,
@@ -154,174 +103,186 @@ def call_deepseek_api(system_prompt, user_prompt):
         ],
         "max_tokens": MAX_TOKENS_RESPONSE,
         "temperature": TEMPERATURE,
-        "stream": False
+        "stream": False # Not streaming the response
     }
 
     try:
-        logger.debug(f"Sending request to DeepSeek API. Payload keys: {payload.keys()}")
+        logger.debug(f"Sending filter request to DeepSeek API (model: {AGENT_MODEL}).")
         response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=60)
-        response.raise_for_status()
+        response.raise_for_status() # Raise HTTPError for bad responses (4xx or 5xx)
 
         result = response.json()
-        logger.debug(f"Raw API Response: {result}")
+        logger.debug(f"Raw API Response received (Filter Agent).")
 
         if result.get("choices") and len(result["choices"]) > 0:
             message_content = result["choices"][0].get("message", {}).get("content")
             if message_content:
-                # Clean markdown code fences
+                # Clean potential markdown code fences ```json ... ```
                 content_stripped = message_content.strip()
                 if content_stripped.startswith("```json"):
                     message_content = content_stripped[7:-3].strip()
                 elif content_stripped.startswith("```"):
                      message_content = content_stripped[3:-3].strip()
-                logger.debug(f"Extracted content: {message_content}")
+                logger.debug(f"Extracted content from API response.")
                 return message_content
             else:
                 logger.error("API response successful, but no message content found in choices.")
                 return None
         else:
-            logger.error(f"API response did not contain expected 'choices' structure: {result}")
+            # Log the actual response structure if it's unexpected
+            logger.error(f"API response missing 'choices' or choices empty: {result}")
             return None
 
+    except requests.exceptions.Timeout:
+         logger.error(f"API request timed out after 60 seconds.")
+         return None
     except requests.exceptions.RequestException as e:
         logger.error(f"API request failed: {e}")
         return None
     except json.JSONDecodeError as e:
-        logger.error(f"Failed to decode API JSON response: {e}")
-        logger.error(f"Response text: {response.text}")
+        # Log the response text that failed parsing
+        response_text = response.text if response else "N/A"
+        logger.error(f"Failed to decode API JSON response: {e}. Response text: {response_text[:500]}...")
         return None
     except Exception as e:
+        # Catch any other unexpected errors during the API call
         logger.exception(f"An unexpected error occurred during API call: {e}")
         return None
 
-# --- UPDATED run_filter_agent ---
+# --- Main Agent Function ---
 def run_filter_agent(article_data):
     """
-    Takes article data, runs the filter agent for importance and topic,
-    and adds the parsed JSON verdict back into the article_data dict.
+    Takes article data, runs the filter agent, validates the response,
+    and adds the parsed JSON verdict or error info back into the article_data dict.
     """
-    if not article_data or 'title' not in article_data or 'summary' not in article_data:
-        logger.error("Invalid article data provided to filter agent.")
-        # Ensure keys exist even on failure, set to None
-        article_data['filter_verdict'] = None
-        article_data['filter_error'] = "Invalid input data"
-        return article_data # Return data even if invalid input
+    # Basic input validation
+    if not isinstance(article_data, dict) or not article_data.get('title') or not article_data.get('summary'):
+        logger.error("Invalid or incomplete article_data provided to filter agent.")
+        # Ensure consistent return structure even on input error
+        if isinstance(article_data, dict):
+             article_data['filter_verdict'] = None
+             article_data['filter_error'] = "Invalid input data (missing title or summary)"
+        else:
+             # If article_data wasn't even a dict, we can't modify it
+             logger.error("Input 'article_data' was not a dictionary.")
+             return None # Or handle appropriately
+        return article_data
 
-    article_title = article_data.get('title', '')
-    article_summary = article_data.get('summary', '')
+    article_title = article_data['title']
+    article_summary = article_data['summary']
+    article_id = article_data.get('id', 'N/A') # For logging
 
-    max_summary_length = 1000 # Keep summary truncation
+    # Truncate summary if it's excessively long for the API context/cost
+    max_summary_length = 1000 # Keep summary reasonable
     if len(article_summary) > max_summary_length:
-        logger.warning(f"Truncating summary for filtering (Article ID: {article_data.get('id', 'N/A')})")
+        logger.warning(f"Truncating summary (> {max_summary_length} chars) for filtering (Article ID: {article_id})")
         article_summary = article_summary[:max_summary_length] + "..."
 
-    # Format the allowed topics list for the prompt
+    # Format the allowed topics list for insertion into the prompt
     allowed_topics_str = "\n".join([f"- {topic}" for topic in ALLOWED_TOPICS])
 
     try:
         user_prompt = FILTER_PROMPT_USER_TEMPLATE.format(
             article_title=article_title,
             article_summary=article_summary,
-            allowed_topics_list_str=allowed_topics_str # Pass the formatted list
+            allowed_topics_list_str=allowed_topics_str
         )
     except KeyError as e:
-        logger.exception(f"KeyError formatting filter prompt! Error: {e}")
+        logger.exception(f"KeyError formatting filter prompt template! Error: {e}")
         article_data['filter_verdict'] = None
         article_data['filter_error'] = f"Prompt template formatting error: {e}"
         return article_data
 
-    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    logger.info(f"Running filter agent for article ID: {article_id} Title: {article_title[:60]}...")
     raw_response_content = call_deepseek_api(FILTER_PROMPT_SYSTEM, user_prompt)
 
+    # Handle API call failure
     if not raw_response_content:
-        logger.error("Filter agent failed to get a response from the API.")
+        logger.error(f"Filter agent failed to get a valid response from the API for article ID: {article_id}.")
         article_data['filter_verdict'] = None
-        article_data['filter_error'] = "API call failed"
+        article_data['filter_error'] = "API call failed or returned empty content"
         return article_data
 
+    # Parse and Validate the JSON response
     try:
         filter_verdict = json.loads(raw_response_content)
 
-        # --- Validate the NEW JSON Structure ---
+        # --- Validate JSON Structure and Content ---
         required_keys = ["importance_level", "topic", "reasoning_summary", "primary_topic_keyword"]
-        if not all(k in filter_verdict for k in required_keys):
-            logger.error(f"Parsed filter verdict JSON is missing required keys: {filter_verdict}")
-            raise ValueError("Missing keys in filter verdict JSON")
+        if not isinstance(filter_verdict, dict) or not all(k in filter_verdict for k in required_keys):
+            logger.error(f"Parsed filter verdict JSON is missing required keys or is not a dict: {filter_verdict}")
+            raise ValueError("Missing required keys or invalid format in filter verdict JSON")
 
-        # Validate importance level
+        # Validate importance level value
         valid_levels = ["Breaking", "Interesting", "Boring"]
-        if filter_verdict.get('importance_level') not in valid_levels:
-             logger.error(f"Invalid importance_level received: {filter_verdict.get('importance_level')}")
-             raise ValueError("Invalid importance_level value")
+        received_level = filter_verdict.get('importance_level')
+        if received_level not in valid_levels:
+             logger.error(f"Invalid importance_level received: '{received_level}'")
+             raise ValueError(f"Invalid importance_level value: {received_level}")
 
-        # Validate topic against allowed list
-        if filter_verdict.get('topic') not in ALLOWED_TOPICS:
-             logger.error(f"Invalid topic received: {filter_verdict.get('topic')}. Not in allowed list.")
-             # Fallback maybe? Or error out? Let's fallback to "Other" for now.
-             logger.warning(f"Topic '{filter_verdict.get('topic')}' not in allowed list. Forcing to 'Other'.")
-             filter_verdict['topic'] = "Other"
-             # raise ValueError("Invalid topic value") # Option to fail stricter
+        # Validate topic against allowed list (with fallback)
+        received_topic = filter_verdict.get('topic')
+        if received_topic not in ALLOWED_TOPICS:
+             logger.warning(f"Topic '{received_topic}' not in allowed list for article ID {article_id}. Forcing to 'Other'.")
+             filter_verdict['topic'] = "Other" # Apply fallback
+             # Optionally, store the original invalid topic if needed for analysis
+             # filter_verdict['original_invalid_topic'] = received_topic
+             # Alternatively, raise ValueError for stricter validation:
+             # raise ValueError(f"Invalid topic value: {received_topic}")
 
-        logger.info(f"Filter verdict received: level={filter_verdict.get('importance_level')}, topic='{filter_verdict.get('topic')}', keyword='{filter_verdict.get('primary_topic_keyword')}'")
-
+        # --- Success Case ---
+        logger.info(f"Filter verdict received for ID {article_id}: level={filter_verdict['importance_level']}, topic='{filter_verdict['topic']}', keyword='{filter_verdict['primary_topic_keyword']}'")
         article_data['filter_verdict'] = filter_verdict
-        article_data['filter_error'] = None # Clear error on success
-        article_data['filtered_at_iso'] = datetime.now(timezone.utc).isoformat()
+        article_data['filter_error'] = None # Clear any previous error state on success
+        # Add timestamp using standard UTC 'Z' format
+        article_data['filtered_at_iso'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
         return article_data
 
     except json.JSONDecodeError:
-        logger.error(f"Failed to parse JSON response from filter agent: {raw_response_content}")
+        logger.error(f"Failed to parse JSON response from filter agent for ID {article_id}: {raw_response_content}")
         article_data['filter_verdict'] = None
-        article_data['filter_error'] = "Invalid JSON response"
+        article_data['filter_error'] = "Invalid JSON response from API"
         return article_data
-    except ValueError as ve:
-        logger.error(f"Validation error on filter verdict: {ve}")
+    except ValueError as ve: # Catch validation errors
+        logger.error(f"Validation error on filter verdict for ID {article_id}: {ve}")
         article_data['filter_verdict'] = None
-        article_data['filter_error'] = str(ve)
+        article_data['filter_error'] = f"Verdict validation failed: {ve}"
         return article_data
-    except Exception as e:
-        logger.exception(f"An unexpected error occurred processing filter response: {e}")
+    except Exception as e: # Catch any other unexpected errors during processing
+        logger.exception(f"An unexpected error occurred processing filter response for ID {article_id}: {e}")
         article_data['filter_verdict'] = None
         article_data['filter_error'] = "Unexpected processing error"
         return article_data
 
-# --- Example Usage (keep or update if needed) ---
+# --- Example Usage (for standalone testing) ---
 if __name__ == "__main__":
-    # Example data
-    test_article_data_breaking = {
-        'id': 'test-breaking-001',
-        'title': "BREAKING: OpenAI CEO Sam Altman Steps Down Unexpectedly Amid Board Conflict",
-        'summary': "In a shocking move, OpenAI announced CEO Sam Altman is leaving the company immediately following a board review citing a lack of consistent candor. CTO Mira Murati appointed interim CEO. Major implications for the AI industry.",
-    }
-    test_article_data_interesting = {
-        'id': 'test-interesting-002',
-        'title': "Anthropic Releases Claude 3.5 Sonnet, Outperforms GPT-4o",
-        'summary': "Anthropic launched Claude 3.5 Sonnet, claiming state-of-the-art performance surpassing OpenAI's GPT-4o and Google's Gemini on key benchmarks, particularly in coding and vision tasks. Includes new 'Artifacts' feature.",
-    }
-    test_article_data_boring = {
-        'id': 'test-boring-003',
-        'title': "AI Startup 'InnovateAI' Secures $5M Seed Funding",
-        'summary': "InnovateAI, a company developing AI tools for marketing automation, announced it has closed a $5 million seed funding round led by Venture Partners. Funds will be used for hiring and product development.",
-    }
+    # Set higher logging level for testing this script directly
+    logging.getLogger().setLevel(logging.DEBUG)
+    logger.setLevel(logging.DEBUG) # Ensure this module's logger is also DEBUG
 
-    logger.info("\n--- Running Filter Agent Test ---")
+    # Example article data
+    test_article_data_breaking = { 'id': 'test-breaking-001', 'title': "BREAKING: OpenAI CEO Sam Altman Steps Down Unexpectedly Amid Board Conflict", 'summary': "In a shocking move, OpenAI announced CEO Sam Altman is leaving the company immediately following a board review citing a lack of consistent candor. CTO Mira Murati appointed interim CEO. Major implications for the AI industry.", }
+    test_article_data_interesting = { 'id': 'test-interesting-002', 'title': "Anthropic Releases Claude 3.5 Sonnet, Outperforms GPT-4o", 'summary': "Anthropic launched Claude 3.5 Sonnet, claiming state-of-the-art performance surpassing OpenAI's GPT-4o and Google's Gemini on key benchmarks, particularly in coding and vision tasks. Includes new 'Artifacts' feature.", }
+    test_article_data_boring = { 'id': 'test-boring-003', 'title': "AI Startup 'InnovateAI' Secures $5M Seed Funding", 'summary': "InnovateAI, a company developing AI tools for marketing automation, announced it has closed a $5 million seed funding round led by Venture Partners. Funds will be used for hiring and product development.", }
+    test_article_invalid_input = {'id': 'test-invalid-input', 'title': 'Just a title'}
+
+    logger.info("\n--- Running Filter Agent Standalone Test ---")
 
     logger.info("\nTesting BREAKING article...")
     result_breaking = run_filter_agent(test_article_data_breaking.copy())
-    print(json.dumps(result_breaking.get('filter_verdict'), indent=2) if result_breaking else "FAILED")
-    if result_breaking and result_breaking.get('filter_error'): print(f"Error: {result_breaking['filter_error']}")
-
+    print("Result:", json.dumps(result_breaking, indent=2))
 
     logger.info("\nTesting INTERESTING article...")
     result_interesting = run_filter_agent(test_article_data_interesting.copy())
-    print(json.dumps(result_interesting.get('filter_verdict'), indent=2) if result_interesting else "FAILED")
-    if result_interesting and result_interesting.get('filter_error'): print(f"Error: {result_interesting['filter_error']}")
-
+    print("Result:", json.dumps(result_interesting, indent=2))
 
     logger.info("\nTesting BORING article...")
     result_boring = run_filter_agent(test_article_data_boring.copy())
-    print(json.dumps(result_boring.get('filter_verdict'), indent=2) if result_boring else "FAILED")
-    if result_boring and result_boring.get('filter_error'): print(f"Error: {result_boring['filter_error']}")
+    print("Result:", json.dumps(result_boring, indent=2))
+
+    logger.info("\nTesting INVALID INPUT article...")
+    result_invalid = run_filter_agent(test_article_invalid_input.copy())
+    print("Result:", json.dumps(result_invalid, indent=2))
 
 
-    logger.info("\n--- Filter Agent Test Complete ---")
+    logger.info("\n--- Filter Agent Standalone Test Complete ---")

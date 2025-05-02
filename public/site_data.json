@@ -164,6 +164,28 @@
       "trend_score": 15.0
     },
     {
+      "id": "bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170",
+      "title": "Rising star defense tech startup Mach Industries is raising $100 million, sources say",
+      "link": "articles/rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-.html",
+      "published_iso": "2025-05-01T20:44:43Z",
+      "summary_short": "Defense tech startup Mach Industries, led by 21-year-old Ethan Thornton, is securing $100M in funding co-led by Khosla and Bedrock Capital.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/03/EthanThornton5.jpg?resize=1200,931",
+      "topic": "Startups",
+      "is_breaking": false,
+      "tags": [
+        "Mach Industries",
+        "defense tech startup",
+        "venture capital funding",
+        "Ethan Thornton",
+        "Khosla Ventures",
+        "Bedrock Capital",
+        "defense sector investment",
+        "next-generation defense technologies",
+        "startup valuation"
+      ],
+      "trend_score": 14.5
+    },
+    {
       "id": "93cde970ee35b82e8d0280722bad5bbe9cef858b6e213de32662dd4218babbd8",
       "title": "Zuckerberg Says in Response to Loneliness Epidemic, He Will Create Most of Your Friends Using Artificial Intelligence - futurism.com",
       "link": "articles/zuckerberg-says-in-response-to-loneliness-epidemic-he-will-create-most-of-your-f.html",
@@ -428,28 +450,6 @@
         "AI workflow automation",
         "human oversight in AI",
         "organizational rules compliance"
-      ],
-      "audio_url": null
-    },
-    {
-      "id": "997a1af6b65efbdacfeeb28b0640e535ed49dee8edd2031a123409906aeede24",
-      "title": "The ‘era of experience’ will unleash self-learning AI agents across the web—here’s how to prepare",
-      "link": "articles/the-era-of-experience-will-unleash-self-learning-ai-agents-across-the-webheres-h.html",
-      "published_iso": "2025-04-30T20:38:01",
-      "summary_short": "AI visionaries predict self-learning AI agents will revolutionize application design in the coming 'Era of Experience.' Learn how to prepare.",
-      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/era-of-experience.webp?w=1024?w=1200&strip=all",
-      "topic": "AI Models",
-      "is_breaking": false,
-      "tags": [
-        "Era of Experience",
-        "Self-Learning AI",
-        "AI Agents",
-        "Autonomous AI",
-        "AI-Driven Interactions",
-        "Adaptive Systems",
-        "Real-Time Learning",
-        "Software Architecture",
-        "AI Evolution"
       ],
       "audio_url": null
     }

@@ -1,26 +1,26 @@
 # src/scrapers/news_scraper.py
 
 import feedparser
-import time
+# import time # <- Removed, not needed without the main loop
 import os
+import sys # <- Added sys for path check below
 import json
 import hashlib
 import logging
-from datetime import datetime
+from datetime import datetime # <- Simplified import
 
-# --- Determine absolute paths based on script location ---
-# Get the directory where this script (news_scraper.py) lives
+# --- Path Setup (Ensure src is in path if run standalone) ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-# Get the parent directory (which should be 'src')
 SRC_DIR = os.path.dirname(SCRIPT_DIR)
-# Get the root project directory (parent of 'src')
 PROJECT_ROOT = os.path.dirname(SRC_DIR)
-# Define data directory path relative to project root
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT) # Add project root for imports if needed
+
 DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
-# --- End Path Calculation ---
+# --- End Path Setup ---
 
 # --- Configuration ---
-# !!! --- List of RSS Feed URLs to scrape (Anthropic URL updated) --- !!!
+# List of RSS Feed URLs (Keep this updated)
 NEWS_FEED_URLS = [
     "https://techcrunch.com/feed/",
     "https://www.wired.com/feed/tag/ai/latest/rss",
@@ -31,237 +31,253 @@ NEWS_FEED_URLS = [
     "https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en",
     "https://news.ycombinator.com/rss",
     "https://www.anthropic.com/feed.xml",
-    "https://ai.googleblog.com/feeds/posts/default?alt=rss",     
-    "https://openai.com/blog/rss.xml",                           
-    "https://deepmind.com/blog/feed/basic",                      
-    "https://syncedreview.com/feed",                             
-    "http://machinelearningmastery.com/blog/feed/",              
+    "https://ai.googleblog.com/feeds/posts/default?alt=rss",
+    "https://openai.com/blog/rss.xml",
+    "https://blog.google/technology/ai/rss/", # <- Updated Google AI Blog Feed URL (check if this is better)
+    "https://aws.amazon.com/blogs/machine-learning/feed/",
+    "https://blogs.microsoft.com/ai/feed/",
+    # "https://deepmind.google/blog/feed/basic/", # <- DeepMind often redirects or merges with Google AI blog
+    "https://syncedreview.com/feed",
+    # "http://machinelearningmastery.com/blog/feed/", # <- Often less breaking news, more tutorials
 ]
 
-# How often to check all feeds (in seconds)
-CHECK_INTERVAL_SECONDS = 900  # 15 minutes
-# Folder to store IDs of processed articles (using absolute path)
+# File to store IDs of processed articles
 PROCESSED_IDS_FILE = os.path.join(DATA_DIR, 'processed_article_ids.txt')
-# Folder to save newly scraped articles as JSON files (using absolute path)
+# Folder to save newly scraped articles as JSON files
 OUTPUT_DIR = os.path.join(DATA_DIR, 'scraped_articles')
-# Max *total* new articles to process across all feeds per run
+# Max *total* new articles to process across all feeds per run (controlled by main.py logic now, but good default)
 MAX_ARTICLES_PER_RUN = 30
 # --- End Configuration ---
 
 # --- Setup Logging ---
-logging.basicConfig(
-    level=logging.DEBUG,  # Changed to DEBUG for more detail
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler(os.path.join(PROJECT_ROOT, 'dacoola.log'))
+# This setup is mainly for standalone testing. main.py's config will usually take precedence.
+log_file_path_scraper = os.path.join(PROJECT_ROOT, 'dacoola.log')
+# Ensure log directory exists if it's not the project root
+try:
+    os.makedirs(os.path.dirname(log_file_path_scraper), exist_ok=True)
+    log_handlers_scraper = [
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler(log_file_path_scraper, encoding='utf-8')
     ]
+except OSError as e:
+    print(f"Scraper Log Error: Could not create log directory/file: {e}. Logging to console only.")
+    log_handlers_scraper = [logging.StreamHandler(sys.stdout)]
+
+# Configure a specific logger for this module if needed, or rely on root logger
+logging.basicConfig(
+    level=logging.INFO, # Use INFO or DEBUG as needed
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=log_handlers_scraper,
+    force=True # Allow reconfiguration by main.py if it runs first
 )
+logger = logging.getLogger(__name__) # Use module-specific logger
 # --- End Setup Logging ---
 
 
-def get_article_id(entry):
-    """Generate a unique ID for an article entry."""
+def get_article_id(entry, feed_url): # <- Added feed_url parameter
+    """Generate a unique ID for an article entry, using feed_url for uniqueness."""
     link = entry.get('link', '')
-    guid = entry.get('id', entry.get('guid', link))
+    guid = entry.get('id', entry.get('guid', link)) # Use link as fallback for guid
+
+    # Determine the primary identifier string
     if not entry.get('guidislink', False) and link:
-        identifier = link
+        identifier_base = link
     else:
-        identifier = guid
-    if not identifier:
-        identifier = entry.get('title', '') + entry.get('summary', '')
-    # Add feed source to identifier hash to prevent collisions if different feeds list the exact same item/link
-    source_url = entry.get('source', {}).get('href', entry.feedurl if hasattr(entry, 'feedurl') else '')  # Try to get source feed URL
-    identifier += source_url  # Make ID unique per source
+        identifier_base = guid
+
+    # If no link or guid, fall back to title + summary (less reliable)
+    if not identifier_base:
+        identifier_base = entry.get('title', '') + entry.get('summary', '')
+        logger.warning(f"Using title+summary for ID base for entry in {feed_url}. Title: {entry.get('title', 'N/A')}")
+
+    # Add the source feed URL to ensure uniqueness across different feeds
+    # Use the passed feed_url argument directly
+    identifier = f"{identifier_base}::{feed_url}" # Combine base ID with feed URL
+
     article_id = hashlib.sha256(identifier.encode('utf-8')).hexdigest()
-    logging.debug(f"Generated ID {article_id} for article: {entry.get('title', 'No Title')}")
+    logger.debug(f"Generated ID {article_id} for article (Feed: {feed_url}): {entry.get('title', 'No Title')}")
     return article_id
 
 
 def load_processed_ids():
     """Load the set of already processed article IDs from the file."""
     processed_ids = set()
-    # Use the absolute path PROCESSED_IDS_FILE
     try:
+        # Ensure the data directory exists
         os.makedirs(DATA_DIR, exist_ok=True)
         if os.path.exists(PROCESSED_IDS_FILE):
             with open(PROCESSED_IDS_FILE, 'r', encoding='utf-8') as f:
                 for line in f:
                     processed_ids.add(line.strip())
-            logging.debug(f"Loaded {len(processed_ids)} processed article IDs from {PROCESSED_IDS_FILE}")
+            logger.debug(f"Loaded {len(processed_ids)} processed article IDs from {PROCESSED_IDS_FILE}")
         else:
-            logging.debug(f"Processed IDs file not found at {PROCESSED_IDS_FILE}. Starting fresh.")
+            logger.debug(f"Processed IDs file not found at {PROCESSED_IDS_FILE}. Starting fresh.")
     except Exception as e:
-        logging.error(f"Error loading processed IDs from {PROCESSED_IDS_FILE}: {e}")
+        logger.error(f"Error loading processed IDs from {PROCESSED_IDS_FILE}: {e}")
     return processed_ids
 
 
 def save_processed_id(article_id):
     """Append a new processed article ID to the file."""
     try:
-        # Use the absolute path PROCESSED_IDS_FILE
         # Ensure the directory exists before trying to append
         os.makedirs(os.path.dirname(PROCESSED_IDS_FILE), exist_ok=True)
         with open(PROCESSED_IDS_FILE, 'a', encoding='utf-8') as f:
             f.write(article_id + '\n')
-        logging.debug(f"Saved processed ID: {article_id}")
+        logger.debug(f"Saved processed ID: {article_id}")
     except Exception as e:
-        logging.error(f"Error saving processed ID {article_id} to {PROCESSED_IDS_FILE}: {e}")
+        logger.error(f"Error saving processed ID {article_id} to {PROCESSED_IDS_FILE}: {e}")
 
 
 def save_article_data(article_id, data):
-    """Save the scraped article data as a JSON file."""
-    # Use the absolute path OUTPUT_DIR
-    # Ensure the directory exists *before* creating the file path
+    """Save the scraped article data as a JSON file in the designated output directory."""
     try:
-        os.makedirs(OUTPUT_DIR, exist_ok=True)  # exist_ok=True prevents error if dir already exists
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
     except OSError as e:
-        logging.error(f"Could not create or access output directory {OUTPUT_DIR}: {e}")
-        return False  # Can't save if directory is inaccessible
+        logger.error(f"Could not create or access output directory {OUTPUT_DIR}: {e}")
+        return False # Cannot save if directory is inaccessible
 
-    # Now create the full file path
     file_path = os.path.join(OUTPUT_DIR, f"{article_id}.json")
     try:
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
-        logging.debug(f"Saved article data to {file_path}")
-        logging.info(f"Saved new article: {file_path} (Title: {data.get('title', 'N/A')})")
+        # Log saving action clearly
+        logger.info(f"SAVED SCRAPED: {os.path.basename(file_path)} (Title: {data.get('title', 'N/A')})")
         return True
     except IOError as e:
-        # This error might still occur if permissions are wrong, disk is full, etc.
-        logging.error(f"Could not write article file {file_path}: {e}")
+        logger.error(f"Could not write article file {file_path}: {e}")
         return False
     except Exception as e:
-        logging.error(f"Unexpected error saving article {file_path}: {e}")
+        logger.error(f"Unexpected error saving article {file_path}: {e}")
         return False
 
 
 def scrape_news(feed_urls, processed_ids):
-    """Fetches multiple news feeds, processes new entries, and saves them."""
-    logging.info(f"Starting scrape run for {len(feed_urls)} feeds...")
-    total_new_articles_found_run = 0
-    processed_in_this_run = 0
+    """
+    Fetches multiple news feeds, processes new entries, and saves them as JSON.
+    This function is intended to be called once per run by an orchestrator.
+    """
+    logger.info(f"--- Starting News Scraper Run ({len(feed_urls)} feeds) ---")
+    total_new_articles_saved_run = 0
+    processed_article_count_this_run = 0 # Renamed for clarity
 
     for feed_url in feed_urls:
-        # Pass feed_url to get_article_id context if needed
-        feedparser.mixin._FeedParserMixin.feedurl = feed_url  # Store feed url context for get_article_id
-
-        if processed_in_this_run >= MAX_ARTICLES_PER_RUN:
-            logging.warning(f"Reached max articles per run ({MAX_ARTICLES_PER_RUN}). Skipping remaining feeds.")
+        # Check if max articles per run limit is reached
+        if processed_article_count_this_run >= MAX_ARTICLES_PER_RUN:
+            logger.warning(f"Reached max articles per run ({MAX_ARTICLES_PER_RUN}). Stopping feed processing for this run.")
             break
 
-        logging.info(f"Checking feed: {feed_url}")
+        logger.info(f"Checking feed: {feed_url}")
         try:
-            headers = {
-                'User-Agent': 'DacoolaNewsBot/1.0 (Python Feedparser; +http://dacoola.com)',
-                'Accept': 'application/rss+xml,application/xml;q=0.9,*/*;q=0.8'
-            }
-            feed = feedparser.parse(feed_url, agent=headers['User-Agent'])
+            # Use a consistent, identifiable User-Agent
+            headers = {'User-Agent': 'DacoolaNewsBot/1.0 (+https://your-site-url.com)'} # Replace with your actual site URL
+            feed_data = feedparser.parse(feed_url, agent=headers['User-Agent'])
 
-            if feed.bozo:
-                # Log bozo reason but try to process anyway, unless it's a known bad type like text/html from 404
-                bozo_reason = feed.get('bozo_exception', 'Unknown reason')
-                # Check if it's likely an HTML error page mistaken for feed
-                if 'text/html' in str(bozo_reason) and hasattr(feed, 'status') and feed.status >= 400:
-                    logging.error(f"Failed to fetch feed {feed_url}: Likely received HTML error page instead of XML. Status: {feed.get('status', 'N/A')}. Reason: {bozo_reason}")
-                    continue  # Skip this feed
+            # Handle feedparser errors (bozo)
+            if feed_data.bozo:
+                bozo_reason = feed_data.get('bozo_exception', 'Unknown reason')
+                # More specific check for critical fetch errors (like getting HTML instead of XML)
+                if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+                     logger.error(f"Failed to fetch feed {feed_url}: Content type was not XML/RSS/Atom ({bozo_reason}). Skipping.")
+                     continue
+                elif hasattr(feed_data, 'status') and feed_data.status >= 400:
+                     logger.error(f"Failed to fetch feed {feed_url}: HTTP Status {feed_data.status}. Skipping. Reason: {bozo_reason}")
+                     continue
                 else:
-                    logging.warning(f"Feed {feed_url} potentially malformed. Reason: {bozo_reason}")
+                    logger.warning(f"Feed {feed_url} potentially malformed (bozo). Reason: {bozo_reason}. Attempting to process...")
 
-            if hasattr(feed, 'status') and feed.status not in [200, 304]:
-                logging.error(f"Failed to fetch feed {feed_url}. HTTP Status: {feed.status}")
+            # Check HTTP status if available
+            if hasattr(feed_data, 'status') and feed_data.status not in [200, 304]: # 304 Not Modified is OK
+                logger.error(f"Failed to fetch feed {feed_url}. HTTP Status: {feed_data.status}")
                 continue
 
-            if not feed.entries:
-                logging.info(f"No entries found in feed: {feed_url}")
+            if not feed_data.entries:
+                logger.info(f"No entries found in feed: {feed_url}")
                 continue
 
-            logging.info(f"Feed {feed_url} fetched. Found {len(feed.entries)} entries.")
+            logger.info(f"Feed {feed_url} fetched. Contains {len(feed_data.entries)} entries.")
 
             new_articles_this_feed = 0
-            for entry in feed.entries:
-                if processed_in_this_run >= MAX_ARTICLES_PER_RUN:
-                    logging.warning(f"Reached max articles per run ({MAX_ARTICLES_PER_RUN}) processing feed {feed_url}.")
+            for entry in feed_data.entries:
+                # Re-check limit within the inner loop
+                if processed_article_count_this_run >= MAX_ARTICLES_PER_RUN:
+                    logger.warning(f"Reached max articles per run ({MAX_ARTICLES_PER_RUN}) while processing feed {feed_url}.")
                     break
 
-                # Pass the feed URL context to ID generation
-                article_id = get_article_id(entry)  # get_article_id now uses feedparser context
+                # Generate ID using the entry and the specific feed_url
+                article_id = get_article_id(entry, feed_url) # <- Pass feed_url
 
                 if article_id in processed_ids:
-                    logging.debug(f"Skipping already processed article: {entry.get('title', 'No Title')}")
+                    logger.debug(f"Skipping already processed article ID: {article_id} (Title: {entry.get('title', 'N/A')})")
                     continue
 
-                logging.info(f"Found new article: {entry.get('title', 'No Title')} (ID: {article_id})")
-
-                title = entry.get('title', 'No Title')
+                # --- Extract data ---
+                title = entry.get('title', 'No Title Provided')
                 link = entry.get('link', '')
-                published_parsed = entry.get('published_parsed', None)
+                # Parse published date safely
+                published_parsed = entry.get('published_parsed')
                 published_iso = None
                 if published_parsed:
                     try:
-                        published_iso = datetime(*published_parsed[:6]).isoformat()
+                        # Create datetime object and convert to UTC ISO format
+                        dt_obj = datetime(*published_parsed[:6])
+                        # Note: feedparser times are generally UTC, but this ensures it
+                        published_iso = dt_obj.strftime('%Y-%m-%dT%H:%M:%SZ')
                     except Exception as e:
-                        logging.error(f"Error parsing date for {article_id}: {e}")
+                        logger.warning(f"Error parsing date for article {article_id}: {e}. Date: {published_parsed}")
+
+                # Get summary/content, prioritize 'content' if available
                 content_list = entry.get('content', [])
                 summary = content_list[0].get('value', '') if content_list else entry.get('summary', entry.get('description', ''))
 
+                # Basic validation
+                if not link:
+                     logger.warning(f"Article '{title}' (ID: {article_id}) has no link. Skipping.")
+                     continue
                 if not summary or not summary.strip():
-                    logging.warning(f"Article ID {article_id} from {feed_url} has empty summary/content. Skipping.")
+                    logger.warning(f"Article '{title}' (ID: {article_id}) has empty summary/content. Skipping.")
                     continue
 
+                # Prepare data structure for saving
                 article_data = {
                     'id': article_id,
-                    'title': title,
+                    'title': title.strip(), # Strip whitespace
                     'link': link,
                     'published_iso': published_iso,
-                    'summary': summary,
+                    'summary': summary.strip(), # Strip whitespace
                     'source_feed': feed_url,
-                    'scraped_at_iso': datetime.utcnow().isoformat()
+                    'scraped_at_iso': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ') # Use UTC 'Z' format
                 }
 
+                # Save the article data
                 if save_article_data(article_id, article_data):
                     processed_ids.add(article_id)
                     save_processed_id(article_id)
                     new_articles_this_feed += 1
-                    processed_in_this_run += 1
-                    total_new_articles_found_run += 1
-                    logging.info(f"Successfully saved new article: {title}")
+                    processed_article_count_this_run += 1
+                    total_new_articles_saved_run += 1
+                    # logger.info(f"Successfully saved new article: {title}") # Covered by save_article_data log
                 else:
-                    logging.error(f"Failed to save article: {title}")
+                    logger.error(f"Failed to save article data for: {title} (ID: {article_id})")
 
-            logging.info(f"Finished feed {feed_url}. Saved {new_articles_this_feed} new articles.")
+            logger.info(f"Finished feed {feed_url}. Saved {new_articles_this_feed} new articles from this feed.")
 
         except Exception as e:
-            logging.exception(f"Failed to process feed {feed_url}: {e}")
+            logger.exception(f"Unexpected error processing feed {feed_url}: {e}")
+            # Continue to the next feed even if one fails
             continue
 
-    logging.info(f"Scrape run finished. Total new articles saved this run: {total_new_articles_found_run}.")
-    return total_new_articles_found_run
+    logger.info(f"--- News Scraper Run Finished. Total new articles saved this run: {total_new_articles_saved_run} ---")
+    return total_new_articles_saved_run
 
-
-def main():
-    """Main function to run the news scraper."""
-    logging.info("Starting multi-feed news scraper...")
-    try:
-        processed_ids = load_processed_ids()
-
-        while True:
-            try:
-                new_articles = scrape_news(NEWS_FEED_URLS, processed_ids)
-                logging.info(f"Sleeping for {CHECK_INTERVAL_SECONDS} seconds...")
-                time.sleep(CHECK_INTERVAL_SECONDS)
-            except KeyboardInterrupt:
-                logging.info("News scraper stopped manually")
-                break
-            except Exception as e:
-                logging.exception(f"Error in main scrape loop: {e}")
-                logging.info(f"Sleeping for {CHECK_INTERVAL_SECONDS} seconds before retry...")
-                time.sleep(CHECK_INTERVAL_SECONDS)
-
-    except Exception as init_error:
-        logging.critical(f"Failed to initialize news scraper: {init_error}")
-        exit(1)
-
-
+# --- Standalone Execution (Optional for testing) ---
+# This part is not used when called from main.py
 if __name__ == "__main__":
-    main()
+    logger.info("--- Running News Scraper Standalone ---")
+    try:
+        current_processed_ids = load_processed_ids()
+        scrape_news(NEWS_FEED_URLS, current_processed_ids)
+    except Exception as standalone_e:
+        logger.critical(f"Failed to run news scraper standalone: {standalone_e}")
+        sys.exit(1)
+    logger.info("--- News Scraper Standalone Finished ---")
