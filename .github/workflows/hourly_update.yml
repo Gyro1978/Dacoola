@@ -2,29 +2,28 @@ name: Hourly News Update and Deploy
 
 on:
   schedule:
-    # Runs at minutes 0, 20, and 40 past the hour
+    # Runs every 20 minutes
     - cron: "0,20,40 * * * *"
   workflow_dispatch: # Allows manual triggering
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    # Prevent concurrent runs for the same workflow
+    # Prevent concurrent runs
     concurrency:
       group: ${{ github.workflow }}
       cancel-in-progress: true
 
     permissions:
-      contents: write # Allow workflow to commit back to the repo
-      # pages: write # No longer needed for Netlify
-      # id-token: write # No longer needed for Netlify
+      contents: write
+      # pages: write # Keep commented if using Netlify
+      # id-token: write # Keep commented if using Netlify
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        # Fetch history to allow rebasing
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Needed for git pull --rebase
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -38,9 +37,11 @@ jobs:
 
       - name: Run Main Script
         env:
+          # Pass secrets securely as environment variables
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
           CAMB_AI_API_KEY: ${{ secrets.CAMB_AI_API_KEY }}
+          # Pass other secrets
           YOUR_WEBSITE_NAME: ${{ secrets.YOUR_WEBSITE_NAME }}
           YOUR_WEBSITE_LOGO_URL: ${{ secrets.YOUR_WEBSITE_LOGO_URL }}
           MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES }}
@@ -54,23 +55,25 @@ jobs:
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-          # Add expected output files/dirs
-          git add public/ data/processed_json/ data/processed_article_ids.txt
-          # Optionally add log file if it exists
-          if [ -f "dacoola.log" ]; then git add dacola.log; fi
+          # --- Use find to safely add files if they exist ---
+          git add public/ # Add public dir unconditionally
+          git add data/processed_json/ # Add processed json dir unconditionally
+          # Safely add log file if it exists in the root
+          find . -maxdepth 1 -name 'dacoola.log' -print -exec git add {} \;
+          # Safely add processed IDs file if it exists in data/
+          find ./data -maxdepth 1 -name 'processed_article_ids.txt' -print -exec git add {} \;
+          # --------------------------------------------------
 
           # Check if there are staged changes
           if git diff --staged --quiet; then
             echo "No content changes to commit."
           else
             echo "Content changes detected. Committing..."
-            # Commit locally first
             git commit -m "Automated hourly news update [skip ci]"
 
             # --- CORRECTED PUSH LOGIC ---
             echo "Pulling latest changes before push..."
-            # Pull with rebase to apply local commit on top of remote changes
-            git pull origin ${{ github.ref_name }} --rebase
+            git pull origin ${{ github.ref_name }} --rebase # Pull and rebase current commit on top
 
             echo "Attempting to push changes..."
             # Retry push logic...
@@ -80,8 +83,6 @@ jobs:
               retry_count=$((retry_count+1))
               echo "Push failed. Retrying (${retry_count}/${max_retries})..."
               sleep 5
-              # Optional: Add a git pull --rebase here too in case another run finished during sleep
-              # git pull origin ${{ github.ref_name }} --rebase
             done
             if [ $retry_count -eq $max_retries ]; then
               echo "Push failed after $max_retries attempts."
