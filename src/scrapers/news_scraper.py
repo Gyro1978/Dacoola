@@ -39,7 +39,7 @@ PROCESSED_IDS_FILE = os.path.join(DATA_DIR, 'processed_article_ids.txt')
 # Folder to save newly scraped articles as JSON files
 OUTPUT_DIR = os.path.join(DATA_DIR, 'scraped_articles')
 # Max *total* new articles to process across all feeds per run (controlled by main.py logic now, but good default)
-MAX_ARTICLES_PER_RUN = 30
+MAX_ARTICLES_PER_RUN = 15
 # --- End Configuration ---
 
 # --- Setup Logging ---
