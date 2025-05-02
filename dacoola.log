@@ -13193,3 +13193,672 @@ AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentTy
 2025-05-02 19:11:48,579 - main_orchestrator - INFO - Article b70b49bcf451b68192c62f4860225d983e8333f69754e76598b725acdcaad28d classified as Boring. Skipping.
 2025-05-02 19:11:49,580 - main_orchestrator - INFO - Processing cycle complete. Successful: 8, Failed/Skipped: 24
 2025-05-02 19:11:49,580 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished (555.16 seconds) === ---
+2025-05-02 20:38:18,762 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 20:38:18,762 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 20:38:19,299 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-02 20:38:21,292 - transformers.processing_utils - WARNING - Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+2025-05-02 20:38:21,544 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 20:38:21,554 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative or potentially incorrect.
+2025-05-02 20:38:21,554 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-02 20:38:21,554 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 20:38:21,554 - main_orchestrator - INFO - Ensured data, processed_json, and public/articles directories exist.
+2025-05-02 20:38:21,555 - main_orchestrator - INFO - --- Running Scraper ---
+2025-05-02 20:38:21,555 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (10 feeds) ---
+2025-05-02 20:38:21,555 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 20:38:21,689 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 20:38:21,689 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999.json (Title: Google will soon start letting kids under 13 use its Gemini chatbot)
+2025-05-02 20:38:21,689 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 1 new articles from this feed.
+2025-05-02 20:38:21,689 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 20:38:21,841 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 20:38:21,841 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-02 20:38:21,841 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 20:38:21,956 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-02 20:38:21,957 - src.scrapers.news_scraper - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles from this feed.
+2025-05-02 20:38:21,957 - src.scrapers.news_scraper - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 20:38:22,216 - src.scrapers.news_scraper - INFO - Feed https://news.ycombinator.com/rss fetched. Contains 30 entries.
+2025-05-02 20:38:22,217 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 46af3a302ce79d67ac9029e7b28de66bb14cc15087b16d24f19a8fa8dae5c4b6.json (Title: Images of Soviet Venus lander falling to Earth suggest its parachute may be out)
+2025-05-02 20:38:22,217 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: e2e0bda70921748ff03d5e7e14cb4a8d75a8d5f5da938ed0f02d2559871eee83.json (Title: VR Design Unpacked: The Secret to Beat Saber's Fun Isn't What You Think)
+2025-05-02 20:38:22,217 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8f3ffc801f97f707e93549cceffd13c1042d060f4eb3d6b1993ed8804b7fc47e.json (Title: The Impossible Contradictions of Mark Twain)
+2025-05-02 20:38:22,218 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f87f54ad343346f316ad2c32b511f625ec9dcf1cf7770f8cabc5ccad563da075.json (Title: A proof of concept tool to verify estimates)
+2025-05-02 20:38:22,218 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: b938dd5c0d18bde08694894afd1c1d799785a1e3e03b9b96a59891d30b8872ea.json (Title: Doom GPU Flame Graphs)
+2025-05-02 20:38:22,218 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: eb57f82329e8cf9b16cad3162bea726c9a640ba5f370abf2c5648aaee7ad6a06.json (Title: Elm Test Distributions)
+2025-05-02 20:38:22,219 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8ae0bf05a3af1e512fb456bcaa89c7987c8ccc38000bf74f8a3fa49465ad15eb.json (Title: Strings Just Got Faster)
+2025-05-02 20:38:22,219 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f141ab802481224d7e3593cd68ab9e7059e0a92f882691b71c5815765cb0efb0.json (Title: The Totalitarian Buddhist Who Beat SIM City (2010))
+2025-05-02 20:38:22,219 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 05a9ef6556ffb412f71abf18beef4ba6491cd9f440f15f218dfa15db69d2891d.json (Title: Google is hurting new apps that have less users than competitors)
+2025-05-02 20:38:22,220 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 25b1782523cf09cde3fb053095038a5329e1866914724ef9c8a9f8caacfa556b.json (Title: Don't watermark your legal PDFs with purple dragons in suits)
+2025-05-02 20:38:22,220 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 60c48ba0b23c04d77cb79c57871431b4c8c38203286e1c11b92a7a21de09e0a1.json (Title: Suno v4.5)
+2025-05-02 20:38:22,220 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d4c62d92945e3880cc08da26794f67bfb973fd7e8788c05a038d1d1aed971c0d.json (Title: Webflow makes GSAP 100% free – plus more updates)
+2025-05-02 20:38:22,221 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 98a6fc4a3f66fcff312bb8ef17091846486820303854b86dc20b469cf02a4f0d.json (Title: Just redesigned my personal site with a TTY-style interface)
+2025-05-02 20:38:22,221 - src.scrapers.news_scraper - INFO - Finished feed https://news.ycombinator.com/rss. Saved 13 new articles from this feed.
+2025-05-02 20:38:22,221 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 20:38:22,488 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://www.anthropic.com/feed.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 20:38:22,488 - src.scrapers.news_scraper - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 20:38:22,662 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://ai.googleblog.com/feeds/posts/default?alt=rss: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 20:38:22,662 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 20:38:22,721 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://openai.com/blog/rss.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 20:38:22,722 - src.scrapers.news_scraper - INFO - Checking feed: https://aws.amazon.com/blogs/machine-learning/feed/
+2025-05-02 20:38:23,132 - src.scrapers.news_scraper - INFO - Feed https://aws.amazon.com/blogs/machine-learning/feed/ fetched. Contains 20 entries.
+2025-05-02 20:38:23,133 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df.json (Title: Build a gen AI–powered financial assistant with Amazon Bedrock multi-agent collaboration)
+2025-05-02 20:38:23,133 - src.scrapers.news_scraper - WARNING - Reached max articles per run (15) while processing feed https://aws.amazon.com/blogs/machine-learning/feed/.
+2025-05-02 20:38:23,133 - src.scrapers.news_scraper - INFO - Finished feed https://aws.amazon.com/blogs/machine-learning/feed/. Saved 1 new articles from this feed.
+2025-05-02 20:38:23,133 - src.scrapers.news_scraper - WARNING - Reached max articles per run (15). Stopping feed processing for this run.
+2025-05-02 20:38:23,133 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 15 ---
+2025-05-02 20:38:23,133 - main_orchestrator - INFO - Scraper run completed. Found 15 new JSON files potentially.
+2025-05-02 20:38:23,133 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 20:38:23,134 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 20:38:23,134 - main_orchestrator - INFO - Found 15 scraped articles to process.
+2025-05-02 20:38:23,135 - main_orchestrator - INFO - --- Processing article file: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999.json ---
+2025-05-02 20:38:23,135 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999 Title: Google will soon start letting kids under 13 use its Gemini ...
+2025-05-02 20:38:31,248 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999: level=Interesting, topic='Society', keyword='Gemini for kids'
+2025-05-02 20:38:31,248 - main_orchestrator - INFO - Article a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999 classified as Interesting (Topic: Society).
+2025-05-02 20:38:31,248 - main_orchestrator - INFO - Checking duplicates for a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999...
+2025-05-02 20:38:31,249 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999 Title: Google will soon start letting kids under 13 use its Gemini ...
+2025-05-02 20:38:37,135 - src.agents.similarity_check_agent - INFO - Similarity check result for ID a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999: is_duplicate=False. Reason: No recently published article reports on Google allowing kids under 13 to use its Gemini chatbot with parent-managed accounts.
+2025-05-02 20:38:37,136 - main_orchestrator - INFO - Article a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999 passed similarity check.
+2025-05-02 20:38:37,136 - main_orchestrator - INFO - Finding image for a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999...
+2025-05-02 20:38:37,136 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/02/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot/
+2025-05-02 20:38:37,228 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2197065135.jpg?resize=1200,800
+2025-05-02 20:38:37,229 - main_orchestrator - INFO - Using scraped image for a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999: https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2197065135.jpg?resize=1200,800
+2025-05-02 20:38:37,229 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999...
+2025-05-02 20:39:06,561 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999.
+2025-05-02 20:39:06,561 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999...
+2025-05-02 20:39:11,824 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999
+2025-05-02 20:39:11,882 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot.html
+2025-05-02 20:39:11,883 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 20:39:11,885 - main_orchestrator - INFO - Updated all_articles.json (58 articles).
+2025-05-02 20:39:11,885 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999.json
+2025-05-02 20:39:11,885 - main_orchestrator - INFO - --- Successfully processed article: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999 ---
+2025-05-02 20:39:12,887 - main_orchestrator - INFO - --- Processing article file: 46af3a302ce79d67ac9029e7b28de66bb14cc15087b16d24f19a8fa8dae5c4b6.json ---
+2025-05-02 20:39:12,887 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 46af3a302ce79d67ac9029e7b28de66bb14cc15087b16d24f19a8fa8dae5c4b6 Title: Images of Soviet Venus lander falling to Earth suggest its p...
+2025-05-02 20:39:20,316 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 46af3a302ce79d67ac9029e7b28de66bb14cc15087b16d24f19a8fa8dae5c4b6: level=Boring, topic='Other', keyword='Soviet Venus lander'
+2025-05-02 20:39:20,317 - main_orchestrator - INFO - Article 46af3a302ce79d67ac9029e7b28de66bb14cc15087b16d24f19a8fa8dae5c4b6 classified as Boring. Skipping.
+2025-05-02 20:39:21,318 - main_orchestrator - INFO - --- Processing article file: e2e0bda70921748ff03d5e7e14cb4a8d75a8d5f5da938ed0f02d2559871eee83.json ---
+2025-05-02 20:39:21,318 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: e2e0bda70921748ff03d5e7e14cb4a8d75a8d5f5da938ed0f02d2559871eee83 Title: VR Design Unpacked: The Secret to Beat Saber's Fun Isn't Wha...
+2025-05-02 20:39:27,476 - src.agents.filter_news_agent - INFO - Filter verdict received for ID e2e0bda70921748ff03d5e7e14cb4a8d75a8d5f5da938ed0f02d2559871eee83: level=Boring, topic='Other', keyword='VR game design'
+2025-05-02 20:39:27,476 - main_orchestrator - INFO - Article e2e0bda70921748ff03d5e7e14cb4a8d75a8d5f5da938ed0f02d2559871eee83 classified as Boring. Skipping.
+2025-05-02 20:39:28,478 - main_orchestrator - INFO - --- Processing article file: 8f3ffc801f97f707e93549cceffd13c1042d060f4eb3d6b1993ed8804b7fc47e.json ---
+2025-05-02 20:39:28,478 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 8f3ffc801f97f707e93549cceffd13c1042d060f4eb3d6b1993ed8804b7fc47e Title: The Impossible Contradictions of Mark Twain...
+2025-05-02 20:39:34,287 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 8f3ffc801f97f707e93549cceffd13c1042d060f4eb3d6b1993ed8804b7fc47e: level=Boring, topic='Other', keyword='Mark Twain analysis'
+2025-05-02 20:39:34,287 - main_orchestrator - INFO - Article 8f3ffc801f97f707e93549cceffd13c1042d060f4eb3d6b1993ed8804b7fc47e classified as Boring. Skipping.
+2025-05-02 20:39:35,289 - main_orchestrator - INFO - --- Processing article file: f87f54ad343346f316ad2c32b511f625ec9dcf1cf7770f8cabc5ccad563da075.json ---
+2025-05-02 20:39:35,289 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f87f54ad343346f316ad2c32b511f625ec9dcf1cf7770f8cabc5ccad563da075 Title: A proof of concept tool to verify estimates...
+2025-05-02 20:39:43,889 - src.agents.filter_news_agent - INFO - Filter verdict received for ID f87f54ad343346f316ad2c32b511f625ec9dcf1cf7770f8cabc5ccad563da075: level=Boring, topic='Other', keyword='Proof of concept tool'
+2025-05-02 20:39:43,889 - main_orchestrator - INFO - Article f87f54ad343346f316ad2c32b511f625ec9dcf1cf7770f8cabc5ccad563da075 classified as Boring. Skipping.
+2025-05-02 20:39:44,891 - main_orchestrator - INFO - --- Processing article file: b938dd5c0d18bde08694894afd1c1d799785a1e3e03b9b96a59891d30b8872ea.json ---
+2025-05-02 20:39:44,891 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: b938dd5c0d18bde08694894afd1c1d799785a1e3e03b9b96a59891d30b8872ea Title: Doom GPU Flame Graphs...
+2025-05-02 20:39:51,226 - src.agents.filter_news_agent - INFO - Filter verdict received for ID b938dd5c0d18bde08694894afd1c1d799785a1e3e03b9b96a59891d30b8872ea: level=Boring, topic='Other', keyword='Forum comments'
+2025-05-02 20:39:51,226 - main_orchestrator - INFO - Article b938dd5c0d18bde08694894afd1c1d799785a1e3e03b9b96a59891d30b8872ea classified as Boring. Skipping.
+2025-05-02 20:39:52,227 - main_orchestrator - INFO - --- Processing article file: 8ae0bf05a3af1e512fb456bcaa89c7987c8ccc38000bf74f8a3fa49465ad15eb.json ---
+2025-05-02 20:39:52,227 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 8ae0bf05a3af1e512fb456bcaa89c7987c8ccc38000bf74f8a3fa49465ad15eb Title: Strings Just Got Faster...
+2025-05-02 20:39:59,981 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 8ae0bf05a3af1e512fb456bcaa89c7987c8ccc38000bf74f8a3fa49465ad15eb: level=Boring, topic='Other', keyword='Unspecified update'
+2025-05-02 20:39:59,981 - main_orchestrator - INFO - Article 8ae0bf05a3af1e512fb456bcaa89c7987c8ccc38000bf74f8a3fa49465ad15eb classified as Boring. Skipping.
+2025-05-02 20:40:00,983 - main_orchestrator - INFO - --- Processing article file: eb57f82329e8cf9b16cad3162bea726c9a640ba5f370abf2c5648aaee7ad6a06.json ---
+2025-05-02 20:40:00,983 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: eb57f82329e8cf9b16cad3162bea726c9a640ba5f370abf2c5648aaee7ad6a06 Title: Elm Test Distributions...
+2025-05-02 20:40:06,992 - src.agents.filter_news_agent - INFO - Filter verdict received for ID eb57f82329e8cf9b16cad3162bea726c9a640ba5f370abf2c5648aaee7ad6a06: level=Boring, topic='Other', keyword='Unclear topic'
+2025-05-02 20:40:06,992 - main_orchestrator - INFO - Article eb57f82329e8cf9b16cad3162bea726c9a640ba5f370abf2c5648aaee7ad6a06 classified as Boring. Skipping.
+2025-05-02 20:40:07,993 - main_orchestrator - INFO - --- Processing article file: f141ab802481224d7e3593cd68ab9e7059e0a92f882691b71c5815765cb0efb0.json ---
+2025-05-02 20:40:07,994 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f141ab802481224d7e3593cd68ab9e7059e0a92f882691b71c5815765cb0efb0 Title: The Totalitarian Buddhist Who Beat SIM City (2010)...
+2025-05-02 20:40:16,592 - src.agents.filter_news_agent - INFO - Filter verdict received for ID f141ab802481224d7e3593cd68ab9e7059e0a92f882691b71c5815765cb0efb0: level=Boring, topic='Other', keyword='Historical game discussion'
+2025-05-02 20:40:16,592 - main_orchestrator - INFO - Article f141ab802481224d7e3593cd68ab9e7059e0a92f882691b71c5815765cb0efb0 classified as Boring. Skipping.
+2025-05-02 20:40:17,594 - main_orchestrator - INFO - --- Processing article file: 05a9ef6556ffb412f71abf18beef4ba6491cd9f440f15f218dfa15db69d2891d.json ---
+2025-05-02 20:40:17,594 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 05a9ef6556ffb412f71abf18beef4ba6491cd9f440f15f218dfa15db69d2891d Title: Google is hurting new apps that have less users than competi...
+2025-05-02 20:40:26,147 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 05a9ef6556ffb412f71abf18beef4ba6491cd9f440f15f218dfa15db69d2891d: level=Boring, topic='Business', keyword='Google app policies'
+2025-05-02 20:40:26,147 - main_orchestrator - INFO - Article 05a9ef6556ffb412f71abf18beef4ba6491cd9f440f15f218dfa15db69d2891d classified as Boring. Skipping.
+2025-05-02 20:40:27,149 - main_orchestrator - INFO - --- Processing article file: 25b1782523cf09cde3fb053095038a5329e1866914724ef9c8a9f8caacfa556b.json ---
+2025-05-02 20:40:27,149 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 25b1782523cf09cde3fb053095038a5329e1866914724ef9c8a9f8caacfa556b Title: Don't watermark your legal PDFs with purple dragons in suits...
+2025-05-02 20:40:33,450 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 25b1782523cf09cde3fb053095038a5329e1866914724ef9c8a9f8caacfa556b: level=Boring, topic='Other', keyword='Watermarking satire'
+2025-05-02 20:40:33,451 - main_orchestrator - INFO - Article 25b1782523cf09cde3fb053095038a5329e1866914724ef9c8a9f8caacfa556b classified as Boring. Skipping.
+2025-05-02 20:40:34,452 - main_orchestrator - INFO - --- Processing article file: 60c48ba0b23c04d77cb79c57871431b4c8c38203286e1c11b92a7a21de09e0a1.json ---
+2025-05-02 20:40:34,452 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 60c48ba0b23c04d77cb79c57871431b4c8c38203286e1c11b92a7a21de09e0a1 Title: Suno v4.5...
+2025-05-02 20:40:41,354 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 60c48ba0b23c04d77cb79c57871431b4c8c38203286e1c11b92a7a21de09e0a1: level=Boring, topic='Other', keyword='Suno v4.5'
+2025-05-02 20:40:41,354 - main_orchestrator - INFO - Article 60c48ba0b23c04d77cb79c57871431b4c8c38203286e1c11b92a7a21de09e0a1 classified as Boring. Skipping.
+2025-05-02 20:40:42,356 - main_orchestrator - INFO - --- Processing article file: d4c62d92945e3880cc08da26794f67bfb973fd7e8788c05a038d1d1aed971c0d.json ---
+2025-05-02 20:40:42,356 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d4c62d92945e3880cc08da26794f67bfb973fd7e8788c05a038d1d1aed971c0d Title: Webflow makes GSAP 100% free – plus more updates...
+2025-05-02 20:40:49,786 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d4c62d92945e3880cc08da26794f67bfb973fd7e8788c05a038d1d1aed971c0d: level=Boring, topic='Software', keyword='Webflow GSAP update'
+2025-05-02 20:40:49,786 - main_orchestrator - INFO - Article d4c62d92945e3880cc08da26794f67bfb973fd7e8788c05a038d1d1aed971c0d classified as Boring. Skipping.
+2025-05-02 20:40:50,788 - main_orchestrator - INFO - --- Processing article file: 98a6fc4a3f66fcff312bb8ef17091846486820303854b86dc20b469cf02a4f0d.json ---
+2025-05-02 20:40:50,788 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 98a6fc4a3f66fcff312bb8ef17091846486820303854b86dc20b469cf02a4f0d Title: Just redesigned my personal site with a TTY-style interface...
+2025-05-02 20:40:56,591 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 98a6fc4a3f66fcff312bb8ef17091846486820303854b86dc20b469cf02a4f0d: level=Boring, topic='Other', keyword='Personal website redesign'
+2025-05-02 20:40:56,591 - main_orchestrator - INFO - Article 98a6fc4a3f66fcff312bb8ef17091846486820303854b86dc20b469cf02a4f0d classified as Boring. Skipping.
+2025-05-02 20:40:57,593 - main_orchestrator - INFO - --- Processing article file: 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df.json ---
+2025-05-02 20:40:57,593 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df)
+2025-05-02 20:40:57,593 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df Title: Build a gen AI–powered financial assistant with Amazon Bedro...
+2025-05-02 20:41:08,422 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df: level=Boring, topic='Software', keyword='Amazon Bedrock feature'
+2025-05-02 20:41:08,422 - main_orchestrator - INFO - Article 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df classified as Boring. Skipping.
+2025-05-02 20:41:09,423 - main_orchestrator - INFO - Processing cycle complete. Successful: 1, Failed/Skipped: 14
+2025-05-02 20:41:09,423 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished (167.87 seconds) === ---
+2025-05-02 20:50:38,898 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 20:50:38,899 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 20:50:39,757 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-02 20:50:42,247 - transformers.processing_utils - WARNING - Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+2025-05-02 20:50:42,541 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 20:50:42,551 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-02 20:50:42,551 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 20:50:42,551 - main_orchestrator - INFO - Ensured data, processed_json, and public/articles directories exist.
+2025-05-02 20:50:42,552 - main_orchestrator - INFO - --- Running Scraper ---
+2025-05-02 20:50:42,552 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (10 feeds) ---
+2025-05-02 20:50:42,552 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 20:50:42,675 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 20:50:42,675 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc.json (Title: Aurora launches its driverless commercial trucking service, and a surprise bidder joins Canoo’s bankruptcy case)
+2025-05-02 20:50:42,675 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 1 new articles from this feed.
+2025-05-02 20:50:42,675 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 20:50:42,847 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 20:50:42,847 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-02 20:50:42,847 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 20:50:43,034 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-02 20:50:43,034 - src.scrapers.news_scraper - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles from this feed.
+2025-05-02 20:50:43,034 - src.scrapers.news_scraper - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 20:50:43,199 - src.scrapers.news_scraper - INFO - Feed https://news.ycombinator.com/rss fetched. Contains 30 entries.
+2025-05-02 20:50:43,200 - src.scrapers.news_scraper - INFO - Finished feed https://news.ycombinator.com/rss. Saved 0 new articles from this feed.
+2025-05-02 20:50:43,200 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 20:50:43,500 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://www.anthropic.com/feed.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 20:50:43,500 - src.scrapers.news_scraper - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 20:50:43,815 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://ai.googleblog.com/feeds/posts/default?alt=rss: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 20:50:43,816 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 20:50:43,898 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://openai.com/blog/rss.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 20:50:43,898 - src.scrapers.news_scraper - INFO - Checking feed: https://aws.amazon.com/blogs/machine-learning/feed/
+2025-05-02 20:50:44,348 - src.scrapers.news_scraper - INFO - Feed https://aws.amazon.com/blogs/machine-learning/feed/ fetched. Contains 20 entries.
+2025-05-02 20:50:44,349 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115.json (Title: WordFinder app: Harnessing generative AI on AWS for aphasia communication)
+2025-05-02 20:50:44,350 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: e5c2093d6df98df5e9fe61b0ecb733781a1e8b738f826123d7b38fb1ff0a725f.json (Title: Get faster and actionable AWS Trusted Advisor insights to make data-driven decisions using Amazon Q Business)
+2025-05-02 20:50:44,350 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 7df28eae495bc08cee5191c77319b9ea1f96e0c08a99440108b178d5dde4a8b8.json (Title: Best practices for Meta Llama 3.2 multimodal fine-tuning on Amazon Bedrock)
+2025-05-02 20:50:44,350 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 0de6113dc41e8bce3b96e5992b6fc75881e6cd6b29d61f7b02be7a830d17aae2.json (Title: Extend large language models powered by Amazon SageMaker AI using Model Context Protocol)
+2025-05-02 20:50:44,351 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d0aa9f67a5209476069affced3e798f305c7c32cc7218a223ef16a39cc6ef217.json (Title: Automate document translation and standardization with Amazon Bedrock and Amazon Translate)
+2025-05-02 20:50:44,351 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 0b7f925b6ddc68b174ad5b18715c72a2665926f55dc7cc73fc3af454d18e5a61.json (Title: Autonomous mortgage processing using Amazon Bedrock Data Automation and Amazon Bedrock Agents)
+2025-05-02 20:50:44,352 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc.json (Title: Amazon Bedrock Model Distillation: Boost function calling accuracy while reducing cost and latency)
+2025-05-02 20:50:44,353 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 269a8c0fb7d4f599579829081c2dbcea2067ec46be5dd3b55422da9ff2292e0f.json (Title: Build public-facing generative AI applications using Amazon Q Business for anonymous users)
+2025-05-02 20:50:44,353 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 36f1eb8734665f5908c84796bbd05105666274c4a3cb99002119d3637bd86581.json (Title: FloQast builds an AI-powered accounting transformation solution with Anthropic’s Claude 3 on Amazon Bedrock)
+2025-05-02 20:50:44,353 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c7e22c55f40e830dfc00ec4f6a80f80f467637ea9cf17a3061a1414da93015ba.json (Title: Insights in implementing production-ready solutions with generative AI)
+2025-05-02 20:50:44,354 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 5e2e5b6ed47fea2ab9f055a17243cdf528a88ff55711c2cd716a6390f3bbfd11.json (Title: Responsible AI in action: How Data Reply red teaming supports generative AI safety on AWS)
+2025-05-02 20:50:44,354 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ea8488287340a5ca9227fc934d2564ebdd7e08b1123e03215da5491960ccaec6.json (Title: InterVision accelerates AI development using AWS LLM League and Amazon SageMaker AI)
+2025-05-02 20:50:44,355 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: eba027245c02ffe66aa4f823f75bfa99e2965a1cd7731eaf19bf23801e483a08.json (Title: Improve Amazon Nova migration performance with data-aware prompt optimization)
+2025-05-02 20:50:44,355 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734.json (Title: Customize Amazon Nova models to improve tool usage)
+2025-05-02 20:50:44,355 - src.scrapers.news_scraper - WARNING - Reached max articles per run (15) while processing feed https://aws.amazon.com/blogs/machine-learning/feed/.
+2025-05-02 20:50:44,355 - src.scrapers.news_scraper - INFO - Finished feed https://aws.amazon.com/blogs/machine-learning/feed/. Saved 14 new articles from this feed.
+2025-05-02 20:50:44,356 - src.scrapers.news_scraper - WARNING - Reached max articles per run (15). Stopping feed processing for this run.
+2025-05-02 20:50:44,356 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 15 ---
+2025-05-02 20:50:44,356 - main_orchestrator - INFO - Scraper run completed. Found 15 new JSON files potentially.
+2025-05-02 20:50:44,356 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 20:50:44,356 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 20:50:44,357 - main_orchestrator - INFO - Found 15 scraped articles to process.
+2025-05-02 20:50:44,357 - main_orchestrator - INFO - --- Processing article file: 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc.json ---
+2025-05-02 20:50:44,357 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc Title: Aurora launches its driverless commercial trucking service, ...
+2025-05-02 20:50:51,826 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc: level=Interesting, topic='Robotics', keyword='driverless trucking service'
+2025-05-02 20:50:51,826 - main_orchestrator - INFO - Article 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc classified as Interesting (Topic: Robotics).
+2025-05-02 20:50:51,827 - main_orchestrator - INFO - Checking duplicates for 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc...
+2025-05-02 20:50:51,827 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc Title: Aurora launches its driverless commercial trucking service, ...
+2025-05-02 20:50:57,803 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc: is_duplicate=False. Reason: The core news event in the New Candidate Article about Aurora launching its driverless commercial trucking service and a surprise bidder joining Canoo’s bankruptcy case does not match any of the core events in the Recently Published Articles.
+2025-05-02 20:50:57,803 - main_orchestrator - INFO - Article 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc passed similarity check.
+2025-05-02 20:50:57,803 - main_orchestrator - INFO - Finding image for 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc...
+2025-05-02 20:50:57,803 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/02/aurora-launches-its-driverless-commercial-trucking-service-and-a-surprise-bidder-joins-canoos-bankruptcy-case/
+2025-05-02 20:50:57,881 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2025/01/Illustrative-purposes-warning-beacon-1.jpg?resize=1200,758
+2025-05-02 20:50:57,882 - main_orchestrator - INFO - Using scraped image for 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc: https://techcrunch.com/wp-content/uploads/2025/01/Illustrative-purposes-warning-beacon-1.jpg?resize=1200,758
+2025-05-02 20:50:57,882 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc...
+2025-05-02 20:51:26,808 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc.
+2025-05-02 20:51:26,808 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc...
+2025-05-02 20:51:32,570 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc
+2025-05-02 20:51:32,593 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/aurora-launches-its-driverless-commercial-trucking-service-and-a-surprise-bidder.html
+2025-05-02 20:51:32,595 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 20:51:32,596 - main_orchestrator - INFO - Updated all_articles.json (59 articles).
+2025-05-02 20:51:32,597 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc.json
+2025-05-02 20:51:32,597 - main_orchestrator - INFO - --- Successfully processed article: 96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc ---
+2025-05-02 20:51:33,598 - main_orchestrator - INFO - --- Processing article file: e5c2093d6df98df5e9fe61b0ecb733781a1e8b738f826123d7b38fb1ff0a725f.json ---
+2025-05-02 20:51:33,599 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: e5c2093d6df98df5e9fe61b0ecb733781a1e8b738f826123d7b38fb1ff0a725f)
+2025-05-02 20:51:33,599 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: e5c2093d6df98df5e9fe61b0ecb733781a1e8b738f826123d7b38fb1ff0a725f Title: Get faster and actionable AWS Trusted Advisor insights to ma...
+2025-05-02 20:51:41,029 - src.agents.filter_news_agent - INFO - Filter verdict received for ID e5c2093d6df98df5e9fe61b0ecb733781a1e8b738f826123d7b38fb1ff0a725f: level=Boring, topic='Software', keyword='AWS cloud tools'
+2025-05-02 20:51:41,030 - main_orchestrator - INFO - Article e5c2093d6df98df5e9fe61b0ecb733781a1e8b738f826123d7b38fb1ff0a725f classified as Boring. Skipping.
+2025-05-02 20:51:42,031 - main_orchestrator - INFO - --- Processing article file: c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115.json ---
+2025-05-02 20:51:42,032 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115)
+2025-05-02 20:51:42,032 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115 Title: WordFinder app: Harnessing generative AI on AWS for aphasia ...
+2025-05-02 20:51:49,150 - src.agents.filter_news_agent - INFO - Filter verdict received for ID c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115: level=Interesting, topic='Health', keyword='AI for aphasia'
+2025-05-02 20:51:49,150 - main_orchestrator - INFO - Article c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115 classified as Interesting (Topic: Health).
+2025-05-02 20:51:49,150 - main_orchestrator - INFO - Checking duplicates for c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115...
+2025-05-02 20:51:49,150 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115)
+2025-05-02 20:51:49,150 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115 Title: WordFinder app: Harnessing generative AI on AWS for aphasia ...
+2025-05-02 20:51:56,422 - src.agents.similarity_check_agent - INFO - Similarity check result for ID c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115: is_duplicate=False. Reason: The New Candidate Article discusses the development of WordFinder app using AWS generative AI for aphasia communication, which is not covered in any of the Recently Published Articles.
+2025-05-02 20:51:56,423 - main_orchestrator - INFO - Article c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115 passed similarity check.
+2025-05-02 20:51:56,423 - main_orchestrator - INFO - Finding image for c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115...
+2025-05-02 20:51:56,423 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/wordfinder-app-harnessing-generative-ai-on-aws-for-aphasia-communication/
+2025-05-02 20:51:56,648 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/04/ML-16892WordFinder-app-Architecture.png
+2025-05-02 20:51:56,649 - main_orchestrator - INFO - Using scraped image for c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/04/ML-16892WordFinder-app-Architecture.png
+2025-05-02 20:51:56,649 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115...
+2025-05-02 20:52:30,441 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115.
+2025-05-02 20:52:30,441 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115...
+2025-05-02 20:52:38,802 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115
+2025-05-02 20:52:38,804 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/wordfinder-app-harnessing-generative-ai-on-aws-for-aphasia-communication.html
+2025-05-02 20:52:38,805 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 20:52:38,807 - main_orchestrator - INFO - Updated all_articles.json (60 articles).
+2025-05-02 20:52:38,807 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115.json
+2025-05-02 20:52:38,807 - main_orchestrator - INFO - --- Successfully processed article: c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115 ---
+2025-05-02 20:52:39,809 - main_orchestrator - INFO - --- Processing article file: 0de6113dc41e8bce3b96e5992b6fc75881e6cd6b29d61f7b02be7a830d17aae2.json ---
+2025-05-02 20:52:39,809 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 0de6113dc41e8bce3b96e5992b6fc75881e6cd6b29d61f7b02be7a830d17aae2)
+2025-05-02 20:52:39,809 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 0de6113dc41e8bce3b96e5992b6fc75881e6cd6b29d61f7b02be7a830d17aae2 Title: Extend large language models powered by Amazon SageMaker AI ...
+2025-05-02 20:52:47,546 - src.agents.filter_news_agent - ERROR - API request failed: Response ended prematurely
+2025-05-02 20:52:47,546 - src.agents.filter_news_agent - ERROR - Filter agent failed to get a valid response from the API for article ID: 0de6113dc41e8bce3b96e5992b6fc75881e6cd6b29d61f7b02be7a830d17aae2.
+2025-05-02 20:52:47,546 - main_orchestrator - ERROR - Filter Agent failed for 0de6113dc41e8bce3b96e5992b6fc75881e6cd6b29d61f7b02be7a830d17aae2. Error: API call failed or returned empty content
+2025-05-02 20:52:48,548 - main_orchestrator - INFO - --- Processing article file: 7df28eae495bc08cee5191c77319b9ea1f96e0c08a99440108b178d5dde4a8b8.json ---
+2025-05-02 20:52:48,548 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 7df28eae495bc08cee5191c77319b9ea1f96e0c08a99440108b178d5dde4a8b8)
+2025-05-02 20:52:48,548 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 7df28eae495bc08cee5191c77319b9ea1f96e0c08a99440108b178d5dde4a8b8 Title: Best practices for Meta Llama 3.2 multimodal fine-tuning on ...
+2025-05-02 20:52:55,197 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 7df28eae495bc08cee5191c77319b9ea1f96e0c08a99440108b178d5dde4a8b8: level=Boring, topic='Software', keyword='Multimodal fine-tuning'
+2025-05-02 20:52:55,197 - main_orchestrator - INFO - Article 7df28eae495bc08cee5191c77319b9ea1f96e0c08a99440108b178d5dde4a8b8 classified as Boring. Skipping.
+2025-05-02 20:52:56,198 - main_orchestrator - INFO - --- Processing article file: d0aa9f67a5209476069affced3e798f305c7c32cc7218a223ef16a39cc6ef217.json ---
+2025-05-02 20:52:56,199 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: d0aa9f67a5209476069affced3e798f305c7c32cc7218a223ef16a39cc6ef217)
+2025-05-02 20:52:56,199 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d0aa9f67a5209476069affced3e798f305c7c32cc7218a223ef16a39cc6ef217 Title: Automate document translation and standardization with Amazo...
+2025-05-02 20:53:03,005 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d0aa9f67a5209476069affced3e798f305c7c32cc7218a223ef16a39cc6ef217: level=Boring, topic='Software', keyword='AWS document translation'
+2025-05-02 20:53:03,005 - main_orchestrator - INFO - Article d0aa9f67a5209476069affced3e798f305c7c32cc7218a223ef16a39cc6ef217 classified as Boring. Skipping.
+2025-05-02 20:53:04,007 - main_orchestrator - INFO - --- Processing article file: 0b7f925b6ddc68b174ad5b18715c72a2665926f55dc7cc73fc3af454d18e5a61.json ---
+2025-05-02 20:53:04,007 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 0b7f925b6ddc68b174ad5b18715c72a2665926f55dc7cc73fc3af454d18e5a61)
+2025-05-02 20:53:04,007 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 0b7f925b6ddc68b174ad5b18715c72a2665926f55dc7cc73fc3af454d18e5a61 Title: Autonomous mortgage processing using Amazon Bedrock Data Aut...
+2025-05-02 20:53:10,927 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 0b7f925b6ddc68b174ad5b18715c72a2665926f55dc7cc73fc3af454d18e5a61: level=Boring, topic='Business', keyword='AI mortgage processing'
+2025-05-02 20:53:10,927 - main_orchestrator - INFO - Article 0b7f925b6ddc68b174ad5b18715c72a2665926f55dc7cc73fc3af454d18e5a61 classified as Boring. Skipping.
+2025-05-02 20:53:11,929 - main_orchestrator - INFO - --- Processing article file: b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc.json ---
+2025-05-02 20:53:11,929 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc)
+2025-05-02 20:53:11,929 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc Title: Amazon Bedrock Model Distillation: Boost function calling ac...
+2025-05-02 20:53:19,040 - src.agents.filter_news_agent - INFO - Filter verdict received for ID b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc: level=Interesting, topic='AI Models', keyword='AI model distillation'
+2025-05-02 20:53:19,041 - main_orchestrator - INFO - Article b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc classified as Interesting (Topic: AI Models).
+2025-05-02 20:53:19,041 - main_orchestrator - INFO - Checking duplicates for b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc...
+2025-05-02 20:53:19,041 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc)
+2025-05-02 20:53:19,041 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc Title: Amazon Bedrock Model Distillation: Boost function calling ac...
+2025-05-02 20:53:25,999 - src.agents.similarity_check_agent - INFO - Similarity check result for ID b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc: is_duplicate=False. Reason: The New Candidate Article discusses Amazon Bedrock Model Distillation's general availability and its benefits, which is not covered in any of the Recently Published Articles.
+2025-05-02 20:53:26,000 - main_orchestrator - INFO - Article b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc passed similarity check.
+2025-05-02 20:53:26,000 - main_orchestrator - INFO - Finding image for b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc...
+2025-05-02 20:53:26,000 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-model-distillation-boost-function-calling-accuracy-while-reducing-cost-and-latency/
+2025-05-02 20:53:26,261 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/30/abmd-1120x630.png
+2025-05-02 20:53:26,262 - main_orchestrator - INFO - Using scraped image for b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/30/abmd-1120x630.png
+2025-05-02 20:53:26,262 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc...
+2025-05-02 20:54:02,850 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc.
+2025-05-02 20:54:02,850 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc...
+2025-05-02 20:54:11,278 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc
+2025-05-02 20:54:11,280 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/amazon-bedrock-model-distillation-boost-function-calling-accuracy-while-reducing.html
+2025-05-02 20:54:11,282 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 20:54:11,283 - main_orchestrator - INFO - Updated all_articles.json (61 articles).
+2025-05-02 20:54:11,284 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc.json
+2025-05-02 20:54:11,284 - main_orchestrator - INFO - --- Successfully processed article: b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc ---
+2025-05-02 20:54:12,285 - main_orchestrator - INFO - --- Processing article file: 269a8c0fb7d4f599579829081c2dbcea2067ec46be5dd3b55422da9ff2292e0f.json ---
+2025-05-02 20:54:12,286 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 269a8c0fb7d4f599579829081c2dbcea2067ec46be5dd3b55422da9ff2292e0f)
+2025-05-02 20:54:12,286 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 269a8c0fb7d4f599579829081c2dbcea2067ec46be5dd3b55422da9ff2292e0f Title: Build public-facing generative AI applications using Amazon ...
+2025-05-02 20:54:18,491 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 269a8c0fb7d4f599579829081c2dbcea2067ec46be5dd3b55422da9ff2292e0f: level=Boring, topic='Software', keyword='Amazon Q Business update'
+2025-05-02 20:54:18,491 - main_orchestrator - INFO - Article 269a8c0fb7d4f599579829081c2dbcea2067ec46be5dd3b55422da9ff2292e0f classified as Boring. Skipping.
+2025-05-02 20:54:19,492 - main_orchestrator - INFO - --- Processing article file: c7e22c55f40e830dfc00ec4f6a80f80f467637ea9cf17a3061a1414da93015ba.json ---
+2025-05-02 20:54:19,493 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: c7e22c55f40e830dfc00ec4f6a80f80f467637ea9cf17a3061a1414da93015ba)
+2025-05-02 20:54:19,493 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c7e22c55f40e830dfc00ec4f6a80f80f467637ea9cf17a3061a1414da93015ba Title: Insights in implementing production-ready solutions with gen...
+2025-05-02 20:54:25,523 - src.agents.filter_news_agent - INFO - Filter verdict received for ID c7e22c55f40e830dfc00ec4f6a80f80f467637ea9cf17a3061a1414da93015ba: level=Boring, topic='Business', keyword='Generative AI implementation'
+2025-05-02 20:54:25,524 - main_orchestrator - INFO - Article c7e22c55f40e830dfc00ec4f6a80f80f467637ea9cf17a3061a1414da93015ba classified as Boring. Skipping.
+2025-05-02 20:54:26,525 - main_orchestrator - INFO - --- Processing article file: 5e2e5b6ed47fea2ab9f055a17243cdf528a88ff55711c2cd716a6390f3bbfd11.json ---
+2025-05-02 20:54:26,526 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 5e2e5b6ed47fea2ab9f055a17243cdf528a88ff55711c2cd716a6390f3bbfd11)
+2025-05-02 20:54:26,526 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 5e2e5b6ed47fea2ab9f055a17243cdf528a88ff55711c2cd716a6390f3bbfd11 Title: Responsible AI in action: How Data Reply red teaming support...
+2025-05-02 20:54:33,407 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 5e2e5b6ed47fea2ab9f055a17243cdf528a88ff55711c2cd716a6390f3bbfd11: level=Boring, topic='Ethics', keyword='Responsible AI'
+2025-05-02 20:54:33,407 - main_orchestrator - INFO - Article 5e2e5b6ed47fea2ab9f055a17243cdf528a88ff55711c2cd716a6390f3bbfd11 classified as Boring. Skipping.
+2025-05-02 20:54:34,408 - main_orchestrator - INFO - --- Processing article file: 36f1eb8734665f5908c84796bbd05105666274c4a3cb99002119d3637bd86581.json ---
+2025-05-02 20:54:34,409 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 36f1eb8734665f5908c84796bbd05105666274c4a3cb99002119d3637bd86581)
+2025-05-02 20:54:34,409 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 36f1eb8734665f5908c84796bbd05105666274c4a3cb99002119d3637bd86581 Title: FloQast builds an AI-powered accounting transformation solut...
+2025-05-02 20:54:40,710 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 36f1eb8734665f5908c84796bbd05105666274c4a3cb99002119d3637bd86581: level=Boring, topic='Business', keyword='AI accounting solution'
+2025-05-02 20:54:40,711 - main_orchestrator - INFO - Article 36f1eb8734665f5908c84796bbd05105666274c4a3cb99002119d3637bd86581 classified as Boring. Skipping.
+2025-05-02 20:54:41,712 - main_orchestrator - INFO - --- Processing article file: eba027245c02ffe66aa4f823f75bfa99e2965a1cd7731eaf19bf23801e483a08.json ---
+2025-05-02 20:54:41,713 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: eba027245c02ffe66aa4f823f75bfa99e2965a1cd7731eaf19bf23801e483a08)
+2025-05-02 20:54:41,713 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: eba027245c02ffe66aa4f823f75bfa99e2965a1cd7731eaf19bf23801e483a08 Title: Improve Amazon Nova migration performance with data-aware pr...
+2025-05-02 20:54:47,460 - src.agents.filter_news_agent - INFO - Filter verdict received for ID eba027245c02ffe66aa4f823f75bfa99e2965a1cd7731eaf19bf23801e483a08: level=Boring, topic='Software', keyword='Amazon Nova optimization'
+2025-05-02 20:54:47,460 - main_orchestrator - INFO - Article eba027245c02ffe66aa4f823f75bfa99e2965a1cd7731eaf19bf23801e483a08 classified as Boring. Skipping.
+2025-05-02 20:54:48,461 - main_orchestrator - INFO - --- Processing article file: ea8488287340a5ca9227fc934d2564ebdd7e08b1123e03215da5491960ccaec6.json ---
+2025-05-02 20:54:48,462 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: ea8488287340a5ca9227fc934d2564ebdd7e08b1123e03215da5491960ccaec6)
+2025-05-02 20:54:48,462 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ea8488287340a5ca9227fc934d2564ebdd7e08b1123e03215da5491960ccaec6 Title: InterVision accelerates AI development using AWS LLM League ...
+2025-05-02 20:54:55,300 - src.agents.filter_news_agent - INFO - Filter verdict received for ID ea8488287340a5ca9227fc934d2564ebdd7e08b1123e03215da5491960ccaec6: level=Boring, topic='Business', keyword='AI contact center solution'
+2025-05-02 20:54:55,300 - main_orchestrator - INFO - Article ea8488287340a5ca9227fc934d2564ebdd7e08b1123e03215da5491960ccaec6 classified as Boring. Skipping.
+2025-05-02 20:54:56,303 - main_orchestrator - INFO - --- Processing article file: fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734.json ---
+2025-05-02 20:54:56,303 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734)
+2025-05-02 20:54:56,303 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734 Title: Customize Amazon Nova models to improve tool usage...
+2025-05-02 20:55:04,927 - src.agents.filter_news_agent - INFO - Filter verdict received for ID fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734: level=Interesting, topic='AI Models', keyword='Amazon Nova models'
+2025-05-02 20:55:04,927 - main_orchestrator - INFO - Article fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734 classified as Interesting (Topic: AI Models).
+2025-05-02 20:55:04,927 - main_orchestrator - INFO - Checking duplicates for fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734...
+2025-05-02 20:55:04,928 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734)
+2025-05-02 20:55:04,928 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734 Title: Customize Amazon Nova models to improve tool usage...
+2025-05-02 20:55:10,799 - src.agents.similarity_check_agent - INFO - Similarity check result for ID fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734: is_duplicate=False. Reason: The New Candidate Article discusses customizing Amazon Nova models for tool usage, which is not covered in any of the Recently Published Articles.
+2025-05-02 20:55:10,799 - main_orchestrator - INFO - Article fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734 passed similarity check.
+2025-05-02 20:55:10,799 - main_orchestrator - INFO - Finding image for fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734...
+2025-05-02 20:55:10,799 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/customize-amazon-nova-models-to-improve-tool-usage/
+2025-05-02 20:55:11,052 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/iML-18065-SolutionOverviewjpg-911x630.jpg
+2025-05-02 20:55:11,052 - main_orchestrator - INFO - Using scraped image for fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/iML-18065-SolutionOverviewjpg-911x630.jpg
+2025-05-02 20:55:11,052 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734...
+2025-05-02 20:55:44,570 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734.
+2025-05-02 20:55:44,570 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734...
+2025-05-02 20:55:52,078 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734
+2025-05-02 20:55:52,080 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/customize-amazon-nova-models-to-improve-tool-usage.html
+2025-05-02 20:55:52,082 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 20:55:52,083 - main_orchestrator - INFO - Updated all_articles.json (62 articles).
+2025-05-02 20:55:52,084 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734.json
+2025-05-02 20:55:52,084 - main_orchestrator - INFO - --- Successfully processed article: fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734 ---
+2025-05-02 20:55:53,085 - main_orchestrator - INFO - Processing cycle complete. Successful: 4, Failed/Skipped: 11
+2025-05-02 20:55:53,085 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished (310.53 seconds) === ---
+2025-05-02 21:32:06,385 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 21:32:06,385 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 21:32:07,237 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-02 21:32:09,802 - transformers.processing_utils - WARNING - Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+2025-05-02 21:32:10,097 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 21:32:10,107 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-02 21:32:10,107 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 21:32:10,107 - main_orchestrator - INFO - Ensured data, processed_json, and public/articles directories exist.
+2025-05-02 21:32:10,108 - main_orchestrator - INFO - --- Running Scraper ---
+2025-05-02 21:32:10,108 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (10 feeds) ---
+2025-05-02 21:32:10,108 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 21:32:10,217 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 21:32:10,217 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles from this feed.
+2025-05-02 21:32:10,217 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 21:32:10,404 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 21:32:10,404 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-02 21:32:10,404 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 21:32:10,589 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-02 21:32:10,589 - src.scrapers.news_scraper - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles from this feed.
+2025-05-02 21:32:10,590 - src.scrapers.news_scraper - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 21:32:10,737 - src.scrapers.news_scraper - INFO - Feed https://news.ycombinator.com/rss fetched. Contains 30 entries.
+2025-05-02 21:32:10,737 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 2715afebe6e30b0f0bdec04211577694ef657085cd89a54d531637bab6a6336e.json (Title: OneText (YC W23) Is Hiring a DevOps/DBA Lead Engineer)
+2025-05-02 21:32:10,738 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 78415211138a2acea02cfb7f2447a928c1d03d51eaa44a59cdb3a95a685dda98.json (Title: Derivation and Intuition behind Poisson distribution)
+2025-05-02 21:32:10,738 - src.scrapers.news_scraper - INFO - Finished feed https://news.ycombinator.com/rss. Saved 2 new articles from this feed.
+2025-05-02 21:32:10,738 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 21:32:11,340 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://www.anthropic.com/feed.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 21:32:11,340 - src.scrapers.news_scraper - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 21:32:11,671 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://ai.googleblog.com/feeds/posts/default?alt=rss: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 21:32:11,672 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 21:32:11,753 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://openai.com/blog/rss.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 21:32:11,753 - src.scrapers.news_scraper - INFO - Checking feed: https://aws.amazon.com/blogs/machine-learning/feed/
+2025-05-02 21:32:12,142 - src.scrapers.news_scraper - INFO - Feed https://aws.amazon.com/blogs/machine-learning/feed/ fetched. Contains 20 entries.
+2025-05-02 21:32:12,143 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a76b5c0a91eb78ff2d3e014848ceb4231c2dcd3df1b14f40ac1a2cd2b7edcacc.json (Title: Evaluate Amazon Bedrock Agents with Ragas and LLM-as-a-judge)
+2025-05-02 21:32:12,144 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e.json (Title: Enterprise-grade natural language to SQL generation using LLMs: Balancing accuracy, latency, and scale)
+2025-05-02 21:32:12,144 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: aba9b0efb2cd68bfcab6492e8e10d60538d7ba3682c84d6f7dbec007eab8fb4c.json (Title: AWS Field Experience reduced cost and delivered low latency and high performance with Amazon Nova Lite foundation model)
+2025-05-02 21:32:12,145 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f819c25867a51121e5d0e71df1e16bd2e1b583332c95349f7c2a421ed3e9c80a.json (Title: Combine keyword and semantic search for text and images using Amazon Bedrock and Amazon OpenSearch Service)
+2025-05-02 21:32:12,145 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f.json (Title: Build an AI-powered document processing platform with open source NER model and LLM on Amazon SageMaker)
+2025-05-02 21:32:12,145 - src.scrapers.news_scraper - INFO - Finished feed https://aws.amazon.com/blogs/machine-learning/feed/. Saved 5 new articles from this feed.
+2025-05-02 21:32:12,145 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.microsoft.com/ai/feed/
+2025-05-02 21:32:12,350 - src.scrapers.news_scraper - INFO - Feed https://blogs.microsoft.com/ai/feed/ fetched. Contains 10 entries.
+2025-05-02 21:32:12,350 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 4e2e9d35008f464e9294a47662d74c04339bef9a06e3260105d03ab6382cf09c.json (Title: A conversation with Kevin Scott: What’s next in AI)
+2025-05-02 21:32:12,351 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 9da69f1eb8ea1a103988ef1918d149473008b7f1e6e133190e68034f09861f30.json (Title: From Hot Wheels to handling content: How brands are using Microsoft AI to be more productive and imaginative)
+2025-05-02 21:32:12,351 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1.json (Title: Microsoft open sources its ‘farm of the future’ toolkit)
+2025-05-02 21:32:12,351 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 3300f73106c945c3ab2e3203757143593c35fe93b298416fcb58135406fc4ef6.json (Title: How data and AI will transform contact centres for financial services)
+2025-05-02 21:32:12,352 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb.json (Title: AI-equipped drones study dolphins on the edge of extinction)
+2025-05-02 21:32:12,352 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 48cc1c9cb230d39f4be03abf52c4c234a14fd4e4e48888beb1e79f06cc8a410d.json (Title: Online math tutoring service uses AI to help boost students’ skills and confidence)
+2025-05-02 21:32:12,352 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0.json (Title: AI-Mimi is building inclusive TV experiences for Deaf and Hard of Hearing user in Japan)
+2025-05-02 21:32:12,352 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 938fa36463d0c7b3efd11f24f21ec81527c1f9818a4e87ff42a629f04166a15b.json (Title: Microsoft’s framework for building AI systems responsibly)
+2025-05-02 21:32:12,352 - src.scrapers.news_scraper - WARNING - Reached max articles per run (15) while processing feed https://blogs.microsoft.com/ai/feed/.
+2025-05-02 21:32:12,353 - src.scrapers.news_scraper - INFO - Finished feed https://blogs.microsoft.com/ai/feed/. Saved 8 new articles from this feed.
+2025-05-02 21:32:12,353 - src.scrapers.news_scraper - WARNING - Reached max articles per run (15). Stopping feed processing for this run.
+2025-05-02 21:32:12,353 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 15 ---
+2025-05-02 21:32:12,353 - main_orchestrator - INFO - Scraper run completed. Found 15 new JSON files potentially.
+2025-05-02 21:32:12,353 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 21:32:12,353 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 21:32:12,354 - main_orchestrator - INFO - Found 15 scraped articles to process.
+2025-05-02 21:32:12,354 - main_orchestrator - INFO - --- Processing article file: 2715afebe6e30b0f0bdec04211577694ef657085cd89a54d531637bab6a6336e.json ---
+2025-05-02 21:32:12,354 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 2715afebe6e30b0f0bdec04211577694ef657085cd89a54d531637bab6a6336e Title: OneText (YC W23) Is Hiring a DevOps/DBA Lead Engineer...
+2025-05-02 21:32:18,939 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 2715afebe6e30b0f0bdec04211577694ef657085cd89a54d531637bab6a6336e: level=Boring, topic='Other', keyword='Job posting'
+2025-05-02 21:32:18,939 - main_orchestrator - INFO - Article 2715afebe6e30b0f0bdec04211577694ef657085cd89a54d531637bab6a6336e classified as Boring. Skipping.
+2025-05-02 21:32:19,941 - main_orchestrator - INFO - --- Processing article file: 78415211138a2acea02cfb7f2447a928c1d03d51eaa44a59cdb3a95a685dda98.json ---
+2025-05-02 21:32:19,941 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 78415211138a2acea02cfb7f2447a928c1d03d51eaa44a59cdb3a95a685dda98 Title: Derivation and Intuition behind Poisson distribution...
+2025-05-02 21:32:26,688 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 78415211138a2acea02cfb7f2447a928c1d03d51eaa44a59cdb3a95a685dda98: level=Boring, topic='Other', keyword='Poisson distribution'
+2025-05-02 21:32:26,689 - main_orchestrator - INFO - Article 78415211138a2acea02cfb7f2447a928c1d03d51eaa44a59cdb3a95a685dda98 classified as Boring. Skipping.
+2025-05-02 21:32:27,690 - main_orchestrator - INFO - --- Processing article file: a76b5c0a91eb78ff2d3e014848ceb4231c2dcd3df1b14f40ac1a2cd2b7edcacc.json ---
+2025-05-02 21:32:27,691 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: a76b5c0a91eb78ff2d3e014848ceb4231c2dcd3df1b14f40ac1a2cd2b7edcacc)
+2025-05-02 21:32:27,691 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a76b5c0a91eb78ff2d3e014848ceb4231c2dcd3df1b14f40ac1a2cd2b7edcacc Title: Evaluate Amazon Bedrock Agents with Ragas and LLM-as-a-judge...
+2025-05-02 21:32:34,324 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a76b5c0a91eb78ff2d3e014848ceb4231c2dcd3df1b14f40ac1a2cd2b7edcacc: level=Boring, topic='Software', keyword='AI agent evaluation'
+2025-05-02 21:32:34,324 - main_orchestrator - INFO - Article a76b5c0a91eb78ff2d3e014848ceb4231c2dcd3df1b14f40ac1a2cd2b7edcacc classified as Boring. Skipping.
+2025-05-02 21:32:35,326 - main_orchestrator - INFO - --- Processing article file: efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e.json ---
+2025-05-02 21:32:35,326 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e)
+2025-05-02 21:32:35,326 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e Title: Enterprise-grade natural language to SQL generation using LL...
+2025-05-02 21:32:41,600 - src.agents.filter_news_agent - INFO - Filter verdict received for ID efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e: level=Interesting, topic='AI Models', keyword='NL2SQL with LLMs'
+2025-05-02 21:32:41,600 - main_orchestrator - INFO - Article efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e classified as Interesting (Topic: AI Models).
+2025-05-02 21:32:41,601 - main_orchestrator - INFO - Checking duplicates for efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e...
+2025-05-02 21:32:41,601 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e)
+2025-05-02 21:32:41,601 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e Title: Enterprise-grade natural language to SQL generation using LL...
+2025-05-02 21:32:47,531 - src.agents.similarity_check_agent - INFO - Similarity check result for ID efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e: is_duplicate=False. Reason: The New Candidate Article discusses enterprise-grade natural language to SQL generation using LLMs, which is not covered in any of the Recently Published Articles.
+2025-05-02 21:32:47,531 - main_orchestrator - INFO - Article efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e passed similarity check.
+2025-05-02 21:32:47,531 - main_orchestrator - INFO - Finding image for efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e...
+2025-05-02 21:32:47,531 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/enterprise-grade-natural-language-to-sql-generation-using-llms-balancing-accuracy-latency-and-scale/
+2025-05-02 21:32:47,730 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/09/ML-18212-nl2sql-aws-impl-example-1002x630.png
+2025-05-02 21:32:47,730 - main_orchestrator - INFO - Using scraped image for efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/09/ML-18212-nl2sql-aws-impl-example-1002x630.png
+2025-05-02 21:32:47,731 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e...
+2025-05-02 21:33:21,114 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e.
+2025-05-02 21:33:21,114 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e...
+2025-05-02 21:33:27,510 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e
+2025-05-02 21:33:27,532 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/enterprise-grade-natural-language-to-sql-generation-using-llms-balancing-accurac.html
+2025-05-02 21:33:27,534 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 21:33:27,535 - main_orchestrator - INFO - Updated all_articles.json (63 articles).
+2025-05-02 21:33:27,536 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e.json
+2025-05-02 21:33:27,536 - main_orchestrator - INFO - --- Successfully processed article: efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e ---
+2025-05-02 21:33:28,538 - main_orchestrator - INFO - --- Processing article file: aba9b0efb2cd68bfcab6492e8e10d60538d7ba3682c84d6f7dbec007eab8fb4c.json ---
+2025-05-02 21:33:28,538 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: aba9b0efb2cd68bfcab6492e8e10d60538d7ba3682c84d6f7dbec007eab8fb4c)
+2025-05-02 21:33:28,538 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: aba9b0efb2cd68bfcab6492e8e10d60538d7ba3682c84d6f7dbec007eab8fb4c Title: AWS Field Experience reduced cost and delivered low latency ...
+2025-05-02 21:33:35,408 - src.agents.filter_news_agent - INFO - Filter verdict received for ID aba9b0efb2cd68bfcab6492e8e10d60538d7ba3682c84d6f7dbec007eab8fb4c: level=Boring, topic='Business', keyword='AWS sales AI tools'
+2025-05-02 21:33:35,409 - main_orchestrator - INFO - Article aba9b0efb2cd68bfcab6492e8e10d60538d7ba3682c84d6f7dbec007eab8fb4c classified as Boring. Skipping.
+2025-05-02 21:33:36,410 - main_orchestrator - INFO - --- Processing article file: f819c25867a51121e5d0e71df1e16bd2e1b583332c95349f7c2a421ed3e9c80a.json ---
+2025-05-02 21:33:36,411 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: f819c25867a51121e5d0e71df1e16bd2e1b583332c95349f7c2a421ed3e9c80a)
+2025-05-02 21:33:36,411 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f819c25867a51121e5d0e71df1e16bd2e1b583332c95349f7c2a421ed3e9c80a Title: Combine keyword and semantic search for text and images usin...
+2025-05-02 21:33:42,773 - src.agents.filter_news_agent - INFO - Filter verdict received for ID f819c25867a51121e5d0e71df1e16bd2e1b583332c95349f7c2a421ed3e9c80a: level=Boring, topic='Software', keyword='Amazon search functionality'
+2025-05-02 21:33:42,773 - main_orchestrator - INFO - Article f819c25867a51121e5d0e71df1e16bd2e1b583332c95349f7c2a421ed3e9c80a classified as Boring. Skipping.
+2025-05-02 21:33:43,775 - main_orchestrator - INFO - --- Processing article file: 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f.json ---
+2025-05-02 21:33:43,775 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f)
+2025-05-02 21:33:43,775 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f Title: Build an AI-powered document processing platform with open s...
+2025-05-02 21:33:51,333 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f: level=Interesting, topic='AI Models', keyword='AI document processing'
+2025-05-02 21:33:51,333 - main_orchestrator - INFO - Article 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f classified as Interesting (Topic: AI Models).
+2025-05-02 21:33:51,333 - main_orchestrator - INFO - Checking duplicates for 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f...
+2025-05-02 21:33:51,333 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f)
+2025-05-02 21:33:51,333 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f Title: Build an AI-powered document processing platform with open s...
+2025-05-02 21:33:59,942 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f: is_duplicate=False. Reason: The New Candidate Article discusses an AI-driven document processing platform using NER and LLMs on Amazon SageMaker, which is not covered in any of the Recently Published Articles.
+2025-05-02 21:33:59,942 - main_orchestrator - INFO - Article 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f passed similarity check.
+2025-05-02 21:33:59,942 - main_orchestrator - INFO - Finding image for 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f...
+2025-05-02 21:33:59,942 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-llm-on-amazon-sagemaker/
+2025-05-02 21:34:00,058 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/document-processing-sagemaker-1120x630.jpg
+2025-05-02 21:34:00,058 - main_orchestrator - INFO - Using scraped image for 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/document-processing-sagemaker-1120x630.jpg
+2025-05-02 21:34:00,058 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f...
+2025-05-02 21:34:33,615 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f.
+2025-05-02 21:34:33,615 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f...
+2025-05-02 21:34:38,876 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f
+2025-05-02 21:34:38,878 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and.html
+2025-05-02 21:34:38,880 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 21:34:38,881 - main_orchestrator - INFO - Updated all_articles.json (64 articles).
+2025-05-02 21:34:38,882 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f.json
+2025-05-02 21:34:38,882 - main_orchestrator - INFO - --- Successfully processed article: 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f ---
+2025-05-02 21:34:39,883 - main_orchestrator - INFO - --- Processing article file: 4e2e9d35008f464e9294a47662d74c04339bef9a06e3260105d03ab6382cf09c.json ---
+2025-05-02 21:34:39,884 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 4e2e9d35008f464e9294a47662d74c04339bef9a06e3260105d03ab6382cf09c Title: A conversation with Kevin Scott: What’s next in AI...
+2025-05-02 21:34:45,819 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 4e2e9d35008f464e9294a47662d74c04339bef9a06e3260105d03ab6382cf09c: level=Boring, topic='Other', keyword='AI conversation'
+2025-05-02 21:34:45,820 - main_orchestrator - INFO - Article 4e2e9d35008f464e9294a47662d74c04339bef9a06e3260105d03ab6382cf09c classified as Boring. Skipping.
+2025-05-02 21:34:46,821 - main_orchestrator - INFO - --- Processing article file: 9da69f1eb8ea1a103988ef1918d149473008b7f1e6e133190e68034f09861f30.json ---
+2025-05-02 21:34:46,821 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 9da69f1eb8ea1a103988ef1918d149473008b7f1e6e133190e68034f09861f30 Title: From Hot Wheels to handling content: How brands are using Mi...
+2025-05-02 21:34:54,192 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 9da69f1eb8ea1a103988ef1918d149473008b7f1e6e133190e68034f09861f30: level=Boring, topic='Business', keyword='Microsoft AI usage'
+2025-05-02 21:34:54,192 - main_orchestrator - INFO - Article 9da69f1eb8ea1a103988ef1918d149473008b7f1e6e133190e68034f09861f30 classified as Boring. Skipping.
+2025-05-02 21:34:55,194 - main_orchestrator - INFO - --- Processing article file: fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1.json ---
+2025-05-02 21:34:55,194 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1 Title: Microsoft open sources its ‘farm of the future’ toolkit...
+2025-05-02 21:35:00,993 - src.agents.filter_news_agent - INFO - Filter verdict received for ID fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1: level=Interesting, topic='Open Source', keyword='farm toolkit open-sourced'
+2025-05-02 21:35:00,993 - main_orchestrator - INFO - Article fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1 classified as Interesting (Topic: Open Source).
+2025-05-02 21:35:00,993 - main_orchestrator - INFO - Checking duplicates for fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1...
+2025-05-02 21:35:00,994 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1 Title: Microsoft open sources its ‘farm of the future’ toolkit...
+2025-05-02 21:35:08,500 - src.agents.similarity_check_agent - INFO - Similarity check result for ID fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1: is_duplicate=False. Reason: No recently published article reports on Microsoft open sourcing its 'farm of the future' toolkit.
+2025-05-02 21:35:08,500 - main_orchestrator - INFO - Article fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1 passed similarity check.
+2025-05-02 21:35:08,501 - main_orchestrator - INFO - Finding image for fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1...
+2025-05-02 21:35:08,501 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://blogs.microsoft.com/ai/microsoft-open-sources-its-farm-of-the-future-toolkit/
+2025-05-02 21:35:09,187 - src.scrapers.image_scraper - INFO - Found og:image: https://news.microsoft.com/source/wp-content/uploads/2022/10/Untitled-8.jpg
+2025-05-02 21:35:09,187 - main_orchestrator - INFO - Using scraped image for fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1: https://news.microsoft.com/source/wp-content/uploads/2022/10/Untitled-8.jpg
+2025-05-02 21:35:09,187 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1...
+2025-05-02 21:35:36,657 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1.
+2025-05-02 21:35:36,657 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1...
+2025-05-02 21:35:42,363 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1
+2025-05-02 21:35:42,365 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/microsoft-open-sources-its-farm-of-the-future-toolkit.html
+2025-05-02 21:35:42,366 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 21:35:42,368 - main_orchestrator - INFO - Updated all_articles.json (65 articles).
+2025-05-02 21:35:42,368 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1.json
+2025-05-02 21:35:42,368 - main_orchestrator - INFO - --- Successfully processed article: fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1 ---
+2025-05-02 21:35:43,370 - main_orchestrator - INFO - --- Processing article file: 3300f73106c945c3ab2e3203757143593c35fe93b298416fcb58135406fc4ef6.json ---
+2025-05-02 21:35:43,370 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 3300f73106c945c3ab2e3203757143593c35fe93b298416fcb58135406fc4ef6 Title: How data and AI will transform contact centres for financial...
+2025-05-02 21:35:50,064 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 3300f73106c945c3ab2e3203757143593c35fe93b298416fcb58135406fc4ef6: level=Boring, topic='Business', keyword='AI in financial services'
+2025-05-02 21:35:50,064 - main_orchestrator - INFO - Article 3300f73106c945c3ab2e3203757143593c35fe93b298416fcb58135406fc4ef6 classified as Boring. Skipping.
+2025-05-02 21:35:51,066 - main_orchestrator - INFO - --- Processing article file: 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0.json ---
+2025-05-02 21:35:51,066 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0 Title: AI-Mimi is building inclusive TV experiences for Deaf and Ha...
+2025-05-02 21:35:58,854 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0: level=Interesting, topic='Society', keyword='AI accessibility initiative'
+2025-05-02 21:35:58,854 - main_orchestrator - INFO - Article 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0 classified as Interesting (Topic: Society).
+2025-05-02 21:35:58,854 - main_orchestrator - INFO - Checking duplicates for 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0...
+2025-05-02 21:35:58,854 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0 Title: AI-Mimi is building inclusive TV experiences for Deaf and Ha...
+2025-05-02 21:36:05,762 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0: is_duplicate=False. Reason: The New Candidate Article discusses AI-Mimi's initiative for inclusive TV experiences in Japan, which is not covered in any of the Recently Published Articles.
+2025-05-02 21:36:05,762 - main_orchestrator - INFO - Article 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0 passed similarity check.
+2025-05-02 21:36:05,762 - main_orchestrator - INFO - Finding image for 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0...
+2025-05-02 21:36:05,763 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://blogs.microsoft.com/accessibility/ai-mimi-is-building-inclusive-tv-experiences-for-deaf-and-hard-of-hearing-user-in-japan/
+2025-05-02 21:36:05,952 - src.scrapers.image_scraper - INFO - Found og:image: https://blogs.microsoft.com/wp-content/uploads/prod/sites/172/2022/06/Picture2.png
+2025-05-02 21:36:05,953 - main_orchestrator - INFO - Using scraped image for 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0: https://blogs.microsoft.com/wp-content/uploads/prod/sites/172/2022/06/Picture2.png
+2025-05-02 21:36:05,953 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0...
+2025-05-02 21:36:32,376 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0.
+2025-05-02 21:36:32,376 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0...
+2025-05-02 21:36:39,377 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0
+2025-05-02 21:36:39,379 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/ai-mimi-is-building-inclusive-tv-experiences-for-deaf-and-hard-of-hearing-user-i.html
+2025-05-02 21:36:39,380 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 21:36:39,382 - main_orchestrator - INFO - Updated all_articles.json (66 articles).
+2025-05-02 21:36:39,382 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0.json
+2025-05-02 21:36:39,382 - main_orchestrator - INFO - --- Successfully processed article: 05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0 ---
+2025-05-02 21:36:40,384 - main_orchestrator - INFO - --- Processing article file: 48cc1c9cb230d39f4be03abf52c4c234a14fd4e4e48888beb1e79f06cc8a410d.json ---
+2025-05-02 21:36:40,384 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 48cc1c9cb230d39f4be03abf52c4c234a14fd4e4e48888beb1e79f06cc8a410d Title: Online math tutoring service uses AI to help boost students’...
+2025-05-02 21:36:48,105 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 48cc1c9cb230d39f4be03abf52c4c234a14fd4e4e48888beb1e79f06cc8a410d: level=Boring, topic='Other', keyword='AI tutoring service'
+2025-05-02 21:36:48,105 - main_orchestrator - INFO - Article 48cc1c9cb230d39f4be03abf52c4c234a14fd4e4e48888beb1e79f06cc8a410d classified as Boring. Skipping.
+2025-05-02 21:36:49,107 - main_orchestrator - INFO - --- Processing article file: 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb.json ---
+2025-05-02 21:36:49,107 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb Title: AI-equipped drones study dolphins on the edge of extinction...
+2025-05-02 21:36:55,604 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb: level=Interesting, topic='AI Models', keyword='AI drones conservation'
+2025-05-02 21:36:55,604 - main_orchestrator - INFO - Article 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb classified as Interesting (Topic: AI Models).
+2025-05-02 21:36:55,604 - main_orchestrator - INFO - Checking duplicates for 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb...
+2025-05-02 21:36:55,604 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb Title: AI-equipped drones study dolphins on the edge of extinction...
+2025-05-02 21:37:01,586 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb: is_duplicate=False. Reason: The core news event of AI-equipped drones studying dolphins is not reported in any of the recently published articles.
+2025-05-02 21:37:01,586 - main_orchestrator - INFO - Article 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb passed similarity check.
+2025-05-02 21:37:01,586 - main_orchestrator - INFO - Finding image for 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb...
+2025-05-02 21:37:01,586 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://news.microsoft.com/apac/features/ai-drones-dolphins-maui63/
+2025-05-02 21:37:01,967 - src.scrapers.image_scraper - INFO - Found og:image: https://news.microsoft.com/source/asia/wp-content/uploads/2022/07/Maui63-Hero-still.jpg
+2025-05-02 21:37:01,968 - main_orchestrator - INFO - Using scraped image for 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb: https://news.microsoft.com/source/asia/wp-content/uploads/2022/07/Maui63-Hero-still.jpg
+2025-05-02 21:37:01,968 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb...
+2025-05-02 21:37:25,303 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb.
+2025-05-02 21:37:25,303 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb...
+2025-05-02 21:37:31,460 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb
+2025-05-02 21:37:31,461 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/ai-equipped-drones-study-dolphins-on-the-edge-of-extinction.html
+2025-05-02 21:37:31,463 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 21:37:31,464 - main_orchestrator - INFO - Updated all_articles.json (67 articles).
+2025-05-02 21:37:31,465 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb.json
+2025-05-02 21:37:31,465 - main_orchestrator - INFO - --- Successfully processed article: 3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb ---
+2025-05-02 21:37:32,466 - main_orchestrator - INFO - --- Processing article file: 938fa36463d0c7b3efd11f24f21ec81527c1f9818a4e87ff42a629f04166a15b.json ---
+2025-05-02 21:37:32,467 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 938fa36463d0c7b3efd11f24f21ec81527c1f9818a4e87ff42a629f04166a15b Title: Microsoft’s framework for building AI systems responsibly...
+2025-05-02 21:37:38,243 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 938fa36463d0c7b3efd11f24f21ec81527c1f9818a4e87ff42a629f04166a15b: level=Boring, topic='Ethics', keyword='AI ethics framework'
+2025-05-02 21:37:38,243 - main_orchestrator - INFO - Article 938fa36463d0c7b3efd11f24f21ec81527c1f9818a4e87ff42a629f04166a15b classified as Boring. Skipping.
+2025-05-02 21:37:39,245 - main_orchestrator - INFO - Processing cycle complete. Successful: 5, Failed/Skipped: 10
+2025-05-02 21:37:39,245 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished (329.14 seconds) === ---
+2025-05-02 21:47:59,456 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 21:47:59,457 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 21:48:00,257 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-02 21:48:02,370 - transformers.processing_utils - WARNING - Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+2025-05-02 21:48:03,382 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 21:48:03,392 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-02 21:48:03,392 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 21:48:03,392 - main_orchestrator - INFO - Ensured data, processed_json, and public/articles directories exist.
+2025-05-02 21:48:03,393 - main_orchestrator - INFO - --- Running Scraper ---
+2025-05-02 21:48:03,393 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (10 feeds) ---
+2025-05-02 21:48:03,393 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 21:48:03,488 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 21:48:03,488 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles from this feed.
+2025-05-02 21:48:03,488 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 21:48:03,588 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 21:48:03,588 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-02 21:48:03,588 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 21:48:03,867 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-02 21:48:03,867 - src.scrapers.news_scraper - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles from this feed.
+2025-05-02 21:48:03,867 - src.scrapers.news_scraper - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 21:48:04,247 - src.scrapers.news_scraper - INFO - Feed https://news.ycombinator.com/rss fetched. Contains 30 entries.
+2025-05-02 21:48:04,247 - src.scrapers.news_scraper - INFO - Finished feed https://news.ycombinator.com/rss. Saved 0 new articles from this feed.
+2025-05-02 21:48:04,247 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 21:48:05,282 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://www.anthropic.com/feed.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 21:48:05,283 - src.scrapers.news_scraper - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 21:48:05,484 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://ai.googleblog.com/feeds/posts/default?alt=rss: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 21:48:05,484 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 21:48:05,549 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://openai.com/blog/rss.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 21:48:05,549 - src.scrapers.news_scraper - INFO - Checking feed: https://aws.amazon.com/blogs/machine-learning/feed/
+2025-05-02 21:48:05,988 - src.scrapers.news_scraper - INFO - Feed https://aws.amazon.com/blogs/machine-learning/feed/ fetched. Contains 20 entries.
+2025-05-02 21:48:05,989 - src.scrapers.news_scraper - INFO - Finished feed https://aws.amazon.com/blogs/machine-learning/feed/. Saved 0 new articles from this feed.
+2025-05-02 21:48:05,989 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.microsoft.com/ai/feed/
+2025-05-02 21:48:06,158 - src.scrapers.news_scraper - INFO - Feed https://blogs.microsoft.com/ai/feed/ fetched. Contains 10 entries.
+2025-05-02 21:48:06,159 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f.json (Title: Singapore develops Asia’s first AI-based mobile app for shark and ray fin identification to combat illegal wildlife trade)
+2025-05-02 21:48:06,159 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: abb29e286ab766454b026374dc99b01c30a2d6d4cbdfd623d5cef23788d6dc89.json (Title: The opportunity at home – can AI drive innovation in personal assistant devices and sign language?)
+2025-05-02 21:48:06,159 - src.scrapers.news_scraper - INFO - Finished feed https://blogs.microsoft.com/ai/feed/. Saved 2 new articles from this feed.
+2025-05-02 21:48:06,159 - src.scrapers.news_scraper - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 21:48:06,392 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 21:48:06,392 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 2 ---
+2025-05-02 21:48:06,392 - main_orchestrator - INFO - Scraper run completed. Found 2 new JSON files potentially.
+2025-05-02 21:48:06,392 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 21:48:06,393 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 21:48:06,393 - main_orchestrator - INFO - Found 2 scraped articles to process.
+2025-05-02 21:48:06,394 - main_orchestrator - INFO - --- Processing article file: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f.json ---
+2025-05-02 21:48:06,394 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f Title: Singapore develops Asia’s first AI-based mobile app for shar...
+2025-05-02 21:48:13,040 - src.agents.filter_news_agent - INFO - Filter verdict received for ID aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f: level=Interesting, topic='AI Models', keyword='AI wildlife conservation app'
+2025-05-02 21:48:13,040 - main_orchestrator - INFO - Article aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f classified as Interesting (Topic: AI Models).
+2025-05-02 21:48:13,040 - main_orchestrator - INFO - Checking duplicates for aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f...
+2025-05-02 21:48:13,040 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f Title: Singapore develops Asia’s first AI-based mobile app for shar...
+2025-05-02 21:48:18,144 - src.agents.similarity_check_agent - INFO - Similarity check result for ID aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f: is_duplicate=False. Reason: No recently published article reports on Singapore developing an AI-based mobile app for shark and ray fin identification.
+2025-05-02 21:48:18,145 - main_orchestrator - INFO - Article aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f passed similarity check.
+2025-05-02 21:48:18,145 - main_orchestrator - INFO - Finding image for aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f...
+2025-05-02 21:48:18,145 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://news.microsoft.com/en-sg/2022/06/08/singapore-develops-asias-first-ai-based-mobile-app-for-shark-and-ray-fin-identification-to-combat-illegal-wildlife-trade/
+2025-05-02 21:48:18,317 - src.scrapers.image_scraper - WARNING - No suitable og:image or twitter:image meta tag found at: https://news.microsoft.com/en-sg/2022/06/08/singapore-develops-asias-first-ai-based-mobile-app-for-shark-and-ray-fin-identification-to-combat-illegal-wildlife-trade/
+2025-05-02 21:48:18,317 - main_orchestrator - INFO - Image scraping failed/no image, using API search for aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f...
+2025-05-02 21:48:18,317 - src.scrapers.image_scraper - INFO - Finding best image for query: 'AI wildlife conservation app' (CLIP Enabled: True)
+2025-05-02 21:48:24,784 - src.scrapers.image_scraper - INFO - SerpApi found 5 image candidates for query: 'AI wildlife conservation app'
+2025-05-02 21:48:24,784 - src.scrapers.image_scraper - INFO - CLIP filtering 5 candidate images against prompt: 'AI wildlife conservation app'
+2025-05-02 21:48:27,642 - src.scrapers.image_scraper - INFO - CLIP selected best image: https://i.ytimg.com/vi/K4Ht5K0zaTQ/maxresdefault.jpg (Score: 0.3535)
+2025-05-02 21:48:27,642 - src.scrapers.image_scraper - INFO - Selected image URL for 'AI wildlife conservation app': https://i.ytimg.com/vi/K4Ht5K0zaTQ/maxresdefault.jpg
+2025-05-02 21:48:27,643 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f...
+2025-05-02 21:48:55,198 - src.agents.seo_article_generator_agent - WARNING - Generated title tag > 60 chars: 'Singapore Launches AI Wildlife Conservation App to Protect Sharks & Rays'
+2025-05-02 21:48:55,199 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f.
+2025-05-02 21:48:55,199 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f...
+2025-05-02 21:49:01,827 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f
+2025-05-02 21:49:01,849 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/singapore-develops-asias-first-ai-based-mobile-app-for-shark-and-ray-fin-identif.html
+2025-05-02 21:49:01,851 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 21:49:01,853 - main_orchestrator - INFO - Updated all_articles.json (68 articles).
+2025-05-02 21:49:01,853 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f.json
+2025-05-02 21:49:01,853 - main_orchestrator - INFO - --- Successfully processed article: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f ---
+2025-05-02 21:49:02,855 - main_orchestrator - INFO - --- Processing article file: abb29e286ab766454b026374dc99b01c30a2d6d4cbdfd623d5cef23788d6dc89.json ---
+2025-05-02 21:49:02,855 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: abb29e286ab766454b026374dc99b01c30a2d6d4cbdfd623d5cef23788d6dc89 Title: The opportunity at home – can AI drive innovation in persona...
+2025-05-02 21:49:09,203 - src.agents.filter_news_agent - INFO - Filter verdict received for ID abb29e286ab766454b026374dc99b01c30a2d6d4cbdfd623d5cef23788d6dc89: level=Boring, topic='Other', keyword='AI accessibility blog'
+2025-05-02 21:49:09,203 - main_orchestrator - INFO - Article abb29e286ab766454b026374dc99b01c30a2d6d4cbdfd623d5cef23788d6dc89 classified as Boring. Skipping.
+2025-05-02 21:49:10,204 - main_orchestrator - INFO - Processing cycle complete. Successful: 1, Failed/Skipped: 1
+2025-05-02 21:49:10,205 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished (66.81 seconds) === ---
