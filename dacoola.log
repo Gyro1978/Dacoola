@@ -14218,3 +14218,367 @@ AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentTy
 2025-05-02 22:50:18 - main_orchestrator - INFO - --- Successfully processed article: b92355f3cf7d7529594f61178671e5cc307441ec4d53c10e024fc4f339e1fc9a ---
 2025-05-02 22:50:19 - main_orchestrator - INFO - Processing cycle complete. Successfully processed: 9, Failed/Skipped/Duplicate: 6
 2025-05-02 22:50:19 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (495.57 seconds) === ---
+2025-05-02 23:03:33,203 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 23:03:33,203 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 23:03:33,943 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-02 23:03:36,420 - transformers.processing_utils - WARNING - Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+2025-05-02 23:03:36,709 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 23:03:36 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/home/
+2025-05-02 23:03:36 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-02 23:03:36 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-02 23:03:36.737986) === ---
+2025-05-02 23:03:36 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-02 23:03:36 - main_orchestrator - INFO - --- Stage 1: Running Scraper ---
+2025-05-02 23:03:36 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (10 feeds) ---
+2025-05-02 23:03:36 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 23:03:36 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 23:03:36 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles from this feed.
+2025-05-02 23:03:36 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 23:03:37 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 23:03:37 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-02 23:03:37 - src.scrapers.news_scraper - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 23:03:37 - src.scrapers.news_scraper - INFO - Feed https://news.ycombinator.com/rss fetched. Contains 30 entries.
+2025-05-02 23:03:37 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 39f4e41ba6c6c0fe497f386c70ffc1630db02eb2e31a36d8f07c101ea49bc8e8.json (Title: What I've learned from jj)
+2025-05-02 23:03:37 - src.scrapers.news_scraper - INFO - Finished feed https://news.ycombinator.com/rss. Saved 1 new articles from this feed.
+2025-05-02 23:03:37 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 23:03:37 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://www.anthropic.com/feed.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 23:03:37 - src.scrapers.news_scraper - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 23:03:38 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://ai.googleblog.com/feeds/posts/default?alt=rss: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 23:03:38 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 23:03:38 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://openai.com/blog/rss.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 23:03:38 - src.scrapers.news_scraper - INFO - Checking feed: https://aws.amazon.com/blogs/machine-learning/feed/
+2025-05-02 23:03:38 - src.scrapers.news_scraper - INFO - Feed https://aws.amazon.com/blogs/machine-learning/feed/ fetched. Contains 20 entries.
+2025-05-02 23:03:38 - src.scrapers.news_scraper - INFO - Finished feed https://aws.amazon.com/blogs/machine-learning/feed/. Saved 0 new articles from this feed.
+2025-05-02 23:03:38 - src.scrapers.news_scraper - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 23:03:39 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 23:03:39 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-02 23:03:39 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-02 23:03:39 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 71afb516f765b738d33e1ed62e45c782e251f88f77818d451d5d8c10381c54d4.json (Title: How the Economics of Inference Can Maximize AI Value)
+2025-05-02 23:03:39 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 6b78f52592c4aa21f57476d00c3b493915d2eef2221e5ced5bfa64d0b8ba2569.json (Title: Enterprises Onboard AI Teammates Faster With NVIDIA NeMo Tools to Scale Employee Productivity)
+2025-05-02 23:03:39 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 18a2cb001a3b0613d5b1d8e1006f175f58b7971e7c80a71805d75904b9e3addd.json (Title: Project G-Assist Plug-In Builder Lets Anyone Customize AI on GeForce RTX AI PCs)
+2025-05-02 23:03:39 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051.json (Title: Making Brain Waves: AI Startup Speeds Disease Research With Lab in the Loop)
+2025-05-02 23:03:39 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763.json (Title: Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficiency by Over 300x)
+2025-05-02 23:03:39 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a1dd9cce8d32a43daa9de37901b8d87969803b250f59185802630c58b8adf949.json (Title: Keeping AI on the Planet: NVIDIA Technologies Make Every Day About Earth Day)
+2025-05-02 23:03:39 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078.json (Title: AI Bites Back: Researchers Develop Model to Detect Malaria Amid Venezuelan Gold Rush)
+2025-05-02 23:03:39 - src.scrapers.news_scraper - INFO - Finished feed https://blogs.nvidia.com/feed/. Saved 7 new articles from this feed.
+2025-05-02 23:03:39 - src.scrapers.news_scraper - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-02 23:03:40 - src.scrapers.news_scraper - INFO - Feed http://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-02 23:03:40 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc.json (Title: Microsoft’s new “passwordless by default” is great but comes at a cost)
+2025-05-02 23:03:40 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 5ce45a8706c4f3fda22dbdb7322664060bb031c4abd14036012bfb83622e2590.json (Title: Claude’s AI research mode now runs for up to 45 minutes before delivering reports)
+2025-05-02 23:03:40 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8.json (Title: Time saved by AI offset by new work created, study suggests)
+2025-05-02 23:03:40 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872.json (Title: Why MFA is getting easier to bypass and what to do about it)
+2025-05-02 23:03:40 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca.json (Title: Windows RDP lets you log in using revoked passwords. Microsoft is OK with that.)
+2025-05-02 23:03:40 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3.json (Title: Millions of Apple Airplay-enabled devices can be hacked via Wi-Fi)
+2025-05-02 23:03:40 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4.json (Title: The end of an AI that shocked the world: OpenAI retires GPT-4)
+2025-05-02 23:03:40 - src.scrapers.news_scraper - WARNING - Reached max articles per run (15) while processing feed http://feeds.arstechnica.com/arstechnica/technology-lab.
+2025-05-02 23:03:40 - src.scrapers.news_scraper - INFO - Finished feed http://feeds.arstechnica.com/arstechnica/technology-lab. Saved 7 new articles from this feed.
+2025-05-02 23:03:40 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 15 ---
+2025-05-02 23:03:40 - main_orchestrator - INFO - Scraper run completed. Saved 15 new raw article JSON files.
+2025-05-02 23:03:40 - main_orchestrator - INFO - --- Stage 2: Running Processing Cycle ---
+2025-05-02 23:03:40 - main_orchestrator - INFO - Loaded 50 recent articles from all_articles.json for comparison context.
+2025-05-02 23:03:40 - main_orchestrator - INFO - Loaded 50 recent articles from existing site data for duplicate checking.
+2025-05-02 23:03:40 - main_orchestrator - INFO - Found 15 scraped articles to process.
+2025-05-02 23:03:40 - main_orchestrator - INFO - --- Processing article file: 39f4e41ba6c6c0fe497f386c70ffc1630db02eb2e31a36d8f07c101ea49bc8e8.json ---
+2025-05-02 23:03:40 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 39f4e41ba6c6c0fe497f386c70ffc1630db02eb2e31a36d8f07c101ea49bc8e8 Title: What I've learned from jj...
+2025-05-02 23:03:47 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 39f4e41ba6c6c0fe497f386c70ffc1630db02eb2e31a36d8f07c101ea49bc8e8: level=Boring, topic='Other', keyword='Personal reflection'
+2025-05-02 23:03:47 - main_orchestrator - INFO - Article 39f4e41ba6c6c0fe497f386c70ffc1630db02eb2e31a36d8f07c101ea49bc8e8 classified as Boring by Filter Agent. Skipping.
+2025-05-02 23:03:48 - main_orchestrator - INFO - --- Processing article file: 71afb516f765b738d33e1ed62e45c782e251f88f77818d451d5d8c10381c54d4.json ---
+2025-05-02 23:03:48 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 71afb516f765b738d33e1ed62e45c782e251f88f77818d451d5d8c10381c54d4)
+2025-05-02 23:03:48 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 71afb516f765b738d33e1ed62e45c782e251f88f77818d451d5d8c10381c54d4 Title: How the Economics of Inference Can Maximize AI Value...
+2025-05-02 23:03:54 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 71afb516f765b738d33e1ed62e45c782e251f88f77818d451d5d8c10381c54d4: level=Boring, topic='Other', keyword='AI inference economics'
+2025-05-02 23:03:54 - main_orchestrator - INFO - Article 71afb516f765b738d33e1ed62e45c782e251f88f77818d451d5d8c10381c54d4 classified as Boring by Filter Agent. Skipping.
+2025-05-02 23:03:55 - main_orchestrator - INFO - --- Processing article file: 18a2cb001a3b0613d5b1d8e1006f175f58b7971e7c80a71805d75904b9e3addd.json ---
+2025-05-02 23:03:55 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 18a2cb001a3b0613d5b1d8e1006f175f58b7971e7c80a71805d75904b9e3addd)
+2025-05-02 23:03:55 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 18a2cb001a3b0613d5b1d8e1006f175f58b7971e7c80a71805d75904b9e3addd Title: Project G-Assist Plug-In Builder Lets Anyone Customize AI on...
+2025-05-02 23:04:02 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 18a2cb001a3b0613d5b1d8e1006f175f58b7971e7c80a71805d75904b9e3addd: level=Boring, topic='Software', keyword='AI assistant feature'
+2025-05-02 23:04:02 - main_orchestrator - INFO - Article 18a2cb001a3b0613d5b1d8e1006f175f58b7971e7c80a71805d75904b9e3addd classified as Boring by Filter Agent. Skipping.
+2025-05-02 23:04:03 - main_orchestrator - INFO - --- Processing article file: 6b78f52592c4aa21f57476d00c3b493915d2eef2221e5ced5bfa64d0b8ba2569.json ---
+2025-05-02 23:04:03 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 6b78f52592c4aa21f57476d00c3b493915d2eef2221e5ced5bfa64d0b8ba2569)
+2025-05-02 23:04:03 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 6b78f52592c4aa21f57476d00c3b493915d2eef2221e5ced5bfa64d0b8ba2569 Title: Enterprises Onboard AI Teammates Faster With NVIDIA NeMo Too...
+2025-05-02 23:04:10 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 6b78f52592c4aa21f57476d00c3b493915d2eef2221e5ced5bfa64d0b8ba2569: level=Boring, topic='Software', keyword='NVIDIA NeMo microservices'
+2025-05-02 23:04:10 - main_orchestrator - INFO - Article 6b78f52592c4aa21f57476d00c3b493915d2eef2221e5ced5bfa64d0b8ba2569 classified as Boring by Filter Agent. Skipping.
+2025-05-02 23:04:11 - main_orchestrator - INFO - --- Processing article file: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051.json ---
+2025-05-02 23:04:11 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051)
+2025-05-02 23:04:11 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051 Title: Making Brain Waves: AI Startup Speeds Disease Research With ...
+2025-05-02 23:04:17 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051: level=Interesting, topic='Health', keyword='AI drug discovery'
+2025-05-02 23:04:17 - main_orchestrator - INFO - Article d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051 classified as Interesting (Topic: Health).
+2025-05-02 23:04:17 - main_orchestrator - INFO - Checking duplicates for d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051...
+2025-05-02 23:04:17 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051)
+2025-05-02 23:04:17 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051 Title: Making Brain Waves: AI Startup Speeds Disease Research With ...
+2025-05-02 23:04:23 - src.agents.similarity_check_agent - INFO - Similarity check result for ID d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051: is_duplicate=False. Reason: The New Candidate Article discusses BrainStorm Therapeutics' AI-powered drug discovery for neurological disorders, which is not covered in any of the Recently Published Articles.
+2025-05-02 23:04:23 - main_orchestrator - INFO - Article d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051 passed similarity check.
+2025-05-02 23:04:23 - main_orchestrator - INFO - Finding image for d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051...
+2025-05-02 23:04:23 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://blogs.nvidia.com/blog/brain-disease-ai-lab-in-the-loop/
+2025-05-02 23:04:23 - src.scrapers.image_scraper - INFO - Found og:image: https://blogs.nvidia.com/wp-content/uploads/2025/04/DSCF8311_blogcrop.jpg
+2025-05-02 23:04:23 - main_orchestrator - INFO - Using scraped image for d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051: https://blogs.nvidia.com/wp-content/uploads/2025/04/DSCF8311_blogcrop.jpg
+2025-05-02 23:04:23 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051...
+2025-05-02 23:04:53 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051.
+2025-05-02 23:04:53 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051...
+2025-05-02 23:04:59 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051
+2025-05-02 23:04:59 - main_orchestrator - INFO - Rendered HTML: making-brain-waves-ai-startup-speeds-disease-research-with-lab-in-the-loop.html
+2025-05-02 23:04:59 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 23:04:59 - main_orchestrator - INFO - Updated all_articles.json (78 articles).
+2025-05-02 23:04:59 - main_orchestrator - INFO - Attempting to post article d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051 to Twitter...
+2025-05-02 23:04:59 - src.social.twitter_poster - INFO - Attempting to post tweet for: Making Brain Waves: AI Startup Speeds Disease Research With Lab in the Loop
+2025-05-02 23:04:59 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:04:59 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:05:00 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:05:00 - main_orchestrator - ERROR - Failed to post d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051 to Twitter (function returned False).
+2025-05-02 23:05:00 - main_orchestrator - INFO - Saved final processed data to: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051.json
+2025-05-02 23:05:00 - main_orchestrator - INFO - --- Successfully processed article: d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051 ---
+2025-05-02 23:05:01 - main_orchestrator - INFO - --- Processing article file: a1dd9cce8d32a43daa9de37901b8d87969803b250f59185802630c58b8adf949.json ---
+2025-05-02 23:05:01 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: a1dd9cce8d32a43daa9de37901b8d87969803b250f59185802630c58b8adf949)
+2025-05-02 23:05:01 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a1dd9cce8d32a43daa9de37901b8d87969803b250f59185802630c58b8adf949 Title: Keeping AI on the Planet: NVIDIA Technologies Make Every Day...
+2025-05-02 23:05:08 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a1dd9cce8d32a43daa9de37901b8d87969803b250f59185802630c58b8adf949: level=Boring, topic='Other', keyword='NVIDIA environmental AI'
+2025-05-02 23:05:08 - main_orchestrator - INFO - Article a1dd9cce8d32a43daa9de37901b8d87969803b250f59185802630c58b8adf949 classified as Boring by Filter Agent. Skipping.
+2025-05-02 23:05:09 - main_orchestrator - INFO - --- Processing article file: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763.json ---
+2025-05-02 23:05:09 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763)
+2025-05-02 23:05:09 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763 Title: Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficie...
+2025-05-02 23:05:16 - src.agents.filter_news_agent - INFO - Filter verdict received for ID c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763: level=Interesting, topic='Hardware', keyword='NVIDIA Blackwell cooling'
+2025-05-02 23:05:16 - main_orchestrator - INFO - Article c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763 classified as Interesting (Topic: Hardware).
+2025-05-02 23:05:16 - main_orchestrator - INFO - Checking duplicates for c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763...
+2025-05-02 23:05:16 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763)
+2025-05-02 23:05:16 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763 Title: Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficie...
+2025-05-02 23:05:22 - src.agents.similarity_check_agent - INFO - Similarity check result for ID c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763: is_duplicate=False. Reason: The New Candidate Article discusses NVIDIA Blackwell Platform's water efficiency improvements, which is not covered in any of the Recently Published Articles.
+2025-05-02 23:05:22 - main_orchestrator - INFO - Article c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763 passed similarity check.
+2025-05-02 23:05:22 - main_orchestrator - INFO - Finding image for c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763...
+2025-05-02 23:05:22 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://blogs.nvidia.com/blog/blackwell-platform-water-efficiency-liquid-cooling-data-centers-ai-factories/
+2025-05-02 23:05:22 - src.scrapers.image_scraper - INFO - Found og:image: https://blogs.nvidia.com/wp-content/uploads/2025/04/water-efficiency-hero-resized.jpg
+2025-05-02 23:05:22 - main_orchestrator - INFO - Using scraped image for c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763: https://blogs.nvidia.com/wp-content/uploads/2025/04/water-efficiency-hero-resized.jpg
+2025-05-02 23:05:22 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763...
+2025-05-02 23:05:53 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763.
+2025-05-02 23:05:53 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763...
+2025-05-02 23:05:59 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763
+2025-05-02 23:05:59 - main_orchestrator - INFO - Rendered HTML: chill-factor-nvidia-blackwell-platform-boosts-water-efficiency-by-over-300x.html
+2025-05-02 23:05:59 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 23:05:59 - main_orchestrator - INFO - Updated all_articles.json (79 articles).
+2025-05-02 23:05:59 - main_orchestrator - INFO - Attempting to post article c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763 to Twitter...
+2025-05-02 23:05:59 - src.social.twitter_poster - INFO - Attempting to post tweet for: Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficiency by Over 300x
+2025-05-02 23:05:59 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:05:59 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:06:00 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:06:00 - main_orchestrator - ERROR - Failed to post c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763 to Twitter (function returned False).
+2025-05-02 23:06:00 - main_orchestrator - INFO - Saved final processed data to: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763.json
+2025-05-02 23:06:00 - main_orchestrator - INFO - --- Successfully processed article: c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763 ---
+2025-05-02 23:06:01 - main_orchestrator - INFO - --- Processing article file: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078.json ---
+2025-05-02 23:06:01 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078)
+2025-05-02 23:06:01 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078 Title: AI Bites Back: Researchers Develop Model to Detect Malaria A...
+2025-05-02 23:06:07 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078: level=Interesting, topic='Health', keyword='AI malaria detection'
+2025-05-02 23:06:07 - main_orchestrator - INFO - Article 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078 classified as Interesting (Topic: Health).
+2025-05-02 23:06:07 - main_orchestrator - INFO - Checking duplicates for 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078...
+2025-05-02 23:06:07 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078)
+2025-05-02 23:06:07 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078 Title: AI Bites Back: Researchers Develop Model to Detect Malaria A...
+2025-05-02 23:06:13 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078: is_duplicate=False. Reason: No recently published article reports on the development of an AI model to detect malaria in Venezuela.
+2025-05-02 23:06:13 - main_orchestrator - INFO - Article 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078 passed similarity check.
+2025-05-02 23:06:13 - main_orchestrator - INFO - Finding image for 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078...
+2025-05-02 23:06:13 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://blogs.nvidia.com/blog/ai-researchers-malaria-venezuela/
+2025-05-02 23:06:13 - src.scrapers.image_scraper - INFO - Found og:image: https://blogs.nvidia.com/wp-content/uploads/2025/04/Anopheles_stephensi.jpeg
+2025-05-02 23:06:13 - main_orchestrator - INFO - Using scraped image for 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078: https://blogs.nvidia.com/wp-content/uploads/2025/04/Anopheles_stephensi.jpeg
+2025-05-02 23:06:13 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078...
+2025-05-02 23:06:40 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078.
+2025-05-02 23:06:40 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078...
+2025-05-02 23:06:47 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078
+2025-05-02 23:06:47 - main_orchestrator - INFO - Rendered HTML: ai-bites-back-researchers-develop-model-to-detect-malaria-amid-venezuelan-gold-r.html
+2025-05-02 23:06:47 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 23:06:47 - main_orchestrator - INFO - Updated all_articles.json (80 articles).
+2025-05-02 23:06:47 - main_orchestrator - INFO - Attempting to post article 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078 to Twitter...
+2025-05-02 23:06:47 - src.social.twitter_poster - INFO - Attempting to post tweet for: AI Bites Back: Researchers Develop Model to Detect Malaria Amid Venezuelan Gold Rush
+2025-05-02 23:06:47 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:06:47 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:06:47 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:06:47 - main_orchestrator - ERROR - Failed to post 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078 to Twitter (function returned False).
+2025-05-02 23:06:47 - main_orchestrator - INFO - Saved final processed data to: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078.json
+2025-05-02 23:06:47 - main_orchestrator - INFO - --- Successfully processed article: 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078 ---
+2025-05-02 23:06:48 - main_orchestrator - INFO - --- Processing article file: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8.json ---
+2025-05-02 23:06:48 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8)
+2025-05-02 23:06:48 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8 Title: Time saved by AI offset by new work created, study suggests...
+2025-05-02 23:06:56 - src.agents.filter_news_agent - INFO - Filter verdict received for ID aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8: level=Interesting, topic='Society', keyword='AI labor impact'
+2025-05-02 23:06:56 - main_orchestrator - INFO - Article aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8 classified as Interesting (Topic: Society).
+2025-05-02 23:06:56 - main_orchestrator - INFO - Checking duplicates for aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8...
+2025-05-02 23:06:56 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8)
+2025-05-02 23:06:56 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8 Title: Time saved by AI offset by new work created, study suggests...
+2025-05-02 23:07:05 - src.agents.similarity_check_agent - INFO - Similarity check result for ID aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8: is_duplicate=False. Reason: The core news event in the New Candidate Article is a study on AI's impact on labor markets, which is not covered in any of the Recently Published Articles.
+2025-05-02 23:07:05 - main_orchestrator - INFO - Article aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8 passed similarity check.
+2025-05-02 23:07:05 - main_orchestrator - INFO - Finding image for aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8...
+2025-05-02 23:07:05 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/ai/2025/05/time-saved-by-ai-offset-by-new-work-created-study-suggests/
+2025-05-02 23:07:05 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/05/AI_work_interference-1152x648.jpg
+2025-05-02 23:07:05 - main_orchestrator - INFO - Using scraped image for aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8: https://cdn.arstechnica.net/wp-content/uploads/2025/05/AI_work_interference-1152x648.jpg
+2025-05-02 23:07:05 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8...
+2025-05-02 23:07:33 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8.
+2025-05-02 23:07:33 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8...
+2025-05-02 23:07:39 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8
+2025-05-02 23:07:39 - main_orchestrator - INFO - Rendered HTML: time-saved-by-ai-offset-by-new-work-created-study-suggests.html
+2025-05-02 23:07:39 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 23:07:39 - main_orchestrator - INFO - Updated all_articles.json (81 articles).
+2025-05-02 23:07:39 - main_orchestrator - INFO - Attempting to post article aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8 to Twitter...
+2025-05-02 23:07:39 - src.social.twitter_poster - INFO - Attempting to post tweet for: Time saved by AI offset by new work created, study suggests
+2025-05-02 23:07:39 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:07:39 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:07:39 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:07:39 - main_orchestrator - ERROR - Failed to post aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8 to Twitter (function returned False).
+2025-05-02 23:07:39 - main_orchestrator - INFO - Saved final processed data to: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8.json
+2025-05-02 23:07:39 - main_orchestrator - INFO - --- Successfully processed article: aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8 ---
+2025-05-02 23:07:40 - main_orchestrator - INFO - --- Processing article file: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc.json ---
+2025-05-02 23:07:40 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc)
+2025-05-02 23:07:40 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc Title: Microsoft’s new “passwordless by default” is great but comes...
+2025-05-02 23:07:46 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc: level=Interesting, topic='Software', keyword='passwordless authentication'
+2025-05-02 23:07:46 - main_orchestrator - INFO - Article 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc classified as Interesting (Topic: Software).
+2025-05-02 23:07:46 - main_orchestrator - INFO - Checking duplicates for 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc...
+2025-05-02 23:07:46 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc)
+2025-05-02 23:07:46 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc Title: Microsoft’s new “passwordless by default” is great but comes...
+2025-05-02 23:07:51 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc: is_duplicate=False. Reason: No recently published article reports on Microsoft making passwordless logins the default for new accounts.
+2025-05-02 23:07:51 - main_orchestrator - INFO - Article 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc passed similarity check.
+2025-05-02 23:07:51 - main_orchestrator - INFO - Finding image for 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc...
+2025-05-02 23:07:51 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/security/2025/05/microsoft-pushes-unphishable-logins-forward-with-new-sign-in-options/
+2025-05-02 23:07:51 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/05/microsoft-passkey-1152x648.webp
+2025-05-02 23:07:51 - main_orchestrator - INFO - Using scraped image for 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc: https://cdn.arstechnica.net/wp-content/uploads/2025/05/microsoft-passkey-1152x648.webp
+2025-05-02 23:07:51 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc...
+2025-05-02 23:08:17 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc.
+2025-05-02 23:08:17 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc...
+2025-05-02 23:08:23 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc
+2025-05-02 23:08:23 - main_orchestrator - INFO - Rendered HTML: microsofts-new-passwordless-by-default-is-great-but-comes-at-a-cost.html
+2025-05-02 23:08:23 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 23:08:23 - main_orchestrator - INFO - Updated all_articles.json (82 articles).
+2025-05-02 23:08:23 - main_orchestrator - INFO - Attempting to post article 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc to Twitter...
+2025-05-02 23:08:23 - src.social.twitter_poster - INFO - Attempting to post tweet for: Microsoft’s new “passwordless by default” is great but comes at a cost
+2025-05-02 23:08:23 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:08:23 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:08:23 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:08:23 - main_orchestrator - ERROR - Failed to post 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc to Twitter (function returned False).
+2025-05-02 23:08:23 - main_orchestrator - INFO - Saved final processed data to: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc.json
+2025-05-02 23:08:23 - main_orchestrator - INFO - --- Successfully processed article: 67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc ---
+2025-05-02 23:08:24 - main_orchestrator - INFO - --- Processing article file: 5ce45a8706c4f3fda22dbdb7322664060bb031c4abd14036012bfb83622e2590.json ---
+2025-05-02 23:08:24 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 5ce45a8706c4f3fda22dbdb7322664060bb031c4abd14036012bfb83622e2590)
+2025-05-02 23:08:24 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 5ce45a8706c4f3fda22dbdb7322664060bb031c4abd14036012bfb83622e2590 Title: Claude’s AI research mode now runs for up to 45 minutes befo...
+2025-05-02 23:08:30 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 5ce45a8706c4f3fda22dbdb7322664060bb031c4abd14036012bfb83622e2590: level=Boring, topic='Software', keyword='AI assistant update'
+2025-05-02 23:08:30 - main_orchestrator - INFO - Article 5ce45a8706c4f3fda22dbdb7322664060bb031c4abd14036012bfb83622e2590 classified as Boring by Filter Agent. Skipping.
+2025-05-02 23:08:31 - main_orchestrator - INFO - --- Processing article file: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca.json ---
+2025-05-02 23:08:31 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca)
+2025-05-02 23:08:31 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca Title: Windows RDP lets you log in using revoked passwords. Microso...
+2025-05-02 23:08:38 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca: level=Interesting, topic='Software', keyword='Windows RDP security'
+2025-05-02 23:08:38 - main_orchestrator - INFO - Article 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca classified as Interesting (Topic: Software).
+2025-05-02 23:08:38 - main_orchestrator - INFO - Checking duplicates for 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca...
+2025-05-02 23:08:38 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca)
+2025-05-02 23:08:38 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca Title: Windows RDP lets you log in using revoked passwords. Microso...
+2025-05-02 23:08:44 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca: is_duplicate=False. Reason: The New Candidate Article discusses a specific issue with Windows RDP allowing revoked passwords, which is not covered in any of the Recently Published Articles.
+2025-05-02 23:08:44 - main_orchestrator - INFO - Article 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca passed similarity check.
+2025-05-02 23:08:44 - main_orchestrator - INFO - Finding image for 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca...
+2025-05-02 23:08:44 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/security/2025/04/windows-rdp-lets-you-log-in-using-revoked-passwords-microsoft-is-ok-with-that/
+2025-05-02 23:08:45 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/04/remote-desktop.png
+2025-05-02 23:08:45 - main_orchestrator - INFO - Using scraped image for 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca: https://cdn.arstechnica.net/wp-content/uploads/2025/04/remote-desktop.png
+2025-05-02 23:08:45 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca...
+2025-05-02 23:09:14 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca.
+2025-05-02 23:09:14 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca...
+2025-05-02 23:09:20 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca
+2025-05-02 23:09:20 - main_orchestrator - INFO - Rendered HTML: windows-rdp-lets-you-log-in-using-revoked-passwords-microsoft-is-ok-with-that.html
+2025-05-02 23:09:20 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 23:09:20 - main_orchestrator - INFO - Updated all_articles.json (83 articles).
+2025-05-02 23:09:20 - main_orchestrator - INFO - Attempting to post article 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca to Twitter...
+2025-05-02 23:09:20 - src.social.twitter_poster - INFO - Attempting to post tweet for: Windows RDP lets you log in using revoked passwords. Microsoft is OK with that.
+2025-05-02 23:09:20 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:09:20 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:09:21 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:09:21 - main_orchestrator - ERROR - Failed to post 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca to Twitter (function returned False).
+2025-05-02 23:09:21 - main_orchestrator - INFO - Saved final processed data to: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca.json
+2025-05-02 23:09:21 - main_orchestrator - INFO - --- Successfully processed article: 1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca ---
+2025-05-02 23:09:22 - main_orchestrator - INFO - --- Processing article file: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4.json ---
+2025-05-02 23:09:22 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4)
+2025-05-02 23:09:22 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4 Title: The end of an AI that shocked the world: OpenAI retires GPT-...
+2025-05-02 23:09:30 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4: level=Interesting, topic='AI Models', keyword='GPT-4 retirement'
+2025-05-02 23:09:30 - main_orchestrator - INFO - Article a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4 classified as Interesting (Topic: AI Models).
+2025-05-02 23:09:30 - main_orchestrator - INFO - Checking duplicates for a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4...
+2025-05-02 23:09:30 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4)
+2025-05-02 23:09:30 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4 Title: The end of an AI that shocked the world: OpenAI retires GPT-...
+2025-05-02 23:09:38 - src.agents.similarity_check_agent - INFO - Similarity check result for ID a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4: is_duplicate=False. Reason: No recently published article reports OpenAI retiring GPT-4 and replacing it with GPT-4o.
+2025-05-02 23:09:38 - main_orchestrator - INFO - Article a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4 passed similarity check.
+2025-05-02 23:09:38 - main_orchestrator - INFO - Finding image for a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4...
+2025-05-02 23:09:38 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/ai/2025/04/the-ai-that-sparked-tech-panic-and-scared-world-leaders-heads-to-retirement/
+2025-05-02 23:09:38 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/04/the_end_typewriter-1152x648.jpg
+2025-05-02 23:09:38 - main_orchestrator - INFO - Using scraped image for a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4: https://cdn.arstechnica.net/wp-content/uploads/2025/04/the_end_typewriter-1152x648.jpg
+2025-05-02 23:09:38 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4...
+2025-05-02 23:10:09 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4.
+2025-05-02 23:10:09 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4...
+2025-05-02 23:10:14 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4
+2025-05-02 23:10:14 - main_orchestrator - INFO - Rendered HTML: the-end-of-an-ai-that-shocked-the-world-openai-retires-gpt-4.html
+2025-05-02 23:10:14 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 23:10:14 - main_orchestrator - INFO - Updated all_articles.json (84 articles).
+2025-05-02 23:10:14 - main_orchestrator - INFO - Attempting to post article a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4 to Twitter...
+2025-05-02 23:10:14 - src.social.twitter_poster - INFO - Attempting to post tweet for: The end of an AI that shocked the world: OpenAI retires GPT-4
+2025-05-02 23:10:14 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:10:14 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:10:14 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:10:14 - main_orchestrator - ERROR - Failed to post a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4 to Twitter (function returned False).
+2025-05-02 23:10:14 - main_orchestrator - INFO - Saved final processed data to: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4.json
+2025-05-02 23:10:14 - main_orchestrator - INFO - --- Successfully processed article: a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4 ---
+2025-05-02 23:10:15 - main_orchestrator - INFO - --- Processing article file: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3.json ---
+2025-05-02 23:10:15 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3)
+2025-05-02 23:10:15 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3 Title: Millions of Apple Airplay-enabled devices can be hacked via ...
+2025-05-02 23:10:22 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3: level=Interesting, topic='Hardware', keyword='AirPlay security flaws'
+2025-05-02 23:10:22 - main_orchestrator - INFO - Article d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3 classified as Interesting (Topic: Hardware).
+2025-05-02 23:10:22 - main_orchestrator - INFO - Checking duplicates for d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3...
+2025-05-02 23:10:22 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3)
+2025-05-02 23:10:22 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3 Title: Millions of Apple Airplay-enabled devices can be hacked via ...
+2025-05-02 23:10:27 - src.agents.similarity_check_agent - INFO - Similarity check result for ID d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3: is_duplicate=False. Reason: No recently published article discusses the same specific security flaws in Apple's AirPlay feature.
+2025-05-02 23:10:27 - main_orchestrator - INFO - Article d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3 passed similarity check.
+2025-05-02 23:10:27 - main_orchestrator - INFO - Finding image for d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3...
+2025-05-02 23:10:27 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/security/2025/04/millions-of-apple-airplay-enabled-devices-can-be-hacked-via-wi-fi/
+2025-05-02 23:10:28 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/04/airplay-malware-gear-1391670285-1152x648.jpg
+2025-05-02 23:10:28 - main_orchestrator - INFO - Using scraped image for d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3: https://cdn.arstechnica.net/wp-content/uploads/2025/04/airplay-malware-gear-1391670285-1152x648.jpg
+2025-05-02 23:10:28 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3...
+2025-05-02 23:10:57 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3.
+2025-05-02 23:10:57 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3...
+2025-05-02 23:11:05 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3
+2025-05-02 23:11:05 - main_orchestrator - INFO - Rendered HTML: millions-of-apple-airplay-enabled-devices-can-be-hacked-via-wi-fi.html
+2025-05-02 23:11:05 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 23:11:05 - main_orchestrator - INFO - Updated all_articles.json (85 articles).
+2025-05-02 23:11:05 - main_orchestrator - INFO - Attempting to post article d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3 to Twitter...
+2025-05-02 23:11:05 - src.social.twitter_poster - INFO - Attempting to post tweet for: Millions of Apple Airplay-enabled devices can be hacked via Wi-Fi
+2025-05-02 23:11:05 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:11:05 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:11:06 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:11:06 - main_orchestrator - ERROR - Failed to post d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3 to Twitter (function returned False).
+2025-05-02 23:11:06 - main_orchestrator - INFO - Saved final processed data to: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3.json
+2025-05-02 23:11:06 - main_orchestrator - INFO - --- Successfully processed article: d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3 ---
+2025-05-02 23:11:07 - main_orchestrator - INFO - --- Processing article file: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872.json ---
+2025-05-02 23:11:07 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872)
+2025-05-02 23:11:07 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872 Title: Why MFA is getting easier to bypass and what to do about it...
+2025-05-02 23:11:14 - src.agents.filter_news_agent - WARNING - Topic 'Security' not in allowed list for article ID 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872. Forcing to 'Other'.
+2025-05-02 23:11:14 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872: level=Interesting, topic='Other', keyword='MFA bypass phishing'
+2025-05-02 23:11:14 - main_orchestrator - INFO - Article 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872 classified as Interesting (Topic: Other).
+2025-05-02 23:11:14 - main_orchestrator - INFO - Checking duplicates for 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872...
+2025-05-02 23:11:14 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872)
+2025-05-02 23:11:14 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872 Title: Why MFA is getting easier to bypass and what to do about it...
+2025-05-02 23:11:19 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872: is_duplicate=False. Reason: The New Candidate Article discusses MFA bypass techniques, which is not covered in any of the Recently Published Articles.
+2025-05-02 23:11:19 - main_orchestrator - INFO - Article 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872 passed similarity check.
+2025-05-02 23:11:19 - main_orchestrator - INFO - Finding image for 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872...
+2025-05-02 23:11:19 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/security/2025/05/phishing-attacks-that-defeat-mfa-are-easier-than-ever-so-what-are-we-to-do/
+2025-05-02 23:11:20 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2022/03/phishing.jpeg
+2025-05-02 23:11:20 - main_orchestrator - INFO - Using scraped image for 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872: https://cdn.arstechnica.net/wp-content/uploads/2022/03/phishing.jpeg
+2025-05-02 23:11:20 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872...
+2025-05-02 23:11:51 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872.
+2025-05-02 23:11:51 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872...
+2025-05-02 23:11:57 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872
+2025-05-02 23:11:57 - main_orchestrator - INFO - Rendered HTML: why-mfa-is-getting-easier-to-bypass-and-what-to-do-about-it.html
+2025-05-02 23:11:57 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 23:11:57 - main_orchestrator - INFO - Updated all_articles.json (86 articles).
+2025-05-02 23:11:57 - main_orchestrator - INFO - Attempting to post article 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872 to Twitter...
+2025-05-02 23:11:57 - src.social.twitter_poster - INFO - Attempting to post tweet for: Why MFA is getting easier to bypass and what to do about it
+2025-05-02 23:11:57 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:11:57 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:11:57 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:11:57 - main_orchestrator - ERROR - Failed to post 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872 to Twitter (function returned False).
+2025-05-02 23:11:57 - main_orchestrator - INFO - Saved final processed data to: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872.json
+2025-05-02 23:11:57 - main_orchestrator - INFO - --- Successfully processed article: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872 ---
+2025-05-02 23:11:58 - main_orchestrator - INFO - Processing cycle complete. Successfully processed: 9, Failed/Skipped/Duplicate: 6
+2025-05-02 23:11:58 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (501.91 seconds) === ---

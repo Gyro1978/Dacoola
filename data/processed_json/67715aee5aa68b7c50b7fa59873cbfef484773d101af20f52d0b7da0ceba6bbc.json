@@ -1,0 +1,44 @@
+{
+    "id": "67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc",
+    "title": "Microsoft’s new “passwordless by default” is great but comes at a cost",
+    "link": "https://arstechnica.com/security/2025/05/microsoft-pushes-unphishable-logins-forward-with-new-sign-in-options/",
+    "published_iso": "2025-05-02T20:14:58Z",
+    "summary": "<p>Microsoft says it’s making passwordless logins the default means for signing in to new accounts, as the company helps drive an industry-wide push to transition away from passwords and the costly security problems they have created for companies and their users.</p>\n<p>A key part of the “passwordless by default” <a href=\"https://www.microsoft.com/en-us/security/blog/2025/05/01/pushing-passkeys-forward-microsofts-latest-updates-for-simpler-safer-sign-ins/\">initiative</a> Microsoft announced on Thursday is encouraging the use of passkeys—the new <a href=\"http://feeds.arstechnica.com/arstechnica/link\">alternative to passwords</a> that Microsoft, Google, Apple, and a large roster of other companies are developing under the coordination of the FIDO Alliance.</p>\n<p>Going forward, Microsoft will make passkeys the default means for new users to sign in. Existing users who have yet to enroll a passkey will be presented with a prompt to do so the next time they log in.</p><p><a href=\"https://arstechnica.com/security/2025/05/microsoft-pushes-unphishable-logins-forward-with-new-sign-in-options/\">Read full article</a></p>\n<p><a href=\"https://arstechnica.com/security/2025/05/microsoft-pushes-unphishable-logins-forward-with-new-sign-in-options/#comments\">Comments</a></p>",
+    "source_feed": "http://feeds.arstechnica.com/arstechnica/technology-lab",
+    "scraped_at_iso": "2025-05-02T23:03:40Z",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Software",
+        "reasoning_summary": "Microsoft's announcement of making passwordless logins the default for new accounts is a significant and verifiable shift in authentication technology, involving major industry players and the FIDO Alliance.",
+        "primary_topic_keyword": "passwordless authentication"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-02T23:07:46Z",
+    "topic": "Software",
+    "is_breaking": false,
+    "primary_keyword": "passwordless authentication",
+    "similarity_check_error": null,
+    "selected_image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/05/microsoft-passkey-1152x648.webp",
+    "seo_agent_results": {
+        "generated_title_tag": "Microsoft shifts to passwordless authentication by default",
+        "generated_meta_description": "Microsoft makes passkeys the default login method, advancing passwordless authentication to enhance security and reduce phishing risks.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Microsoft shifts to passwordless authentication by default\",  \n  \"description\": \"Microsoft makes passkeys the default login method, advancing passwordless authentication to enhance security and reduce phishing risks.\",  \n  \"keywords\": [\"passwordless authentication\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://arstechnica.com/security/2025/05/microsoft-pushes-unphishable-logins-forward-with-new-sign-in-options/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://cdn.arstechnica.net/wp-content/uploads/2025/05/microsoft-passkey-1152x648.webp\" },  \n  \"datePublished\": \"2025-05-02T20:14:58Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Microsoft’s new “passwordless by default” is great but comes at a cost  \n\nMicrosoft is taking a major step toward eliminating passwords by making **passwordless authentication** the default option for new user accounts. The company announced this initiative as part of an industry-wide effort to move away from traditional passwords, which have long been a weak point in cybersecurity. By prioritizing passkeys—a more secure alternative—Microsoft aims to reduce the risks of phishing and credential theft.  \n\nA key component of this shift is the adoption of passkeys, a technology developed in collaboration with Google, Apple, and the FIDO Alliance. Passkeys provide a more secure and user-friendly login method, eliminating the need for memorizing complex passwords. Microsoft will now prompt existing users to set up a passkey upon their next login, while new users will automatically default to this method.  \n\nThis move aligns with broader industry trends toward stronger authentication standards. While the transition may require adjustments for some users, the long-term benefits—such as reduced security breaches and simplified logins—could outweigh the initial challenges."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "passwordless authentication",
+        "Microsoft security",
+        "passkeys",
+        "FIDO Alliance",
+        "cybersecurity trends",
+        "phishing prevention",
+        "credential theft",
+        "user authentication",
+        "tech industry standards"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.41,
+    "slug": "microsofts-new-passwordless-by-default-is-great-but-comes-at-a-cost",
+    "audio_url": null
+}
