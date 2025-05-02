@@ -393,13 +393,14 @@ def update_site_data(new_article_info):
     site_data["articles"] = site_data["articles"][:MAX_HOME_PAGE_ARTICLES]
 
     # --- Save BOTH files ---
-    for filepath, data_dict in [(filepath, site_data), (ALL_ARTICLES_FILE, all_articles_data)]:
+    # Use consistent naming for filepath variables
+    for file_path_to_save, data_dict_to_save in [(SITE_DATA_FILE, site_data), (ALL_ARTICLES_FILE, all_articles_data)]:
         try:
-            with open(filepath, 'w', encoding='utf-8') as f:
-                json.dump(data_dict, f, indent=2, ensure_ascii=False)
-            logger.info(f"Updated {os.path.basename(filepath)} ({len(data_dict['articles'])} articles).")
+            with open(file_path_to_save, 'w', encoding='utf-8') as f:
+                json.dump(data_dict_to_save, f, indent=2, ensure_ascii=False)
+            logger.info(f"Updated {os.path.basename(file_path_to_save)} ({len(data_dict_to_save['articles'])} articles).")
         except Exception as e:
-            logger.error(f"Failed to save {os.path.basename(filepath)}: {e}")
+            logger.error(f"Failed to save {os.path.basename(file_path_to_save)}: {e}")
 
 
 # --- Main Processing Pipeline ---
@@ -729,6 +730,8 @@ if __name__ == "__main__":
         for filepath in json_files_to_process:
             if process_single_article(filepath, recent_articles_context):
                 processed_successfully_count += 1
+                # Reload context after successful processing to include the new article for subsequent checks
+                recent_articles_context = load_recent_articles_for_comparison()
             else:
                  failed_or_skipped_count += 1
             time.sleep(1) # Small pause
