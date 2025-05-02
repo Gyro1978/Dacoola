@@ -1370,6 +1370,120 @@
       ],
       "audio_url": null,
       "trend_score": 9.0
+    },
+    {
+      "id": "efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e",
+      "title": "Enterprise-grade natural language to SQL generation using LLMs: Balancing accuracy, latency, and scale",
+      "link": "articles/enterprise-grade-natural-language-to-sql-generation-using-llms-balancing-accurac.html",
+      "published_iso": "2025-04-24T16:23:48Z",
+      "summary_short": "Discover how AWS and Cisco optimized NL2SQL with LLMs for enterprise data, balancing accuracy, latency, and scalability.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/09/ML-18212-nl2sql-aws-impl-example-1002x630.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Natural Language to SQL",
+        "LLMs in Enterprise",
+        "AWS SQL Generation",
+        "NL2SQL with AI",
+        "Enterprise Data Query",
+        "Amazon Bedrock",
+        "Code Llama 13B",
+        "Claude Haiku",
+        "SQL Generation Architecture",
+        "AWS Lambda"
+      ],
+      "trend_score": 10.0
+    },
+    {
+      "id": "686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f",
+      "title": "Build an AI-powered document processing platform with open source NER model and LLM on Amazon SageMaker",
+      "link": "articles/build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-.html",
+      "published_iso": "2025-04-23T16:06:35Z",
+      "summary_short": "Learn how to build an AI document processing platform using open-source NER models and LLMs on Amazon SageMaker for efficient archival data management.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/document-processing-sagemaker-1120x630.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI document processing",
+        "Amazon SageMaker",
+        "Named Entity Recognition",
+        "Large Language Models",
+        "Mixtral-8x7B",
+        "BERT NER model",
+        "AWS Step Functions",
+        "metadata enrichment",
+        "serverless architecture",
+        "digital transformation"
+      ],
+      "trend_score": 10.0
+    },
+    {
+      "id": "fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1",
+      "title": "Microsoft open sources its ‘farm of the future’ toolkit",
+      "link": "articles/microsoft-open-sources-its-farm-of-the-future-toolkit.html",
+      "published_iso": "2022-10-06T14:58:15Z",
+      "summary_short": "Microsoft has open-sourced its innovative farm toolkit, aiming to revolutionize agricultural technology with accessible AI solutions.",
+      "image_url": "https://news.microsoft.com/source/wp-content/uploads/2022/10/Untitled-8.jpg",
+      "topic": "Open Source",
+      "is_breaking": false,
+      "tags": [
+        "Microsoft",
+        "Farm of the Future",
+        "Open Source",
+        "AI in Agriculture",
+        "Smart Farming",
+        "Precision Agriculture",
+        "Agricultural Technology",
+        "AI for Sustainability",
+        "Data-Driven Farming",
+        "Climate-Smart Agriculture"
+      ],
+      "trend_score": 10.0
+    },
+    {
+      "id": "3ae5d4eaec6ea380467a583d6be8bcbc8b5148c8aae85edab56606e5336874eb",
+      "title": "AI-equipped drones study dolphins on the edge of extinction",
+      "link": "articles/ai-equipped-drones-study-dolphins-on-the-edge-of-extinction.html",
+      "published_iso": "2022-07-21T14:50:33Z",
+      "summary_short": "AI drones are being used to study critically endangered dolphins, aiding conservation efforts with advanced technology.",
+      "image_url": "https://news.microsoft.com/source/asia/wp-content/uploads/2022/07/Maui63-Hero-still.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI drones",
+        "wildlife conservation",
+        "endangered species",
+        "Maui dolphin",
+        "marine mammal protection",
+        "AI in ecology",
+        "non-invasive research",
+        "real-time monitoring",
+        "conservation technology"
+      ],
+      "trend_score": 9.5
+    },
+    {
+      "id": "05146c4377180cb6b29f7561c86ff50ca6881f027f6cbe74df6e191238a6f6c0",
+      "title": "AI-Mimi is building inclusive TV experiences for Deaf and Hard of Hearing user in Japan",
+      "link": "articles/ai-mimi-is-building-inclusive-tv-experiences-for-deaf-and-hard-of-hearing-user-i.html",
+      "published_iso": "2022-07-06T14:51:23Z",
+      "summary_short": "Discover how AI-Mimi's AI accessibility initiative is transforming TV experiences for Deaf and Hard of Hearing users in Japan.",
+      "image_url": "https://blogs.microsoft.com/wp-content/uploads/prod/sites/172/2022/06/Picture2.png",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "AI accessibility initiative",
+        "Deaf and Hard of Hearing",
+        "inclusive media consumption",
+        "assistive technologies",
+        "AI for social impact",
+        "inclusive design",
+        "Japan accessibility solutions",
+        "AI in television",
+        "Microsoft blog post",
+        "communication barriers"
+      ],
+      "trend_score": 10.0
     }
   ]
 }
