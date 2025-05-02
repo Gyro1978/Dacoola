@@ -2,17 +2,17 @@ name: Hourly News Update and Deploy
 
 on:
   schedule:
-    # Runs every 5 minutes
-    - cron: "*/5 * * * *"
+    # Runs every 20 minutes (Adjusted from 5)
+    - cron: "*/20 * * * *"
   workflow_dispatch: # Allows manual triggering
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pages: write
-      id-token: write
+      contents: write # Allow workflow to commit back to the repo
+      # pages: write # No longer needed for Netlify
+      # id-token: write # No longer needed for Netlify
 
     steps:
       - name: Checkout Repository
@@ -30,9 +30,11 @@ jobs:
 
       - name: Run Main Script
         env:
+          # Pass secrets securely as environment variables
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
           CAMB_AI_API_KEY: ${{ secrets.CAMB_AI_API_KEY }}
+          # Pass other secrets
           YOUR_WEBSITE_NAME: ${{ secrets.YOUR_WEBSITE_NAME }}
           YOUR_WEBSITE_LOGO_URL: ${{ secrets.YOUR_WEBSITE_LOGO_URL }}
           MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES }}
@@ -46,13 +48,10 @@ jobs:
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-          # --- Explicitly add expected output files/dirs relative to workspace root ---
-          git add public/
-          git add data/processed_json/
-          # Use find to add the specific file if it exists, avoid errors if not
-          find . -maxdepth 1 -name 'dacoola.log' -print -exec git add {} \;
-          find . -maxdepth 1 -name 'data' -type d -exec test -f '{}/processed_article_ids.txt' \; -print -exec git add '{}/processed_article_ids.txt' \;
-          # ----------------------------------------------------------------------------
+          # Add expected output files/dirs relative to workspace root
+          git add public/ data/processed_json/ data/processed_article_ids.txt
+          # Optionally add the log file ONLY if it exists
+          if [ -f "dacoola.log" ]; then git add dacola.log; fi
 
           # Check if there are staged changes
           if git diff --staged --quiet; then
@@ -78,15 +77,27 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # --- DEPLOYMENT STEP ---
-      # Option 1: Deploy to GitHub Pages is ACTIVE
+      # Option 1: Deploy to GitHub Pages (COMMENTED OUT)
+      # - name: Upload artifact for GitHub Pages
+      #   uses: actions/upload-pages-artifact@v3
+      #   with:
+      #     path: ./public
 
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
+      # - name: Deploy to GitHub Pages
+      #   id: deployment
+      #   uses: actions/deploy-pages@v4
+
+      # Option 2: Deploy via rsync/scp (COMMENTED OUT)
+      # - name: Deploy to Server via rsync ...
+
+      # Option 3: Deploy using Netlify CLI (ACTIVE)
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
         with:
-          path: ./public
+          args: deploy --dir=public --prod # Deploy the 'public' dir to production site
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-      # Other options remain commented out...
+      # Option 4: Deploy using Vercel CLI (COMMENTED OUT)
+      # - name: Install Vercel CLI ...
