@@ -13774,3 +13774,91 @@ AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentTy
 2025-05-02 21:37:38,243 - main_orchestrator - INFO - Article 938fa36463d0c7b3efd11f24f21ec81527c1f9818a4e87ff42a629f04166a15b classified as Boring. Skipping.
 2025-05-02 21:37:39,245 - main_orchestrator - INFO - Processing cycle complete. Successful: 5, Failed/Skipped: 10
 2025-05-02 21:37:39,245 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished (329.14 seconds) === ---
+2025-05-02 21:47:59,456 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 21:47:59,457 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 21:48:00,257 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-02 21:48:02,370 - transformers.processing_utils - WARNING - Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+2025-05-02 21:48:03,382 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 21:48:03,392 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-02 21:48:03,392 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 21:48:03,392 - main_orchestrator - INFO - Ensured data, processed_json, and public/articles directories exist.
+2025-05-02 21:48:03,393 - main_orchestrator - INFO - --- Running Scraper ---
+2025-05-02 21:48:03,393 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (10 feeds) ---
+2025-05-02 21:48:03,393 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 21:48:03,488 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 21:48:03,488 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles from this feed.
+2025-05-02 21:48:03,488 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 21:48:03,588 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 21:48:03,588 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-02 21:48:03,588 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 21:48:03,867 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-02 21:48:03,867 - src.scrapers.news_scraper - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles from this feed.
+2025-05-02 21:48:03,867 - src.scrapers.news_scraper - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 21:48:04,247 - src.scrapers.news_scraper - INFO - Feed https://news.ycombinator.com/rss fetched. Contains 30 entries.
+2025-05-02 21:48:04,247 - src.scrapers.news_scraper - INFO - Finished feed https://news.ycombinator.com/rss. Saved 0 new articles from this feed.
+2025-05-02 21:48:04,247 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 21:48:05,282 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://www.anthropic.com/feed.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 21:48:05,283 - src.scrapers.news_scraper - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 21:48:05,484 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://ai.googleblog.com/feeds/posts/default?alt=rss: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 21:48:05,484 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 21:48:05,549 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://openai.com/blog/rss.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 21:48:05,549 - src.scrapers.news_scraper - INFO - Checking feed: https://aws.amazon.com/blogs/machine-learning/feed/
+2025-05-02 21:48:05,988 - src.scrapers.news_scraper - INFO - Feed https://aws.amazon.com/blogs/machine-learning/feed/ fetched. Contains 20 entries.
+2025-05-02 21:48:05,989 - src.scrapers.news_scraper - INFO - Finished feed https://aws.amazon.com/blogs/machine-learning/feed/. Saved 0 new articles from this feed.
+2025-05-02 21:48:05,989 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.microsoft.com/ai/feed/
+2025-05-02 21:48:06,158 - src.scrapers.news_scraper - INFO - Feed https://blogs.microsoft.com/ai/feed/ fetched. Contains 10 entries.
+2025-05-02 21:48:06,159 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f.json (Title: Singapore develops Asia’s first AI-based mobile app for shark and ray fin identification to combat illegal wildlife trade)
+2025-05-02 21:48:06,159 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: abb29e286ab766454b026374dc99b01c30a2d6d4cbdfd623d5cef23788d6dc89.json (Title: The opportunity at home – can AI drive innovation in personal assistant devices and sign language?)
+2025-05-02 21:48:06,159 - src.scrapers.news_scraper - INFO - Finished feed https://blogs.microsoft.com/ai/feed/. Saved 2 new articles from this feed.
+2025-05-02 21:48:06,159 - src.scrapers.news_scraper - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 21:48:06,392 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 21:48:06,392 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 2 ---
+2025-05-02 21:48:06,392 - main_orchestrator - INFO - Scraper run completed. Found 2 new JSON files potentially.
+2025-05-02 21:48:06,392 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 21:48:06,393 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 21:48:06,393 - main_orchestrator - INFO - Found 2 scraped articles to process.
+2025-05-02 21:48:06,394 - main_orchestrator - INFO - --- Processing article file: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f.json ---
+2025-05-02 21:48:06,394 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f Title: Singapore develops Asia’s first AI-based mobile app for shar...
+2025-05-02 21:48:13,040 - src.agents.filter_news_agent - INFO - Filter verdict received for ID aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f: level=Interesting, topic='AI Models', keyword='AI wildlife conservation app'
+2025-05-02 21:48:13,040 - main_orchestrator - INFO - Article aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f classified as Interesting (Topic: AI Models).
+2025-05-02 21:48:13,040 - main_orchestrator - INFO - Checking duplicates for aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f...
+2025-05-02 21:48:13,040 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f Title: Singapore develops Asia’s first AI-based mobile app for shar...
+2025-05-02 21:48:18,144 - src.agents.similarity_check_agent - INFO - Similarity check result for ID aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f: is_duplicate=False. Reason: No recently published article reports on Singapore developing an AI-based mobile app for shark and ray fin identification.
+2025-05-02 21:48:18,145 - main_orchestrator - INFO - Article aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f passed similarity check.
+2025-05-02 21:48:18,145 - main_orchestrator - INFO - Finding image for aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f...
+2025-05-02 21:48:18,145 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://news.microsoft.com/en-sg/2022/06/08/singapore-develops-asias-first-ai-based-mobile-app-for-shark-and-ray-fin-identification-to-combat-illegal-wildlife-trade/
+2025-05-02 21:48:18,317 - src.scrapers.image_scraper - WARNING - No suitable og:image or twitter:image meta tag found at: https://news.microsoft.com/en-sg/2022/06/08/singapore-develops-asias-first-ai-based-mobile-app-for-shark-and-ray-fin-identification-to-combat-illegal-wildlife-trade/
+2025-05-02 21:48:18,317 - main_orchestrator - INFO - Image scraping failed/no image, using API search for aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f...
+2025-05-02 21:48:18,317 - src.scrapers.image_scraper - INFO - Finding best image for query: 'AI wildlife conservation app' (CLIP Enabled: True)
+2025-05-02 21:48:24,784 - src.scrapers.image_scraper - INFO - SerpApi found 5 image candidates for query: 'AI wildlife conservation app'
+2025-05-02 21:48:24,784 - src.scrapers.image_scraper - INFO - CLIP filtering 5 candidate images against prompt: 'AI wildlife conservation app'
+2025-05-02 21:48:27,642 - src.scrapers.image_scraper - INFO - CLIP selected best image: https://i.ytimg.com/vi/K4Ht5K0zaTQ/maxresdefault.jpg (Score: 0.3535)
+2025-05-02 21:48:27,642 - src.scrapers.image_scraper - INFO - Selected image URL for 'AI wildlife conservation app': https://i.ytimg.com/vi/K4Ht5K0zaTQ/maxresdefault.jpg
+2025-05-02 21:48:27,643 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f...
+2025-05-02 21:48:55,198 - src.agents.seo_article_generator_agent - WARNING - Generated title tag > 60 chars: 'Singapore Launches AI Wildlife Conservation App to Protect Sharks & Rays'
+2025-05-02 21:48:55,199 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f.
+2025-05-02 21:48:55,199 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f...
+2025-05-02 21:49:01,827 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f
+2025-05-02 21:49:01,849 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/singapore-develops-asias-first-ai-based-mobile-app-for-shark-and-ray-fin-identif.html
+2025-05-02 21:49:01,851 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 21:49:01,853 - main_orchestrator - INFO - Updated all_articles.json (68 articles).
+2025-05-02 21:49:01,853 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f.json
+2025-05-02 21:49:01,853 - main_orchestrator - INFO - --- Successfully processed article: aaacf6f165427f9714d0fe9fa7b322c3ceff3f7abf311cb55fbb98aef1ded60f ---
+2025-05-02 21:49:02,855 - main_orchestrator - INFO - --- Processing article file: abb29e286ab766454b026374dc99b01c30a2d6d4cbdfd623d5cef23788d6dc89.json ---
+2025-05-02 21:49:02,855 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: abb29e286ab766454b026374dc99b01c30a2d6d4cbdfd623d5cef23788d6dc89 Title: The opportunity at home – can AI drive innovation in persona...
+2025-05-02 21:49:09,203 - src.agents.filter_news_agent - INFO - Filter verdict received for ID abb29e286ab766454b026374dc99b01c30a2d6d4cbdfd623d5cef23788d6dc89: level=Boring, topic='Other', keyword='AI accessibility blog'
+2025-05-02 21:49:09,203 - main_orchestrator - INFO - Article abb29e286ab766454b026374dc99b01c30a2d6d4cbdfd623d5cef23788d6dc89 classified as Boring. Skipping.
+2025-05-02 21:49:10,204 - main_orchestrator - INFO - Processing cycle complete. Successful: 1, Failed/Skipped: 1
+2025-05-02 21:49:10,205 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished (66.81 seconds) === ---
