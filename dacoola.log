@@ -12863,3 +12863,333 @@ AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentTy
 2025-05-02 10:33:57,665 - main_orchestrator - INFO - --- Successfully processed article: bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee ---
 2025-05-02 10:33:58,666 - main_orchestrator - INFO - --- Processing article file: f1d38aa4e29c7f72c90f5f4c99a1d18ce55aefa7956fcb21046236cf0fefc0a3.json ---
 2025-05-02 10:33:58,681 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f1d38aa4e29c7f72c90f5f4c99a1d18ce55aefa7956fcb21046236cf0fefc0a3 Title: AI Is Using Your Likes to Get Inside Your Head...
+2025-05-02 19:02:31,488 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 19:02:31,488 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 19:02:31,934 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-02 19:02:34,173 - transformers.processing_utils - WARNING - Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+2025-05-02 19:02:34,409 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 19:02:34,419 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative or potentially incorrect.
+2025-05-02 19:02:34,419 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-02 19:02:34,419 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 19:02:34,419 - main_orchestrator - INFO - Ensured data, processed_json, and public/articles directories exist.
+2025-05-02 19:02:34,420 - main_orchestrator - INFO - --- Running Scraper ---
+2025-05-02 19:02:34,420 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (10 feeds) ---
+2025-05-02 19:02:34,420 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 19:02:34,591 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 19:02:34,591 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b.json (Title: One of Google’s recent Gemini AI models scores worse on safety)
+2025-05-02 19:02:34,592 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76.json (Title: Apple and Anthropic reportedly partner to build an AI coding platform)
+2025-05-02 19:02:34,592 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 880711802f1a5a47fccb503c628cd5d516f20c8513acb40241ced9f7dd44f40b.json (Title: Uber’s latest autonomous vehicle partner? Chinese startup Momenta)
+2025-05-02 19:02:34,592 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c.json (Title: Dating app Raw exposed users’ location data and personal information)
+2025-05-02 19:02:34,593 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 3f9bacf7538b9d9ee93831e9631597a2d05c71294c00093f025e949af52c0b11.json (Title: Startups Weekly: Drama or game-changer? You decide)
+2025-05-02 19:02:34,593 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 3f805054ef1f33a8f1016455b32077dcd3fab1b5ab70fb9eb00ad18f7c3971f6.json (Title: Ara Partners’ new $800M fund will decarbonize old industrial assets)
+2025-05-02 19:02:34,593 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373.json (Title: OpenAI pledges to make changes to prevent future ChatGPT sycophancy)
+2025-05-02 19:02:34,593 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 44d70157f358d4d40ca3124f1be0fe70284bd13a5d19a01a61a5156f5bef83d8.json (Title: Google’s NotebookLM Android and iOS apps are available for preorder)
+2025-05-02 19:02:34,594 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372.json (Title: Apple approves Spotify app update that allows US users to access pricing info, external payment links)
+2025-05-02 19:02:34,594 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 1cf2b7227f35505d8dec71d89e2e4400237ac97b5f9da674309a98e7e42be6db.json (Title: Airbnb is quietly rolling out an AI customer service bot in the US)
+2025-05-02 19:02:34,594 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ab07374f5aef7e2ba427fc953edd23488598242d35edb7adb5095a93f8bb0d88.json (Title: Apple changes US App Store rules to let apps link to external payment systems)
+2025-05-02 19:02:34,594 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 11 new articles from this feed.
+2025-05-02 19:02:34,594 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 19:02:34,773 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 19:02:34,773 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-02 19:02:34,774 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 19:02:34,988 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-02 19:02:34,989 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc.json (Title: OpenAI overrode concerns of expert testers to release sycophantic GPT-4o)
+2025-05-02 19:02:34,989 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a2ecf3baa30d85410c1438067b22d25410abe66a3f3c7a0fbd9f978f670619ca.json (Title: Roblox breaks ground on data center in Brazil for early 2026)
+2025-05-02 19:02:34,989 - src.scrapers.news_scraper - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 2 new articles from this feed.
+2025-05-02 19:02:34,989 - src.scrapers.news_scraper - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 19:02:35,433 - src.scrapers.news_scraper - INFO - Feed https://news.ycombinator.com/rss fetched. Contains 30 entries.
+2025-05-02 19:02:35,433 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 30c9313917fbbac5860cc7b7aa2e3a2d22cb91cbbacb6ac90d72657254af7cad.json (Title: Show HN: I built a synthesizer based on 3D physics and launched the product)
+2025-05-02 19:02:35,433 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c68b086499d688e105e0776104ccc913998b4544ce83dda33ca52f5d4bb72345.json (Title: Rams is a documentary portrait of Dieter Rams (2018))
+2025-05-02 19:02:35,434 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 93450e4759add3c01fda07967257668284cc5ba4857da2d72632dd1629e01a24.json (Title: The language brain matters more for learning programming than the math brain)
+2025-05-02 19:02:35,434 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219.json (Title: Show HN: Blast – Fast, multi-threaded serving engine for web browsing AI agents)
+2025-05-02 19:02:35,434 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd.json (Title: Show HN: GPT-2 implemented using graphics shaders)
+2025-05-02 19:02:35,434 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 60c1acf59141278c38782100563b768dba95d1473aa0302dd4088b9602172f42.json (Title: Building Burstables: CPU slicing with cgroups)
+2025-05-02 19:02:35,435 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: dc4d5fee8ef78654d452194564b0561ee088370f73c6dd79b855f12acb633d56.json (Title: Expanding on what we missed with sycophancy)
+2025-05-02 19:02:35,435 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: b9630b56036fa509523d6649877fdae2f2d8f2e5a724f25455663a428af3e5cc.json (Title: How to live an intellectually rich life)
+2025-05-02 19:02:35,435 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: aa9a2abaa83cfbf667907ff70afc014b1570e090e9c526852f5bc7913a0e3269.json (Title: The History of Album Art)
+2025-05-02 19:02:35,435 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ac65f93ff5277705c2d50050773c01f536b51d52bbe5892e187f7220d2ac8464.json (Title: Toma (YC W24) Is Hiring Engs #3-4 (AI for Automotive))
+2025-05-02 19:02:35,436 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 349fc1e7f374519a3a702b139455e0179e96ebc10968756a9e1a40274e63ceed.json (Title: When Americana doesn't mean American)
+2025-05-02 19:02:35,436 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 4fd4fde5d858419e8d612b35d97f861b784b1bd7d47b6aa57241068cd0413c79.json (Title: The Cannae Problem)
+2025-05-02 19:02:35,436 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 6619492208dfe98fec7d63049c960d3698da15ef3a1455a82ad91a9ef242a957.json (Title: Show HN: Exhibit and Site on Mechanisms for Students)
+2025-05-02 19:02:35,436 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c6ccb3beecb24a3789b93822829ffc8b2068d208c1afc490bcc2d8534ef88d8d.json (Title: Relational Graph Transformers)
+2025-05-02 19:02:35,437 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 3f9494c6521a0994a5ee2271492306315e229287cefcdd59046245d24cc627df.json (Title: A Common Lisp jq replacement)
+2025-05-02 19:02:35,437 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ad809dd4d2c958f64fa582fd8cdb15b9f4c85df30499a1f8aa8d3e6958228eb5.json (Title: Fast(er) regular expression engines in Ruby)
+2025-05-02 19:02:35,437 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: b70b49bcf451b68192c62f4860225d983e8333f69754e76598b725acdcaad28d.json (Title: Altair at 50: Remembering the first Personal Computer)
+2025-05-02 19:02:35,437 - src.scrapers.news_scraper - WARNING - Reached max articles per run (30) while processing feed https://news.ycombinator.com/rss.
+2025-05-02 19:02:35,437 - src.scrapers.news_scraper - INFO - Finished feed https://news.ycombinator.com/rss. Saved 17 new articles from this feed.
+2025-05-02 19:02:35,437 - src.scrapers.news_scraper - WARNING - Reached max articles per run (30). Stopping feed processing for this run.
+2025-05-02 19:02:35,437 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 30 ---
+2025-05-02 19:02:35,437 - main_orchestrator - INFO - Scraper run completed. Found 30 new JSON files potentially.
+2025-05-02 19:02:35,438 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 19:02:35,438 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 19:02:35,438 - main_orchestrator - INFO - Found 32 scraped articles to process.
+2025-05-02 19:02:35,439 - main_orchestrator - INFO - --- Processing article file: fd50b9107e292dfc2420443bdbbcebdcec7ae6c934aef28a9d3aa5f888a2d75e.json ---
+2025-05-02 19:02:35,439 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: fd50b9107e292dfc2420443bdbbcebdcec7ae6c934aef28a9d3aa5f888a2d75e Title: Ask HN: Who is hiring? (May 2025)...
+2025-05-02 19:02:41,171 - src.agents.filter_news_agent - INFO - Filter verdict received for ID fd50b9107e292dfc2420443bdbbcebdcec7ae6c934aef28a9d3aa5f888a2d75e: level=Boring, topic='Other', keyword='Hiring thread'
+2025-05-02 19:02:41,171 - main_orchestrator - INFO - Article fd50b9107e292dfc2420443bdbbcebdcec7ae6c934aef28a9d3aa5f888a2d75e classified as Boring. Skipping.
+2025-05-02 19:02:42,172 - main_orchestrator - INFO - --- Processing article file: fb91cc46dc8f8a5ae9428246141cf9c9ba777718aae1aeb48c57451be15257b5.json ---
+2025-05-02 19:02:42,173 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: fb91cc46dc8f8a5ae9428246141cf9c9ba777718aae1aeb48c57451be15257b5 Title: DeepSeek’s success shows why motivation is key to AI innovat...
+2025-05-02 19:02:48,507 - src.agents.filter_news_agent - INFO - Filter verdict received for ID fb91cc46dc8f8a5ae9428246141cf9c9ba777718aae1aeb48c57451be15257b5: level=Boring, topic='Other', keyword='AI innovation analysis'
+2025-05-02 19:02:48,507 - main_orchestrator - INFO - Article fb91cc46dc8f8a5ae9428246141cf9c9ba777718aae1aeb48c57451be15257b5 classified as Boring. Skipping.
+2025-05-02 19:02:49,508 - main_orchestrator - INFO - --- Processing article file: 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76.json ---
+2025-05-02 19:02:49,509 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76 Title: Apple and Anthropic reportedly partner to build an AI coding...
+2025-05-02 19:02:55,383 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76: level=Interesting, topic='Software', keyword='AI coding platform'
+2025-05-02 19:02:55,384 - main_orchestrator - INFO - Article 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76 classified as Interesting (Topic: Software).
+2025-05-02 19:02:55,384 - main_orchestrator - INFO - Checking duplicates for 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76...
+2025-05-02 19:02:55,384 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76 Title: Apple and Anthropic reportedly partner to build an AI coding...
+2025-05-02 19:03:02,665 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76: is_duplicate=False. Reason: No recently published article reports on Apple and Anthropic partnering to build an AI coding platform.
+2025-05-02 19:03:02,666 - main_orchestrator - INFO - Article 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76 passed similarity check.
+2025-05-02 19:03:02,666 - main_orchestrator - INFO - Finding image for 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76...
+2025-05-02 19:03:02,666 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/02/apple-and-anthropic-reportedly-partner-to-build-an-ai-coding-platform/
+2025-05-02 19:03:02,737 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2024/06/YouTube-Thumb-Text-2-3.png?resize=1200,675
+2025-05-02 19:03:02,737 - main_orchestrator - INFO - Using scraped image for 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76: https://techcrunch.com/wp-content/uploads/2024/06/YouTube-Thumb-Text-2-3.png?resize=1200,675
+2025-05-02 19:03:02,737 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76...
+2025-05-02 19:03:26,295 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76.
+2025-05-02 19:03:26,295 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76...
+2025-05-02 19:03:31,964 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76
+2025-05-02 19:03:31,991 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/apple-and-anthropic-reportedly-partner-to-build-an-ai-coding-platform.html
+2025-05-02 19:03:31,993 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 19:03:31,994 - main_orchestrator - INFO - Updated all_articles.json (50 articles).
+2025-05-02 19:03:31,995 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76.json
+2025-05-02 19:03:31,995 - main_orchestrator - INFO - --- Successfully processed article: 6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76 ---
+2025-05-02 19:03:32,996 - main_orchestrator - INFO - --- Processing article file: 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b.json ---
+2025-05-02 19:03:32,997 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b Title: One of Google’s recent Gemini AI models scores worse on safe...
+2025-05-02 19:03:40,786 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b: level=Interesting, topic='AI Models', keyword='AI model safety decline'
+2025-05-02 19:03:40,786 - main_orchestrator - INFO - Article 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b classified as Interesting (Topic: AI Models).
+2025-05-02 19:03:40,786 - main_orchestrator - INFO - Checking duplicates for 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b...
+2025-05-02 19:03:40,786 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b Title: One of Google’s recent Gemini AI models scores worse on safe...
+2025-05-02 19:03:47,528 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b: is_duplicate=False. Reason: The core news event in the New Candidate Article about Google's Gemini AI model's safety performance is not reported in any of the Recently Published Articles.
+2025-05-02 19:03:47,528 - main_orchestrator - INFO - Article 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b passed similarity check.
+2025-05-02 19:03:47,528 - main_orchestrator - INFO - Finding image for 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b...
+2025-05-02 19:03:47,528 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/02/one-of-googles-recent-gemini-ai-models-scores-worse-on-safety/
+2025-05-02 19:03:47,590 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2169339854.jpg?resize=1200,857
+2025-05-02 19:03:47,591 - main_orchestrator - INFO - Using scraped image for 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b: https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2169339854.jpg?resize=1200,857
+2025-05-02 19:03:47,591 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b...
+2025-05-02 19:04:14,498 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b.
+2025-05-02 19:04:14,499 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b...
+2025-05-02 19:04:20,365 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b
+2025-05-02 19:04:20,366 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/one-of-googles-recent-gemini-ai-models-scores-worse-on-safety.html
+2025-05-02 19:04:20,368 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 19:04:20,369 - main_orchestrator - INFO - Updated all_articles.json (51 articles).
+2025-05-02 19:04:20,369 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b.json
+2025-05-02 19:04:20,369 - main_orchestrator - INFO - --- Successfully processed article: 272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b ---
+2025-05-02 19:04:21,371 - main_orchestrator - INFO - --- Processing article file: 880711802f1a5a47fccb503c628cd5d516f20c8513acb40241ced9f7dd44f40b.json ---
+2025-05-02 19:04:21,371 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 880711802f1a5a47fccb503c628cd5d516f20c8513acb40241ced9f7dd44f40b Title: Uber’s latest autonomous vehicle partner? Chinese startup Mo...
+2025-05-02 19:04:28,827 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 880711802f1a5a47fccb503c628cd5d516f20c8513acb40241ced9f7dd44f40b: level=Boring, topic='Business', keyword='autonomous vehicle partnership'
+2025-05-02 19:04:28,827 - main_orchestrator - INFO - Article 880711802f1a5a47fccb503c628cd5d516f20c8513acb40241ced9f7dd44f40b classified as Boring. Skipping.
+2025-05-02 19:04:29,828 - main_orchestrator - INFO - --- Processing article file: 3f805054ef1f33a8f1016455b32077dcd3fab1b5ab70fb9eb00ad18f7c3971f6.json ---
+2025-05-02 19:04:29,829 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 3f805054ef1f33a8f1016455b32077dcd3fab1b5ab70fb9eb00ad18f7c3971f6 Title: Ara Partners’ new $800M fund will decarbonize old industrial...
+2025-05-02 19:04:39,439 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 3f805054ef1f33a8f1016455b32077dcd3fab1b5ab70fb9eb00ad18f7c3971f6: level=Boring, topic='Other', keyword='decarbonization fund'
+2025-05-02 19:04:39,439 - main_orchestrator - INFO - Article 3f805054ef1f33a8f1016455b32077dcd3fab1b5ab70fb9eb00ad18f7c3971f6 classified as Boring. Skipping.
+2025-05-02 19:04:40,440 - main_orchestrator - INFO - --- Processing article file: 3f9bacf7538b9d9ee93831e9631597a2d05c71294c00093f025e949af52c0b11.json ---
+2025-05-02 19:04:40,441 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 3f9bacf7538b9d9ee93831e9631597a2d05c71294c00093f025e949af52c0b11 Title: Startups Weekly: Drama or game-changer? You decide...
+2025-05-02 19:04:46,542 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 3f9bacf7538b9d9ee93831e9631597a2d05c71294c00093f025e949af52c0b11: level=Boring, topic='Startups', keyword='Startups weekly recap'
+2025-05-02 19:04:46,542 - main_orchestrator - INFO - Article 3f9bacf7538b9d9ee93831e9631597a2d05c71294c00093f025e949af52c0b11 classified as Boring. Skipping.
+2025-05-02 19:04:47,544 - main_orchestrator - INFO - --- Processing article file: c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c.json ---
+2025-05-02 19:04:47,544 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c Title: Dating app Raw exposed users’ location data and personal inf...
+2025-05-02 19:04:56,337 - src.agents.filter_news_agent - INFO - Filter verdict received for ID c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c: level=Interesting, topic='Ethics', keyword='dating app data breach'
+2025-05-02 19:04:56,337 - main_orchestrator - INFO - Article c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c classified as Interesting (Topic: Ethics).
+2025-05-02 19:04:56,338 - main_orchestrator - INFO - Checking duplicates for c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c...
+2025-05-02 19:04:56,338 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c Title: Dating app Raw exposed users’ location data and personal inf...
+2025-05-02 19:05:01,690 - src.agents.similarity_check_agent - INFO - Similarity check result for ID c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c: is_duplicate=False. Reason: No recently published article reports on the same specific event of the dating app Raw exposing users' location data and personal information.
+2025-05-02 19:05:01,690 - main_orchestrator - INFO - Article c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c passed similarity check.
+2025-05-02 19:05:01,690 - main_orchestrator - INFO - Finding image for c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c...
+2025-05-02 19:05:01,690 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/02/dating-app-raw-exposed-users-location-data-personal-information/
+2025-05-02 19:05:01,757 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2025/05/ring-raw-dating-app.jpg?resize=1200,922
+2025-05-02 19:05:01,757 - main_orchestrator - INFO - Using scraped image for c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c: https://techcrunch.com/wp-content/uploads/2025/05/ring-raw-dating-app.jpg?resize=1200,922
+2025-05-02 19:05:01,757 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c...
+2025-05-02 19:05:27,352 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c.
+2025-05-02 19:05:27,352 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c...
+2025-05-02 19:05:33,171 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c
+2025-05-02 19:05:33,173 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/dating-app-raw-exposed-users-location-data-and-personal-information.html
+2025-05-02 19:05:33,174 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 19:05:33,175 - main_orchestrator - INFO - Updated all_articles.json (52 articles).
+2025-05-02 19:05:33,176 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c.json
+2025-05-02 19:05:33,176 - main_orchestrator - INFO - --- Successfully processed article: c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c ---
+2025-05-02 19:05:34,177 - main_orchestrator - INFO - --- Processing article file: 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373.json ---
+2025-05-02 19:05:34,178 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373 Title: OpenAI pledges to make changes to prevent future ChatGPT syc...
+2025-05-02 19:05:39,975 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373: level=Interesting, topic='AI Models', keyword='ChatGPT behavior update'
+2025-05-02 19:05:39,976 - main_orchestrator - INFO - Article 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373 classified as Interesting (Topic: AI Models).
+2025-05-02 19:05:39,976 - main_orchestrator - INFO - Checking duplicates for 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373...
+2025-05-02 19:05:39,976 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373 Title: OpenAI pledges to make changes to prevent future ChatGPT syc...
+2025-05-02 19:05:45,034 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373: is_duplicate=False. Reason: No recently published article reports on OpenAI making changes to prevent ChatGPT sycophancy.
+2025-05-02 19:05:45,034 - main_orchestrator - INFO - Article 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373 passed similarity check.
+2025-05-02 19:05:45,034 - main_orchestrator - INFO - Finding image for 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373...
+2025-05-02 19:05:45,034 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/02/openai-pledges-to-make-changes-to-prevent-future-chatgpt-sycophancy/
+2025-05-02 19:05:45,097 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2195918462.jpg?w=1024
+2025-05-02 19:05:45,097 - main_orchestrator - INFO - Using scraped image for 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373: https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2195918462.jpg?w=1024
+2025-05-02 19:05:45,097 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373...
+2025-05-02 19:06:10,337 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373.
+2025-05-02 19:06:10,337 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373...
+2025-05-02 19:06:16,549 - src.agents.tags_generator_agent - INFO - Successfully generated 8 tags for article ID: 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373
+2025-05-02 19:06:16,551 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/openai-pledges-to-make-changes-to-prevent-future-chatgpt-sycophancy.html
+2025-05-02 19:06:16,553 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 19:06:16,554 - main_orchestrator - INFO - Updated all_articles.json (53 articles).
+2025-05-02 19:06:16,554 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373.json
+2025-05-02 19:06:16,555 - main_orchestrator - INFO - --- Successfully processed article: 8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373 ---
+2025-05-02 19:06:17,556 - main_orchestrator - INFO - --- Processing article file: 44d70157f358d4d40ca3124f1be0fe70284bd13a5d19a01a61a5156f5bef83d8.json ---
+2025-05-02 19:06:17,556 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 44d70157f358d4d40ca3124f1be0fe70284bd13a5d19a01a61a5156f5bef83d8 Title: Google’s NotebookLM Android and iOS apps are available for p...
+2025-05-02 19:06:24,988 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 44d70157f358d4d40ca3124f1be0fe70284bd13a5d19a01a61a5156f5bef83d8: level=Boring, topic='Software', keyword='NotebookLM app preorder'
+2025-05-02 19:06:24,988 - main_orchestrator - INFO - Article 44d70157f358d4d40ca3124f1be0fe70284bd13a5d19a01a61a5156f5bef83d8 classified as Boring. Skipping.
+2025-05-02 19:06:25,990 - main_orchestrator - INFO - --- Processing article file: 1cf2b7227f35505d8dec71d89e2e4400237ac97b5f9da674309a98e7e42be6db.json ---
+2025-05-02 19:06:25,990 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 1cf2b7227f35505d8dec71d89e2e4400237ac97b5f9da674309a98e7e42be6db Title: Airbnb is quietly rolling out an AI customer service bot in ...
+2025-05-02 19:06:33,273 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 1cf2b7227f35505d8dec71d89e2e4400237ac97b5f9da674309a98e7e42be6db: level=Boring, topic='Business', keyword='AI customer service'
+2025-05-02 19:06:33,273 - main_orchestrator - INFO - Article 1cf2b7227f35505d8dec71d89e2e4400237ac97b5f9da674309a98e7e42be6db classified as Boring. Skipping.
+2025-05-02 19:06:34,275 - main_orchestrator - INFO - --- Processing article file: 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372.json ---
+2025-05-02 19:06:34,275 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372 Title: Apple approves Spotify app update that allows US users to ac...
+2025-05-02 19:06:41,187 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372: level=Interesting, topic='Regulation', keyword='App store regulation'
+2025-05-02 19:06:41,187 - main_orchestrator - INFO - Article 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372 classified as Interesting (Topic: Regulation).
+2025-05-02 19:06:41,187 - main_orchestrator - INFO - Checking duplicates for 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372...
+2025-05-02 19:06:41,187 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372 Title: Apple approves Spotify app update that allows US users to ac...
+2025-05-02 19:06:46,370 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372: is_duplicate=False. Reason: No recently published article reports on Apple approving Spotify's app update with pricing info and external payment links.
+2025-05-02 19:06:46,370 - main_orchestrator - INFO - Article 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372 passed similarity check.
+2025-05-02 19:06:46,370 - main_orchestrator - INFO - Finding image for 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372...
+2025-05-02 19:06:46,370 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/02/apple-approves-spotify-app-update-that-allows-u-s-users-to-access-pricing-info-external-payment-links/
+2025-05-02 19:06:46,432 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2024/02/GettyImages-1783835425-crop-e1717409949317.jpg?resize=1200,676
+2025-05-02 19:06:46,432 - main_orchestrator - INFO - Using scraped image for 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372: https://techcrunch.com/wp-content/uploads/2024/02/GettyImages-1783835425-crop-e1717409949317.jpg?resize=1200,676
+2025-05-02 19:06:46,432 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372...
+2025-05-02 19:07:13,968 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372.
+2025-05-02 19:07:13,968 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372...
+2025-05-02 19:07:22,605 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372
+2025-05-02 19:07:22,607 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/apple-approves-spotify-app-update-that-allows-us-users-to-access-pricing-info-ex.html
+2025-05-02 19:07:22,609 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 19:07:22,610 - main_orchestrator - INFO - Updated all_articles.json (54 articles).
+2025-05-02 19:07:22,610 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372.json
+2025-05-02 19:07:22,610 - main_orchestrator - INFO - --- Successfully processed article: 7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372 ---
+2025-05-02 19:07:23,612 - main_orchestrator - INFO - --- Processing article file: ab07374f5aef7e2ba427fc953edd23488598242d35edb7adb5095a93f8bb0d88.json ---
+2025-05-02 19:07:23,612 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ab07374f5aef7e2ba427fc953edd23488598242d35edb7adb5095a93f8bb0d88 Title: Apple changes US App Store rules to let apps link to externa...
+2025-05-02 19:07:32,162 - src.agents.filter_news_agent - INFO - Filter verdict received for ID ab07374f5aef7e2ba427fc953edd23488598242d35edb7adb5095a93f8bb0d88: level=Interesting, topic='Regulation', keyword='App Store rule change'
+2025-05-02 19:07:32,162 - main_orchestrator - INFO - Article ab07374f5aef7e2ba427fc953edd23488598242d35edb7adb5095a93f8bb0d88 classified as Interesting (Topic: Regulation).
+2025-05-02 19:07:32,163 - main_orchestrator - INFO - Checking duplicates for ab07374f5aef7e2ba427fc953edd23488598242d35edb7adb5095a93f8bb0d88...
+2025-05-02 19:07:32,163 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: ab07374f5aef7e2ba427fc953edd23488598242d35edb7adb5095a93f8bb0d88 Title: Apple changes US App Store rules to let apps link to externa...
+2025-05-02 19:07:38,201 - src.agents.similarity_check_agent - INFO - Similarity check result for ID ab07374f5aef7e2ba427fc953edd23488598242d35edb7adb5095a93f8bb0d88: is_duplicate=True. Reason: The New Candidate Article reports on Apple allowing apps to link to external payment systems in the U.S., which is the same core event as the recently published article about Apple approving Spotify's app update with external payment links.
+2025-05-02 19:07:38,201 - main_orchestrator - INFO - Article ab07374f5aef7e2ba427fc953edd23488598242d35edb7adb5095a93f8bb0d88 is SEMANTIC DUPLICATE. Skipping. Reason: The New Candidate Article reports on Apple allowing apps to link to external payment systems in the U.S., which is the same core event as the recently published article about Apple approving Spotify's app update with external payment links.
+2025-05-02 19:07:39,203 - main_orchestrator - INFO - --- Processing article file: a2ecf3baa30d85410c1438067b22d25410abe66a3f3c7a0fbd9f978f670619ca.json ---
+2025-05-02 19:07:39,203 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a2ecf3baa30d85410c1438067b22d25410abe66a3f3c7a0fbd9f978f670619ca Title: Roblox breaks ground on data center in Brazil for early 2026...
+2025-05-02 19:07:45,167 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a2ecf3baa30d85410c1438067b22d25410abe66a3f3c7a0fbd9f978f670619ca: level=Boring, topic='Other', keyword='Roblox data center'
+2025-05-02 19:07:45,167 - main_orchestrator - INFO - Article a2ecf3baa30d85410c1438067b22d25410abe66a3f3c7a0fbd9f978f670619ca classified as Boring. Skipping.
+2025-05-02 19:07:46,169 - main_orchestrator - INFO - --- Processing article file: 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc.json ---
+2025-05-02 19:07:46,169 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc Title: OpenAI overrode concerns of expert testers to release sycoph...
+2025-05-02 19:07:52,477 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc: level=Interesting, topic='Ethics', keyword='AI ethics concerns'
+2025-05-02 19:07:52,477 - main_orchestrator - INFO - Article 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc classified as Interesting (Topic: Ethics).
+2025-05-02 19:07:52,477 - main_orchestrator - INFO - Checking duplicates for 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc...
+2025-05-02 19:07:52,477 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc Title: OpenAI overrode concerns of expert testers to release sycoph...
+2025-05-02 19:07:59,233 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc: is_duplicate=False. Reason: The New Candidate Article discusses OpenAI overriding expert concerns to release GPT-4o, while the Recently Published Articles cover various unrelated AI and tech topics.
+2025-05-02 19:07:59,234 - main_orchestrator - INFO - Article 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc passed similarity check.
+2025-05-02 19:07:59,234 - main_orchestrator - INFO - Finding image for 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc...
+2025-05-02 19:07:59,234 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://venturebeat.com/ai/openai-overrode-concerns-of-expert-testers-to-release-sycophantic-gpt-4o/
+2025-05-02 19:07:59,429 - src.scrapers.image_scraper - INFO - Found twitter:image: https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_diverse_young_adult_office_workers_in_hipster_fashion_l_0059768d-e4b9-43be-9e72-3c836e51eb45-1.png?w=1024?w=1200&strip=all
+2025-05-02 19:07:59,429 - main_orchestrator - INFO - Using scraped image for 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc: https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_diverse_young_adult_office_workers_in_hipster_fashion_l_0059768d-e4b9-43be-9e72-3c836e51eb45-1.png?w=1024?w=1200&strip=all
+2025-05-02 19:07:59,429 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc...
+2025-05-02 19:08:24,560 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc.
+2025-05-02 19:08:24,560 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc...
+2025-05-02 19:08:31,049 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc
+2025-05-02 19:08:31,051 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/openai-overrode-concerns-of-expert-testers-to-release-sycophantic-gpt-4o.html
+2025-05-02 19:08:31,052 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 19:08:31,054 - main_orchestrator - INFO - Updated all_articles.json (55 articles).
+2025-05-02 19:08:31,054 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc.json
+2025-05-02 19:08:31,054 - main_orchestrator - INFO - --- Successfully processed article: 26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc ---
+2025-05-02 19:08:32,055 - main_orchestrator - INFO - --- Processing article file: 30c9313917fbbac5860cc7b7aa2e3a2d22cb91cbbacb6ac90d72657254af7cad.json ---
+2025-05-02 19:08:32,056 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 30c9313917fbbac5860cc7b7aa2e3a2d22cb91cbbacb6ac90d72657254af7cad Title: Show HN: I built a synthesizer based on 3D physics and launc...
+2025-05-02 19:08:38,692 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 30c9313917fbbac5860cc7b7aa2e3a2d22cb91cbbacb6ac90d72657254af7cad: level=Boring, topic='Other', keyword='Personal project launch'
+2025-05-02 19:08:38,692 - main_orchestrator - INFO - Article 30c9313917fbbac5860cc7b7aa2e3a2d22cb91cbbacb6ac90d72657254af7cad classified as Boring. Skipping.
+2025-05-02 19:08:39,694 - main_orchestrator - INFO - --- Processing article file: 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219.json ---
+2025-05-02 19:08:39,694 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219 Title: Show HN: Blast – Fast, multi-threaded serving engine for web...
+2025-05-02 19:08:45,478 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219: level=Interesting, topic='Software', keyword='AI agent serving engine'
+2025-05-02 19:08:45,478 - main_orchestrator - INFO - Article 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219 classified as Interesting (Topic: Software).
+2025-05-02 19:08:45,478 - main_orchestrator - INFO - Checking duplicates for 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219...
+2025-05-02 19:08:45,478 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219 Title: Show HN: Blast – Fast, multi-threaded serving engine for web...
+2025-05-02 19:08:50,886 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219: is_duplicate=False. Reason: The New Candidate Article discusses a new multi-threaded serving engine for web browsing AI agents, which is not covered in any of the Recently Published Articles.
+2025-05-02 19:08:50,886 - main_orchestrator - INFO - Article 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219 passed similarity check.
+2025-05-02 19:08:50,886 - main_orchestrator - INFO - Finding image for 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219...
+2025-05-02 19:08:50,886 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://github.com/stanford-mast/blast
+2025-05-02 19:08:51,333 - src.scrapers.image_scraper - INFO - Found og:image: https://opengraph.githubassets.com/205774e7188a1c0be9a1836965070bc864af997c2b311905def0c90a6d5f268b/stanford-mast/blast
+2025-05-02 19:08:51,333 - main_orchestrator - INFO - Using scraped image for 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219: https://opengraph.githubassets.com/205774e7188a1c0be9a1836965070bc864af997c2b311905def0c90a6d5f268b/stanford-mast/blast
+2025-05-02 19:08:51,333 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219...
+2025-05-02 19:09:15,049 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219.
+2025-05-02 19:09:15,049 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219...
+2025-05-02 19:09:22,663 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219
+2025-05-02 19:09:22,665 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/show-hn-blast-fast-multi-threaded-serving-engine-for-web-browsing-ai-agents.html
+2025-05-02 19:09:22,666 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 19:09:22,668 - main_orchestrator - INFO - Updated all_articles.json (56 articles).
+2025-05-02 19:09:22,668 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219.json
+2025-05-02 19:09:22,668 - main_orchestrator - INFO - --- Successfully processed article: 9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219 ---
+2025-05-02 19:09:23,670 - main_orchestrator - INFO - --- Processing article file: 93450e4759add3c01fda07967257668284cc5ba4857da2d72632dd1629e01a24.json ---
+2025-05-02 19:09:23,670 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 93450e4759add3c01fda07967257668284cc5ba4857da2d72632dd1629e01a24 Title: The language brain matters more for learning programming tha...
+2025-05-02 19:09:29,224 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 93450e4759add3c01fda07967257668284cc5ba4857da2d72632dd1629e01a24: level=Boring, topic='Other', keyword='programming learning'
+2025-05-02 19:09:29,225 - main_orchestrator - INFO - Article 93450e4759add3c01fda07967257668284cc5ba4857da2d72632dd1629e01a24 classified as Boring. Skipping.
+2025-05-02 19:09:30,226 - main_orchestrator - INFO - --- Processing article file: c68b086499d688e105e0776104ccc913998b4544ce83dda33ca52f5d4bb72345.json ---
+2025-05-02 19:09:30,227 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c68b086499d688e105e0776104ccc913998b4544ce83dda33ca52f5d4bb72345 Title: Rams is a documentary portrait of Dieter Rams (2018)...
+2025-05-02 19:09:36,248 - src.agents.filter_news_agent - INFO - Filter verdict received for ID c68b086499d688e105e0776104ccc913998b4544ce83dda33ca52f5d4bb72345: level=Boring, topic='Other', keyword='Dieter Rams documentary'
+2025-05-02 19:09:36,248 - main_orchestrator - INFO - Article c68b086499d688e105e0776104ccc913998b4544ce83dda33ca52f5d4bb72345 classified as Boring. Skipping.
+2025-05-02 19:09:37,249 - main_orchestrator - INFO - --- Processing article file: dc4d5fee8ef78654d452194564b0561ee088370f73c6dd79b855f12acb633d56.json ---
+2025-05-02 19:09:37,250 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: dc4d5fee8ef78654d452194564b0561ee088370f73c6dd79b855f12acb633d56 Title: Expanding on what we missed with sycophancy...
+2025-05-02 19:09:43,257 - src.agents.filter_news_agent - INFO - Filter verdict received for ID dc4d5fee8ef78654d452194564b0561ee088370f73c6dd79b855f12acb633d56: level=Boring, topic='Other', keyword='Discussion link'
+2025-05-02 19:09:43,257 - main_orchestrator - INFO - Article dc4d5fee8ef78654d452194564b0561ee088370f73c6dd79b855f12acb633d56 classified as Boring. Skipping.
+2025-05-02 19:09:44,259 - main_orchestrator - INFO - --- Processing article file: 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd.json ---
+2025-05-02 19:09:44,259 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd Title: Show HN: GPT-2 implemented using graphics shaders...
+2025-05-02 19:09:51,362 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd: level=Interesting, topic='AI Models', keyword='GPT-2 shader implementation'
+2025-05-02 19:09:51,362 - main_orchestrator - INFO - Article 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd classified as Interesting (Topic: AI Models).
+2025-05-02 19:09:51,362 - main_orchestrator - INFO - Checking duplicates for 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd...
+2025-05-02 19:09:51,362 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd Title: Show HN: GPT-2 implemented using graphics shaders...
+2025-05-02 19:09:57,261 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd: is_duplicate=False. Reason: The New Candidate Article discusses a unique implementation of GPT-2 using graphics shaders, which is not covered in any of the Recently Published Articles.
+2025-05-02 19:09:57,262 - main_orchestrator - INFO - Article 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd passed similarity check.
+2025-05-02 19:09:57,262 - main_orchestrator - INFO - Finding image for 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd...
+2025-05-02 19:09:57,262 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://github.com/nathan-barry/gpt2-webgl
+2025-05-02 19:09:57,688 - src.scrapers.image_scraper - INFO - Found og:image: https://opengraph.githubassets.com/4316146edfc49b0c7f76d1be7e205ea7e5bf23bdc15ce17e56843382315a2aab/nathan-barry/gpt2-webgl
+2025-05-02 19:09:57,689 - main_orchestrator - INFO - Using scraped image for 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd: https://opengraph.githubassets.com/4316146edfc49b0c7f76d1be7e205ea7e5bf23bdc15ce17e56843382315a2aab/nathan-barry/gpt2-webgl
+2025-05-02 19:09:57,689 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd...
+2025-05-02 19:10:22,608 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd.
+2025-05-02 19:10:22,608 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd...
+2025-05-02 19:10:27,790 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd
+2025-05-02 19:10:27,791 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/show-hn-gpt-2-implemented-using-graphics-shaders.html
+2025-05-02 19:10:27,793 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 19:10:27,794 - main_orchestrator - INFO - Updated all_articles.json (57 articles).
+2025-05-02 19:10:27,795 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd.json
+2025-05-02 19:10:27,795 - main_orchestrator - INFO - --- Successfully processed article: 077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd ---
+2025-05-02 19:10:28,796 - main_orchestrator - INFO - --- Processing article file: 60c1acf59141278c38782100563b768dba95d1473aa0302dd4088b9602172f42.json ---
+2025-05-02 19:10:28,797 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 60c1acf59141278c38782100563b768dba95d1473aa0302dd4088b9602172f42 Title: Building Burstables: CPU slicing with cgroups...
+2025-05-02 19:10:34,252 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 60c1acf59141278c38782100563b768dba95d1473aa0302dd4088b9602172f42: level=Boring, topic='Software', keyword='CPU slicing'
+2025-05-02 19:10:34,252 - main_orchestrator - INFO - Article 60c1acf59141278c38782100563b768dba95d1473aa0302dd4088b9602172f42 classified as Boring. Skipping.
+2025-05-02 19:10:35,254 - main_orchestrator - INFO - --- Processing article file: b9630b56036fa509523d6649877fdae2f2d8f2e5a724f25455663a428af3e5cc.json ---
+2025-05-02 19:10:35,254 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: b9630b56036fa509523d6649877fdae2f2d8f2e5a724f25455663a428af3e5cc Title: How to live an intellectually rich life...
+2025-05-02 19:10:42,095 - src.agents.filter_news_agent - INFO - Filter verdict received for ID b9630b56036fa509523d6649877fdae2f2d8f2e5a724f25455663a428af3e5cc: level=Boring, topic='Other', keyword='intellectual life discussion'
+2025-05-02 19:10:42,095 - main_orchestrator - INFO - Article b9630b56036fa509523d6649877fdae2f2d8f2e5a724f25455663a428af3e5cc classified as Boring. Skipping.
+2025-05-02 19:10:43,097 - main_orchestrator - INFO - --- Processing article file: ac65f93ff5277705c2d50050773c01f536b51d52bbe5892e187f7220d2ac8464.json ---
+2025-05-02 19:10:43,097 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ac65f93ff5277705c2d50050773c01f536b51d52bbe5892e187f7220d2ac8464 Title: Toma (YC W24) Is Hiring Engs #3-4 (AI for Automotive)...
+2025-05-02 19:10:50,640 - src.agents.filter_news_agent - INFO - Filter verdict received for ID ac65f93ff5277705c2d50050773c01f536b51d52bbe5892e187f7220d2ac8464: level=Boring, topic='Startups', keyword='Startup hiring'
+2025-05-02 19:10:50,640 - main_orchestrator - INFO - Article ac65f93ff5277705c2d50050773c01f536b51d52bbe5892e187f7220d2ac8464 classified as Boring. Skipping.
+2025-05-02 19:10:51,641 - main_orchestrator - INFO - --- Processing article file: aa9a2abaa83cfbf667907ff70afc014b1570e090e9c526852f5bc7913a0e3269.json ---
+2025-05-02 19:10:51,642 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: aa9a2abaa83cfbf667907ff70afc014b1570e090e9c526852f5bc7913a0e3269 Title: The History of Album Art...
+2025-05-02 19:10:58,147 - src.agents.filter_news_agent - INFO - Filter verdict received for ID aa9a2abaa83cfbf667907ff70afc014b1570e090e9c526852f5bc7913a0e3269: level=Boring, topic='Other', keyword='Album art history'
+2025-05-02 19:10:58,147 - main_orchestrator - INFO - Article aa9a2abaa83cfbf667907ff70afc014b1570e090e9c526852f5bc7913a0e3269 classified as Boring. Skipping.
+2025-05-02 19:10:59,149 - main_orchestrator - INFO - --- Processing article file: 4fd4fde5d858419e8d612b35d97f861b784b1bd7d47b6aa57241068cd0413c79.json ---
+2025-05-02 19:10:59,149 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 4fd4fde5d858419e8d612b35d97f861b784b1bd7d47b6aa57241068cd0413c79 Title: The Cannae Problem...
+2025-05-02 19:11:05,001 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 4fd4fde5d858419e8d612b35d97f861b784b1bd7d47b6aa57241068cd0413c79: level=Boring, topic='Other', keyword='Unspecified content'
+2025-05-02 19:11:05,001 - main_orchestrator - INFO - Article 4fd4fde5d858419e8d612b35d97f861b784b1bd7d47b6aa57241068cd0413c79 classified as Boring. Skipping.
+2025-05-02 19:11:06,003 - main_orchestrator - INFO - --- Processing article file: 349fc1e7f374519a3a702b139455e0179e96ebc10968756a9e1a40274e63ceed.json ---
+2025-05-02 19:11:06,003 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 349fc1e7f374519a3a702b139455e0179e96ebc10968756a9e1a40274e63ceed Title: When Americana doesn't mean American...
+2025-05-02 19:11:12,711 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 349fc1e7f374519a3a702b139455e0179e96ebc10968756a9e1a40274e63ceed: level=Boring, topic='Other', keyword='General discussion'
+2025-05-02 19:11:12,712 - main_orchestrator - INFO - Article 349fc1e7f374519a3a702b139455e0179e96ebc10968756a9e1a40274e63ceed classified as Boring. Skipping.
+2025-05-02 19:11:13,713 - main_orchestrator - INFO - --- Processing article file: 6619492208dfe98fec7d63049c960d3698da15ef3a1455a82ad91a9ef242a957.json ---
+2025-05-02 19:11:13,714 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 6619492208dfe98fec7d63049c960d3698da15ef3a1455a82ad91a9ef242a957 Title: Show HN: Exhibit and Site on Mechanisms for Students...
+2025-05-02 19:11:19,791 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 6619492208dfe98fec7d63049c960d3698da15ef3a1455a82ad91a9ef242a957: level=Boring, topic='Other', keyword='Educational mechanisms'
+2025-05-02 19:11:19,791 - main_orchestrator - INFO - Article 6619492208dfe98fec7d63049c960d3698da15ef3a1455a82ad91a9ef242a957 classified as Boring. Skipping.
+2025-05-02 19:11:20,793 - main_orchestrator - INFO - --- Processing article file: ad809dd4d2c958f64fa582fd8cdb15b9f4c85df30499a1f8aa8d3e6958228eb5.json ---
+2025-05-02 19:11:20,793 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ad809dd4d2c958f64fa582fd8cdb15b9f4c85df30499a1f8aa8d3e6958228eb5 Title: Fast(er) regular expression engines in Ruby...
+2025-05-02 19:11:27,231 - src.agents.filter_news_agent - INFO - Filter verdict received for ID ad809dd4d2c958f64fa582fd8cdb15b9f4c85df30499a1f8aa8d3e6958228eb5: level=Boring, topic='Software', keyword='Ruby regex engines'
+2025-05-02 19:11:27,231 - main_orchestrator - INFO - Article ad809dd4d2c958f64fa582fd8cdb15b9f4c85df30499a1f8aa8d3e6958228eb5 classified as Boring. Skipping.
+2025-05-02 19:11:28,233 - main_orchestrator - INFO - --- Processing article file: 3f9494c6521a0994a5ee2271492306315e229287cefcdd59046245d24cc627df.json ---
+2025-05-02 19:11:28,233 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 3f9494c6521a0994a5ee2271492306315e229287cefcdd59046245d24cc627df Title: A Common Lisp jq replacement...
+2025-05-02 19:11:34,366 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 3f9494c6521a0994a5ee2271492306315e229287cefcdd59046245d24cc627df: level=Boring, topic='Software', keyword='Common Lisp jq replacement'
+2025-05-02 19:11:34,366 - main_orchestrator - INFO - Article 3f9494c6521a0994a5ee2271492306315e229287cefcdd59046245d24cc627df classified as Boring. Skipping.
+2025-05-02 19:11:35,368 - main_orchestrator - INFO - --- Processing article file: c6ccb3beecb24a3789b93822829ffc8b2068d208c1afc490bcc2d8534ef88d8d.json ---
+2025-05-02 19:11:35,368 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c6ccb3beecb24a3789b93822829ffc8b2068d208c1afc490bcc2d8534ef88d8d Title: Relational Graph Transformers...
+2025-05-02 19:11:41,412 - src.agents.filter_news_agent - INFO - Filter verdict received for ID c6ccb3beecb24a3789b93822829ffc8b2068d208c1afc490bcc2d8534ef88d8d: level=Boring, topic='Other', keyword='Relational Graph Transformers'
+2025-05-02 19:11:41,412 - main_orchestrator - INFO - Article c6ccb3beecb24a3789b93822829ffc8b2068d208c1afc490bcc2d8534ef88d8d classified as Boring. Skipping.
+2025-05-02 19:11:42,413 - main_orchestrator - INFO - --- Processing article file: b70b49bcf451b68192c62f4860225d983e8333f69754e76598b725acdcaad28d.json ---
+2025-05-02 19:11:42,414 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: b70b49bcf451b68192c62f4860225d983e8333f69754e76598b725acdcaad28d Title: Altair at 50: Remembering the first Personal Computer...
+2025-05-02 19:11:48,579 - src.agents.filter_news_agent - INFO - Filter verdict received for ID b70b49bcf451b68192c62f4860225d983e8333f69754e76598b725acdcaad28d: level=Boring, topic='Other', keyword='Historical PC retrospective'
+2025-05-02 19:11:48,579 - main_orchestrator - INFO - Article b70b49bcf451b68192c62f4860225d983e8333f69754e76598b725acdcaad28d classified as Boring. Skipping.
+2025-05-02 19:11:49,580 - main_orchestrator - INFO - Processing cycle complete. Successful: 8, Failed/Skipped: 24
+2025-05-02 19:11:49,580 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished (555.16 seconds) === ---
