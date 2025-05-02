@@ -47,6 +47,29 @@
       "trend_score": 15.0
     },
     {
+      "id": "67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc",
+      "title": "Microsoft’s new “passwordless by default” is great but comes at a cost",
+      "link": "articles/microsofts-new-passwordless-by-default-is-great-but-comes-at-a-cost.html",
+      "published_iso": "2025-05-02T20:14:58Z",
+      "summary_short": "Microsoft makes passkeys the default login method, advancing passwordless authentication to enhance security and reduce phishing risks.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/05/microsoft-passkey-1152x648.webp",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "passwordless authentication",
+        "Microsoft security",
+        "passkeys",
+        "FIDO Alliance",
+        "cybersecurity trends",
+        "phishing prevention",
+        "credential theft",
+        "user authentication",
+        "tech industry standards"
+      ],
+      "audio_url": null,
+      "trend_score": 14.41
+    },
+    {
       "id": "a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999",
       "title": "Google will soon start letting kids under 13 use its Gemini chatbot",
       "link": "articles/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot.html",
@@ -430,29 +453,6 @@
         "AI chip landscape",
         "GPU technology",
         "global AI processor demand"
-      ],
-      "audio_url": null,
-      "trend_score": 14.5
-    },
-    {
-      "id": "add0f3060f56a04d7c249ea967ec6fdb8b19c6a654653d7121be9989ffa686ef",
-      "title": "A Judge Says Meta’s AI Copyright Case Is About ‘the Next Taylor Swift’",
-      "link": "articles/a-judge-says-metas-ai-copyright-case-is-about-the-next-taylor-swift.html",
-      "published_iso": "2025-05-01T22:47:07",
-      "summary_short": "The Meta AI copyright case intensifies as a judge hints at an impending ruling, shaping the future of AI and intellectual property.",
-      "image_url": "https://media.wired.com/photos/68127a1cc6e866c6748464f3/191:100/w_1280,c_limit/Meta-Kadrey-Hearing-Business-1498692170.jpg",
-      "topic": "Regulation",
-      "is_breaking": false,
-      "tags": [
-        "Meta AI copyright case",
-        "AI-generated content",
-        "copyright law",
-        "intellectual property rights",
-        "Taylor Swift comparison",
-        "AI innovation",
-        "legal precedent",
-        "content creators",
-        "AI training practices"
       ],
       "audio_url": null,
       "trend_score": 14.5

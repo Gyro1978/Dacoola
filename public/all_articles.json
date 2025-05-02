@@ -47,6 +47,29 @@
       "trend_score": 15.0
     },
     {
+      "id": "67715aee5aa68b7c50b7fa59873cbfef484773d101af20f52d0b7da0ceba6bbc",
+      "title": "Microsoft’s new “passwordless by default” is great but comes at a cost",
+      "link": "articles/microsofts-new-passwordless-by-default-is-great-but-comes-at-a-cost.html",
+      "published_iso": "2025-05-02T20:14:58Z",
+      "summary_short": "Microsoft makes passkeys the default login method, advancing passwordless authentication to enhance security and reduce phishing risks.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/05/microsoft-passkey-1152x648.webp",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "passwordless authentication",
+        "Microsoft security",
+        "passkeys",
+        "FIDO Alliance",
+        "cybersecurity trends",
+        "phishing prevention",
+        "credential theft",
+        "user authentication",
+        "tech industry standards"
+      ],
+      "audio_url": null,
+      "trend_score": 14.41
+    },
+    {
       "id": "a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999",
       "title": "Google will soon start letting kids under 13 use its Gemini chatbot",
       "link": "articles/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot.html",
@@ -458,6 +481,30 @@
       "trend_score": 14.5
     },
     {
+      "id": "aaa9031d7325b251f1b289715827e8e9ddc9d4e738584216c0124f7d1323d8d8",
+      "title": "Time saved by AI offset by new work created, study suggests",
+      "link": "articles/time-saved-by-ai-offset-by-new-work-created-study-suggests.html",
+      "published_iso": "2025-05-01T21:32:27Z",
+      "summary_short": "A new study reveals AI labor impact remains negligible in Denmark, with time savings offset by new tasks. Read the findings here.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/05/AI_work_interference-1152x648.jpg",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "AI labor impact",
+        "generative AI tools",
+        "ChatGPT",
+        "workforce transformation",
+        "productivity gains",
+        "job displacement",
+        "economic effects of AI",
+        "University of Chicago study",
+        "Denmark labor market",
+        "Large Language Models"
+      ],
+      "audio_url": null,
+      "trend_score": 14.24
+    },
+    {
       "id": "9df3d8e0130ec5d428f4b88feeafa658253ead0117476b1139dcaaab59da3c55",
       "title": "New Federal Circuit Decision - Expect Getting AI/Machine Learning Patents Past 101 to Get Tougher - Quarles",
       "link": "articles/new-federal-circuit-decision-expect-getting-aimachine-learning-patents-past-101-.html",
@@ -480,6 +527,30 @@
       ],
       "audio_url": null,
       "trend_score": 15.0
+    },
+    {
+      "id": "37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872",
+      "title": "Why MFA is getting easier to bypass and what to do about it",
+      "link": "articles/why-mfa-is-getting-easier-to-bypass-and-what-to-do-about-it.html",
+      "published_iso": "2025-05-01T21:00:02Z",
+      "summary_short": "Learn why MFA bypass phishing is on the rise and how attackers exploit common authentication methods. Stay informed and secure.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2022/03/phishing.jpeg",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "MFA bypass phishing",
+        "multifactor authentication",
+        "cybersecurity threats",
+        "phishing-as-a-service",
+        "adversary-in-the-middle attacks",
+        "Cisco Talos",
+        "Tycoon 2FA",
+        "Evilproxy",
+        "Mamba 2FA",
+        "hardware tokens"
+      ],
+      "audio_url": null,
+      "trend_score": 14.22
     },
     {
       "id": "bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170",
@@ -1170,6 +1241,30 @@
       "audio_url": null
     },
     {
+      "id": "1e77fa4f130870fcf99cb1598a084cdcf958d34020aacd947613306d76dc3cca",
+      "title": "Windows RDP lets you log in using revoked passwords. Microsoft is OK with that.",
+      "link": "articles/windows-rdp-lets-you-log-in-using-revoked-passwords-microsoft-is-ok-with-that.html",
+      "published_iso": "2025-04-30T18:36:26Z",
+      "summary_short": "Microsoft confirms Windows RDP permits revoked password logins, calling it a design choice. Learn about this Windows RDP security quirk.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/04/remote-desktop.png",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Windows RDP",
+        "Remote Desktop Protocol",
+        "Microsoft security",
+        "Password revocation",
+        "RDP vulnerability",
+        "Remote access security",
+        "Multi-factor authentication",
+        "Microsoft design decision",
+        "System access control",
+        "Cybersecurity risks"
+      ],
+      "audio_url": null,
+      "trend_score": 13.44
+    },
+    {
       "id": "8c8c5593259ced8b081720b422d6ec42e711bb3afe00091d53c040b27b4a260f",
       "title": "If you own Ray-Ban Meta glasses, you should double-check your privacy settings",
       "link": "articles/if-you-own-ray-ban-meta-glasses-you-should-double-check-your-privacy-settings.html",
@@ -1212,6 +1307,30 @@
         "Apple user notifications"
       ],
       "audio_url": null
+    },
+    {
+      "id": "d81b2d87cccbdf71389b1600ddf8426f946fe9274c3974122652ec8ab4a330d3",
+      "title": "Millions of Apple Airplay-enabled devices can be hacked via Wi-Fi",
+      "link": "articles/millions-of-apple-airplay-enabled-devices-can-be-hacked-via-wi-fi.html",
+      "published_iso": "2025-04-30T17:52:06Z",
+      "summary_short": "Researchers uncover AirPlay security flaws allowing hackers to spread malware via Wi-Fi, affecting millions of Apple and third-party devices.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/04/airplay-malware-gear-1391670285-1152x648.jpg",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "AirPlay security flaws",
+        "Apple AirPlay vulnerabilities",
+        "Wi-Fi hacking risks",
+        "IoT device security",
+        "AirPlay SDK bugs",
+        "smart home device threats",
+        "cybersecurity risks",
+        "Oligo AirBorne",
+        "third-party device vulnerabilities",
+        "Apple ecosystem security"
+      ],
+      "audio_url": null,
+      "trend_score": 13.41
     },
     {
       "id": "3744354b457d8af2cf77b12ccff14bdbf0ba9eaee4f419bea9228abded88c5d4",
@@ -1282,6 +1401,30 @@
       ],
       "audio_url": null,
       "trend_score": 13.28
+    },
+    {
+      "id": "a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4",
+      "title": "The end of an AI that shocked the world: OpenAI retires GPT-4",
+      "link": "articles/the-end-of-an-ai-that-shocked-the-world-openai-retires-gpt-4.html",
+      "published_iso": "2025-04-30T11:30:40Z",
+      "summary_short": "OpenAI retires GPT-4, the AI that sparked global hype and panic, replacing it with GPT-4o in ChatGPT by April 30, 2025.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/04/the_end_typewriter-1152x648.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI",
+        "GPT-4 retirement",
+        "GPT-4o",
+        "AI model transition",
+        "Generative AI",
+        "AI ethics",
+        "AI regulation",
+        "ChatGPT",
+        "Artificial Intelligence",
+        "AI industry trends"
+      ],
+      "audio_url": null,
+      "trend_score": 13.22
     },
     {
       "id": "a4c561cf3a31f0292c042aa67cc4a07b21776d35c06459a63ddfe56a86db2110",
@@ -1630,6 +1773,78 @@
         "serverless architecture",
         "digital transformation"
       ],
+      "trend_score": 10.0
+    },
+    {
+      "id": "d293f7115e579a59a542accd42ccd28f826703b245f69a4603a3f71da8ea2051",
+      "title": "Making Brain Waves: AI Startup Speeds Disease Research With Lab in the Loop",
+      "link": "articles/making-brain-waves-ai-startup-speeds-disease-research-with-lab-in-the-loop.html",
+      "published_iso": "2025-04-22T13:00:43Z",
+      "summary_short": "BrainStorm Therapeutics uses AI drug discovery and brain organoids to accelerate treatments for neurological disorders like Parkinson's and Alzheimer's.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/DSCF8311_blogcrop.jpg",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "AI drug discovery",
+        "neurological disorders",
+        "brain organoids",
+        "NVIDIA BioNeMo Framework",
+        "Parkinson’s disease research",
+        "Rett syndrome treatment",
+        "precision medicine",
+        "clinical trials acceleration",
+        "stem cell technology",
+        "computational biology"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
+      "id": "c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763",
+      "title": "Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficiency by Over 300x",
+      "link": "articles/chill-factor-nvidia-blackwell-platform-boosts-water-efficiency-by-over-300x.html",
+      "published_iso": "2025-04-22T13:00:39Z",
+      "summary_short": "NVIDIA Blackwell cooling technology enhances water efficiency by 300x in AI data centers, reducing energy costs with liquid-cooled systems.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/water-efficiency-hero-resized.jpg",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA Blackwell cooling",
+        "liquid-cooled data centers",
+        "AI workload efficiency",
+        "GB200 NVL72",
+        "water efficiency in data centers",
+        "sustainable AI computing",
+        "hyperscale data center cooling",
+        "energy-efficient AI infrastructure",
+        "NVLink technology",
+        "data center cost savings"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
+      "id": "68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078",
+      "title": "AI Bites Back: Researchers Develop Model to Detect Malaria Amid Venezuelan Gold Rush",
+      "link": "articles/ai-bites-back-researchers-develop-model-to-detect-malaria-amid-venezuelan-gold-r.html",
+      "published_iso": "2025-04-17T16:00:01Z",
+      "summary_short": "Researchers use AI malaria detection to combat a resurgence in Venezuela caused by gold mining, achieving 99.51% accuracy with NVIDIA GPUs.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/Anopheles_stephensi.jpeg",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "AI malaria detection",
+        "convolutional neural networks",
+        "malaria diagnosis",
+        "Plasmodium falciparum",
+        "Plasmodium vivax",
+        "Venezuela malaria crisis",
+        "NVIDIA GPUs",
+        "automated medical diagnosis",
+        "transfer learning in healthcare",
+        "rural healthcare technology"
+      ],
+      "audio_url": null,
       "trend_score": 10.0
     },
     {
