@@ -12240,3 +12240,131 @@ NameError: name 'logger' is not defined
 2025-05-02 06:48:55,660 - main_orchestrator - INFO - Article 22c2d76ca1430c38ebec854499c4dfa9a3073d3a5e2d490e1f99d8488ec722c3 is Boring. Skipping.
 2025-05-02 06:48:56,661 - main_orchestrator - INFO - Processing cycle complete. Successful: 1, Failed/Skipped: 2
 2025-05-02 06:48:56,661 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 06:51:58,028 - INFO - Use pytorch device_name: cpu
+2025-05-02 06:51:58,029 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 06:51:58,030 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 06:51:58,133 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 06:51:58,134 - DEBUG - Attempting to acquire lock 140271412832592 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/f1be01c3c3a2f8e54f7071e72eaae8820edc586c.lock
+2025-05-02 06:51:58,134 - DEBUG - Lock 140271412832592 acquired on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/f1be01c3c3a2f8e54f7071e72eaae8820edc586c.lock
+2025-05-02 06:51:58,201 - DEBUG - https://huggingface.co:443 "GET /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 122
+2025-05-02 06:51:58,203 - DEBUG - Attempting to release lock 140271412832592 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/f1be01c3c3a2f8e54f7071e72eaae8820edc586c.lock
+2025-05-02 06:51:58,203 - DEBUG - Lock 140271412832592 released on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/f1be01c3c3a2f8e54f7071e72eaae8820edc586c.lock
+2025-05-02 06:51:58,268 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 06:51:58,269 - DEBUG - Attempting to acquire lock 140271412833600 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/61b8eaf90b0e0af22aec20ef23b893ae4a5c4981.lock
+2025-05-02 06:51:58,269 - DEBUG - Lock 140271412833600 acquired on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/61b8eaf90b0e0af22aec20ef23b893ae4a5c4981.lock
+2025-05-02 06:51:58,336 - DEBUG - https://huggingface.co:443 "GET /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 116
+2025-05-02 06:51:58,337 - DEBUG - Attempting to release lock 140271412833600 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/61b8eaf90b0e0af22aec20ef23b893ae4a5c4981.lock
+2025-05-02 06:51:58,337 - DEBUG - Lock 140271412833600 released on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/61b8eaf90b0e0af22aec20ef23b893ae4a5c4981.lock
+2025-05-02 06:51:58,443 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 06:51:58,444 - DEBUG - Attempting to acquire lock 140271412829520 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/4f88b61af88e307a31095b60a6f4ebb740ead065.lock
+2025-05-02 06:51:58,444 - DEBUG - Lock 140271412829520 acquired on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/4f88b61af88e307a31095b60a6f4ebb740ead065.lock
+2025-05-02 06:51:58,525 - DEBUG - https://huggingface.co:443 "GET /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 1911
+2025-05-02 06:51:58,526 - DEBUG - Attempting to release lock 140271412829520 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/4f88b61af88e307a31095b60a6f4ebb740ead065.lock
+2025-05-02 06:51:58,526 - DEBUG - Lock 140271412829520 released on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/4f88b61af88e307a31095b60a6f4ebb740ead065.lock
+2025-05-02 06:51:58,591 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 06:51:58,658 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 06:51:58,676 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 06:51:58,677 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 06:51:58,679 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 06:51:58,680 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 06:51:58,682 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 06:51:58,684 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 06:51:58,686 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 06:51:58,754 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/merges.txt HTTP/1.1" 200 0
+2025-05-02 06:51:58,755 - DEBUG - Attempting to acquire lock 140271411452208 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/76e821f1b6f0a9709293c3b6b51ed90980b3166b.lock
+2025-05-02 06:51:58,755 - DEBUG - Lock 140271411452208 acquired on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/76e821f1b6f0a9709293c3b6b51ed90980b3166b.lock
+2025-05-02 06:51:58,757 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/pytorch_model.bin HTTP/1.1" 302 0
+2025-05-02 06:51:58,757 - DEBUG - Attempting to acquire lock 140271411458160 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/a62934cf6216e42859223aed2df08b4f1bd0042cb31be80d2db5cd54f71c0d16.lock
+2025-05-02 06:51:58,758 - DEBUG - Lock 140271411458160 acquired on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/a62934cf6216e42859223aed2df08b4f1bd0042cb31be80d2db5cd54f71c0d16.lock
+2025-05-02 06:51:58,758 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-02 06:51:58,759 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/tokenizer_config.json HTTP/1.1" 200 0
+2025-05-02 06:51:58,760 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/preprocessor_config.json HTTP/1.1" 200 0
+2025-05-02 06:51:58,761 - DEBUG - Attempting to acquire lock 140271411456816 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/d9ce3e8b9bcd9c71d6c6bd77183db59a35578337.lock
+2025-05-02 06:51:58,761 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/vocab.json HTTP/1.1" 200 0
+2025-05-02 06:51:58,762 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/special_tokens_map.json HTTP/1.1" 200 0
+2025-05-02 06:51:58,762 - DEBUG - Attempting to acquire lock 140271411460992 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/5a12a1eb250987a4eee0e3e7d7338c4b22724be1.lock
+2025-05-02 06:51:58,762 - DEBUG - Lock 140271411460992 acquired on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/5a12a1eb250987a4eee0e3e7d7338c4b22724be1.lock
+2025-05-02 06:51:58,763 - DEBUG - Attempting to acquire lock 140271411446208 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/4297ea6a8d2bae1fea8f48b45e257814dcb11f69.lock
+2025-05-02 06:51:58,764 - DEBUG - Attempting to acquire lock 140271412836816 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/9bfb42aa97dcd61e89f279ccaee988bccb4fabae.lock
+2025-05-02 06:51:58,764 - DEBUG - Lock 140271411446208 acquired on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/4297ea6a8d2bae1fea8f48b45e257814dcb11f69.lock
+2025-05-02 06:51:58,764 - DEBUG - Lock 140271411456816 acquired on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/d9ce3e8b9bcd9c71d6c6bd77183db59a35578337.lock
+2025-05-02 06:51:58,766 - DEBUG - Lock 140271412836816 acquired on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/9bfb42aa97dcd61e89f279ccaee988bccb4fabae.lock
+2025-05-02 06:51:58,772 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/config.json HTTP/1.1" 200 0
+2025-05-02 06:51:58,772 - DEBUG - Attempting to acquire lock 140271411453552 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/1b988bbb808a94f5913b7175234bb3ebc3b4ec08.lock
+2025-05-02 06:51:58,772 - DEBUG - Lock 140271411453552 acquired on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/1b988bbb808a94f5913b7175234bb3ebc3b4ec08.lock
+2025-05-02 06:51:58,819 - DEBUG - https://huggingface.co:443 "GET /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/merges.txt HTTP/1.1" 200 524619
+2025-05-02 06:51:58,826 - DEBUG - https://huggingface.co:443 "GET /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/pytorch_model.bin HTTP/1.1" 302 1368
+2025-05-02 06:51:58,828 - DEBUG - Starting new HTTPS connection (1): cas-bridge.xethub.hf.co:443
+2025-05-02 06:51:58,830 - DEBUG - https://huggingface.co:443 "GET /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/tokenizer_config.json HTTP/1.1" 200 604
+2025-05-02 06:51:58,831 - DEBUG - Attempting to release lock 140271411456816 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/d9ce3e8b9bcd9c71d6c6bd77183db59a35578337.lock
+2025-05-02 06:51:58,831 - DEBUG - Lock 140271411456816 released on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/d9ce3e8b9bcd9c71d6c6bd77183db59a35578337.lock
+2025-05-02 06:51:58,834 - DEBUG - https://huggingface.co:443 "GET /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/vocab.json HTTP/1.1" 200 961143
+2025-05-02 06:51:58,834 - DEBUG - https://huggingface.co:443 "GET /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/preprocessor_config.json HTTP/1.1" 200 316
+2025-05-02 06:51:58,835 - DEBUG - https://huggingface.co:443 "GET /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/special_tokens_map.json HTTP/1.1" 200 389
+2025-05-02 06:51:58,836 - DEBUG - Attempting to release lock 140271411460992 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/5a12a1eb250987a4eee0e3e7d7338c4b22724be1.lock
+2025-05-02 06:51:58,837 - DEBUG - Lock 140271411460992 released on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/5a12a1eb250987a4eee0e3e7d7338c4b22724be1.lock
+2025-05-02 06:51:58,837 - DEBUG - Attempting to release lock 140271412836816 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/9bfb42aa97dcd61e89f279ccaee988bccb4fabae.lock
+2025-05-02 06:51:58,837 - DEBUG - Lock 140271412836816 released on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/9bfb42aa97dcd61e89f279ccaee988bccb4fabae.lock
+2025-05-02 06:51:58,845 - DEBUG - https://huggingface.co:443 "GET /sentence-transformers/clip-ViT-B-32/resolve/11fb331c2c388748c110926aa8013161cb5a85b5/0_CLIPModel/config.json HTTP/1.1" 200 4025
+2025-05-02 06:51:58,845 - DEBUG - Attempting to release lock 140271411453552 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/1b988bbb808a94f5913b7175234bb3ebc3b4ec08.lock
+2025-05-02 06:51:58,845 - DEBUG - Lock 140271411453552 released on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/1b988bbb808a94f5913b7175234bb3ebc3b4ec08.lock
+2025-05-02 06:51:58,889 - DEBUG - Attempting to release lock 140271411452208 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/76e821f1b6f0a9709293c3b6b51ed90980b3166b.lock
+2025-05-02 06:51:58,889 - DEBUG - Lock 140271411452208 released on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/76e821f1b6f0a9709293c3b6b51ed90980b3166b.lock
+2025-05-02 06:51:58,997 - DEBUG - Attempting to release lock 140271411446208 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/4297ea6a8d2bae1fea8f48b45e257814dcb11f69.lock
+2025-05-02 06:51:58,997 - DEBUG - Lock 140271411446208 released on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/4297ea6a8d2bae1fea8f48b45e257814dcb11f69.lock
+2025-05-02 06:51:59,034 - DEBUG - https://cas-bridge.xethub.hf.co:443 "GET /xet-bridge-us/621ffdc136468d709f1802a8/57fe1319d988e37d3da2bddac58a31b3412c657ed0379a60260053a2f0095539?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cas%2F20250502%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250502T063626Z&X-Amz-Expires=3600&X-Amz-Signature=10e9e40cfaced1a4152bdfe9be00dfa77bd6857e84d687940dbe60e08b4e6a2d&X-Amz-SignedHeaders=host&X-Xet-Cas-Uid=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27pytorch_model.bin%3B+filename%3D%22pytorch_model.bin%22%3B&response-content-type=application%2Foctet-stream&x-id=GetObject&Expires=1746171386&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc0NjE3MTM4Nn19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2FzLWJyaWRnZS54ZXRodWIuaGYuY28veGV0LWJyaWRnZS11cy82MjFmZmRjMTM2NDY4ZDcwOWYxODAyYTgvNTdmZTEzMTlkOTg4ZTM3ZDNkYTJiZGRhYzU4YTMxYjM0MTJjNjU3ZWQwMzc5YTYwMjYwMDUzYTJmMDA5NTUzOSoifV19&Signature=nACv-cIYlvfPm5KOWifM9vaMLyMWGo3uhC9rOjya397WTvYUL~8Xazom1fhDzXy0jDMJNFvOzciwOy1NPn1aKbOH7Z2Wi7SfJmaxIQJlZQvj0ChpTMXQEDLwH82vezAAFx863adTlwB0Q9KLq-ueCS-sn9GWO~4tM92lBIM~-Tbn6bbs2l9UyPaCtr7bIvCwCiQgh81gZTXpb1mphQMGWqaEF7OC8mjT2Uhq0Qrj4MQgTmk4RvpqZ5A3d766F4-LEou6wzEict06OLf8n6oMVXW4RlffHmZiCbaMH7LoZwWhIAgObJpgcG4D~qkfbGMAnlt0quofsZr4mIFUZ28Zcw__&Key-Pair-Id=K2L8F4GPSG1IFC HTTP/1.1" 200 605266175
+2025-05-02 06:52:07,687 - DEBUG - Attempting to release lock 140271411458160 on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/a62934cf6216e42859223aed2df08b4f1bd0042cb31be80d2db5cd54f71c0d16.lock
+2025-05-02 06:52:07,687 - DEBUG - Lock 140271411458160 released on /home/runner/.cache/huggingface/hub/.locks/models--sentence-transformers--clip-ViT-B-32/a62934cf6216e42859223aed2df08b4f1bd0042cb31be80d2db5cd54f71c0d16.lock
+2025-05-02 06:52:07,929 - WARNING - Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+2025-05-02 06:52:08,202 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 06:52:08,208 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 06:52:08,220 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 06:52:08,220 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 06:52:08,220 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-02 06:52:08,221 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 06:52:08,221 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 06:52:08,221 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 06:52:08,222 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 06:52:08,222 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 06:52:08,222 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 06:52:08,365 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 06:52:08,365 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 06:52:08,365 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 06:52:08,494 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 06:52:08,494 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 06:52:08,494 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 06:52:08,711 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 06:52:08,711 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 06:52:08,711 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 06:52:08,873 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 06:52:08,873 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 06:52:08,873 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 06:52:09,094 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 06:52:09,095 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 06:52:09,095 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 06:52:09,347 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 06:52:09,348 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 06:52:10,035 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 06:52:10,036 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 0 new articles.
+2025-05-02 06:52:10,036 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 06:52:10,227 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 06:52:10,227 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 0 new articles.
+2025-05-02 06:52:10,227 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 06:52:11,436 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 06:52:11,436 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 06:52:12,077 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 06:52:12,077 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 06:52:12,077 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 06:52:12,157 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 06:52:12,157 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 06:52:12,157 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 06:52:13,645 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 06:52:13,645 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 06:52:14,036 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 06:52:14,036 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 06:52:14,257 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 06:52:14,257 - root - INFO - Scrape run finished. Total new articles saved this run: 0.
+2025-05-02 06:52:14,257 - main_orchestrator - INFO - Scraper run completed. Found 0 new JSON files potentially.
+2025-05-02 06:52:14,258 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 06:52:14,258 - main_orchestrator - INFO - No new scraped articles to process.
+2025-05-02 06:52:14,258 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
