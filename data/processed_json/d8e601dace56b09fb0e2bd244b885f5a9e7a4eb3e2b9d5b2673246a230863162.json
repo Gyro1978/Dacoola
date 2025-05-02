@@ -1,0 +1,45 @@
+{
+    "id": "d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162",
+    "title": "New Android spyware is targeting Russian military personnel on the front lines",
+    "link": "https://arstechnica.com/security/2025/04/russian-military-personnel-on-the-front-lines-targeted-with-new-android-spyware/",
+    "published_iso": "2025-04-24T20:02:40Z",
+    "summary": "<p>Russian military personnel are being targeted with recently discovered Android malware that steals their contacts and tracks their location.</p>\n<p>The malware is hidden inside a modified app for Alpine Quest mapping software, which is used by, among others, hunters, athletes, and Russian personnel stationed in the war zone in Ukraine. The app displays various topographical maps for use online and offline. The trojanized Alpine Quest app is being pushed on a dedicated Telegram channel and in unofficial Android app repositories. The chief selling point of the trojanized app is that it provides a free version of Alpine Quest Pro, which is usually available only to paying users.</p>\n<h2>Looks like the real thing</h2>\n<p>The malicious module is named Android.Spy.1292.origin. In a <a href=\"https://news.drweb.com/show/?i=15006&amp;lng=en&amp;c=5\">blog post</a>, researchers at Russia-based security firm Dr.Web wrote:</p><p><a href=\"https://arstechnica.com/security/2025/04/russian-military-personnel-on-the-front-lines-targeted-with-new-android-spyware/\">Read full article</a></p>\n<p><a href=\"https://arstechnica.com/security/2025/04/russian-military-personnel-on-the-front-lines-targeted-with-new-android-spyware/#comments\">Comments</a></p>",
+    "source_feed": "http://feeds.arstechnica.com/arstechnica/technology-lab",
+    "scraped_at_iso": "2025-05-02T23:18:30Z",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Software",
+        "reasoning_summary": "The article reports on a concrete cybersecurity threat involving Android malware targeting Russian military personnel, with verifiable details from a security firm's blog post.",
+        "primary_topic_keyword": "Android spyware targeting military"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-02T23:23:09Z",
+    "topic": "Software",
+    "is_breaking": false,
+    "primary_keyword": "Android spyware targeting military",
+    "similarity_check_error": null,
+    "selected_image_url": "https://cdn.arstechnica.net/wp-content/uploads/2023/09/trojan-backdoor-1000x648.jpg",
+    "seo_agent_results": {
+        "generated_title_tag": "Android Spyware Targeting Military Personnel in Russian War Zone",
+        "generated_meta_description": "New Android spyware disguised as Alpine Quest Pro targets Russian military, stealing contacts and tracking locations. Learn more about this threat.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Android Spyware Targeting Military Personnel in Russian War Zone\",  \n  \"description\": \"New Android spyware disguised as Alpine Quest Pro targets Russian military, stealing contacts and tracking locations. Learn more about this threat.\",  \n  \"keywords\": [\"Android spyware targeting military\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://arstechnica.com/security/2025/04/russian-military-personnel-on-the-front-lines-targeted-with-new-android-spyware/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://cdn.arstechnica.net/wp-content/uploads/2023/09/trojan-backdoor-1000x648.jpg\" },  \n  \"datePublished\": \"2025-04-24T20:02:40Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## New Android Spyware Targets Russian Military Personnel on the Front Lines  \n\nRussian military personnel stationed in Ukraine are being targeted by a newly discovered Android spyware strain designed to steal contacts and track their locations. The malware is embedded in a modified version of Alpine Quest, a mapping app popular among hunters, athletes, and soldiers for its offline topographical map features. The **Android spyware targeting military** personnel is distributed via a Telegram channel and unofficial app stores, luring victims with a free version of Alpine Quest Pro, which is normally a paid service.  \n\nThe malicious app, identified as Android.Spy.1292.origin, closely mimics the legitimate Alpine Quest software to avoid detection. According to researchers at Russian cybersecurity firm Dr.Web, the trojanized app functions normally while secretly exfiltrating sensitive data. The attackers exploit the app’s utility in war zones, where reliable offline mapping tools are critical for navigation and operations.  \n\n### Looks Like the Real Thing  \nThe malware’s deceptive packaging makes it difficult for users to distinguish it from the genuine Alpine Quest app. By offering a \"free\" Pro version, the attackers increase the likelihood of successful infections among military personnel seeking cost-effective solutions. This tactic highlights the growing sophistication of cyber threats in conflict zones, where digital espionage can have immediate real-world consequences."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Android spyware",
+        "Russian military cyberattack",
+        "Alpine Quest malware",
+        "Telegram malware distribution",
+        "cybersecurity threats in war zones",
+        "Dr.Web research",
+        "mobile espionage",
+        "offline mapping app security",
+        "trojanized Android apps",
+        "military personnel data theft"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 10.0,
+    "slug": "new-android-spyware-is-targeting-russian-military-personnel-on-the-front-lines",
+    "audio_url": null
+}

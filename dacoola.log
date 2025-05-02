@@ -14582,3 +14582,388 @@ AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentTy
 2025-05-02 23:11:57 - main_orchestrator - INFO - --- Successfully processed article: 37df370f110d8ab97c8cb9296e45e22e6cabf978cbba57b647470755c84c2872 ---
 2025-05-02 23:11:58 - main_orchestrator - INFO - Processing cycle complete. Successfully processed: 9, Failed/Skipped/Duplicate: 6
 2025-05-02 23:11:58 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (501.91 seconds) === ---
+2025-05-02 23:18:24,404 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 23:18:24,404 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 23:18:25,692 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-02 23:18:28,044 - transformers.processing_utils - WARNING - Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+2025-05-02 23:18:28,294 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 23:18:28 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/home/
+2025-05-02 23:18:28 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-02 23:18:28 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-02 23:18:28.322996) === ---
+2025-05-02 23:18:28 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-02 23:18:28 - main_orchestrator - INFO - --- Stage 1: Running Scraper ---
+2025-05-02 23:18:28 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (7 feeds) ---
+2025-05-02 23:18:28 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 23:18:28 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 23:18:28 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles from this feed.
+2025-05-02 23:18:28 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 23:18:28 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 23:18:28 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-02 23:18:28 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 23:18:28 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://www.anthropic.com/feed.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 170, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 23:18:28 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 23:18:29 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://openai.com/blog/rss.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 170, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 23:18:29 - src.scrapers.news_scraper - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 23:18:29 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 23:18:29 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - Finished feed https://blogs.nvidia.com/feed/. Saved 0 new articles from this feed.
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - Feed http://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f427686ec3dddec777f947fb7d7c234e833498d2d0404c3682f1f722f86351ac.json (Title: Trump admin lashes out as Amazon considers displaying tariff costs on its sites)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e.json (Title: AI-generated code could be a disaster for the software supply chain. Here’s why.)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ad74c2cab51e1696d1a7a8d3e2123095e15560a9db935851c99fd172ffc8da06.json (Title: ChatGPT goes shopping with new product-browsing feature)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50.json (Title: Backblaze responds to claims of “sham accounting,” customer backups at risk)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492.json (Title: iOS and Android juice jacking defenses have been trivial to bypass for years)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778.json (Title: New study shows why simulated reasoning AI models don’t yet live up to their billing)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7.json (Title: FBI offers $10 million for information about Salt Typhoon members)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a9a145e814a148e39e7fc6c23f03dff021492b3be36b08685c55f1d199dc2ce4.json (Title: In the age of AI, we must protect human creativity as a natural resource)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162.json (Title: New Android spyware is targeting Russian military personnel on the front lines)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ba37a49257391167de86d5016b59d2ee499975a3f48332d00d308e8648c1812c.json (Title: Annoyed ChatGPT users complain about bot’s relentlessly positive tone)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b.json (Title: Company apologizes after AI support agent invents policy that causes user uproar)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154.json (Title: OpenAI releases new simulated reasoning models with full tool access)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e.json (Title: Researchers claim breakthrough in fight against AI’s frustrating security hole)
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - Finished feed http://feeds.arstechnica.com/arstechnica/technology-lab. Saved 13 new articles from this feed.
+2025-05-02 23:18:30 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 13 ---
+2025-05-02 23:18:30 - main_orchestrator - INFO - Scraper run completed. Saved 13 new raw article JSON files.
+2025-05-02 23:18:30 - main_orchestrator - INFO - --- Stage 2: Running Processing Cycle ---
+2025-05-02 23:18:30 - main_orchestrator - INFO - Loaded 50 recent articles from all_articles.json for comparison context.
+2025-05-02 23:18:30 - main_orchestrator - INFO - Loaded 50 recent articles from existing site data for duplicate checking.
+2025-05-02 23:18:30 - main_orchestrator - INFO - Found 13 scraped articles to process.
+2025-05-02 23:18:30 - main_orchestrator - INFO - --- Processing article file: f427686ec3dddec777f947fb7d7c234e833498d2d0404c3682f1f722f86351ac.json ---
+2025-05-02 23:18:30 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: f427686ec3dddec777f947fb7d7c234e833498d2d0404c3682f1f722f86351ac)
+2025-05-02 23:18:30 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f427686ec3dddec777f947fb7d7c234e833498d2d0404c3682f1f722f86351ac Title: Trump admin lashes out as Amazon considers displaying tariff...
+2025-05-02 23:18:37 - src.agents.filter_news_agent - INFO - Filter verdict received for ID f427686ec3dddec777f947fb7d7c234e833498d2d0404c3682f1f722f86351ac: level=Boring, topic='Other', keyword='Amazon tariff costs'
+2025-05-02 23:18:37 - main_orchestrator - INFO - Article f427686ec3dddec777f947fb7d7c234e833498d2d0404c3682f1f722f86351ac classified as Boring by Filter Agent. Skipping.
+2025-05-02 23:18:38 - main_orchestrator - INFO - --- Processing article file: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e.json ---
+2025-05-02 23:18:38 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e)
+2025-05-02 23:18:38 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e Title: AI-generated code could be a disaster for the software suppl...
+2025-05-02 23:18:46 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e: level=Interesting, topic='Software', keyword='AI-generated code vulnerabilities'
+2025-05-02 23:18:46 - main_orchestrator - INFO - Article 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e classified as Interesting (Topic: Software).
+2025-05-02 23:18:46 - main_orchestrator - INFO - Checking duplicates for 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e...
+2025-05-02 23:18:46 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e)
+2025-05-02 23:18:46 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e Title: AI-generated code could be a disaster for the software suppl...
+2025-05-02 23:18:51 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e: is_duplicate=False. Reason: The New Candidate Article discusses AI-generated code and its risks to the software supply chain, which is not covered in any of the Recently Published Articles.
+2025-05-02 23:18:51 - main_orchestrator - INFO - Article 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e passed similarity check.
+2025-05-02 23:18:51 - main_orchestrator - INFO - Finding image for 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e...
+2025-05-02 23:18:51 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/security/2025/04/ai-generated-code-could-be-a-disaster-for-the-software-supply-chain-heres-why/
+2025-05-02 23:18:52 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/04/robot-working-computer-1152x648.jpg
+2025-05-02 23:18:52 - main_orchestrator - INFO - Using scraped image for 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e: https://cdn.arstechnica.net/wp-content/uploads/2025/04/robot-working-computer-1152x648.jpg
+2025-05-02 23:18:52 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e...
+2025-05-02 23:19:24 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e.
+2025-05-02 23:19:24 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e...
+2025-05-02 23:19:30 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e
+2025-05-02 23:19:30 - main_orchestrator - INFO - Rendered HTML: ai-generated-code-could-be-a-disaster-for-the-software-supply-chain-heres-why.html
+2025-05-02 23:19:30 - main_orchestrator - INFO - Updated all_articles.json (20 articles).
+2025-05-02 23:19:30 - main_orchestrator - INFO - Updated all_articles.json (87 articles).
+2025-05-02 23:19:30 - main_orchestrator - INFO - Attempting to post article 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e to Twitter...
+2025-05-02 23:19:30 - src.social.twitter_poster - INFO - Attempting to post tweet for: AI-generated code could be a disaster for the software supply chain. Here’s why.
+2025-05-02 23:19:30 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:19:30 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:19:31 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:19:31 - main_orchestrator - ERROR - Failed to post 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e to Twitter (function returned False).
+2025-05-02 23:19:31 - main_orchestrator - INFO - Attempting to send webhook to Make.com for 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e...
+2025-05-02 23:19:31 - main_orchestrator - ERROR - Failed to send data to Make.com webhook: 400 Client Error: Bad Request for url: https://hook.eu2.make.com/dljj9hgj0bh6exb45u8sp34snsx23f38
+2025-05-02 23:19:31 - main_orchestrator - ERROR - Webhook Response Status: 400
+2025-05-02 23:19:31 - main_orchestrator - ERROR - Webhook Response Body: There is no scenario listening for this webhook.
+2025-05-02 23:19:31 - main_orchestrator - ERROR - Failed sending webhook for 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e.
+2025-05-02 23:19:31 - main_orchestrator - INFO - Saved final processed data to: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e.json
+2025-05-02 23:19:31 - main_orchestrator - INFO - --- Successfully processed article: 7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e ---
+2025-05-02 23:19:32 - main_orchestrator - INFO - --- Processing article file: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50.json ---
+2025-05-02 23:19:32 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50)
+2025-05-02 23:19:32 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50 Title: Backblaze responds to claims of “sham accounting,” customer ...
+2025-05-02 23:19:40 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50: level=Interesting, topic='Business', keyword='Backblaze accounting allegations'
+2025-05-02 23:19:40 - main_orchestrator - INFO - Article 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50 classified as Interesting (Topic: Business).
+2025-05-02 23:19:40 - main_orchestrator - INFO - Checking duplicates for 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50...
+2025-05-02 23:19:40 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50)
+2025-05-02 23:19:40 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50 Title: Backblaze responds to claims of “sham accounting,” customer ...
+2025-05-02 23:19:46 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50: is_duplicate=False. Reason: The New Candidate Article discusses Backblaze's response to accounting allegations, which is not covered in any of the Recently Published Articles.
+2025-05-02 23:19:46 - main_orchestrator - INFO - Article 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50 passed similarity check.
+2025-05-02 23:19:46 - main_orchestrator - INFO - Finding image for 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50...
+2025-05-02 23:19:46 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/gadgets/2025/04/backblaze-responds-to-claims-of-sham-accounting-customer-backups-at-risk/
+2025-05-02 23:19:46 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/04/66ecb7b025b5adbe29cfd593_Backup_20_26_20Archive-1000x648.jpg
+2025-05-02 23:19:46 - main_orchestrator - INFO - Using scraped image for 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50: https://cdn.arstechnica.net/wp-content/uploads/2025/04/66ecb7b025b5adbe29cfd593_Backup_20_26_20Archive-1000x648.jpg
+2025-05-02 23:19:46 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50...
+2025-05-02 23:20:16 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50.
+2025-05-02 23:20:16 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50...
+2025-05-02 23:20:22 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50
+2025-05-02 23:20:22 - main_orchestrator - INFO - Rendered HTML: backblaze-responds-to-claims-of-sham-accounting-customer-backups-at-risk.html
+2025-05-02 23:20:22 - main_orchestrator - INFO - Updated all_articles.json (20 articles).
+2025-05-02 23:20:22 - main_orchestrator - INFO - Updated all_articles.json (88 articles).
+2025-05-02 23:20:22 - main_orchestrator - INFO - Attempting to post article 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50 to Twitter...
+2025-05-02 23:20:22 - src.social.twitter_poster - INFO - Attempting to post tweet for: Backblaze responds to claims of “sham accounting,” customer backups at risk
+2025-05-02 23:20:22 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:20:22 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:20:22 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:20:22 - main_orchestrator - ERROR - Failed to post 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50 to Twitter (function returned False).
+2025-05-02 23:20:22 - main_orchestrator - INFO - Attempting to send webhook to Make.com for 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50...
+2025-05-02 23:20:22 - main_orchestrator - ERROR - Failed to send data to Make.com webhook: 400 Client Error: Bad Request for url: https://hook.eu2.make.com/dljj9hgj0bh6exb45u8sp34snsx23f38
+2025-05-02 23:20:22 - main_orchestrator - ERROR - Webhook Response Status: 400
+2025-05-02 23:20:22 - main_orchestrator - ERROR - Webhook Response Body: There is no scenario listening for this webhook.
+2025-05-02 23:20:22 - main_orchestrator - ERROR - Failed sending webhook for 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50.
+2025-05-02 23:20:22 - main_orchestrator - INFO - Saved final processed data to: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50.json
+2025-05-02 23:20:22 - main_orchestrator - INFO - --- Successfully processed article: 81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50 ---
+2025-05-02 23:20:23 - main_orchestrator - INFO - --- Processing article file: ad74c2cab51e1696d1a7a8d3e2123095e15560a9db935851c99fd172ffc8da06.json ---
+2025-05-02 23:20:23 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: ad74c2cab51e1696d1a7a8d3e2123095e15560a9db935851c99fd172ffc8da06)
+2025-05-02 23:20:23 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ad74c2cab51e1696d1a7a8d3e2123095e15560a9db935851c99fd172ffc8da06 Title: ChatGPT goes shopping with new product-browsing feature...
+2025-05-02 23:20:30 - src.agents.filter_news_agent - INFO - Filter verdict received for ID ad74c2cab51e1696d1a7a8d3e2123095e15560a9db935851c99fd172ffc8da06: level=Boring, topic='Software', keyword='ChatGPT shopping feature'
+2025-05-02 23:20:30 - main_orchestrator - INFO - Article ad74c2cab51e1696d1a7a8d3e2123095e15560a9db935851c99fd172ffc8da06 classified as Boring by Filter Agent. Skipping.
+2025-05-02 23:20:31 - main_orchestrator - INFO - --- Processing article file: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492.json ---
+2025-05-02 23:20:31 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492)
+2025-05-02 23:20:31 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492 Title: iOS and Android juice jacking defenses have been trivial to ...
+2025-05-02 23:20:39 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492: level=Interesting, topic='Software', keyword='mobile security vulnerability'
+2025-05-02 23:20:39 - main_orchestrator - INFO - Article 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492 classified as Interesting (Topic: Software).
+2025-05-02 23:20:39 - main_orchestrator - INFO - Checking duplicates for 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492...
+2025-05-02 23:20:39 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492)
+2025-05-02 23:20:39 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492 Title: iOS and Android juice jacking defenses have been trivial to ...
+2025-05-02 23:20:45 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492: is_duplicate=False. Reason: No recently published article discusses the bypassing of juice jacking defenses in iOS and Android.
+2025-05-02 23:20:45 - main_orchestrator - INFO - Article 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492 passed similarity check.
+2025-05-02 23:20:45 - main_orchestrator - INFO - Finding image for 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492...
+2025-05-02 23:20:45 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/security/2025/04/ios-and-android-juice-jacking-defenses-have-been-trivial-to-bypass-for-years/
+2025-05-02 23:20:46 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2023/04/scary-usb-juice-jacking-whooooo-1152x648.jpg
+2025-05-02 23:20:46 - main_orchestrator - INFO - Using scraped image for 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492: https://cdn.arstechnica.net/wp-content/uploads/2023/04/scary-usb-juice-jacking-whooooo-1152x648.jpg
+2025-05-02 23:20:46 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492...
+2025-05-02 23:21:13 - src.agents.seo_article_generator_agent - WARNING - Generated title tag > 60 chars: 'Mobile security vulnerability: Juice jacking defenses bypassed for years'
+2025-05-02 23:21:13 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492.
+2025-05-02 23:21:13 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492...
+2025-05-02 23:21:19 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492
+2025-05-02 23:21:19 - main_orchestrator - INFO - Rendered HTML: ios-and-android-juice-jacking-defenses-have-been-trivial-to-bypass-for-years.html
+2025-05-02 23:21:19 - main_orchestrator - INFO - Updated all_articles.json (20 articles).
+2025-05-02 23:21:19 - main_orchestrator - INFO - Updated all_articles.json (89 articles).
+2025-05-02 23:21:19 - main_orchestrator - INFO - Attempting to post article 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492 to Twitter...
+2025-05-02 23:21:19 - src.social.twitter_poster - INFO - Attempting to post tweet for: iOS and Android juice jacking defenses have been trivial to bypass for years
+2025-05-02 23:21:19 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:21:19 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:21:19 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:21:19 - main_orchestrator - ERROR - Failed to post 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492 to Twitter (function returned False).
+2025-05-02 23:21:19 - main_orchestrator - INFO - Attempting to send webhook to Make.com for 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492...
+2025-05-02 23:21:19 - main_orchestrator - ERROR - Failed to send data to Make.com webhook: 400 Client Error: Bad Request for url: https://hook.eu2.make.com/dljj9hgj0bh6exb45u8sp34snsx23f38
+2025-05-02 23:21:19 - main_orchestrator - ERROR - Webhook Response Status: 400
+2025-05-02 23:21:19 - main_orchestrator - ERROR - Webhook Response Body: There is no scenario listening for this webhook.
+2025-05-02 23:21:19 - main_orchestrator - ERROR - Failed sending webhook for 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492.
+2025-05-02 23:21:19 - main_orchestrator - INFO - Saved final processed data to: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492.json
+2025-05-02 23:21:19 - main_orchestrator - INFO - --- Successfully processed article: 568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492 ---
+2025-05-02 23:21:20 - main_orchestrator - INFO - --- Processing article file: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778.json ---
+2025-05-02 23:21:20 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778)
+2025-05-02 23:21:20 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778 Title: New study shows why simulated reasoning AI models don’t yet ...
+2025-05-02 23:21:27 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778: level=Interesting, topic='Research', keyword='AI reasoning limitations'
+2025-05-02 23:21:27 - main_orchestrator - INFO - Article 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778 classified as Interesting (Topic: Research).
+2025-05-02 23:21:27 - main_orchestrator - INFO - Checking duplicates for 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778...
+2025-05-02 23:21:27 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778)
+2025-05-02 23:21:27 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778 Title: New study shows why simulated reasoning AI models don’t yet ...
+2025-05-02 23:21:32 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778: is_duplicate=False. Reason: The New Candidate Article discusses a study on the limitations of simulated reasoning AI models, which is not covered in any of the Recently Published Articles.
+2025-05-02 23:21:32 - main_orchestrator - INFO - Article 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778 passed similarity check.
+2025-05-02 23:21:32 - main_orchestrator - INFO - Finding image for 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778...
+2025-05-02 23:21:32 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/ai/2025/04/new-study-shows-why-simulated-reasoning-ai-models-dont-yet-live-up-to-their-billing/
+2025-05-02 23:21:32 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/04/math_question_1-1152x648.jpg
+2025-05-02 23:21:32 - main_orchestrator - INFO - Using scraped image for 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778: https://cdn.arstechnica.net/wp-content/uploads/2025/04/math_question_1-1152x648.jpg
+2025-05-02 23:21:32 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778...
+2025-05-02 23:22:00 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778.
+2025-05-02 23:22:00 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778...
+2025-05-02 23:22:06 - src.agents.tags_generator_agent - INFO - Successfully generated 8 tags for article ID: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778
+2025-05-02 23:22:06 - main_orchestrator - INFO - Rendered HTML: new-study-shows-why-simulated-reasoning-ai-models-dont-yet-live-up-to-their-bill.html
+2025-05-02 23:22:06 - main_orchestrator - INFO - Updated all_articles.json (20 articles).
+2025-05-02 23:22:06 - main_orchestrator - INFO - Updated all_articles.json (90 articles).
+2025-05-02 23:22:06 - main_orchestrator - INFO - Attempting to post article 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778 to Twitter...
+2025-05-02 23:22:06 - src.social.twitter_poster - INFO - Attempting to post tweet for: New study shows why simulated reasoning AI models don’t yet live up to their billing
+2025-05-02 23:22:06 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:22:06 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:22:06 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:22:06 - main_orchestrator - ERROR - Failed to post 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778 to Twitter (function returned False).
+2025-05-02 23:22:06 - main_orchestrator - INFO - Attempting to send webhook to Make.com for 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778...
+2025-05-02 23:22:06 - main_orchestrator - ERROR - Failed to send data to Make.com webhook: 400 Client Error: Bad Request for url: https://hook.eu2.make.com/dljj9hgj0bh6exb45u8sp34snsx23f38
+2025-05-02 23:22:06 - main_orchestrator - ERROR - Webhook Response Status: 400
+2025-05-02 23:22:06 - main_orchestrator - ERROR - Webhook Response Body: There is no scenario listening for this webhook.
+2025-05-02 23:22:06 - main_orchestrator - ERROR - Failed sending webhook for 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778.
+2025-05-02 23:22:06 - main_orchestrator - INFO - Saved final processed data to: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778.json
+2025-05-02 23:22:06 - main_orchestrator - INFO - --- Successfully processed article: 8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778 ---
+2025-05-02 23:22:07 - main_orchestrator - INFO - --- Processing article file: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7.json ---
+2025-05-02 23:22:07 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7)
+2025-05-02 23:22:07 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7 Title: FBI offers $10 million for information about Salt Typhoon me...
+2025-05-02 23:22:13 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7: level=Interesting, topic='Other', keyword='China-state hacking group'
+2025-05-02 23:22:13 - main_orchestrator - INFO - Article 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7 classified as Interesting (Topic: Other).
+2025-05-02 23:22:13 - main_orchestrator - INFO - Checking duplicates for 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7...
+2025-05-02 23:22:13 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7)
+2025-05-02 23:22:13 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7 Title: FBI offers $10 million for information about Salt Typhoon me...
+2025-05-02 23:22:19 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7: is_duplicate=False. Reason: No recently published article reports on the FBI offering $10 million for information about Salt Typhoon members.
+2025-05-02 23:22:19 - main_orchestrator - INFO - Article 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7 passed similarity check.
+2025-05-02 23:22:19 - main_orchestrator - INFO - Finding image for 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7...
+2025-05-02 23:22:19 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/security/2025/04/fbi-offers-10-million-for-information-about-salt-typhoon-members/
+2025-05-02 23:22:19 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/04/salt-typoon-chinese-flag-1152x648.jpg
+2025-05-02 23:22:19 - main_orchestrator - INFO - Using scraped image for 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7: https://cdn.arstechnica.net/wp-content/uploads/2025/04/salt-typoon-chinese-flag-1152x648.jpg
+2025-05-02 23:22:19 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7...
+2025-05-02 23:22:48 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7.
+2025-05-02 23:22:48 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7...
+2025-05-02 23:22:54 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7
+2025-05-02 23:22:54 - main_orchestrator - INFO - Rendered HTML: fbi-offers-10-million-for-information-about-salt-typhoon-members.html
+2025-05-02 23:22:54 - main_orchestrator - INFO - Updated all_articles.json (20 articles).
+2025-05-02 23:22:54 - main_orchestrator - INFO - Updated all_articles.json (91 articles).
+2025-05-02 23:22:54 - main_orchestrator - INFO - Attempting to post article 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7 to Twitter...
+2025-05-02 23:22:54 - src.social.twitter_poster - INFO - Attempting to post tweet for: FBI offers $10 million for information about Salt Typhoon members
+2025-05-02 23:22:54 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:22:54 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:22:54 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:22:54 - main_orchestrator - ERROR - Failed to post 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7 to Twitter (function returned False).
+2025-05-02 23:22:54 - main_orchestrator - INFO - Attempting to send webhook to Make.com for 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7...
+2025-05-02 23:22:54 - main_orchestrator - ERROR - Failed to send data to Make.com webhook: 400 Client Error: Bad Request for url: https://hook.eu2.make.com/dljj9hgj0bh6exb45u8sp34snsx23f38
+2025-05-02 23:22:54 - main_orchestrator - ERROR - Webhook Response Status: 400
+2025-05-02 23:22:54 - main_orchestrator - ERROR - Webhook Response Body: There is no scenario listening for this webhook.
+2025-05-02 23:22:54 - main_orchestrator - ERROR - Failed sending webhook for 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7.
+2025-05-02 23:22:54 - main_orchestrator - INFO - Saved final processed data to: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7.json
+2025-05-02 23:22:54 - main_orchestrator - INFO - --- Successfully processed article: 7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7 ---
+2025-05-02 23:22:55 - main_orchestrator - INFO - --- Processing article file: a9a145e814a148e39e7fc6c23f03dff021492b3be36b08685c55f1d199dc2ce4.json ---
+2025-05-02 23:22:55 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: a9a145e814a148e39e7fc6c23f03dff021492b3be36b08685c55f1d199dc2ce4)
+2025-05-02 23:22:55 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a9a145e814a148e39e7fc6c23f03dff021492b3be36b08685c55f1d199dc2ce4 Title: In the age of AI, we must protect human creativity as a natu...
+2025-05-02 23:23:01 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a9a145e814a148e39e7fc6c23f03dff021492b3be36b08685c55f1d199dc2ce4: level=Boring, topic='Ethics', keyword='AI and human creativity'
+2025-05-02 23:23:01 - main_orchestrator - INFO - Article a9a145e814a148e39e7fc6c23f03dff021492b3be36b08685c55f1d199dc2ce4 classified as Boring by Filter Agent. Skipping.
+2025-05-02 23:23:02 - main_orchestrator - INFO - --- Processing article file: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162.json ---
+2025-05-02 23:23:02 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162)
+2025-05-02 23:23:02 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162 Title: New Android spyware is targeting Russian military personnel ...
+2025-05-02 23:23:09 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162: level=Interesting, topic='Software', keyword='Android spyware targeting military'
+2025-05-02 23:23:09 - main_orchestrator - INFO - Article d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162 classified as Interesting (Topic: Software).
+2025-05-02 23:23:09 - main_orchestrator - INFO - Checking duplicates for d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162...
+2025-05-02 23:23:09 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162)
+2025-05-02 23:23:09 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162 Title: New Android spyware is targeting Russian military personnel ...
+2025-05-02 23:23:15 - src.agents.similarity_check_agent - INFO - Similarity check result for ID d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162: is_duplicate=False. Reason: No recently published article reports on the same specific Android spyware targeting Russian military personnel.
+2025-05-02 23:23:15 - main_orchestrator - INFO - Article d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162 passed similarity check.
+2025-05-02 23:23:15 - main_orchestrator - INFO - Finding image for d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162...
+2025-05-02 23:23:15 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/security/2025/04/russian-military-personnel-on-the-front-lines-targeted-with-new-android-spyware/
+2025-05-02 23:23:16 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2023/09/trojan-backdoor-1000x648.jpg
+2025-05-02 23:23:16 - main_orchestrator - INFO - Using scraped image for d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162: https://cdn.arstechnica.net/wp-content/uploads/2023/09/trojan-backdoor-1000x648.jpg
+2025-05-02 23:23:16 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162...
+2025-05-02 23:23:45 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162.
+2025-05-02 23:23:45 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162...
+2025-05-02 23:23:54 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162
+2025-05-02 23:23:54 - main_orchestrator - INFO - Rendered HTML: new-android-spyware-is-targeting-russian-military-personnel-on-the-front-lines.html
+2025-05-02 23:23:54 - main_orchestrator - INFO - Updated all_articles.json (20 articles).
+2025-05-02 23:23:54 - main_orchestrator - INFO - Updated all_articles.json (92 articles).
+2025-05-02 23:23:54 - main_orchestrator - INFO - Attempting to post article d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162 to Twitter...
+2025-05-02 23:23:54 - src.social.twitter_poster - INFO - Attempting to post tweet for: New Android spyware is targeting Russian military personnel on the front lines
+2025-05-02 23:23:54 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:23:54 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:23:54 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:23:54 - main_orchestrator - ERROR - Failed to post d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162 to Twitter (function returned False).
+2025-05-02 23:23:54 - main_orchestrator - INFO - Attempting to send webhook to Make.com for d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162...
+2025-05-02 23:23:55 - main_orchestrator - ERROR - Failed to send data to Make.com webhook: 400 Client Error: Bad Request for url: https://hook.eu2.make.com/dljj9hgj0bh6exb45u8sp34snsx23f38
+2025-05-02 23:23:55 - main_orchestrator - ERROR - Webhook Response Status: 400
+2025-05-02 23:23:55 - main_orchestrator - ERROR - Webhook Response Body: There is no scenario listening for this webhook.
+2025-05-02 23:23:55 - main_orchestrator - ERROR - Failed sending webhook for d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162.
+2025-05-02 23:23:55 - main_orchestrator - INFO - Saved final processed data to: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162.json
+2025-05-02 23:23:55 - main_orchestrator - INFO - --- Successfully processed article: d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162 ---
+2025-05-02 23:23:56 - main_orchestrator - INFO - --- Processing article file: ba37a49257391167de86d5016b59d2ee499975a3f48332d00d308e8648c1812c.json ---
+2025-05-02 23:23:56 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: ba37a49257391167de86d5016b59d2ee499975a3f48332d00d308e8648c1812c)
+2025-05-02 23:23:56 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ba37a49257391167de86d5016b59d2ee499975a3f48332d00d308e8648c1812c Title: Annoyed ChatGPT users complain about bot’s relentlessly posi...
+2025-05-02 23:24:02 - src.agents.filter_news_agent - INFO - Filter verdict received for ID ba37a49257391167de86d5016b59d2ee499975a3f48332d00d308e8648c1812c: level=Boring, topic='Other', keyword='ChatGPT tone complaints'
+2025-05-02 23:24:02 - main_orchestrator - INFO - Article ba37a49257391167de86d5016b59d2ee499975a3f48332d00d308e8648c1812c classified as Boring by Filter Agent. Skipping.
+2025-05-02 23:24:03 - main_orchestrator - INFO - --- Processing article file: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154.json ---
+2025-05-02 23:24:03 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154)
+2025-05-02 23:24:03 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154 Title: OpenAI releases new simulated reasoning models with full too...
+2025-05-02 23:24:09 - src.agents.filter_news_agent - INFO - Filter verdict received for ID f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154: level=Interesting, topic='AI Models', keyword='OpenAI reasoning models'
+2025-05-02 23:24:09 - main_orchestrator - INFO - Article f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154 classified as Interesting (Topic: AI Models).
+2025-05-02 23:24:09 - main_orchestrator - INFO - Checking duplicates for f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154...
+2025-05-02 23:24:09 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154)
+2025-05-02 23:24:09 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154 Title: OpenAI releases new simulated reasoning models with full too...
+2025-05-02 23:24:15 - src.agents.similarity_check_agent - INFO - Similarity check result for ID f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154: is_duplicate=False. Reason: No recently published article reports on OpenAI's release of o3 and o4-mini models with full tool access.
+2025-05-02 23:24:15 - main_orchestrator - INFO - Article f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154 passed similarity check.
+2025-05-02 23:24:15 - main_orchestrator - INFO - Finding image for f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154...
+2025-05-02 23:24:15 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/ai/2025/04/openai-releases-new-simulated-reasoning-models-with-full-tool-access/
+2025-05-02 23:24:16 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/04/digital_thinker_1-1152x648.jpg
+2025-05-02 23:24:16 - main_orchestrator - INFO - Using scraped image for f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154: https://cdn.arstechnica.net/wp-content/uploads/2025/04/digital_thinker_1-1152x648.jpg
+2025-05-02 23:24:16 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154...
+2025-05-02 23:24:44 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154.
+2025-05-02 23:24:44 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154...
+2025-05-02 23:24:49 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154
+2025-05-02 23:24:49 - main_orchestrator - INFO - Rendered HTML: openai-releases-new-simulated-reasoning-models-with-full-tool-access.html
+2025-05-02 23:24:49 - main_orchestrator - INFO - Updated all_articles.json (20 articles).
+2025-05-02 23:24:49 - main_orchestrator - INFO - Updated all_articles.json (93 articles).
+2025-05-02 23:24:49 - main_orchestrator - INFO - Attempting to post article f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154 to Twitter...
+2025-05-02 23:24:49 - src.social.twitter_poster - INFO - Attempting to post tweet for: OpenAI releases new simulated reasoning models with full tool access
+2025-05-02 23:24:49 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:24:49 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:24:50 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:24:50 - main_orchestrator - ERROR - Failed to post f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154 to Twitter (function returned False).
+2025-05-02 23:24:50 - main_orchestrator - INFO - Attempting to send webhook to Make.com for f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154...
+2025-05-02 23:24:50 - main_orchestrator - ERROR - Failed to send data to Make.com webhook: 400 Client Error: Bad Request for url: https://hook.eu2.make.com/dljj9hgj0bh6exb45u8sp34snsx23f38
+2025-05-02 23:24:50 - main_orchestrator - ERROR - Webhook Response Status: 400
+2025-05-02 23:24:50 - main_orchestrator - ERROR - Webhook Response Body: There is no scenario listening for this webhook.
+2025-05-02 23:24:50 - main_orchestrator - ERROR - Failed sending webhook for f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154.
+2025-05-02 23:24:50 - main_orchestrator - INFO - Saved final processed data to: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154.json
+2025-05-02 23:24:50 - main_orchestrator - INFO - --- Successfully processed article: f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154 ---
+2025-05-02 23:24:51 - main_orchestrator - INFO - --- Processing article file: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b.json ---
+2025-05-02 23:24:51 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b)
+2025-05-02 23:24:51 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b Title: Company apologizes after AI support agent invents policy tha...
+2025-05-02 23:24:57 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b: level=Interesting, topic='Ethics', keyword='AI confabulation incident'
+2025-05-02 23:24:57 - main_orchestrator - INFO - Article 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b classified as Interesting (Topic: Ethics).
+2025-05-02 23:24:57 - main_orchestrator - INFO - Checking duplicates for 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b...
+2025-05-02 23:24:57 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b)
+2025-05-02 23:24:57 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b Title: Company apologizes after AI support agent invents policy tha...
+2025-05-02 23:25:03 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b: is_duplicate=False. Reason: No recently published article reports on an AI support agent inventing a policy causing user uproar.
+2025-05-02 23:25:03 - main_orchestrator - INFO - Article 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b passed similarity check.
+2025-05-02 23:25:03 - main_orchestrator - INFO - Finding image for 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b...
+2025-05-02 23:25:03 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/ai/2025/04/cursor-ai-support-bot-invents-fake-policy-and-triggers-user-uproar/
+2025-05-02 23:25:03 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/04/telephone_robot_2-1152x648.jpg
+2025-05-02 23:25:03 - main_orchestrator - INFO - Using scraped image for 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b: https://cdn.arstechnica.net/wp-content/uploads/2025/04/telephone_robot_2-1152x648.jpg
+2025-05-02 23:25:03 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b...
+2025-05-02 23:25:32 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b.
+2025-05-02 23:25:32 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b...
+2025-05-02 23:25:38 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b
+2025-05-02 23:25:38 - main_orchestrator - INFO - Rendered HTML: company-apologizes-after-ai-support-agent-invents-policy-that-causes-user-uproar.html
+2025-05-02 23:25:38 - main_orchestrator - INFO - Updated all_articles.json (20 articles).
+2025-05-02 23:25:38 - main_orchestrator - INFO - Updated all_articles.json (94 articles).
+2025-05-02 23:25:38 - main_orchestrator - INFO - Attempting to post article 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b to Twitter...
+2025-05-02 23:25:38 - src.social.twitter_poster - INFO - Attempting to post tweet for: Company apologizes after AI support agent invents policy that causes user uproar
+2025-05-02 23:25:38 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:25:38 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:25:38 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:25:38 - main_orchestrator - ERROR - Failed to post 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b to Twitter (function returned False).
+2025-05-02 23:25:38 - main_orchestrator - INFO - Attempting to send webhook to Make.com for 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b...
+2025-05-02 23:25:38 - main_orchestrator - ERROR - Failed to send data to Make.com webhook: 400 Client Error: Bad Request for url: https://hook.eu2.make.com/dljj9hgj0bh6exb45u8sp34snsx23f38
+2025-05-02 23:25:38 - main_orchestrator - ERROR - Webhook Response Status: 400
+2025-05-02 23:25:38 - main_orchestrator - ERROR - Webhook Response Body: There is no scenario listening for this webhook.
+2025-05-02 23:25:38 - main_orchestrator - ERROR - Failed sending webhook for 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b.
+2025-05-02 23:25:38 - main_orchestrator - INFO - Saved final processed data to: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b.json
+2025-05-02 23:25:38 - main_orchestrator - INFO - --- Successfully processed article: 6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b ---
+2025-05-02 23:25:39 - main_orchestrator - INFO - --- Processing article file: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e.json ---
+2025-05-02 23:25:39 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e)
+2025-05-02 23:25:39 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e Title: Researchers claim breakthrough in fight against AI’s frustra...
+2025-05-02 23:25:46 - src.agents.filter_news_agent - INFO - Filter verdict received for ID aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e: level=Interesting, topic='AI Models', keyword='AI security breakthrough'
+2025-05-02 23:25:46 - main_orchestrator - INFO - Article aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e classified as Interesting (Topic: AI Models).
+2025-05-02 23:25:46 - main_orchestrator - INFO - Checking duplicates for aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e...
+2025-05-02 23:25:46 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e)
+2025-05-02 23:25:46 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e Title: Researchers claim breakthrough in fight against AI’s frustra...
+2025-05-02 23:25:51 - src.agents.similarity_check_agent - INFO - Similarity check result for ID aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e: is_duplicate=False. Reason: No recently published article discusses Google DeepMind's CaMeL approach to stopping prompt-injection attacks.
+2025-05-02 23:25:51 - main_orchestrator - INFO - Article aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e passed similarity check.
+2025-05-02 23:25:51 - main_orchestrator - INFO - Finding image for aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e...
+2025-05-02 23:25:51 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://arstechnica.com/information-technology/2025/04/researchers-claim-breakthrough-in-fight-against-ais-frustrating-security-hole/
+2025-05-02 23:25:52 - src.scrapers.image_scraper - INFO - Found og:image: https://cdn.arstechnica.net/wp-content/uploads/2025/04/camel_image-1152x648.jpg
+2025-05-02 23:25:52 - main_orchestrator - INFO - Using scraped image for aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e: https://cdn.arstechnica.net/wp-content/uploads/2025/04/camel_image-1152x648.jpg
+2025-05-02 23:25:52 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e...
+2025-05-02 23:26:20 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e.
+2025-05-02 23:26:20 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e...
+2025-05-02 23:26:27 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e
+2025-05-02 23:26:27 - main_orchestrator - INFO - Rendered HTML: researchers-claim-breakthrough-in-fight-against-ais-frustrating-security-hole.html
+2025-05-02 23:26:27 - main_orchestrator - INFO - Updated all_articles.json (20 articles).
+2025-05-02 23:26:27 - main_orchestrator - INFO - Updated all_articles.json (95 articles).
+2025-05-02 23:26:27 - main_orchestrator - INFO - Attempting to post article aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e to Twitter...
+2025-05-02 23:26:27 - src.social.twitter_poster - INFO - Attempting to post tweet for: Researchers claim breakthrough in fight against AI’s frustrating security hole
+2025-05-02 23:26:27 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-02 23:26:27 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-02 23:26:27 - src.social.twitter_poster - ERROR - Twitter media upload failed: 403 Forbidden
+2025-05-02 23:26:27 - main_orchestrator - ERROR - Failed to post aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e to Twitter (function returned False).
+2025-05-02 23:26:27 - main_orchestrator - INFO - Attempting to send webhook to Make.com for aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e...
+2025-05-02 23:26:27 - main_orchestrator - ERROR - Failed to send data to Make.com webhook: 400 Client Error: Bad Request for url: https://hook.eu2.make.com/dljj9hgj0bh6exb45u8sp34snsx23f38
+2025-05-02 23:26:27 - main_orchestrator - ERROR - Webhook Response Status: 400
+2025-05-02 23:26:27 - main_orchestrator - ERROR - Webhook Response Body: There is no scenario listening for this webhook.
+2025-05-02 23:26:27 - main_orchestrator - ERROR - Failed sending webhook for aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e.
+2025-05-02 23:26:27 - main_orchestrator - INFO - Saved final processed data to: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e.json
+2025-05-02 23:26:27 - main_orchestrator - INFO - --- Successfully processed article: aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e ---
+2025-05-02 23:26:28 - main_orchestrator - INFO - Processing cycle complete. Successfully processed: 9, Failed/Skipped/Duplicate: 4
+2025-05-02 23:26:28 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (480.60 seconds) === ---
