@@ -12465,3 +12465,219 @@ NameError: name 'logger' is not defined
 2025-05-02 06:52:14,258 - main_orchestrator - INFO - No new scraped articles to process.
 2025-05-02 06:52:14,258 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
 >>>>>>> 040268555bb106d78465a45f444ff224c39607a6
+2025-05-02 10:05:39,256 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 10:05:39,268 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 10:05:42,203 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 10:05:42,255 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 10:05:42,255 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 10:05:42,255 - main_orchestrator - INFO - Ensured data, processed_json, and public/articles directories exist.
+2025-05-02 10:05:42,260 - main_orchestrator - INFO - --- Running Scraper ---
+2025-05-02 10:05:42,260 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (15 feeds) ---
+2025-05-02 10:05:42,260 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 10:05:42,347 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 10:05:42,348 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles from this feed.
+2025-05-02 10:05:42,348 - src.scrapers.news_scraper - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 10:05:42,429 - src.scrapers.news_scraper - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Contains 10 entries.
+2025-05-02 10:05:42,429 - src.scrapers.news_scraper - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles from this feed.
+2025-05-02 10:05:42,429 - src.scrapers.news_scraper - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 10:05:42,626 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed http://feeds.arstechnica.com/arstechnica/ai: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\scrapers\news_scraper.py", line 180, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'. Did you mean: 'NonXMLContentType'?
+2025-05-02 10:05:42,654 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 10:05:42,766 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 10:05:42,767 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 4d329a904c3f3259bed7c57d3dbd6d6f839c9846a2e549f4b9b30f4f6e28f3e5.json (Title: This data set helps researchers spot harmful stereotypes in LLMs)
+2025-05-02 10:05:42,769 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 26ed367a70cc0be2b8be4340ccb71672d0a4001d4bd82766774e53a8ca859639.json (Title: The AI Hype Index: AI agent cyberattacks, racing robots, and musical models)
+2025-05-02 10:05:42,787 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d5a45e35e9c927001c9b1f8ef5a46a669e2bd720e9355989bc8163f69ca11594.json (Title: We need to start thinking of AI as “normal”)
+2025-05-02 10:05:42,788 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8d841f7f49e033711d3d4284e45d6e5dd1bbda9bee279295e0995c84f3eb2741.json (Title: Seeing AI as a collaborator, not a creator)
+2025-05-02 10:05:42,789 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 5780a466b04d481404add4ff1a48e2d992514f1b2f2d06dc9481a138661b6ba7.json (Title: The future of AI processing)
+2025-05-02 10:05:42,791 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ad7f7262d9e4506029e8a82bb6228b6680b2fe97d37b293bb16e8e698ef98b82.json (Title: Generative AI is reshaping South Korea’s webcomics industry)
+2025-05-02 10:05:42,792 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 3a8ffeb2e1a6a923a51b324c39ee40e5e8f2dad4b3e3317853e924e1c3880b04.json (Title: AI is pushing the limits of the physical world)
+2025-05-02 10:05:42,793 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 20efa269a1bf6ced6bc2c3c9a9f7b33826957e07595bffed1d7b1536a4f3a923.json (Title: A Google Gemini model now has a “dial” to adjust how much it reasons)
+2025-05-02 10:05:42,795 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 9ddf7f86fb5566af135e521d8c444ee75dfbdc2a6e07ec699b99f49f8df5b3f0.json (Title: Adapting for AI’s reasoning era)
+2025-05-02 10:05:42,797 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a50f62ed84636ecd4a99a014961064d65bbe40aa2b7d3a66eee76d5d3df142e9.json (Title: AI is coming for music, too)
+2025-05-02 10:05:42,798 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 10 new articles from this feed.
+2025-05-02 10:05:42,798 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 10:05:42,909 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 28 entries.
+2025-05-02 10:05:42,911 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 088f3e0ff539c031fed53da67c1db85a3d671bc0e600b91d7cf4e30ce93bcf6d.json (Title: Hidden costs in AI deployment: Why Claude models may be 20-30% more expensive than GPT in enterprise settings)
+2025-05-02 10:05:42,912 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 3562f13802cc50d522e2801ce1cbb31f4f007231e5fa670467a15f00ee8e1ca8.json (Title: Astronomer’s $93M raise underscores a new reality: Orchestration is king in AI infrastructure)
+2025-05-02 10:05:42,913 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 2a3a387f11f1c3ab1a946f2d77501510d01246f35bc73f1b7eda01343d3ad745.json (Title: Microsoft launches Phi-4-Reasoning-Plus, a small, powerful, open weights reasoning model!)
+2025-05-02 10:05:42,914 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ba11b1ad65510c3153203891bd85f368592103fcf1b342897291c1ba5c80824c.json (Title: Salesforce takes aim at ‘jagged intelligence’ in push for more reliable AI)
+2025-05-02 10:05:42,915 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ea22ab702f29ec016ba65336b5256d83df667233f60a0ccf67e12ea306a28882.json (Title: UiPath’s new orchestrator guides AI agents to follow your enterprise’s rules)
+2025-05-02 10:05:42,917 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 932cf5155a08e3c94a8b61e5bb3d5f2103047c0005711b41245ad810325dff16.json (Title: The ‘era of experience’ will unleash self-learning AI agents across the web—here’s how to prepare)
+2025-05-02 10:05:42,918 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: dbe229ed6721dc0cac311e1b9b899a6957932902981ceb2ebe74a2d0f140251d.json (Title: Qwen swings for a double with 2.5-Omni-3B model that runs on consumer PCs, laptops)
+2025-05-02 10:05:42,919 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 12b51aca09faf86eed57905479ba0abef3f977362d1bee4fa50c8505cabd8a86.json (Title: Breaking the ‘intellectual bottleneck’: How AI is computing the previously uncomputable in healthcare)
+2025-05-02 10:05:42,920 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 6bbbec2d7718bdd066ddabd04c17b38a82e73ae8b210fcc84d37e6b6704d0dff.json (Title: OpenAI rolls back ChatGPT’s sycophancy and explains what went wrong)
+2025-05-02 10:05:42,925 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a38f31a2ef2598e3e9451aaae845aebfa0adb63565e13baccaae4d1763a2e521.json (Title: Structify raises $4.1M seed to turn unstructured web data into enterprise-ready datasets)
+2025-05-02 10:05:42,927 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ac54691dac89a019c74ae40cce1d154c83a4d3ab9e0fbbbbde83312679ab9001.json (Title: No more window switching: Mastercard’s Agent Pay transforms how enterprises use AI search)
+2025-05-02 10:05:42,928 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 94b630f3ca377a57659f55c58859c21fd39fd1149a830e321428845ac06b15d9.json (Title: Meta unleashes Llama API running 18x faster than OpenAI: Cerebras partnership delivers 2,600 tokens per second)
+2025-05-02 10:05:42,929 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: bd7e60b7f9c74cd44a7e805f0f0da47042926dfc2f28dc77a8334fdf9933cfb0.json (Title: Meta’s first dedicated AI app is here with Llama 4 — but it’s more consumer than productivity or business oriented)
+2025-05-02 10:05:42,931 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 353a9326ddeb5a0b64c180d7bcdbbda89aa70705e797f5a222723151f6e8ed2c.json (Title: Tripp launches Kōkua AI as mental wellness coach across multiple platforms)
+2025-05-02 10:05:42,963 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 36cbed01347cc50db9b379c2a5751b9f973e5b575cdd3d4ec8572f9a260c4bea.json (Title: xMEMS extends micro cooling fan-on-a-chip tech to AI data centers)
+2025-05-02 10:05:42,964 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 1f10771e8695c3d188f74e8ee4a4c9b415049454178d0c49cbd7dc03beb5b37a.json (Title: Alibaba launches open source Qwen3 model that surpasses OpenAI o1 and DeepSeek R1)
+2025-05-02 10:05:42,965 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 111f2637b8b54cc359ec6fa3acfc2dc700d4513dcc6fdbe0acdc22835ac28b98.json (Title: Ex-OpenAI CEO and power users sound alarm over AI sycophancy and flattery of users)
+2025-05-02 10:05:42,966 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ed31bed9e0b3f12c188e612c29ed01a3577a09f772ccc9e0b8da180b364ebf6a.json (Title: Beyond A2A and MCP: How LOKA’s Universal Agent Identity Layer changes the game)
+2025-05-02 10:05:42,968 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 01c1259984aa84d08506e7c6ed673328506269bfe3cae5eca32afd53a5596ab5.json (Title: 30 seconds vs. 3: The d1 reasoning framework that’s slashing AI response times)
+2025-05-02 10:05:42,969 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c13ee827e482160d72722c3aca4fad5eff71acb56e25ad1ed6114efc35262290.json (Title: Writer releases Palmyra X5, delivers near GPT-4.1 performance at 75% lower cost)
+2025-05-02 10:05:42,970 - src.scrapers.news_scraper - WARNING - Reached max articles per run (30) while processing feed https://venturebeat.com/category/ai/feed/.
+2025-05-02 10:05:42,970 - src.scrapers.news_scraper - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 20 new articles from this feed.
+2025-05-02 10:05:42,970 - src.scrapers.news_scraper - WARNING - Reached max articles per run (30). Stopping feed processing for this run.
+2025-05-02 10:05:42,970 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 30 ---
+2025-05-02 10:05:42,970 - main_orchestrator - INFO - Scraper run completed. Found 30 new JSON files potentially.
+2025-05-02 10:05:42,970 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 10:05:42,986 - main_orchestrator - INFO - Loaded 21 recent articles for duplicate checking.
+2025-05-02 10:05:42,987 - main_orchestrator - INFO - Found 54 scraped articles to process.
+2025-05-02 10:05:42,988 - main_orchestrator - INFO - --- Processing article file: c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043.json ---
+2025-05-02 10:05:43,003 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043 Title: Stripe shows iOS developers how to avoid Apple’s App Store c...
+2025-05-02 10:05:51,907 - src.agents.filter_news_agent - INFO - Filter verdict received for ID c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043: level=Interesting, topic='Business', keyword='App Store commission bypass'
+2025-05-02 10:05:51,907 - main_orchestrator - INFO - Article c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043 classified as Interesting (Topic: Business).
+2025-05-02 10:05:51,907 - main_orchestrator - INFO - Checking duplicates for c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043...
+2025-05-02 10:05:51,907 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043 Title: Stripe shows iOS developers how to avoid Apple’s App Store c...
+2025-05-02 10:06:00,515 - src.agents.similarity_check_agent - INFO - Similarity check result for ID c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043: is_duplicate=False. Reason: The core event in the New Candidate Article is about Stripe helping iOS developers bypass Apple's App Store commission, which is not reported in any of the Recently Published Articles.
+2025-05-02 10:06:00,515 - main_orchestrator - INFO - Article c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043 passed similarity check.
+2025-05-02 10:06:00,515 - main_orchestrator - INFO - Finding image for c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043...
+2025-05-02 10:06:00,515 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/01/stripe-shows-ios-developers-how-to-avoid-apples-app-store-commission/
+2025-05-02 10:06:00,578 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2022/07/app-store-ios-2022-a.jpg?resize=1200,675
+2025-05-02 10:06:00,578 - main_orchestrator - INFO - Using scraped image for c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043: https://techcrunch.com/wp-content/uploads/2022/07/app-store-ios-2022-a.jpg?resize=1200,675
+2025-05-02 10:06:00,578 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043...
+2025-05-02 10:06:31,649 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043.
+2025-05-02 10:06:31,649 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043...
+2025-05-02 10:06:37,233 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043
+2025-05-02 10:06:37,321 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\stripe-shows-ios-developers-how-to-avoid-apples-app-store-commission.html
+2025-05-02 10:06:37,323 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 10:06:37,325 - main_orchestrator - INFO - Updated all_articles.json (40 articles).
+2025-05-02 10:06:37,327 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043.json
+2025-05-02 10:06:37,328 - main_orchestrator - INFO - --- Successfully processed article: c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043 ---
+2025-05-02 10:06:38,329 - main_orchestrator - INFO - --- Processing article file: 7ca72b9401b7373d4abb997a3c97b6285955d11d241e61362aa51b65f6a7359d.json ---
+2025-05-02 10:06:38,441 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 7ca72b9401b7373d4abb997a3c97b6285955d11d241e61362aa51b65f6a7359d Title: Buzzy investing app Dub lands $30M Series A...
+2025-05-02 10:06:46,104 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 7ca72b9401b7373d4abb997a3c97b6285955d11d241e61362aa51b65f6a7359d: level=Boring, topic='Finance', keyword='Series A funding'
+2025-05-02 10:06:46,104 - main_orchestrator - INFO - Article 7ca72b9401b7373d4abb997a3c97b6285955d11d241e61362aa51b65f6a7359d classified as Boring. Skipping.
+2025-05-02 10:06:47,106 - main_orchestrator - INFO - --- Processing article file: e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2.json ---
+2025-05-02 10:06:47,129 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2 Title: FutureHouse releases AI tools it claims can accelerate scien...
+2025-05-02 10:06:54,963 - src.agents.filter_news_agent - INFO - Filter verdict received for ID e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2: level=Interesting, topic='AI Models', keyword='AI scientific tools'
+2025-05-02 10:06:54,963 - main_orchestrator - INFO - Article e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2 classified as Interesting (Topic: AI Models).
+2025-05-02 10:06:54,963 - main_orchestrator - INFO - Checking duplicates for e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2...
+2025-05-02 10:06:54,963 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2 Title: FutureHouse releases AI tools it claims can accelerate scien...
+2025-05-02 10:07:01,955 - src.agents.similarity_check_agent - INFO - Similarity check result for ID e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2: is_duplicate=False. Reason: No recently published article reports on FutureHouse's launch of AI tools for scientific work.
+2025-05-02 10:07:01,955 - main_orchestrator - INFO - Article e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2 passed similarity check.
+2025-05-02 10:07:01,955 - main_orchestrator - INFO - Finding image for e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2...
+2025-05-02 10:07:01,955 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/01/futurehouse-releases-ai-tools-it-claims-can-accelerate-science/
+2025-05-02 10:07:02,015 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2025/05/66bb703c19a6473deb260e81_Hero-Image-Research-Subpage.jpg?resize=1200,806
+2025-05-02 10:07:02,015 - main_orchestrator - INFO - Using scraped image for e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2: https://techcrunch.com/wp-content/uploads/2025/05/66bb703c19a6473deb260e81_Hero-Image-Research-Subpage.jpg?resize=1200,806
+2025-05-02 10:07:02,015 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2...
+2025-05-02 10:07:36,194 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2.
+2025-05-02 10:07:36,194 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2...
+2025-05-02 10:07:42,387 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2
+2025-05-02 10:07:42,390 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\futurehouse-releases-ai-tools-it-claims-can-accelerate-science.html
+2025-05-02 10:07:42,394 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 10:07:42,395 - main_orchestrator - INFO - Updated all_articles.json (41 articles).
+2025-05-02 10:07:42,397 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2.json
+2025-05-02 10:07:42,398 - main_orchestrator - INFO - --- Successfully processed article: e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2 ---
+2025-05-02 10:07:43,398 - main_orchestrator - INFO - --- Processing article file: b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043.json ---
+2025-05-02 10:07:43,426 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043 Title: Ai2’s new small AI model outperforms similarly-sized models ...
+2025-05-02 10:07:51,700 - src.agents.filter_news_agent - INFO - Filter verdict received for ID b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043: level=Interesting, topic='AI Models', keyword='small AI model'
+2025-05-02 10:07:51,701 - main_orchestrator - INFO - Article b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043 classified as Interesting (Topic: AI Models).
+2025-05-02 10:07:51,701 - main_orchestrator - INFO - Checking duplicates for b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043...
+2025-05-02 10:07:51,701 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043 Title: Ai2’s new small AI model outperforms similarly-sized models ...
+2025-05-02 10:07:58,098 - src.agents.similarity_check_agent - INFO - Similarity check result for ID b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043: is_duplicate=False. Reason: The New Candidate Article reports on Ai2's release of the Olmo 2 1B model, which is not covered in any of the Recently Published Articles.
+2025-05-02 10:07:58,098 - main_orchestrator - INFO - Article b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043 passed similarity check.
+2025-05-02 10:07:58,098 - main_orchestrator - INFO - Finding image for b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043...
+2025-05-02 10:07:58,098 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/01/ai2s-new-small-ai-model-outperforms-similarly-sized-models-from-google-meta/
+2025-05-02 10:07:58,154 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2024/10/GettyImages-1335295270.jpg?resize=1200,675
+2025-05-02 10:07:58,155 - main_orchestrator - INFO - Using scraped image for b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043: https://techcrunch.com/wp-content/uploads/2024/10/GettyImages-1335295270.jpg?resize=1200,675
+2025-05-02 10:07:58,155 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043...
+2025-05-02 10:08:31,064 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043.
+2025-05-02 10:08:31,064 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043...
+2025-05-02 10:08:37,262 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043
+2025-05-02 10:08:37,265 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\ai2s-new-small-ai-model-outperforms-similarly-sized-models-from-google-meta.html
+2025-05-02 10:08:37,267 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 10:08:37,269 - main_orchestrator - INFO - Updated all_articles.json (42 articles).
+2025-05-02 10:08:37,271 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043.json
+2025-05-02 10:08:37,271 - main_orchestrator - INFO - --- Successfully processed article: b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043 ---
+2025-05-02 10:08:38,272 - main_orchestrator - INFO - --- Processing article file: fb6e62e0c7bea2e5dde361ab614d27d9be22e8487b9c99ca7921fc4832d46efa.json ---
+2025-05-02 10:08:38,289 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: fb6e62e0c7bea2e5dde361ab614d27d9be22e8487b9c99ca7921fc4832d46efa Title: Fintech Bench conducts layoff while others still work month-...
+2025-05-02 10:08:44,978 - src.agents.filter_news_agent - INFO - Filter verdict received for ID fb6e62e0c7bea2e5dde361ab614d27d9be22e8487b9c99ca7921fc4832d46efa: level=Boring, topic='Business', keyword='Fintech layoffs'
+2025-05-02 10:08:44,978 - main_orchestrator - INFO - Article fb6e62e0c7bea2e5dde361ab614d27d9be22e8487b9c99ca7921fc4832d46efa classified as Boring. Skipping.
+2025-05-02 10:08:45,979 - main_orchestrator - INFO - --- Processing article file: ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b.json ---
+2025-05-02 10:08:46,002 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b Title: Nvidia takes aim at Anthropic’s support of chip export contr...
+2025-05-02 10:08:55,413 - src.agents.filter_news_agent - INFO - Filter verdict received for ID ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b: level=Interesting, topic='Regulation', keyword='AI chip export controls'
+2025-05-02 10:08:55,414 - main_orchestrator - INFO - Article ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b classified as Interesting (Topic: Regulation).
+2025-05-02 10:08:55,414 - main_orchestrator - INFO - Checking duplicates for ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b...
+2025-05-02 10:08:55,414 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b Title: Nvidia takes aim at Anthropic’s support of chip export contr...
+2025-05-02 10:09:01,233 - src.agents.similarity_check_agent - INFO - Similarity check result for ID ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b: is_duplicate=False. Reason: No recently published article discusses Nvidia's disagreement with Anthropic's support for AI chip export controls.
+2025-05-02 10:09:01,233 - main_orchestrator - INFO - Article ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b passed similarity check.
+2025-05-02 10:09:01,233 - main_orchestrator - INFO - Finding image for ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b...
+2025-05-02 10:09:01,233 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/01/nvidia-takes-aim-at-anthropics-support-of-chip-export-controls/
+2025-05-02 10:09:01,314 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2023/08/GettyImages-1598978057.jpg?w=1024
+2025-05-02 10:09:01,314 - main_orchestrator - INFO - Using scraped image for ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b: https://techcrunch.com/wp-content/uploads/2023/08/GettyImages-1598978057.jpg?w=1024
+2025-05-02 10:09:01,314 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b...
+2025-05-02 10:09:31,815 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b.
+2025-05-02 10:09:31,815 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b...
+2025-05-02 10:09:40,418 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b
+2025-05-02 10:09:40,423 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\nvidia-takes-aim-at-anthropics-support-of-chip-export-controls.html
+2025-05-02 10:09:40,426 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 10:09:40,428 - main_orchestrator - INFO - Updated all_articles.json (43 articles).
+2025-05-02 10:09:40,429 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b.json
+2025-05-02 10:09:40,430 - main_orchestrator - INFO - --- Successfully processed article: ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b ---
+2025-05-02 10:09:41,431 - main_orchestrator - INFO - --- Processing article file: 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55.json ---
+2025-05-02 10:09:41,443 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55 Title: May Mobility to launch robotaxis on Uber platform this year ...
+2025-05-02 10:09:50,860 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55: level=Interesting, topic='Robotics', keyword='autonomous vehicles partnership'
+2025-05-02 10:09:50,860 - main_orchestrator - INFO - Article 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55 classified as Interesting (Topic: Robotics).
+2025-05-02 10:09:50,860 - main_orchestrator - INFO - Checking duplicates for 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55...
+2025-05-02 10:09:50,860 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55 Title: May Mobility to launch robotaxis on Uber platform this year ...
+2025-05-02 10:09:57,845 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55: is_duplicate=False. Reason: No recently published article reports on May Mobility launching robotaxis on Uber's platform in Texas.
+2025-05-02 10:09:57,846 - main_orchestrator - INFO - Article 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55 passed similarity check.
+2025-05-02 10:09:57,846 - main_orchestrator - INFO - Finding image for 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55...
+2025-05-02 10:09:57,846 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/01/may-mobility-to-launch-robotaxis-on-uber-platform-this-year-in-texas/
+2025-05-02 10:09:57,907 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2025/05/May_Uber-copy.jpg?resize=1200,800
+2025-05-02 10:09:57,907 - main_orchestrator - INFO - Using scraped image for 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55: https://techcrunch.com/wp-content/uploads/2025/05/May_Uber-copy.jpg?resize=1200,800
+2025-05-02 10:09:57,907 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55...
+2025-05-02 10:10:30,715 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55.
+2025-05-02 10:10:30,715 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55...
+2025-05-02 10:10:38,872 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55
+2025-05-02 10:10:38,876 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\may-mobility-to-launch-robotaxis-on-uber-platform-this-year-in-texas.html
+2025-05-02 10:10:38,880 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 10:10:38,884 - main_orchestrator - INFO - Updated all_articles.json (44 articles).
+2025-05-02 10:10:38,895 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55.json
+2025-05-02 10:10:38,896 - main_orchestrator - INFO - --- Successfully processed article: 5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55 ---
+2025-05-02 10:10:39,897 - main_orchestrator - INFO - --- Processing article file: 97d610ee8b7faffb0101402443ea518065b0342e3599a2dceb786893cae9febe.json ---
+2025-05-02 10:10:39,922 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 97d610ee8b7faffb0101402443ea518065b0342e3599a2dceb786893cae9febe Title: Epic Games is launching webshops to allow developers to circ...
+2025-05-02 10:10:46,621 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 97d610ee8b7faffb0101402443ea518065b0342e3599a2dceb786893cae9febe: level=Interesting, topic='Regulation', keyword='app store fees'
+2025-05-02 10:10:46,621 - main_orchestrator - INFO - Article 97d610ee8b7faffb0101402443ea518065b0342e3599a2dceb786893cae9febe classified as Interesting (Topic: Regulation).
+2025-05-02 10:10:46,621 - main_orchestrator - INFO - Checking duplicates for 97d610ee8b7faffb0101402443ea518065b0342e3599a2dceb786893cae9febe...
+2025-05-02 10:10:46,622 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 97d610ee8b7faffb0101402443ea518065b0342e3599a2dceb786893cae9febe Title: Epic Games is launching webshops to allow developers to circ...
+2025-05-02 10:10:54,504 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 97d610ee8b7faffb0101402443ea518065b0342e3599a2dceb786893cae9febe: is_duplicate=True. Reason: The New Candidate Article reports on Epic Games allowing developers to circumvent app store fees, which is the same core event as the Recently Published Article about Stripe offering iOS developers a way to bypass Apple's App Store commission following the recent Epic antitrust ruling.
+2025-05-02 10:10:54,505 - main_orchestrator - INFO - Article 97d610ee8b7faffb0101402443ea518065b0342e3599a2dceb786893cae9febe is SEMANTIC DUPLICATE. Skipping. Reason: The New Candidate Article reports on Epic Games allowing developers to circumvent app store fees, which is the same core event as the Recently Published Article about Stripe offering iOS developers a way to bypass Apple's App Store commission following the recent Epic antitrust ruling.
+2025-05-02 10:10:55,506 - main_orchestrator - INFO - --- Processing article file: 2883d59c79bc3c0ef91e079b4ddd0c4d322de9a6624d45a313c59a2a2f8e6f27.json ---
+2025-05-02 10:10:55,519 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 2883d59c79bc3c0ef91e079b4ddd0c4d322de9a6624d45a313c59a2a2f8e6f27 Title: Anthropic lets users connect more apps to Claude...
+2025-05-02 10:11:02,294 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 2883d59c79bc3c0ef91e079b4ddd0c4d322de9a6624d45a313c59a2a2f8e6f27: level=Boring, topic='Software', keyword='Claude app integrations'
+2025-05-02 10:11:02,294 - main_orchestrator - INFO - Article 2883d59c79bc3c0ef91e079b4ddd0c4d322de9a6624d45a313c59a2a2f8e6f27 classified as Boring. Skipping.
+2025-05-02 10:11:03,296 - main_orchestrator - INFO - --- Processing article file: 057dddd019be5f2f2610d8473ded0d8280dc9ffd4e34b4df85e1035d7adbef31.json ---
+2025-05-02 10:11:03,309 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 057dddd019be5f2f2610d8473ded0d8280dc9ffd4e34b4df85e1035d7adbef31 Title: Fivetran acquires Census to become end-to-end data movement ...
+2025-05-02 10:11:09,346 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 057dddd019be5f2f2610d8473ded0d8280dc9ffd4e34b4df85e1035d7adbef31: level=Boring, topic='Business', keyword='Fivetran acquires Census'
+2025-05-02 10:11:09,346 - main_orchestrator - INFO - Article 057dddd019be5f2f2610d8473ded0d8280dc9ffd4e34b4df85e1035d7adbef31 classified as Boring. Skipping.
+2025-05-02 10:11:10,348 - main_orchestrator - INFO - --- Processing article file: 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce.json ---
+2025-05-02 10:11:10,361 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce Title: Read the juiciest bits from the Apple-Epic court ruling...
+2025-05-02 10:11:19,414 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce: level=Interesting, topic='Regulation', keyword='Apple-Epic court ruling'
+2025-05-02 10:11:19,415 - main_orchestrator - INFO - Article 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce classified as Interesting (Topic: Regulation).
+2025-05-02 10:11:19,415 - main_orchestrator - INFO - Checking duplicates for 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce...
+2025-05-02 10:11:19,415 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce Title: Read the juiciest bits from the Apple-Epic court ruling...
+2025-05-02 10:11:26,824 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce: is_duplicate=False. Reason: The New Candidate Article discusses a court ruling involving Apple and Epic Games, which is not covered in any of the Recently Published Articles.
+2025-05-02 10:11:26,825 - main_orchestrator - INFO - Article 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce passed similarity check.
+2025-05-02 10:11:26,825 - main_orchestrator - INFO - Finding image for 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce...
+2025-05-02 10:11:26,825 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/01/read-the-juiciest-bits-from-the-apple-epic-court-ruling/
+2025-05-02 10:11:26,899 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2023/11/gavel-messy-legal.jpg?resize=1200,675
+2025-05-02 10:11:26,899 - main_orchestrator - INFO - Using scraped image for 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce: https://techcrunch.com/wp-content/uploads/2023/11/gavel-messy-legal.jpg?resize=1200,675
+2025-05-02 10:11:26,899 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce...
+2025-05-02 10:11:58,442 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce.
+2025-05-02 10:11:58,442 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce...
+2025-05-02 10:12:04,985 - src.agents.tags_generator_agent - INFO - Successfully generated 8 tags for article ID: 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce
+2025-05-02 10:12:04,989 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\read-the-juiciest-bits-from-the-apple-epic-court-ruling.html
+2025-05-02 10:12:04,992 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 10:12:04,995 - main_orchestrator - INFO - Updated all_articles.json (45 articles).
+2025-05-02 10:12:04,997 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce.json
+2025-05-02 10:12:04,997 - main_orchestrator - INFO - --- Successfully processed article: 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce ---
+2025-05-02 10:12:05,999 - main_orchestrator - INFO - --- Processing article file: f741db83524ca4541ccef44127f876aa7fe6d8d51f656d693fbbf795eafe5912.json ---
+2025-05-02 10:12:06,017 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f741db83524ca4541ccef44127f876aa7fe6d8d51f656d693fbbf795eafe5912 Title: Google’s AI Mode gets expanded access and additional functio...

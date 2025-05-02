@@ -1,27 +1,28 @@
-<!-- templates/navbar.html -->
+<!-- public/navbar.html -->
 <nav class="navbar">
     <div class="nav-container">
-        <a href="../home.html"><img src="https://i.postimg.cc/C145pD86/Dacoola-text-logo.png" alt="Dacoola_logo" class="nav-logo"> </a> <!-- Added class -->
+        <!-- Links should be absolute paths from the web root (public/) -->
+        <a href="/home.html"><img src="https://i.postimg.cc/C145pD86/Dacoola-text-logo.png" alt="Dacoola_logo" class="nav-logo"></a>
 
         <div class="nav-search">
             <input type="search" placeholder="Search news..." id="search-input" autocomplete="off">
             <button type="button" id="search-button" title="Search">
                 <i class="fas fa-search"></i>
             </button>
-            <!-- Add Suggestion Dropdown -->
             <div id="search-suggestions" class="search-suggestions-dropdown"></div>
          </div>
 
         <ul class="nav-menu">
             <li class="nav-item">
+                <!-- External link is fine -->
                 <a href="https://buy.stripe.com/fZeaHF9Cvgqy1eofYY" class="nav-link icon-link donate-icon" target="_blank" rel="noopener noreferrer" title="Donate">
-                    <i class="fas fa-hand-holding-heart"></i> <!-- Changed Icon -->
+                    <i class="fas fa-hand-holding-heart"></i>
                 </a>
             </li>
-             <!-- Home Icon Second -->
             <li class="nav-item">
-                 <a href="../home.html" class="nav-link icon-link home-icon" title="Home">
-                     <i class="fas fa-home"></i> <!-- Home Icon -->
+                 <!-- Link should be absolute path from web root -->
+                 <a href="/home.html" class="nav-link icon-link home-icon" title="Home">
+                     <i class="fas fa-home"></i>
                  </a>
             </li>
             <!-- Add other icon links here if needed -->

@@ -6,7 +6,7 @@
       "link": "articles/study-uses-artificial-intelligence-to-classify-patient-pain-archetypes-after-kne.html",
       "published_iso": "2025-05-02T06:03:00",
       "summary_short": "A new AI pain classification study identifies distinct patient pain archetypes following knee replacement surgery, aiding personalized recovery strategies.",
-      "image_url": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "image_url": "https://formaspace.com/wp-content/uploads/2024/04/ai-dr.jpeg",
       "topic": "Health",
       "is_breaking": false,
       "tags": [
@@ -210,6 +210,120 @@
       "trend_score": 14.5
     },
     {
+      "id": "c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043",
+      "title": "Stripe shows iOS developers how to avoid Apple’s App Store commission",
+      "link": "articles/stripe-shows-ios-developers-how-to-avoid-apples-app-store-commission.html",
+      "published_iso": "2025-05-01T20:31:18Z",
+      "summary_short": "Stripe offers iOS developers a way to bypass Apple's App Store commission following the recent Epic antitrust ruling.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2022/07/app-store-ios-2022-a.jpg?resize=1200,675",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Stripe",
+        "iOS developers",
+        "App Store commission",
+        "Apple antitrust case",
+        "third-party payment options",
+        "Epic lawsuit",
+        "mobile app payments",
+        "developer revenue",
+        "payment processing"
+      ],
+      "trend_score": 14.5
+    },
+    {
+      "id": "e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2",
+      "title": "FutureHouse releases AI tools it claims can accelerate science",
+      "link": "articles/futurehouse-releases-ai-tools-it-claims-can-accelerate-science.html",
+      "published_iso": "2025-05-01T20:16:33Z",
+      "summary_short": "FutureHouse debuts AI-powered platform and API designed to accelerate scientific research, backed by Eric Schmidt. Explore the latest in AI scientific tools.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/66bb703c19a6473deb260e81_Hero-Image-Research-Subpage.jpg?resize=1200,806",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "FutureHouse",
+        "AI for scientific research",
+        "AI-powered platform",
+        "Eric Schmidt",
+        "nonprofit AI initiatives",
+        "AI scientist",
+        "scientific workflows",
+        "AI-driven scientific advancements",
+        "autonomous AI research",
+        "open scientific innovation"
+      ],
+      "trend_score": 15.0
+    },
+    {
+      "id": "b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043",
+      "title": "Ai2’s new small AI model outperforms similarly-sized models from Google, Meta",
+      "link": "articles/ai2s-new-small-ai-model-outperforms-similarly-sized-models-from-google-meta.html",
+      "published_iso": "2025-05-01T18:29:58Z",
+      "summary_short": "Ai2's new small AI model, Olmo 2 1B, surpasses similar-sized models from Google and Meta in benchmark tests.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/10/GettyImages-1335295270.jpg?resize=1200,675",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI2",
+        "Olmo 2 1B",
+        "small AI models",
+        "AI benchmarks",
+        "Google AI",
+        "Meta AI",
+        "Alibaba AI",
+        "edge computing",
+        "AI efficiency",
+        "AI research"
+      ],
+      "trend_score": 15.0
+    },
+    {
+      "id": "ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b",
+      "title": "Nvidia takes aim at Anthropic’s support of chip export controls",
+      "link": "articles/nvidia-takes-aim-at-anthropics-support-of-chip-export-controls.html",
+      "published_iso": "2025-05-01T17:46:40Z",
+      "summary_short": "Nvidia challenges Anthropic's support for U.S. AI chip export controls, highlighting industry divisions over new regulations.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/08/GettyImages-1598978057.jpg?w=1024",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Nvidia",
+        "Anthropic",
+        "AI chip export controls",
+        "semiconductor technology",
+        "AI regulation",
+        "tech industry rift",
+        "US Department of Commerce",
+        "Framework for Artificial Intelligence Diffusion",
+        "global market access",
+        "AI hardware"
+      ],
+      "trend_score": 15.0
+    },
+    {
+      "id": "5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55",
+      "title": "May Mobility to launch robotaxis on Uber platform this year in Texas",
+      "link": "articles/may-mobility-to-launch-robotaxis-on-uber-platform-this-year-in-texas.html",
+      "published_iso": "2025-05-01T17:00:00Z",
+      "summary_short": "May Mobility plans to deploy robotaxis on Uber's platform in Arlington, Texas, marking a key autonomous vehicles partnership by late 2025.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/May_Uber-copy.jpg?resize=1200,800",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "May Mobility",
+        "Uber robotaxis",
+        "autonomous vehicles",
+        "ride-hailing platform",
+        "self-driving technology",
+        "Arlington Texas",
+        "mobility solutions",
+        "autonomous ride-hailing",
+        "urban transportation",
+        "sustainable transportation"
+      ],
+      "trend_score": 15.0
+    },
+    {
       "id": "93cde970ee35b82e8d0280722bad5bbe9cef858b6e213de32662dd4218babbd8",
       "title": "Zuckerberg Says in Response to Loneliness Epidemic, He Will Create Most of Your Friends Using Artificial Intelligence - futurism.com",
       "link": "articles/zuckerberg-says-in-response-to-loneliness-epidemic-he-will-create-most-of-your-f.html",
@@ -231,6 +345,27 @@
       ],
       "audio_url": null,
       "trend_score": 14.5
+    },
+    {
+      "id": "84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce",
+      "title": "Read the juiciest bits from the Apple-Epic court ruling",
+      "link": "articles/read-the-juiciest-bits-from-the-apple-epic-court-ruling.html",
+      "published_iso": "2025-05-01T16:05:45Z",
+      "summary_short": "Judge Yvonne Gonzalez Rogers criticizes Apple in the latest Apple-Epic court ruling for defying court orders. Read the details here.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/11/gavel-messy-legal.jpg?resize=1200,675",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Apple-Epic court ruling",
+        "Fortnite",
+        "App Store policies",
+        "antitrust concerns",
+        "Judge Yvonne Gonzalez Rogers",
+        "corporate compliance",
+        "regulatory scrutiny",
+        "legal battle"
+      ],
+      "trend_score": 14.0
     },
     {
       "id": "645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9",

@@ -23,22 +23,16 @@ DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 # List of RSS Feed URLs (Keep this updated)
 NEWS_FEED_URLS = [
     "https://techcrunch.com/feed/",
-    "https://www.wired.com/feed/tag/ai/latest/rss",
-    "http://feeds.arstechnica.com/arstechnica/ai",
     "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
     "https://venturebeat.com/category/ai/feed/",
     "https://www.theverge.com/tech/rss/index.xml",
-    "https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en",
     "https://news.ycombinator.com/rss",
     "https://www.anthropic.com/feed.xml",
     "https://ai.googleblog.com/feeds/posts/default?alt=rss",
     "https://openai.com/blog/rss.xml",
-    "https://blog.google/technology/ai/rss/", # <- Updated Google AI Blog Feed URL (check if this is better)
     "https://aws.amazon.com/blogs/machine-learning/feed/",
     "https://blogs.microsoft.com/ai/feed/",
-    # "https://deepmind.google/blog/feed/basic/", # <- DeepMind often redirects or merges with Google AI blog
     "https://syncedreview.com/feed",
-    # "http://machinelearningmastery.com/blog/feed/", # <- Often less breaking news, more tutorials
 ]
 
 # File to store IDs of processed articles

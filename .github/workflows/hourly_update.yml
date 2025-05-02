@@ -1,31 +1,32 @@
+# .github/workflows/hourly_update.yml
+
 name: Hourly News Update and Deploy
 
 on:
   schedule:
-    # Runs every 20 minutes
+    # Runs every 20 minutes (0, 20, 40 minutes past the hour)
     - cron: "0,20,40 * * * *"
   workflow_dispatch: # Allows manual triggering
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    # Prevent concurrent runs
+    # Prevent concurrent runs of the same workflow
     concurrency:
       group: ${{ github.workflow }}
       cancel-in-progress: true
 
     permissions:
-      contents: write
-      # pages: write # Keep commented if using Netlify
-      # id-token: write # Keep commented if using Netlify
+      contents: write # Allow workflow to commit changes
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Needed for git pull --rebase
+          # Fetch all history for accurate git pull/rebase
+          fetch-depth: 0
 
-      - name: Set up Python
+      - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
@@ -34,20 +35,20 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          else echo "requirements.txt not found, skipping dependency installation." ; fi
 
       - name: Run Main Script
         env:
-          # Pass secrets securely as environment variables
+          # Pass API keys from Secrets
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
-          CAMB_AI_API_KEY: ${{ secrets.CAMB_AI_API_KEY }}
-          # Pass other secrets
-          YOUR_WEBSITE_NAME: ${{ secrets.YOUR_WEBSITE_NAME }}
-          YOUR_WEBSITE_LOGO_URL: ${{ secrets.YOUR_WEBSITE_LOGO_URL }}
-          MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES }}
-          MAX_LATEST_NEWS: ${{ secrets.MAX_LATEST_NEWS }}
-          CHECK_INTERVAL_SECONDS: ${{ secrets.CHECK_INTERVAL_SECONDS }}
+          # Pass Website Config from Secrets (or Variables if not sensitive)
+          YOUR_WEBSITE_NAME: ${{ secrets.YOUR_WEBSITE_NAME || vars.YOUR_WEBSITE_NAME || 'Dacoola' }}
+          YOUR_WEBSITE_LOGO_URL: ${{ secrets.YOUR_WEBSITE_LOGO_URL || vars.YOUR_WEBSITE_LOGO_URL || '' }}
           YOUR_SITE_BASE_URL: ${{ secrets.YOUR_SITE_BASE_URL || vars.YOUR_SITE_BASE_URL || '' }}
+          # Pass Other Config from Secrets (or Variables)
+          MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES || vars.MAX_HOME_PAGE_ARTICLES || 20 }}
+          # AUTHOR_NAME: ${{ secrets.AUTHOR_NAME || vars.AUTHOR_NAME || 'AI News Team' }} # Optional: if you want to control author name via secrets/vars
         run: python src/main.py
 
       - name: Commit and Push Changes
@@ -55,61 +56,55 @@ jobs:
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-          # --- Use find to safely add files if they exist ---
-          git add public/ # Add public dir unconditionally
-          git add data/processed_json/ # Add processed json dir unconditionally
-          # Safely add log file if it exists in the root
+          # Add generated content and state files
+          git add public/
+          git add data/processed_json/
+          # Safely add log file and processed IDs file if they exist
           find . -maxdepth 1 -name 'dacoola.log' -print -exec git add {} \;
-          # Safely add processed IDs file if it exists in data/
           find ./data -maxdepth 1 -name 'processed_article_ids.txt' -print -exec git add {} \;
-          # --------------------------------------------------
 
-          # Check if there are staged changes
+          # Check if there are staged changes before committing
           if git diff --staged --quiet; then
-            echo "No content changes to commit."
+            echo "No content changes detected to commit."
           else
             echo "Content changes detected. Committing..."
-            git commit -m "Automated hourly news update [skip ci]"
+            # Use [skip ci] in commit message to prevent triggering workflows on this commit
+            git commit -m "Automated news update [skip ci]"
 
-            # --- CORRECTED PUSH LOGIC ---
+            # Pull latest changes with rebase before pushing to avoid merge conflicts
             echo "Pulling latest changes before push..."
-            git pull origin ${{ github.ref_name }} --rebase # Pull and rebase current commit on top
+            git pull origin ${{ github.ref_name }} --rebase
 
             echo "Attempting to push changes..."
-            # Retry push logic...
+            # Retry push logic in case of transient network issues
             retry_count=0
             max_retries=3
             until git push origin ${{ github.ref_name }} || [ $retry_count -eq $max_retries ]; do
               retry_count=$((retry_count+1))
               echo "Push failed. Retrying (${retry_count}/${max_retries})..."
-              sleep 5
+              sleep 5 # Wait before retrying
+              # Optional: Pull again inside retry loop if needed? Usually rebase before loop is sufficient.
+              # git pull origin ${{ github.ref_name }} --rebase
             done
+
             if [ $retry_count -eq $max_retries ]; then
-              echo "Push failed after $max_retries attempts."
+              echo "::error::Push failed after $max_retries attempts."
               exit 1
             fi
             echo "Changes pushed successfully."
-            # --------------------------
           fi
         env:
+          # Use the automatically generated token for commit/push
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # --- DEPLOYMENT STEP ---
-      # Option 1: Deploy to GitHub Pages (COMMENTED OUT)
-      # - name: Upload artifact for GitHub Pages ...
-      # - name: Deploy to GitHub Pages ...
-
-      # Option 2: Deploy via rsync/scp (COMMENTED OUT)
-      # - name: Deploy to Server via rsync ...
-
-      # Option 3: Deploy using Netlify CLI (ACTIVE)
+      # --- DEPLOYMENT STEP (Using Netlify) ---
       - name: Deploy to Netlify
+        # Use the official Netlify CLI action
         uses: netlify/actions/cli@master
         with:
-          args: deploy --dir=public --prod # Deploy the 'public' dir to production site
+          # Deploy the 'public' directory to the production site
+          args: deploy --dir=public --prod
         env:
+          # Netlify authentication token and site ID from Secrets
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-
-      # Option 4: Deploy using Vercel CLI (COMMENTED OUT)
-      # - name: Install Vercel CLI ...
