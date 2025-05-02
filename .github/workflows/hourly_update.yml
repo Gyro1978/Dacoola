@@ -2,7 +2,7 @@ name: Hourly News Update and Deploy
 
 on:
   schedule:
-    # Runs every 20 minutes (Adjusted from 5)
+    # Runs every 20 minutes
     - cron: "*/20 * * * *"
   workflow_dispatch: # Allows manual triggering
 
@@ -48,10 +48,12 @@ jobs:
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-          # Add expected output files/dirs relative to workspace root
-          git add public/ data/processed_json/ data/processed_article_ids.txt
-          # Optionally add the log file ONLY if it exists
-          if [ -f "dacoola.log" ]; then git add dacola.log; fi
+          # --- CORRECTED: Add essential output dirs/files. Removed log file add ---
+          git add public/
+          git add data/processed_json/
+          # Add processed IDs file only if it exists
+          if [ -f "data/processed_article_ids.txt" ]; then git add data/processed_article_ids.txt; fi
+          # ----------------------------------------------------------------------
 
           # Check if there are staged changes
           if git diff --staged --quiet; then
@@ -78,14 +80,8 @@ jobs:
 
       # --- DEPLOYMENT STEP ---
       # Option 1: Deploy to GitHub Pages (COMMENTED OUT)
-      # - name: Upload artifact for GitHub Pages
-      #   uses: actions/upload-pages-artifact@v3
-      #   with:
-      #     path: ./public
-
-      # - name: Deploy to GitHub Pages
-      #   id: deployment
-      #   uses: actions/deploy-pages@v4
+      # - name: Upload artifact for GitHub Pages ...
+      # - name: Deploy to GitHub Pages ...
 
       # Option 2: Deploy via rsync/scp (COMMENTED OUT)
       # - name: Deploy to Server via rsync ...
