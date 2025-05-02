@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "24de9cf57b398e5b9ccaa0e6e166535a67dda10be19deef571a23019a6841134",
+      "title": "Show HN: Kinematic Hand Skeleton Optimization in Jax",
+      "link": "articles/show-hn-kinematic-hand-skeleton-optimization-in-jax.html",
+      "published_iso": "2025-05-02T21:03:52Z",
+      "summary_short": "Explore kinematic hand skeleton optimization in Jax, now available on GitHub for developers and researchers.",
+      "image_url": "https://opengraph.githubassets.com/d4bf3102f53a26e7e043f5fc5ea41ebc379f2f4a19a186f95fa3e06cf41255d9/rerun-io/pi0-lerobot",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "Kinematic Hand Optimization",
+        "Jax Library",
+        "Motion Tracking",
+        "Robotics",
+        "Virtual Reality",
+        "Prosthetics",
+        "Biomechanical Research",
+        "Open-Source Projects",
+        "GitHub Repositories"
+      ],
+      "audio_url": null,
+      "trend_score": 14.45
+    },
+    {
       "id": "96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc",
       "title": "Aurora launches its driverless commercial trucking service, and a surprise bidder joins Canoo’s bankruptcy case",
       "link": "articles/aurora-launches-its-driverless-commercial-trucking-service-and-a-surprise-bidder.html",
@@ -89,6 +112,30 @@
         "AI automation"
       ],
       "trend_score": 14.5
+    },
+    {
+      "id": "468cae42bf2c597d393db9bbfbaf3900f3c8b0ea2861b5898d0fb7d9dfa48f4e",
+      "title": "Driverless semis have started running regular longhaul routes",
+      "link": "articles/driverless-semis-have-started-running-regular-longhaul-routes.html",
+      "published_iso": "2025-05-02T18:02:51Z",
+      "summary_short": "Driverless semis have officially started operating regular longhaul routes, marking a milestone in autonomous freight transportation.",
+      "image_url": "https://media.cnn.com/api/v1/images/stellar/prod/aurora-launch-1.jpg?c=16x9&q=w_800,c_fill",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "Driverless Semis",
+        "Autonomous Freight Transportation",
+        "Self-Driving Technology",
+        "Logistics Industry",
+        "Trucking Industry",
+        "Longhaul Routes",
+        "Supply Chain Efficiency",
+        "Freight Logistics",
+        "Regulatory Approvals",
+        "Transportation Costs"
+      ],
+      "audio_url": null,
+      "trend_score": 14.86
     },
     {
       "id": "26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc",
@@ -660,6 +707,30 @@
       "trend_score": 14.0
     },
     {
+      "id": "ad60886c01c0bb324eff6d208d7122bbd7f86eca41511a5af2c2720bf89c26f9",
+      "title": "Wandercraft Begins Clinical Trials for Physical AI-Powered Personal Exoskeleton",
+      "link": "articles/wandercraft-begins-clinical-trials-for-physical-ai-powered-personal-exoskeleton.html",
+      "published_iso": "2025-05-01T13:00:30Z",
+      "summary_short": "Wandercraft's AI-powered exoskeleton begins clinical trials, offering mobility solutions for wheelchair users with spinal cord injuries and neuromuscular disorders.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/EXO-Paris-1.jpg",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "AI-powered exoskeleton",
+        "Wandercraft",
+        "mobility aids",
+        "physical AI",
+        "NVIDIA Isaac Sim",
+        "FDA clearance",
+        "reinforcement learning",
+        "inclusive mobility solutions",
+        "Charcot-Marie-Tooth disease",
+        "Jetson Thor"
+      ],
+      "audio_url": null,
+      "trend_score": 14.0
+    },
+    {
       "id": "037705e09113b0b95778bd12da8f50bf77de3d550c57d812433d012f36185a19",
       "title": "Meta forecasted it would make $1.4T in revenue from generative AI by 2035",
       "link": "articles/meta-forecasted-it-would-make-14t-in-revenue-from-generative-ai-by-2035.html",
@@ -1143,6 +1214,30 @@
       "audio_url": null
     },
     {
+      "id": "3744354b457d8af2cf77b12ccff14bdbf0ba9eaee4f419bea9228abded88c5d4",
+      "title": "From Kitchen to Drive-Thru: How Yum! Brands Is Accelerating Restaurant Innovation With AI",
+      "link": "articles/from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation-.html",
+      "published_iso": "2025-04-30T16:00:04Z",
+      "summary_short": "Yum! Brands partners with NVIDIA to deploy AI in 500 restaurants, optimizing everything from kitchen efficiency to drive-thru orders.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/yum-podcast-blog-1280x680-1.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "AI in restaurants",
+        "Yum! Brands",
+        "NVIDIA partnership",
+        "restaurant automation",
+        "machine learning in QSR",
+        "Byte by Yum!",
+        "computer vision drive-thru",
+        "voice AI order accuracy",
+        "QSR industry trends",
+        "AI kitchen optimization"
+      ],
+      "audio_url": null,
+      "trend_score": 13.37
+    },
+    {
       "id": "245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111",
       "title": "These Startups Are Building Advanced AI Models Without Data Centers",
       "link": "articles/these-startups-are-building-advanced-ai-models-without-data-centers.html",
@@ -1163,6 +1258,30 @@
         "Open AI Collaboration"
       ],
       "trend_score": 12.78
+    },
+    {
+      "id": "d898b065ba06b51a0cc2a7bbc744e1627c87ff3c4643eb8b2a21ea2fdc561158",
+      "title": "Control the Composition of AI-Generated Images With the NVIDIA AI Blueprint for 3D-Guided Generative AI",
+      "link": "articles/control-the-composition-of-ai-generated-images-with-the-nvidia-ai-blueprint-for-.html",
+      "published_iso": "2025-04-30T13:00:25Z",
+      "summary_short": "NVIDIA's new AI Blueprint offers precise AI image generation control using 3D-guided workflows, simplifying advanced creative adjustments.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/ai-3d-blueprint-nv-blog-1280x680-1.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA AI Blueprint",
+        "3D-guided generative AI",
+        "AI image generation control",
+        "Blender integration",
+        "ComfyUI",
+        "TensorRT-optimized FLUX.1-dev model",
+        "RTX 4080 GPU",
+        "Blackwell architecture",
+        "AI-generated images",
+        "depth maps"
+      ],
+      "audio_url": null,
+      "trend_score": 13.28
     },
     {
       "id": "a4c561cf3a31f0292c042aa67cc4a07b21776d35c06459a63ddfe56a86db2110",
@@ -1327,6 +1446,78 @@
       "trend_score": 10.0
     },
     {
+      "id": "8211f28350d8b5ff32ff8ac06679aad6b13eee65db487402ab56ea5a9ffa082a",
+      "title": "How Agentic AI Enables the Next Leap in Cybersecurity",
+      "link": "articles/how-agentic-ai-enables-the-next-leap-in-cybersecurity.html",
+      "published_iso": "2025-04-28T15:00:54Z",
+      "summary_short": "Discover how Agentic AI is transforming cybersecurity, offering autonomous threat detection and response while introducing new security challenges.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/agentic-ai-cybersecurity.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Agentic AI",
+        "Cybersecurity",
+        "Autonomous Systems",
+        "Threat Detection",
+        "NVIDIA AI Blueprints",
+        "AI Security Challenges",
+        "Confidential Computing",
+        "AI Red Teaming",
+        "CrowdStrike Charlotte AI",
+        "Enterprise AI Adoption"
+      ],
+      "audio_url": null,
+      "trend_score": 11.91
+    },
+    {
+      "id": "432f0f01dd1c53c8fce4ebfe840ad16bf3a4cee4dc08e5d0318a5342b5d60519",
+      "title": "NVIDIA Brings Cybersecurity to Every AI Factory",
+      "link": "articles/nvidia-brings-cybersecurity-to-every-ai-factory.html",
+      "published_iso": "2025-04-28T15:00:34Z",
+      "summary_short": "NVIDIA introduces DOCA Argus, an AI cybersecurity framework for real-time threat detection in AI factories, enhancing enterprise security.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/bluefield-corp-blog-cybersecurity-1280x680-1.png",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA cybersecurity",
+        "AI factory security",
+        "DOCA Argus",
+        "AI threat detection",
+        "NVIDIA BlueField",
+        "agentless security",
+        "enterprise AI security",
+        "real-time threat mitigation",
+        "AI-driven cybersecurity",
+        "Cisco NVIDIA collaboration"
+      ],
+      "audio_url": null,
+      "trend_score": 11.91
+    },
+    {
+      "id": "7594f05df83addab55cc2bd09c905194d38d60c753971056fd5988ef76d4eef0",
+      "title": "Oracle Cloud Infrastructure Deploys Thousands of NVIDIA Blackwell GPUs for Agentic AI and Reasoning Models",
+      "link": "articles/oracle-cloud-infrastructure-deploys-thousands-of-nvidia-blackwell-gpus-for-agent.html",
+      "published_iso": "2025-04-28T13:00:25Z",
+      "summary_short": "Oracle Cloud Infrastructure rolls out thousands of NVIDIA Blackwell GPUs to power next-gen AI reasoning models and agentic AI workloads.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/blackwell-corp-blog-oci-blackwell-momentum-1280x680-r1.png",
+      "topic": "Compute",
+      "is_breaking": false,
+      "tags": [
+        "Oracle Cloud Infrastructure",
+        "NVIDIA Blackwell GPUs",
+        "AI infrastructure",
+        "agentic AI",
+        "NVIDIA GB200 NVL72",
+        "cloud computing",
+        "AI workloads",
+        "NVIDIA DGX Cloud",
+        "data center technology",
+        "AI-driven projects"
+      ],
+      "audio_url": null,
+      "trend_score": 11.85
+    },
+    {
       "id": "51c0c65bcf80ac62a15fdd2a7213c63fafaa7b7b03243eb0a697aaf68e750157",
       "title": "Does RAG make LLMs less safe?  Bloomberg research reveals hidden dangers",
       "link": "articles/does-rag-make-llms-less-safe-bloomberg-research-reveals-hidden-dangers.html",
@@ -1392,6 +1583,30 @@
         "SQL Generation Architecture",
         "AWS Lambda"
       ],
+      "trend_score": 10.0
+    },
+    {
+      "id": "b92355f3cf7d7529594f61178671e5cc307441ec4d53c10e024fc4f339e1fc9a",
+      "title": "NVIDIA Research at ICLR — Pioneering the Next Wave of Multimodal Generative AI",
+      "link": "articles/nvidia-research-at-iclr-pioneering-the-next-wave-of-multimodal-generative-ai.html",
+      "published_iso": "2025-04-24T13:00:48Z",
+      "summary_short": "NVIDIA AI research showcases 70+ papers at ICLR 2025, advancing multimodal generative AI, robotics, and more. Discover the innovations.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/ICLR_featuredstill.jpg",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA Research",
+        "Multimodal Generative AI",
+        "ICLR 2025",
+        "AI Innovations",
+        "Fugatto Audio AI",
+        "HAMSTER Robotics",
+        "Hymba Language Model",
+        "LongVILA Video Understanding",
+        "LLaMaFlex Compression",
+        "Proteina Protein Generation"
+      ],
+      "audio_url": null,
       "trend_score": 10.0
     },
     {
