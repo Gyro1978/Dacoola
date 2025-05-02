@@ -24,16 +24,16 @@ DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 NEWS_FEED_URLS = [
     "https://techcrunch.com/feed/",
     "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
-    "https://venturebeat.com/category/ai/feed/",
-    "https://news.ycombinator.com/rss",
+    "https://news.ycombinator.com/rss", # Sometimes technical, but titles usually clean
     "https://www.anthropic.com/feed.xml",
     "https://ai.googleblog.com/feeds/posts/default?alt=rss",
     "https://openai.com/blog/rss.xml",
     "https://aws.amazon.com/blogs/machine-learning/feed/",
-    "https://blogs.microsoft.com/ai/feed/",
     "https://syncedreview.com/feed",
+    "https://blogs.nvidia.com/feed/",
+    "http://feeds.arstechnica.com/arstechnica/technology-lab"
+    # --- Add new suggestions below ---
 ]
-
 # File to store IDs of processed articles
 PROCESSED_IDS_FILE = os.path.join(DATA_DIR, 'processed_article_ids.txt')
 # Folder to save newly scraped articles as JSON files
