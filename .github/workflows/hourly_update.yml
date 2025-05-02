@@ -2,13 +2,18 @@ name: Hourly News Update and Deploy
 
 on:
   schedule:
-    # Runs every 20 minutes
+    # Runs at minutes 0, 20, and 40 past the hour
     - cron: "0,20,40 * * * *"
   workflow_dispatch: # Allows manual triggering
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # Prevent concurrent runs for the same workflow
+    concurrency:
+      group: ${{ github.workflow }}
+      cancel-in-progress: true
+
     permissions:
       contents: write # Allow workflow to commit back to the repo
       # pages: write # No longer needed for Netlify
@@ -17,6 +22,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        # Fetch history to allow rebasing
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -30,11 +38,9 @@ jobs:
 
       - name: Run Main Script
         env:
-          # Pass secrets securely as environment variables
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
           CAMB_AI_API_KEY: ${{ secrets.CAMB_AI_API_KEY }}
-          # Pass other secrets
           YOUR_WEBSITE_NAME: ${{ secrets.YOUR_WEBSITE_NAME }}
           YOUR_WEBSITE_LOGO_URL: ${{ secrets.YOUR_WEBSITE_LOGO_URL }}
           MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES }}
@@ -48,19 +54,25 @@ jobs:
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-          # --- CORRECTED: Add essential output dirs/files. Removed log file add ---
-          git add public/
-          git add data/processed_json/
-          # Add processed IDs file only if it exists
-          if [ -f "data/processed_article_ids.txt" ]; then git add data/processed_article_ids.txt; fi
-          # ----------------------------------------------------------------------
+          # Add expected output files/dirs
+          git add public/ data/processed_json/ data/processed_article_ids.txt
+          # Optionally add log file if it exists
+          if [ -f "dacoola.log" ]; then git add dacola.log; fi
 
           # Check if there are staged changes
           if git diff --staged --quiet; then
             echo "No content changes to commit."
           else
             echo "Content changes detected. Committing..."
+            # Commit locally first
             git commit -m "Automated hourly news update [skip ci]"
+
+            # --- CORRECTED PUSH LOGIC ---
+            echo "Pulling latest changes before push..."
+            # Pull with rebase to apply local commit on top of remote changes
+            git pull origin ${{ github.ref_name }} --rebase
+
+            echo "Attempting to push changes..."
             # Retry push logic...
             retry_count=0
             max_retries=3
@@ -68,12 +80,15 @@ jobs:
               retry_count=$((retry_count+1))
               echo "Push failed. Retrying (${retry_count}/${max_retries})..."
               sleep 5
+              # Optional: Add a git pull --rebase here too in case another run finished during sleep
+              # git pull origin ${{ github.ref_name }} --rebase
             done
             if [ $retry_count -eq $max_retries ]; then
               echo "Push failed after $max_retries attempts."
               exit 1
             fi
             echo "Changes pushed successfully."
+            # --------------------------
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
