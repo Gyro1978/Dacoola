@@ -1,0 +1,43 @@
+{
+    "id": "7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372",
+    "title": "Apple approves Spotify app update that allows US users to access pricing info, external payment links",
+    "link": "https://techcrunch.com/2025/05/02/apple-approves-spotify-app-update-that-allows-u-s-users-to-access-pricing-info-external-payment-links/",
+    "published_iso": "2025-05-02T13:51:10Z",
+    "summary": "Spotify said on Friday that&#160;Apple has approved its U.S. app update that will allow users to access pricing information and external payment links. The approval comes days after a U.S. judge ordered Apple to stop charging commissions on purchases through iPhone apps. “In a victory for consumers, artists, creators, and authors, Apple has approved Spotify’s [&#8230;]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-02T19:02:34Z",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Regulation",
+        "reasoning_summary": "The article reports a concrete event where Apple approved Spotify's app update allowing external payment links, following a U.S. judge's order. This is a significant development in the ongoing regulatory and legal battles over app store policies.",
+        "primary_topic_keyword": "App store regulation"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-02T19:06:41Z",
+    "topic": "Regulation",
+    "is_breaking": false,
+    "primary_keyword": "App store regulation",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2024/02/GettyImages-1783835425-crop-e1717409949317.jpg?resize=1200,676",
+    "seo_agent_results": {
+        "generated_title_tag": "Apple approves Spotify update amid App store regulation changes",
+        "generated_meta_description": "Apple greenlights Spotify's U.S. app update with pricing and external payment links, marking a shift in App store regulation compliance.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Apple approves Spotify update amid App store regulation changes\",  \n  \"description\": \"Apple greenlights Spotify's U.S. app update with pricing and external payment links, marking a shift in App store regulation compliance.\",  \n  \"keywords\": [\"App store regulation\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/02/apple-approves-spotify-app-update-that-allows-u-s-users-to-access-pricing-info-external-payment-links/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2024/02/GettyImages-1783835425-crop-e1717409949317.jpg?resize=1200,676\" },  \n  \"datePublished\": \"2025-05-02T13:51:10Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Apple approves Spotify app update that allows US users to access pricing info, external payment links  \n\nSpotify announced on Friday that Apple has approved its U.S. app update, enabling users to view pricing information and access external payment links. This development follows a recent U.S. court order prohibiting Apple from charging commissions on in-app purchases made through iPhone apps, signaling a notable shift in **App store regulation**. Spotify described the approval as \"a victory for consumers, artists, creators, and authors,\" highlighting the broader implications for digital marketplaces.  \n\nThe update allows Spotify to bypass Apple’s traditional in-app purchase system, which previously required the company to pay a commission on subscriptions. By directing users to external payment options, Spotify can now potentially reduce costs and offer more competitive pricing. The move aligns with increasing regulatory scrutiny over Apple’s App Store policies, which have faced criticism for anti-competitive practices.  \n\n### Significance  \nThis approval underscores the growing pressure on Apple to adapt its App Store policies in response to legal and regulatory challenges. The decision not only benefits Spotify but could set a precedent for other developers seeking greater flexibility in payment systems."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Apple App Store",
+        "Spotify app update",
+        "in-app purchases",
+        "App Store regulation",
+        "external payment links",
+        "anti-competitive practices",
+        "digital marketplaces",
+        "US court order",
+        "subscription pricing"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.5,
+    "slug": "apple-approves-spotify-app-update-that-allows-us-users-to-access-pricing-info-ex",
+    "audio_url": null
+}

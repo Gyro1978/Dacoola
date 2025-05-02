@@ -1,6 +1,185 @@
 {
   "articles": [
     {
+      "id": "272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b",
+      "title": "One of Google’s recent Gemini AI models scores worse on safety",
+      "link": "articles/one-of-googles-recent-gemini-ai-models-scores-worse-on-safety.html",
+      "published_iso": "2025-05-02T18:52:03Z",
+      "summary_short": "Google's Gemini 2.5 Flash AI model shows a safety decline compared to its predecessor, per internal benchmarks. Learn more about the AI model safety decline.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2169339854.jpg?resize=1200,857",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Gemini AI",
+        "AI model safety",
+        "Google Gemini 2.5 Flash",
+        "AI safety decline",
+        "text-to-text safety evaluations",
+        "AI ethics",
+        "responsible AI deployment",
+        "AI benchmarking",
+        "AI model performance",
+        "AI safety protocols"
+      ],
+      "trend_score": 15.0
+    },
+    {
+      "id": "6025b52ed0b6925dd565e95283448bd1c41d3c3efdfa678b6a26e470abe47a76",
+      "title": "Apple and Anthropic reportedly partner to build an AI coding platform",
+      "link": "articles/apple-and-anthropic-reportedly-partner-to-build-an-ai-coding-platform.html",
+      "published_iso": "2025-05-02T18:49:22Z",
+      "summary_short": "Apple and Anthropic are collaborating on an AI coding platform to assist programmers with generative AI tools.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/06/YouTube-Thumb-Text-2-3.png?resize=1200,675",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Apple",
+        "Anthropic",
+        "AI coding platform",
+        "generative AI",
+        "software development",
+        "AI-assisted coding",
+        "developer tools",
+        "vibe-coding",
+        "AI automation"
+      ],
+      "trend_score": 14.5
+    },
+    {
+      "id": "26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc",
+      "title": "OpenAI overrode concerns of expert testers to release sycophantic GPT-4o",
+      "link": "articles/openai-overrode-concerns-of-expert-testers-to-release-sycophantic-gpt-4o.html",
+      "published_iso": "2025-05-02T17:57:14Z",
+      "summary_short": "OpenAI dismissed expert concerns to launch GPT-4o, highlighting AI ethics concerns in development practices.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_diverse_young_adult_office_workers_in_hipster_fashion_l_0059768d-e4b9-43be-9e72-3c836e51eb45-1.png?w=1024?w=1200&strip=all",
+      "topic": "Ethics",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI",
+        "GPT-4o",
+        "AI Ethics",
+        "Responsible AI Development",
+        "Expert Feedback",
+        "AI Model Deployment",
+        "AI Bias",
+        "Interdisciplinary AI",
+        "AI Accountability",
+        "Tech Industry Ethics"
+      ],
+      "trend_score": 15.0
+    },
+    {
+      "id": "c3f57023268209ab291549c09f2f10034eb12630060aa0ae4c6837067e82ec2c",
+      "title": "Dating app Raw exposed users’ location data and personal information",
+      "link": "articles/dating-app-raw-exposed-users-location-data-and-personal-information.html",
+      "published_iso": "2025-05-02T17:56:04Z",
+      "summary_short": "Dating app Raw leaked users' personal data and location details despite claiming end-to-end encryption. Learn more about this dating app data breach.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/ring-raw-dating-app.jpg?resize=1200,922",
+      "topic": "Ethics",
+      "is_breaking": false,
+      "tags": [
+        "Dating app data breach",
+        "Raw app security failure",
+        "Location data exposure",
+        "Personal information leak",
+        "Dating app privacy concerns",
+        "End-to-end encryption failure",
+        "User data security risks",
+        "Online dating safety",
+        "Data breach implications",
+        "Privacy settings review"
+      ],
+      "trend_score": 15.0
+    },
+    {
+      "id": "9599637536db8f35ce0b11655abeddc4f5be1a3772979993a3a7171c8a8a7219",
+      "title": "Show HN: Blast – Fast, multi-threaded serving engine for web browsing AI agents",
+      "link": "articles/show-hn-blast-fast-multi-threaded-serving-engine-for-web-browsing-ai-agents.html",
+      "published_iso": "2025-05-02T17:42:28Z",
+      "summary_short": "Blast is a multi-threaded AI agent serving engine optimized for fast web browsing performance.",
+      "image_url": "https://opengraph.githubassets.com/205774e7188a1c0be9a1836965070bc864af997c2b311905def0c90a6d5f268b/stanford-mast/blast",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Blast serving engine",
+        "AI web browsing",
+        "multi-threaded processing",
+        "AI agent performance",
+        "web scraping automation",
+        "real-time data processing",
+        "open-source AI tools",
+        "Stanford-MAST project",
+        "AI-driven web interactions",
+        "automated testing"
+      ],
+      "trend_score": 15.0
+    },
+    {
+      "id": "8e9db43d2427672a99c625b76007b966fbb562dbbd65f8a2f3e1895d8b8d7373",
+      "title": "OpenAI pledges to make changes to prevent future ChatGPT sycophancy",
+      "link": "articles/openai-pledges-to-make-changes-to-prevent-future-chatgpt-sycophancy.html",
+      "published_iso": "2025-05-02T15:54:27Z",
+      "summary_short": "OpenAI announces changes to prevent overly sycophantic ChatGPT behavior update following user feedback on GPT-4o responses.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2195918462.jpg?w=1024",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI",
+        "ChatGPT behavior update",
+        "GPT-4o",
+        "AI sycophancy",
+        "AI model refinement",
+        "user trust in AI",
+        "AI conversational balance",
+        "AI unintended side effects"
+      ],
+      "trend_score": 14.0
+    },
+    {
+      "id": "077c4dc7655fb0e8c7b77069f649896f6b70f8b90a70a625d53e30b0ce50d4fd",
+      "title": "Show HN: GPT-2 implemented using graphics shaders",
+      "link": "articles/show-hn-gpt-2-implemented-using-graphics-shaders.html",
+      "published_iso": "2025-05-02T15:21:49Z",
+      "summary_short": "Explore how GPT-2 is implemented using graphics shaders, a novel approach blending AI and GPU rendering.",
+      "image_url": "https://opengraph.githubassets.com/4316146edfc49b0c7f76d1be7e205ea7e5bf23bdc15ce17e56843382315a2aab/nathan-barry/gpt2-webgl",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "GPT-2",
+        "WebGL",
+        "GPU Computing",
+        "Neural Networks",
+        "Shader Programming",
+        "AI Model Deployment",
+        "Open Source Projects",
+        "Performance Optimization",
+        "General-Purpose GPU"
+      ],
+      "trend_score": 14.5
+    },
+    {
+      "id": "7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372",
+      "title": "Apple approves Spotify app update that allows US users to access pricing info, external payment links",
+      "link": "articles/apple-approves-spotify-app-update-that-allows-us-users-to-access-pricing-info-ex.html",
+      "published_iso": "2025-05-02T13:51:10Z",
+      "summary_short": "Apple greenlights Spotify's U.S. app update with pricing and external payment links, marking a shift in App store regulation compliance.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/02/GettyImages-1783835425-crop-e1717409949317.jpg?resize=1200,676",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Apple App Store",
+        "Spotify app update",
+        "in-app purchases",
+        "App Store regulation",
+        "external payment links",
+        "anti-competitive practices",
+        "digital marketplaces",
+        "US court order",
+        "subscription pricing"
+      ],
+      "trend_score": 14.5
+    },
+    {
       "id": "144be37c7e9c4562c4dd6b34b4da528113a64f31c57f75fce177bcc9d46de149",
       "title": "Study uses artificial intelligence to classify patient pain archetypes after knee replacement - News-Medical",
       "link": "articles/study-uses-artificial-intelligence-to-classify-patient-pain-archetypes-after-kne.html",
@@ -276,184 +455,6 @@
         "AI research"
       ],
       "trend_score": 15.0
-    },
-    {
-      "id": "ea5071f448ee9c5dc89731e5735dbb488916d2f4e715a3f6f33a9d69dbf12c5b",
-      "title": "Nvidia takes aim at Anthropic’s support of chip export controls",
-      "link": "articles/nvidia-takes-aim-at-anthropics-support-of-chip-export-controls.html",
-      "published_iso": "2025-05-01T17:46:40Z",
-      "summary_short": "Nvidia challenges Anthropic's support for U.S. AI chip export controls, highlighting industry divisions over new regulations.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2023/08/GettyImages-1598978057.jpg?w=1024",
-      "topic": "Regulation",
-      "is_breaking": false,
-      "tags": [
-        "Nvidia",
-        "Anthropic",
-        "AI chip export controls",
-        "semiconductor technology",
-        "AI regulation",
-        "tech industry rift",
-        "US Department of Commerce",
-        "Framework for Artificial Intelligence Diffusion",
-        "global market access",
-        "AI hardware"
-      ],
-      "trend_score": 15.0
-    },
-    {
-      "id": "5b47d23db14ecff5b758d25b74c78010f0f0f42c7a638cfe6fffaa153465aa55",
-      "title": "May Mobility to launch robotaxis on Uber platform this year in Texas",
-      "link": "articles/may-mobility-to-launch-robotaxis-on-uber-platform-this-year-in-texas.html",
-      "published_iso": "2025-05-01T17:00:00Z",
-      "summary_short": "May Mobility plans to deploy robotaxis on Uber's platform in Arlington, Texas, marking a key autonomous vehicles partnership by late 2025.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/May_Uber-copy.jpg?resize=1200,800",
-      "topic": "Robotics",
-      "is_breaking": false,
-      "tags": [
-        "May Mobility",
-        "Uber robotaxis",
-        "autonomous vehicles",
-        "ride-hailing platform",
-        "self-driving technology",
-        "Arlington Texas",
-        "mobility solutions",
-        "autonomous ride-hailing",
-        "urban transportation",
-        "sustainable transportation"
-      ],
-      "trend_score": 15.0
-    },
-    {
-      "id": "93cde970ee35b82e8d0280722bad5bbe9cef858b6e213de32662dd4218babbd8",
-      "title": "Zuckerberg Says in Response to Loneliness Epidemic, He Will Create Most of Your Friends Using Artificial Intelligence - futurism.com",
-      "link": "articles/zuckerberg-says-in-response-to-loneliness-epidemic-he-will-create-most-of-your-f.html",
-      "published_iso": "2025-05-01T16:13:45",
-      "summary_short": "Mark Zuckerberg proposes AI friends to combat loneliness, leveraging artificial intelligence for social connections.",
-      "image_url": "https://media.abc10.com/assets/KXTV/images/f028090e-5678-4958-9f3b-eb48ccd49e9f/f028090e-5678-4958-9f3b-eb48ccd49e9f_1920x1080.jpg",
-      "topic": "Society",
-      "is_breaking": false,
-      "tags": [
-        "AI friends",
-        "loneliness epidemic",
-        "Mark Zuckerberg",
-        "Meta AI",
-        "artificial intelligence companionship",
-        "social isolation",
-        "AI ethics",
-        "digital relationships",
-        "human-AI interaction"
-      ],
-      "audio_url": null,
-      "trend_score": 14.5
-    },
-    {
-      "id": "84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce",
-      "title": "Read the juiciest bits from the Apple-Epic court ruling",
-      "link": "articles/read-the-juiciest-bits-from-the-apple-epic-court-ruling.html",
-      "published_iso": "2025-05-01T16:05:45Z",
-      "summary_short": "Judge Yvonne Gonzalez Rogers criticizes Apple in the latest Apple-Epic court ruling for defying court orders. Read the details here.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2023/11/gavel-messy-legal.jpg?resize=1200,675",
-      "topic": "Regulation",
-      "is_breaking": false,
-      "tags": [
-        "Apple-Epic court ruling",
-        "Fortnite",
-        "App Store policies",
-        "antitrust concerns",
-        "Judge Yvonne Gonzalez Rogers",
-        "corporate compliance",
-        "regulatory scrutiny",
-        "legal battle"
-      ],
-      "trend_score": 14.0
-    },
-    {
-      "id": "645cb2529514fa732f4eab0ce599890331c0d846289784283a9e1e49faf6d2c9",
-      "title": "Proving Grounds: Governments Build Sandboxes to Test AI - GovTech",
-      "link": "articles/proving-grounds-governments-build-sandboxes-to-test-ai-govtech.html",
-      "published_iso": "2025-05-01T15:34:21",
-      "summary_short": "Governments are creating AI testing sandboxes to evaluate AI systems in controlled environments, ensuring safety and compliance.",
-      "image_url": "https://miro.medium.com/v2/resize:fit:1400/0*ThRlmn_QDQBApzrq.jpg",
-      "topic": "Regulation",
-      "is_breaking": false,
-      "tags": [
-        "AI testing sandboxes",
-        "AI governance",
-        "artificial intelligence regulation",
-        "AI safety",
-        "government AI policies",
-        "AI risk assessment",
-        "ethical AI",
-        "AI deployment strategies",
-        "AI bias detection",
-        "AI security vulnerabilities"
-      ],
-      "audio_url": null,
-      "trend_score": 15.0
-    },
-    {
-      "id": "f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657",
-      "title": "Tesla’s board reportedly sought a successor while Musk wheeled around Washington",
-      "link": "articles/teslas-board-reportedly-sought-a-successor-while-musk-wheeled-around-washington.html",
-      "published_iso": "2025-05-01T15:17:37Z",
-      "summary_short": "Tesla's board reportedly sought a successor for Elon Musk amid company struggles and his Washington lobbying efforts.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2025/04/GettyImages-2209410968.jpg?w=1024",
-      "topic": "Business",
-      "is_breaking": false,
-      "tags": [
-        "Tesla leadership search",
-        "Elon Musk",
-        "Tesla board",
-        "CEO succession",
-        "Tesla financial struggles",
-        "Musk political engagements",
-        "Tesla operational stability",
-        "Wall Street Journal report"
-      ],
-      "trend_score": 14.0
-    },
-    {
-      "id": "037705e09113b0b95778bd12da8f50bf77de3d550c57d812433d012f36185a19",
-      "title": "Meta forecasted it would make $1.4T in revenue from generative AI by 2035",
-      "link": "articles/meta-forecasted-it-would-make-14t-in-revenue-from-generative-ai-by-2035.html",
-      "published_iso": "2025-05-01T01:38:33",
-      "summary_short": "Meta projected its generative AI products could generate up to $1.4 trillion in revenue by 2035, according to newly unsealed court filings.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2195497483.jpg?resize=1200,800",
-      "topic": "Business",
-      "is_breaking": false,
-      "tags": [
-        "Meta AI revenue",
-        "generative AI products",
-        "AI monetization",
-        "copyright lawsuit",
-        "AI industry projections",
-        "Meta legal challenges",
-        "AI model training",
-        "2035 AI forecast",
-        "unauthorized data use"
-      ],
-      "audio_url": null
-    },
-    {
-      "id": "bb13030a13901d7971f5f551e5dd804b01758a626d5882b3c37d619a2017cf64",
-      "title": "Epic Games just scored a win against Apple",
-      "link": "articles/epic-games-just-scored-a-win-against-apple.html",
-      "published_iso": "2025-05-01T01:29:56",
-      "summary_short": "Epic Games prevails in Apple legal dispute, potentially bringing Fortnite back to iOS next week after court ruling.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2020/08/epic-fortnite-GettyImages-1149627286.jpg?resize=1200,800",
-      "topic": "Business",
-      "is_breaking": false,
-      "tags": [
-        "Epic Games",
-        "Apple legal dispute",
-        "Fortnite return",
-        "App Store policies",
-        "antitrust regulations",
-        "Judge Yvonne Gonzalez Rogers",
-        "iOS App Store",
-        "anticompetitive pricing"
-      ],
-      "audio_url": null
     }
   ]
 }
