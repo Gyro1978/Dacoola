@@ -12681,3 +12681,185 @@ AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentTy
 2025-05-02 10:12:04,997 - main_orchestrator - INFO - --- Successfully processed article: 84b4bce13270166d6450e424d9564b6365921a261a8bb4804c424e15e9e079ce ---
 2025-05-02 10:12:05,999 - main_orchestrator - INFO - --- Processing article file: f741db83524ca4541ccef44127f876aa7fe6d8d51f656d693fbbf795eafe5912.json ---
 2025-05-02 10:12:06,017 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f741db83524ca4541ccef44127f876aa7fe6d8d51f656d693fbbf795eafe5912 Title: Google’s AI Mode gets expanded access and additional functio...
+2025-05-02 10:29:03,444 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 10:29:03,445 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 10:29:06,082 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 10:29:06,130 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 10:29:06,130 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 10:29:06,130 - main_orchestrator - INFO - Ensured data, processed_json, and public/articles directories exist.
+2025-05-02 10:29:06,131 - main_orchestrator - INFO - --- Running Scraper ---
+2025-05-02 10:29:06,131 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (11 feeds) ---
+2025-05-02 10:29:06,131 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 10:29:06,226 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 10:29:06,226 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles from this feed.
+2025-05-02 10:29:06,226 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 10:29:06,306 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 10:29:06,307 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-02 10:29:06,307 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 10:29:06,413 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 28 entries.
+2025-05-02 10:29:06,415 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8cc2958bbfa8c1c2e508e09a9d8f484d368bf08e388f676e3a9b28a755793773.json (Title: Does RAG make LLMs less safe?  Bloomberg research reveals hidden dangers)
+2025-05-02 10:29:06,416 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 276e4f37db0b19fd57d89f9d32991b8314a4c1025d375a395f812490a6dd44c1.json (Title: Is your AI product actually working? How to develop the right metric system)
+2025-05-02 10:29:06,417 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: fb91cc46dc8f8a5ae9428246141cf9c9ba777718aae1aeb48c57451be15257b5.json (Title: DeepSeek’s success shows why motivation is key to AI innovation)
+2025-05-02 10:29:06,436 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: df299c5ccdbc10dfd9b267e0c7c98d4209af1ea94011b33d0f7b6cec66a51cd8.json (Title: Liquid AI is revolutionizing LLMs to work on edge devices like smartphones with new ‘Hyena Edge’ model)
+2025-05-02 10:29:06,437 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 1f8e00c66262273019993c090cbc099e95645a0a4671ffecd2dfc99d5e88c523.json (Title: The new AI calculus: Google’s 80% cost edge vs. OpenAI’s ecosystem)
+2025-05-02 10:29:06,438 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 5dd3be7ebc78309172d0b1be799f5ba81adba8c5ccfde5011fd0536571c7738e.json (Title: Is that really your boss calling? Jericho Security raises $15M to stop deepfake fraud that’s cost businesses $200M in 2025 alone)
+2025-05-02 10:29:06,439 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 72d16446b7f3c5be6f555d7bb3f0bcfe95bfdd30393c186387af0d4dd2c1c8bf.json (Title: Intel’s new CEO signals streamlining efforts but does not spell out exact layoff numbers)
+2025-05-02 10:29:06,440 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 74165b7d3e51e84d02f6e46959a0499e2cf7ab5b55852443c6348c5cabb3915f.json (Title: Zencoder buys Machinet to challenge GitHub Copilot as AI coding assistant consolidation accelerates)
+2025-05-02 10:29:06,441 - src.scrapers.news_scraper - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 8 new articles from this feed.
+2025-05-02 10:29:06,441 - src.scrapers.news_scraper - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 10:29:06,535 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://www.theverge.com/tech/rss/index.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\scrapers\news_scraper.py", line 174, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'. Did you mean: 'NonXMLContentType'?
+2025-05-02 10:29:06,538 - src.scrapers.news_scraper - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 10:29:07,195 - src.scrapers.news_scraper - INFO - Feed https://news.ycombinator.com/rss fetched. Contains 30 entries.
+2025-05-02 10:29:07,197 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a56938097dceaf37034692a3a80a44e6f49a3f5c81622abface6cf42c3b1db48.json (Title: Redis is open source again)
+2025-05-02 10:29:07,198 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 5e44c570eb7ef2abc45018be8a36d85350fb903d6d9050d121eedd322627cdcf.json (Title: RustAssistant: Using LLMs to Fix Compilation Errors in Rust Code)
+2025-05-02 10:29:07,199 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 127826f22fc74e98531a52ec712b341dc0ea887460938ba81736d691428ff7c5.json (Title: Claude Integrations)
+2025-05-02 10:29:07,200 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: baac2495a9fbbda349d890a58277b691d915eef44291ddbec873a21b9795f62d.json (Title: Liverpool's title win has completed a mysterious Fibonacci sequence)
+2025-05-02 10:29:07,201 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c8389c9abd1a82daf4ede32b03e7c6e1bb6ea5ee3103aead22253f6ed95349d0.json (Title: Third party cookies must be removed)
+2025-05-02 10:29:07,203 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c3111cab310ecf33e56b49822808e124b39c3d8d4970bffd7179ac816155146c.json (Title: Bloom Filters)
+2025-05-02 10:29:07,204 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8a415164d8411eb48adb5c426554abcb52f5bda5ab739aecd168bee77a6e895b.json (Title: Anubis saved our websites from a DDoS attack)
+2025-05-02 10:29:07,205 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: fd50b9107e292dfc2420443bdbbcebdcec7ae6c934aef28a9d3aa5f888a2d75e.json (Title: Ask HN: Who is hiring? (May 2025))
+2025-05-02 10:29:07,206 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f0b837bfa603568203055112a38c868e259695d93adaf0c706196f547b4f830e.json (Title: Reflecting on a Year of Gamedev in Zig)
+2025-05-02 10:29:07,207 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d1168b92d4a964baa3d23d83cfa019a17343a77cdf1f0881ec9e6dd8c2b90929.json (Title: Show HN: OSle – A 510 bytes OS in x86 assembly)
+2025-05-02 10:29:07,208 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 317a619c921b322c5d7247b5bfe5acb33fbd5a8aa0decbc7a63de4b2a6b2801c.json (Title: Quebec refuses to reinvest in Lion Electric)
+2025-05-02 10:29:07,209 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: faf3ce9ca25658f29ea546878eda14f5bbea368ee0e7f7300c0b279897f2d05d.json (Title: Felix86: Run x86-64 programs on RISC-V Linux)
+2025-05-02 10:29:07,210 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 37aa09dea53445332e23a735e1b98fc05e4dbf8818dfb25e0fd8a5a4fc28654d.json (Title: Owen Le Blanc: creator of the first Linux distribution)
+2025-05-02 10:29:07,211 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 9980717f59cb2b941c70095637b0d7c52a3467cb19714218f0718de99d69b97e.json (Title: Chrome Origin Trial: Device Bound Session Credentials)
+2025-05-02 10:29:07,212 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 063dc9672d4bd1673ccc3fdb36ae24d3d08392c1bddd90850e543aae137a48df.json (Title: LLMs for Engineering: Teaching Models to Design High Powered Rockets)
+2025-05-02 10:29:07,213 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: cfcafcdce1eae10017d1d62030ddc4ce47c112a55126e807af2a2430b85ff724.json (Title: When ChatGPT broke the field of NLP: An oral history)
+2025-05-02 10:29:07,215 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 39313f8b47a998d22a9c25e3e1ec75c11ed6ff1049bd2c9dd97a09414fe7e672.json (Title: Llasa: Llama-Based Speech Synthesis)
+2025-05-02 10:29:07,217 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 28b3db899a9cf611ad6a05acb21dcb9f269b2d39dfe293bb6f24b24645889c34.json (Title: Dopamine signals when a fear can be forgotten)
+2025-05-02 10:29:07,218 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 13216d3d6f888f59a06aaecbdd5cdc5ea1e92a3dca80bae0e4d87eb5a1da25d2.json (Title: Linkwarden: FOSS self-hostable bookmarking with AI-tagging and page archival)
+2025-05-02 10:29:07,219 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 753d2b4d9dda7ebc941462e45a2a71e7cec7bb6f19f8ca7f91caced6e28d8a5e.json (Title: Show HN: Kubetail – Real-time log search for Kubernetes)
+2025-05-02 10:29:07,221 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c1dd7e602613189f25299bc80ae7e02db3b2db332a8d36c0ba6bb299fc02d4f3.json (Title: DECtalk Archive)
+2025-05-02 10:29:07,224 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: fa569b0daa55d3caa1169c831cbf25c9f521df5a4ad5828885514b55002772a3.json (Title: xAI dev leaks API key for private SpaceX, Tesla LLMs)
+2025-05-02 10:29:07,224 - src.scrapers.news_scraper - WARNING - Reached max articles per run (30) while processing feed https://news.ycombinator.com/rss.
+2025-05-02 10:29:07,225 - src.scrapers.news_scraper - INFO - Finished feed https://news.ycombinator.com/rss. Saved 22 new articles from this feed.
+2025-05-02 10:29:07,225 - src.scrapers.news_scraper - WARNING - Reached max articles per run (30). Stopping feed processing for this run.
+2025-05-02 10:29:07,225 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 30 ---
+2025-05-02 10:29:07,225 - main_orchestrator - INFO - Scraper run completed. Found 30 new JSON files potentially.
+2025-05-02 10:29:07,225 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 10:29:07,240 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 10:29:07,241 - main_orchestrator - INFO - Found 73 scraped articles to process.
+2025-05-02 10:29:07,244 - main_orchestrator - INFO - --- Processing article file: f741db83524ca4541ccef44127f876aa7fe6d8d51f656d693fbbf795eafe5912.json ---
+2025-05-02 10:29:07,256 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f741db83524ca4541ccef44127f876aa7fe6d8d51f656d693fbbf795eafe5912 Title: Google’s AI Mode gets expanded access and additional functio...
+2025-05-02 10:29:14,114 - src.agents.filter_news_agent - INFO - Filter verdict received for ID f741db83524ca4541ccef44127f876aa7fe6d8d51f656d693fbbf795eafe5912: level=Boring, topic='Software', keyword='Google AI Mode update'
+2025-05-02 10:29:14,115 - main_orchestrator - INFO - Article f741db83524ca4541ccef44127f876aa7fe6d8d51f656d693fbbf795eafe5912 classified as Boring. Skipping.
+2025-05-02 10:29:15,116 - main_orchestrator - INFO - --- Processing article file: d8fd87e60203c797cb2b1feae7bdd9d30d01c54359da1a27ec07881094aa1fd0.json ---
+2025-05-02 10:29:15,139 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d8fd87e60203c797cb2b1feae7bdd9d30d01c54359da1a27ec07881094aa1fd0 Title: ChatGPT: Everything you need to know about the AI-powered ch...
+2025-05-02 10:29:25,490 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d8fd87e60203c797cb2b1feae7bdd9d30d01c54359da1a27ec07881094aa1fd0: level=Boring, topic='AI Models', keyword='ChatGPT overview'
+2025-05-02 10:29:25,490 - main_orchestrator - INFO - Article d8fd87e60203c797cb2b1feae7bdd9d30d01c54359da1a27ec07881094aa1fd0 classified as Boring. Skipping.
+2025-05-02 10:29:26,491 - main_orchestrator - INFO - --- Processing article file: f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657.json ---
+2025-05-02 10:29:26,509 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657 Title: Tesla’s board reportedly sought a successor while Musk wheel...
+2025-05-02 10:29:34,265 - src.agents.filter_news_agent - INFO - Filter verdict received for ID f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657: level=Interesting, topic='Business', keyword='Tesla leadership search'
+2025-05-02 10:29:34,265 - main_orchestrator - INFO - Article f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657 classified as Interesting (Topic: Business).
+2025-05-02 10:29:34,265 - main_orchestrator - INFO - Checking duplicates for f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657...
+2025-05-02 10:29:34,265 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657 Title: Tesla’s board reportedly sought a successor while Musk wheel...
+2025-05-02 10:29:40,834 - src.agents.similarity_check_agent - INFO - Similarity check result for ID f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657: is_duplicate=False. Reason: No recently published article reports on Tesla's board searching for Elon Musk's successor.
+2025-05-02 10:29:40,834 - main_orchestrator - INFO - Article f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657 passed similarity check.
+2025-05-02 10:29:40,834 - main_orchestrator - INFO - Finding image for f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657...
+2025-05-02 10:29:40,834 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/01/teslas-board-reportedly-sought-a-successor-while-musk-wheeled-around-washington/
+2025-05-02 10:29:40,895 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2025/04/GettyImages-2209410968.jpg?w=1024
+2025-05-02 10:29:40,895 - main_orchestrator - INFO - Using scraped image for f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657: https://techcrunch.com/wp-content/uploads/2025/04/GettyImages-2209410968.jpg?w=1024
+2025-05-02 10:29:40,896 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657...
+2025-05-02 10:30:10,187 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657.
+2025-05-02 10:30:10,188 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657...
+2025-05-02 10:30:16,971 - src.agents.tags_generator_agent - INFO - Successfully generated 8 tags for article ID: f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657
+2025-05-02 10:30:17,047 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\teslas-board-reportedly-sought-a-successor-while-musk-wheeled-around-washington.html
+2025-05-02 10:30:17,067 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 10:30:17,069 - main_orchestrator - INFO - Updated all_articles.json (46 articles).
+2025-05-02 10:30:17,071 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657.json
+2025-05-02 10:30:17,072 - main_orchestrator - INFO - --- Successfully processed article: f25982ab6f86027e86c9a91dfb4623b6449e0c030f4e4fbc4a5c0ca22391f657 ---
+2025-05-02 10:30:18,072 - main_orchestrator - INFO - --- Processing article file: 510e8c814ce335d55551010fbc98b2911ce4eb0e06ed88070d0bded51223f5c4.json ---
+2025-05-02 10:30:18,095 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 510e8c814ce335d55551010fbc98b2911ce4eb0e06ed88070d0bded51223f5c4 Title: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Tay...
+2025-05-02 10:30:28,776 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 510e8c814ce335d55551010fbc98b2911ce4eb0e06ed88070d0bded51223f5c4: level=Interesting, topic='Regulation', keyword='AI copyright case'
+2025-05-02 10:30:28,776 - main_orchestrator - INFO - Article 510e8c814ce335d55551010fbc98b2911ce4eb0e06ed88070d0bded51223f5c4 classified as Interesting (Topic: Regulation).
+2025-05-02 10:30:28,776 - main_orchestrator - INFO - Checking duplicates for 510e8c814ce335d55551010fbc98b2911ce4eb0e06ed88070d0bded51223f5c4...
+2025-05-02 10:30:28,776 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 510e8c814ce335d55551010fbc98b2911ce4eb0e06ed88070d0bded51223f5c4 Title: A Judge Says Meta’s AI Copyright Case Is About ‘the Next Tay...
+2025-05-02 10:30:34,024 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 510e8c814ce335d55551010fbc98b2911ce4eb0e06ed88070d0bded51223f5c4: is_duplicate=True. Reason: The New Candidate Article reports on the same Meta AI copyright case and impending ruling as the Recently Published Article 7.
+2025-05-02 10:30:34,024 - main_orchestrator - INFO - Article 510e8c814ce335d55551010fbc98b2911ce4eb0e06ed88070d0bded51223f5c4 is SEMANTIC DUPLICATE. Skipping. Reason: The New Candidate Article reports on the same Meta AI copyright case and impending ruling as the Recently Published Article 7.
+2025-05-02 10:30:35,026 - main_orchestrator - INFO - --- Processing article file: fc5bef3e883b343172f42686a1bce5afbb8569d7e2ce0da34bbb9e8ddf9c8406.json ---
+2025-05-02 10:30:35,042 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: fc5bef3e883b343172f42686a1bce5afbb8569d7e2ce0da34bbb9e8ddf9c8406 Title: Think Twice Before Creating That ChatGPT Action Figure...
+2025-05-02 10:30:42,558 - src.agents.filter_news_agent - INFO - Filter verdict received for ID fc5bef3e883b343172f42686a1bce5afbb8569d7e2ce0da34bbb9e8ddf9c8406: level=Boring, topic='Ethics', keyword='ChatGPT privacy concerns'
+2025-05-02 10:30:42,558 - main_orchestrator - INFO - Article fc5bef3e883b343172f42686a1bce5afbb8569d7e2ce0da34bbb9e8ddf9c8406 classified as Boring. Skipping.
+2025-05-02 10:30:43,559 - main_orchestrator - INFO - --- Processing article file: 65a62dde1e20fc23c9d0099e629bd152f7d3ebe1dfb8944c079bde26d7b0ddf4.json ---
+2025-05-02 10:30:43,572 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 65a62dde1e20fc23c9d0099e629bd152f7d3ebe1dfb8944c079bde26d7b0ddf4 Title: 2025 Is the Year of the Humanoid Robot Factory Worker...
+2025-05-02 10:30:51,939 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 65a62dde1e20fc23c9d0099e629bd152f7d3ebe1dfb8944c079bde26d7b0ddf4: level=Boring, topic='Robotics', keyword='humanoid robot workers'
+2025-05-02 10:30:51,939 - main_orchestrator - INFO - Article 65a62dde1e20fc23c9d0099e629bd152f7d3ebe1dfb8944c079bde26d7b0ddf4 classified as Boring. Skipping.
+2025-05-02 10:30:52,941 - main_orchestrator - INFO - --- Processing article file: bb9a99a23cb1014b73d2bdbacfdddd33ea7b78c3049209db533498423b4ddda8.json ---
+2025-05-02 10:30:52,955 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: bb9a99a23cb1014b73d2bdbacfdddd33ea7b78c3049209db533498423b4ddda8 Title: North Korea Stole Your Job...
+2025-05-02 10:30:59,632 - src.agents.filter_news_agent - INFO - Filter verdict received for ID bb9a99a23cb1014b73d2bdbacfdddd33ea7b78c3049209db533498423b4ddda8: level=Boring, topic='Other', keyword='North Korea IT workers'
+2025-05-02 10:30:59,632 - main_orchestrator - INFO - Article bb9a99a23cb1014b73d2bdbacfdddd33ea7b78c3049209db533498423b4ddda8 classified as Boring. Skipping.
+2025-05-02 10:31:00,634 - main_orchestrator - INFO - --- Processing article file: 4a192b7f76ab597bc854c012e584bc2c3f1d69c61c6c3dadeb41a87ebb0ce8cb.json ---
+2025-05-02 10:31:00,649 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 4a192b7f76ab597bc854c012e584bc2c3f1d69c61c6c3dadeb41a87ebb0ce8cb Title: DOGE Put a College Student in Charge of Using AI to Rewrite ...
+2025-05-02 10:31:07,357 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 4a192b7f76ab597bc854c012e584bc2c3f1d69c61c6c3dadeb41a87ebb0ce8cb: level=Boring, topic='Other', keyword='AI in government'
+2025-05-02 10:31:07,357 - main_orchestrator - INFO - Article 4a192b7f76ab597bc854c012e584bc2c3f1d69c61c6c3dadeb41a87ebb0ce8cb classified as Boring. Skipping.
+2025-05-02 10:31:08,358 - main_orchestrator - INFO - --- Processing article file: 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98.json ---
+2025-05-02 10:31:08,376 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98 Title: AI Code Hallucinations Increase the Risk of ‘Package Confusi...
+2025-05-02 10:31:18,608 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98: level=Interesting, topic='AI Models', keyword='AI code hallucinations'
+2025-05-02 10:31:18,608 - main_orchestrator - INFO - Article 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98 classified as Interesting (Topic: AI Models).
+2025-05-02 10:31:18,608 - main_orchestrator - INFO - Checking duplicates for 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98...
+2025-05-02 10:31:18,608 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98 Title: AI Code Hallucinations Increase the Risk of ‘Package Confusi...
+2025-05-02 10:31:26,496 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98: is_duplicate=False. Reason: The core news event in the New Candidate Article about AI code hallucinations leading to security risks is not reported in any of the Recently Published Articles.
+2025-05-02 10:31:26,496 - main_orchestrator - INFO - Article 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98 passed similarity check.
+2025-05-02 10:31:26,496 - main_orchestrator - INFO - Finding image for 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98...
+2025-05-02 10:31:26,496 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.wired.com/story/ai-code-hallucinations-increase-the-risk-of-package-confusion-attacks/
+2025-05-02 10:31:26,616 - src.scrapers.image_scraper - INFO - Found og:image: https://media.wired.com/photos/68126d295a838ce371cf4263/191:100/w_1280,c_limit/ai-attacks-sec-890154980.jpg
+2025-05-02 10:31:26,617 - main_orchestrator - INFO - Using scraped image for 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98: https://media.wired.com/photos/68126d295a838ce371cf4263/191:100/w_1280,c_limit/ai-attacks-sec-890154980.jpg
+2025-05-02 10:31:26,617 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98...
+2025-05-02 10:31:56,341 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98.
+2025-05-02 10:31:56,341 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98...
+2025-05-02 10:32:04,101 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98
+2025-05-02 10:32:04,104 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\ai-code-hallucinations-increase-the-risk-of-package-confusion-attacks.html
+2025-05-02 10:32:04,107 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 10:32:04,109 - main_orchestrator - INFO - Updated all_articles.json (47 articles).
+2025-05-02 10:32:04,112 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98.json
+2025-05-02 10:32:04,113 - main_orchestrator - INFO - --- Successfully processed article: 2469b74dca96a471c592fa822aa3176fb96c2b910c4fbefef7693d391bab8c98 ---
+2025-05-02 10:32:05,114 - main_orchestrator - INFO - --- Processing article file: 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111.json ---
+2025-05-02 10:32:05,134 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111 Title: These Startups Are Building Advanced AI Models Without Data ...
+2025-05-02 10:32:13,093 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111: level=Interesting, topic='AI Models', keyword='crowd-trained LLMs'
+2025-05-02 10:32:13,093 - main_orchestrator - INFO - Article 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111 classified as Interesting (Topic: AI Models).
+2025-05-02 10:32:13,094 - main_orchestrator - INFO - Checking duplicates for 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111...
+2025-05-02 10:32:13,094 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111 Title: These Startups Are Building Advanced AI Models Without Data ...
+2025-05-02 10:32:20,593 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111: is_duplicate=False. Reason: The New Candidate Article discusses a new crowd-trained method for developing LLMs without data centers, which is not covered in any of the Recently Published Articles.
+2025-05-02 10:32:20,593 - main_orchestrator - INFO - Article 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111 passed similarity check.
+2025-05-02 10:32:20,593 - main_orchestrator - INFO - Finding image for 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111...
+2025-05-02 10:32:20,593 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.wired.com/story/these-startups-are-building-advanced-ai-models-over-the-internet-with-untapped-data/
+2025-05-02 10:32:20,704 - src.scrapers.image_scraper - INFO - Found og:image: https://media.wired.com/photos/681145fabe9752a4760f6bee/191:100/w_1280,c_limit/AI-Lab-LLM-Scaling-Business.jpg
+2025-05-02 10:32:20,705 - main_orchestrator - INFO - Using scraped image for 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111: https://media.wired.com/photos/681145fabe9752a4760f6bee/191:100/w_1280,c_limit/AI-Lab-LLM-Scaling-Business.jpg
+2025-05-02 10:32:20,705 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111...
+2025-05-02 10:32:51,802 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111.
+2025-05-02 10:32:51,803 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111...
+2025-05-02 10:33:00,088 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111
+2025-05-02 10:33:00,093 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\these-startups-are-building-advanced-ai-models-without-data-centers.html
+2025-05-02 10:33:00,099 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 10:33:00,103 - main_orchestrator - INFO - Updated all_articles.json (48 articles).
+2025-05-02 10:33:00,106 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111.json
+2025-05-02 10:33:00,107 - main_orchestrator - INFO - --- Successfully processed article: 245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111 ---
+2025-05-02 10:33:01,108 - main_orchestrator - INFO - --- Processing article file: bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee.json ---
+2025-05-02 10:33:01,140 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee Title: WhatsApp Is Walking a Tightrope Between AI Features and Priv...
+2025-05-02 10:33:10,660 - src.agents.filter_news_agent - INFO - Filter verdict received for ID bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee: level=Interesting, topic='Ethics', keyword='WhatsApp AI privacy'
+2025-05-02 10:33:10,660 - main_orchestrator - INFO - Article bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee classified as Interesting (Topic: Ethics).
+2025-05-02 10:33:10,661 - main_orchestrator - INFO - Checking duplicates for bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee...
+2025-05-02 10:33:10,661 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee Title: WhatsApp Is Walking a Tightrope Between AI Features and Priv...
+2025-05-02 10:33:17,858 - src.agents.similarity_check_agent - INFO - Similarity check result for ID bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee: is_duplicate=False. Reason: No recently published article discusses WhatsApp's new 'Private Processing' system for AI tools and privacy concerns.
+2025-05-02 10:33:17,858 - main_orchestrator - INFO - Article bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee passed similarity check.
+2025-05-02 10:33:17,858 - main_orchestrator - INFO - Finding image for bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee...
+2025-05-02 10:33:17,858 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.wired.com/story/whatsapp-private-processing-generative-ai-security-risks/
+2025-05-02 10:33:17,968 - src.scrapers.image_scraper - INFO - Found og:image: https://media.wired.com/photos/680bf4a327f99c0d5fd7d8ce/191:100/w_1280,c_limit/wahtsapp-sec-2186498023.jpg
+2025-05-02 10:33:17,969 - main_orchestrator - INFO - Using scraped image for bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee: https://media.wired.com/photos/680bf4a327f99c0d5fd7d8ce/191:100/w_1280,c_limit/wahtsapp-sec-2186498023.jpg
+2025-05-02 10:33:17,969 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee...
+2025-05-02 10:33:50,213 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee.
+2025-05-02 10:33:50,213 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee...
+2025-05-02 10:33:57,653 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee
+2025-05-02 10:33:57,657 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\whatsapp-is-walking-a-tightrope-between-ai-features-and-privacy.html
+2025-05-02 10:33:57,661 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 10:33:57,663 - main_orchestrator - INFO - Updated all_articles.json (49 articles).
+2025-05-02 10:33:57,664 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee.json
+2025-05-02 10:33:57,665 - main_orchestrator - INFO - --- Successfully processed article: bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee ---
+2025-05-02 10:33:58,666 - main_orchestrator - INFO - --- Processing article file: f1d38aa4e29c7f72c90f5f4c99a1d18ce55aefa7956fcb21046236cf0fefc0a3.json ---
+2025-05-02 10:33:58,681 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f1d38aa4e29c7f72c90f5f4c99a1d18ce55aefa7956fcb21046236cf0fefc0a3 Title: AI Is Using Your Likes to Get Inside Your Head...
