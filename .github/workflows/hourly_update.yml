@@ -2,7 +2,7 @@ name: Hourly News Update and Deploy
 
 on:
   schedule:
-    # Runs every 5 minutes (Adjusted for reliability)
+    # Runs every 5 minutes
     - cron: "*/5 * * * *"
   workflow_dispatch: # Allows manual triggering
 
@@ -10,9 +10,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Allow workflow to commit back to the repo
-      pages: write # Required for GitHub Pages deployment action
-      id-token: write # Required for GitHub Pages deployment action
+      contents: write
+      pages: write
+      id-token: write
 
     steps:
       - name: Checkout Repository
@@ -21,7 +21,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10" # Ensure matches your requirements
+          python-version: "3.10"
 
       - name: Install Dependencies
         run: |
@@ -30,11 +30,9 @@ jobs:
 
       - name: Run Main Script
         env:
-          # Pass secrets securely as environment variables
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
           CAMB_AI_API_KEY: ${{ secrets.CAMB_AI_API_KEY }}
-          # Pass other secrets
           YOUR_WEBSITE_NAME: ${{ secrets.YOUR_WEBSITE_NAME }}
           YOUR_WEBSITE_LOGO_URL: ${{ secrets.YOUR_WEBSITE_LOGO_URL }}
           MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES }}
@@ -48,11 +46,13 @@ jobs:
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-          # --- CORRECTED: Only add specific output dirs/files expected to change ---
-          git add public/ data/processed_json/ data/processed_article_ids.txt
-          # Optionally add the log file ONLY if it exists
-          if [ -f "dacoola.log" ]; then git add dacola.log; fi
-          # -----------------------------------------------------------------------
+          # --- Explicitly add expected output files/dirs relative to workspace root ---
+          git add public/
+          git add data/processed_json/
+          # Use find to add the specific file if it exists, avoid errors if not
+          find . -maxdepth 1 -name 'dacoola.log' -print -exec git add {} \;
+          find . -maxdepth 1 -name 'data' -type d -exec test -f '{}/processed_article_ids.txt' \; -print -exec git add '{}/processed_article_ids.txt' \;
+          # ----------------------------------------------------------------------------
 
           # Check if there are staged changes
           if git diff --staged --quiet; then
@@ -83,16 +83,10 @@ jobs:
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public # Upload the public directory content
+          path: ./public
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
       # Other options remain commented out...
-      # Option 2: Deploy via rsync/scp
-      # - name: Deploy to Server via rsync ...
-      # Option 3: Deploy using Netlify CLI
-      # - name: Deploy to Netlify ...
-      # Option 4: Deploy using Vercel CLI
-      # - name: Install Vercel CLI ...
