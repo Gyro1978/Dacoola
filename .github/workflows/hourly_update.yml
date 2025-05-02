@@ -5,7 +5,7 @@ name: Hourly News Update and Deploy
 on:
   schedule:
     # Runs every 20 minutes (0, 20, 40 minutes past the hour)
-    - cron: "0,20,40 * * * *"
+    - cron: "0 * * * *" # Runs at the top of every
   workflow_dispatch: # Allows manual triggering
 
 jobs:
@@ -74,9 +74,19 @@ jobs:
             # Use [skip ci] in commit message to prevent triggering workflows on this commit
             git commit -m "Automated news update [skip ci]"
 
+            # --- START OF FIX ---
+            echo "Stashing any potentially unstaged changes..."
+            git stash push --include-untracked # Stash everything not committed
+            # --- END OF FIX ---
+
             # Pull latest changes with rebase before pushing to avoid merge conflicts
             echo "Pulling latest changes before push..."
             git pull origin ${{ github.ref_name }} --rebase
+
+            # --- Optional: Apply stashed changes if needed, but usually not for CI generated files ---
+            # echo "Applying stashed changes (if any)..."
+            # git stash pop || echo "No stash to pop."
+            # --- End Optional Stash Pop ---
 
             echo "Attempting to push changes..."
             # Retry push logic in case of transient network issues

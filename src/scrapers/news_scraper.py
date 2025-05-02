@@ -25,7 +25,6 @@ NEWS_FEED_URLS = [
     "https://techcrunch.com/feed/",
     "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
     "https://venturebeat.com/category/ai/feed/",
-    "https://www.theverge.com/tech/rss/index.xml",
     "https://news.ycombinator.com/rss",
     "https://www.anthropic.com/feed.xml",
     "https://ai.googleblog.com/feeds/posts/default?alt=rss",
