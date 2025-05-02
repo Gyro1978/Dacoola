@@ -5,7 +5,8 @@ name: Hourly News Update and Deploy
 on:
   schedule:
     # Runs every 20 minutes (0, 20, 40 minutes past the hour)
-    - cron: "0,20,40 * * * *" # Runs at the top of every
+    # Consider changing to "0 * * * *" (hourly) if runs take > 10-15 mins
+    - cron: "0,20,40 * * * *"
   workflow_dispatch: # Allows manual triggering
 
 jobs:
@@ -51,7 +52,14 @@ jobs:
           YOUR_SITE_BASE_URL: ${{ secrets.YOUR_SITE_BASE_URL || vars.YOUR_SITE_BASE_URL || '' }}
           # Pass Other Config from Secrets (or Variables)
           MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES || vars.MAX_HOME_PAGE_ARTICLES || 20 }}
-          # AUTHOR_NAME: ${{ secrets.AUTHOR_NAME || vars.AUTHOR_NAME || 'AI News Team' }} # Optional: if you want to control author name via secrets/vars
+          # AUTHOR_NAME: ${{ secrets.AUTHOR_NAME || vars.AUTHOR_NAME || 'AI News Team' }} # Optional
+
+          # --- NEW Twitter Secrets ---
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+          # --- End Twitter Secrets ---
         run: python src/main.py
 
       - name: Commit and Push Changes
@@ -74,19 +82,16 @@ jobs:
             # Use [skip ci] in commit message to prevent triggering workflows on this commit
             git commit -m "Automated news update [skip ci]"
 
-            # --- START OF FIX ---
             echo "Stashing any potentially unstaged changes..."
             git stash push --include-untracked # Stash everything not committed
-            # --- END OF FIX ---
 
             # Pull latest changes with rebase before pushing to avoid merge conflicts
             echo "Pulling latest changes before push..."
             git pull origin ${{ github.ref_name }} --rebase
 
-            # --- Optional: Apply stashed changes if needed, but usually not for CI generated files ---
+            # Optional: Apply stashed changes if needed, but usually not for CI generated files
             # echo "Applying stashed changes (if any)..."
             # git stash pop || echo "No stash to pop."
-            # --- End Optional Stash Pop ---
 
             echo "Attempting to push changes..."
             # Retry push logic in case of transient network issues
@@ -96,8 +101,6 @@ jobs:
               retry_count=$((retry_count+1))
               echo "Push failed. Retrying (${retry_count}/${max_retries})..."
               sleep 5 # Wait before retrying
-              # Optional: Pull again inside retry loop if needed? Usually rebase before loop is sufficient.
-              # git pull origin ${{ github.ref_name }} --rebase
             done
 
             if [ $retry_count -eq $max_retries ]; then
