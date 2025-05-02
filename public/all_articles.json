@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "ff4da2ffaf28d77a9d0fcdd156bf6e626e579d63226b1f1bef05b9b64bd4279a",
+      "title": "Google now injects hyper-personalized ads into third party AI chats - Computerworld",
+      "link": "articles/google-now-injects-hyper-personalized-ads-into-third-party-ai-chats-computerworl.html",
+      "published_iso": "2025-05-01T23:31:25",
+      "summary_short": "Google has begun injecting hyper-personalized ads into third-party AI chat platforms, expanding its ad reach. Learn more about Google AI chat ads.",
+      "image_url": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Google AI chat ads",
+        "hyper-personalized advertising",
+        "AI chatbot monetization",
+        "third-party AI platforms",
+        "digital advertising trends",
+        "user data privacy",
+        "conversational AI marketing",
+        "real-time ad targeting",
+        "AI-driven promotions",
+        "tech giant ad strategies"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "513bb84804882648d7ca824a24fce71699dfbaedf25d5740eafc739208f3136a",
       "title": "Huawei’s AI chips raise concerns in Nvidia’s closed-door meeting - USA Today",
       "link": "articles/huaweis-ai-chips-raise-concerns-in-nvidias-closed-door-meeting-usa-today.html",
