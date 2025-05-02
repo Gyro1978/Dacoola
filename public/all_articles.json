@@ -1,6 +1,75 @@
 {
   "articles": [
     {
+      "id": "5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0",
+      "title": "Zoho Halts $700M Semiconductor Plan",
+      "link": "articles/zoho-halts-700m-semiconductor-plan.html",
+      "published_iso": "2025-05-02T04:52:38",
+      "summary_short": "Zoho has halted its $700M semiconductor plan, marking a significant shift in its expansion strategy. Learn more about the decision.",
+      "image_url": "https://i0.wp.com/semiconductorsinsight.com/wp-content/uploads/2025/05/image.png",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Zoho semiconductor plan",
+        "Zoho $700M investment",
+        "semiconductor industry challenges",
+        "tech hardware sector",
+        "semiconductor market volatility",
+        "Zoho strategic direction",
+        "semiconductor manufacturing pause",
+        "global tech supply chain",
+        "semiconductor industry barriers"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea",
+      "title": "Nvidia CEO Jensen Huang Sounds Alarm As 50% Of AI Researchers Are Chinese, Urges America To Reskill Amid 'Infinite Game' - Yahoo Finance",
+      "link": "articles/nvidia-ceo-jensen-huang-sounds-alarm-as-50-of-ai-researchers-are-chinese-urges-a.html",
+      "published_iso": "2025-05-02T03:59:00",
+      "summary_short": "Nvidia CEO Jensen Huang highlights that 50% of AI researchers are Chinese, urging America to reskill in the AI \"infinite game.\"",
+      "image_url": "https://electroiq.com/wp-content/uploads/2024/08/Artificial-Intelligence-statistics.webp",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "Nvidia CEO Jensen Huang",
+        "AI researcher demographics",
+        "China AI talent",
+        "US AI competitiveness",
+        "AI workforce reskilling",
+        "geopolitical AI tensions",
+        "AI education investment",
+        "AI innovation race"
+      ],
+      "audio_url": null,
+      "trend_score": 14.0
+    },
+    {
+      "id": "b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74",
+      "title": "XAI Dev Leaks API Key for Private SpaceX, Tesla LLMs",
+      "link": "articles/xai-dev-leaks-api-key-for-private-spacex-tesla-llms.html",
+      "published_iso": "2025-05-02T00:56:02",
+      "summary_short": "An XAI developer accidentally leaked an API key granting access to private SpaceX and Tesla LLMs, raising security concerns.",
+      "image_url": "https://krebsonsecurity.com/wp-content/uploads/2025/05/x-ai.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "XAI developer leak",
+        "SpaceX Tesla LLM leak",
+        "API key exposure",
+        "AI security concerns",
+        "Elon Musk companies",
+        "proprietary AI models",
+        "unauthorized access",
+        "AI intellectual property",
+        "large language models",
+        "tech firm breaches"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "ff4da2ffaf28d77a9d0fcdd156bf6e626e579d63226b1f1bef05b9b64bd4279a",
       "title": "Google now injects hyper-personalized ads into third party AI chats - Computerworld",
       "link": "articles/google-now-injects-hyper-personalized-ads-into-third-party-ai-chats-computerworl.html",

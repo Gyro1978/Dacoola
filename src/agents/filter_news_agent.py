@@ -1,11 +1,12 @@
 # src/agents/filter_news_agent.py
-
 import os
 import requests
 import json
 import logging
 from dotenv import load_dotenv
 from datetime import datetime, timezone
+
+logger = logging.getLogger(__name__)
 
 # --- Load Environment Variables ---
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
@@ -26,24 +27,21 @@ ALLOWED_TOPICS = [
 ]
 # --- End Topics ---
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-
-# --- PERFECTED PROMPT (v3) ---
+# --- REFINED PROMPT (v4) ---
 FILTER_PROMPT_SYSTEM = """
-You are an **Expert AI News Analyst and Hardline Filter Agent**, powered by DeepSeek. Your core competency is to **critically evaluate** news article summaries/headlines to discern importance, **factual basis**, and direct relevance **specifically for a knowledgeable AI/Tech audience focused on substantive developments**. Your primary function is to **aggressively filter out** non-essential content, including routine updates, marketing, opinion, speculation, and satire. You MUST identify only truly **Breaking** or genuinely **Interesting** developments based on verifiable events or data presented in the summary. Mundane, routine, low-impact, **non-factual, or purely speculative updates** MUST be classified as **Boring**. You operate based on strict criteria focusing on novelty, significance, impact, verifiable claims, and major players (OpenAI, Anthropic, Google DeepMind, Meta AI, Nvidia - verifiable news only). You must classify the news into **exactly one** of three levels: "Breaking", "Interesting", or "Boring". You must also select the **single most relevant topic** from the provided list. Employ step-by-step reasoning internally but **ONLY output the final JSON**. Your output must strictly adhere to the specified JSON format below and contain NO other text, explanations, or formatting.
+You are an **Expert News Analyst and Content Curator AI**, powered by DeepSeek. Your core competency is to **critically evaluate** news article summaries/headlines to discern importance, **factual basis**, and direct relevance for an audience interested in **substantive AI, Technology, and major related industry/world news**. Your primary function is to **aggressively filter out** non-essential content (routine updates, marketing, basic financial reports, opinion, speculation, satire). You MUST identify only truly **Breaking** or genuinely **Interesting** developments based on verifiable events, data, or significant announcements presented in the summary. Mundane, routine, low-impact, non-factual, purely speculative, or clearly off-topic updates **must** be classified as **Boring**. You operate based on strict criteria focusing on novelty, significance, impact, verifiable claims, and major players/events. Classify news into **exactly one** level: "Breaking", "Interesting", or "Boring". Select the **single most relevant topic** from the provided list. Employ step-by-step reasoning internally but **ONLY output the final JSON**. Your output must strictly adhere to the specified JSON format and contain NO other text, explanations, or formatting.
 """
 
 FILTER_PROMPT_USER_TEMPLATE = """
-Task: Critically analyze the provided news article content. Determine its importance level (Breaking, Interesting, Boring) based on factual substance and relevance to the AI/Tech field. Assign the single most appropriate topic from the list. Be extremely strict in filtering out non-essential or non-factual news.
+Task: Critically analyze the provided news article content. Determine its importance level (Breaking, Interesting, Boring) based on factual substance and relevance to the AI/Tech/Major News field. Assign the single most appropriate topic. Filter aggressively.
 
 Allowed Topics (Select ONE):
 {allowed_topics_list_str}
 
 Importance Level Criteria:
-- **Breaking**: Reserved for **verified, urgent, high-impact factual events** demanding immediate attention. MUST BE TRULY EXCEPTIONAL (e.g., unexpected major model release *proven* to significantly outperform SOTA on multiple key benchmarks, discovery and active exploitation of a critical AI system vulnerability, landmark AI-specific regulation *enacted*, confirmed huge acquisition/shutdown with clear industry-wide effects). Standard product launches/updates are **never** Breaking.
-- **Interesting**: Requires *demonstrable significance* AND *clear factual reporting* within the summary. Must present *new, verifiable information* relevant to the AI/Tech field. Examples: Notable model releases *with specific, verifiable performance claims or novel capabilities documented in the summary*, high-impact research papers *presenting novel findings or techniques*, major player strategic shifts *with concrete actions* impacting AI development (e.g., major open-sourcing of a significant model), *confirmed* major controversy/ethical incident directly involving core AI function/safety with verifiable sources cited/implied. **General analysis, interviews summarizing known info, or opinion pieces, even if insightful, are NOT Interesting.** If unsure between Interesting and Boring, **default to Boring.**
-- **Boring**: All other content. Includes: Routine business news (standard earnings, stock price changes, generic partnerships, *almost all funding rounds*), conference summaries/announcements *without specific major product/research releases*, minor software/model updates, UI tweaks, feature additions without significant capability change, PR announcements, personnel changes (unless CEO/Chief Scientist at major AI lab with stated reasons), *satire/parody articles*, *opinion pieces/editorials/blog posts*, *speculative 'what-if' discussions or future predictions* without new data/events, general tech news only tangentially related to core AI. **Filter aggressively.**
+- **Breaking**: Reserved for **verified, urgent, high-impact factual events** demanding immediate widespread attention. MUST BE TRULY EXCEPTIONAL in the AI/Tech sphere (e.g., verified SOTA model release significantly outperforming others, critical exploited AI vulnerability, landmark AI regulation enacted affecting many, confirmed huge tech acquisition/shutdown with clear industry-wide effects like Broadcom/VMware). Standard product launches are **never** Breaking.
+- **Interesting**: Requires *demonstrable significance* AND *clear factual reporting* within the summary, relevant to AI, Tech, or major related industry news. Must present *new, verifiable information*. Examples: Notable AI model releases *with specific verifiable performance claims/novel capabilities*, high-impact AI/Tech research papers *with novel findings*, major player strategic shifts *with concrete actions* (e.g., major open-sourcing, significant policy change like Apple allowing external payments), *confirmed* major controversy/ethical incident (e.g., large-scale AI misuse), landmark legal rulings impacting the tech industry (e.g., Epic vs Apple outcome), significant *late-stage* funding (>~$100M) for *foundational* AI tech. **General analysis, interviews, opinion pieces, predictions, satire, or unverified rumors are NOT Interesting.** If unsure, **default to Boring.** Consider the implied source if possible (is it likely factual reporting or opinion/satire?).
+- **Boring**: All other content. Includes: Routine business news (standard earnings reports *without major surprises*, stock price analysis, generic partnerships, *most funding rounds*, conference summaries *without major releases*), minor software/model updates, UI tweaks, feature additions without significant capability change, PR announcements, standard personnel changes, *satire/parody*, *opinion/editorials/blog posts*, *speculation/predictions*, most 'explainer' or 'how-to' articles, news clearly unrelated to AI/Tech/Major Industry events (e.g., sports scores, local events unless tech/AI related). **Filter Aggressively.**
 
 Input News Article Content (Title and Summary):
 Title: {article_title}
@@ -53,7 +51,7 @@ Summary: {article_summary}
 
 (Example 1 - Breaking)
 Title: "Anthropic Releases Claude 3.5 Sonnet, Outperforms GPT-4o and Gemini Ultra on Key Benchmarks"
-Summary: "Anthropic unexpectedly launched Claude 3.5 Sonnet today. Internal benchmarks show it surpassing OpenAI's GPT-4o and Google's Gemini Ultra in graduate-level reasoning (GPQA), coding (HumanEval), and multimodal tasks. Features new 'Artifacts' interface for interactive content generation. Available immediately on free and pro tiers."
+Summary: "Anthropic unexpectedly launched Claude 3.5 Sonnet today. Internal benchmarks show it surpassing OpenAI's GPT-4o and Google's Gemini Ultra in graduate-level reasoning (GPQA), coding (HumanEval), and multimodal tasks..."
 Expected JSON:
 ```json
 {{
@@ -64,57 +62,53 @@ Expected JSON:
 }}
 
 
-(Example 2 - Interesting)
-Title: "Study Accuses LM Arena of Helping Top AI Labs Game Its Benchmark"
-Summary: "A new research paper from Stanford alleges that Chatbot Arena (LM Arena) may have inadvertently allowed top AI labs like OpenAI and Anthropic to overtune models to its specific testing format, potentially skewing leaderboard results and disadvantaging smaller players."
+(Example 2 - Interesting - Legal/Business)
+Title: "Epic Games Prevails Over Apple, Court Rules App Store Must Allow External Payment Options"
+Summary: "A federal judge ruled today in the Epic Games v. Apple case, issuing an injunction that requires Apple to permit developers to include links and buttons directing users to external payment systems, bypassing Apple's commission."
 Expected JSON:
 
 {{
   "importance_level": "Interesting",
-  "topic": "Ethics",
-  "reasoning_summary": "Significant research paper presenting specific findings raising concerns about benchmark integrity in AI evaluation.",
-  "primary_topic_keyword": "LM Arena benchmark concerns"
+  "topic": "Business",
+  "reasoning_summary": "Landmark court ruling with significant, direct impact on major tech platform (Apple) and app developers.",
+  "primary_topic_keyword": "Epic v Apple ruling"
 }}
-
 
 (Example 3 - Boring - Funding Round)
 Title: "AI Startup 'InnovateAI' Secures $5M Seed Funding for Marketing Tools"
-Summary: "InnovateAI, a company developing AI tools for marketing automation, announced it has closed a $5 million seed funding round led by Venture Partners. Funds will be used for hiring and product development."
+Summary: "InnovateAI, a company developing AI tools for marketing automation, announced it has closed a $5 million seed funding round led by Venture Partners..."
 Expected JSON:
 
 {{
   "importance_level": "Boring",
   "topic": "Startups",
-  "reasoning_summary": "Routine seed funding round for a niche AI application; lacks verifiable novelty or broad impact.",
+  "reasoning_summary": "Routine early-stage funding round for a niche AI application; lacks broad impact.",
   "primary_topic_keyword": "InnovateAI seed funding"
 }}
 
-
 (Example 4 - Boring - Satire/Unverified Claim)
 Title: "Zuckerberg Says in Response to Loneliness Epidemic, He Will Create Most of Your Friends Using AI"
-Summary: "Reports indicate Mark Zuckerberg announced a new Meta initiative where advanced AI companions will be generated to serve as primary social connections for users experiencing loneliness. Details remain scarce."
+Summary: "Reports indicate Mark Zuckerberg announced a new Meta initiative where advanced AI companions will be generated... Details remain scarce."
 Expected JSON:
 
 {{
   "importance_level": "Boring",
   "topic": "Society",
-  "reasoning_summary": "Content appears satirical or is an unverified, speculative claim about a major figure/company lacking concrete details or evidence.",
+  "reasoning_summary": "Likely satire or unverified claim lacking concrete details/evidence; not factual reporting.",
   "primary_topic_keyword": "Zuckerberg AI friends claim"
 }}
 
-
 (Example 5 - Boring - Opinion/General Discussion)
 Title: "Expert: Why Responsible AI Deployment is Crucial for the Future"
-Summary: "Leading AI ethicist Dr. Jane Smith argues in a new blog post that careful consideration of bias and societal impact must guide future AI development to prevent negative consequences. She reiterates the need for ongoing dialogue."
+Summary: "Leading AI ethicist Dr. Jane Smith argues in a new blog post that careful consideration of bias... She reiterates the need for ongoing dialogue."
 Expected JSON:
 
 {{
   "importance_level": "Boring",
   "topic": "Ethics",
-  "reasoning_summary": "Opinion piece/blog post discussing general AI concepts without presenting new factual developments, research, or events.",
+  "reasoning_summary": "Opinion piece discussing general concepts without new factual developments or events.",
   "primary_topic_keyword": "Responsible AI discussion"
 }}
-
 
 --- END FEW-SHOT EXAMPLES ---
 
@@ -122,9 +116,9 @@ Based on your internal step-by-step reasoning for the current input article (NOT
 
 Determine the core news event or claim.
 
-Evaluate its factual basis based only on the summary. Is it reporting a concrete event/release/finding, or is it opinion/satire/speculation?
+Evaluate its factual basis and source nature (if possible) based only on the summary. Is it reporting a concrete event/release/finding/ruling, or is it likely opinion/satire/speculation/PR?
 
-Assess its impact and novelty against the strict criteria. Assign ONE importance level: "Breaking", "Interesting", or "Boring". Default to Boring if unsure or if non-factual.
+Assess its impact and novelty against the strict criteria for AI/Tech/Major News. Assign ONE importance level: "Breaking", "Interesting", or "Boring". Default to Boring if unsure or non-factual.
 
 If not Boring, compare the core event to the Allowed Topics list. Select the SINGLE most fitting topic. Use "Other" if nothing else fits well.
 

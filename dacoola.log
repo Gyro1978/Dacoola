@@ -10517,3 +10517,1431 @@ TypeError: object of type 'NoneType' has no len()
 2025-05-02 00:05:29,336 - main_orchestrator - INFO - --- Successfully processed article: ff4da2ffaf28d77a9d0fcdd156bf6e626e579d63226b1f1bef05b9b64bd4279a ---
 2025-05-02 00:05:30,337 - main_orchestrator - INFO - Processing cycle complete. Successful: 1, Failed/Skipped: 6
 2025-05-02 00:05:30,337 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 05:24:46,255 - INFO - Use pytorch device_name: cpu
+2025-05-02 05:24:46,276 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 05:24:46,280 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 05:24:46,450 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:24:46,555 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 05:24:46,668 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 05:24:46,770 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:24:46,875 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 05:24:48,910 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 05:24:48,923 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 05:24:48,988 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 05:24:48,988 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 05:24:48,988 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 05:24:48,988 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 05:24:48,989 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 05:24:48,997 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 05:24:48,998 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 05:24:48,998 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 05:24:48,998 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 05:24:49,087 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 05:24:49,088 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 05:24:49,088 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 05:24:49,173 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 05:24:49,173 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 05:24:49,173 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 05:24:49,391 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 05:24:49,391 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 05:24:49,391 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 05:24:49,495 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 05:24:49,495 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 05:24:49,495 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 05:24:49,607 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 05:24:49,608 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 05:24:49,608 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 05:24:49,697 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:24:49,698 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 05:24:50,162 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 05:24:50,162 - root - INFO - Found new article: Nvidia Accuses Anthropic of Spinning ‘Tall Tales’ About Chip Restrictions - PYMNTS.com (ID: e572d0aa6b54dbd9da78d6d546a898a9d614c4e57040a0ce93ef696c844878b1)
+2025-05-02 05:24:50,163 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\e572d0aa6b54dbd9da78d6d546a898a9d614c4e57040a0ce93ef696c844878b1.json (Title: Nvidia Accuses Anthropic of Spinning ‘Tall Tales’ About Chip Restrictions - PYMNTS.com)
+2025-05-02 05:24:50,164 - root - INFO - Successfully saved new article: Nvidia Accuses Anthropic of Spinning ‘Tall Tales’ About Chip Restrictions - PYMNTS.com
+2025-05-02 05:24:50,165 - root - INFO - Found new article: Nvidia Is Jumping Today -- Is the Artificial Intelligence (AI) Stock a Buy? - MSN (ID: 77ec63b2c44b7f4343346119e93807cc7e9c228ec3b02a93a6aacb29f0914387)
+2025-05-02 05:24:50,166 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\77ec63b2c44b7f4343346119e93807cc7e9c228ec3b02a93a6aacb29f0914387.json (Title: Nvidia Is Jumping Today -- Is the Artificial Intelligence (AI) Stock a Buy? - MSN)
+2025-05-02 05:24:50,166 - root - INFO - Successfully saved new article: Nvidia Is Jumping Today -- Is the Artificial Intelligence (AI) Stock a Buy? - MSN
+2025-05-02 05:24:50,167 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 2 new articles.
+2025-05-02 05:24:50,167 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 05:24:50,820 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 05:24:50,821 - root - INFO - Found new article: Third Party Cookies Must Be Removed (ID: 7f6c44527acdf1043b9259794964e6d09b2771309a8e2e4b58018dff2ffe0d0b)
+2025-05-02 05:24:50,822 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\7f6c44527acdf1043b9259794964e6d09b2771309a8e2e4b58018dff2ffe0d0b.json (Title: Third Party Cookies Must Be Removed)
+2025-05-02 05:24:50,822 - root - INFO - Successfully saved new article: Third Party Cookies Must Be Removed
+2025-05-02 05:24:50,823 - root - INFO - Found new article: Quebec refuses to reinvest in Lion Electric (busses); US factory auction (ID: c0b6133721a96f15e8988e3989820c6d5db2c8a42ecfe289c910d6dcaf69dcd9)
+2025-05-02 05:24:50,824 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\c0b6133721a96f15e8988e3989820c6d5db2c8a42ecfe289c910d6dcaf69dcd9.json (Title: Quebec refuses to reinvest in Lion Electric (busses); US factory auction)
+2025-05-02 05:24:50,824 - root - INFO - Successfully saved new article: Quebec refuses to reinvest in Lion Electric (busses); US factory auction
+2025-05-02 05:24:50,824 - root - INFO - Found new article: Chrome Origin Trial: Device Bound Session Credentials (ID: 0120f11c51b1512d86658aadaba3b5af24ccec8bc4bc80c85c4a6770bb5b1999)
+2025-05-02 05:24:50,825 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\0120f11c51b1512d86658aadaba3b5af24ccec8bc4bc80c85c4a6770bb5b1999.json (Title: Chrome Origin Trial: Device Bound Session Credentials)
+2025-05-02 05:24:50,825 - root - INFO - Successfully saved new article: Chrome Origin Trial: Device Bound Session Credentials
+2025-05-02 05:24:50,826 - root - INFO - Found new article: Liverpool's title win has completed a mysterious Fibonacci sequence (ID: de0afff465fdddf48b29b4d7148dd8f0c9dec8f82d8e800eecb9ce3493360c32)
+2025-05-02 05:24:50,826 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\de0afff465fdddf48b29b4d7148dd8f0c9dec8f82d8e800eecb9ce3493360c32.json (Title: Liverpool's title win has completed a mysterious Fibonacci sequence)
+2025-05-02 05:24:50,827 - root - INFO - Successfully saved new article: Liverpool's title win has completed a mysterious Fibonacci sequence
+2025-05-02 05:24:50,827 - root - INFO - Found new article: Mike Waltz Accidentally Reveals App Govt Uses to Archive Signal Messages (ID: 4c0f74b1322252eca559c951a883df08a5724a723cbcf04fd6859adee7b61498)
+2025-05-02 05:24:50,827 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\4c0f74b1322252eca559c951a883df08a5724a723cbcf04fd6859adee7b61498.json (Title: Mike Waltz Accidentally Reveals App Govt Uses to Archive Signal Messages)
+2025-05-02 05:24:50,828 - root - INFO - Successfully saved new article: Mike Waltz Accidentally Reveals App Govt Uses to Archive Signal Messages
+2025-05-02 05:24:50,828 - root - INFO - Found new article: Felix86: Run x86-64 programs on RISC-V Linux (ID: d9ad6481f1afe5553e83e8a4b7d09762e7ad37b8e66509f320caf3ee0d96206d)
+2025-05-02 05:24:50,828 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\d9ad6481f1afe5553e83e8a4b7d09762e7ad37b8e66509f320caf3ee0d96206d.json (Title: Felix86: Run x86-64 programs on RISC-V Linux)
+2025-05-02 05:24:50,829 - root - INFO - Successfully saved new article: Felix86: Run x86-64 programs on RISC-V Linux
+2025-05-02 05:24:50,829 - root - INFO - Found new article: The Anti-Capitalist Case for Standards (ID: c29b408ede9e7c5ce06ec63e6ce1ddda7543c554b4eafddcdfd38bbb25369816)
+2025-05-02 05:24:50,829 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\c29b408ede9e7c5ce06ec63e6ce1ddda7543c554b4eafddcdfd38bbb25369816.json (Title: The Anti-Capitalist Case for Standards)
+2025-05-02 05:24:50,830 - root - INFO - Successfully saved new article: The Anti-Capitalist Case for Standards
+2025-05-02 05:24:50,830 - root - INFO - Found new article: Offline-First with CouchDB and PouchDB in 2025 (ID: 5d227d5f41dd88bae52cd42e01d8204e56b177cc2c30cafcdf063927f41f0ddf)
+2025-05-02 05:24:50,830 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\5d227d5f41dd88bae52cd42e01d8204e56b177cc2c30cafcdf063927f41f0ddf.json (Title: Offline-First with CouchDB and PouchDB in 2025)
+2025-05-02 05:24:50,831 - root - INFO - Successfully saved new article: Offline-First with CouchDB and PouchDB in 2025
+2025-05-02 05:24:50,831 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 8 new articles.
+2025-05-02 05:24:50,831 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 05:24:51,567 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:24:51,568 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 05:24:51,797 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 05:24:51,797 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 05:24:51,797 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 05:24:51,882 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 05:24:51,882 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 05:24:51,882 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 05:24:52,360 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 05:24:52,360 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 05:24:52,497 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 05:24:52,497 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 05:24:52,594 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 05:24:52,594 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 05:24:52,594 - root - INFO - Scrape run finished. Total new articles saved this run: 10.
+2025-05-02 05:24:52,594 - main_orchestrator - INFO - Scraper run completed. Found 10 new JSON files potentially.
+2025-05-02 05:24:52,619 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 05:24:52,620 - main_orchestrator - INFO - Found 12 scraped articles to process.
+2025-05-02 05:24:52,621 - main_orchestrator - INFO - --- Processing article file: fdb7ecbbafd02bd520d7c50b976b8ab3e49446a7d47a4babe22f8570a9b33895.json ---
+2025-05-02 05:24:52,637 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: fdb7ecbbafd02bd520d7c50b976b8ab3e49446a7d47a4babe22f8570a9b33895 Title: 3 Reasons Amazon Stock Is Still a Top Artificial Intelligenc...
+2025-05-02 05:24:59,772 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='Amazon stock AI buy'
+2025-05-02 05:24:59,772 - main_orchestrator - INFO - Article fdb7ecbbafd02bd520d7c50b976b8ab3e49446a7d47a4babe22f8570a9b33895 is Boring. Skipping.
+2025-05-02 05:25:00,798 - main_orchestrator - INFO - --- Processing article file: 5091e526bb0c47560bcada16752136b2b09077e58c0acf2291f0f112a32c55c4.json ---
+2025-05-02 05:25:00,816 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 5091e526bb0c47560bcada16752136b2b09077e58c0acf2291f0f112a32c55c4 Title: LLMs for Engineering: Teaching Models to Design High Powered...
+2025-05-02 05:25:09,664 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='LLMs in engineering'
+2025-05-02 05:25:09,664 - main_orchestrator - INFO - Article 5091e526bb0c47560bcada16752136b2b09077e58c0acf2291f0f112a32c55c4 is Boring. Skipping.
+2025-05-02 05:25:10,665 - main_orchestrator - INFO - --- Processing article file: e572d0aa6b54dbd9da78d6d546a898a9d614c4e57040a0ce93ef696c844878b1.json ---
+2025-05-02 05:25:10,679 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: e572d0aa6b54dbd9da78d6d546a898a9d614c4e57040a0ce93ef696c844878b1 Title: Nvidia Accuses Anthropic of Spinning ‘Tall Tales’ About Chip...
+2025-05-02 05:25:18,473 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='Nvidia Anthropic dispute'
+2025-05-02 05:25:18,474 - main_orchestrator - INFO - Article e572d0aa6b54dbd9da78d6d546a898a9d614c4e57040a0ce93ef696c844878b1 is Boring. Skipping.
+2025-05-02 05:25:19,475 - main_orchestrator - INFO - --- Processing article file: 77ec63b2c44b7f4343346119e93807cc7e9c228ec3b02a93a6aacb29f0914387.json ---
+2025-05-02 05:25:19,489 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 77ec63b2c44b7f4343346119e93807cc7e9c228ec3b02a93a6aacb29f0914387 Title: Nvidia Is Jumping Today -- Is the Artificial Intelligence (A...
+2025-05-02 05:25:28,541 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='Nvidia stock analysis'
+2025-05-02 05:25:28,541 - main_orchestrator - INFO - Article 77ec63b2c44b7f4343346119e93807cc7e9c228ec3b02a93a6aacb29f0914387 is Boring. Skipping.
+2025-05-02 05:25:29,542 - main_orchestrator - INFO - --- Processing article file: 7f6c44527acdf1043b9259794964e6d09b2771309a8e2e4b58018dff2ffe0d0b.json ---
+2025-05-02 05:25:29,567 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 7f6c44527acdf1043b9259794964e6d09b2771309a8e2e4b58018dff2ffe0d0b Title: Third Party Cookies Must Be Removed...
+2025-05-02 05:25:37,040 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='Third party cookies'
+2025-05-02 05:25:37,040 - main_orchestrator - INFO - Article 7f6c44527acdf1043b9259794964e6d09b2771309a8e2e4b58018dff2ffe0d0b is Boring. Skipping.
+2025-05-02 05:25:38,041 - main_orchestrator - INFO - --- Processing article file: c0b6133721a96f15e8988e3989820c6d5db2c8a42ecfe289c910d6dcaf69dcd9.json ---
+2025-05-02 05:25:38,053 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c0b6133721a96f15e8988e3989820c6d5db2c8a42ecfe289c910d6dcaf69dcd9 Title: Quebec refuses to reinvest in Lion Electric (busses); US fac...
+2025-05-02 05:25:45,721 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='Lion Electric funding'
+2025-05-02 05:25:45,722 - main_orchestrator - INFO - Article c0b6133721a96f15e8988e3989820c6d5db2c8a42ecfe289c910d6dcaf69dcd9 is Boring. Skipping.
+2025-05-02 05:25:46,723 - main_orchestrator - INFO - --- Processing article file: 0120f11c51b1512d86658aadaba3b5af24ccec8bc4bc80c85c4a6770bb5b1999.json ---
+2025-05-02 05:25:46,733 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 0120f11c51b1512d86658aadaba3b5af24ccec8bc4bc80c85c4a6770bb5b1999 Title: Chrome Origin Trial: Device Bound Session Credentials...
+2025-05-02 05:25:54,293 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Software', keyword='Chrome feature trial'
+2025-05-02 05:25:54,293 - main_orchestrator - INFO - Article 0120f11c51b1512d86658aadaba3b5af24ccec8bc4bc80c85c4a6770bb5b1999 is Boring. Skipping.
+2025-05-02 05:25:55,294 - main_orchestrator - INFO - --- Processing article file: de0afff465fdddf48b29b4d7148dd8f0c9dec8f82d8e800eecb9ce3493360c32.json ---
+2025-05-02 05:25:55,304 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: de0afff465fdddf48b29b4d7148dd8f0c9dec8f82d8e800eecb9ce3493360c32 Title: Liverpool's title win has completed a mysterious Fibonacci s...
+2025-05-02 05:26:02,899 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='Liverpool Fibonacci sequence'
+2025-05-02 05:26:02,899 - main_orchestrator - INFO - Article de0afff465fdddf48b29b4d7148dd8f0c9dec8f82d8e800eecb9ce3493360c32 is Boring. Skipping.
+2025-05-02 05:26:03,900 - main_orchestrator - INFO - --- Processing article file: 4c0f74b1322252eca559c951a883df08a5724a723cbcf04fd6859adee7b61498.json ---
+2025-05-02 05:26:03,909 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 4c0f74b1322252eca559c951a883df08a5724a723cbcf04fd6859adee7b61498 Title: Mike Waltz Accidentally Reveals App Govt Uses to Archive Sig...
+2025-05-02 05:26:12,262 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='Signal messages archive'
+2025-05-02 05:26:12,262 - main_orchestrator - INFO - Article 4c0f74b1322252eca559c951a883df08a5724a723cbcf04fd6859adee7b61498 is Boring. Skipping.
+2025-05-02 05:26:13,264 - main_orchestrator - INFO - --- Processing article file: d9ad6481f1afe5553e83e8a4b7d09762e7ad37b8e66509f320caf3ee0d96206d.json ---
+2025-05-02 05:26:13,273 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d9ad6481f1afe5553e83e8a4b7d09762e7ad37b8e66509f320caf3ee0d96206d Title: Felix86: Run x86-64 programs on RISC-V Linux...
+2025-05-02 05:26:19,939 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Software', keyword='x86-64 on RISC-V'
+2025-05-02 05:26:19,939 - main_orchestrator - INFO - Article d9ad6481f1afe5553e83e8a4b7d09762e7ad37b8e66509f320caf3ee0d96206d is Boring. Skipping.
+2025-05-02 05:26:20,941 - main_orchestrator - INFO - --- Processing article file: c29b408ede9e7c5ce06ec63e6ce1ddda7543c554b4eafddcdfd38bbb25369816.json ---
+2025-05-02 05:26:20,950 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c29b408ede9e7c5ce06ec63e6ce1ddda7543c554b4eafddcdfd38bbb25369816 Title: The Anti-Capitalist Case for Standards...
+2025-05-02 05:26:32,006 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Society', keyword='Anti-capitalist standards discussion'
+2025-05-02 05:26:32,006 - main_orchestrator - INFO - Article c29b408ede9e7c5ce06ec63e6ce1ddda7543c554b4eafddcdfd38bbb25369816 is Boring. Skipping.
+2025-05-02 05:26:33,007 - main_orchestrator - INFO - --- Processing article file: 5d227d5f41dd88bae52cd42e01d8204e56b177cc2c30cafcdf063927f41f0ddf.json ---
+2025-05-02 05:26:33,017 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 5d227d5f41dd88bae52cd42e01d8204e56b177cc2c30cafcdf063927f41f0ddf Title: Offline-First with CouchDB and PouchDB in 2025...
+2025-05-02 05:26:41,441 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Software', keyword='CouchDB and PouchDB'
+2025-05-02 05:26:41,441 - main_orchestrator - INFO - Article 5d227d5f41dd88bae52cd42e01d8204e56b177cc2c30cafcdf063927f41f0ddf is Boring. Skipping.
+2025-05-02 05:26:42,442 - main_orchestrator - INFO - Processing cycle complete. Successful: 0, Failed/Skipped: 12
+2025-05-02 05:26:42,442 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 05:27:38,608 - INFO - Use pytorch device_name: cpu
+2025-05-02 05:27:38,608 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 05:27:38,610 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 05:27:38,791 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:27:38,904 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 05:27:39,006 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 05:27:39,109 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:27:39,219 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 05:27:39,837 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 05:27:39,842 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 05:27:39,853 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 05:27:39,853 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 05:27:39,853 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 05:27:39,853 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 05:27:39,854 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 05:27:39,854 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 05:27:39,854 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 05:27:39,854 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 05:27:39,854 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 05:27:39,918 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 05:27:39,918 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 05:27:39,918 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 05:27:39,996 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 05:27:39,996 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 05:27:39,996 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 05:27:40,153 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 05:27:40,153 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 05:27:40,153 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 05:27:40,244 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 05:27:40,245 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 05:27:40,245 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 05:27:40,341 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 05:27:40,341 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 05:27:40,341 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 05:27:40,439 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:27:40,439 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 05:27:40,916 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 05:27:40,918 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 0 new articles.
+2025-05-02 05:27:40,918 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 05:27:41,593 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 05:27:41,593 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 0 new articles.
+2025-05-02 05:27:41,593 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 05:27:41,880 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:27:41,880 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 05:27:42,096 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 05:27:42,096 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 05:27:42,096 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 05:27:42,186 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 05:27:42,186 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 05:27:42,186 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 05:27:42,591 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 05:27:42,592 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 05:27:42,727 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 05:27:42,727 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 05:27:42,824 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 05:27:42,824 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 05:27:42,824 - root - INFO - Scrape run finished. Total new articles saved this run: 0.
+2025-05-02 05:27:42,824 - main_orchestrator - INFO - Scraper run completed. Found 0 new JSON files potentially.
+2025-05-02 05:27:42,825 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 05:27:42,825 - main_orchestrator - INFO - No new scraped articles to process.
+2025-05-02 05:27:42,826 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 05:38:36,415 - INFO - Use pytorch device_name: cpu
+2025-05-02 05:38:36,415 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 05:38:36,420 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 05:38:36,578 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:38:36,681 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 05:38:36,953 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 05:38:37,054 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:38:37,158 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 05:38:39,167 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 05:38:39,175 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 05:38:39,304 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 05:38:39,304 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 05:38:39,305 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 05:38:39,305 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 05:38:39,308 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 05:38:39,310 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 05:38:39,310 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 05:38:39,311 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 05:38:39,311 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 05:38:39,444 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 05:38:39,444 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 05:38:39,444 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 05:38:39,529 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 05:38:39,530 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 05:38:39,530 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 05:38:39,719 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 05:38:39,719 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 05:38:39,719 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 05:38:39,935 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 05:38:39,936 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 05:38:39,936 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 05:38:40,082 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 05:38:40,083 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 05:38:40,083 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 05:38:40,205 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:38:40,205 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 05:38:40,682 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 05:38:40,682 - root - INFO - Found new article: Accounting Firms Aim Higher as AI Handles the Heavy Lifting - PYMNTS.com (ID: 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97)
+2025-05-02 05:38:40,684 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json (Title: Accounting Firms Aim Higher as AI Handles the Heavy Lifting - PYMNTS.com)
+2025-05-02 05:38:40,685 - root - INFO - Successfully saved new article: Accounting Firms Aim Higher as AI Handles the Heavy Lifting - PYMNTS.com
+2025-05-02 05:38:40,686 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 1 new articles.
+2025-05-02 05:38:40,686 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 05:38:41,336 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 05:38:41,336 - root - INFO - Found new article: Chariot and Saucer (ID: 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08)
+2025-05-02 05:38:41,337 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json (Title: Chariot and Saucer)
+2025-05-02 05:38:41,338 - root - INFO - Successfully saved new article: Chariot and Saucer
+2025-05-02 05:38:41,338 - root - INFO - Found new article: XAI Dev Leaks API Key for Private SpaceX, Tesla LLMs (ID: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74)
+2025-05-02 05:38:41,339 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json (Title: XAI Dev Leaks API Key for Private SpaceX, Tesla LLMs)
+2025-05-02 05:38:41,339 - root - INFO - Successfully saved new article: XAI Dev Leaks API Key for Private SpaceX, Tesla LLMs
+2025-05-02 05:38:41,339 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 2 new articles.
+2025-05-02 05:38:41,339 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 05:38:41,811 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:38:41,811 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 05:38:42,019 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 05:38:42,020 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 05:38:42,020 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 05:38:42,101 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 05:38:42,101 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 05:38:42,101 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 05:38:42,555 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 05:38:42,555 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 05:38:42,685 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 05:38:42,685 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 05:38:42,800 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 05:38:42,800 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 05:38:42,801 - root - INFO - Scrape run finished. Total new articles saved this run: 3.
+2025-05-02 05:38:42,801 - main_orchestrator - INFO - Scraper run completed. Found 3 new JSON files potentially.
+2025-05-02 05:38:42,812 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 05:38:42,813 - main_orchestrator - INFO - Found 3 scraped articles to process.
+2025-05-02 05:38:42,814 - main_orchestrator - INFO - --- Processing article file: 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json ---
+2025-05-02 05:38:42,828 - main_orchestrator - ERROR - CRITICAL failure processing 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97 file 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:38:43,831 - main_orchestrator - INFO - --- Processing article file: 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json ---
+2025-05-02 05:38:43,846 - main_orchestrator - ERROR - CRITICAL failure processing 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08 file 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:38:44,849 - main_orchestrator - INFO - --- Processing article file: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json ---
+2025-05-02 05:38:44,867 - main_orchestrator - ERROR - CRITICAL failure processing b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 file b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:38:45,871 - main_orchestrator - INFO - Processing cycle complete. Successful: 0, Failed/Skipped: 3
+2025-05-02 05:38:45,871 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 05:41:51,564 - INFO - Use pytorch device_name: cpu
+2025-05-02 05:41:51,564 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 05:41:51,568 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 05:41:51,717 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:41:51,824 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 05:41:51,955 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 05:41:52,060 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:41:52,168 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 05:41:52,768 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 05:41:52,775 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 05:41:52,787 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 05:41:52,788 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 05:41:52,788 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 05:41:52,788 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 05:41:52,788 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 05:41:52,789 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 05:41:52,789 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 05:41:52,789 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 05:41:52,789 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 05:41:52,858 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 05:41:52,859 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 05:41:52,859 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 05:41:52,943 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 05:41:52,943 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 05:41:52,943 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 05:41:53,150 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 05:41:53,150 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 05:41:53,150 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 05:41:53,251 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 05:41:53,252 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 05:41:53,252 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 05:41:53,344 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 05:41:53,345 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 05:41:53,345 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 05:41:53,444 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:41:53,444 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 05:41:54,049 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 05:41:54,049 - root - INFO - Found new article: Checked and found: The LinkedIn report that highlights Israeli leadership - The Jerusalem Post (ID: 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b)
+2025-05-02 05:41:54,050 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json (Title: Checked and found: The LinkedIn report that highlights Israeli leadership - The Jerusalem Post)
+2025-05-02 05:41:54,051 - root - INFO - Successfully saved new article: Checked and found: The LinkedIn report that highlights Israeli leadership - The Jerusalem Post
+2025-05-02 05:41:54,051 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 1 new articles.
+2025-05-02 05:41:54,051 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 05:41:54,708 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 05:41:54,708 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 0 new articles.
+2025-05-02 05:41:54,708 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 05:41:54,978 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:41:54,978 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 05:41:55,198 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 05:41:55,198 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 05:41:55,198 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 05:41:55,283 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 05:41:55,283 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 05:41:55,283 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 05:41:55,673 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 05:41:55,673 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 05:41:55,791 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 05:41:55,791 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 05:41:55,881 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 05:41:55,881 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 05:41:55,881 - root - INFO - Scrape run finished. Total new articles saved this run: 1.
+2025-05-02 05:41:55,881 - main_orchestrator - INFO - Scraper run completed. Found 1 new JSON files potentially.
+2025-05-02 05:41:55,882 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 05:41:55,883 - main_orchestrator - INFO - Found 4 scraped articles to process.
+2025-05-02 05:41:55,885 - main_orchestrator - INFO - --- Processing article file: 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json ---
+2025-05-02 05:41:55,886 - main_orchestrator - ERROR - CRITICAL failure processing 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97 file 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:41:56,891 - main_orchestrator - INFO - --- Processing article file: 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json ---
+2025-05-02 05:41:56,893 - main_orchestrator - ERROR - CRITICAL failure processing 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08 file 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:41:57,895 - main_orchestrator - INFO - --- Processing article file: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json ---
+2025-05-02 05:41:57,896 - main_orchestrator - ERROR - CRITICAL failure processing b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 file b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:41:58,900 - main_orchestrator - INFO - --- Processing article file: 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json ---
+2025-05-02 05:41:58,920 - main_orchestrator - ERROR - CRITICAL failure processing 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b file 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:41:59,922 - main_orchestrator - INFO - Processing cycle complete. Successful: 0, Failed/Skipped: 4
+2025-05-02 05:41:59,922 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 05:57:42,767 - INFO - Use pytorch device_name: cpu
+2025-05-02 05:57:42,767 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 05:57:42,770 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 05:57:42,917 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:57:43,020 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 05:57:43,123 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 05:57:43,262 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:57:43,375 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 05:57:44,089 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 05:57:44,103 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 05:57:44,119 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 05:57:44,119 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 05:57:44,120 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 05:57:44,120 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 05:57:44,120 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 05:57:44,121 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 05:57:44,122 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 05:57:44,122 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 05:57:44,122 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 05:57:44,222 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 05:57:44,222 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 05:57:44,222 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 05:57:44,309 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 05:57:44,310 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 05:57:44,310 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 05:57:44,482 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 05:57:44,482 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 05:57:44,482 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 05:57:44,593 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 05:57:44,593 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 05:57:44,593 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 05:57:44,698 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 05:57:44,698 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 05:57:44,698 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 05:57:44,801 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:57:44,801 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 05:57:45,301 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 05:57:45,301 - root - INFO - Found new article: Trust, attitudes and use of artificial intelligence: A global study 2025 - KPMG (ID: 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250)
+2025-05-02 05:57:45,302 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json (Title: Trust, attitudes and use of artificial intelligence: A global study 2025 - KPMG)
+2025-05-02 05:57:45,303 - root - INFO - Successfully saved new article: Trust, attitudes and use of artificial intelligence: A global study 2025 - KPMG
+2025-05-02 05:57:45,304 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 1 new articles.
+2025-05-02 05:57:45,304 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 05:57:46,002 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 05:57:46,002 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 0 new articles.
+2025-05-02 05:57:46,003 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 05:57:46,744 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:57:46,745 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 05:57:47,013 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 05:57:47,013 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 05:57:47,013 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 05:57:47,094 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 05:57:47,094 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 05:57:47,094 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 05:57:47,547 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 05:57:47,547 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 05:57:47,693 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 05:57:47,693 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 05:57:47,797 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 05:57:47,797 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 05:57:47,797 - root - INFO - Scrape run finished. Total new articles saved this run: 1.
+2025-05-02 05:57:47,797 - main_orchestrator - INFO - Scraper run completed. Found 1 new JSON files potentially.
+2025-05-02 05:57:47,798 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 05:57:47,799 - main_orchestrator - INFO - Found 5 scraped articles to process.
+2025-05-02 05:57:47,801 - main_orchestrator - INFO - --- Processing article file: 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json ---
+2025-05-02 05:57:47,802 - main_orchestrator - ERROR - CRITICAL failure processing 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97 file 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:57:48,809 - main_orchestrator - INFO - --- Processing article file: 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json ---
+2025-05-02 05:57:48,809 - main_orchestrator - ERROR - CRITICAL failure processing 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08 file 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:57:49,815 - main_orchestrator - INFO - --- Processing article file: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json ---
+2025-05-02 05:57:49,816 - main_orchestrator - ERROR - CRITICAL failure processing b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 file b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:57:50,821 - main_orchestrator - INFO - --- Processing article file: 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json ---
+2025-05-02 05:57:50,823 - main_orchestrator - ERROR - CRITICAL failure processing 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b file 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:57:51,827 - main_orchestrator - INFO - --- Processing article file: 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json ---
+2025-05-02 05:57:51,851 - main_orchestrator - ERROR - CRITICAL failure processing 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250 file 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:57:52,853 - main_orchestrator - INFO - Processing cycle complete. Successful: 0, Failed/Skipped: 5
+2025-05-02 05:57:52,853 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 05:59:12,150 - INFO - Use pytorch device_name: cpu
+2025-05-02 05:59:12,150 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 05:59:12,152 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 05:59:12,299 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:59:12,405 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 05:59:12,512 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 05:59:12,615 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 05:59:12,724 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 05:59:13,457 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 05:59:13,465 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 05:59:13,481 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 05:59:13,481 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 05:59:13,481 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 05:59:13,481 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 05:59:13,482 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 05:59:13,482 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 05:59:13,482 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 05:59:13,482 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 05:59:13,482 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 05:59:13,545 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 05:59:13,545 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 05:59:13,545 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 05:59:13,625 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 05:59:13,626 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 05:59:13,626 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 05:59:13,796 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 05:59:13,797 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 05:59:13,797 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 05:59:13,888 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 05:59:13,888 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 05:59:13,888 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 05:59:13,974 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 05:59:13,974 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 05:59:13,974 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 05:59:14,067 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:59:14,067 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 05:59:14,176 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 05:59:14,177 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 0 new articles.
+2025-05-02 05:59:14,177 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 05:59:14,829 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 05:59:14,829 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 0 new articles.
+2025-05-02 05:59:14,829 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 05:59:15,086 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 05:59:15,086 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 05:59:15,659 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 05:59:15,659 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 05:59:15,660 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 05:59:15,739 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 05:59:15,739 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 05:59:15,739 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 05:59:16,124 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 05:59:16,124 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 05:59:16,237 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 05:59:16,238 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 05:59:16,327 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 05:59:16,327 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 05:59:16,327 - root - INFO - Scrape run finished. Total new articles saved this run: 0.
+2025-05-02 05:59:16,327 - main_orchestrator - INFO - Scraper run completed. Found 0 new JSON files potentially.
+2025-05-02 05:59:16,328 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 05:59:16,328 - main_orchestrator - INFO - Found 5 scraped articles to process.
+2025-05-02 05:59:16,330 - main_orchestrator - INFO - --- Processing article file: 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json ---
+2025-05-02 05:59:16,330 - main_orchestrator - ERROR - CRITICAL failure processing 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97 file 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:59:17,334 - main_orchestrator - INFO - --- Processing article file: 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json ---
+2025-05-02 05:59:17,334 - main_orchestrator - ERROR - CRITICAL failure processing 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08 file 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:59:18,343 - main_orchestrator - INFO - --- Processing article file: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json ---
+2025-05-02 05:59:18,343 - main_orchestrator - ERROR - CRITICAL failure processing b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 file b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:59:19,346 - main_orchestrator - INFO - --- Processing article file: 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json ---
+2025-05-02 05:59:19,347 - main_orchestrator - ERROR - CRITICAL failure processing 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b file 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:59:20,349 - main_orchestrator - INFO - --- Processing article file: 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json ---
+2025-05-02 05:59:20,350 - main_orchestrator - ERROR - CRITICAL failure processing 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250 file 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 05:59:21,353 - main_orchestrator - INFO - Processing cycle complete. Successful: 0, Failed/Skipped: 5
+2025-05-02 05:59:21,353 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 06:20:08,229 - INFO - Use pytorch device_name: cpu
+2025-05-02 06:20:08,229 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 06:20:08,231 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 06:20:08,391 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 06:20:08,494 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 06:20:08,596 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 06:20:08,698 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 06:20:08,800 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 06:20:09,489 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 06:20:09,495 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 06:20:09,507 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 06:20:09,507 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 06:20:09,507 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 06:20:09,507 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 06:20:09,507 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 06:20:09,508 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 06:20:09,508 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 06:20:09,508 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 06:20:09,508 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 06:20:09,588 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 06:20:09,589 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 06:20:09,589 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 06:20:09,676 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 06:20:09,676 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 06:20:09,677 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 06:20:09,878 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 06:20:09,878 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 06:20:09,878 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 06:20:09,965 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 06:20:09,965 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 06:20:09,965 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 06:20:10,065 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 06:20:10,066 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 06:20:10,066 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 06:20:10,157 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 06:20:10,157 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 06:20:10,640 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 06:20:10,641 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 0 new articles.
+2025-05-02 06:20:10,641 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 06:20:11,300 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 06:20:11,301 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 0 new articles.
+2025-05-02 06:20:11,301 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 06:20:11,701 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 06:20:11,701 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 06:20:12,395 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 06:20:12,395 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 06:20:12,395 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 06:20:12,477 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 06:20:12,477 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 06:20:12,477 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 06:20:12,934 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 06:20:12,934 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 06:20:13,104 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 06:20:13,104 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 06:20:13,449 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 06:20:13,449 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 06:20:13,449 - root - INFO - Scrape run finished. Total new articles saved this run: 0.
+2025-05-02 06:20:13,450 - main_orchestrator - INFO - Scraper run completed. Found 0 new JSON files potentially.
+2025-05-02 06:20:13,462 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 06:20:13,462 - main_orchestrator - INFO - Found 5 scraped articles to process.
+2025-05-02 06:20:13,463 - main_orchestrator - INFO - --- Processing article file: 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json ---
+2025-05-02 06:20:13,479 - main_orchestrator - ERROR - CRITICAL failure processing 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97 file 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:20:14,482 - main_orchestrator - INFO - --- Processing article file: 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json ---
+2025-05-02 06:20:14,482 - main_orchestrator - ERROR - CRITICAL failure processing 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08 file 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:20:15,485 - main_orchestrator - INFO - --- Processing article file: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json ---
+2025-05-02 06:20:15,485 - main_orchestrator - ERROR - CRITICAL failure processing b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 file b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:20:16,489 - main_orchestrator - INFO - --- Processing article file: 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json ---
+2025-05-02 06:20:16,583 - main_orchestrator - ERROR - CRITICAL failure processing 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b file 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:20:17,587 - main_orchestrator - INFO - --- Processing article file: 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json ---
+2025-05-02 06:20:17,610 - main_orchestrator - ERROR - CRITICAL failure processing 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250 file 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:20:18,612 - main_orchestrator - INFO - Processing cycle complete. Successful: 0, Failed/Skipped: 5
+2025-05-02 06:20:18,613 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 06:40:05,538 - INFO - Use pytorch device_name: cpu
+2025-05-02 06:40:05,538 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 06:40:05,541 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 06:40:05,708 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 06:40:05,813 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 06:40:05,914 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 06:40:06,016 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 06:40:06,123 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 06:40:06,833 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 06:40:06,856 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 06:40:06,869 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 06:40:06,869 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 06:40:06,869 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 06:40:06,869 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 06:40:06,870 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 06:40:06,871 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 06:40:06,871 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 06:40:06,871 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 06:40:06,871 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 06:40:06,974 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 06:40:06,975 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 06:40:06,975 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 06:40:07,058 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 06:40:07,058 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 06:40:07,058 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 06:40:07,219 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 06:40:07,219 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 06:40:07,219 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 06:40:07,330 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 06:40:07,330 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 06:40:07,330 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 06:40:07,443 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 06:40:07,443 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 06:40:07,443 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 06:40:07,552 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 06:40:07,552 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 06:40:08,034 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 06:40:08,035 - root - INFO - Found new article: Impact of Artificial Intelligence on future of workplaces: Dual-edged sword - AzerNews (ID: 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd)
+2025-05-02 06:40:08,035 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd.json (Title: Impact of Artificial Intelligence on future of workplaces: Dual-edged sword - AzerNews)
+2025-05-02 06:40:08,036 - root - INFO - Successfully saved new article: Impact of Artificial Intelligence on future of workplaces: Dual-edged sword - AzerNews
+2025-05-02 06:40:08,036 - root - INFO - Found new article: 1 No-Brainer Artificial Intelligence (AI) Stock to Buy Right Now - Nasdaq (ID: 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16)
+2025-05-02 06:40:08,037 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16.json (Title: 1 No-Brainer Artificial Intelligence (AI) Stock to Buy Right Now - Nasdaq)
+2025-05-02 06:40:08,038 - root - INFO - Successfully saved new article: 1 No-Brainer Artificial Intelligence (AI) Stock to Buy Right Now - Nasdaq
+2025-05-02 06:40:08,039 - root - INFO - Found new article: Even AI is embarrassed by our team meetings - The Nightly (ID: f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8)
+2025-05-02 06:40:08,039 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8.json (Title: Even AI is embarrassed by our team meetings - The Nightly)
+2025-05-02 06:40:08,040 - root - INFO - Successfully saved new article: Even AI is embarrassed by our team meetings - The Nightly
+2025-05-02 06:40:08,040 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 3 new articles.
+2025-05-02 06:40:08,040 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 06:40:08,708 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 06:40:08,709 - root - INFO - Found new article: AI suggestions make writing more generic, Western (ID: 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173)
+2025-05-02 06:40:08,710 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173.json (Title: AI suggestions make writing more generic, Western)
+2025-05-02 06:40:08,711 - root - INFO - Successfully saved new article: AI suggestions make writing more generic, Western
+2025-05-02 06:40:08,712 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 1 new articles.
+2025-05-02 06:40:08,712 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 06:40:09,802 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 06:40:09,802 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 06:40:10,045 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 06:40:10,045 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 06:40:10,045 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 06:40:10,142 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 06:40:10,142 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 06:40:10,142 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 06:40:10,609 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 06:40:10,609 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 06:40:10,775 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 06:40:10,775 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 06:40:10,916 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 06:40:10,917 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 06:40:10,917 - root - INFO - Scrape run finished. Total new articles saved this run: 4.
+2025-05-02 06:40:10,917 - main_orchestrator - INFO - Scraper run completed. Found 4 new JSON files potentially.
+2025-05-02 06:40:10,918 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 06:40:10,918 - main_orchestrator - INFO - Found 9 scraped articles to process.
+2025-05-02 06:40:10,921 - main_orchestrator - INFO - --- Processing article file: 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json ---
+2025-05-02 06:40:10,922 - main_orchestrator - ERROR - CRITICAL failure processing 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97 file 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:40:11,927 - main_orchestrator - INFO - --- Processing article file: 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json ---
+2025-05-02 06:40:11,927 - main_orchestrator - ERROR - CRITICAL failure processing 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08 file 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:40:12,936 - main_orchestrator - INFO - --- Processing article file: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json ---
+2025-05-02 06:40:12,937 - main_orchestrator - ERROR - CRITICAL failure processing b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 file b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:40:13,939 - main_orchestrator - INFO - --- Processing article file: 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json ---
+2025-05-02 06:40:13,940 - main_orchestrator - ERROR - CRITICAL failure processing 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b file 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:40:14,944 - main_orchestrator - INFO - --- Processing article file: 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json ---
+2025-05-02 06:40:14,945 - main_orchestrator - ERROR - CRITICAL failure processing 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250 file 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:40:15,949 - main_orchestrator - INFO - --- Processing article file: 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd.json ---
+2025-05-02 06:40:15,963 - main_orchestrator - ERROR - CRITICAL failure processing 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd file 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:40:16,965 - main_orchestrator - INFO - --- Processing article file: 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16.json ---
+2025-05-02 06:40:16,978 - main_orchestrator - ERROR - CRITICAL failure processing 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16 file 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:40:17,980 - main_orchestrator - INFO - --- Processing article file: f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8.json ---
+2025-05-02 06:40:18,002 - main_orchestrator - ERROR - CRITICAL failure processing f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8 file f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:40:19,006 - main_orchestrator - INFO - --- Processing article file: 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173.json ---
+2025-05-02 06:40:19,022 - main_orchestrator - ERROR - CRITICAL failure processing 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173 file 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 06:40:20,024 - main_orchestrator - INFO - Processing cycle complete. Successful: 0, Failed/Skipped: 9
+2025-05-02 06:40:20,024 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 07:03:57,955 - INFO - Use pytorch device_name: cpu
+2025-05-02 07:03:57,956 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 07:03:57,960 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 07:03:58,105 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 07:03:58,373 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 07:03:58,473 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 07:03:58,575 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 07:03:58,676 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 07:03:59,368 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 07:03:59,372 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 07:03:59,383 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 07:03:59,383 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 07:03:59,383 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 07:03:59,383 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 07:03:59,384 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 07:03:59,384 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 07:03:59,384 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 07:03:59,384 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 07:03:59,384 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 07:03:59,455 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 07:03:59,455 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 07:03:59,456 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 07:03:59,530 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 07:03:59,530 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 07:03:59,530 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 07:03:59,731 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 07:03:59,731 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 07:03:59,731 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 07:03:59,813 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 07:03:59,813 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 07:03:59,813 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 07:03:59,903 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 07:03:59,904 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 07:03:59,904 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 07:03:59,995 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 07:03:59,995 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 07:04:00,451 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 07:04:00,452 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 0 new articles.
+2025-05-02 07:04:00,452 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 07:04:01,095 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 07:04:01,096 - root - INFO - Found new article: Zoho Halts $700M Semiconductor Plan (ID: 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0)
+2025-05-02 07:04:01,097 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0.json (Title: Zoho Halts $700M Semiconductor Plan)
+2025-05-02 07:04:01,097 - root - INFO - Successfully saved new article: Zoho Halts $700M Semiconductor Plan
+2025-05-02 07:04:01,098 - root - INFO - Found new article: Reflecting on a Year of Gamedev in Zig (ID: 830cd1dfff4831aefc82f321e52b1a80a0f2e207b45128f48765d038ac4bc228)
+2025-05-02 07:04:01,098 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\830cd1dfff4831aefc82f321e52b1a80a0f2e207b45128f48765d038ac4bc228.json (Title: Reflecting on a Year of Gamedev in Zig)
+2025-05-02 07:04:01,099 - root - INFO - Successfully saved new article: Reflecting on a Year of Gamedev in Zig
+2025-05-02 07:04:01,099 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 2 new articles.
+2025-05-02 07:04:01,099 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 07:04:01,477 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 07:04:01,478 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 07:04:01,786 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 07:04:01,786 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 07:04:01,786 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 07:04:01,860 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 07:04:01,860 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 07:04:01,860 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 07:04:02,335 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 07:04:02,335 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 07:04:02,468 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 07:04:02,468 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 07:04:02,583 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 07:04:02,584 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 07:04:02,584 - root - INFO - Scrape run finished. Total new articles saved this run: 2.
+2025-05-02 07:04:02,584 - main_orchestrator - INFO - Scraper run completed. Found 2 new JSON files potentially.
+2025-05-02 07:04:02,585 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 07:04:02,586 - main_orchestrator - INFO - Found 11 scraped articles to process.
+2025-05-02 07:04:02,587 - main_orchestrator - INFO - --- Processing article file: 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json ---
+2025-05-02 07:04:02,588 - main_orchestrator - ERROR - CRITICAL failure processing 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97 file 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:04:03,591 - main_orchestrator - INFO - --- Processing article file: 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json ---
+2025-05-02 07:04:03,592 - main_orchestrator - ERROR - CRITICAL failure processing 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08 file 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:04:04,595 - main_orchestrator - INFO - --- Processing article file: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json ---
+2025-05-02 07:04:04,595 - main_orchestrator - ERROR - CRITICAL failure processing b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 file b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:04:05,598 - main_orchestrator - INFO - --- Processing article file: 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json ---
+2025-05-02 07:04:05,599 - main_orchestrator - ERROR - CRITICAL failure processing 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b file 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:04:06,604 - main_orchestrator - INFO - --- Processing article file: 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json ---
+2025-05-02 07:04:06,605 - main_orchestrator - ERROR - CRITICAL failure processing 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250 file 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:04:07,611 - main_orchestrator - INFO - --- Processing article file: 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd.json ---
+2025-05-02 07:04:07,611 - main_orchestrator - ERROR - CRITICAL failure processing 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd file 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:04:08,616 - main_orchestrator - INFO - --- Processing article file: 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16.json ---
+2025-05-02 07:04:08,617 - main_orchestrator - ERROR - CRITICAL failure processing 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16 file 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:04:09,626 - main_orchestrator - INFO - --- Processing article file: f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8.json ---
+2025-05-02 07:04:09,627 - main_orchestrator - ERROR - CRITICAL failure processing f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8 file f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:04:10,633 - main_orchestrator - INFO - --- Processing article file: 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173.json ---
+2025-05-02 07:04:10,633 - main_orchestrator - ERROR - CRITICAL failure processing 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173 file 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:04:11,636 - main_orchestrator - INFO - --- Processing article file: 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0.json ---
+2025-05-02 07:04:11,655 - main_orchestrator - ERROR - CRITICAL failure processing 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0 file 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:04:12,657 - main_orchestrator - INFO - --- Processing article file: 830cd1dfff4831aefc82f321e52b1a80a0f2e207b45128f48765d038ac4bc228.json ---
+2025-05-02 07:04:12,672 - main_orchestrator - ERROR - CRITICAL failure processing 830cd1dfff4831aefc82f321e52b1a80a0f2e207b45128f48765d038ac4bc228 file 830cd1dfff4831aefc82f321e52b1a80a0f2e207b45128f48765d038ac4bc228.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:04:13,675 - main_orchestrator - INFO - Processing cycle complete. Successful: 0, Failed/Skipped: 11
+2025-05-02 07:04:13,675 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 07:15:06,481 - INFO - Use pytorch device_name: cpu
+2025-05-02 07:15:06,482 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 07:15:06,485 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 07:15:06,633 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 07:15:06,742 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 07:15:06,855 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 07:15:06,969 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 07:15:07,231 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 07:15:08,010 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 07:15:08,019 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 07:15:08,030 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 07:15:08,031 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 07:15:08,031 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 07:15:08,031 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 07:15:08,032 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 07:15:08,033 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 07:15:08,033 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 07:15:08,033 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 07:15:08,033 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 07:15:08,129 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 07:15:08,129 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 07:15:08,129 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 07:15:08,216 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 07:15:08,217 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 07:15:08,217 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 07:15:08,422 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 07:15:08,422 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 07:15:08,422 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 07:15:08,536 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 07:15:08,536 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 07:15:08,536 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 07:15:08,664 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 07:15:08,665 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 07:15:08,665 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 07:15:08,797 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 07:15:08,797 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 07:15:09,317 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 07:15:09,318 - root - INFO - Found new article: Nvidia CEO Jensen Huang Sounds Alarm As 50% Of AI Researchers Are Chinese, Urges America To Reskill Amid 'Infinite Game' - Yahoo Finance (ID: 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea)
+2025-05-02 07:15:09,320 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea.json (Title: Nvidia CEO Jensen Huang Sounds Alarm As 50% Of AI Researchers Are Chinese, Urges America To Reskill Amid 'Infinite Game' - Yahoo Finance)
+2025-05-02 07:15:09,320 - root - INFO - Successfully saved new article: Nvidia CEO Jensen Huang Sounds Alarm As 50% Of AI Researchers Are Chinese, Urges America To Reskill Amid 'Infinite Game' - Yahoo Finance
+2025-05-02 07:15:09,321 - root - INFO - Found new article: Customer First, Agentic AI Next. Amazon Lays Out Its 2025 Roadmap - PYMNTS.com (ID: 7bc8c4e03cd33351b0a0b08a017d5603a798a725ad31742c42ce1a10ea56b9f3)
+2025-05-02 07:15:09,322 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\7bc8c4e03cd33351b0a0b08a017d5603a798a725ad31742c42ce1a10ea56b9f3.json (Title: Customer First, Agentic AI Next. Amazon Lays Out Its 2025 Roadmap - PYMNTS.com)
+2025-05-02 07:15:09,323 - root - INFO - Successfully saved new article: Customer First, Agentic AI Next. Amazon Lays Out Its 2025 Roadmap - PYMNTS.com
+2025-05-02 07:15:09,323 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 2 new articles.
+2025-05-02 07:15:09,323 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 07:15:10,030 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 07:15:10,030 - root - INFO - Found new article: Don't watermark your legal PDFs with purple dragons in suits (ID: e62e210516eeb53c0552b5b54105360f2cd83cea5dc73f9222d906afedc3589a)
+2025-05-02 07:15:10,032 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\e62e210516eeb53c0552b5b54105360f2cd83cea5dc73f9222d906afedc3589a.json (Title: Don't watermark your legal PDFs with purple dragons in suits)
+2025-05-02 07:15:10,033 - root - INFO - Successfully saved new article: Don't watermark your legal PDFs with purple dragons in suits
+2025-05-02 07:15:10,033 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 1 new articles.
+2025-05-02 07:15:10,033 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 07:15:11,410 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 07:15:11,410 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 07:15:11,656 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 07:15:11,656 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 07:15:11,656 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 07:15:11,729 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 07:15:11,730 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 07:15:11,730 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 07:15:12,193 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 07:15:12,194 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 07:15:12,332 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 07:15:12,332 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 07:15:12,442 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 07:15:12,442 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 07:15:12,443 - root - INFO - Scrape run finished. Total new articles saved this run: 3.
+2025-05-02 07:15:12,443 - main_orchestrator - INFO - Scraper run completed. Found 3 new JSON files potentially.
+2025-05-02 07:15:12,443 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 07:15:12,444 - main_orchestrator - INFO - Found 14 scraped articles to process.
+2025-05-02 07:15:12,447 - main_orchestrator - INFO - --- Processing article file: 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json ---
+2025-05-02 07:15:12,449 - main_orchestrator - ERROR - CRITICAL failure processing 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97 file 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:13,452 - main_orchestrator - INFO - --- Processing article file: 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json ---
+2025-05-02 07:15:13,453 - main_orchestrator - ERROR - CRITICAL failure processing 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08 file 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:14,457 - main_orchestrator - INFO - --- Processing article file: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json ---
+2025-05-02 07:15:14,458 - main_orchestrator - ERROR - CRITICAL failure processing b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 file b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:15,460 - main_orchestrator - INFO - --- Processing article file: 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json ---
+2025-05-02 07:15:15,460 - main_orchestrator - ERROR - CRITICAL failure processing 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b file 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:16,464 - main_orchestrator - INFO - --- Processing article file: 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json ---
+2025-05-02 07:15:16,464 - main_orchestrator - ERROR - CRITICAL failure processing 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250 file 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:17,467 - main_orchestrator - INFO - --- Processing article file: 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd.json ---
+2025-05-02 07:15:17,468 - main_orchestrator - ERROR - CRITICAL failure processing 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd file 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:18,475 - main_orchestrator - INFO - --- Processing article file: 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16.json ---
+2025-05-02 07:15:18,475 - main_orchestrator - ERROR - CRITICAL failure processing 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16 file 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:19,480 - main_orchestrator - INFO - --- Processing article file: f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8.json ---
+2025-05-02 07:15:19,480 - main_orchestrator - ERROR - CRITICAL failure processing f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8 file f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:20,484 - main_orchestrator - INFO - --- Processing article file: 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173.json ---
+2025-05-02 07:15:20,484 - main_orchestrator - ERROR - CRITICAL failure processing 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173 file 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:21,487 - main_orchestrator - INFO - --- Processing article file: 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0.json ---
+2025-05-02 07:15:21,487 - main_orchestrator - ERROR - CRITICAL failure processing 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0 file 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:22,493 - main_orchestrator - INFO - --- Processing article file: 830cd1dfff4831aefc82f321e52b1a80a0f2e207b45128f48765d038ac4bc228.json ---
+2025-05-02 07:15:22,494 - main_orchestrator - ERROR - CRITICAL failure processing 830cd1dfff4831aefc82f321e52b1a80a0f2e207b45128f48765d038ac4bc228 file 830cd1dfff4831aefc82f321e52b1a80a0f2e207b45128f48765d038ac4bc228.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:23,499 - main_orchestrator - INFO - --- Processing article file: 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea.json ---
+2025-05-02 07:15:23,515 - main_orchestrator - ERROR - CRITICAL failure processing 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea file 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:24,517 - main_orchestrator - INFO - --- Processing article file: 7bc8c4e03cd33351b0a0b08a017d5603a798a725ad31742c42ce1a10ea56b9f3.json ---
+2025-05-02 07:15:24,537 - main_orchestrator - ERROR - CRITICAL failure processing 7bc8c4e03cd33351b0a0b08a017d5603a798a725ad31742c42ce1a10ea56b9f3 file 7bc8c4e03cd33351b0a0b08a017d5603a798a725ad31742c42ce1a10ea56b9f3.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:25,540 - main_orchestrator - INFO - --- Processing article file: e62e210516eeb53c0552b5b54105360f2cd83cea5dc73f9222d906afedc3589a.json ---
+2025-05-02 07:15:25,551 - main_orchestrator - ERROR - CRITICAL failure processing e62e210516eeb53c0552b5b54105360f2cd83cea5dc73f9222d906afedc3589a file e62e210516eeb53c0552b5b54105360f2cd83cea5dc73f9222d906afedc3589a.json: name 'logger' is not defined
+Traceback (most recent call last):
+  File "e:\websites\dacoola\src\main.py", line 342, in process_single_article
+    article_data = run_filter_agent(article_data)
+  File "e:\websites\dacoola\src\agents\filter_news_agent.py", line 232, in run_filter_agent
+    logger.info(f"Running filter agent for article ID: {article_data.get('id', 'N/A')} Title: {article_title[:60]}...")
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-05-02 07:15:26,553 - main_orchestrator - INFO - Processing cycle complete. Successful: 0, Failed/Skipped: 14
+2025-05-02 07:15:26,553 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---
+2025-05-02 07:34:23,188 - INFO - Use pytorch device_name: cpu
+2025-05-02 07:34:23,188 - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 07:34:23,191 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-02 07:34:23,339 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 07:34:23,453 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-05-02 07:34:23,560 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/README.md HTTP/1.1" 200 0
+2025-05-02 07:34:23,671 - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/clip-ViT-B-32/resolve/main/modules.json HTTP/1.1" 200 0
+2025-05-02 07:34:23,780 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32/revision/main HTTP/1.1" 200 1648
+2025-05-02 07:34:25,900 - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/clip-ViT-B-32 HTTP/1.1" 200 1648
+2025-05-02 07:34:25,907 - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 07:34:25,971 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative.
+2025-05-02 07:34:25,971 - main_orchestrator - WARNING - CAMB_AI_API_KEY environment variable not set. TTS generation will be skipped.
+2025-05-02 07:34:25,972 - main_orchestrator - INFO - Jinja2 environment loaded from e:\websites\dacoola\templates
+2025-05-02 07:34:25,972 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 07:34:25,974 - main_orchestrator - INFO - Ensured data, public, and audio directories exist.
+2025-05-02 07:34:25,976 - main_orchestrator - INFO - Skipping TTS retry check - CAMB_AI_API_KEY not set.
+2025-05-02 07:34:25,976 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 07:34:25,977 - root - INFO - Starting scrape run for 14 feeds...
+2025-05-02 07:34:25,977 - root - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 07:34:26,065 - root - INFO - Feed https://techcrunch.com/feed/ fetched. Found 20 entries.
+2025-05-02 07:34:26,065 - root - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles.
+2025-05-02 07:34:26,065 - root - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-02 07:34:26,140 - root - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Found 10 entries.
+2025-05-02 07:34:26,140 - root - INFO - Finished feed https://www.wired.com/feed/tag/ai/latest/rss. Saved 0 new articles.
+2025-05-02 07:34:26,140 - root - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/ai
+2025-05-02 07:34:26,278 - root - WARNING - Feed http://feeds.arstechnica.com/arstechnica/ai potentially malformed. Reason: <unknown>:2:20: not well-formed (invalid token)
+2025-05-02 07:34:26,278 - root - ERROR - Failed to fetch feed http://feeds.arstechnica.com/arstechnica/ai. HTTP Status: 404
+2025-05-02 07:34:26,278 - root - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 07:34:26,373 - root - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Found 10 entries.
+2025-05-02 07:34:26,374 - root - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles.
+2025-05-02 07:34:26,374 - root - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 07:34:26,474 - root - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Found 28 entries.
+2025-05-02 07:34:26,474 - root - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles.
+2025-05-02 07:34:26,474 - root - INFO - Checking feed: https://www.theverge.com/tech/rss/index.xml
+2025-05-02 07:34:26,575 - root - ERROR - Failed to fetch feed https://www.theverge.com/tech/rss/index.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 07:34:26,575 - root - INFO - Checking feed: https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en
+2025-05-02 07:34:27,054 - root - INFO - Feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en fetched. Found 100 entries.
+2025-05-02 07:34:27,055 - root - INFO - Found new article: FutureHouse Unveils Superintelligent AI Agents to Revolutionize Scientific Discovery - Unite.AI (ID: 98e300bc597654112d1e1ad52db9a47439294f2dff0a4e60fb9c38df1e136c5b)
+2025-05-02 07:34:27,056 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\98e300bc597654112d1e1ad52db9a47439294f2dff0a4e60fb9c38df1e136c5b.json (Title: FutureHouse Unveils Superintelligent AI Agents to Revolutionize Scientific Discovery - Unite.AI)
+2025-05-02 07:34:27,057 - root - INFO - Successfully saved new article: FutureHouse Unveils Superintelligent AI Agents to Revolutionize Scientific Discovery - Unite.AI
+2025-05-02 07:34:27,057 - root - INFO - Finished feed https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en. Saved 1 new articles.
+2025-05-02 07:34:27,057 - root - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 07:34:27,708 - root - INFO - Feed https://news.ycombinator.com/rss fetched. Found 30 entries.
+2025-05-02 07:34:27,708 - root - INFO - Found new article: Owen Le Blanc: creator of the first Linux distribution (ID: e0b771efc530cfcc76ceff0782206fdedbc24bf4ab8b89a751013e9d95aa61ec)
+2025-05-02 07:34:27,710 - root - INFO - Saved new article: e:\websites\dacoola\data\scraped_articles\e0b771efc530cfcc76ceff0782206fdedbc24bf4ab8b89a751013e9d95aa61ec.json (Title: Owen Le Blanc: creator of the first Linux distribution)
+2025-05-02 07:34:27,711 - root - INFO - Successfully saved new article: Owen Le Blanc: creator of the first Linux distribution
+2025-05-02 07:34:27,711 - root - INFO - Finished feed https://news.ycombinator.com/rss. Saved 1 new articles.
+2025-05-02 07:34:27,711 - root - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 07:34:28,003 - root - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml: Likely received HTML error page instead of XML. Status: 404. Reason: text/html; charset=utf-8 is not an XML media type
+2025-05-02 07:34:28,003 - root - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 07:34:28,190 - root - WARNING - Feed https://ai.googleblog.com/feeds/posts/default?alt=rss potentially malformed. Reason: <unknown>:4:31: mismatched tag
+2025-05-02 07:34:28,191 - root - ERROR - Failed to fetch feed https://ai.googleblog.com/feeds/posts/default?alt=rss. HTTP Status: 404
+2025-05-02 07:34:28,191 - root - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 07:34:28,280 - root - WARNING - Feed https://openai.com/blog/rss.xml potentially malformed. Reason: <unknown>:4:17: not well-formed (invalid token)
+2025-05-02 07:34:28,280 - root - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-02 07:34:28,280 - root - INFO - Checking feed: https://deepmind.com/blog/feed/basic
+2025-05-02 07:34:28,752 - root - ERROR - Failed to fetch feed https://deepmind.com/blog/feed/basic. HTTP Status: 302
+2025-05-02 07:34:28,752 - root - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 07:34:28,886 - root - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 07:34:28,886 - root - INFO - Checking feed: http://machinelearningmastery.com/blog/feed/
+2025-05-02 07:34:28,994 - root - WARNING - Feed http://machinelearningmastery.com/blog/feed/ potentially malformed. Reason: <unknown>:2:737: not well-formed (invalid token)
+2025-05-02 07:34:28,994 - root - ERROR - Failed to fetch feed http://machinelearningmastery.com/blog/feed/. HTTP Status: 301
+2025-05-02 07:34:28,995 - root - INFO - Scrape run finished. Total new articles saved this run: 2.
+2025-05-02 07:34:28,995 - main_orchestrator - INFO - Scraper run completed. Found 2 new JSON files potentially.
+2025-05-02 07:34:29,091 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 07:34:29,092 - main_orchestrator - INFO - Found 16 scraped articles to process.
+2025-05-02 07:34:29,093 - main_orchestrator - INFO - --- Processing article file: 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97.json ---
+2025-05-02 07:34:29,116 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97 Title: Accounting Firms Aim Higher as AI Handles the Heavy Lifting ...
+2025-05-02 07:34:35,984 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='AI in accounting'
+2025-05-02 07:34:35,984 - main_orchestrator - INFO - Article 8bbe6389fe9a460abac77e41810a6672bfc373f70bd1f2b446c3f2217778af97 is Boring. Skipping.
+2025-05-02 07:34:36,986 - main_orchestrator - INFO - --- Processing article file: 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08.json ---
+2025-05-02 07:34:36,987 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08 Title: Chariot and Saucer...
+2025-05-02 07:34:45,214 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='No substantive content'
+2025-05-02 07:34:45,215 - main_orchestrator - INFO - Article 0ef97192ad4de8a96c0cbbc05a8e1b1677f2aaae29da6e03a7193be56798ae08 is Boring. Skipping.
+2025-05-02 07:34:46,216 - main_orchestrator - INFO - --- Processing article file: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json ---
+2025-05-02 07:34:46,216 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 Title: XAI Dev Leaks API Key for Private SpaceX, Tesla LLMs...
+2025-05-02 07:34:57,214 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Interesting, topic='AI Models', keyword='SpaceX Tesla LLM leak'
+2025-05-02 07:34:57,214 - main_orchestrator - INFO - Article b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 is Interesting (Topic: AI Models). Checking duplicates...
+2025-05-02 07:34:57,214 - src.agents.similarity_check_agent - INFO - Running similarity check for article: XAI Dev Leaks API Key for Private SpaceX, Tesla LLMs...
+2025-05-02 07:35:04,148 - src.agents.similarity_check_agent - INFO - Similarity check result: is_duplicate=False. Reason: The New Candidate Article reports on a specific incident involving XAI leaking API keys for SpaceX and Tesla LLMs, which is not covered in any of the Recently Published Articles.
+2025-05-02 07:35:04,148 - main_orchestrator - INFO - Article b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 passed similarity check.
+2025-05-02 07:35:04,148 - src.scrapers.image_scraper - INFO - Attempting to scrape image from source: https://krebsonsecurity.com/2025/05/xai-dev-leaks-api-key-for-private-spacex-tesla-llms/
+2025-05-02 07:35:04,214 - src.scrapers.image_scraper - INFO - Found twitter:image: https://krebsonsecurity.com/wp-content/uploads/2025/05/x-ai.png
+2025-05-02 07:35:04,214 - main_orchestrator - INFO - Using scraped image for b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74
+2025-05-02 07:35:04,214 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74...
+2025-05-02 07:35:34,956 - src.agents.seo_article_generator_agent - INFO - Successfully parsed SEO content for b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.
+2025-05-02 07:35:34,957 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74...
+2025-05-02 07:35:43,385 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74
+2025-05-02 07:35:43,385 - main_orchestrator - INFO - Skipping TTS generation - CAMB_AI_API_KEY not set.
+2025-05-02 07:35:43,467 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\xai-dev-leaks-api-key-for-private-spacex-tesla-llms.html
+2025-05-02 07:35:43,504 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\site_data.json (20 articles).
+2025-05-02 07:35:43,506 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\all_articles.json (35 articles).
+2025-05-02 07:35:43,511 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74.json
+2025-05-02 07:35:43,512 - main_orchestrator - INFO - --- Successfully processed article: b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74 ---
+2025-05-02 07:35:44,513 - main_orchestrator - INFO - --- Processing article file: 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b.json ---
+2025-05-02 07:35:44,531 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b Title: Checked and found: The LinkedIn report that highlights Israe...
+2025-05-02 07:35:51,521 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='LinkedIn report'
+2025-05-02 07:35:51,521 - main_orchestrator - INFO - Article 99d9cc8c763d93b9e27b722e1aa949c17908c06cbf05a836c15dbaa66d39dd7b is Boring. Skipping.
+2025-05-02 07:35:52,522 - main_orchestrator - INFO - --- Processing article file: 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250.json ---
+2025-05-02 07:35:52,542 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250 Title: Trust, attitudes and use of artificial intelligence: A globa...
+2025-05-02 07:36:01,305 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Society', keyword='AI attitudes study'
+2025-05-02 07:36:01,306 - main_orchestrator - INFO - Article 1f8cd443eb90a88f7b3e7f78b8d403caf76cb96af657d362b639323fe63fa250 is Boring. Skipping.
+2025-05-02 07:36:02,307 - main_orchestrator - INFO - --- Processing article file: 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd.json ---
+2025-05-02 07:36:02,320 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd Title: Impact of Artificial Intelligence on future of workplaces: D...
+2025-05-02 07:36:09,503 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Society', keyword='AI workplace impact'
+2025-05-02 07:36:09,503 - main_orchestrator - INFO - Article 63f1a01691319f94e6c90937444de75838c7a61e9c7bd34b7119e3fba3ce8ddd is Boring. Skipping.
+2025-05-02 07:36:10,505 - main_orchestrator - INFO - --- Processing article file: 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16.json ---
+2025-05-02 07:36:10,518 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16 Title: 1 No-Brainer Artificial Intelligence (AI) Stock to Buy Right...
+2025-05-02 07:36:19,293 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Finance', keyword='AI stock recommendation'
+2025-05-02 07:36:19,293 - main_orchestrator - INFO - Article 918df8b1c70075fef76cfb0f1368a09e8a36e320e5ec67c6c330f52bb5bd6f16 is Boring. Skipping.
+2025-05-02 07:36:20,294 - main_orchestrator - INFO - --- Processing article file: f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8.json ---
+2025-05-02 07:36:20,307 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8 Title: Even AI is embarrassed by our team meetings - The Nightly...
+2025-05-02 07:36:28,596 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Society', keyword='AI humor'
+2025-05-02 07:36:28,596 - main_orchestrator - INFO - Article f3814c40c318f427a86a663c6b39e2cf58745b399484fc03ca67e9505dd826e8 is Boring. Skipping.
+2025-05-02 07:36:29,598 - main_orchestrator - INFO - --- Processing article file: 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173.json ---
+2025-05-02 07:36:29,598 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173 Title: AI suggestions make writing more generic, Western...
+2025-05-02 07:36:36,468 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Society', keyword='AI writing impact'
+2025-05-02 07:36:36,468 - main_orchestrator - INFO - Article 0d54d66b68c6ca597661cac52f5bd4c0b478f1c55a751bcdd372199c45d92173 is Boring. Skipping.
+2025-05-02 07:36:37,469 - main_orchestrator - INFO - --- Processing article file: 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0.json ---
+2025-05-02 07:36:37,470 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0 Title: Zoho Halts $700M Semiconductor Plan...
+2025-05-02 07:36:44,271 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Interesting, topic='Business', keyword='Zoho semiconductor plan halt'
+2025-05-02 07:36:44,271 - main_orchestrator - INFO - Article 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0 is Interesting (Topic: Business). Checking duplicates...
+2025-05-02 07:36:44,272 - src.agents.similarity_check_agent - INFO - Running similarity check for article: Zoho Halts $700M Semiconductor Plan...
+2025-05-02 07:36:52,712 - src.agents.similarity_check_agent - INFO - Similarity check result: is_duplicate=False. Reason: The New Candidate Article reports on Zoho halting a $700M semiconductor plan, which is not covered in any of the Recently Published Articles.
+2025-05-02 07:36:52,712 - main_orchestrator - INFO - Article 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0 passed similarity check.
+2025-05-02 07:36:52,712 - src.scrapers.image_scraper - INFO - Attempting to scrape image from source: https://semiconductorsinsight.com/zoho-halts-700-million-semiconductor-plan/
+2025-05-02 07:36:52,784 - src.scrapers.image_scraper - INFO - Found og:image: https://i0.wp.com/semiconductorsinsight.com/wp-content/uploads/2025/05/image.png
+2025-05-02 07:36:52,785 - main_orchestrator - INFO - Using scraped image for 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0
+2025-05-02 07:36:52,785 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0...
+2025-05-02 07:37:21,414 - src.agents.seo_article_generator_agent - INFO - Successfully parsed SEO content for 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0.
+2025-05-02 07:37:21,414 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0...
+2025-05-02 07:37:27,765 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0
+2025-05-02 07:37:27,765 - main_orchestrator - INFO - Skipping TTS generation - CAMB_AI_API_KEY not set.
+2025-05-02 07:37:27,773 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\zoho-halts-700m-semiconductor-plan.html
+2025-05-02 07:37:27,780 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\site_data.json (20 articles).
+2025-05-02 07:37:27,783 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\all_articles.json (36 articles).
+2025-05-02 07:37:27,786 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0.json
+2025-05-02 07:37:27,787 - main_orchestrator - INFO - --- Successfully processed article: 5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0 ---
+2025-05-02 07:37:28,789 - main_orchestrator - INFO - --- Processing article file: 830cd1dfff4831aefc82f321e52b1a80a0f2e207b45128f48765d038ac4bc228.json ---
+2025-05-02 07:37:28,790 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 830cd1dfff4831aefc82f321e52b1a80a0f2e207b45128f48765d038ac4bc228 Title: Reflecting on a Year of Gamedev in Zig...
+2025-05-02 07:37:35,366 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Software', keyword='Gamedev in Zig'
+2025-05-02 07:37:35,366 - main_orchestrator - INFO - Article 830cd1dfff4831aefc82f321e52b1a80a0f2e207b45128f48765d038ac4bc228 is Boring. Skipping.
+2025-05-02 07:37:36,367 - main_orchestrator - INFO - --- Processing article file: 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea.json ---
+2025-05-02 07:37:36,382 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea Title: Nvidia CEO Jensen Huang Sounds Alarm As 50% Of AI Researcher...
+2025-05-02 07:37:44,187 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Interesting, topic='Society', keyword='AI researcher demographics'
+2025-05-02 07:37:44,187 - main_orchestrator - INFO - Article 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea is Interesting (Topic: Society). Checking duplicates...
+2025-05-02 07:37:44,187 - src.agents.similarity_check_agent - INFO - Running similarity check for article: Nvidia CEO Jensen Huang Sounds Alarm As 50% Of AI Researcher...
+2025-05-02 07:37:49,646 - src.agents.similarity_check_agent - INFO - Similarity check result: is_duplicate=False. Reason: No recently published article discusses Nvidia CEO Jensen Huang's comments on the proportion of Chinese AI researchers and urging America to reskill.
+2025-05-02 07:37:49,646 - main_orchestrator - INFO - Article 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea passed similarity check.
+2025-05-02 07:37:49,646 - src.scrapers.image_scraper - INFO - Attempting to scrape image from source: https://news.google.com/rss/articles/CBMiggFBVV95cUxPdkVMeUlPbXFONFhjQlZfNzROMGV0TG9DMUdiR3JzSXdrbUI2VlI4bVhaa0ZmeEpjbjlzZ0VMYzdNaGFlZE1fWTBTek9vbFA4ZWpLaEJPTE9PRlRKdzJtbE9YS1cxX3U1RUpPMUJUMmprYS1tcmVkVXlWN0NRaGQwX1J3?oc=5
+2025-05-02 07:37:49,844 - src.scrapers.image_scraper - WARNING - No suitable meta image tag found at https://news.google.com/rss/articles/CBMiggFBVV95cUxPdkVMeUlPbXFONFhjQlZfNzROMGV0TG9DMUdiR3JzSXdrbUI2VlI4bVhaa0ZmeEpjbjlzZ0VMYzdNaGFlZE1fWTBTek9vbFA4ZWpLaEJPTE9PRlRKdzJtbE9YS1cxX3U1RUpPMUJUMmprYS1tcmVkVXlWN0NRaGQwX1J3?oc=5
+2025-05-02 07:37:49,844 - main_orchestrator - INFO - Image scraping failed/no image, using API search for 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea...
+2025-05-02 07:37:49,844 - src.scrapers.image_scraper - INFO - Finding best image for query: 'AI researcher demographics' (CLIP Enabled: True)
+2025-05-02 07:37:52,259 - src.scrapers.image_scraper - INFO - SerpApi found 5 relevant images for query: 'AI researcher demographics'
+2025-05-02 07:37:52,259 - src.scrapers.image_scraper - INFO - CLIP filtering 5 images against prompt: 'AI researcher demographics'
+2025-05-02 07:37:58,586 - src.scrapers.image_scraper - INFO - CLIP selected best image: https://electroiq.com/wp-content/uploads/2024/08/Artificial-Intelligence-statistics.webp with score 0.2801
+2025-05-02 07:37:58,589 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea...
+2025-05-02 07:38:37,280 - src.agents.seo_article_generator_agent - WARNING - Generated title tag exceeds 60 chars: 'Nvidia CEO Warns of AI Researcher Demographics Shift, Urges US Action'
+2025-05-02 07:38:37,280 - src.agents.seo_article_generator_agent - INFO - Successfully parsed SEO content for 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea.
+2025-05-02 07:38:37,281 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea...
+2025-05-02 07:38:43,723 - src.agents.tags_generator_agent - INFO - Successfully generated 8 tags for article ID: 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea
+2025-05-02 07:38:43,724 - main_orchestrator - INFO - Skipping TTS generation - CAMB_AI_API_KEY not set.
+2025-05-02 07:38:43,729 - main_orchestrator - INFO - Rendered HTML: e:\websites\dacoola\public\articles\nvidia-ceo-jensen-huang-sounds-alarm-as-50-of-ai-researchers-are-chinese-urges-a.html
+2025-05-02 07:38:43,735 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\site_data.json (20 articles).
+2025-05-02 07:38:43,740 - main_orchestrator - INFO - Updated e:\websites\dacoola\public\all_articles.json (37 articles).
+2025-05-02 07:38:43,743 - main_orchestrator - INFO - Saved final processed data to e:\websites\dacoola\data\processed_json\31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea.json
+2025-05-02 07:38:43,744 - main_orchestrator - INFO - --- Successfully processed article: 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea ---
+2025-05-02 07:38:44,745 - main_orchestrator - INFO - --- Processing article file: 7bc8c4e03cd33351b0a0b08a017d5603a798a725ad31742c42ce1a10ea56b9f3.json ---
+2025-05-02 07:38:44,755 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 7bc8c4e03cd33351b0a0b08a017d5603a798a725ad31742c42ce1a10ea56b9f3 Title: Customer First, Agentic AI Next. Amazon Lays Out Its 2025 Ro...
+2025-05-02 07:38:54,905 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Business', keyword='Amazon 2025 roadmap'
+2025-05-02 07:38:54,905 - main_orchestrator - INFO - Article 7bc8c4e03cd33351b0a0b08a017d5603a798a725ad31742c42ce1a10ea56b9f3 is Boring. Skipping.
+2025-05-02 07:38:55,906 - main_orchestrator - INFO - --- Processing article file: e62e210516eeb53c0552b5b54105360f2cd83cea5dc73f9222d906afedc3589a.json ---
+2025-05-02 07:38:55,907 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: e62e210516eeb53c0552b5b54105360f2cd83cea5dc73f9222d906afedc3589a Title: Don't watermark your legal PDFs with purple dragons in suits...
+2025-05-02 07:39:02,610 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='Watermarking satire'
+2025-05-02 07:39:02,611 - main_orchestrator - INFO - Article e62e210516eeb53c0552b5b54105360f2cd83cea5dc73f9222d906afedc3589a is Boring. Skipping.
+2025-05-02 07:39:03,612 - main_orchestrator - INFO - --- Processing article file: 98e300bc597654112d1e1ad52db9a47439294f2dff0a4e60fb9c38df1e136c5b.json ---
+2025-05-02 07:39:03,628 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 98e300bc597654112d1e1ad52db9a47439294f2dff0a4e60fb9c38df1e136c5b Title: FutureHouse Unveils Superintelligent AI Agents to Revolution...
+2025-05-02 07:39:10,110 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='AI Models', keyword='FutureHouse AI agents'
+2025-05-02 07:39:10,110 - main_orchestrator - INFO - Article 98e300bc597654112d1e1ad52db9a47439294f2dff0a4e60fb9c38df1e136c5b is Boring. Skipping.
+2025-05-02 07:39:11,111 - main_orchestrator - INFO - --- Processing article file: e0b771efc530cfcc76ceff0782206fdedbc24bf4ab8b89a751013e9d95aa61ec.json ---
+2025-05-02 07:39:11,125 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: e0b771efc530cfcc76ceff0782206fdedbc24bf4ab8b89a751013e9d95aa61ec Title: Owen Le Blanc: creator of the first Linux distribution...
+2025-05-02 07:39:21,946 - src.agents.filter_news_agent - INFO - Filter verdict received: level=Boring, topic='Other', keyword='Linux distribution history'
+2025-05-02 07:39:21,946 - main_orchestrator - INFO - Article e0b771efc530cfcc76ceff0782206fdedbc24bf4ab8b89a751013e9d95aa61ec is Boring. Skipping.
+2025-05-02 07:39:22,946 - main_orchestrator - INFO - Processing cycle complete. Successful: 3, Failed/Skipped: 13
+2025-05-02 07:39:22,947 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished === ---

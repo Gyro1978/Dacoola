@@ -1,0 +1,42 @@
+{
+    "id": "31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea",
+    "title": "Nvidia CEO Jensen Huang Sounds Alarm As 50% Of AI Researchers Are Chinese, Urges America To Reskill Amid 'Infinite Game' - Yahoo Finance",
+    "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPdkVMeUlPbXFONFhjQlZfNzROMGV0TG9DMUdiR3JzSXdrbUI2VlI4bVhaa0ZmeEpjbjlzZ0VMYzdNaGFlZE1fWTBTek9vbFA4ZWpLaEJPTE9PRlRKdzJtbE9YS1cxX3U1RUpPMUJUMmprYS1tcmVkVXlWN0NRaGQwX1J3?oc=5",
+    "published_iso": "2025-05-02T03:59:00",
+    "summary": "<a href=\"https://news.google.com/rss/articles/CBMiggFBVV95cUxPdkVMeUlPbXFONFhjQlZfNzROMGV0TG9DMUdiR3JzSXdrbUI2VlI4bVhaa0ZmeEpjbjlzZ0VMYzdNaGFlZE1fWTBTek9vbFA4ZWpLaEJPTE9PRlRKdzJtbE9YS1cxX3U1RUpPMUJUMmprYS1tcmVkVXlWN0NRaGQwX1J3?oc=5\" target=\"_blank\">Nvidia CEO Jensen Huang Sounds Alarm As 50% Of AI Researchers Are Chinese, Urges America To Reskill Amid 'Infinite Game'</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Yahoo Finance</font>",
+    "source_feed": "https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en",
+    "scraped_at_iso": "2025-05-02T05:15:09.318658",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Society",
+        "reasoning_summary": "Nvidia CEO's public statement on the demographic shift in AI research and call for reskilling presents a notable, verifiable claim with potential societal and industry implications.",
+        "primary_topic_keyword": "AI researcher demographics"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-02T05:37:44.187485+00:00",
+    "topic": "Society",
+    "is_breaking": false,
+    "primary_keyword": "AI researcher demographics",
+    "selected_image_url": "https://electroiq.com/wp-content/uploads/2024/08/Artificial-Intelligence-statistics.webp",
+    "seo_agent_results": {
+        "generated_title_tag": "Nvidia CEO Warns of AI Researcher Demographics Shift, Urges US Action",
+        "generated_meta_description": "Nvidia CEO Jensen Huang highlights that 50% of AI researchers are Chinese, urging America to reskill in the AI \"infinite game.\"",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Nvidia CEO Warns of AI Researcher Demographics Shift, Urges US Action\",  \n  \"description\": \"Nvidia CEO Jensen Huang highlights that 50% of AI researchers are Chinese, urging America to reskill in the AI 'infinite game.'\",  \n  \"keywords\": [\"AI researcher demographics\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://news.google.com/rss/articles/CBMiggFBVV95cUxPdkVMeUlPbXFONFhjQlZfNzROMGV0TG9DMUdiR3JzSXdrbUI2VlI4bVhaa0ZmeEpjbjlzZ0VMYzdNaGFlZE1fWTBTek9vbFA4ZWpLaEJPTE9PRlRKdzJtbE9YS1cxX3U1RUpPMUJUMmprYS1tcmVkVXlWN0NRaGQwX1J3?oc=5\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://electroiq.com/wp-content/uploads/2024/08/Artificial-Intelligence-statistics.webp\" },  \n  \"datePublished\": \"2025-05-02T03:59:00\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://ibb.co/tpKjc98q\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Nvidia CEO Jensen Huang Sounds Alarm on AI Researcher Demographics  \n\nNvidia CEO Jensen Huang has raised concerns over the shifting **AI researcher demographics**, revealing that 50% of AI researchers are now Chinese. Speaking at a recent event, Huang emphasized the need for the U.S. to invest in reskilling its workforce to remain competitive in what he calls the \"infinite game\" of artificial intelligence. His comments highlight the growing dominance of China in AI talent development.  \n\nHuang stressed that the U.S. must take immediate action to bridge the gap in AI expertise. He pointed to the rapid advancements in AI research coming from China, which now accounts for half of the global AI research workforce. The Nvidia CEO urged American policymakers and businesses to prioritize education and training programs to cultivate a stronger domestic talent pipeline.  \n\nThe remarks come amid increasing geopolitical tensions over technological leadership. Huang framed AI development as a long-term competition, where sustained investment in human capital will determine future success. Without decisive action, he warned, the U.S. risks falling behind in critical AI innovation."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Nvidia CEO Jensen Huang",
+        "AI researcher demographics",
+        "China AI talent",
+        "US AI competitiveness",
+        "AI workforce reskilling",
+        "geopolitical AI tensions",
+        "AI education investment",
+        "AI innovation race"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.0,
+    "audio_url": null,
+    "slug": "nvidia-ceo-jensen-huang-sounds-alarm-as-50-of-ai-researchers-are-chinese-urges-a"
+}

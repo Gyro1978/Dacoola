@@ -1,6 +1,75 @@
 {
   "articles": [
     {
+      "id": "5dd284a6baddabcea5be97ed6384bad51f02b0e6b7812bb40ac7ff32d8a39dc0",
+      "title": "Zoho Halts $700M Semiconductor Plan",
+      "link": "articles/zoho-halts-700m-semiconductor-plan.html",
+      "published_iso": "2025-05-02T04:52:38",
+      "summary_short": "Zoho has halted its $700M semiconductor plan, marking a significant shift in its expansion strategy. Learn more about the decision.",
+      "image_url": "https://i0.wp.com/semiconductorsinsight.com/wp-content/uploads/2025/05/image.png",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Zoho semiconductor plan",
+        "Zoho $700M investment",
+        "semiconductor industry challenges",
+        "tech hardware sector",
+        "semiconductor market volatility",
+        "Zoho strategic direction",
+        "semiconductor manufacturing pause",
+        "global tech supply chain",
+        "semiconductor industry barriers"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea",
+      "title": "Nvidia CEO Jensen Huang Sounds Alarm As 50% Of AI Researchers Are Chinese, Urges America To Reskill Amid 'Infinite Game' - Yahoo Finance",
+      "link": "articles/nvidia-ceo-jensen-huang-sounds-alarm-as-50-of-ai-researchers-are-chinese-urges-a.html",
+      "published_iso": "2025-05-02T03:59:00",
+      "summary_short": "Nvidia CEO Jensen Huang highlights that 50% of AI researchers are Chinese, urging America to reskill in the AI \"infinite game.\"",
+      "image_url": "https://electroiq.com/wp-content/uploads/2024/08/Artificial-Intelligence-statistics.webp",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "Nvidia CEO Jensen Huang",
+        "AI researcher demographics",
+        "China AI talent",
+        "US AI competitiveness",
+        "AI workforce reskilling",
+        "geopolitical AI tensions",
+        "AI education investment",
+        "AI innovation race"
+      ],
+      "audio_url": null,
+      "trend_score": 14.0
+    },
+    {
+      "id": "b3154484177714b450b790bb66de992dea8d7a4cd74f992c3bb138381e6ecc74",
+      "title": "XAI Dev Leaks API Key for Private SpaceX, Tesla LLMs",
+      "link": "articles/xai-dev-leaks-api-key-for-private-spacex-tesla-llms.html",
+      "published_iso": "2025-05-02T00:56:02",
+      "summary_short": "An XAI developer accidentally leaked an API key granting access to private SpaceX and Tesla LLMs, raising security concerns.",
+      "image_url": "https://krebsonsecurity.com/wp-content/uploads/2025/05/x-ai.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "XAI developer leak",
+        "SpaceX Tesla LLM leak",
+        "API key exposure",
+        "AI security concerns",
+        "Elon Musk companies",
+        "proprietary AI models",
+        "unauthorized access",
+        "AI intellectual property",
+        "large language models",
+        "tech firm breaches"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "ff4da2ffaf28d77a9d0fcdd156bf6e626e579d63226b1f1bef05b9b64bd4279a",
       "title": "Google now injects hyper-personalized ads into third party AI chats - Computerworld",
       "link": "articles/google-now-injects-hyper-personalized-ads-into-third-party-ai-chats-computerworl.html",
@@ -381,70 +450,6 @@
         "Real-Time Learning",
         "Software Architecture",
         "AI Evolution"
-      ],
-      "audio_url": null
-    },
-    {
-      "id": "b3f3cb6c8b7eea6c5cd83ae3469017a9c6363829ee87aaf4949ed7029bb98af1",
-      "title": "Qwen swings for a double with 2.5-Omni-3B model that runs on consumer PCs, laptops",
-      "link": "articles/qwen-swings-for-a-double-with-25-omni-3b-model-that-runs-on-consumer-pcs-laptops.html",
-      "published_iso": "2025-04-30T20:31:30",
-      "summary_short": "Alibaba Cloud's Qwen2.5-Omni-3B AI model release is optimized for non-commercial use on consumer PCs and laptops.",
-      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/cfr0z3n_vector_art_graphic_novel_style_image_of_a_humanoid_robo_bbc90f34-b66b-4b30-8405-c858eb5122a9.png?w=1024?w=1200&strip=all",
-      "topic": "AI Models",
-      "is_breaking": false,
-      "tags": [
-        "Qwen2.5-Omni-3B",
-        "Alibaba Cloud",
-        "AI Model Release",
-        "Consumer PCs",
-        "Lightweight AI",
-        "Qwen Research License",
-        "Non-commercial AI",
-        "Local AI Development"
-      ],
-      "audio_url": null
-    },
-    {
-      "id": "4935a3724d08af61f91233776bb454dcdb6fdd224ef7c8dfbd2124c630fd673b",
-      "title": "Pinterest launches new tools to fight AI slop",
-      "link": "articles/pinterest-launches-new-tools-to-fight-ai-slop.html",
-      "published_iso": "2025-04-30T20:04:19",
-      "summary_short": "Pinterest rolls out AI content labeling and filtering tools to address user complaints about AI-generated images flooding the platform.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2025/04/Newsroom_Header__2_.jpeg?resize=1200,675",
-      "topic": "Ethics",
-      "is_breaking": false,
-      "tags": [
-        "Pinterest",
-        "AI-generated content",
-        "image labeling",
-        "user controls",
-        "content moderation",
-        "AI transparency",
-        "platform updates",
-        "digital content quality"
-      ],
-      "audio_url": null
-    },
-    {
-      "id": "29b2acc44968ddf22f12e7461f6a49916214b0fb666093dba31442533a2cc77f",
-      "title": "Amazon updates Q Business to let companies build public-facing chatbots",
-      "link": "articles/amazon-updates-q-business-to-let-companies-build-public-facing-chatbots.html",
-      "published_iso": "2025-04-30T20:00:04",
-      "summary_short": "Amazon Q Business now allows companies to create public-facing chatbots for websites and support portals, expanding its AI assistant capabilities.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2024/05/IMG_4752.jpg?resize=1200,797",
-      "topic": "Business",
-      "is_breaking": false,
-      "tags": [
-        "Amazon Q Business",
-        "AI chatbots",
-        "AWS AI tools",
-        "public-facing chatbots",
-        "customer engagement AI",
-        "enterprise AI solutions",
-        "Amazon AI updates",
-        "AI assistant technology",
-        "business chatbots"
       ],
       "audio_url": null
     }
