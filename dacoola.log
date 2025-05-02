@@ -13193,3 +13193,149 @@ AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentTy
 2025-05-02 19:11:48,579 - main_orchestrator - INFO - Article b70b49bcf451b68192c62f4860225d983e8333f69754e76598b725acdcaad28d classified as Boring. Skipping.
 2025-05-02 19:11:49,580 - main_orchestrator - INFO - Processing cycle complete. Successful: 8, Failed/Skipped: 24
 2025-05-02 19:11:49,580 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished (555.16 seconds) === ---
+2025-05-02 20:38:18,762 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 20:38:18,762 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 20:38:19,299 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-02 20:38:21,292 - transformers.processing_utils - WARNING - Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+2025-05-02 20:38:21,544 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 20:38:21,554 - main_orchestrator - WARNING - YOUR_SITE_BASE_URL environment variable not set. Canonical and Open Graph URLs will be relative or potentially incorrect.
+2025-05-02 20:38:21,554 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-02 20:38:21,554 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Single Run === ---
+2025-05-02 20:38:21,554 - main_orchestrator - INFO - Ensured data, processed_json, and public/articles directories exist.
+2025-05-02 20:38:21,555 - main_orchestrator - INFO - --- Running Scraper ---
+2025-05-02 20:38:21,555 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (10 feeds) ---
+2025-05-02 20:38:21,555 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 20:38:21,689 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 20:38:21,689 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999.json (Title: Google will soon start letting kids under 13 use its Gemini chatbot)
+2025-05-02 20:38:21,689 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 1 new articles from this feed.
+2025-05-02 20:38:21,689 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 20:38:21,841 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 20:38:21,841 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-02 20:38:21,841 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-02 20:38:21,956 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-02 20:38:21,957 - src.scrapers.news_scraper - INFO - Finished feed https://venturebeat.com/category/ai/feed/. Saved 0 new articles from this feed.
+2025-05-02 20:38:21,957 - src.scrapers.news_scraper - INFO - Checking feed: https://news.ycombinator.com/rss
+2025-05-02 20:38:22,216 - src.scrapers.news_scraper - INFO - Feed https://news.ycombinator.com/rss fetched. Contains 30 entries.
+2025-05-02 20:38:22,217 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 46af3a302ce79d67ac9029e7b28de66bb14cc15087b16d24f19a8fa8dae5c4b6.json (Title: Images of Soviet Venus lander falling to Earth suggest its parachute may be out)
+2025-05-02 20:38:22,217 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: e2e0bda70921748ff03d5e7e14cb4a8d75a8d5f5da938ed0f02d2559871eee83.json (Title: VR Design Unpacked: The Secret to Beat Saber's Fun Isn't What You Think)
+2025-05-02 20:38:22,217 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8f3ffc801f97f707e93549cceffd13c1042d060f4eb3d6b1993ed8804b7fc47e.json (Title: The Impossible Contradictions of Mark Twain)
+2025-05-02 20:38:22,218 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f87f54ad343346f316ad2c32b511f625ec9dcf1cf7770f8cabc5ccad563da075.json (Title: A proof of concept tool to verify estimates)
+2025-05-02 20:38:22,218 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: b938dd5c0d18bde08694894afd1c1d799785a1e3e03b9b96a59891d30b8872ea.json (Title: Doom GPU Flame Graphs)
+2025-05-02 20:38:22,218 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: eb57f82329e8cf9b16cad3162bea726c9a640ba5f370abf2c5648aaee7ad6a06.json (Title: Elm Test Distributions)
+2025-05-02 20:38:22,219 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8ae0bf05a3af1e512fb456bcaa89c7987c8ccc38000bf74f8a3fa49465ad15eb.json (Title: Strings Just Got Faster)
+2025-05-02 20:38:22,219 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f141ab802481224d7e3593cd68ab9e7059e0a92f882691b71c5815765cb0efb0.json (Title: The Totalitarian Buddhist Who Beat SIM City (2010))
+2025-05-02 20:38:22,219 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 05a9ef6556ffb412f71abf18beef4ba6491cd9f440f15f218dfa15db69d2891d.json (Title: Google is hurting new apps that have less users than competitors)
+2025-05-02 20:38:22,220 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 25b1782523cf09cde3fb053095038a5329e1866914724ef9c8a9f8caacfa556b.json (Title: Don't watermark your legal PDFs with purple dragons in suits)
+2025-05-02 20:38:22,220 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 60c48ba0b23c04d77cb79c57871431b4c8c38203286e1c11b92a7a21de09e0a1.json (Title: Suno v4.5)
+2025-05-02 20:38:22,220 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d4c62d92945e3880cc08da26794f67bfb973fd7e8788c05a038d1d1aed971c0d.json (Title: Webflow makes GSAP 100% free – plus more updates)
+2025-05-02 20:38:22,221 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 98a6fc4a3f66fcff312bb8ef17091846486820303854b86dc20b469cf02a4f0d.json (Title: Just redesigned my personal site with a TTY-style interface)
+2025-05-02 20:38:22,221 - src.scrapers.news_scraper - INFO - Finished feed https://news.ycombinator.com/rss. Saved 13 new articles from this feed.
+2025-05-02 20:38:22,221 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 20:38:22,488 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://www.anthropic.com/feed.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 20:38:22,488 - src.scrapers.news_scraper - INFO - Checking feed: https://ai.googleblog.com/feeds/posts/default?alt=rss
+2025-05-02 20:38:22,662 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://ai.googleblog.com/feeds/posts/default?alt=rss: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 20:38:22,662 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 20:38:22,721 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://openai.com/blog/rss.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 173, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 20:38:22,722 - src.scrapers.news_scraper - INFO - Checking feed: https://aws.amazon.com/blogs/machine-learning/feed/
+2025-05-02 20:38:23,132 - src.scrapers.news_scraper - INFO - Feed https://aws.amazon.com/blogs/machine-learning/feed/ fetched. Contains 20 entries.
+2025-05-02 20:38:23,133 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df.json (Title: Build a gen AI–powered financial assistant with Amazon Bedrock multi-agent collaboration)
+2025-05-02 20:38:23,133 - src.scrapers.news_scraper - WARNING - Reached max articles per run (15) while processing feed https://aws.amazon.com/blogs/machine-learning/feed/.
+2025-05-02 20:38:23,133 - src.scrapers.news_scraper - INFO - Finished feed https://aws.amazon.com/blogs/machine-learning/feed/. Saved 1 new articles from this feed.
+2025-05-02 20:38:23,133 - src.scrapers.news_scraper - WARNING - Reached max articles per run (15). Stopping feed processing for this run.
+2025-05-02 20:38:23,133 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 15 ---
+2025-05-02 20:38:23,133 - main_orchestrator - INFO - Scraper run completed. Found 15 new JSON files potentially.
+2025-05-02 20:38:23,133 - main_orchestrator - INFO - --- Running Processing Cycle ---
+2025-05-02 20:38:23,134 - main_orchestrator - INFO - Loaded 20 recent articles for duplicate checking.
+2025-05-02 20:38:23,134 - main_orchestrator - INFO - Found 15 scraped articles to process.
+2025-05-02 20:38:23,135 - main_orchestrator - INFO - --- Processing article file: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999.json ---
+2025-05-02 20:38:23,135 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999 Title: Google will soon start letting kids under 13 use its Gemini ...
+2025-05-02 20:38:31,248 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999: level=Interesting, topic='Society', keyword='Gemini for kids'
+2025-05-02 20:38:31,248 - main_orchestrator - INFO - Article a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999 classified as Interesting (Topic: Society).
+2025-05-02 20:38:31,248 - main_orchestrator - INFO - Checking duplicates for a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999...
+2025-05-02 20:38:31,249 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999 Title: Google will soon start letting kids under 13 use its Gemini ...
+2025-05-02 20:38:37,135 - src.agents.similarity_check_agent - INFO - Similarity check result for ID a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999: is_duplicate=False. Reason: No recently published article reports on Google allowing kids under 13 to use its Gemini chatbot with parent-managed accounts.
+2025-05-02 20:38:37,136 - main_orchestrator - INFO - Article a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999 passed similarity check.
+2025-05-02 20:38:37,136 - main_orchestrator - INFO - Finding image for a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999...
+2025-05-02 20:38:37,136 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/02/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot/
+2025-05-02 20:38:37,228 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2197065135.jpg?resize=1200,800
+2025-05-02 20:38:37,229 - main_orchestrator - INFO - Using scraped image for a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999: https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2197065135.jpg?resize=1200,800
+2025-05-02 20:38:37,229 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999...
+2025-05-02 20:39:06,561 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999.
+2025-05-02 20:39:06,561 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999...
+2025-05-02 20:39:11,824 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999
+2025-05-02 20:39:11,882 - main_orchestrator - INFO - Rendered HTML: /home/runner/work/Dacoola/Dacoola/public/articles/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot.html
+2025-05-02 20:39:11,883 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-02 20:39:11,885 - main_orchestrator - INFO - Updated all_articles.json (58 articles).
+2025-05-02 20:39:11,885 - main_orchestrator - INFO - Saved final processed data to /home/runner/work/Dacoola/Dacoola/data/processed_json/a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999.json
+2025-05-02 20:39:11,885 - main_orchestrator - INFO - --- Successfully processed article: a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999 ---
+2025-05-02 20:39:12,887 - main_orchestrator - INFO - --- Processing article file: 46af3a302ce79d67ac9029e7b28de66bb14cc15087b16d24f19a8fa8dae5c4b6.json ---
+2025-05-02 20:39:12,887 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 46af3a302ce79d67ac9029e7b28de66bb14cc15087b16d24f19a8fa8dae5c4b6 Title: Images of Soviet Venus lander falling to Earth suggest its p...
+2025-05-02 20:39:20,316 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 46af3a302ce79d67ac9029e7b28de66bb14cc15087b16d24f19a8fa8dae5c4b6: level=Boring, topic='Other', keyword='Soviet Venus lander'
+2025-05-02 20:39:20,317 - main_orchestrator - INFO - Article 46af3a302ce79d67ac9029e7b28de66bb14cc15087b16d24f19a8fa8dae5c4b6 classified as Boring. Skipping.
+2025-05-02 20:39:21,318 - main_orchestrator - INFO - --- Processing article file: e2e0bda70921748ff03d5e7e14cb4a8d75a8d5f5da938ed0f02d2559871eee83.json ---
+2025-05-02 20:39:21,318 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: e2e0bda70921748ff03d5e7e14cb4a8d75a8d5f5da938ed0f02d2559871eee83 Title: VR Design Unpacked: The Secret to Beat Saber's Fun Isn't Wha...
+2025-05-02 20:39:27,476 - src.agents.filter_news_agent - INFO - Filter verdict received for ID e2e0bda70921748ff03d5e7e14cb4a8d75a8d5f5da938ed0f02d2559871eee83: level=Boring, topic='Other', keyword='VR game design'
+2025-05-02 20:39:27,476 - main_orchestrator - INFO - Article e2e0bda70921748ff03d5e7e14cb4a8d75a8d5f5da938ed0f02d2559871eee83 classified as Boring. Skipping.
+2025-05-02 20:39:28,478 - main_orchestrator - INFO - --- Processing article file: 8f3ffc801f97f707e93549cceffd13c1042d060f4eb3d6b1993ed8804b7fc47e.json ---
+2025-05-02 20:39:28,478 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 8f3ffc801f97f707e93549cceffd13c1042d060f4eb3d6b1993ed8804b7fc47e Title: The Impossible Contradictions of Mark Twain...
+2025-05-02 20:39:34,287 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 8f3ffc801f97f707e93549cceffd13c1042d060f4eb3d6b1993ed8804b7fc47e: level=Boring, topic='Other', keyword='Mark Twain analysis'
+2025-05-02 20:39:34,287 - main_orchestrator - INFO - Article 8f3ffc801f97f707e93549cceffd13c1042d060f4eb3d6b1993ed8804b7fc47e classified as Boring. Skipping.
+2025-05-02 20:39:35,289 - main_orchestrator - INFO - --- Processing article file: f87f54ad343346f316ad2c32b511f625ec9dcf1cf7770f8cabc5ccad563da075.json ---
+2025-05-02 20:39:35,289 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f87f54ad343346f316ad2c32b511f625ec9dcf1cf7770f8cabc5ccad563da075 Title: A proof of concept tool to verify estimates...
+2025-05-02 20:39:43,889 - src.agents.filter_news_agent - INFO - Filter verdict received for ID f87f54ad343346f316ad2c32b511f625ec9dcf1cf7770f8cabc5ccad563da075: level=Boring, topic='Other', keyword='Proof of concept tool'
+2025-05-02 20:39:43,889 - main_orchestrator - INFO - Article f87f54ad343346f316ad2c32b511f625ec9dcf1cf7770f8cabc5ccad563da075 classified as Boring. Skipping.
+2025-05-02 20:39:44,891 - main_orchestrator - INFO - --- Processing article file: b938dd5c0d18bde08694894afd1c1d799785a1e3e03b9b96a59891d30b8872ea.json ---
+2025-05-02 20:39:44,891 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: b938dd5c0d18bde08694894afd1c1d799785a1e3e03b9b96a59891d30b8872ea Title: Doom GPU Flame Graphs...
+2025-05-02 20:39:51,226 - src.agents.filter_news_agent - INFO - Filter verdict received for ID b938dd5c0d18bde08694894afd1c1d799785a1e3e03b9b96a59891d30b8872ea: level=Boring, topic='Other', keyword='Forum comments'
+2025-05-02 20:39:51,226 - main_orchestrator - INFO - Article b938dd5c0d18bde08694894afd1c1d799785a1e3e03b9b96a59891d30b8872ea classified as Boring. Skipping.
+2025-05-02 20:39:52,227 - main_orchestrator - INFO - --- Processing article file: 8ae0bf05a3af1e512fb456bcaa89c7987c8ccc38000bf74f8a3fa49465ad15eb.json ---
+2025-05-02 20:39:52,227 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 8ae0bf05a3af1e512fb456bcaa89c7987c8ccc38000bf74f8a3fa49465ad15eb Title: Strings Just Got Faster...
+2025-05-02 20:39:59,981 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 8ae0bf05a3af1e512fb456bcaa89c7987c8ccc38000bf74f8a3fa49465ad15eb: level=Boring, topic='Other', keyword='Unspecified update'
+2025-05-02 20:39:59,981 - main_orchestrator - INFO - Article 8ae0bf05a3af1e512fb456bcaa89c7987c8ccc38000bf74f8a3fa49465ad15eb classified as Boring. Skipping.
+2025-05-02 20:40:00,983 - main_orchestrator - INFO - --- Processing article file: eb57f82329e8cf9b16cad3162bea726c9a640ba5f370abf2c5648aaee7ad6a06.json ---
+2025-05-02 20:40:00,983 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: eb57f82329e8cf9b16cad3162bea726c9a640ba5f370abf2c5648aaee7ad6a06 Title: Elm Test Distributions...
+2025-05-02 20:40:06,992 - src.agents.filter_news_agent - INFO - Filter verdict received for ID eb57f82329e8cf9b16cad3162bea726c9a640ba5f370abf2c5648aaee7ad6a06: level=Boring, topic='Other', keyword='Unclear topic'
+2025-05-02 20:40:06,992 - main_orchestrator - INFO - Article eb57f82329e8cf9b16cad3162bea726c9a640ba5f370abf2c5648aaee7ad6a06 classified as Boring. Skipping.
+2025-05-02 20:40:07,993 - main_orchestrator - INFO - --- Processing article file: f141ab802481224d7e3593cd68ab9e7059e0a92f882691b71c5815765cb0efb0.json ---
+2025-05-02 20:40:07,994 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f141ab802481224d7e3593cd68ab9e7059e0a92f882691b71c5815765cb0efb0 Title: The Totalitarian Buddhist Who Beat SIM City (2010)...
+2025-05-02 20:40:16,592 - src.agents.filter_news_agent - INFO - Filter verdict received for ID f141ab802481224d7e3593cd68ab9e7059e0a92f882691b71c5815765cb0efb0: level=Boring, topic='Other', keyword='Historical game discussion'
+2025-05-02 20:40:16,592 - main_orchestrator - INFO - Article f141ab802481224d7e3593cd68ab9e7059e0a92f882691b71c5815765cb0efb0 classified as Boring. Skipping.
+2025-05-02 20:40:17,594 - main_orchestrator - INFO - --- Processing article file: 05a9ef6556ffb412f71abf18beef4ba6491cd9f440f15f218dfa15db69d2891d.json ---
+2025-05-02 20:40:17,594 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 05a9ef6556ffb412f71abf18beef4ba6491cd9f440f15f218dfa15db69d2891d Title: Google is hurting new apps that have less users than competi...
+2025-05-02 20:40:26,147 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 05a9ef6556ffb412f71abf18beef4ba6491cd9f440f15f218dfa15db69d2891d: level=Boring, topic='Business', keyword='Google app policies'
+2025-05-02 20:40:26,147 - main_orchestrator - INFO - Article 05a9ef6556ffb412f71abf18beef4ba6491cd9f440f15f218dfa15db69d2891d classified as Boring. Skipping.
+2025-05-02 20:40:27,149 - main_orchestrator - INFO - --- Processing article file: 25b1782523cf09cde3fb053095038a5329e1866914724ef9c8a9f8caacfa556b.json ---
+2025-05-02 20:40:27,149 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 25b1782523cf09cde3fb053095038a5329e1866914724ef9c8a9f8caacfa556b Title: Don't watermark your legal PDFs with purple dragons in suits...
+2025-05-02 20:40:33,450 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 25b1782523cf09cde3fb053095038a5329e1866914724ef9c8a9f8caacfa556b: level=Boring, topic='Other', keyword='Watermarking satire'
+2025-05-02 20:40:33,451 - main_orchestrator - INFO - Article 25b1782523cf09cde3fb053095038a5329e1866914724ef9c8a9f8caacfa556b classified as Boring. Skipping.
+2025-05-02 20:40:34,452 - main_orchestrator - INFO - --- Processing article file: 60c48ba0b23c04d77cb79c57871431b4c8c38203286e1c11b92a7a21de09e0a1.json ---
+2025-05-02 20:40:34,452 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 60c48ba0b23c04d77cb79c57871431b4c8c38203286e1c11b92a7a21de09e0a1 Title: Suno v4.5...
+2025-05-02 20:40:41,354 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 60c48ba0b23c04d77cb79c57871431b4c8c38203286e1c11b92a7a21de09e0a1: level=Boring, topic='Other', keyword='Suno v4.5'
+2025-05-02 20:40:41,354 - main_orchestrator - INFO - Article 60c48ba0b23c04d77cb79c57871431b4c8c38203286e1c11b92a7a21de09e0a1 classified as Boring. Skipping.
+2025-05-02 20:40:42,356 - main_orchestrator - INFO - --- Processing article file: d4c62d92945e3880cc08da26794f67bfb973fd7e8788c05a038d1d1aed971c0d.json ---
+2025-05-02 20:40:42,356 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d4c62d92945e3880cc08da26794f67bfb973fd7e8788c05a038d1d1aed971c0d Title: Webflow makes GSAP 100% free – plus more updates...
+2025-05-02 20:40:49,786 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d4c62d92945e3880cc08da26794f67bfb973fd7e8788c05a038d1d1aed971c0d: level=Boring, topic='Software', keyword='Webflow GSAP update'
+2025-05-02 20:40:49,786 - main_orchestrator - INFO - Article d4c62d92945e3880cc08da26794f67bfb973fd7e8788c05a038d1d1aed971c0d classified as Boring. Skipping.
+2025-05-02 20:40:50,788 - main_orchestrator - INFO - --- Processing article file: 98a6fc4a3f66fcff312bb8ef17091846486820303854b86dc20b469cf02a4f0d.json ---
+2025-05-02 20:40:50,788 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 98a6fc4a3f66fcff312bb8ef17091846486820303854b86dc20b469cf02a4f0d Title: Just redesigned my personal site with a TTY-style interface...
+2025-05-02 20:40:56,591 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 98a6fc4a3f66fcff312bb8ef17091846486820303854b86dc20b469cf02a4f0d: level=Boring, topic='Other', keyword='Personal website redesign'
+2025-05-02 20:40:56,591 - main_orchestrator - INFO - Article 98a6fc4a3f66fcff312bb8ef17091846486820303854b86dc20b469cf02a4f0d classified as Boring. Skipping.
+2025-05-02 20:40:57,593 - main_orchestrator - INFO - --- Processing article file: 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df.json ---
+2025-05-02 20:40:57,593 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df)
+2025-05-02 20:40:57,593 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df Title: Build a gen AI–powered financial assistant with Amazon Bedro...
+2025-05-02 20:41:08,422 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df: level=Boring, topic='Software', keyword='Amazon Bedrock feature'
+2025-05-02 20:41:08,422 - main_orchestrator - INFO - Article 41608a513c3aaa6f863a2f2f64ea448a7714979f0308c3333dd775841ddf83df classified as Boring. Skipping.
+2025-05-02 20:41:09,423 - main_orchestrator - INFO - Processing cycle complete. Successful: 1, Failed/Skipped: 14
+2025-05-02 20:41:09,423 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Single Run Finished (167.87 seconds) === ---

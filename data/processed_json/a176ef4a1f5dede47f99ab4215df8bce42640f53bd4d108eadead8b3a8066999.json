@@ -1,0 +1,43 @@
+{
+    "id": "a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999",
+    "title": "Google will soon start letting kids under 13 use its Gemini chatbot",
+    "link": "https://techcrunch.com/2025/05/02/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot/",
+    "published_iso": "2025-05-02T20:13:07Z",
+    "summary": "Next week, Google will begin allowing kids under 13 who have parent-managed Google accounts to use its Gemini chatbot, according to The New York Times. The Times reports that Gemini will be available to kids whose parents use Family Link, a Google service that enables families to opt into various Google services for their child. A Google [&#8230;]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-02T20:38:21Z",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Society",
+        "reasoning_summary": "Google's decision to allow kids under 13 to use Gemini with parental controls is a notable development in AI accessibility for younger users, reported by a credible source (The New York Times).",
+        "primary_topic_keyword": "Gemini for kids"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-02T20:38:31Z",
+    "topic": "Society",
+    "is_breaking": false,
+    "primary_keyword": "Gemini for kids",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2197065135.jpg?resize=1200,800",
+    "seo_agent_results": {
+        "generated_title_tag": "Google to Launch Gemini for Kids Under 13 Next Week",
+        "generated_meta_description": "Google will soon allow kids under 13 with parent-managed accounts to use Gemini, expanding access via Family Link.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Google to Launch Gemini for Kids Under 13 Next Week\",  \n  \"description\": \"Google will soon allow kids under 13 with parent-managed accounts to use Gemini, expanding access via Family Link.\",  \n  \"keywords\": [\"Gemini for kids\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/02/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2197065135.jpg?resize=1200,800\" },  \n  \"datePublished\": \"2025-05-02T20:13:07Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Google Will Soon Start Letting Kids Under 13 Use Its Gemini Chatbot  \n\nGoogle is set to introduce **Gemini for kids** under 13 next week, according to *The New York Times*. The AI chatbot will be available to children whose parents use **Family Link**, a Google service that enables families to manage and approve various Google services for their kids. This move marks a significant expansion of Gemini’s accessibility, catering to younger users under parental supervision.  \n\nThe rollout will specifically target children with parent-managed Google accounts, ensuring that guardians retain control over their child’s interactions with the AI. Family Link, which already allows parents to set digital ground rules for apps and screen time, will serve as the gateway for enabling Gemini access. Google has not yet detailed additional safeguards or content filters tailored for younger audiences.  \n\nThis development follows growing interest in AI tools for education and child-friendly digital experiences. By integrating Gemini with Family Link, Google aims to provide a supervised environment where kids can explore conversational AI while parents maintain oversight. The company has yet to confirm whether any specialized features or restrictions will accompany the under-13 rollout."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Gemini for kids",
+        "Family Link",
+        "AI chatbot for children",
+        "parental controls",
+        "Google AI",
+        "child-friendly AI",
+        "digital parenting",
+        "AI in education",
+        "supervised AI access"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.5,
+    "slug": "google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot",
+    "audio_url": null
+}

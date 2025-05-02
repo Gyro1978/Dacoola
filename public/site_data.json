@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999",
+      "title": "Google will soon start letting kids under 13 use its Gemini chatbot",
+      "link": "articles/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot.html",
+      "published_iso": "2025-05-02T20:13:07Z",
+      "summary_short": "Google will soon allow kids under 13 with parent-managed accounts to use Gemini, expanding access via Family Link.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2197065135.jpg?resize=1200,800",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "Gemini for kids",
+        "Family Link",
+        "AI chatbot for children",
+        "parental controls",
+        "Google AI",
+        "child-friendly AI",
+        "digital parenting",
+        "AI in education",
+        "supervised AI access"
+      ],
+      "trend_score": 14.5
+    },
+    {
       "id": "272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b",
       "title": "One of Google’s recent Gemini AI models scores worse on safety",
       "link": "articles/one-of-googles-recent-gemini-ai-models-scores-worse-on-safety.html",
@@ -430,29 +452,6 @@
         "AI-driven scientific advancements",
         "autonomous AI research",
         "open scientific innovation"
-      ],
-      "trend_score": 15.0
-    },
-    {
-      "id": "b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043",
-      "title": "Ai2’s new small AI model outperforms similarly-sized models from Google, Meta",
-      "link": "articles/ai2s-new-small-ai-model-outperforms-similarly-sized-models-from-google-meta.html",
-      "published_iso": "2025-05-01T18:29:58Z",
-      "summary_short": "Ai2's new small AI model, Olmo 2 1B, surpasses similar-sized models from Google and Meta in benchmark tests.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2024/10/GettyImages-1335295270.jpg?resize=1200,675",
-      "topic": "AI Models",
-      "is_breaking": false,
-      "tags": [
-        "AI2",
-        "Olmo 2 1B",
-        "small AI models",
-        "AI benchmarks",
-        "Google AI",
-        "Meta AI",
-        "Alibaba AI",
-        "edge computing",
-        "AI efficiency",
-        "AI research"
       ],
       "trend_score": 15.0
     }

@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999",
+      "title": "Google will soon start letting kids under 13 use its Gemini chatbot",
+      "link": "articles/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot.html",
+      "published_iso": "2025-05-02T20:13:07Z",
+      "summary_short": "Google will soon allow kids under 13 with parent-managed accounts to use Gemini, expanding access via Family Link.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2197065135.jpg?resize=1200,800",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "Gemini for kids",
+        "Family Link",
+        "AI chatbot for children",
+        "parental controls",
+        "Google AI",
+        "child-friendly AI",
+        "digital parenting",
+        "AI in education",
+        "supervised AI access"
+      ],
+      "trend_score": 14.5
+    },
+    {
       "id": "272be7e5340b939fe2968df6155e77593348505e370611323af09ae9d4980f6b",
       "title": "One of Google’s recent Gemini AI models scores worse on safety",
       "link": "articles/one-of-googles-recent-gemini-ai-models-scores-worse-on-safety.html",
