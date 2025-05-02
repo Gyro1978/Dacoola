@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "24de9cf57b398e5b9ccaa0e6e166535a67dda10be19deef571a23019a6841134",
+      "title": "Show HN: Kinematic Hand Skeleton Optimization in Jax",
+      "link": "articles/show-hn-kinematic-hand-skeleton-optimization-in-jax.html",
+      "published_iso": "2025-05-02T21:03:52Z",
+      "summary_short": "Explore kinematic hand skeleton optimization in Jax, now available on GitHub for developers and researchers.",
+      "image_url": "https://opengraph.githubassets.com/d4bf3102f53a26e7e043f5fc5ea41ebc379f2f4a19a186f95fa3e06cf41255d9/rerun-io/pi0-lerobot",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "Kinematic Hand Optimization",
+        "Jax Library",
+        "Motion Tracking",
+        "Robotics",
+        "Virtual Reality",
+        "Prosthetics",
+        "Biomechanical Research",
+        "Open-Source Projects",
+        "GitHub Repositories"
+      ],
+      "audio_url": null,
+      "trend_score": 14.45
+    },
+    {
       "id": "96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc",
       "title": "Aurora launches its driverless commercial trucking service, and a surprise bidder joins Canoo’s bankruptcy case",
       "link": "articles/aurora-launches-its-driverless-commercial-trucking-service-and-a-surprise-bidder.html",
@@ -89,6 +112,30 @@
         "AI automation"
       ],
       "trend_score": 14.5
+    },
+    {
+      "id": "468cae42bf2c597d393db9bbfbaf3900f3c8b0ea2861b5898d0fb7d9dfa48f4e",
+      "title": "Driverless semis have started running regular longhaul routes",
+      "link": "articles/driverless-semis-have-started-running-regular-longhaul-routes.html",
+      "published_iso": "2025-05-02T18:02:51Z",
+      "summary_short": "Driverless semis have officially started operating regular longhaul routes, marking a milestone in autonomous freight transportation.",
+      "image_url": "https://media.cnn.com/api/v1/images/stellar/prod/aurora-launch-1.jpg?c=16x9&q=w_800,c_fill",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "Driverless Semis",
+        "Autonomous Freight Transportation",
+        "Self-Driving Technology",
+        "Logistics Industry",
+        "Trucking Industry",
+        "Longhaul Routes",
+        "Supply Chain Efficiency",
+        "Freight Logistics",
+        "Regulatory Approvals",
+        "Transportation Costs"
+      ],
+      "audio_url": null,
+      "trend_score": 14.86
     },
     {
       "id": "26ddf8a4e8361fa5a0204447fa3f6ba0de678bcfc68c36f3f21ac7a06b0c34fc",
@@ -408,52 +455,6 @@
         "AI training practices"
       ],
       "audio_url": null,
-      "trend_score": 14.5
-    },
-    {
-      "id": "9df3d8e0130ec5d428f4b88feeafa658253ead0117476b1139dcaaab59da3c55",
-      "title": "New Federal Circuit Decision - Expect Getting AI/Machine Learning Patents Past 101 to Get Tougher - Quarles",
-      "link": "articles/new-federal-circuit-decision-expect-getting-aimachine-learning-patents-past-101-.html",
-      "published_iso": "2025-05-01T21:15:54",
-      "summary_short": "A new Federal Circuit decision tightens AI patentability ruling, making it tougher to secure AI and machine learning patents under Section 101.",
-      "image_url": "https://norrismclaughlin.com/mtym/wp-content/uploads/sites/8/2022/12/MTYM-Blog-Thumbnail.png",
-      "topic": "Regulation",
-      "is_breaking": false,
-      "tags": [
-        "Federal Circuit decision",
-        "AI patentability",
-        "machine learning patents",
-        "Section 101 Patent Act",
-        "patent eligibility",
-        "AI-driven inventions",
-        "legal scrutiny",
-        "tech startups",
-        "patent applications",
-        "AI research"
-      ],
-      "audio_url": null,
-      "trend_score": 15.0
-    },
-    {
-      "id": "bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170",
-      "title": "Rising star defense tech startup Mach Industries is raising $100 million, sources say",
-      "link": "articles/rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-.html",
-      "published_iso": "2025-05-01T20:44:43Z",
-      "summary_short": "Defense tech startup Mach Industries, led by 21-year-old Ethan Thornton, is securing $100M in funding co-led by Khosla and Bedrock Capital.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2025/03/EthanThornton5.jpg?resize=1200,931",
-      "topic": "Startups",
-      "is_breaking": false,
-      "tags": [
-        "Mach Industries",
-        "defense tech startup",
-        "venture capital funding",
-        "Ethan Thornton",
-        "Khosla Ventures",
-        "Bedrock Capital",
-        "defense sector investment",
-        "next-generation defense technologies",
-        "startup valuation"
-      ],
       "trend_score": 14.5
     }
   ]
