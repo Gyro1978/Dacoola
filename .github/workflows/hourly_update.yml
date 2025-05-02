@@ -54,12 +54,14 @@ jobs:
           MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES || vars.MAX_HOME_PAGE_ARTICLES || 20 }}
           # AUTHOR_NAME: ${{ secrets.AUTHOR_NAME || vars.AUTHOR_NAME || 'AI News Team' }} # Optional
 
-          # --- NEW Twitter Secrets ---
+          # Twitter Secrets
           TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
           TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
           TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
           TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
-          # --- End Twitter Secrets ---
+
+          # Make.com Webhook Secret
+          MAKE_INSTAGRAM_WEBHOOK_URL: ${{ secrets.MAKE_INSTAGRAM_WEBHOOK_URL }}
         run: python src/main.py
 
       - name: Commit and Push Changes

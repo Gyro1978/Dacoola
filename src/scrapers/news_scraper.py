@@ -24,11 +24,8 @@ DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 NEWS_FEED_URLS = [
     "https://techcrunch.com/feed/",
     "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
-    "https://news.ycombinator.com/rss", # Sometimes technical, but titles usually clean
     "https://www.anthropic.com/feed.xml",
-    "https://ai.googleblog.com/feeds/posts/default?alt=rss",
     "https://openai.com/blog/rss.xml",
-    "https://aws.amazon.com/blogs/machine-learning/feed/",
     "https://syncedreview.com/feed",
     "https://blogs.nvidia.com/feed/",
     "http://feeds.arstechnica.com/arstechnica/technology-lab"

@@ -16,7 +16,7 @@ import glob
 from jinja2 import Environment, FileSystemLoader
 import markdown
 import re # Needed for slug generation
-import requests # Needed for requests.utils.quote
+import requests # Needed for requests.utils.quote and webhook
 from dotenv import load_dotenv
 from datetime import datetime, timezone
 from urllib.parse import urljoin # To create absolute URLs
@@ -56,6 +56,8 @@ YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 # Ensure base URL ends with a slash if it exists, otherwise empty string
 raw_base_url = os.getenv('YOUR_SITE_BASE_URL', '')
 YOUR_SITE_BASE_URL = (raw_base_url.rstrip('/') + '/') if raw_base_url else ''
+# Load Make.com Webhook URL
+MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None)
 
 
 # --- Setup Logging ---
@@ -90,6 +92,9 @@ else:
 
 if not YOUR_WEBSITE_LOGO_URL:
      logger.warning("YOUR_WEBSITE_LOGO_URL environment variable not set. Schema markup and potentially branding might be affected.")
+
+if not MAKE_WEBHOOK_URL:
+     logger.warning("MAKE_INSTAGRAM_WEBHOOK_URL environment variable not set. Cannot send data to Make.com.")
 
 
 # --- Configuration ---
@@ -193,15 +198,10 @@ def format_tags_html(tags_list):
     """Formats a list of tags into linked HTML spans."""
     if not tags_list or not isinstance(tags_list, list): return ""
     try:
-        # Use relative path from /public/articles/ back to root for topic.html
-        # Link should be like ../topic.html?name=... from within an article page
-        # Or use absolute path if base URL is known: /topic.html?name=...
-        # Assuming / is the root where topic.html lives relative to domain:
+        # Use absolute path from site root for topic links
         tag_links = []
         for tag in tags_list:
-            # Ensure tag is a string and URL-encode it properly
             safe_tag = requests.utils.quote(str(tag))
-            # Use absolute path from site root
             tag_links.append(f'<span class="tag-item"><a href="/topic.html?name={safe_tag}">{tag}</a></span>')
         return " ".join(tag_links)
     except Exception as e:
@@ -211,28 +211,52 @@ def format_tags_html(tags_list):
 
 def get_sort_key(article_dict):
     """Helper function to extract a timezone-aware datetime object for sorting articles."""
-    # Fallback to a very old date if published_iso is missing or invalid
-    # Use timezone.utc for consistency
     fallback_date = datetime(1970, 1, 1, tzinfo=timezone.utc)
     date_str = article_dict.get('published_iso')
     if not date_str or not isinstance(date_str, str):
         return fallback_date
 
     try:
-        # Handle Z explicitly for UTC
         if date_str.endswith('Z'):
             date_str = date_str[:-1] + '+00:00'
-        # Parse ISO format
         dt = datetime.fromisoformat(date_str)
-        # If timezone info is missing, assume UTC
         if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
             return dt.replace(tzinfo=timezone.utc)
-        # Return the timezone-aware datetime object
         return dt
     except (ValueError, TypeError) as e:
         logger.warning(f"Could not parse date '{date_str}' for sorting (ID: {article_dict.get('id', 'N/A')}). Error: {e}. Using fallback.")
         return fallback_date
 
+# --- NEW WEBHOOK FUNCTION ---
+def send_make_webhook(webhook_url, data):
+    """Sends data to a Make.com webhook."""
+    if not webhook_url:
+        logger.warning("Make.com webhook URL not set. Skipping webhook send.")
+        return False
+    if not data:
+        logger.warning("No data provided for Make.com webhook. Skipping.")
+        return False
+
+    try:
+        headers = {'Content-Type': 'application/json'}
+        # Send data as JSON payload
+        response = requests.post(webhook_url, headers=headers, json=data, timeout=15)
+        response.raise_for_status() # Raise an exception for bad status codes (4xx or 5xx)
+        logger.info(f"Successfully sent data to Make.com webhook for article ID: {data.get('id', 'N/A')}")
+        return True
+    except requests.exceptions.Timeout:
+        logger.error("Request to Make.com webhook timed out.")
+        return False
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Failed to send data to Make.com webhook: {e}")
+        if e.response is not None:
+             logger.error(f"Webhook Response Status: {e.response.status_code}")
+             logger.error(f"Webhook Response Body: {e.response.text[:500]}") # Log first 500 chars
+        return False
+    except Exception as e:
+         logger.exception(f"Unexpected error sending Make.com webhook: {e}")
+         return False
+# --- END NEW WEBHOOK FUNCTION ---
 
 def render_post_page(template_variables, slug_base):
     """Renders a single article HTML page using the template."""
@@ -253,26 +277,21 @@ def render_post_page(template_variables, slug_base):
 
         # Generate safe filename from slug_base
         safe_filename = slug_base if slug_base else template_variables.get('id', 'untitled')
-        # Remove characters that are problematic in URLs/filenames
         safe_filename = re.sub(r'[<>:"/\\|?*%\.]+', '', safe_filename) # Added %
         safe_filename = safe_filename.strip().lower()
         safe_filename = safe_filename.replace(' ', '-')
-        safe_filename = re.sub('-+', '-', safe_filename) # Consolidate multiple hyphens
-        # Limit length and remove leading/trailing hyphens
-        safe_filename = safe_filename.strip('-')[:80] # Limit slug length
-        # Fallback if slug becomes empty after cleaning
+        safe_filename = re.sub('-+', '-', safe_filename)
+        safe_filename = safe_filename.strip('-')[:80]
         if not safe_filename:
              safe_filename = template_variables.get('id', 'untitled_fallback')
 
         output_path = os.path.join(OUTPUT_HTML_DIR, f"{safe_filename}.html")
-        # Ensure directory exists before writing
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         with open(output_path, 'w', encoding='utf-8') as f:
              f.write(html_content)
         logger.info(f"Rendered HTML: {os.path.basename(output_path)}")
-        return output_path # Return the path to the generated file
+        return output_path
     except Exception as e:
-        # Log the exception with traceback
         logger.exception(f"CRITICAL Error rendering template for ID {template_variables.get('id','N/A')}: {e}")
         return None
 
@@ -281,7 +300,6 @@ def render_post_page(template_variables, slug_base):
 def load_recent_articles_for_comparison(max_articles=50):
     """Loads recent article titles/summaries for similarity checking from all_articles.json."""
     articles_for_comparison = []
-    # Use ALL_ARTICLES_FILE as it contains the full history needed for comparison
     source_file = ALL_ARTICLES_FILE
     if not os.path.exists(source_file):
         logger.info(f"Source file {os.path.basename(source_file)} not found for loading recent articles.")
@@ -290,18 +308,13 @@ def load_recent_articles_for_comparison(max_articles=50):
     try:
         with open(source_file, 'r', encoding='utf-8') as f:
             site_data = json.load(f)
-            # Check if 'articles' key exists and is a list
             if isinstance(site_data.get('articles'), list):
-                # Sort by date just in case they aren't already (most recent first)
                 sorted_articles = sorted(site_data["articles"], key=get_sort_key, reverse=True)
-                # Take the N most recent articles for context
                 for a in sorted_articles[:max_articles]:
-                     # Ensure the article entry is valid and has needed keys
                      if isinstance(a, dict) and a.get("title") and a.get("id"):
-                         # Use short summary if available, otherwise full summary (truncated)
-                         summary = a.get("summary_short", a.get("summary", ""))[:300] # Truncate for context
+                         summary = a.get("summary_short", a.get("summary", ""))[:300]
                          articles_for_comparison.append({
-                             "id": a.get("id"), # Include ID for potential logging/debugging
+                             "id": a.get("id"),
                              "title": a.get("title"),
                              "summary_short": summary
                          })
@@ -321,8 +334,8 @@ def load_recent_articles_for_comparison(max_articles=50):
 
 def update_site_data(new_article_info):
     """Updates site_data.json (homepage) and all_articles.json (archive)."""
-    site_data = {"articles": []} # For homepage (limited)
-    all_articles_data = {"articles": []} # For archive (all)
+    site_data = {"articles": []}
+    all_articles_data = {"articles": []}
     article_id = new_article_info.get('id')
 
     if not article_id:
@@ -335,9 +348,8 @@ def update_site_data(new_article_info):
             if os.path.exists(filepath):
                 with open(filepath, 'r', encoding='utf-8') as f:
                     loaded_data = json.load(f)
-                    # Basic validation: check if 'articles' is a list
                     if isinstance(loaded_data.get('articles'), list):
-                        data_dict['articles'] = loaded_data['articles'] # Assign loaded list
+                        data_dict['articles'] = loaded_data['articles']
                     else:
                          logger.warning(f"Loaded data from {os.path.basename(filepath)} is missing 'articles' list. Starting fresh.")
         except json.JSONDecodeError as e:
@@ -346,22 +358,19 @@ def update_site_data(new_article_info):
             logger.warning(f"Could not load {os.path.basename(filepath)}: {e}. Starting fresh.")
 
     # --- Prepare the minimal entry for JSON files ---
-    # This structure is used for both site_data.json and all_articles.json
     minimal_entry = {
         "id": article_id,
         "title": new_article_info.get('title'),
-        # 'link' should be the RELATIVE path from the public dir for use on the site
-        "link": new_article_info.get('link'), # Should be like 'articles/slug.html'
+        "link": new_article_info.get('link'), # Relative path 'articles/slug.html'
         "published_iso": new_article_info.get('published_iso'),
         "summary_short": new_article_info.get('summary_short'),
         "image_url": new_article_info.get('image_url'),
         "topic": new_article_info.get('topic'),
         "is_breaking": new_article_info.get('is_breaking', False),
         "tags": new_article_info.get('tags', []),
-        "audio_url": None, # Explicitly ensure no audio URL is saved here
+        "audio_url": None,
         "trend_score": new_article_info.get('trend_score', 0)
     }
-    # Basic validation of the entry
     if not minimal_entry['link'] or not minimal_entry['title']:
          logger.error(f"Cannot add entry for {article_id}: missing critical link or title.")
          return
@@ -369,30 +378,25 @@ def update_site_data(new_article_info):
     # --- Update/Add Logic for BOTH files ---
     for data_dict, filename in [(site_data, SITE_DATA_FILE), (all_articles_data, ALL_ARTICLES_FILE)]:
         current_articles = data_dict.setdefault("articles", [])
-        # Find index based on ID
         index_to_update = next((i for i, article in enumerate(current_articles) if isinstance(article, dict) and article.get('id') == article_id), -1)
 
         if index_to_update != -1:
-            # Update existing entry - merge dictionaries, new info takes precedence
             current_articles[index_to_update].update(minimal_entry)
             logger.debug(f"Updating {article_id} in {os.path.basename(filename)}")
         else:
-            # Add new entry
             current_articles.append(minimal_entry)
             logger.debug(f"Adding {article_id} to {os.path.basename(filename)}")
 
     # --- Sort and Limit (Homepage only) ---
-    # Sort both lists by date (most recent first)
     site_data["articles"].sort(key=get_sort_key, reverse=True)
     all_articles_data["articles"].sort(key=get_sort_key, reverse=True)
-    # Limit homepage list
     site_data["articles"] = site_data["articles"][:MAX_HOME_PAGE_ARTICLES]
 
     # --- Save BOTH files ---
-    for filepath, data_dict in [(SITE_DATA_FILE, site_data), (ALL_ARTICLES_FILE, all_articles_data)]:
+    for filepath, data_dict in [(filepath, site_data), (ALL_ARTICLES_FILE, all_articles_data)]:
         try:
             with open(filepath, 'w', encoding='utf-8') as f:
-                json.dump(data_dict, f, indent=2, ensure_ascii=False) # Use indent=2 for readability
+                json.dump(data_dict, f, indent=2, ensure_ascii=False)
             logger.info(f"Updated {os.path.basename(filepath)} ({len(data_dict['articles'])} articles).")
         except Exception as e:
             logger.error(f"Failed to save {os.path.basename(filepath)}: {e}")
@@ -406,48 +410,42 @@ def process_single_article(json_filepath, recent_articles_context):
     article_data = load_article_data(json_filepath)
     if not article_data or not isinstance(article_data, dict):
         logger.error(f"Failed to load or invalid data in {article_filename}. Skipping.")
-        # Attempt to remove potentially corrupted file? Or leave for inspection?
-        # remove_scraped_file(json_filepath) # Maybe remove if loading fails consistently
-        return False # Indicate failure
+        remove_scraped_file(json_filepath) # Remove bad file
+        return False
 
     article_id = article_data.get('id')
     if not article_id:
-        # Try to generate ID again if missing (shouldn't happen if scraper worked)
         feed_url = article_data.get('source_feed', 'unknown_feed')
         from src.scrapers.news_scraper import get_article_id # Local import for safety
         article_id = get_article_id(article_data, feed_url)
-        article_data['id'] = article_id # Add generated ID back to data
+        article_data['id'] = article_id
         logger.warning(f"Article data missing 'id' in {article_filename}, generated: {article_id}")
 
     processed_file_path = os.path.join(PROCESSED_JSON_DIR, f"{article_id}.json")
 
     try:
-        # 1. Check if already fully processed (final JSON exists)
+        # 1. Check if already fully processed
         if os.path.exists(processed_file_path):
              logger.info(f"Article {article_id} already processed (processed JSON exists). Skipping.")
-             remove_scraped_file(json_filepath) # Clean up original scraped file
-             return False # Not an error, just already done
+             remove_scraped_file(json_filepath)
+             return False
 
         # --- Start Agent Pipeline ---
-
         # 2. Filter Agent
         logger.debug(f"Running filter agent for {article_id}...")
         article_data = run_filter_agent(article_data)
-        # Check if agent failed critically or returned unusable data
         if not article_data or article_data.get('filter_verdict') is None:
              filter_error = article_data.get('filter_error', 'Filter agent critical failure') if isinstance(article_data, dict) else 'Filter agent returned non-dict'
              logger.error(f"Filter Agent failed for {article_id}. Error: {filter_error}. Skipping.")
-             # Save intermediate state for debugging? Or just remove?
-             # save_processed_data(processed_file_path.replace(".json", ".filter-failed.json"), article_data or {"id": article_id, "error": "filter failed"})
-             remove_scraped_file(json_filepath) # Remove to prevent reprocessing
+             remove_scraped_file(json_filepath)
              return False
 
         filter_verdict = article_data['filter_verdict']
         importance_level = filter_verdict.get('importance_level')
         if importance_level == "Boring":
             logger.info(f"Article {article_id} classified as Boring by Filter Agent. Skipping.")
-            remove_scraped_file(json_filepath) # Clean up
-            return False # Successfully skipped
+            remove_scraped_file(json_filepath)
+            return False
 
         assigned_topic = filter_verdict.get('topic', 'Other')
         article_data['topic'] = assigned_topic
@@ -461,14 +459,14 @@ def process_single_article(json_filepath, recent_articles_context):
         similarity_result = run_similarity_check_agent(article_data, recent_articles_context)
         if similarity_result and similarity_result.get('is_semantic_duplicate'):
             logger.info(f"Article {article_id} is SEMANTIC DUPLICATE. Skipping. Reason: {similarity_result.get('reasoning')}")
-            remove_scraped_file(json_filepath) # Clean up
-            return False # Successfully skipped duplicate
+            remove_scraped_file(json_filepath)
+            return False
         elif similarity_result is None:
-             logger.warning(f"Similarity check failed for {article_id}. Proceeding cautiously (potential duplicate?).")
+             logger.warning(f"Similarity check failed for {article_id}. Proceeding cautiously.")
              article_data['similarity_check_error'] = "Agent failed"
         else:
              logger.info(f"Article {article_id} passed similarity check.")
-             article_data['similarity_check_error'] = None # Explicitly clear error
+             article_data['similarity_check_error'] = None
 
         # 4. Image Finding
         logger.info(f"Finding image for {article_id}...")
@@ -491,7 +489,7 @@ def process_single_article(json_filepath, recent_articles_context):
              else:
                  logger.error(f"Failed to find any image (scrape or API) for {article_id}. Skipping article.")
                  remove_scraped_file(json_filepath)
-                 return False # Cannot proceed without image
+                 return False
 
         # 5. SEO Article Generation
         logger.debug(f"Running SEO agent for {article_id}...")
@@ -510,56 +508,51 @@ def process_single_article(json_filepath, recent_articles_context):
         article_data = run_tags_generator_agent(article_data)
         tags_error = article_data.get('tags_agent_error')
         if tags_error: logger.warning(f"Tags Agent failed/skipped for {article_id}. Error: {tags_error}")
-        # Ensure generated_tags is always a list, even if agent failed/skipped
         article_data['generated_tags'] = article_data.get('generated_tags', []) if isinstance(article_data.get('generated_tags'), list) else []
 
-        # 7. Trend Score Calculation (Simplified example)
+        # 7. Trend Score Calculation
         trend_score = 0
         tags_count = len(article_data['generated_tags'])
         publish_date_iso = article_data.get('published_iso')
         try:
             if importance_level == "Interesting": trend_score += 5
             elif importance_level == "Breaking": trend_score += 10
-            trend_score += tags_count * 0.5 # Add score based on tag count
+            trend_score += tags_count * 0.5
             if publish_date_iso:
                  publish_dt = get_sort_key(article_data)
                  now_utc = datetime.now(timezone.utc)
-                 # Ensure comparison is valid (publish date should not be in future)
                  if publish_dt <= now_utc:
                      days_old = (now_utc - publish_dt).total_seconds() / (60 * 60 * 24)
-                     recency_factor = max(0, 1 - (days_old / 7)) # Simple linear decay over a week
+                     recency_factor = max(0, 1 - (days_old / 7))
                      trend_score += recency_factor * 5
                  else:
                       logger.warning(f"Publish date {publish_date_iso} seems to be in the future for {article_id}.")
         except Exception as e:
              logger.warning(f"Could not calculate trend score factors for {article_id}: {e}")
 
-        article_data['trend_score'] = round(max(0, trend_score), 2) # Ensure non-negative
+        article_data['trend_score'] = round(max(0, trend_score), 2)
         logger.debug(f"Calculated trend score for {article_id}: {article_data['trend_score']}")
 
         # --- Prepare for HTML Rendering ---
         # 8. Generate Slug
         original_title = article_data.get('title', f'article-{article_id}')
         slug = original_title.lower()
-        slug = re.sub(r'[^a-z0-9\s-]', '', slug) # Remove non-alphanumeric, space, hyphen
-        slug = re.sub(r'\s+', '-', slug) # Replace spaces with hyphens
-        slug = re.sub(r'-+', '-', slug).strip('-') # Consolidate hyphens, strip ends
-        slug = slug[:80] # Truncate
-        if not slug: slug = f'article-{article_id}' # Fallback if empty
+        slug = re.sub(r'[^a-z0-9\s-]', '', slug)
+        slug = re.sub(r'\s+', '-', slug)
+        slug = re.sub(r'-+', '-', slug).strip('-')
+        slug = slug[:80]
+        if not slug: slug = f'article-{article_id}'
         article_data['slug'] = slug
 
         # 9. Prepare Template Variables
         article_relative_path = f"articles/{slug}.html"
-        # Use YOUR_SITE_BASE_URL (which has trailing slash or is empty)
-        canonical_url = urljoin(YOUR_SITE_BASE_URL, article_relative_path)
+        canonical_url = urljoin(YOUR_SITE_BASE_URL, article_relative_path) # Use absolute URL
 
         body_md = seo_results.get('generated_article_body_md', '')
-        try:
-             body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables', 'nl2br'])
+        try: body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables', 'nl2br'])
         except Exception as md_err:
             logger.error(f"Markdown conversion failed for {article_id}: {md_err}")
-            # Provide safe fallback HTML
-            body_html = f"<p><i>Content rendering error.</i></p><pre>{body_md}</pre>" # Show raw MD in pre tag on error
+            body_html = f"<p><i>Content rendering error.</i></p><pre>{body_md}</pre>"
 
         tags_list = article_data.get('generated_tags', [])
         tags_html = format_tags_html(tags_list)
@@ -579,54 +572,50 @@ def process_single_article(json_filepath, recent_articles_context):
             'PAGE_TITLE': page_title,
             'META_DESCRIPTION': meta_description,
             'AUTHOR_NAME': article_data.get('author', AUTHOR_NAME_DEFAULT),
-            'META_KEYWORDS': ", ".join(tags_list), # Comma-separated string for meta keywords
+            'META_KEYWORDS': ", ".join(tags_list),
             'CANONICAL_URL': canonical_url,
             'SITE_NAME': YOUR_WEBSITE_NAME,
             'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
-            'IMAGE_URL': article_data.get('selected_image_url', ''), # Default empty string
-            'IMAGE_ALT_TEXT': page_title, # Use page title as alt text
-            'META_KEYWORDS_LIST': tags_list, # Pass list for looping if needed
+            'IMAGE_URL': article_data.get('selected_image_url', ''),
+            'IMAGE_ALT_TEXT': page_title,
+            'META_KEYWORDS_LIST': tags_list,
             'PUBLISH_ISO_FOR_META': publish_date_iso_for_meta,
-            # Pass the raw JSON-LD block generated by the agent (assumes it includes <script> tags)
             'JSON_LD_SCRIPT_BLOCK': seo_results.get('generated_json_ld', ''),
             'ARTICLE_HEADLINE': article_data.get('title', 'Article'),
             'PUBLISH_DATE': publish_date_formatted,
             'ARTICLE_BODY_HTML': body_html,
             'ARTICLE_TAGS_HTML': tags_html,
-            'SOURCE_ARTICLE_URL': article_data.get('link', '#'), # Default to # if missing
-            'ARTICLE_TITLE': article_data.get('title'), # Used in source link
-            'id': article_id, # Pass ID for potential JS use
-            # Data attributes for JS sidebar loading
+            'SOURCE_ARTICLE_URL': article_data.get('link', '#'),
+            'ARTICLE_TITLE': article_data.get('title'),
+            'id': article_id,
             'CURRENT_ARTICLE_ID': article_id,
             'CURRENT_ARTICLE_TOPIC': article_data.get('topic', ''),
-            'CURRENT_ARTICLE_TAGS_JSON': json.dumps(tags_list), # Pass tags as JSON string
-            'AUDIO_URL': None # Explicitly None for template compatibility
+            'CURRENT_ARTICLE_TAGS_JSON': json.dumps(tags_list),
+            'AUDIO_URL': None
         }
 
         # 10. Render HTML Page
         generated_html_path = render_post_page(template_vars, slug)
         if not generated_html_path:
             logger.error(f"Failed to render HTML for {article_id}. Skipping article.")
-            # Should we remove scraped file here? Maybe leave it for debugging render failure.
-            return False # Indicate failure
+            return False
 
         # --- Finalize and Update Site ---
         # 11. Prepare minimal data for site_data/all_articles JSON
         site_data_entry = {
             "id": article_id,
             "title": article_data.get('title'),
-            "link": article_relative_path, # Use relative path for site JSONs
+            "link": article_relative_path, # Relative path for site JSONs
             "published_iso": publish_date_iso_for_meta,
-            "summary_short": meta_description, # Use meta description as short summary
+            "summary_short": meta_description,
             "image_url": article_data.get('selected_image_url'),
             "topic": article_data.get('topic', 'News'),
             "is_breaking": article_data.get('is_breaking', False),
             "tags": tags_list,
-            "audio_url": None, # Explicitly None
+            "audio_url": None,
             "trend_score": article_data.get('trend_score', 0)
         }
-        # Update main data dict just before saving final JSON
-        article_data['audio_url'] = None # Ensure audio_url is None in processed JSON
+        article_data['audio_url'] = None # Ensure audio_url is None in final processed JSON
 
         # 12. Update Site Data JSON files
         update_site_data(site_data_entry)
@@ -634,8 +623,7 @@ def process_single_article(json_filepath, recent_articles_context):
         # --- Post to Twitter (AFTER site data is updated) ---
         logger.info(f"Attempting to post article {article_id} to Twitter...")
         try:
-            # Use the absolute canonical URL for the tweet
-            tweet_link = canonical_url
+            tweet_link = canonical_url # Use absolute URL
             tweet_title = article_data.get('title', 'New AI/Tech Article')
             tweet_image = article_data.get('selected_image_url')
 
@@ -648,7 +636,7 @@ def process_single_article(json_filepath, recent_articles_context):
                          logger.info(f"Successfully posted {article_id} to Twitter.")
                      else:
                          logger.error(f"Failed to post {article_id} to Twitter (function returned False).")
-                         # Non-fatal error, just log it, don't stop processing
+                         # Non-fatal error
             else:
                 logger.error(f"Missing title ('{tweet_title}'), link ('{tweet_link}'), or image URL ('{tweet_image}') for Twitter post (Article ID: {article_id}). Skipping tweet.")
 
@@ -656,22 +644,42 @@ def process_single_article(json_filepath, recent_articles_context):
              logger.exception(f"Unexpected error during Twitter posting attempt for {article_id}: {tweet_err}")
         # --- END Twitter Post ---
 
+        # --- Send data to Make.com Webhook ---
+        logger.info(f"Attempting to send webhook to Make.com for {article_id}...")
+        try:
+            webhook_data = {
+                "id": article_id,
+                "title": article_data.get('title', 'New Article'),
+                "article_url": canonical_url, # Send absolute URL
+                "image_url": article_data.get('selected_image_url'),
+                "topic": article_data.get('topic'),
+                "tags": article_data.get('generated_tags', [])
+            }
+            if MAKE_WEBHOOK_URL: # Check if URL is loaded
+                webhook_success = send_make_webhook(MAKE_WEBHOOK_URL, webhook_data)
+                if webhook_success:
+                    logger.info(f"Successfully sent webhook for {article_id}.")
+                else:
+                    logger.error(f"Failed sending webhook for {article_id}.")
+            else:
+                logger.warning(f"MAKE_INSTAGRAM_WEBHOOK_URL not configured. Skipping webhook for {article_id}.")
+
+        except Exception as webhook_err:
+             logger.exception(f"Unexpected error preparing/sending Make.com webhook for {article_id}: {webhook_err}")
+        # --- END Webhook Send ---
 
         # 13. Save final processed data & remove original scraped file
         if save_processed_data(processed_file_path, article_data):
              remove_scraped_file(json_filepath)
              logger.info(f"--- Successfully processed article: {article_id} ---")
-             return True # Indicate success
+             return True
         else:
              logger.error(f"Failed to save final processed JSON for {article_id}. Original scraped file NOT removed.")
-             return False # Indicate failure to save final data
+             return False
 
     except Exception as process_e:
-         # Catch all other unexpected errors during the main processing flow
          logger.exception(f"CRITICAL failure processing {article_id} (file {article_filename}): {process_e}")
-         # Optionally save partial data for debugging
-         # save_processed_data(processed_file_path.replace(".json", ".critical-error.json"), article_data or {"id": article_id, "error": str(process_e)})
-         return False # Indicate critical failure
+         return False
 
 
 # --- Main Orchestration Logic (Single Run) ---
@@ -679,38 +687,31 @@ if __name__ == "__main__":
     run_start_time = time.time()
     logger.info(f"--- === Dacoola AI News Orchestrator Starting Run ({datetime.now()}) === ---")
 
-    # Ensure base directories exist
     ensure_directories()
 
-    # Load IDs of articles already fully processed or skipped (prevents reprocessing scraped files)
-    scraper_processed_ids = set() # This set tracks files saved by news_scraper.py
-    try: scraper_processed_ids = load_processed_ids() # Load IDs from data/processed_article_ids.txt
+    scraper_processed_ids = set()
+    try: scraper_processed_ids = load_processed_ids()
     except Exception as load_e: logger.exception(f"Error loading processed IDs: {load_e}")
 
     # 1. Scrape for new articles
     logger.info("--- Stage 1: Running Scraper ---")
     new_articles_found_count = 0
     try:
-        # Pass the set of processed IDs to the scraper
         new_articles_found_count = scrape_news(NEWS_FEED_URLS, scraper_processed_ids)
         logger.info(f"Scraper run completed. Saved {new_articles_found_count} new raw article JSON files.")
     except NameError:
          logger.critical("NEWS_FEED_URLS not defined. Cannot run scraper.")
-         sys.exit(1) # Exit if config is missing
+         sys.exit(1)
     except Exception as scrape_e:
         logger.exception(f"Scraper stage failed critically: {scrape_e}")
-        # Decide whether to proceed or exit if scraping fails
-        # For now, let's try processing any existing files, but log critical error
         logger.error("Proceeding to processing stage despite scraper error.")
 
 
-    # 2. Process newly scraped articles (and any leftovers from previous failed runs)
+    # 2. Process newly scraped articles (and any leftovers)
     logger.info("--- Stage 2: Running Processing Cycle ---")
-    # Load context AFTER scraping, so it includes articles processed in previous runs but before this one
     recent_articles_context = load_recent_articles_for_comparison()
     logger.info(f"Loaded {len(recent_articles_context)} recent articles from existing site data for duplicate checking.")
 
-    # Find all raw JSON files waiting for processing
     json_files_to_process = []
     try: json_files_to_process = glob.glob(os.path.join(SCRAPED_ARTICLES_DIR, '*.json'))
     except Exception as glob_e: logger.exception(f"Error listing JSON files for processing: {glob_e}")
@@ -722,22 +723,15 @@ if __name__ == "__main__":
         processed_successfully_count = 0
         failed_or_skipped_count = 0
 
-        # Sort by modification time (oldest first) to process in order
         try: json_files_to_process.sort(key=os.path.getmtime)
         except Exception as sort_e: logger.warning(f"Could not sort JSON files by time: {sort_e}")
 
-        # Process each file
         for filepath in json_files_to_process:
-            # Reload context before each article? Maybe too slow.
-            # Use context loaded once at start of processing cycle for efficiency.
             if process_single_article(filepath, recent_articles_context):
                 processed_successfully_count += 1
-                # Optional: Reload context after successful processing to include the new article
-                # recent_articles_context = load_recent_articles_for_comparison()
             else:
                  failed_or_skipped_count += 1
-            # Optional small delay between articles if API rate limits are a concern
-            time.sleep(1) # 1-second pause
+            time.sleep(1) # Small pause
 
         logger.info(f"Processing cycle complete. Successfully processed: {processed_successfully_count}, Failed/Skipped/Duplicate: {failed_or_skipped_count}")
 
