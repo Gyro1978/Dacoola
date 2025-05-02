@@ -1474,6 +1474,29 @@
       "trend_score": 10.9
     },
     {
+      "id": "7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e",
+      "title": "AI-generated code could be a disaster for the software supply chain. Here’s why.",
+      "link": "articles/ai-generated-code-could-be-a-disaster-for-the-software-supply-chain-heres-why.html",
+      "published_iso": "2025-04-29T11:15:43Z",
+      "summary_short": "AI-generated code often references fake libraries, exposing software to supply-chain attacks. Learn about the risks of AI-generated code vulnerabilities.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/04/robot-working-computer-1152x648.jpg",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "AI-generated code",
+        "software supply chain security",
+        "dependency confusion attacks",
+        "large language models",
+        "AI security risks",
+        "package hallucination",
+        "open-source vulnerabilities",
+        "cyber threats",
+        "AI in software development"
+      ],
+      "audio_url": null,
+      "trend_score": 12.0
+    },
+    {
       "id": "4860c6f3cd4ebe3da43f1121424fc2f94c1b71927359b860d9e2725a28fbad34",
       "title": "Alibaba launches open source Qwen3 model that surpasses OpenAI o1 and DeepSeek R1",
       "link": "articles/alibaba-launches-open-source-qwen3-model-that-surpasses-openai-o1-and-deepseek-r.html",
@@ -1515,6 +1538,30 @@
         "AI adoption"
       ],
       "audio_url": null
+    },
+    {
+      "id": "81181e23455a2170ca2087a40dcef52ac79665318c8fe6cd23a9527ff21d5e50",
+      "title": "Backblaze responds to claims of “sham accounting,” customer backups at risk",
+      "link": "articles/backblaze-responds-to-claims-of-sham-accounting-customer-backups-at-risk.html",
+      "published_iso": "2025-04-28T21:43:43Z",
+      "summary_short": "Backblaze dismisses \"sham accounting\" allegations from a short seller, denying risks to customer backups. Learn more about the claims.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/04/66ecb7b025b5adbe29cfd593_Backup_20_26_20Archive-1000x648.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Backblaze",
+        "cloud storage",
+        "sham accounting",
+        "insider trading",
+        "corporate governance",
+        "financial transparency",
+        "Morpheus Research",
+        "IPO lockup period",
+        "customer data security",
+        "tech sector scrutiny"
+      ],
+      "audio_url": null,
+      "trend_score": 12.09
     },
     {
       "id": "e9b012026dc03486898246459b052ed85492b16fe8592efbfc2429b128531197",
@@ -1661,6 +1708,30 @@
       "trend_score": 11.85
     },
     {
+      "id": "568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492",
+      "title": "iOS and Android juice jacking defenses have been trivial to bypass for years",
+      "link": "articles/ios-and-android-juice-jacking-defenses-have-been-trivial-to-bypass-for-years.html",
+      "published_iso": "2025-04-28T11:00:59Z",
+      "summary_short": "Researchers reveal iOS and Android juice jacking protections have been easily bypassed, exposing a critical mobile security vulnerability.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2023/04/scary-usb-juice-jacking-whooooo-1152x648.jpg",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "iOS security",
+        "Android security",
+        "juice jacking",
+        "mobile security vulnerability",
+        "public charging risks",
+        "data theft",
+        "malicious code execution",
+        "Defcon",
+        "Apple security flaws",
+        "Google security flaws"
+      ],
+      "audio_url": null,
+      "trend_score": 11.78
+    },
+    {
       "id": "51c0c65bcf80ac62a15fdd2a7213c63fafaa7b7b03243eb0a697aaf68e750157",
       "title": "Does RAG make LLMs less safe?  Bloomberg research reveals hidden dangers",
       "link": "articles/does-rag-make-llms-less-safe-bloomberg-research-reveals-hidden-dangers.html",
@@ -1704,6 +1775,75 @@
       ],
       "audio_url": null,
       "trend_score": 9.0
+    },
+    {
+      "id": "8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778",
+      "title": "New study shows why simulated reasoning AI models don’t yet live up to their billing",
+      "link": "articles/new-study-shows-why-simulated-reasoning-ai-models-dont-yet-live-up-to-their-bill.html",
+      "published_iso": "2025-04-25T21:43:09Z",
+      "summary_short": "A new study reveals AI reasoning limitations, showing why simulated reasoning models struggle with complex math proofs despite solving routine problems.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/04/math_question_1-1152x648.jpg",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "AI reasoning limitations",
+        "simulated reasoning models",
+        "chain-of-thought AI",
+        "AI mathematical proofs",
+        "AI cognitive techniques",
+        "AI model benchmarks",
+        "AI industry transparency",
+        "human vs AI reasoning"
+      ],
+      "audio_url": null,
+      "trend_score": 9.0
+    },
+    {
+      "id": "7cb47431dfeb37df18155039d3e5864193a44eb575bb8e324a0aa302634117b7",
+      "title": "FBI offers $10 million for information about Salt Typhoon members",
+      "link": "articles/fbi-offers-10-million-for-information-about-salt-typhoon-members.html",
+      "published_iso": "2025-04-25T20:38:02Z",
+      "summary_short": "The FBI is offering $10M for details on Salt Typhoon, a China-state hacking group behind US telecom breaches.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/04/salt-typoon-chinese-flag-1152x648.jpg",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "FBI reward",
+        "Salt Typhoon",
+        "China-state hacking",
+        "cyber espionage",
+        "US telecommunications security",
+        "national security risks",
+        "foreign cyber threats",
+        "FBI public service announcement",
+        "Chinese hacking groups"
+      ],
+      "audio_url": null,
+      "trend_score": 9.5
+    },
+    {
+      "id": "d8e601dace56b09fb0e2bd244b885f5a9e7a4eb3e2b9d5b2673246a230863162",
+      "title": "New Android spyware is targeting Russian military personnel on the front lines",
+      "link": "articles/new-android-spyware-is-targeting-russian-military-personnel-on-the-front-lines.html",
+      "published_iso": "2025-04-24T20:02:40Z",
+      "summary_short": "New Android spyware disguised as Alpine Quest Pro targets Russian military, stealing contacts and tracking locations. Learn more about this threat.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2023/09/trojan-backdoor-1000x648.jpg",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Android spyware",
+        "Russian military cyberattack",
+        "Alpine Quest malware",
+        "Telegram malware distribution",
+        "cybersecurity threats in war zones",
+        "Dr.Web research",
+        "mobile espionage",
+        "offline mapping app security",
+        "trojanized Android apps",
+        "military personnel data theft"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
     },
     {
       "id": "efe6f7928cbf219d6ea4299f11e41a84300db1a1ef3b4338ef0048a3de49f67e",
@@ -1824,6 +1964,30 @@
       "trend_score": 10.0
     },
     {
+      "id": "6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b",
+      "title": "Company apologizes after AI support agent invents policy that causes user uproar",
+      "link": "articles/company-apologizes-after-ai-support-agent-invents-policy-that-causes-user-uproar.html",
+      "published_iso": "2025-04-17T22:42:23Z",
+      "summary_short": "Cursor's AI support bot invented a fake policy, triggering user outrage in a notable AI confabulation incident. Learn the details.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/04/telephone_robot_2-1152x648.jpg",
+      "topic": "Ethics",
+      "is_breaking": false,
+      "tags": [
+        "AI confabulation",
+        "AI customer service",
+        "AI hallucinations",
+        "Cursor AI code editor",
+        "AI trust issues",
+        "AI policy misinformation",
+        "AI support agent",
+        "AI brand reputation",
+        "Hacker News AI backlash",
+        "Reddit AI complaints"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
       "id": "68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078",
       "title": "AI Bites Back: Researchers Develop Model to Detect Malaria Amid Venezuelan Gold Rush",
       "link": "articles/ai-bites-back-researchers-develop-model-to-detect-malaria-amid-venezuelan-gold-r.html",
@@ -1846,6 +2010,53 @@
       ],
       "audio_url": null,
       "trend_score": 10.0
+    },
+    {
+      "id": "f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154",
+      "title": "OpenAI releases new simulated reasoning models with full tool access",
+      "link": "articles/openai-releases-new-simulated-reasoning-models-with-full-tool-access.html",
+      "published_iso": "2025-04-16T22:21:38Z",
+      "summary_short": "OpenAI debuts new reasoning models o3 and o4-mini, offering full ChatGPT tool integration for enhanced AI capabilities.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/04/digital_thinker_1-1152x648.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI reasoning models",
+        "ChatGPT tools",
+        "AI functionality",
+        "Simulated reasoning",
+        "AI productivity",
+        "OpenAI model release",
+        "ChatGPT Plus",
+        "AI creative applications",
+        "Sam Altman",
+        "AI tool integration"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
+      "id": "aad4a09c83ea831accc33c0a156207beeaf9134d18716ba15e12ff9a71c8f67e",
+      "title": "Researchers claim breakthrough in fight against AI’s frustrating security hole",
+      "link": "articles/researchers-claim-breakthrough-in-fight-against-ais-frustrating-security-hole.html",
+      "published_iso": "2025-04-16T11:15:44Z",
+      "summary_short": "Google DeepMind's CaMeL offers a new approach to combating AI's persistent prompt injection vulnerability, marking a potential AI security breakthrough.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/04/camel_image-1152x648.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Prompt Injection Attacks",
+        "AI Security Breakthrough",
+        "Google DeepMind",
+        "CaMeL Framework",
+        "Control Flow Integrity",
+        "Large Language Models Security",
+        "AI Vulnerability Solutions",
+        "Information Flow Control",
+        "AI Safety Framework"
+      ],
+      "audio_url": null,
+      "trend_score": 9.5
     },
     {
       "id": "fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1",
