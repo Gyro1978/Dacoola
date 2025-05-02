@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc",
+      "title": "Aurora launches its driverless commercial trucking service, and a surprise bidder joins Canoo’s bankruptcy case",
+      "link": "articles/aurora-launches-its-driverless-commercial-trucking-service-and-a-surprise-bidder.html",
+      "published_iso": "2025-05-02T20:45:00Z",
+      "summary_short": "Aurora Innovation debuts its driverless trucking service as a surprise bidder emerges in Canoo's bankruptcy case.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/01/Illustrative-purposes-warning-beacon-1.jpg?resize=1200,758",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "Aurora Innovation",
+        "driverless trucking service",
+        "autonomous freight transportation",
+        "Canoo bankruptcy",
+        "electric vehicle startup",
+        "TechCrunch Mobility",
+        "commercial freight operators",
+        "transportation innovation",
+        "autonomous trucking sector",
+        "EV market"
+      ],
+      "trend_score": 15.0
+    },
+    {
       "id": "a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999",
       "title": "Google will soon start letting kids under 13 use its Gemini chatbot",
       "link": "articles/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot.html",
@@ -133,6 +156,29 @@
         "Stanford-MAST project",
         "AI-driven web interactions",
         "automated testing"
+      ],
+      "trend_score": 15.0
+    },
+    {
+      "id": "c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115",
+      "title": "WordFinder app: Harnessing generative AI on AWS for aphasia communication",
+      "link": "articles/wordfinder-app-harnessing-generative-ai-on-aws-for-aphasia-communication.html",
+      "published_iso": "2025-05-02T16:16:16Z",
+      "summary_short": "Discover how AWS generative AI powers WordFinder, an app helping people with aphasia communicate more independently. AI for aphasia innovation.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/04/ML-16892WordFinder-app-Architecture.png",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "WordFinder app",
+        "AI for aphasia",
+        "AWS generative AI",
+        "Amazon Rekognition",
+        "Amazon Bedrock",
+        "communication disabilities",
+        "AWS Hack For Purpose",
+        "Queensland Aphasia Research Centre",
+        "React Native",
+        "AWS Amplify"
       ],
       "trend_score": 15.0
     },
@@ -655,6 +701,29 @@
         "anticompetitive pricing"
       ],
       "audio_url": null
+    },
+    {
+      "id": "b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc",
+      "title": "Amazon Bedrock Model Distillation: Boost function calling accuracy while reducing cost and latency",
+      "link": "articles/amazon-bedrock-model-distillation-boost-function-calling-accuracy-while-reducing.html",
+      "published_iso": "2025-05-01T01:04:26Z",
+      "summary_short": "Amazon Bedrock's AI model distillation enhances function calling accuracy while reducing latency and costs, making generative AI more efficient.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/30/abmd-1120x630.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Amazon Bedrock Model Distillation",
+        "Generative AI Performance",
+        "Model Distillation Techniques",
+        "Function Calling Accuracy",
+        "AI Cost Reduction",
+        "Latency Optimization",
+        "Llama Model Family",
+        "AI Agent Deployment",
+        "Enterprise AI Solutions",
+        "Data Augmentation Techniques"
+      ],
+      "trend_score": 12.93
     },
     {
       "id": "f606becdcfa406be59638e79566fba00319a2de7b8eae623aa01d1693f6a2658",
@@ -1210,6 +1279,28 @@
       "tags": [],
       "audio_url": null,
       "trend_score": 5.0
+    },
+    {
+      "id": "fa54918a862e5a23abcd05dbc0223aa56dee34c5a63f0c351c26f30495606734",
+      "title": "Customize Amazon Nova models to improve tool usage",
+      "link": "articles/customize-amazon-nova-models-to-improve-tool-usage.html",
+      "published_iso": "2025-04-28T17:47:59Z",
+      "summary_short": "Learn how Amazon Nova models can be fine-tuned to improve tool integration and decision-making in AI workflows.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/iML-18065-SolutionOverviewjpg-911x630.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Amazon Nova models",
+        "Amazon Bedrock",
+        "large language models",
+        "agentic workflows",
+        "AI fine-tuning",
+        "tool-calling precision",
+        "multimodal AI",
+        "Converse and Invoke APIs",
+        "real-time data integration"
+      ],
+      "trend_score": 9.5
     },
     {
       "id": "5d4a51d9943e79c4f1a791e2ebc93bdc24e28f10e34907bdb45975b8caeb0abb",

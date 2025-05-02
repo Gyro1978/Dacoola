@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc",
+      "title": "Aurora launches its driverless commercial trucking service, and a surprise bidder joins Canoo’s bankruptcy case",
+      "link": "articles/aurora-launches-its-driverless-commercial-trucking-service-and-a-surprise-bidder.html",
+      "published_iso": "2025-05-02T20:45:00Z",
+      "summary_short": "Aurora Innovation debuts its driverless trucking service as a surprise bidder emerges in Canoo's bankruptcy case.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/01/Illustrative-purposes-warning-beacon-1.jpg?resize=1200,758",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "Aurora Innovation",
+        "driverless trucking service",
+        "autonomous freight transportation",
+        "Canoo bankruptcy",
+        "electric vehicle startup",
+        "TechCrunch Mobility",
+        "commercial freight operators",
+        "transportation innovation",
+        "autonomous trucking sector",
+        "EV market"
+      ],
+      "trend_score": 15.0
+    },
+    {
       "id": "a176ef4a1f5dede47f99ab4215df8bce42640f53bd4d108eadead8b3a8066999",
       "title": "Google will soon start letting kids under 13 use its Gemini chatbot",
       "link": "articles/google-will-soon-start-letting-kids-under-13-use-its-gemini-chatbot.html",
@@ -133,6 +156,29 @@
         "Stanford-MAST project",
         "AI-driven web interactions",
         "automated testing"
+      ],
+      "trend_score": 15.0
+    },
+    {
+      "id": "c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115",
+      "title": "WordFinder app: Harnessing generative AI on AWS for aphasia communication",
+      "link": "articles/wordfinder-app-harnessing-generative-ai-on-aws-for-aphasia-communication.html",
+      "published_iso": "2025-05-02T16:16:16Z",
+      "summary_short": "Discover how AWS generative AI powers WordFinder, an app helping people with aphasia communicate more independently. AI for aphasia innovation.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/04/ML-16892WordFinder-app-Architecture.png",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "WordFinder app",
+        "AI for aphasia",
+        "AWS generative AI",
+        "Amazon Rekognition",
+        "Amazon Bedrock",
+        "communication disabilities",
+        "AWS Hack For Purpose",
+        "Queensland Aphasia Research Centre",
+        "React Native",
+        "AWS Amplify"
       ],
       "trend_score": 15.0
     },
@@ -409,51 +455,6 @@
         "startup valuation"
       ],
       "trend_score": 14.5
-    },
-    {
-      "id": "c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043",
-      "title": "Stripe shows iOS developers how to avoid Apple’s App Store commission",
-      "link": "articles/stripe-shows-ios-developers-how-to-avoid-apples-app-store-commission.html",
-      "published_iso": "2025-05-01T20:31:18Z",
-      "summary_short": "Stripe offers iOS developers a way to bypass Apple's App Store commission following the recent Epic antitrust ruling.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2022/07/app-store-ios-2022-a.jpg?resize=1200,675",
-      "topic": "Business",
-      "is_breaking": false,
-      "tags": [
-        "Stripe",
-        "iOS developers",
-        "App Store commission",
-        "Apple antitrust case",
-        "third-party payment options",
-        "Epic lawsuit",
-        "mobile app payments",
-        "developer revenue",
-        "payment processing"
-      ],
-      "trend_score": 14.5
-    },
-    {
-      "id": "e89a2875f7fb5b76234cb8cea985ff772643b165cb9e8c75ab0a3056331481a2",
-      "title": "FutureHouse releases AI tools it claims can accelerate science",
-      "link": "articles/futurehouse-releases-ai-tools-it-claims-can-accelerate-science.html",
-      "published_iso": "2025-05-01T20:16:33Z",
-      "summary_short": "FutureHouse debuts AI-powered platform and API designed to accelerate scientific research, backed by Eric Schmidt. Explore the latest in AI scientific tools.",
-      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/66bb703c19a6473deb260e81_Hero-Image-Research-Subpage.jpg?resize=1200,806",
-      "topic": "AI Models",
-      "is_breaking": false,
-      "tags": [
-        "FutureHouse",
-        "AI for scientific research",
-        "AI-powered platform",
-        "Eric Schmidt",
-        "nonprofit AI initiatives",
-        "AI scientist",
-        "scientific workflows",
-        "AI-driven scientific advancements",
-        "autonomous AI research",
-        "open scientific innovation"
-      ],
-      "trend_score": 15.0
     }
   ]
 }
