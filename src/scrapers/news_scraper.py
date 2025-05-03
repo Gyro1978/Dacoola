@@ -25,6 +25,7 @@ NEWS_FEED_URLS = [
     "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
     "https://www.anthropic.com/feed.xml",
     "https://openai.com/blog/rss.xml",
+    "https://blogs.nvidia.com/feed/",
     "https://deepmind.google/blog/feed.xml/",
     "http://feeds.arstechnica.com/arstechnica/technology-lab"
 ]
