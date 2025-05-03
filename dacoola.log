@@ -15099,3 +15099,47 @@ AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentTy
 2025-05-02 23:48:27 - main_orchestrator - INFO - Loaded 50 recent articles from existing site data for duplicate checking.
 2025-05-02 23:48:27 - main_orchestrator - INFO - No new/leftover scraped articles found in directory to process.
 2025-05-02 23:48:27 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (2.58 seconds) === ---
+2025-05-02 23:54:38,006 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-02 23:54:38,006 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: clip-ViT-B-32
+2025-05-02 23:54:39,362 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-02 23:54:41,715 - transformers.processing_utils - WARNING - Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+2025-05-02 23:54:41,979 - root - INFO - Successfully loaded CLIP model: clip-ViT-B-32
+2025-05-02 23:54:42 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/home/
+2025-05-02 23:54:42 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-02 23:54:42 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-02 23:54:42.008289) === ---
+2025-05-02 23:54:42 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-02 23:54:42 - main_orchestrator - INFO - --- Stage 1: Running Scraper ---
+2025-05-02 23:54:42 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (7 feeds) ---
+2025-05-02 23:54:42 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-02 23:54:42 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-02 23:54:42 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles from this feed.
+2025-05-02 23:54:42 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-02 23:54:42 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-02 23:54:42 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-02 23:54:42 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-02 23:54:43 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://www.anthropic.com/feed.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 170, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 23:54:43 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-02 23:54:43 - src.scrapers.news_scraper - ERROR - Unexpected error processing feed https://openai.com/blog/rss.xml: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 170, in scrape_news
+    if isinstance(bozo_reason, feedparser.exceptions.NotXMLContentType):
+AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentType'
+2025-05-02 23:54:43 - src.scrapers.news_scraper - INFO - Checking feed: https://syncedreview.com/feed
+2025-05-02 23:54:43 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://syncedreview.com/feed. HTTP Status: 301
+2025-05-02 23:54:43 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-02 23:54:44 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-02 23:54:44 - src.scrapers.news_scraper - INFO - Finished feed https://blogs.nvidia.com/feed/. Saved 0 new articles from this feed.
+2025-05-02 23:54:44 - src.scrapers.news_scraper - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-02 23:54:44 - src.scrapers.news_scraper - INFO - Feed http://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-02 23:54:44 - src.scrapers.news_scraper - INFO - Finished feed http://feeds.arstechnica.com/arstechnica/technology-lab. Saved 0 new articles from this feed.
+2025-05-02 23:54:44 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 0 ---
+2025-05-02 23:54:44 - main_orchestrator - INFO - Scraper run completed. Saved 0 new raw article JSON files.
+2025-05-02 23:54:44 - main_orchestrator - INFO - --- Stage 2: Running Processing Cycle ---
+2025-05-02 23:54:44 - main_orchestrator - INFO - Loaded 50 recent articles from all_articles.json for comparison context.
+2025-05-02 23:54:44 - main_orchestrator - INFO - Loaded 50 recent articles from existing site data for duplicate checking.
+2025-05-02 23:54:44 - main_orchestrator - INFO - No new/leftover scraped articles found in directory to process.
+2025-05-02 23:54:44 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (2.49 seconds) === ---
