@@ -388,6 +388,11 @@ def process_single_article(json_filepath, existing_articles_data, processed_in_t
         article_relative_path = f"articles/{slug}.html"
         # Ensure YOUR_SITE_BASE_URL ends with a slash for urljoin
         canonical_url = urljoin(YOUR_SITE_BASE_URL, article_relative_path.lstrip('/')) if YOUR_SITE_BASE_URL else f"/{article_relative_path.lstrip('/')}"
+
+        # <<< --- ADDED DEBUG LINE --- >>>
+        logger.info(f"DEBUG: Calculated canonical_url: '{canonical_url}' using base: '{YOUR_SITE_BASE_URL}' and relative: '{article_relative_path}'")
+        # <<< --- END ADDED DEBUG LINE --- >>>
+
         body_md = seo_results.get('generated_article_body_md', ''); body_html = f"<p><i>Article content could not be generated.</i></p><pre>{body_md}</pre>"
         try: body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables', 'nl2br'])
         except Exception as md_err: logger.error(f"Markdown conversion failed for article ID {article_id}: {md_err}")
