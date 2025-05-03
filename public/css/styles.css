@@ -61,7 +61,6 @@ img {
     height: var(--navbar-height);
     display: flex;
     align-items: center;
-    margin-bottom: 25px; /* Space below navbar */
 }
 
 .nav-container {
@@ -196,7 +195,7 @@ img {
     gap: 30px;
     width: 90%;
     max-width: 1400px;
-    margin: 30px auto;
+    margin: 40px auto 30px auto; /* <<< Increased top margin to 40px */
 }
 
 /* --- Main Article Styling (Article Page) --- */
@@ -272,7 +271,12 @@ img {
 
 
 /* --- HOMEPAGE SPECIFIC & GENERIC PAGE STYLES --- */
-.home-container, .page-container { width: 90%; max-width: 1200px; margin: 30px auto; padding: 0; }
+.home-container, .page-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto 30px auto; /* <<< Increased top margin to 40px */
+    padding: 0;
+}
 .home-section { margin-bottom: 50px; }
 .home-section h2, #page-title { font-size: 1.8em; color: var(--text-light); margin-bottom: 25px; border-bottom: 2px solid var(--accent-blue); padding-bottom: 10px; font-weight: 600; }
 #page-title { font-size: 2em; padding-bottom: 15px; margin-bottom: 30px; }
