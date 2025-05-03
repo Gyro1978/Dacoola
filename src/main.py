@@ -106,6 +106,9 @@ OUTPUT_HTML_DIR = os.path.join(PUBLIC_DIR, 'articles')
 TEMPLATE_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'templates')
 SITE_DATA_FILE = os.path.join(PUBLIC_DIR, 'site_data.json')
 ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
+# --- NEW Twitter Limit Constants ---
+DAILY_TWEET_LIMIT = 3
+TWITTER_TRACKER_FILE = os.path.join(DATA_DIR, 'twitter_daily_limit.json')
 
 
 # --- Jinja2 Setup ---
@@ -227,7 +230,39 @@ def get_sort_key(article_dict):
         logger.warning(f"Could not parse date '{date_str}' for sorting (ID: {article_dict.get('id', 'N/A')}). Error: {e}. Using fallback.")
         return fallback_date
 
-# --- NEW WEBHOOK FUNCTION ---
+# --- Twitter Daily Limit Tracker Functions ---
+def _read_tweet_tracker():
+    """Reads the tweet tracker file."""
+    try:
+        if os.path.exists(TWITTER_TRACKER_FILE):
+            with open(TWITTER_TRACKER_FILE, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                # Add validation for expected keys
+                if 'date' in data and 'count' in data:
+                    return data.get('date'), data.get('count', 0)
+                else:
+                    logger.warning(f"Tweet tracker file {TWITTER_TRACKER_FILE} has invalid format. Resetting.")
+                    return None, 0
+        else:
+            return None, 0 # No file, means count is 0 for today
+    except (json.JSONDecodeError, IOError) as e:
+        logger.error(f"Error reading tweet tracker file {TWITTER_TRACKER_FILE}: {e}. Resetting count.")
+        return None, 0 # Error reading, reset count
+
+def _write_tweet_tracker(date_str, count):
+    """Writes the current date and tweet count to the tracker file."""
+    try:
+        # Ensure directory exists
+        os.makedirs(os.path.dirname(TWITTER_TRACKER_FILE), exist_ok=True)
+        with open(TWITTER_TRACKER_FILE, 'w', encoding='utf-8') as f:
+            json.dump({'date': date_str, 'count': count}, f)
+        logger.debug(f"Updated tweet tracker: Date={date_str}, Count={count}")
+    except IOError as e:
+        logger.error(f"Error writing tweet tracker file {TWITTER_TRACKER_FILE}: {e}")
+# --- End Twitter Tracker Functions ---
+
+
+# --- Make.com Webhook Function ---
 def send_make_webhook(webhook_url, data):
     """Sends data to a Make.com webhook."""
     if not webhook_url:
@@ -256,7 +291,8 @@ def send_make_webhook(webhook_url, data):
     except Exception as e:
          logger.exception(f"Unexpected error sending Make.com webhook: {e}")
          return False
-# --- END NEW WEBHOOK FUNCTION ---
+# --- End Make.com Webhook Function ---
+
 
 def render_post_page(template_variables, slug_base):
     """Renders a single article HTML page using the template."""
@@ -621,29 +657,47 @@ def process_single_article(json_filepath, recent_articles_context):
         # 12. Update Site Data JSON files
         update_site_data(site_data_entry)
 
-        # --- Post to Twitter (AFTER site data is updated) ---
-        logger.info(f"Attempting to post article {article_id} to Twitter...")
+        # --- Post to Twitter (with Daily Limit) ---
+        logger.info(f"Checking daily limit for Twitter post for article {article_id}...")
         try:
-            tweet_link = canonical_url # Use absolute URL
-            tweet_title = article_data.get('title', 'New AI/Tech Article')
-            tweet_image = article_data.get('selected_image_url')
+            today_date_str = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+            tracker_date, count_today = _read_tweet_tracker()
 
-            if tweet_title and tweet_link and tweet_image:
-                if not tweet_link.startswith('http'):
-                     logger.error(f"Canonical URL '{tweet_link}' for tweet is not absolute! Check YOUR_SITE_BASE_URL. Skipping tweet.")
+            # Reset count if date is different or tracker file was invalid
+            if tracker_date != today_date_str:
+                logger.info(f"New day ({today_date_str}) or tracker reset. Resetting tweet count.")
+                count_today = 0
+                # Write the tracker immediately with count 0 for the new day
+                _write_tweet_tracker(today_date_str, count_today)
+
+            if count_today < DAILY_TWEET_LIMIT:
+                logger.info(f"Daily limit ({count_today}/{DAILY_TWEET_LIMIT}) not reached. Attempting tweet...")
+
+                tweet_link = canonical_url # Use absolute URL
+                tweet_title = article_data.get('title', 'New AI/Tech Article')
+                tweet_image = article_data.get('selected_image_url')
+
+                if tweet_title and tweet_link and tweet_image:
+                    if not tweet_link.startswith('http'):
+                        logger.error(f"Canonical URL '{tweet_link}' for tweet is not absolute! Check YOUR_SITE_BASE_URL. Skipping tweet.")
+                    else:
+                        tweet_success = post_tweet_with_image(tweet_title, tweet_link, tweet_image)
+                        if tweet_success:
+                            logger.info(f"Successfully posted {article_id} to Twitter.")
+                            # Increment count and update tracker ONLY on successful post
+                            count_today += 1
+                            _write_tweet_tracker(today_date_str, count_today)
+                        else:
+                            logger.error(f"Failed to post {article_id} to Twitter (function returned False). Count not incremented.")
                 else:
-                     tweet_success = post_tweet_with_image(tweet_title, tweet_link, tweet_image)
-                     if tweet_success:
-                         logger.info(f"Successfully posted {article_id} to Twitter.")
-                     else:
-                         logger.error(f"Failed to post {article_id} to Twitter (function returned False).")
-                         # Non-fatal error
+                    logger.error(f"Missing title ('{tweet_title}'), link ('{tweet_link}'), or image URL ('{tweet_image}') for Twitter post (Article ID: {article_id}). Skipping tweet.")
             else:
-                logger.error(f"Missing title ('{tweet_title}'), link ('{tweet_link}'), or image URL ('{tweet_image}') for Twitter post (Article ID: {article_id}). Skipping tweet.")
+                logger.info(f"Daily Twitter limit ({DAILY_TWEET_LIMIT}) reached for {today_date_str}. Skipping tweet for {article_id}.")
 
         except Exception as tweet_err:
              logger.exception(f"Unexpected error during Twitter posting attempt for {article_id}: {tweet_err}")
         # --- END Twitter Post ---
+
 
         # --- Send data to Make.com Webhook ---
         logger.info(f"Attempting to send webhook to Make.com for {article_id}...")

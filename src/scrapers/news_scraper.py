@@ -19,13 +19,12 @@ DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 # --- End Path Setup ---
 
 # --- Configuration ---
-# List of RSS Feed URLs (Cleaned up)
+# List of RSS Feed URLs (User provided list)
 NEWS_FEED_URLS = [
     "https://techcrunch.com/feed/",
     "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
     "https://www.anthropic.com/feed.xml",
     "https://openai.com/blog/rss.xml",
-    "https://blogs.nvidia.com/feed/",
     "https://deepmind.google/blog/feed.xml/",
     "http://feeds.arstechnica.com/arstechnica/technology-lab"
 ]
@@ -35,7 +34,7 @@ PROCESSED_IDS_FILE = os.path.join(DATA_DIR, 'processed_article_ids.txt')
 # Folder to save newly scraped articles as JSON files
 OUTPUT_DIR = os.path.join(DATA_DIR, 'scraped_articles')
 # Max *total* new articles to save across all feeds per run
-MAX_ARTICLES_PER_RUN = 15 # Keep reasonably low
+MAX_ARTICLES_PER_RUN = 20 # Keep reasonably low (User provided value)
 # --- End Configuration ---
 
 # --- Setup Logging ---
@@ -161,6 +160,7 @@ def scrape_news(feed_urls, processed_ids):
             if feed_data.bozo:
                 bozo_reason = feed_data.get('bozo_exception', 'Unknown reason')
                 # *** THIS IS THE CORRECTED CHECK ***
+                # Check if the error message indicates a non-XML content type
                 if "content-type" in str(bozo_reason).lower() and "xml" not in str(bozo_reason).lower():
                     logger.error(f"Failed to fetch feed {feed_url}: Content type was not XML/RSS/Atom ({bozo_reason}). Skipping.")
                     continue

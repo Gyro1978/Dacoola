@@ -6,7 +6,7 @@ on:
   schedule:
     # Runs every 20 minutes (0, 20, 40 minutes past the hour)
     # Consider changing to "0 * * * *" (hourly) if runs take > 10-15 mins
-    - cron: "0,20,40 * * * *"
+    - cron: "0,15,30,45 * * * *"
   workflow_dispatch: # Allows manual triggering
 
 jobs:
