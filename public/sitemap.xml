@@ -241,7 +241,19 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://dacoolaa.netlify.app/articles/salesforce-research-lays-the-foundations-for-more-reliable-enterprise-ai-agents.html</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://dacoolaa.netlify.app/articles/salesforce-takes-aim-at-jagged-intelligence-in-push-for-more-reliable-ai.html</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/rag-can-make-ai-models-riskier-and-less-reliable-new-research-shows.html</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
