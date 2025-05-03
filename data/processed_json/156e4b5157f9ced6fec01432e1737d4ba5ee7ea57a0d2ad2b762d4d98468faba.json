@@ -1,0 +1,43 @@
+{
+    "id": "156e4b5157f9ced6fec01432e1737d4ba5ee7ea57a0d2ad2b762d4d98468faba",
+    "title": "Oracle Cloud Infrastructure Deploys Thousands of NVIDIA Blackwell GPUs for Agentic AI and Reasoning Models",
+    "link": "https://blogs.nvidia.com/blog/oracle-cloud-infrastructure-blackwell-gpus-agentic-ai-reasoning-models/",
+    "published_iso": "2025-04-28T13:00:25Z",
+    "summary": "<div id=\"bsf_rt_marker\"></div><p>Oracle has stood up and optimized its first wave of liquid-cooled <a href=\"https://www.nvidia.com/en-us/data-center/gb200-nvl72/\" target=\"_blank\">NVIDIA GB200 NVL72</a> racks in its data centers. Thousands of NVIDIA Blackwell GPUs are now being deployed and ready for customer use on <a href=\"https://www.nvidia.com/en-us/data-center/dgx-cloud\" target=\"_blank\">NVIDIA DGX Cloud</a> and <a href=\"https://www.oracle.com/cloud/\" target=\"_blank\">Oracle Cloud Infrastructure</a> (OCI) to develop and run next-generation reasoning models and AI agents.</p>\n<p>Oracle’s state-of-the-art GB200 deployment includes high-speed <a href=\"https://www.nvidia.com/en-us/networking/products/infiniband/\" target=\"_blank\">NVIDIA Quantum-2 InfiniBand</a> and <a href=\"https://www.nvidia.com/en-us/networking/spectrumx/\" target=\"_blank\">NVIDIA Spectrum-X Ethernet</a> networking to enable scalable, low-latency performance, as well as a full stack of <a href=\"https://nvidianews.nvidia.com/news/oracle-and-nvidia-collaborate-to-help-enterprises-accelerate-agentic-ai-inference\" target=\"_blank\">software and database integrations</a> from NVIDIA and OCI.</p>\n<p>OCI, one of the world’s largest and fastest-growing cloud service providers, is among the first to deploy NVIDIA GB200 NVL72 systems. The company has ambitious plans to build one of the world’s largest Blackwell clusters. <a href=\"https://www.oracle.com/ai-infrastructure/\" target=\"_blank\">OCI Superclusters</a> will scale beyond 100,000 NVIDIA Blackwell GPUs to meet the world’s skyrocketing need for inference tokens and accelerated computing. The torrid pace of AI innovation continues as several companies including OpenAI have released new reasoning models in the past few weeks.</p>\n<p>OCI’s installation is the latest example of NVIDIA Grace Blackwell systems going online worldwide, transforming cloud data centers into <a href=\"https://www.nvidia.com/en-us/glossary/ai-factory/\" target=\"_blank\">AI factories</a> that manufacture intelligence at scale. These new AI factories leverage the NVIDIA GB200 NVL72 platform, a rack-scale system that combines 36 NVIDIA Grace CPUs and 72 NVIDIA Blackwell GPUs, delivering exceptional performance and energy efficiency for agentic AI powered by advanced AI reasoning models.</p>\n<p>OCI offers flexible deployment options to bring Blackwell to customers across public, government and sovereign clouds, as well as customer-owned data centers through <a href=\"https://www.oracle.com/cloud/cloud-at-customer/dedicated-region/\" target=\"_blank\">OCI Dedicated Region</a> and <a href=\"https://www.oracle.com/cloud/alloy/\" target=\"_blank\">OCI Alloy</a> at any scale.</p>\n<p>A number of customers are planning to deploy workloads right away on the OCI GB200 systems including major technology companies, enterprise customers, government agencies and contractors, and regional cloud providers.</p>\n<p>These new racks are the first systems available from <a href=\"https://www.nvidia.com/en-us/data-center/dgx-cloud/?ncid=pa-srch-goog-108186-DGX-Brand-prsp&amp;_bt=731829895137&amp;_bk=dgx%20cloud&amp;_bm=b&amp;_bn=g&amp;_bg=174488073597&amp;gad_source=1&amp;gbraid=0AAAAAD4XAoEhDJeC2xBpV78B-AJpBH2Am&amp;gclid=EAIaIQobChMI54Ga6tfzjAMVmDBECB13vBGKEAAYASAAEgK3ePD_BwE\" target=\"_blank\">NVIDIA DGX Cloud</a>, an optimized platform with software, services and technical support to develop and deploy AI workloads on leading clouds such as OCI. NVIDIA will use the racks for a variety of projects including training reasoning models, autonomous vehicle development, accelerating chip design and manufacturing, and developing AI tools.</p>\n<p>GB200 NVL72 racks are live and available now from DGX Cloud and OCI.</p>",
+    "source_feed": "https://feeds.feedburner.com/nvidiablog",
+    "scraped_at_iso": "2025-05-03T05:04:10Z",
+    "selected_image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/blackwell-corp-blog-oci-blackwell-momentum-1280x680-r1.png",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Compute",
+        "reasoning_summary": "Oracle's deployment of thousands of NVIDIA Blackwell GPUs for AI and reasoning models represents a significant infrastructure upgrade with verifiable impact on AI compute capabilities.",
+        "primary_topic_keyword": "NVIDIA Blackwell GPUs deployment"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-03T05:08:26Z",
+    "topic": "Compute",
+    "is_breaking": false,
+    "primary_keyword": "NVIDIA Blackwell GPUs deployment",
+    "seo_agent_results": {
+        "generated_title_tag": "Oracle Deploys NVIDIA Blackwell GPUs for AI and Reasoning Models",
+        "generated_meta_description": "Oracle Cloud Infrastructure rolls out thousands of NVIDIA Blackwell GPUs to power next-gen AI agents and reasoning models.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Oracle Deploys NVIDIA Blackwell GPUs for AI and Reasoning Models\",  \n  \"description\": \"Oracle Cloud Infrastructure rolls out thousands of NVIDIA Blackwell GPUs to power next-gen AI agents and reasoning models.\",  \n  \"keywords\": [\"NVIDIA Blackwell GPUs deployment\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://blogs.nvidia.com/blog/oracle-cloud-infrastructure-blackwell-gpus-agentic-ai-reasoning-models/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://blogs.nvidia.com/wp-content/uploads/2025/04/blackwell-corp-blog-oci-blackwell-momentum-1280x680-r1.png\" },  \n  \"datePublished\": \"2025-04-28T13:00:25Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Oracle Cloud Infrastructure Deploys Thousands of NVIDIA Blackwell GPUs for Agentic AI and Reasoning Models  \n\nOracle has launched its first wave of liquid-cooled **NVIDIA GB200 NVL72** racks, deploying thousands of **NVIDIA Blackwell GPUs** across its data centers. These GPUs are now available for customer use on **NVIDIA DGX Cloud** and **Oracle Cloud Infrastructure (OCI)**, enabling the development of advanced reasoning models and AI agents. The deployment includes high-speed **NVIDIA Quantum-2 InfiniBand** and **Spectrum-X Ethernet** networking, ensuring scalable, low-latency performance for AI workloads.  \n\nOCI is among the first cloud providers to adopt the **NVIDIA GB200 NVL72** systems, with plans to expand into one of the world’s largest Blackwell clusters, scaling beyond 100,000 GPUs. The infrastructure supports **OCI Superclusters**, designed to meet the surging demand for AI inference and accelerated computing. Additionally, Oracle offers flexible deployment options, including public, government, and sovereign clouds, as well as **OCI Dedicated Region** and **OCI Alloy** for on-premises solutions.  \n\n### Significance  \nThe deployment marks a major step in transforming cloud data centers into **AI factories**, capable of producing intelligence at scale. Major enterprises, government agencies, and regional cloud providers are already preparing to leverage these systems for AI-driven applications, from autonomous vehicles to chip design. With **NVIDIA DGX Cloud** now live on OCI, developers gain access to optimized AI tools and services, accelerating innovation in agentic AI and reasoning models."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Oracle Cloud Infrastructure",
+        "NVIDIA Blackwell GPUs",
+        "AI factories",
+        "NVIDIA DGX Cloud",
+        "agentic AI",
+        "reasoning models",
+        "OCI Superclusters",
+        "NVIDIA GB200 NVL72",
+        "accelerated computing",
+        "AI inference"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 11.66,
+    "audio_url": null
+}
