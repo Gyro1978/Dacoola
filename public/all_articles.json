@@ -1544,30 +1544,6 @@
       "trend_score": 9.5
     },
     {
-      "id": "c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763",
-      "title": "Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficiency by Over 300x",
-      "link": "articles/chill-factor-nvidia-blackwell-platform-boosts-water-efficiency-by-over-300x.html",
-      "published_iso": "2025-04-22T13:00:39Z",
-      "summary_short": "NVIDIA Blackwell cooling technology enhances water efficiency by 300x in AI data centers, reducing energy costs with liquid-cooled systems.",
-      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/water-efficiency-hero-resized.jpg",
-      "topic": "Hardware",
-      "is_breaking": false,
-      "tags": [
-        "NVIDIA Blackwell cooling",
-        "liquid-cooled data centers",
-        "AI workload efficiency",
-        "GB200 NVL72",
-        "water efficiency in data centers",
-        "sustainable AI computing",
-        "hyperscale data center cooling",
-        "energy-efficient AI infrastructure",
-        "NVLink technology",
-        "data center cost savings"
-      ],
-      "audio_url": null,
-      "trend_score": 10.0
-    },
-    {
       "id": "860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd",
       "title": "Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficiency by Over 300x",
       "link": "articles/chill-factor-nvidia-blackwell-platform-boosts-water-efficiency-by-over-300x.html",
@@ -1659,30 +1635,6 @@
         "AI overthinking",
         "adaptive AI systems",
         "AI industry trends"
-      ],
-      "audio_url": null,
-      "trend_score": 10.0
-    },
-    {
-      "id": "68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078",
-      "title": "AI Bites Back: Researchers Develop Model to Detect Malaria Amid Venezuelan Gold Rush",
-      "link": "articles/ai-bites-back-researchers-develop-model-to-detect-malaria-amid-venezuelan-gold-r.html",
-      "published_iso": "2025-04-17T16:00:01Z",
-      "summary_short": "Researchers use AI malaria detection to combat a resurgence in Venezuela caused by gold mining, achieving 99.51% accuracy with NVIDIA GPUs.",
-      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/Anopheles_stephensi.jpeg",
-      "topic": "Health",
-      "is_breaking": false,
-      "tags": [
-        "AI malaria detection",
-        "convolutional neural networks",
-        "malaria diagnosis",
-        "Plasmodium falciparum",
-        "Plasmodium vivax",
-        "Venezuela malaria crisis",
-        "NVIDIA GPUs",
-        "automated medical diagnosis",
-        "transfer learning in healthcare",
-        "rural healthcare technology"
       ],
       "audio_url": null,
       "trend_score": 10.0

@@ -24,10 +24,11 @@ NEWS_FEED_URLS = [
     "https://techcrunch.com/feed/",
     "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
     "https://www.anthropic.com/feed.xml",
-    "https://openai.com/blog/rss.xml",
+    "https://openai.com/news/rss.xml",
     "https://blogs.nvidia.com/feed/",
-    "https://deepmind.google/blog/feed.xml/",
-    "http://feeds.arstechnica.com/arstechnica/technology-lab"
+    "https://feeds.feedburner.com/nvidiablog",
+    "http://feeds.arstechnica.com/arstechnica/technology-lab",
+    "https://feeds.bbci.co.uk/news/technology/rss.xml"
 ]
 
 # File to store IDs of processed articles
