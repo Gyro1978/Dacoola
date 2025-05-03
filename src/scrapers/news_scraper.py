@@ -28,7 +28,6 @@ NEWS_FEED_URLS = [
     "https://blogs.nvidia.com/feed/",
     "https://feeds.feedburner.com/nvidiablog",
     "http://feeds.arstechnica.com/arstechnica/technology-lab",
-    "https://feeds.bbci.co.uk/news/technology/rss.xml"
 ]
 
 # File to store IDs of processed articles
