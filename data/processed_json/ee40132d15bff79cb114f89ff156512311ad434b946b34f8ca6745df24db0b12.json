@@ -1,0 +1,42 @@
+{
+    "id": "ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12",
+    "title": "AI Bites Back: Researchers Develop Model to Detect Malaria Amid Venezuelan Gold Rush",
+    "link": "https://blogs.nvidia.com/blog/ai-researchers-malaria-venezuela/",
+    "published_iso": "2025-04-17T16:00:01Z",
+    "summary": "<div id=\"bsf_rt_marker\"></div><p>Gold prospecting in Venezuela has led to a malaria resurgence, but researchers have developed AI to take a bite out of the problem.</p>\n<p>In Venezuela’s Bolivar state, deforestation for gold mining in waters has disturbed mosquito populations, which are biting miners and infecting them with the deadly parasite.</p>\n<p>Venezuela was certified as malaria-free in 1961 by the World Health Organization. It’s estimated that worldwide there were 263 million cases of malaria and 597,000 deaths in 2023, according to the WHO.</p>\n<p>In the Venezuelan outbreak, the area affected is rural and has limited access to medical clinics, so detection with microscopy by trained professionals is lacking.</p>\n<p>But researchers at the intersection of medicine and technology have tapped AI and NVIDIA GPUs to come up with a solution. They recently <a href=\"https://www.nature.com/articles/s41598-025-87979-5\" target=\"_blank\">published a paper</a> in <i>Nature</i>, describing the development of a <a href=\"https://blogs.nvidia.com/blog/whats-the-difference-between-a-cnn-and-an-rnn/\">convolutional neural network</a> (CNN) for automatically detecting malaria parasites in blood samples.</p>\n<p>“At some point in Venezuela, malaria was almost eradicated,&#8221; said 25-year-old Diego Ramos-Briceño, who has a bachelor’s in engineering that he earned while also pursuing a doctorate in medicine. “I believe it was around 135,000 cases last year.”</p>\n<h2><b>Identifying Malaria Parasites in Blood Samples</b></h2>\n<p>The researchers — Ramos-Briceño, Alessandro Flammia-D’Aleo, Gerardo Fernández-López, Fhabián Carrión-Nessi and David Forero-Peña — used the CNN to identify Plasmodium falciparum and Plasmodium vivax in thick blood smears, achieving 99.51% accuracy.</p>\n<p>To develop the model, the team acquired a dataset of 5,941 labeled thick blood smear microscope images from the Chittagong Medical College Hospital, in Bangladesh. They processed this dataset to create nearly 190,000 labeled images.</p>\n<p>“What we wanted for the neural network to learn is the morphology of the parasite, so from out of the nearly 6,000 microscope level images, we extracted every single parasite, and from all that data augmentation and segmentation, we ended up having almost 190,000 images for model training,” said Ramos-Briceño.</p>\n<p>The model comes as traditional microscopy methods are also challenged by limitations in accuracy and consistency, according to the research paper.</p>\n<h2><b>Harnessing Gaming GPUs and CUDA for Model Training, Inference</b></h2>\n<p>To run model training, the malaria paper’s team tapped into an RTX 3060 GPU from a computer science teacher mentoring their research.</p>\n<p>“We used PyTorch Lightning with <a href=\"https://developer.nvidia.com/cuda-toolkit\" target=\"_blank\">NVIDIA CUDA</a> acceleration that enabled us to do efficient parallel computation that significantly sped up the matrix operations and the preparations of the neural network compared with what a CPU would have done,” said Ramos-Briceño.</p>\n<p>For inference, malaria determinations from blood samples can be made within several seconds, he said, using such GPUs.</p>\n<p>Clinics lacking trained microscopists could use the model and introduce their own data for transfer learning so that the model performs optimally with the types of images they submit, handling the lighting conditions and other factors, he said.</p>\n<p>“For communities that are far away from the urban setting, where there’s more access to resources, this could be a way to approach the malaria problem,” said Ramos-Briceño.</p>",
+    "source_feed": "https://blogs.nvidia.com/feed/",
+    "scraped_at_iso": "2025-05-03T03:46:23Z",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Health",
+        "reasoning_summary": "The article reports on a novel AI application for malaria detection in a critical health crisis, backed by a published paper in Nature, indicating verifiable research and significant real-world impact.",
+        "primary_topic_keyword": "AI malaria detection"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-03T03:46:31Z",
+    "topic": "Health",
+    "is_breaking": false,
+    "primary_keyword": "AI malaria detection",
+    "similarity_check_error": null,
+    "selected_image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/Anopheles_stephensi.jpeg",
+    "seo_agent_results": {
+        "generated_title_tag": "AI Malaria Detection Model Tackles Outbreak in Venezuela",
+        "generated_meta_description": "Researchers use AI malaria detection to combat rising cases in Venezuela, achieving 99.51% accuracy with a CNN model.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"AI Malaria Detection Model Tackles Outbreak in Venezuela\",  \n  \"description\": \"Researchers use AI malaria detection to combat rising cases in Venezuela, achieving 99.51% accuracy with a CNN model.\",  \n  \"keywords\": [\"AI malaria detection\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://blogs.nvidia.com/blog/ai-researchers-malaria-venezuela/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://blogs.nvidia.com/wp-content/uploads/2025/04/Anopheles_stephensi.jpeg\" },  \n  \"datePublished\": \"2025-04-17T16:00:01Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://i.imgur.com/A5Wdp6f.png\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## AI Bites Back: Researchers Develop Model to Detect Malaria Amid Venezuelan Gold Rush  \n\nGold mining in Venezuela’s Bolivar state has led to deforestation and disrupted mosquito populations, contributing to a resurgence of malaria. With limited access to medical clinics in rural areas, traditional microscopy methods for detecting the disease have proven insufficient. To address this, researchers have developed an **AI malaria detection** system using convolutional neural networks (CNNs), achieving 99.51% accuracy in identifying malaria parasites in blood samples.  \n\nThe team, led by Diego Ramos-Briceño, trained their model on nearly 190,000 labeled images derived from 5,941 microscope slides from Bangladesh. By leveraging NVIDIA CUDA acceleration and an RTX 3060 GPU, they optimized training and inference, enabling rapid diagnosis in just seconds. This approach could be particularly valuable in remote regions where trained microscopists are scarce.  \n\nThe researchers published their findings in *Nature*, highlighting the potential for transfer learning to adapt the model to different clinic conditions. As Venezuela faces a growing malaria crisis—with an estimated 135,000 cases last year—this AI-powered solution offers a scalable way to improve detection and curb the outbreak."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "AI malaria detection",
+        "convolutional neural networks",
+        "malaria outbreak Venezuela",
+        "medical AI applications",
+        "NVIDIA CUDA acceleration",
+        "remote healthcare solutions",
+        "transfer learning in medicine",
+        "malaria diagnosis technology"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 9.0,
+    "audio_url": null
+}

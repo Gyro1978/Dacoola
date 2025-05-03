@@ -15876,3 +15876,151 @@ Check it out: https://dacoolaa.netlify.app/home/articles/making-brain-waves-ai-s
 2025-05-03 01:37:44 - main_orchestrator - INFO - Loaded 50 recent articles from all_articles.json for comparison context.
 2025-05-03 01:37:45 - main_orchestrator - INFO - Processing cycle complete. Successfully processed: 8, Failed/Skipped/Duplicate: 7
 2025-05-03 01:37:45 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (455.54 seconds) === ---
+2025-05-03 03:46:21 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/home/
+2025-05-03 03:46:21 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-03 03:46:21 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-03 03:46:21.721128) === ---
+2025-05-03 03:46:21 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-03 03:46:21 - main_orchestrator - INFO - Found 261 already fully processed articles.
+2025-05-03 03:46:21 - main_orchestrator - INFO - Total initial processed IDs passed to scraper: 784
+2025-05-03 03:46:21 - main_orchestrator - INFO - --- Stage 1: Running Scraper ---
+2025-05-03 03:46:21 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (7 feeds) ---
+2025-05-03 03:46:21 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-03 03:46:21 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-03 03:46:21 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles from this feed.
+2025-05-03 03:46:21 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-03 03:46:21 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-03 03:46:21 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-03 03:46:21 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-03 03:46:22 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml. HTTP Status: 404
+2025-05-03 03:46:22 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-03 03:46:22 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-03 03:46:22 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-03 03:46:23 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-03 03:46:23 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd.json (Title: Chill Factor: NVIDIA Blackwell Platform Boosts Wat...)
+2025-05-03 03:46:23 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 3e88b04be2e32810106de8601b775e4364c7ed40c631d56c6f7bbf5e80285466.json (Title: Keeping AI on the Planet: NVIDIA Technologies Make...)
+2025-05-03 03:46:23 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12.json (Title: AI Bites Back: Researchers Develop Model to Detect...)
+2025-05-03 03:46:23 - src.scrapers.news_scraper - INFO - Finished feed https://blogs.nvidia.com/feed/. Saved 3 new articles from this feed.
+2025-05-03 03:46:23 - src.scrapers.news_scraper - INFO - Checking feed: https://deepmind.google/blog/feed.xml/
+2025-05-03 03:46:23 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://deepmind.google/blog/feed.xml/. HTTP Status: 404
+2025-05-03 03:46:23 - src.scrapers.news_scraper - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-03 03:46:24 - src.scrapers.news_scraper - INFO - Feed http://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-03 03:46:24 - src.scrapers.news_scraper - INFO - Finished feed http://feeds.arstechnica.com/arstechnica/technology-lab. Saved 0 new articles from this feed.
+2025-05-03 03:46:24 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 3 ---
+2025-05-03 03:46:24 - main_orchestrator - INFO - Scraper run completed. Saved 3 new raw article JSON files.
+2025-05-03 03:46:24 - main_orchestrator - INFO - --- Stage 2: Running Processing Cycle ---
+2025-05-03 03:46:24 - main_orchestrator - INFO - Loaded 50 from all_articles.json for context.
+2025-05-03 03:46:24 - main_orchestrator - INFO - Loaded 50 articles from history for duplicate checking.
+2025-05-03 03:46:24 - main_orchestrator - INFO - Found 3 scraped articles to process.
+2025-05-03 03:46:24 - main_orchestrator - INFO - --- Processing article file: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12.json ---
+2025-05-03 03:46:24 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12)
+2025-05-03 03:46:24 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12 Title: AI Bites Back: Researchers Develop Model to Detect Malaria A...
+2025-05-03 03:46:31 - src.agents.filter_news_agent - INFO - Filter verdict received for ID ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12: level=Interesting, topic='Health', keyword='AI malaria detection'
+2025-05-03 03:46:31 - main_orchestrator - INFO - Article ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12 classified Interesting (Topic: Health).
+2025-05-03 03:46:31 - main_orchestrator - INFO - Checking semantic duplicates for ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12 against 50 articles...
+2025-05-03 03:46:31 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12)
+2025-05-03 03:46:31 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12 Title: AI Bites Back: Researchers Develop Model to Detect Malaria A...
+2025-05-03 03:46:36 - src.agents.similarity_check_agent - INFO - Similarity check result for ID ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12: is_duplicate=False. Reason: The core news event in the New Candidate Article about AI detecting malaria in Venezuela is not reported in any of the Recently Published Articles.
+2025-05-03 03:46:36 - main_orchestrator - INFO - Article ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12 passed semantic check.
+2025-05-03 03:46:36 - main_orchestrator - INFO - Finding image for ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12...
+2025-05-03 03:46:36 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://blogs.nvidia.com/blog/ai-researchers-malaria-venezuela/
+2025-05-03 03:46:36 - src.scrapers.image_scraper - INFO - Found og:image: https://blogs.nvidia.com/wp-content/uploads/2025/04/Anopheles_stephensi.jpeg
+2025-05-03 03:46:36 - main_orchestrator - INFO - Using scraped image ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12
+2025-05-03 03:46:36 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12...
+2025-05-03 03:47:04 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12.
+2025-05-03 03:47:04 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12...
+2025-05-03 03:47:13 - src.agents.tags_generator_agent - INFO - Successfully generated 8 tags for article ID: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12
+2025-05-03 03:47:13 - main_orchestrator - INFO - Rendered HTML: ai-bites-back-researchers-develop-model-to-detect-malaria-amid-venezuelan-gold-r.html
+2025-05-03 03:47:13 - main_orchestrator - INFO - Updated all_articles.json (80 articles).
+2025-05-03 03:47:13 - main_orchestrator - INFO - Check Twitter limit ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12...
+2025-05-03 03:47:13 - main_orchestrator - INFO - New day 2025-05-03. Reset tweet count.
+2025-05-03 03:47:13 - main_orchestrator - INFO - Daily limit 0/3. Try tweet...
+2025-05-03 03:47:13 - src.social.twitter_poster - INFO - Attempting to post tweet for: AI Bites Back: Researchers Develop Model to Detect Malaria Amid Venezuelan Gold Rush
+2025-05-03 03:47:13 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-03 03:47:13 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-03 03:47:13 - src.social.twitter_poster - INFO - Image uploaded to Twitter. Media ID: 1918512645465899008
+2025-05-03 03:47:13 - src.social.twitter_poster - INFO - Posting tweet text (length 228): AI Bites Back: Researchers Develop Model to Detect Malaria Amid Venezuelan Gold Rush
+
+Check it out: https://dacoolaa.netlify.app/home/articles/ai-bites-back-researchers-develop-model-to-detect-malaria-amid-venezuelan-gold-r.html
+2025-05-03 03:47:14 - src.social.twitter_poster - INFO - Successfully posted tweet! Tweet ID: 1918512647072264421
+2025-05-03 03:47:14 - main_orchestrator - INFO - Tweet OK ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12.
+2025-05-03 03:47:14 - main_orchestrator - INFO - Attempting send webhook ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12...
+2025-05-03 03:47:14 - main_orchestrator - INFO - Sent data to Make webhook ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12
+2025-05-03 03:47:14 - main_orchestrator - INFO - Webhook OK ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12.
+2025-05-03 03:47:14 - main_orchestrator - INFO - Saved final processed data to: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12.json
+2025-05-03 03:47:14 - main_orchestrator - INFO - --- Successfully processed article: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12 ---
+2025-05-03 03:47:15 - main_orchestrator - INFO - --- Processing article file: 3e88b04be2e32810106de8601b775e4364c7ed40c631d56c6f7bbf5e80285466.json ---
+2025-05-03 03:47:15 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 3e88b04be2e32810106de8601b775e4364c7ed40c631d56c6f7bbf5e80285466)
+2025-05-03 03:47:15 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 3e88b04be2e32810106de8601b775e4364c7ed40c631d56c6f7bbf5e80285466 Title: Keeping AI on the Planet: NVIDIA Technologies Make Every Day...
+2025-05-03 03:47:23 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 3e88b04be2e32810106de8601b775e4364c7ed40c631d56c6f7bbf5e80285466: level=Boring, topic='Other', keyword='NVIDIA environmental AI'
+2025-05-03 03:47:23 - main_orchestrator - INFO - Article 3e88b04be2e32810106de8601b775e4364c7ed40c631d56c6f7bbf5e80285466 classified Boring. Skip.
+2025-05-03 03:47:24 - main_orchestrator - INFO - --- Processing article file: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd.json ---
+2025-05-03 03:47:24 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd)
+2025-05-03 03:47:24 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd Title: Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficie...
+2025-05-03 03:47:30 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd: level=Interesting, topic='Hardware', keyword='NVIDIA Blackwell cooling'
+2025-05-03 03:47:30 - main_orchestrator - INFO - Article 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd classified Interesting (Topic: Hardware).
+2025-05-03 03:47:30 - main_orchestrator - INFO - Checking semantic duplicates for 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd against 51 articles...
+2025-05-03 03:47:30 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd)
+2025-05-03 03:47:30 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd Title: Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficie...
+2025-05-03 03:47:35 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd: is_duplicate=False. Reason: The New Candidate Article discusses NVIDIA Blackwell Platform's water efficiency improvements, which is not covered in any of the Recently Published Articles.
+2025-05-03 03:47:35 - main_orchestrator - INFO - Article 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd passed semantic check.
+2025-05-03 03:47:35 - main_orchestrator - INFO - Finding image for 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd...
+2025-05-03 03:47:35 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://blogs.nvidia.com/blog/blackwell-platform-water-efficiency-liquid-cooling-data-centers-ai-factories/
+2025-05-03 03:47:35 - src.scrapers.image_scraper - INFO - Found og:image: https://blogs.nvidia.com/wp-content/uploads/2025/04/water-efficiency-hero-resized.jpg
+2025-05-03 03:47:35 - main_orchestrator - INFO - Using scraped image 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd
+2025-05-03 03:47:35 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd...
+2025-05-03 03:48:12 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd.
+2025-05-03 03:48:12 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd...
+2025-05-03 03:48:18 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd
+2025-05-03 03:48:18 - main_orchestrator - INFO - Rendered HTML: chill-factor-nvidia-blackwell-platform-boosts-water-efficiency-by-over-300x.html
+2025-05-03 03:48:18 - main_orchestrator - INFO - Updated all_articles.json (81 articles).
+2025-05-03 03:48:18 - main_orchestrator - INFO - Check Twitter limit 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd...
+2025-05-03 03:48:18 - main_orchestrator - INFO - Daily limit 1/3. Try tweet...
+2025-05-03 03:48:18 - src.social.twitter_poster - INFO - Attempting to post tweet for: Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficiency by Over 300x
+2025-05-03 03:48:18 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-03 03:48:18 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-03 03:48:18 - src.social.twitter_poster - INFO - Image uploaded to Twitter. Media ID: 1918512918338977792
+2025-05-03 03:48:18 - src.social.twitter_poster - INFO - Posting tweet text (length 215): Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficiency by Over 300x
+
+Check it out: https://dacoolaa.netlify.app/home/articles/chill-factor-nvidia-blackwell-platform-boosts-water-efficiency-by-over-300x.html
+2025-05-03 03:48:19 - src.social.twitter_poster - INFO - Successfully posted tweet! Tweet ID: 1918512919697834200
+2025-05-03 03:48:19 - main_orchestrator - INFO - Tweet OK 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd.
+2025-05-03 03:48:19 - main_orchestrator - INFO - Attempting send webhook 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd...
+2025-05-03 03:48:19 - main_orchestrator - INFO - Sent data to Make webhook 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd
+2025-05-03 03:48:19 - main_orchestrator - INFO - Webhook OK 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd.
+2025-05-03 03:48:19 - main_orchestrator - INFO - Saved final processed data to: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd.json
+2025-05-03 03:48:19 - main_orchestrator - INFO - --- Successfully processed article: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd ---
+2025-05-03 03:48:20 - main_orchestrator - INFO - Processing cycle complete. Successfully processed: 2, Failed/Skipped/Duplicate: 1
+2025-05-03 03:48:20 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (118.85 seconds) === ---
+2025-05-03 03:59:10 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/home/
+2025-05-03 03:59:10 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-03 03:59:10 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-03 03:59:10.645585) === ---
+2025-05-03 03:59:10 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-03 03:59:10 - main_orchestrator - INFO - Found 263 already fully processed articles.
+2025-05-03 03:59:10 - main_orchestrator - INFO - Total initial processed IDs passed to scraper: 787
+2025-05-03 03:59:10 - main_orchestrator - INFO - --- Stage 1: Running Scraper ---
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (7 feeds) ---
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles from this feed.
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-03 03:59:11 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml. HTTP Status: 404
+2025-05-03 03:59:11 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-03 03:59:11 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-03 03:59:11 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Finished feed https://blogs.nvidia.com/feed/. Saved 0 new articles from this feed.
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Checking feed: https://deepmind.google/blog/feed.xml/
+2025-05-03 03:59:12 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://deepmind.google/blog/feed.xml/. HTTP Status: 404
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Feed http://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Finished feed http://feeds.arstechnica.com/arstechnica/technology-lab. Saved 0 new articles from this feed.
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 0 ---
+2025-05-03 03:59:12 - main_orchestrator - INFO - Scraper run completed. Saved 0 new raw article JSON files.
+2025-05-03 03:59:12 - main_orchestrator - INFO - --- Stage 2: Running Processing Cycle ---
+2025-05-03 03:59:12 - main_orchestrator - INFO - Loaded 50 from all_articles.json for context.
+2025-05-03 03:59:12 - main_orchestrator - INFO - Loaded 50 articles from history for duplicate checking.
+2025-05-03 03:59:12 - main_orchestrator - INFO - No scraped articles found to process.
+2025-05-03 03:59:12 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (1.90 seconds) === ---
