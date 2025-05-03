@@ -6,6 +6,7 @@ import sys
 import json
 import hashlib
 import logging
+import html  # <-- Added import
 from datetime import datetime, timezone # Use timezone
 
 # --- Path Setup (Ensure src is in path if run standalone) ---
@@ -53,14 +54,21 @@ if not logging.getLogger().hasHandlers():
 
 def get_article_id(entry, feed_url):
     """Generate a unique ID for an article entry, using feed_url for uniqueness."""
+    # Decode title/summary here ONLY IF used for ID generation fallback
+    raw_title = entry.get('title', '')
+    raw_summary = entry.get('summary', entry.get('description', ''))
+
     guid = entry.get('id', ''); link = entry.get('link', '')
     if guid and guid != link: identifier_base = guid
     elif link: identifier_base = link
     else:
-        title = entry.get('title', ''); summary = entry.get('summary', entry.get('description', ''))
-        identifier_base = title + summary
-        if not identifier_base: identifier_base = str(datetime.now(timezone.utc).timestamp()); logger.warning(f"Using timestamp ID {feed_url}. T: {title}")
-        else: logger.warning(f"Using title+summary ID {feed_url}. T: {title}")
+        # Use raw title/summary for ID generation if needed, decoding happens later for content
+        identifier_base = raw_title + raw_summary
+        if not identifier_base:
+             identifier_base = str(datetime.now(timezone.utc).timestamp());
+             logger.warning(f"Using timestamp ID {feed_url}. T: {raw_title}")
+        else:
+             logger.warning(f"Using title+summary ID {feed_url}. T: {raw_title}")
     identifier = f"{identifier_base}::{feed_url}"
     article_id = hashlib.sha256(identifier.encode('utf-8')).hexdigest()
     return article_id
@@ -139,18 +147,30 @@ def scrape_news(feed_urls, processed_ids):
             new_count_feed = 0
             for entry in feed_data.entries:
                 if articles_saved_this_run >= MAX_ARTICLES_PER_RUN: logger.warning(f"Hit max ({MAX_ARTICLES_PER_RUN}) processing {feed_url}."); break
-                article_id = get_article_id(entry, feed_url)
+
+                article_id = get_article_id(entry, feed_url) # Get ID based on raw data if needed
                 if article_id in processed_ids: continue
-                title = entry.get('title', '').strip(); link = entry.get('link', '').strip()
+
+                # --- Decode Title ---
+                title_raw = entry.get('title', '').strip()
+                title = html.unescape(title_raw) # Decode HTML entities
+                link = entry.get('link', '').strip()
                 if not title or not link: logger.warning(f"Article skip no title/link {feed_url}."); continue
+
                 published_parsed = entry.get('published_parsed'); published_iso = None
                 if published_parsed:
                     try: dt_obj = datetime(*published_parsed[:6], tzinfo=timezone.utc); published_iso = dt_obj.strftime('%Y-%m-%dT%H:%M:%SZ')
                     except Exception as e: logger.warning(f"Date parse error {article_id}: {e}")
-                summary = entry.content[0].get('value', '') if 'content' in entry and entry.content else entry.get('summary', entry.get('description', ''))
-                summary = summary.strip() if summary else ''
+
+                # --- Decode Summary ---
+                summary_raw = entry.content[0].get('value', '') if 'content' in entry and entry.content else entry.get('summary', entry.get('description', ''))
+                summary = html.unescape(summary_raw.strip() if summary_raw else '') # Decode HTML entities
+
                 if not summary: logger.warning(f"Article '{title}' ({article_id}) empty summary. Skip."); continue
+
+                # Use the *decoded* title and summary for saving
                 article_data = {'id': article_id, 'title': title, 'link': link, 'published_iso': published_iso, 'summary': summary, 'source_feed': feed_url, 'scraped_at_iso': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}
+
                 if save_article_data(article_id, article_data):
                     processed_ids.add(article_id); save_processed_id(article_id)
                     new_count_feed += 1; articles_saved_this_run += 1
