@@ -25,6 +25,53 @@
       "trend_score": 14.9
     },
     {
+      "id": "fd60fa29488c1c50788d38fccb5f0f6bffdd0919a7688c62c19186c60f88cfaf",
+      "title": "Google is going to let kids use its Gemini AI",
+      "link": "articles/google-is-going-to-let-kids-use-its-gemini-ai.html",
+      "published_iso": "2025-05-03T00:03:07Z",
+      "summary_short": "Google now allows kids under 13 to use Gemini AI for homework and stories, with Family Link safeguards. Learn about Gemini AI for kids.",
+      "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/STK255_Google_Gemini_A.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Gemini AI for kids",
+        "Family Link parental controls",
+        "AI in education",
+        "child-friendly AI",
+        "AI data privacy",
+        "AI safety for children",
+        "Google Gemini",
+        "AI homework help",
+        "parental supervision AI",
+        "AI misinformation concerns"
+      ],
+      "audio_url": null,
+      "trend_score": 14.36
+    },
+    {
+      "id": "04673665cca0f54847574ce6ea055fc35616a99f511193b9fcc8d7d7e97df7d2",
+      "title": "Trump&#8217;s proposed budget deals another big blow to science, clean energy, and the environment",
+      "link": "articles/trump8217s-proposed-budget-deals-another-big-blow-to-science-clean-energy-and-th.html",
+      "published_iso": "2025-05-02T21:13:17Z",
+      "summary_short": "Trump's proposed 2026 budget slashes funding for renewable energy, climate research, and environmental protections. Learn the impact of these Trump budget cuts.",
+      "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/02/STK175_DONALD_TRUMP_CVIRGINIA_C.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "Trump budget cuts",
+        "clean energy funding",
+        "climate research",
+        "Environmental Protection Agency",
+        "National Institutes of Health",
+        "climate action",
+        "environmental safety",
+        "science-based policymaking",
+        "Union of Concerned Scientists"
+      ],
+      "audio_url": null,
+      "trend_score": 13.78
+    },
+    {
       "id": "2911f7cf83c993a6c708c4117a381dc5a83569e2354d27ee2f043ad202b52cdc",
       "title": "Co-op cyber attack affects customer data, firm admits, after hackers contact BBC",
       "link": "articles/co-op-cyber-attack-affects-customer-data-firm-admits-after-hackers-contact-bbc.html",
@@ -274,6 +321,29 @@
       "trend_score": 14.0
     },
     {
+      "id": "6b9c8c460319b1550247bd6c6609f6ff9207bd854bb7ed03e090299ed2bc86bc",
+      "title": "Want better AI images? I tried Midjourney 7 and it blew me away - here's why",
+      "link": "articles/want-better-ai-images-i-tried-midjourney-7-and-it-blew-me-away-heres-why.html",
+      "published_iso": "2025-05-02T14:34:41Z",
+      "summary_short": "The Midjourney 7 release sets a new benchmark for AI image generation, offering unparalleled quality and creativity.",
+      "image_url": "https://www.zdnet.com/a/img/resize/d543831307391f79146935f5ae948ba6588ad0af/2025/05/01/90d7b2bc-b3c4-4b16-b7c2-320fe13f02e1/midjourney-hero-is-the-new-midjourney-worth-it.png?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Midjourney 7",
+        "AI image-generation",
+        "digital art",
+        "AI-powered creativity",
+        "high-fidelity visuals",
+        "AI-generated art",
+        "marketing tools",
+        "gaming industry",
+        "entertainment technology"
+      ],
+      "audio_url": null,
+      "trend_score": 13.58
+    },
+    {
       "id": "7f4e3933027e31e99695e532aa98cc04c156bb298018ad9a912702cee8e55372",
       "title": "Apple approves Spotify app update that allows US users to access pricing info, external payment links",
       "link": "articles/apple-approves-spotify-app-update-that-allows-us-users-to-access-pricing-info-ex.html",
@@ -318,6 +388,30 @@
       ],
       "audio_url": null,
       "trend_score": 13.98
+    },
+    {
+      "id": "18377dcb4eff1e247d5458c013ace5e45a41c2742b31643947b67634eb67104f",
+      "title": "Ready for AI-enhanced credit cards? Here's Visa's vision of automated shopping",
+      "link": "articles/ready-for-ai-enhanced-credit-cards-heres-visas-vision-of-automated-shopping.html",
+      "published_iso": "2025-05-02T09:45:00Z",
+      "summary_short": "Visa's latest announcement hints at AI-enhanced credit cards that could automate shopping by finding and ordering products for you.",
+      "image_url": "https://www.zdnet.com/a/img/resize/c2a618e7e893c5d7640f446d99f03b6bae9c7941/2025/05/02/2e8d949e-2f03-415c-ba47-71d7256419e4/gettyimages-2070604007.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "AI-enhanced credit cards",
+        "Visa AI vision",
+        "automated shopping",
+        "AI in financial services",
+        "e-commerce convenience",
+        "AI security concerns",
+        "privacy in AI payments",
+        "AI agent shopping",
+        "financial technology trends",
+        "decision fatigue reduction"
+      ],
+      "audio_url": null,
+      "trend_score": 13.93
     },
     {
       "id": "1a5c311487ea6903494a02f4595fe8af6677deb6e05d48445e0447cbf2eb7c22",

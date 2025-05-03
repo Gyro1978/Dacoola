@@ -1,0 +1,43 @@
+{
+    "id": "fd60fa29488c1c50788d38fccb5f0f6bffdd0919a7688c62c19186c60f88cfaf",
+    "title": "Google is going to let kids use its Gemini AI",
+    "link": "https://www.theverge.com/news/660678/google-gemini-ai-children-under-13-family-link-chatbot-access",
+    "published_iso": "2025-05-03T00:03:07Z",
+    "summary": "<figure>\n\n<img alt=\"\" src=\"https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/STK255_Google_Gemini_A.jpg?quality=90&#038;strip=all&#038;crop=0,0,100,100\" />\n\t<figcaption></figcaption>\n</figure>\n<p class=\"has-text-align-none\">Google is notifying parents using its Family Link parental controls via email that their kids will soon be able to access Gemini AI Apps on their monitored Android devices, <a href=\"https://www.nytimes.com/2025/05/02/technology/google-gemini-ai-chatbot-kids.html\"><em>The New York Times</em> reports</a>.</p>\n\n<p class=\"has-text-align-none\">The company says kids will be able to use Gemini to do things like help them with homework or read them stories. Like its <a href=\"https://www.theverge.com/2024/5/16/24158484/google-gemini-ai-workspace-education-school-privacy-accessibility-chromebook\">Workplace for Education accounts</a>, Google says children’s data will not be used to train AI. Still, in the email, Google warns parents that “Gemini can make mistakes,” and kids “may encounter content you don’t want them to see.”&nbsp;</p>\n\n<p class=\"has-text-align-none\">Besides sillier mistakes like <a href=\"https://www.theverge.com/2024/6/11/24176490/mm-delicious-glue\">recommending glue as a pizza topping</a> or miscounting the number of “r” letters in strawberry, some AI bots have had more distressing issues. Some young Character.ai users have <a href=\"https://www.theverge.com/2024/10/23/24277962/character-ai-google-wrongful-death-lawsuit\">struggled to tell the difference</a> between chatbots and reality, and the bots <a href=\"https://www.theverge.com/2024/5/4/24144763/ai-chatbot-friends-character-teens\">told users they’re talking to a real person</a>. After lawsuits alleged the bots had offered inappropriate content, the company <a href=\"https://www.theverge.com/news/634974/character-ai-parental-insights-chatbot-report-kids\">has introduced new restrictions and parental controls</a>.</p>\n\n<p class=\"has-text-align-none\">In the case of Gemini, Google’s emailed advice says parents should talk to their kids and explain that the AI isn’t human and not to share sensitive information with the chatbot.</p>\n\n<p class=\"has-text-align-none\">Kids under 13 will be able to enable and access Gemini all on their own under Google Family Link, which is designed for parents to keep tabs on their kids’ device usage, set limits, and protect them from harmful content. Google spokesperson Karl Ryan confirmed in an email to <em>The Verge</em> that parents can turn off access via Family Link, and that “they will get an additional notification when the young person accesses Gemini for the first time.”</p>",
+    "source_feed": "https://www.theverge.com/rss/index.xml",
+    "scraped_at_iso": "2025-05-03T21:30:48Z",
+    "selected_image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/STK255_Google_Gemini_A.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "AI Models",
+        "reasoning_summary": "Google's announcement about allowing kids to use Gemini AI with parental controls is a verifiable and notable development in AI accessibility, though not groundbreaking enough to be Breaking.",
+        "primary_topic_keyword": "Gemini AI for kids"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-03T21:31:09Z",
+    "topic": "AI Models",
+    "is_breaking": false,
+    "primary_keyword": "Gemini AI for kids",
+    "seo_agent_results": {
+        "generated_title_tag": "Google Expands Gemini AI for Kids with Parental Controls",
+        "generated_meta_description": "Google now allows kids under 13 to use Gemini AI for homework and stories, with Family Link safeguards. Learn about Gemini AI for kids.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Google Expands Gemini AI for Kids with Parental Controls\",  \n  \"description\": \"Google now allows kids under 13 to use Gemini AI for homework and stories, with Family Link safeguards. Learn about Gemini AI for kids.\",  \n  \"keywords\": [\"Gemini AI for kids\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.theverge.com/news/660678/google-gemini-ai-children-under-13-family-link-chatbot-access\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/STK255_Google_Gemini_A.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200\" },  \n  \"datePublished\": \"2025-05-03T00:03:07Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Google is going to let kids use its Gemini AI  \n\nGoogle is rolling out access to its **Gemini AI for kids** under 13 via Family Link parental controls, according to an email sent to parents. Children will be able to use the AI for tasks like homework help and storytelling, with assurances that their data won’t train AI models. However, Google warns parents that Gemini may produce errors or inappropriate content, advising them to discuss AI limitations with their kids. Parents can disable access via Family Link and will receive notifications when their child first uses Gemini.  \n\n### Why It Matters  \n\nThis move reflects growing AI integration into education and child-friendly tech, but it also highlights concerns about misinformation and digital safety. While Google’s safeguards—like parental controls and data privacy measures—are a step forward, past incidents with AI chatbots (such as Character.ai’s misleading interactions) underscore the need for caution. Parents must balance AI’s educational benefits with active supervision to ensure kids engage with these tools responsibly."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Gemini AI for kids",
+        "Family Link parental controls",
+        "AI in education",
+        "child-friendly AI",
+        "AI data privacy",
+        "AI safety for children",
+        "Google Gemini",
+        "AI homework help",
+        "parental supervision AI",
+        "AI misinformation concerns"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.36,
+    "audio_url": null
+}
