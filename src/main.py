@@ -46,14 +46,11 @@ except ImportError as e:
 
 
 # --- Load Environment Variables ---
-dotenv_path = os.path.join(PROJECT_ROOT_FOR_PATH, '.env')
-load_dotenv(dotenv_path=dotenv_path)
-
+dotenv_path = os.path.join(PROJECT_ROOT_FOR_PATH, '.env'); load_dotenv(dotenv_path=dotenv_path)
 AUTHOR_NAME_DEFAULT = os.getenv('AUTHOR_NAME', 'AI News Team')
 YOUR_WEBSITE_NAME = os.getenv('YOUR_WEBSITE_NAME', 'Dacoola')
 YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
-raw_base_url = os.getenv('YOUR_SITE_BASE_URL', '')
-YOUR_SITE_BASE_URL = (raw_base_url.rstrip('/') + '/') if raw_base_url else ''
+raw_base_url = os.getenv('YOUR_SITE_BASE_URL', ''); YOUR_SITE_BASE_URL = (raw_base_url.rstrip('/') + '/') if raw_base_url else ''
 MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None)
 
 
@@ -62,12 +59,9 @@ log_file_path = os.path.join(PROJECT_ROOT_FOR_PATH, 'dacoola.log')
 try:
     os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
     log_handlers = [ logging.StreamHandler(sys.stdout), logging.FileHandler(log_file_path, encoding='utf-8') ]
-except OSError as e:
-    print(f"Log setup warning: {e}. Logging to console only.")
-    log_handlers = [logging.StreamHandler(sys.stdout)]
+except OSError as e: print(f"Log setup warning: {e}. Log console only."); log_handlers = [logging.StreamHandler(sys.stdout)]
 logging.basicConfig( level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', handlers=log_handlers, force=True )
 logger = logging.getLogger('main_orchestrator')
-
 if not YOUR_SITE_BASE_URL: logger.warning("YOUR_SITE_BASE_URL not set.")
 else: logger.info(f"Using site base URL: {YOUR_SITE_BASE_URL}")
 if not YOUR_WEBSITE_LOGO_URL: logger.warning("YOUR_WEBSITE_LOGO_URL not set.")
@@ -81,7 +75,7 @@ PROCESSED_JSON_DIR = os.path.join(DATA_DIR_MAIN, 'processed_json')
 PUBLIC_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'public')
 OUTPUT_HTML_DIR = os.path.join(PUBLIC_DIR, 'articles')
 TEMPLATE_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'templates')
-ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
+ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json') # Single source
 DAILY_TWEET_LIMIT = 3
 TWITTER_TRACKER_FILE = os.path.join(DATA_DIR_MAIN, 'twitter_daily_limit.json')
 
@@ -89,22 +83,18 @@ TWITTER_TRACKER_FILE = os.path.join(DATA_DIR_MAIN, 'twitter_daily_limit.json')
 # --- Jinja2 Setup ---
 try:
     def escapejs_filter(value):
-        if value is None: return ''
-        value = str(value); value = value.replace('\\', '\\\\').replace('"', '\\"').replace('/', '\\/')
+        if value is None: return ''; value = str(value); value = value.replace('\\', '\\\\').replace('"', '\\"').replace('/', '\\/')
         value = value.replace('<', '\\u003c').replace('>', '\\u003e'); value = value.replace('\b', '\\b').replace('\f', '\\f').replace('\n', '\\n')
         value = value.replace('\r', '\\r').replace('\t', '\\t'); return value
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), autoescape=True); env.filters['escapejs'] = escapejs_filter
     logger.info(f"Jinja2 environment loaded from {TEMPLATE_DIR}")
 except Exception as e: logger.exception(f"CRITICAL: Failed Jinja2 init. Exiting."); sys.exit(1)
 
-# --- Helper Functions (Keep all previous helpers: ensure_directories, load_article_data, save_processed_data, remove_scraped_file, format_tags_html, get_sort_key, _read_tweet_tracker, _write_tweet_tracker, send_make_webhook, render_post_page, load_recent_articles_for_comparison, update_all_articles_json) ---
-# ... (Paste ALL your existing helper functions here) ...
+# --- Helper Functions ---
 def ensure_directories():
     dirs_to_create = [ DATA_DIR_MAIN, SCRAPED_ARTICLES_DIR, PROCESSED_JSON_DIR, PUBLIC_DIR, OUTPUT_HTML_DIR, TEMPLATE_DIR ]
-    try:
-        for dir_path in dirs_to_create: os.makedirs(dir_path, exist_ok=True)
-        logger.info("Ensured core directories exist.")
-    except OSError as e: logger.exception(f"CRITICAL: Could not create directory {e.filename}: {e.strerror}"); sys.exit(1)
+    try: [os.makedirs(d, exist_ok=True) for d in dirs_to_create]; logger.info("Ensured core directories exist.")
+    except OSError as e: logger.exception(f"CRITICAL: Create directory fail {e.filename}: {e.strerror}"); sys.exit(1)
 
 def load_article_data(filepath):
     try:
@@ -153,11 +143,13 @@ def _read_tweet_tracker():
     except Exception as e: logger.error(f"Error read tweet tracker: {e}. Reset."); return None, 0
 
 def _write_tweet_tracker(date_str, count):
+    logger.info(f"Attempting to write tweet tracker: Date={date_str}, Count={count} to {TWITTER_TRACKER_FILE}") # Added Log
     try:
         os.makedirs(os.path.dirname(TWITTER_TRACKER_FILE), exist_ok=True)
         with open(TWITTER_TRACKER_FILE, 'w', encoding='utf-8') as f: json.dump({'date': date_str, 'count': count}, f)
-        logger.debug(f"Updated tweet tracker: Date={date_str}, Count={count}")
-    except IOError as e: logger.error(f"Error write tweet tracker: {e}")
+        logger.info(f"Successfully wrote tweet tracker: Date={date_str}, Count={count}") # Changed Log Level
+    except IOError as e: logger.error(f"Error writing tweet tracker file {TWITTER_TRACKER_FILE}: {e}")
+    except Exception as e: logger.exception(f"Unexpected error writing tweet tracker file: {e}")
 
 def send_make_webhook(webhook_url, data):
     if not webhook_url: logger.warning("Make webhook URL missing. Skip."); return False
@@ -189,23 +181,19 @@ def render_post_page(template_variables, slug_base):
         return output_path
     except Exception as e: logger.exception(f"CRITICAL Render fail {template_variables.get('id','N/A')}: {e}"); return None
 
-def load_all_articles_data(): # <<< RENAMED for clarity
-    """Loads ALL articles from all_articles.json."""
+def load_all_articles_data(): # Renamed
     articles = []
     if not os.path.exists(ALL_ARTICLES_FILE): logger.info(f"{os.path.basename(ALL_ARTICLES_FILE)} not found."); return articles
     try:
         with open(ALL_ARTICLES_FILE, 'r', encoding='utf-8') as f: all_data = json.load(f)
         if isinstance(all_data.get('articles'), list):
-            articles = all_data['articles']
-            logger.info(f"Loaded {len(articles)} articles from {os.path.basename(ALL_ARTICLES_FILE)}.")
+            articles = all_data['articles']; logger.info(f"Loaded {len(articles)} from {os.path.basename(ALL_ARTICLES_FILE)}.")
         else: logger.warning(f"'articles' missing/not list in {os.path.basename(ALL_ARTICLES_FILE)}.")
     except Exception as e: logger.warning(f"Error loading {os.path.basename(ALL_ARTICLES_FILE)}: {e}")
     return articles
 
-def update_all_articles_json(new_article_info):
-    """Updates ONLY all_articles.json."""
-    all_articles_data = {"articles": load_all_articles_data()} # Load existing data
-    article_id = new_article_info.get('id')
+def update_all_articles_json(new_article_info): # Simplified
+    all_articles_data = {"articles": load_all_articles_data()}; article_id = new_article_info.get('id')
     if not article_id: logger.error("Update all_articles fail: missing 'id'."); return
     minimal_entry = { "id": article_id, "title": new_article_info.get('title'), "link": new_article_info.get('link'),
                       "published_iso": new_article_info.get('published_iso'), "summary_short": new_article_info.get('summary_short'),
@@ -222,10 +210,10 @@ def update_all_articles_json(new_article_info):
     except Exception as e: logger.error(f"Failed save {os.path.basename(ALL_ARTICLES_FILE)}: {e}")
 
 
-# --- Main Processing Pipeline (Modified Duplicate Check) ---
-def process_single_article(json_filepath, existing_articles_data): # <<< MODIFIED ARGUMENT
-    """Processes a single scraped article JSON file through the agent pipeline.
-       Checks for title/image duplicates against existing_articles_data.
+# --- Main Processing Pipeline (Removed Similarity Check, Added Title/Image Check) ---
+def process_single_article(json_filepath, existing_articles_data, processed_in_this_run_context):
+    """Processes a single scraped article file through the agent pipeline.
+       Checks for title/image duplicates against existing_articles_data + processed_in_this_run.
        Returns a summary dict if successful, None otherwise."""
     article_filename = os.path.basename(json_filepath)
     logger.info(f"--- Processing article file: {article_filename} ---")
@@ -245,43 +233,35 @@ def process_single_article(json_filepath, existing_articles_data): # <<< MODIFIE
         if os.path.exists(processed_file_path):
              logger.info(f"Article {article_id} already processed. Skip."); remove_scraped_file(json_filepath); return None
 
-        # --- NEW: Exact Title + Image Check ---
-        current_title_lower = article_data.get('title', '').lower()
-        # We need the image URL *before* running agents, so call image finder first
+        # --- 2. Get Image URL (needed for Title/Image duplicate check) ---
         logger.info(f"Finding image for {article_id} (for duplicate check)...")
         scraped_image_url = None; source_url = article_data.get('link')
         if source_url and isinstance(source_url, str) and source_url.startswith('http'):
             try: scraped_image_url = scrape_source_for_image(source_url)
             except Exception as scrape_e: logger.error(f"Error scraping image {source_url}: {scrape_e}")
-
-        current_image_url = scraped_image_url # Use scraped first if available
+        current_image_url = scraped_image_url
         if not current_image_url:
-             # If scrape failed, use placeholder or skip? For now, let's try API if no scrape
-             logger.info(f"Image scrape failed/none {article_id}, using API search (for duplicate check)...")
-             # NOTE: This API call might be redundant later if the article passes checks
-             # Consider optimizing later if needed, but safer for now to get image URL early.
-             primary_keyword_for_img = article_data.get('primary_topic_keyword', article_data.get('title', ''))
-             current_image_url = find_best_image(primary_keyword_for_img if primary_keyword_for_img else article_data.get('title', 'AI News'))
-
-        if not current_image_url:
-             logger.error(f"Could not find any image URL for {article_id} during duplicate check. Skipping.")
-             remove_scraped_file(json_filepath)
-             return None # Can't check duplicate without image
-
+            logger.info(f"Image scrape fail {article_id}, using API search...")
+            # Use title for image search if primary keyword isn't available yet
+            image_query = article_data.get('title', 'AI News')
+            current_image_url = find_best_image(image_query)
+        if not current_image_url: logger.error(f"Could not find image URL {article_id}. Skip."); remove_scraped_file(json_filepath); return None
         article_data['selected_image_url'] = current_image_url # Store the found image URL
 
-        # Now perform the duplicate check
-        for existing_article in existing_articles_data: # Check against historical + current run
+        # --- 3. Exact Title + Image Check ---
+        current_title_lower = article_data.get('title', '').lower()
+        full_context = existing_articles_data + processed_in_this_run_context # Combine historical and current run
+        for existing_article in full_context:
             if (isinstance(existing_article, dict) and
                 existing_article.get('title','').lower() == current_title_lower and
-                existing_article.get('image_url') == current_image_url):
+                existing_article.get('image_url') == current_image_url): # Check both
                 logger.info(f"Article {article_id} is DUPLICATE (Title & Image Match) of existing {existing_article.get('id', 'N/A')}. Skip.")
                 remove_scraped_file(json_filepath); return None # Skip duplicate
         logger.info(f"Article {article_id} passed Title+Image duplicate check.")
         # --- End Title + Image Check ---
 
 
-        # 2. Filter Agent
+        # 4. Filter Agent
         logger.debug(f"Running filter agent for {article_id}...")
         article_data = run_filter_agent(article_data)
         if not article_data or article_data.get('filter_verdict') is None:
@@ -293,19 +273,6 @@ def process_single_article(json_filepath, existing_articles_data): # <<< MODIFIE
         article_data['is_breaking'] = (importance_level == "Breaking")
         primary_keyword = filter_verdict.get('primary_topic_keyword', article_data.get('title','')); article_data['primary_keyword'] = primary_keyword
         logger.info(f"Article {article_id} classified {importance_level} (Topic: {assigned_topic}).")
-
-        # 3. Similarity Check REMOVED
-        # logger.info(f"Checking semantic duplicates for {article_id}...")
-        # similarity_result = run_similarity_check_agent(article_data, existing_articles_data) # Pass full context
-        # if similarity_result and similarity_result.get('is_semantic_duplicate'):
-        #     logger.info(f"Article {article_id} is SEMANTIC DUPLICATE. Skip. Reason: {similarity_result.get('reasoning')}")
-        #     remove_scraped_file(json_filepath); return None
-        # elif similarity_result is None: logger.warning(f"Similarity check failed {article_id}. Proceed cautiously."); article_data['similarity_check_error'] = "Agent failed"
-        # else: logger.info(f"Article {article_id} passed semantic check."); article_data['similarity_check_error'] = None
-
-        # 4. Image Finding - Already done above for duplicate check, URL is in article_data['selected_image_url']
-        logger.info(f"Using image URL found earlier for {article_id}: {article_data['selected_image_url']}")
-
 
         # 5. SEO Article Generation
         logger.debug(f"Running SEO agent for {article_id}...")
@@ -335,13 +302,13 @@ def process_single_article(json_filepath, existing_articles_data): # <<< MODIFIE
         article_data['trend_score'] = round(max(0, trend_score), 2); logger.debug(f"Trend score {article_id}: {article_data['trend_score']}")
 
         # --- Prepare for HTML Rendering ---
-        # 8. Generate Slug
+        # 8. Generate Slug ... (keep this logic)
         original_title = article_data.get('title', f'article-{article_id}'); slug = original_title.lower()
         slug = re.sub(r'[^a-z0-9\s-]', '', slug); slug = re.sub(r'\s+', '-', slug); slug = re.sub(r'-+', '-', slug).strip('-'); slug = slug[:80]
         if not slug: slug = f'article-{article_id}'; article_data['slug'] = slug
 
-        # 9. Prepare Template Variables
-        article_relative_path = f"articles/{slug}.html"; canonical_url = urljoin(YOUR_SITE_BASE_URL, article_relative_path)
+        # 9. Prepare Template Variables ... (keep this logic)
+        article_relative_path = f"articles/{slug}.html"; canonical_url = urljoin(YOUR_SITE_BASE_URL, article_relative_path) # Use absolute URL
         body_md = seo_results.get('generated_article_body_md', ''); body_html = f"<p><i>Content error.</i></p><pre>{body_md}</pre>"
         try: body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables', 'nl2br'])
         except Exception as md_err: logger.error(f"Markdown failed {article_id}: {md_err}")
@@ -373,9 +340,9 @@ def process_single_article(json_filepath, existing_articles_data): # <<< MODIFIE
         article_data['audio_url'] = None
 
         # 12. Update all_articles.json ONLY
-        update_all_articles_json(site_data_entry) # Use the correct update function
+        update_all_articles_json(site_data_entry)
 
-        # --- Post to Twitter (with Daily Limit) ---
+        # 13. --- Post to Twitter (with Daily Limit) ---
         logger.info(f"Check Twitter limit {article_id}...")
         try:
             today_date_str = datetime.now(timezone.utc).strftime('%Y-%m-%d'); tracker_date, count_today = _read_tweet_tracker()
@@ -393,7 +360,7 @@ def process_single_article(json_filepath, existing_articles_data): # <<< MODIFIE
         except Exception as tweet_err: logger.exception(f"Twitter error {article_id}: {tweet_err}")
         # --- END Twitter Post ---
 
-        # --- Send data to Make.com Webhook ---
+        # 14. --- Send data to Make.com Webhook ---
         logger.info(f"Attempting send webhook {article_id}...")
         try:
             webhook_data = { "id": article_id, "title": article_data.get('title', 'New Article'), "article_url": canonical_url,
@@ -405,12 +372,12 @@ def process_single_article(json_filepath, existing_articles_data): # <<< MODIFIE
         except Exception as webhook_err: logger.exception(f"Webhook error {article_id}: {webhook_err}")
         # --- END Webhook Send ---
 
-        # 13. Save final processed data & remove original scraped file
+        # 15. Save final processed data & remove original scraped file
         if save_processed_data(processed_file_path, article_data):
              remove_scraped_file(json_filepath)
              logger.info(f"--- Successfully processed article: {article_id} ---")
-             # Return summary for in-run duplicate check context
-             return {"id": article_id, "title": article_data.get("title"), "image_url": article_data.get("selected_image_url")} # Return image URL too
+             # Return summary with image for in-run duplicate check context
+             return {"id": article_id, "title": article_data.get("title"), "image_url": article_data.get("selected_image_url")}
         else:
              logger.error(f"Failed save final processed JSON {article_id}. Scraped file NOT removed.")
              return None # Failed save
@@ -434,14 +401,14 @@ if __name__ == "__main__":
     initial_processed_ids_for_scraper = scraper_processed_ids_on_disk.union(completed_article_ids)
     logger.info(f"Total initial processed IDs passed to scraper: {len(initial_processed_ids_for_scraper)}")
 
-    # 1. Scrape for new articles
+    # 1. Scrape
     logger.info("--- Stage 1: Running Scraper ---")
     new_articles_found_count = 0
     try: new_articles_found_count = scrape_news(NEWS_FEED_URLS, initial_processed_ids_for_scraper)
-    except Exception as scrape_e: logger.exception(f"Scraper stage failed: {scrape_e}"); logger.error("Proceeding despite scraper error.")
+    except Exception as scrape_e: logger.exception(f"Scraper failed: {scrape_e}"); logger.error("Proceeding despite scraper error.")
     logger.info(f"Scraper run completed. Saved {new_articles_found_count} new raw article JSON files.")
 
-    # 2. Process articles
+    # 2. Process
     logger.info("--- Stage 2: Running Processing Cycle ---")
     # Load ALL existing articles ONCE before the loop for context
     existing_articles_data = load_all_articles_data() # Load full data
@@ -458,24 +425,23 @@ if __name__ == "__main__":
         try: json_files_to_process.sort(key=os.path.getmtime) # Process oldest first
         except Exception as sort_e: logger.warning(f"Could not sort JSON files by time: {sort_e}")
 
-        processed_in_this_run_context = [] # Keep track of items processed successfully IN THIS RUN
+        processed_in_this_run_context = [] # Track items processed successfully IN THIS RUN
 
         for filepath in json_files_to_process:
             potential_id = os.path.basename(filepath).replace('.json', '')
             if potential_id in completed_article_ids:
                  logger.debug(f"Skipping {potential_id} as processed JSON exists."); remove_scraped_file(filepath); failed_or_skipped_count += 1; continue
 
-            # Pass historical + current run context
+            # Process the article, passing historical AND current run context
+            # The context passed is the list of dictionaries from all_articles.json
             processed_summary = process_single_article(filepath, existing_articles_data, processed_in_this_run_context)
 
             if processed_summary: # If successful
                 processed_successfully_count += 1
                 processed_in_this_run_context.append(processed_summary) # Add to this run's context
-                completed_article_ids.add(processed_summary['id']) # Also track as completed overall
+                completed_article_ids.add(processed_summary['id']) # Track as completed
                 # Update the main historical list IN MEMORY for the next iteration's check
-                # (This avoids re-reading the potentially large file multiple times)
                 existing_articles_data.append(processed_summary)
-                # Sort again? Maybe not necessary if only checking title/image
             else:
                  failed_or_skipped_count += 1
             time.sleep(0.5) # Shorter pause
