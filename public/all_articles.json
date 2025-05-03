@@ -1568,6 +1568,30 @@
       "trend_score": 10.0
     },
     {
+      "id": "860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd",
+      "title": "Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficiency by Over 300x",
+      "link": "articles/chill-factor-nvidia-blackwell-platform-boosts-water-efficiency-by-over-300x.html",
+      "published_iso": "2025-04-22T13:00:39Z",
+      "summary_short": "NVIDIA Blackwell cooling solutions enhance water efficiency by 300x in AI data centers, reducing costs and energy consumption with liquid cooling.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/water-efficiency-hero-resized.jpg",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA Blackwell cooling",
+        "liquid-cooled data centers",
+        "AI infrastructure efficiency",
+        "GB200 NVL72",
+        "GB300 NVL72",
+        "water efficiency in data centers",
+        "energy-efficient cooling solutions",
+        "hyperscale data center cooling",
+        "Vertiv liquid cooling",
+        "Schneider Electric cooling systems"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
       "id": "94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466",
       "title": "Generative AI is reshaping South Korea’s webcomics industry",
       "link": "articles/generative-ai-is-reshaping-south-koreas-webcomics-industry.html",
@@ -1662,6 +1686,28 @@
       ],
       "audio_url": null,
       "trend_score": 10.0
+    },
+    {
+      "id": "ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12",
+      "title": "AI Bites Back: Researchers Develop Model to Detect Malaria Amid Venezuelan Gold Rush",
+      "link": "articles/ai-bites-back-researchers-develop-model-to-detect-malaria-amid-venezuelan-gold-r.html",
+      "published_iso": "2025-04-17T16:00:01Z",
+      "summary_short": "Researchers use AI malaria detection to combat rising cases in Venezuela, achieving 99.51% accuracy with a CNN model.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/Anopheles_stephensi.jpeg",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "AI malaria detection",
+        "convolutional neural networks",
+        "malaria outbreak Venezuela",
+        "medical AI applications",
+        "NVIDIA CUDA acceleration",
+        "remote healthcare solutions",
+        "transfer learning in medicine",
+        "malaria diagnosis technology"
+      ],
+      "audio_url": null,
+      "trend_score": 9.0
     },
     {
       "id": "f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154",
