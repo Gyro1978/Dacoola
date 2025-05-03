@@ -195,7 +195,7 @@ img {
     gap: 30px;
     width: 90%;
     max-width: 1400px;
-    margin: 40px auto 30px auto; /* <<< Increased top margin to 40px */
+    margin: 55px auto 30px auto; /* <<< Increased top margin to 40px */
 }
 
 /* --- Main Article Styling (Article Page) --- */
@@ -274,7 +274,7 @@ img {
 .home-container, .page-container {
     width: 90%;
     max-width: 1200px;
-    margin: 40px auto 30px auto; /* <<< Increased top margin to 40px */
+    margin: 55px auto 30px auto; /* <<< Increased top margin to 40px */
     padding: 0;
 }
 .home-section { margin-bottom: 50px; }
