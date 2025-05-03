@@ -61,6 +61,7 @@ img {
     height: var(--navbar-height);
     display: flex;
     align-items: center;
+    margin-bottom: 25px; /* Space below navbar */
 }
 
 .nav-container {
