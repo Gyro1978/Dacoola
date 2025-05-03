@@ -15991,3 +15991,36 @@ Check it out: https://dacoolaa.netlify.app/home/articles/chill-factor-nvidia-bla
 2025-05-03 03:48:19 - main_orchestrator - INFO - --- Successfully processed article: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd ---
 2025-05-03 03:48:20 - main_orchestrator - INFO - Processing cycle complete. Successfully processed: 2, Failed/Skipped/Duplicate: 1
 2025-05-03 03:48:20 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (118.85 seconds) === ---
+2025-05-03 03:59:10 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/home/
+2025-05-03 03:59:10 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-03 03:59:10 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-03 03:59:10.645585) === ---
+2025-05-03 03:59:10 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-03 03:59:10 - main_orchestrator - INFO - Found 263 already fully processed articles.
+2025-05-03 03:59:10 - main_orchestrator - INFO - Total initial processed IDs passed to scraper: 787
+2025-05-03 03:59:10 - main_orchestrator - INFO - --- Stage 1: Running Scraper ---
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (7 feeds) ---
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 0 new articles from this feed.
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0 new articles from this feed.
+2025-05-03 03:59:10 - src.scrapers.news_scraper - INFO - Checking feed: https://www.anthropic.com/feed.xml
+2025-05-03 03:59:11 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://www.anthropic.com/feed.xml. HTTP Status: 404
+2025-05-03 03:59:11 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-03 03:59:11 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-03 03:59:11 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Finished feed https://blogs.nvidia.com/feed/. Saved 0 new articles from this feed.
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Checking feed: https://deepmind.google/blog/feed.xml/
+2025-05-03 03:59:12 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://deepmind.google/blog/feed.xml/. HTTP Status: 404
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Checking feed: http://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Feed http://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - Finished feed http://feeds.arstechnica.com/arstechnica/technology-lab. Saved 0 new articles from this feed.
+2025-05-03 03:59:12 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 0 ---
+2025-05-03 03:59:12 - main_orchestrator - INFO - Scraper run completed. Saved 0 new raw article JSON files.
+2025-05-03 03:59:12 - main_orchestrator - INFO - --- Stage 2: Running Processing Cycle ---
+2025-05-03 03:59:12 - main_orchestrator - INFO - Loaded 50 from all_articles.json for context.
+2025-05-03 03:59:12 - main_orchestrator - INFO - Loaded 50 articles from history for duplicate checking.
+2025-05-03 03:59:12 - main_orchestrator - INFO - No scraped articles found to process.
+2025-05-03 03:59:12 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (1.90 seconds) === ---
