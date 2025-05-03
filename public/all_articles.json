@@ -826,6 +826,30 @@
       "trend_score": 14.0
     },
     {
+      "id": "1a5b95a068b442f1460829af3f2b864d4316df3a6e6e0574f34943774cc8971b",
+      "title": "Wandercraft Begins Clinical Trials for Physical AI-Powered Personal Exoskeleton",
+      "link": "articles/wandercraft-begins-clinical-trials-for-physical-ai-powered-personal-exoskeleton.html",
+      "published_iso": "2025-05-01T13:00:30Z",
+      "summary_short": "Wandercraft's AI-powered exoskeleton begins clinical trials, aiming to help millions with mobility challenges regain independence.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/EXO-Paris-1.jpg",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "AI-powered exoskeleton",
+        "Wandercraft",
+        "mobility impairments",
+        "NVIDIA Isaac Sim",
+        "FDA clearance",
+        "robotics startup",
+        "clinical trials",
+        "assistive technology",
+        "healthcare robotics",
+        "NVIDIA GTC"
+      ],
+      "audio_url": null,
+      "trend_score": 13.91
+    },
+    {
       "id": "037705e09113b0b95778bd12da8f50bf77de3d550c57d812433d012f36185a19",
       "title": "Meta forecasted it would make $1.4T in revenue from generative AI by 2035",
       "link": "articles/meta-forecasted-it-would-make-14t-in-revenue-from-generative-ai-by-2035.html",
@@ -1381,6 +1405,30 @@
       "trend_score": 13.37
     },
     {
+      "id": "6a0dd057cf761ab62ae0bf3bbc5dedb3e1c9953ca0a04fd5da11ca354f347374",
+      "title": "From Kitchen to Drive-Thru: How Yum! Brands Is Accelerating Restaurant Innovation With AI",
+      "link": "articles/from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation-.html",
+      "published_iso": "2025-04-30T16:00:04Z",
+      "summary_short": "Yum! Brands partners with NVIDIA to deploy AI in 500 restaurants, optimizing kitchen efficiency and drive-thru accuracy. Learn how AI in restaurants is reshaping QSRs.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/yum-podcast-blog-1280x680-1.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "AI in restaurants",
+        "Yum! Brands",
+        "NVIDIA AI collaboration",
+        "restaurant innovation",
+        "computer vision in QSR",
+        "AI for inventory management",
+        "voice AI in drive-thru",
+        "Byte by Yum!",
+        "quick-service restaurant technology",
+        "AI-driven customer experience"
+      ],
+      "audio_url": null,
+      "trend_score": 13.29
+    },
+    {
       "id": "245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111",
       "title": "These Startups Are Building Advanced AI Models Without Data Centers",
       "link": "articles/these-startups-are-building-advanced-ai-models-without-data-centers.html",
@@ -1425,6 +1473,29 @@
       ],
       "audio_url": null,
       "trend_score": 13.28
+    },
+    {
+      "id": "efe62474db8795db977316ba61228b5b3d107c83699ce2435773df2eea6142c7",
+      "title": "Control the Composition of AI-Generated Images With the NVIDIA AI Blueprint for 3D-Guided Generative AI",
+      "link": "articles/control-the-composition-of-ai-generated-images-with-the-nvidia-ai-blueprint-for-.html",
+      "published_iso": "2025-04-30T13:00:25Z",
+      "summary_short": "NVIDIA's new AI Blueprint offers precise AI image generation control using 3D-guided workflows, simplifying advanced generative AI for creators.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/ai-3d-blueprint-nv-blog-1280x680-1.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA AI Blueprint",
+        "3D-guided generative AI",
+        "AI image generation control",
+        "ComfyUI",
+        "FLUX.1-dev model",
+        "TensorRT acceleration",
+        "Blender integration",
+        "AI-assisted content creation",
+        "GeForce RTX GPUs"
+      ],
+      "audio_url": null,
+      "trend_score": 12.7
     },
     {
       "id": "a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4",
@@ -1708,6 +1779,30 @@
       "trend_score": 11.91
     },
     {
+      "id": "2f4d28689313955e8817d2954fcb5634de218d20c702fae5f6191706a09a02d2",
+      "title": "How Agentic AI Enables the Next Leap in Cybersecurity",
+      "link": "articles/how-agentic-ai-enables-the-next-leap-in-cybersecurity.html",
+      "published_iso": "2025-04-28T15:00:54Z",
+      "summary_short": "Discover how Agentic AI is transforming cybersecurity, offering autonomous threat detection and response while introducing new security challenges.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/agentic-ai-cybersecurity.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Agentic AI",
+        "Cybersecurity",
+        "Autonomous Systems",
+        "Threat Detection",
+        "NVIDIA AI",
+        "AI Security",
+        "Confidential Computing",
+        "AI Vulnerabilities",
+        "AI in Enterprise",
+        "AI Toolkits"
+      ],
+      "audio_url": null,
+      "trend_score": 11.83
+    },
+    {
       "id": "432f0f01dd1c53c8fce4ebfe840ad16bf3a4cee4dc08e5d0318a5342b5d60519",
       "title": "NVIDIA Brings Cybersecurity to Every AI Factory",
       "link": "articles/nvidia-brings-cybersecurity-to-every-ai-factory.html",
@@ -1732,6 +1827,30 @@
       "trend_score": 11.91
     },
     {
+      "id": "1cb89fbeedd8ba69e681bf012b25d55e226f5506a37d510bf9f2b916953a1667",
+      "title": "NVIDIA Brings Cybersecurity to Every AI Factory",
+      "link": "articles/nvidia-brings-cybersecurity-to-every-ai-factory.html",
+      "published_iso": "2025-04-28T15:00:34Z",
+      "summary_short": "NVIDIA introduces DOCA Argus, an AI cybersecurity framework for real-time threat detection in AI factories, enhancing enterprise security.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/bluefield-corp-blog-cybersecurity-1280x680-1.png",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA cybersecurity",
+        "AI factory security",
+        "DOCA Argus",
+        "BlueField networking",
+        "agentless threat detection",
+        "AI workload protection",
+        "memory forensics",
+        "enterprise AI security",
+        "Cisco AI collaboration",
+        "runtime threat mitigation"
+      ],
+      "audio_url": null,
+      "trend_score": 11.83
+    },
+    {
       "id": "7594f05df83addab55cc2bd09c905194d38d60c753971056fd5988ef76d4eef0",
       "title": "Oracle Cloud Infrastructure Deploys Thousands of NVIDIA Blackwell GPUs for Agentic AI and Reasoning Models",
       "link": "articles/oracle-cloud-infrastructure-deploys-thousands-of-nvidia-blackwell-gpus-for-agent.html",
@@ -1754,6 +1873,30 @@
       ],
       "audio_url": null,
       "trend_score": 11.85
+    },
+    {
+      "id": "e51ef3a029270c96cae43014d9c50ec920fb13716204eb9f733a89b331e88165",
+      "title": "Oracle Cloud Infrastructure Deploys Thousands of NVIDIA Blackwell GPUs for Agentic AI and Reasoning Models",
+      "link": "articles/oracle-cloud-infrastructure-deploys-thousands-of-nvidia-blackwell-gpus-for-agent.html",
+      "published_iso": "2025-04-28T13:00:25Z",
+      "summary_short": "Oracle Cloud Infrastructure rolls out thousands of NVIDIA Blackwell GPUs to power next-gen AI agents and reasoning models.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/blackwell-corp-blog-oci-blackwell-momentum-1280x680-r1.png",
+      "topic": "Compute",
+      "is_breaking": false,
+      "tags": [
+        "Oracle Cloud Infrastructure",
+        "NVIDIA Blackwell GPUs",
+        "AI reasoning models",
+        "NVIDIA GB200 NVL72",
+        "agentic AI",
+        "cloud computing",
+        "AI infrastructure",
+        "NVIDIA DGX Cloud",
+        "accelerated computing",
+        "AI innovation"
+      ],
+      "audio_url": null,
+      "trend_score": 11.77
     },
     {
       "id": "568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492",
@@ -1941,6 +2084,30 @@
       "trend_score": 10.0
     },
     {
+      "id": "e1e0227807af9d695fdf8111efdce2908fedf7ae7fd7ae096263abac99faf256",
+      "title": "NVIDIA Research at ICLR — Pioneering the Next Wave of Multimodal Generative AI",
+      "link": "articles/nvidia-research-at-iclr-pioneering-the-next-wave-of-multimodal-generative-ai.html",
+      "published_iso": "2025-04-24T13:00:48Z",
+      "summary_short": "NVIDIA AI research highlights 70+ papers at ICLR 2025, advancing multimodal generative AI, robotics, and synthetic data generation.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/ICLR_featuredstill.jpg",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA Research",
+        "Multimodal Generative AI",
+        "ICLR 2025",
+        "Fugatto AI",
+        "HAMSTER Robotics",
+        "Hymba Language Model",
+        "LongVILA Video Understanding",
+        "LLaMaFlex LLM Compression",
+        "Proteina Protein Design",
+        "STORM Scene Reconstruction"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
       "id": "686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f",
       "title": "Build an AI-powered document processing platform with open source NER model and LLM on Amazon SageMaker",
       "link": "articles/build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-.html",
@@ -1986,6 +2153,29 @@
       ],
       "audio_url": null,
       "trend_score": 10.0
+    },
+    {
+      "id": "9ad1199e694d1beafdfa117ec14bc96a866bd4e5503342e59a0e5e6b676136e1",
+      "title": "Making Brain Waves: AI Startup Speeds Disease Research With Lab in the Loop",
+      "link": "articles/making-brain-waves-ai-startup-speeds-disease-research-with-lab-in-the-loop.html",
+      "published_iso": "2025-04-22T13:00:43Z",
+      "summary_short": "BrainStorm Therapeutics uses AI and organoids to accelerate AI drug discovery for neurological disorders, reducing clinical trial failure rates.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/DSCF8311_blogcrop.jpg",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "AI drug discovery",
+        "neurological disorders",
+        "brain organoids",
+        "NVIDIA GPUs",
+        "BioNeMo Framework",
+        "Parkinson’s disease",
+        "Rett syndrome",
+        "precision medicine",
+        "clinical trials"
+      ],
+      "audio_url": null,
+      "trend_score": 9.5
     },
     {
       "id": "c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763",
