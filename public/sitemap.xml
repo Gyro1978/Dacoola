@@ -606,4 +606,28 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/next-generation-architectures-bridge-gap-between-neural-and-symbolic-representat.html</loc>
+    <lastmod>2019-12-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/project-petridish-efficient-forward-neural-architecture-search.html</loc>
+    <lastmod>2019-12-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/introducing-mass-a-pre-training-method-that-outperforms-bert-and-gpt-in-sequence.html</loc>
+    <lastmod>2019-06-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/autonomous-soaring-ai-on-the-fly.html</loc>
+    <lastmod>2019-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

@@ -2293,6 +2293,101 @@
         "AI for species identification"
       ],
       "trend_score": 10.0
+    },
+    {
+      "id": "114be36ab2e121dec66e6e5a2e9ca36f7deaf2bd5a4534eac5fbe7efff988047",
+      "title": "Next-generation architectures bridge gap between neural and symbolic representations with neural symbols",
+      "link": "articles/next-generation-architectures-bridge-gap-between-neural-and-symbolic-representat.html",
+      "published_iso": "2019-12-12T17:00:46Z",
+      "summary_short": "Microsoft Research advances neurosymbolic AI research with neural symbols, improving math and programming problem-solving accuracy.",
+      "image_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2019/12/MSResearch_20191204_NeurIPS_Neurosymbolic-AI_1400x788.png",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "Neurosymbolic AI",
+        "Tensor Product Representations",
+        "Microsoft Research",
+        "AI Interpretability",
+        "TP-Transformer",
+        "TP-N2F",
+        "Math Problem Solving AI",
+        "Programming AI",
+        "Explainable AI",
+        "AI Benchmark Performance"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
+      "id": "7b9c794995ed7a4ece7a1a4c41998c49c23ee51b9156f1c4974bf5d18a3f8437",
+      "title": "Project Petridish: Efficient forward neural architecture search",
+      "link": "articles/project-petridish-efficient-forward-neural-architecture-search.html",
+      "published_iso": "2019-12-09T16:16:44Z",
+      "summary_short": "Microsoft introduces Petridish, an efficient neural architecture search method, reducing trial and error in AI model development.",
+      "image_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2019/12/MSR_NeurIPS_EfficientForward_1400x788.png",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "Neural Architecture Search",
+        "Microsoft Research",
+        "Petridish Algorithm",
+        "AI Model Optimization",
+        "Forward Search",
+        "Machine Learning Efficiency",
+        "AI Deployment",
+        "Pareto Frontier",
+        "Deep Learning"
+      ],
+      "audio_url": null,
+      "trend_score": 9.5
+    },
+    {
+      "id": "b4824683ada96d7d9569647d5eb96d9932606709c2305775a481957a05d92689",
+      "title": "Introducing MASS – A pre-training method that outperforms BERT and GPT in sequence to sequence language generation tasks",
+      "link": "articles/introducing-mass-a-pre-training-method-that-outperforms-bert-and-gpt-in-sequence.html",
+      "published_iso": "2019-06-24T01:00:22Z",
+      "summary_short": "Microsoft's MASS pre-training method surpasses BERT and GPT in sequence-to-sequence language generation tasks, offering superior performance in NLP.",
+      "image_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2019/06/Pre-Training-Method-MASS_Social_06_2019_1200x627.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "MASS pre-training",
+        "NLP models",
+        "sequence-to-sequence tasks",
+        "BERT vs GPT",
+        "machine translation",
+        "abstractive summarization",
+        "Microsoft Research Asia",
+        "language generation",
+        "encoder-decoder framework",
+        "AI advancements"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
+      "id": "c8169c21fb7dc54b0d1f7647261455a47bfdfc72e43849fea5c668646493b10f",
+      "title": "Autonomous soaring – AI on the fly",
+      "link": "articles/autonomous-soaring-ai-on-the-fly.html",
+      "published_iso": "2019-05-07T15:08:45Z",
+      "summary_short": "Microsoft's Project Frigatebird uses autonomous decision-making AI to enable drones to soar using atmospheric energy, advancing AI in open-world conditions.",
+      "image_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2019/04/Autonomous-Soaring-An-Open-World-Challenge-for-AI_Site_04_2019_1400x788-5cc745b40c58f.png",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "Autonomous Drones",
+        "AI Decision-Making",
+        "Microsoft Research",
+        "Project Frigatebird",
+        "Reinforcement Learning",
+        "Drone Endurance",
+        "Environmental Monitoring",
+        "Disaster Response",
+        "Energy Efficiency",
+        "POMDSoar Algorithm"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
     }
   ]
 }
