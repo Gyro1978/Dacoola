@@ -1129,30 +1129,6 @@
       "trend_score": 13.41
     },
     {
-      "id": "5ae7564e0b01cc4c1a88a1b18f1a88b27a4689a3f86c6c38a8275fe0b1a06d2e",
-      "title": "From Kitchen to Drive-Thru: How Yum! Brands Is Accelerating Restaurant Innovation With AI",
-      "link": "articles/from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation-.html",
-      "published_iso": "2025-04-30T16:00:04Z",
-      "summary_short": "Yum! Brands partners with NVIDIA to deploy AI in 500 restaurants, optimizing everything from drive-thrus to kitchen efficiency.",
-      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/yum-podcast-blog-1280x680-1.jpg",
-      "topic": "Business",
-      "is_breaking": false,
-      "tags": [
-        "AI in restaurants",
-        "Yum! Brands",
-        "NVIDIA",
-        "quick-service restaurant industry",
-        "machine learning in food service",
-        "AI-powered kitchen optimization",
-        "computer vision in drive-thrus",
-        "Byte by Yum!",
-        "voice AI for order accuracy",
-        "restaurant operational efficiency"
-      ],
-      "audio_url": null,
-      "trend_score": 13.18
-    },
-    {
       "id": "245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111",
       "title": "These Startups Are Building Advanced AI Models Without Data Centers",
       "link": "articles/these-startups-are-building-advanced-ai-models-without-data-centers.html",
@@ -1173,30 +1149,6 @@
         "Open AI Collaboration"
       ],
       "trend_score": 12.78
-    },
-    {
-      "id": "614dc6817bdf48a2b3743fcb59ad1261379bac32d2b3d0256e2b43316d9ebec2",
-      "title": "Control the Composition of AI-Generated Images With the NVIDIA AI Blueprint for 3D-Guided Generative AI",
-      "link": "articles/control-the-composition-of-ai-generated-images-with-the-nvidia-ai-blueprint-for-.html",
-      "published_iso": "2025-04-30T13:00:25Z",
-      "summary_short": "NVIDIA's new AI Blueprint offers precise AI image generation control using 3D-guided workflows, simplifying advanced creative adjustments.",
-      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/ai-3d-blueprint-nv-blog-1280x680-1.jpg",
-      "topic": "AI Models",
-      "is_breaking": false,
-      "tags": [
-        "NVIDIA AI Blueprint",
-        "3D-guided generative AI",
-        "AI image generation control",
-        "ComfyUI",
-        "RTX GPUs",
-        "TensorRT acceleration",
-        "Blender integration",
-        "FLUX.1-dev model",
-        "AI-generated imagery",
-        "GeForce RTX 4080"
-      ],
-      "audio_url": null,
-      "trend_score": 13.09
     },
     {
       "id": "a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4",
@@ -1663,77 +1615,6 @@
       "trend_score": 10.0
     },
     {
-      "id": "e1e0227807af9d695fdf8111efdce2908fedf7ae7fd7ae096263abac99faf256",
-      "title": "NVIDIA Research at ICLR — Pioneering the Next Wave of Multimodal Generative AI",
-      "link": "articles/nvidia-research-at-iclr-pioneering-the-next-wave-of-multimodal-generative-ai.html",
-      "published_iso": "2025-04-24T13:00:48Z",
-      "summary_short": "NVIDIA AI research highlights 70+ papers at ICLR 2025, advancing multimodal generative AI, robotics, and synthetic data generation.",
-      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/ICLR_featuredstill.jpg",
-      "topic": "Research",
-      "is_breaking": false,
-      "tags": [
-        "NVIDIA Research",
-        "Multimodal Generative AI",
-        "ICLR 2025",
-        "Fugatto AI",
-        "HAMSTER Robotics",
-        "Hymba Language Model",
-        "LongVILA Video Understanding",
-        "LLaMaFlex LLM Compression",
-        "Proteina Protein Design",
-        "STORM Scene Reconstruction"
-      ],
-      "audio_url": null,
-      "trend_score": 10.0
-    },
-    {
-      "id": "9ad1199e694d1beafdfa117ec14bc96a866bd4e5503342e59a0e5e6b676136e1",
-      "title": "Making Brain Waves: AI Startup Speeds Disease Research With Lab in the Loop",
-      "link": "articles/making-brain-waves-ai-startup-speeds-disease-research-with-lab-in-the-loop.html",
-      "published_iso": "2025-04-22T13:00:43Z",
-      "summary_short": "BrainStorm Therapeutics uses AI and organoids to accelerate AI drug discovery for neurological disorders, reducing clinical trial failure rates.",
-      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/DSCF8311_blogcrop.jpg",
-      "topic": "Health",
-      "is_breaking": false,
-      "tags": [
-        "AI drug discovery",
-        "neurological disorders",
-        "brain organoids",
-        "NVIDIA GPUs",
-        "BioNeMo Framework",
-        "Parkinson’s disease",
-        "Rett syndrome",
-        "precision medicine",
-        "clinical trials"
-      ],
-      "audio_url": null,
-      "trend_score": 9.5
-    },
-    {
-      "id": "860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd",
-      "title": "Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficiency by Over 300x",
-      "link": "articles/chill-factor-nvidia-blackwell-platform-boosts-water-efficiency-by-over-300x.html",
-      "published_iso": "2025-04-22T13:00:39Z",
-      "summary_short": "NVIDIA Blackwell cooling solutions enhance water efficiency by 300x in AI data centers, reducing costs and energy consumption with liquid cooling.",
-      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/water-efficiency-hero-resized.jpg",
-      "topic": "Hardware",
-      "is_breaking": false,
-      "tags": [
-        "NVIDIA Blackwell cooling",
-        "liquid-cooled data centers",
-        "AI infrastructure efficiency",
-        "GB200 NVL72",
-        "GB300 NVL72",
-        "water efficiency in data centers",
-        "energy-efficient cooling solutions",
-        "hyperscale data center cooling",
-        "Vertiv liquid cooling",
-        "Schneider Electric cooling systems"
-      ],
-      "audio_url": null,
-      "trend_score": 10.0
-    },
-    {
       "id": "94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466",
       "title": "Generative AI is reshaping South Korea’s webcomics industry",
       "link": "articles/generative-ai-is-reshaping-south-koreas-webcomics-industry.html",
@@ -1804,28 +1685,6 @@
       ],
       "audio_url": null,
       "trend_score": 10.0
-    },
-    {
-      "id": "ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12",
-      "title": "AI Bites Back: Researchers Develop Model to Detect Malaria Amid Venezuelan Gold Rush",
-      "link": "articles/ai-bites-back-researchers-develop-model-to-detect-malaria-amid-venezuelan-gold-r.html",
-      "published_iso": "2025-04-17T16:00:01Z",
-      "summary_short": "Researchers use AI malaria detection to combat rising cases in Venezuela, achieving 99.51% accuracy with a CNN model.",
-      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/Anopheles_stephensi.jpeg",
-      "topic": "Health",
-      "is_breaking": false,
-      "tags": [
-        "AI malaria detection",
-        "convolutional neural networks",
-        "malaria outbreak Venezuela",
-        "medical AI applications",
-        "NVIDIA CUDA acceleration",
-        "remote healthcare solutions",
-        "transfer learning in medicine",
-        "malaria diagnosis technology"
-      ],
-      "audio_url": null,
-      "trend_score": 9.0
     },
     {
       "id": "f8a6a90cddda31265b69ba98de03d3d0c6eda9f026e8f76af22f4e4970b72154",

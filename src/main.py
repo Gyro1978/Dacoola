@@ -360,11 +360,18 @@ def process_single_article(json_filepath, existing_articles_data, processed_in_t
         except Exception as tweet_err: logger.exception(f"Twitter error {article_id}: {tweet_err}")
         # --- END Twitter Post ---
 
-        # 14. --- Send data to Make.com Webhook ---
+        # --- Send data to Make.com Webhook ---
         logger.info(f"Attempting send webhook {article_id}...")
         try:
-            webhook_data = { "id": article_id, "title": article_data.get('title', 'New Article'), "article_url": canonical_url,
-                             "image_url": article_data.get('selected_image_url'), "topic": article_data.get('topic'), "tags": tags_list }
+            webhook_data = {
+                "id": article_id,
+                "title": article_data.get('title', 'New Article'),
+                "article_url": canonical_url, # Ensure this is the absolute URL from template_vars
+                "image_url": article_data.get('selected_image_url'),
+                "topic": article_data.get('topic'),
+                "tags": tags_list,
+                "summary_short": site_data_entry.get('summary_short', '') # <<< ADDED summary_short
+            }
             if MAKE_WEBHOOK_URL:
                 if send_make_webhook(MAKE_WEBHOOK_URL, webhook_data): logger.info(f"Webhook OK {article_id}.")
                 else: logger.error(f"Webhook failed {article_id}.")
