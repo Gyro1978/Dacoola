@@ -5,12 +5,13 @@ import requests
 import logging
 import io
 from dotenv import load_dotenv # Added for potential local testing
+from datetime import datetime # Added for standalone test example
 
 logger = logging.getLogger(__name__)
 
 # --- Added for potential local testing ---
 # Get the project root directory (assuming this script is in src/social)
-PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # Load .env file from project root
 dotenv_path = os.path.join(PROJECT_ROOT_DIR, '.env')
 load_dotenv(dotenv_path=dotenv_path)
@@ -126,7 +127,8 @@ def post_tweet_with_image(article_title, article_url, image_url):
         if not filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp')):
             filename = "image.jpg" # Default if extension is missing/weird
 
-        media = api_v1.media_upload(filename=filename, file=image_data)
+        # Use media_category='tweet_image' for robustness if needed, but often optional
+        media = api_v1.media_upload(filename=filename, file=image_data)#, media_category='tweet_image')
         if media and media.media_id_string:
              logger.info(f"Image uploaded to Twitter. Media ID: {media.media_id_string}")
         else:
@@ -182,8 +184,9 @@ def post_tweet_with_image(article_title, article_url, image_url):
             logger.error(f"Twitter API returned errors: {response.errors}")
             # Check for duplicate error specifically
             for error in response.errors:
-                if error.get('code') == 187: # Status is a duplicate
-                    logger.warning("Twitter reported duplicate content (Error Code 187). Skipping.")
+                 # V2 API uses code 403 and detail matching for duplicates
+                if error.get('title') == 'Forbidden' and 'duplicate content' in error.get('detail','').lower():
+                    logger.warning("Twitter reported duplicate content (Error Code 403 Forbidden/Duplicate Detail). Skipping.")
                     return True # Treat as non-fatal for workflow
             return False # Other API error
 
@@ -191,10 +194,23 @@ def post_tweet_with_image(article_title, article_url, image_url):
         return True
     except tweepy.errors.TweepyException as e:
         logger.error(f"Failed to create tweet (TweepyException): {e}")
+        # V1 error codes might still appear sometimes or in underlying layers
         if hasattr(e, 'api_codes') and 187 in e.api_codes: # Duplicate status V1 error code
             logger.warning("Twitter reported duplicate content (TweepyException Code 187). Skipping.")
             return True
-        # Could check other common codes like 403 Forbidden (Permissions?)
+        # Check for V2 Forbidden error specifically
+        if hasattr(e, 'response') and e.response is not None:
+             if e.response.status_code == 403:
+                  try:
+                       error_data = e.response.json()
+                       if 'duplicate content' in error_data.get('detail','').lower():
+                           logger.warning("Twitter reported duplicate content (TweepyException Code 403/Duplicate Detail). Skipping.")
+                           return True
+                  except Exception:
+                       pass # Ignore JSON parsing errors here
+                  logger.error("Twitter returned Forbidden (403). Check permissions or content rules.")
+             elif e.response.status_code == 429:
+                 logger.error("Twitter rate limit exceeded (429). Try again later.")
         return False
     except Exception as e:
         logger.exception(f"Unexpected error creating tweet: {e}")
