@@ -205,12 +205,15 @@ img {
     border-radius: 8px;
     border: 1px solid var(--border-color);
 }
-.main-article header h1#article-headline { font-size: 2.4em; margin-bottom: 15px; color: var(--accent-blue); line-height: 1.3; }
+/* --- MODIFIED --- Reduce main article title size */
+.main-article header h1#article-headline {
+    font-size: 2rem; /* <<< ADJUSTED */
+    margin-bottom: 0.5em; /* <<< ADJUSTED */
+    color: var(--accent-blue);
+    line-height: 1.3;
+}
 .article-meta-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
 .article-meta { font-size: 0.9em; color: var(--text-muted); }
-/* .article-actions { display: flex; align-items: center; } */ /* Removed this, no actions in header now */
-/* --- Styles for .tts-button REMOVED --- */
-/* --- Styles for #audio-player-container REMOVED --- */
 .article-image-container { margin-bottom: 30px; border-radius: 6px; overflow: hidden; }
 #article-body p { margin-bottom: 1.3em; font-size: 1.1em; color: var(--text-light); }
 #article-body h2, #article-body h3 { margin-top: 1.8em; margin-bottom: 0.8em; color: var(--text-light); border-bottom: 1px solid var(--border-color); padding-bottom: 6px; font-weight: 600; }
@@ -223,9 +226,37 @@ img {
 #article-body a.source-button { display: inline-block; background-color: var(--accent-blue); color: var(--bg-dark); padding: 12px 25px; border-radius: 5px; font-weight: bold; transition: background-color 0.3s, transform 0.2s; }
 #article-body a.source-button:hover { background-color: var(--accent-blue-darker); transform: scale(1.03); }
 #article-body a.source-button i { margin-left: 8px; }
-.main-article footer { margin-bottom: -15px; /* Fix gap below tags */ }
-.tags { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9em; color: var(--text-muted); text-align: center; padding-bottom: 0; }
-.tags span#article-tags { margin-left: 10px; }
+
+/* --- MODIFIED --- Style the container holding source link and tags */
+.main-article footer {
+    margin-top: 20px; /* Add space above the footer */
+    padding-top: 15px; /* Add space inside the footer */
+    border-top: 1px solid var(--border-color); /* Optional separator line */
+    display: flex; /* <<< ADDED */
+    flex-direction: column; /* <<< ADDED */
+    align-items: flex-start; /* <<< ADDED Align items to the start (left) */
+}
+
+/* --- MODIFIED --- Add margin below the source link container */
+.source-link-container {
+    margin-bottom: 15px; /* <<< ADJUSTED Add 15px space below the source link */
+    text-align: left; /* Ensure button aligns left if needed */
+}
+
+/* --- MODIFIED --- Add margin below the tags container */
+.tags {
+    margin-top: 0; /* Remove top margin as footer provides it */
+    padding-top: 0; /* Remove top padding */
+    border-top: none; /* Remove top border */
+    font-size: 0.9em;
+    color: var(--text-muted);
+    text-align: left; /* Align tags left */
+    padding-bottom: 0;
+    margin-bottom: 10px; /* <<< ADDED Keep or adjust bottom margin for tags */
+    line-height: 1.6; /* Improve readability if tags wrap */
+}
+
+.tags span#article-tags { margin-left: 0; /* Remove left margin if needed */ } /* Align tags directly left */
 .tags span#article-tags a { display: inline-block; background-color: var(--bg-tertiary); color: var(--text-light); padding: 4px 10px; border-radius: 15px; margin-right: 8px; margin-bottom: 8px; border: 1px solid var(--border-color); font-weight: 500; font-size: 0.9em; transition: background-color 0.3s, border-color 0.3s, color 0.3s; cursor: pointer; }
 .tags span#article-tags a:hover { background-color: var(--accent-blue); border-color: var(--accent-blue); color: var(--bg-dark); }
 
@@ -235,7 +266,6 @@ img {
 .sidebar h2 { font-size: 1.5em; color: var(--text-light); margin-bottom: 20px; border-bottom: 2px solid var(--accent-blue); padding-bottom: 10px; }
 .sidebar #related-news-content,
 .sidebar #latest-news-content { display: flex; flex-direction: column; gap: 15px; padding: 0; margin: 0; }
-/* Remove default list styling */
 .sidebar ul { list-style: none; padding: 0; }
 .sidebar li { background: none; border: none; padding: 0; overflow: visible; border-radius: 0;}
 
@@ -288,7 +318,19 @@ img {
 .article-card a.article-card-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; flex-grow: 1; }
 .article-card-image img { width: 100%; height: 160px; object-fit: cover; display: block; }
 .article-card-content { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
-.article-card-content h3 { font-size: 1.15em; margin-bottom: 10px; line-height: 1.4; font-weight: 600; color: var(--text-light); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
+/* --- MODIFIED --- Reduce card title size */
+.article-card-content h3 {
+    font-size: 1.1rem; /* <<< ADJUSTED */
+    margin: 0.5em 0 0.25em 0; /* <<< ADJUSTED spacing */
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--text-light);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .article-card-content .article-meta { font-size: 0.8em; color: var(--text-muted); padding-top: 10px; margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
 .article-card-content .article-summary { display: none; }
 .article-card-content .article-meta .article-card-topic { font-size: 0.9em; color: var(--text-light); background-color: var(--bg-tertiary); padding: 3px 8px; border-radius: 4px; font-weight: 500; }
@@ -336,6 +378,8 @@ img {
     .related-news { display: none; }
     .nav-container { width: 95%; }
     .nav-search { flex-grow: 0.3; }
+    /* Adjust main article title for medium screens */
+    .main-article header h1#article-headline { font-size: 1.8rem; } /* MODIFIED */
 }
 
 @media (max-width: 768px) {
@@ -343,9 +387,10 @@ img {
     .latest-news { order: 3; } /* Stack latest news below article on mobile */
     .nav-search { display: none; }
     .nav-menu { gap: 20px; }
-    .main-article header h1#article-headline { font-size: 2em; }
+    /* Adjust main article title for small screens */
+    .main-article header h1#article-headline { font-size: 1.6rem; } /* MODIFIED */
     #article-body .source-link-container { text-align: center; }
-    .tags { text-align: center; }
+    .tags { text-align: center; align-items: center; /* Align center for small screens */} /* MODIFIED */
     /* Homepage/Generic Page adjustments */
     .latest-news-grid, #page-content-area { grid-template-columns: 1fr; }
     .breaking-news-text h3 { font-size: 1.5em; }
@@ -356,22 +401,22 @@ img {
     .slider-pagination { bottom: 10px; } /* Adjust dots position */
     .slider-dot { width: 8px; height: 8px; }
     .slider-control { width: 35px; height: 35px; font-size: 1em; }
+    /* Stack footer elements on small screens */
+    article.main-article > footer { align-items: center; } /* MODIFIED */
+    .source-link-container { text-align: center; } /* MODIFIED */
+    .tags { text-align: center; align-items: center; } /* MODIFIED */
 }
 
 /* Add loading/playing state styles for listen/global buttons */
 .listen-button.loading i,
 #global-tts-player-button.loading i {
-    /* Optional: Add spinner icon if Font Awesome is used */
-    /* Assuming spinner class is 'fa-spinner fa-spin' */
-    /* content: "\f110"; */ /* Font Awesome spinner unicode */
-    /* font-family: 'Font Awesome 6 Free'; */
-    /* font-weight: 900; */
     animation: spin 1s linear infinite; /* Basic CSS spin */
 }
-
-.listen-button.playing i::before, /* Target Font Awesome icon */
-#global-tts-player-button.playing i::before {
-    content: "\f04c"; /* Font Awesome pause icon unicode */
+/* Ensure the Font Awesome class isn't overridden when paused/playing */
+.listen-button .fas,
+#global-tts-player-button .fas {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
 }
 
 /* Basic CSS Spin Animation */
@@ -379,3 +424,9 @@ img {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* Remove Font Awesome icon class overrides - handled by JS now */
+/* .listen-button.playing i::before,
+#global-tts-player-button.playing i::before {
+    content: "\f04c";
+} */
