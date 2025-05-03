@@ -434,32 +434,8 @@ img {
 .home-title {
     width: 100%;
     padding: 20px;
-    background-color: var(--bg-secondary);
-    margin-bottom: 25px;
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
 }
 
-.home-title::before,
-.home-title::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 50px;
-    pointer-events: none;
-}
-
-.home-title::before {
-    left: 0;
-    background: linear-gradient(to right, var(--bg-secondary), transparent);
-}
-
-.home-title::after {
-    right: 0;
-    background: linear-gradient(to left, var(--bg-secondary), transparent);
-}
 
         /* Basic Reset & Body Styling */
         *, *::before, *::after {
@@ -598,7 +574,3 @@ img {
              }
             /* --- End button resizing --- */
         }
-
-#breaking-news-section {
-    margin-top: 25px;
-}
