@@ -434,7 +434,6 @@ img {
 .home-title {
     width: 100%;
     padding: 20px;
-    background-color: #2C2F33;
     margin-bottom: 25px;
     border-radius: 8px;
 }
@@ -576,3 +575,7 @@ img {
              }
             /* --- End button resizing --- */
         }
+
+#breaking-news-section {
+    margin-top: 25px;
+}
