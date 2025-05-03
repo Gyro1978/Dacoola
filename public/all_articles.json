@@ -575,6 +575,30 @@
       "trend_score": 14.5
     },
     {
+      "id": "606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7",
+      "title": "Rising star defense tech startup Mach Industries is raising $100 million, sources say",
+      "link": "articles/rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-.html",
+      "published_iso": "2025-05-01T20:44:43Z",
+      "summary_short": "Defense tech startup Mach Industries, led by 21-year-old Ethan Thornton, is securing $100M in funding co-led by Khosla and Bedrock Capital.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/03/EthanThornton5.jpg?resize=1200,931",
+      "topic": "Startups",
+      "is_breaking": false,
+      "tags": [
+        "Mach Industries",
+        "defense tech startup",
+        "Ethan Thornton",
+        "Khosla Ventures",
+        "Bedrock Capital",
+        "venture capital funding",
+        "defense technology",
+        "startup valuation",
+        "Silicon Valley investors",
+        "defense innovation"
+      ],
+      "audio_url": null,
+      "trend_score": 14.18
+    },
+    {
       "id": "c5cde3094704c77b5e528badedfab6af0b8da201b6b5bd65f4d6e741c67ee043",
       "title": "Stripe shows iOS developers how to avoid Apple’s App Store commission",
       "link": "articles/stripe-shows-ios-developers-how-to-avoid-apples-app-store-commission.html",
@@ -1427,6 +1451,30 @@
       "trend_score": 13.22
     },
     {
+      "id": "4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa",
+      "title": "This data set helps researchers spot harmful stereotypes in LLMs",
+      "link": "articles/this-data-set-helps-researchers-spot-harmful-stereotypes-in-llms.html",
+      "published_iso": "2025-04-30T09:41:25Z",
+      "summary_short": "SHADES, a multilingual dataset, helps detect harmful stereotypes in AI models, improving AI bias detection across 16 languages.",
+      "image_url": "https://wp.technologyreview.com/wp-content/uploads/2025/04/shades.jpg?resize=1200,600",
+      "topic": "Ethics",
+      "is_breaking": false,
+      "tags": [
+        "AI bias detection",
+        "large language models",
+        "harmful stereotypes",
+        "multilingual dataset",
+        "SHADES",
+        "AI ethics",
+        "model fairness",
+        "cultural biases",
+        "Margaret Mitchell",
+        "Hugging Face"
+      ],
+      "audio_url": null,
+      "trend_score": 13.13
+    },
+    {
       "id": "a4c561cf3a31f0292c042aa67cc4a07b21776d35c06459a63ddfe56a86db2110",
       "title": "How to tackle deceptive artificial intelligence - The Economist",
       "link": "articles/how-to-tackle-deceptive-artificial-intelligence-the-economist.html",
@@ -1964,6 +2012,30 @@
       "trend_score": 10.0
     },
     {
+      "id": "94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466",
+      "title": "Generative AI is reshaping South Korea’s webcomics industry",
+      "link": "articles/generative-ai-is-reshaping-south-koreas-webcomics-industry.html",
+      "published_iso": "2025-04-22T09:00:00Z",
+      "summary_short": "Discover how Generative AI in comics is revolutionizing South Korea’s webcomics industry, from legendary artists to emerging creators.",
+      "image_url": "https://wp.technologyreview.com/wp-content/uploads/2025/04/tarot-top.jpg?resize=1200,600",
+      "topic": "Art & Media",
+      "is_breaking": false,
+      "tags": [
+        "Generative AI",
+        "South Korea Webcomics",
+        "AI in Comics",
+        "Lee Hyun-se",
+        "Jaedam Media",
+        "AI-Assisted Art",
+        "Onoma AI TooToon",
+        "Artistic Identity Debate",
+        "AI Copyright Issues",
+        "Webcomics Industry Trends"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
       "id": "6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b",
       "title": "Company apologizes after AI support agent invents policy that causes user uproar",
       "link": "articles/company-apologizes-after-ai-support-agent-invents-policy-that-causes-user-uproar.html",
@@ -1983,6 +2055,30 @@
         "AI brand reputation",
         "Hacker News AI backlash",
         "Reddit AI complaints"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
+      "id": "4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0",
+      "title": "A Google Gemini model now has a “dial” to adjust how much it reasons",
+      "link": "articles/a-google-gemini-model-now-has-a-dial-to-adjust-how-much-it-reasons.html",
+      "published_iso": "2025-04-17T19:00:00Z",
+      "summary_short": "Google DeepMind introduces an AI reasoning control dial for Gemini models, allowing developers to adjust computational effort and costs.",
+      "image_url": "https://wp.technologyreview.com/wp-content/uploads/2025/04/thought-dial2a.jpg?resize=1200,600",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Google Gemini",
+        "AI reasoning control",
+        "Gemini Flash 2.5",
+        "AI efficiency",
+        "computational cost optimization",
+        "DeepMind",
+        "AI model performance",
+        "AI overthinking",
+        "adaptive AI systems",
+        "AI industry trends"
       ],
       "audio_url": null,
       "trend_score": 10.0

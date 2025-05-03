@@ -15269,3 +15269,235 @@ AttributeError: module 'feedparser.exceptions' has no attribute 'NotXMLContentTy
 2025-05-03 00:17:32 - main_orchestrator - INFO - Article 064c6e5e349dbbcd930c205785148d3fa6bfb76cabd09b7bb6e94bac5892da35 classified as Boring by Filter Agent. Skipping.
 2025-05-03 00:17:33 - main_orchestrator - INFO - Processing cycle complete. Successfully processed: 0, Failed/Skipped/Duplicate: 15
 2025-05-03 00:17:33 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (160.42 seconds) === ---
+2025-05-03 00:24:49 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/home/
+2025-05-03 00:24:49 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-03 00:24:49 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-03 00:24:49.158360) === ---
+2025-05-03 00:24:49 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-03 00:24:49 - main_orchestrator - INFO - --- Stage 1: Running Scraper ---
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (7 feeds) ---
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 1e905d35c7be8d7eb7a24d2442e63a77807aed8f1d22f8bf16d33c07e7cbc8fc.json (Title: Reddit’s AI play is for the Google crowd, not just...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 31828e7cbbae5bb2f954d9d36bb0be57fc51f554fe6477f3505c3c11a809b2a9.json (Title: Despite paying $900M in tariffs, Apple’s Tim Cook ...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 03d1aa551bf33b77ff10b20ea0333ffc56a16e90c0cea61eae57f8244b3de897.json (Title: Apple CEO Tim Cook says tariffs to add $900M in co...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ed453eb0fcbc5958e406bcb89f68e66229e047fe45ec50a443272c3d2dfeb733.json (Title: Peacock trained TikTokers to make content, and now...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7.json (Title: Rising star defense tech startup Mach Industries i...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - Finished feed https://techcrunch.com/feed/. Saved 5 new articles from this feed.
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa.json (Title: This data set helps researchers spot harmful stere...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c040b1cd27c5890ce34ec11f63fc37ecd938a6e4c9deee85f8c3399d6420e77a.json (Title: The AI Hype Index: AI agent cyberattacks, racing r...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8daae2eb636dcb89204de33325d990c0f06a78b81fe6f2b2f8a0390423f3b16f.json (Title: We need to start thinking of AI as “normal”...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 6dbbf5fbf261924abfb5005ad7a36149a87b1696774065152cbbae267d8751ee.json (Title: Seeing AI as a collaborator, not a creator...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c8a6c1efb3075bd7abbe7d3e7e1494a7bdfd2dd5ce5e5ff4b502fcbdc466e7f3.json (Title: The future of AI processing...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466.json (Title: Generative AI is reshaping South Korea’s webcomics...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: ea4bc30aa168d6d431341d6ecd5078f2cd1574186bbda19895b3916a95101947.json (Title: AI is pushing the limits of the physical world...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0.json (Title: A Google Gemini model now has a “dial” to adjust h...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 0460ee53eb979af57d45e0fad8377e1f7406509b9764b85217eba3a6438bb6be.json (Title: Adapting for AI’s reasoning era...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a527ed9765a4b640f307d6569a61c4a1063a5d511a6af51f0167cd27edaf7567.json (Title: AI is coming for music, too...)
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - Finished feed https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 10 new articles from this feed.
+2025-05-03 00:24:49 - src.scrapers.news_scraper - WARNING - Reached max articles per scraper run (15). Stopping feed processing.
+2025-05-03 00:24:49 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved this run: 15 ---
+2025-05-03 00:24:49 - main_orchestrator - INFO - Scraper run completed. Saved 15 new raw article JSON files.
+2025-05-03 00:24:49 - main_orchestrator - INFO - --- Stage 2: Running Processing Cycle ---
+2025-05-03 00:24:49 - main_orchestrator - INFO - Loaded 50 recent articles from all_articles.json for comparison context.
+2025-05-03 00:24:49 - main_orchestrator - INFO - Loaded 50 recent articles from existing site data for duplicate checking.
+2025-05-03 00:24:49 - main_orchestrator - INFO - Found 15 scraped articles to process.
+2025-05-03 00:24:49 - main_orchestrator - INFO - --- Processing article file: 1e905d35c7be8d7eb7a24d2442e63a77807aed8f1d22f8bf16d33c07e7cbc8fc.json ---
+2025-05-03 00:24:49 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 1e905d35c7be8d7eb7a24d2442e63a77807aed8f1d22f8bf16d33c07e7cbc8fc Title: Reddit’s AI play is for the Google crowd, not just the commu...
+2025-05-03 00:24:57 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 1e905d35c7be8d7eb7a24d2442e63a77807aed8f1d22f8bf16d33c07e7cbc8fc: level=Boring, topic='Other', keyword='Reddit user types'
+2025-05-03 00:24:57 - main_orchestrator - INFO - Article 1e905d35c7be8d7eb7a24d2442e63a77807aed8f1d22f8bf16d33c07e7cbc8fc classified as Boring by Filter Agent. Skipping.
+2025-05-03 00:24:58 - main_orchestrator - INFO - --- Processing article file: 31828e7cbbae5bb2f954d9d36bb0be57fc51f554fe6477f3505c3c11a809b2a9.json ---
+2025-05-03 00:24:58 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 31828e7cbbae5bb2f954d9d36bb0be57fc51f554fe6477f3505c3c11a809b2a9 Title: Despite paying $900M in tariffs, Apple’s Tim Cook isn’t anno...
+2025-05-03 00:25:04 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 31828e7cbbae5bb2f954d9d36bb0be57fc51f554fe6477f3505c3c11a809b2a9: level=Boring, topic='Business', keyword='Apple tariff discussion'
+2025-05-03 00:25:04 - main_orchestrator - INFO - Article 31828e7cbbae5bb2f954d9d36bb0be57fc51f554fe6477f3505c3c11a809b2a9 classified as Boring by Filter Agent. Skipping.
+2025-05-03 00:25:05 - main_orchestrator - INFO - --- Processing article file: ed453eb0fcbc5958e406bcb89f68e66229e047fe45ec50a443272c3d2dfeb733.json ---
+2025-05-03 00:25:05 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ed453eb0fcbc5958e406bcb89f68e66229e047fe45ec50a443272c3d2dfeb733 Title: Peacock trained TikTokers to make content, and now four crea...
+2025-05-03 00:25:11 - src.agents.filter_news_agent - INFO - Filter verdict received for ID ed453eb0fcbc5958e406bcb89f68e66229e047fe45ec50a443272c3d2dfeb733: level=Boring, topic='Art & Media', keyword='social media to TV'
+2025-05-03 00:25:11 - main_orchestrator - INFO - Article ed453eb0fcbc5958e406bcb89f68e66229e047fe45ec50a443272c3d2dfeb733 classified as Boring by Filter Agent. Skipping.
+2025-05-03 00:25:12 - main_orchestrator - INFO - --- Processing article file: 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7.json ---
+2025-05-03 00:25:12 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7 Title: Rising star defense tech startup Mach Industries is raising ...
+2025-05-03 00:25:21 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7: level=Interesting, topic='Startups', keyword='defense tech funding'
+2025-05-03 00:25:21 - main_orchestrator - INFO - Article 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7 classified as Interesting (Topic: Startups).
+2025-05-03 00:25:21 - main_orchestrator - INFO - Checking duplicates for 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7...
+2025-05-03 00:25:21 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7 Title: Rising star defense tech startup Mach Industries is raising ...
+2025-05-03 00:25:26 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7: is_duplicate=False. Reason: No recently published article reports on Mach Industries raising $100 million in funding.
+2025-05-03 00:25:26 - main_orchestrator - INFO - Article 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7 passed similarity check.
+2025-05-03 00:25:26 - main_orchestrator - INFO - Finding image for 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7...
+2025-05-03 00:25:26 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://techcrunch.com/2025/05/01/rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-say/
+2025-05-03 00:25:27 - src.scrapers.image_scraper - INFO - Found og:image: https://techcrunch.com/wp-content/uploads/2025/03/EthanThornton5.jpg?resize=1200,931
+2025-05-03 00:25:27 - main_orchestrator - INFO - Using scraped image for 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7: https://techcrunch.com/wp-content/uploads/2025/03/EthanThornton5.jpg?resize=1200,931
+2025-05-03 00:25:27 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7...
+2025-05-03 00:25:53 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7.
+2025-05-03 00:25:53 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7...
+2025-05-03 00:26:00 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7
+2025-05-03 00:26:00 - main_orchestrator - INFO - Rendered HTML: rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources.html
+2025-05-03 00:26:00 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-03 00:26:00 - main_orchestrator - INFO - Updated all_articles.json (96 articles).
+2025-05-03 00:26:00 - main_orchestrator - INFO - Attempting to post article 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7 to Twitter...
+2025-05-03 00:26:00 - src.social.twitter_poster - INFO - Attempting to post tweet for: Rising star defense tech startup Mach Industries is raising $100 million, sources say
+2025-05-03 00:26:00 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-03 00:26:00 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-03 00:26:00 - src.social.twitter_poster - INFO - Image uploaded to Twitter. Media ID: 1918462007843422209
+2025-05-03 00:26:00 - src.social.twitter_poster - INFO - Posting tweet text (length 229): Rising star defense tech startup Mach Industries is raising $100 million, sources say
+
+Check it out: https://dacoolaa.netlify.app/home/articles/rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-.html
+2025-05-03 00:26:01 - src.social.twitter_poster - INFO - Successfully posted tweet! Tweet ID: 1918462009462395187
+2025-05-03 00:26:01 - main_orchestrator - INFO - Successfully posted 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7 to Twitter.
+2025-05-03 00:26:01 - main_orchestrator - INFO - Attempting to send webhook to Make.com for 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7...
+2025-05-03 00:26:01 - main_orchestrator - INFO - Successfully sent data to Make.com webhook for article ID: 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7
+2025-05-03 00:26:01 - main_orchestrator - INFO - Successfully sent webhook for 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7.
+2025-05-03 00:26:01 - main_orchestrator - INFO - Saved final processed data to: 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7.json
+2025-05-03 00:26:01 - main_orchestrator - INFO - --- Successfully processed article: 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7 ---
+2025-05-03 00:26:01 - main_orchestrator - INFO - Loaded 50 recent articles from all_articles.json for comparison context.
+2025-05-03 00:26:02 - main_orchestrator - INFO - --- Processing article file: 03d1aa551bf33b77ff10b20ea0333ffc56a16e90c0cea61eae57f8244b3de897.json ---
+2025-05-03 00:26:02 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 03d1aa551bf33b77ff10b20ea0333ffc56a16e90c0cea61eae57f8244b3de897 Title: Apple CEO Tim Cook says tariffs to add $900M in costs in Q3,...
+2025-05-03 00:26:08 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 03d1aa551bf33b77ff10b20ea0333ffc56a16e90c0cea61eae57f8244b3de897: level=Boring, topic='Business', keyword='Apple tariffs impact'
+2025-05-03 00:26:08 - main_orchestrator - INFO - Article 03d1aa551bf33b77ff10b20ea0333ffc56a16e90c0cea61eae57f8244b3de897 classified as Boring by Filter Agent. Skipping.
+2025-05-03 00:26:09 - main_orchestrator - INFO - --- Processing article file: c040b1cd27c5890ce34ec11f63fc37ecd938a6e4c9deee85f8c3399d6420e77a.json ---
+2025-05-03 00:26:09 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c040b1cd27c5890ce34ec11f63fc37ecd938a6e4c9deee85f8c3399d6420e77a Title: The AI Hype Index: AI agent cyberattacks, racing robots, and...
+2025-05-03 00:26:15 - src.agents.filter_news_agent - INFO - Filter verdict received for ID c040b1cd27c5890ce34ec11f63fc37ecd938a6e4c9deee85f8c3399d6420e77a: level=Boring, topic='Other', keyword='AI hype overview'
+2025-05-03 00:26:15 - main_orchestrator - INFO - Article c040b1cd27c5890ce34ec11f63fc37ecd938a6e4c9deee85f8c3399d6420e77a classified as Boring by Filter Agent. Skipping.
+2025-05-03 00:26:16 - main_orchestrator - INFO - --- Processing article file: 8daae2eb636dcb89204de33325d990c0f06a78b81fe6f2b2f8a0390423f3b16f.json ---
+2025-05-03 00:26:16 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 8daae2eb636dcb89204de33325d990c0f06a78b81fe6f2b2f8a0390423f3b16f)
+2025-05-03 00:26:16 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 8daae2eb636dcb89204de33325d990c0f06a78b81fe6f2b2f8a0390423f3b16f Title: We need to start thinking of AI as “normal”...
+2025-05-03 00:26:22 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 8daae2eb636dcb89204de33325d990c0f06a78b81fe6f2b2f8a0390423f3b16f: level=Boring, topic='Ethics', keyword='AI societal views'
+2025-05-03 00:26:22 - main_orchestrator - INFO - Article 8daae2eb636dcb89204de33325d990c0f06a78b81fe6f2b2f8a0390423f3b16f classified as Boring by Filter Agent. Skipping.
+2025-05-03 00:26:23 - main_orchestrator - INFO - --- Processing article file: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa.json ---
+2025-05-03 00:26:23 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa)
+2025-05-03 00:26:23 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa Title: This data set helps researchers spot harmful stereotypes in ...
+2025-05-03 00:26:32 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa: level=Interesting, topic='Ethics', keyword='AI bias detection'
+2025-05-03 00:26:32 - main_orchestrator - INFO - Article 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa classified as Interesting (Topic: Ethics).
+2025-05-03 00:26:32 - main_orchestrator - INFO - Checking duplicates for 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa...
+2025-05-03 00:26:32 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa)
+2025-05-03 00:26:32 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa Title: This data set helps researchers spot harmful stereotypes in ...
+2025-05-03 00:26:38 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa: is_duplicate=False. Reason: No recently published article discusses the SHADES data set for spotting harmful stereotypes in LLMs.
+2025-05-03 00:26:38 - main_orchestrator - INFO - Article 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa passed similarity check.
+2025-05-03 00:26:38 - main_orchestrator - INFO - Finding image for 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa...
+2025-05-03 00:26:38 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.technologyreview.com/2025/04/30/1115946/this-data-set-helps-researchers-spot-harmful-stereotypes-in-llms/
+2025-05-03 00:26:38 - src.scrapers.image_scraper - INFO - Found og:image: https://wp.technologyreview.com/wp-content/uploads/2025/04/shades.jpg?resize=1200,600
+2025-05-03 00:26:38 - main_orchestrator - INFO - Using scraped image for 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa: https://wp.technologyreview.com/wp-content/uploads/2025/04/shades.jpg?resize=1200,600
+2025-05-03 00:26:38 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa...
+2025-05-03 00:27:09 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa.
+2025-05-03 00:27:09 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa...
+2025-05-03 00:27:14 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa
+2025-05-03 00:27:14 - main_orchestrator - INFO - Rendered HTML: this-data-set-helps-researchers-spot-harmful-stereotypes-in-llms.html
+2025-05-03 00:27:14 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-03 00:27:14 - main_orchestrator - INFO - Updated all_articles.json (97 articles).
+2025-05-03 00:27:14 - main_orchestrator - INFO - Attempting to post article 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa to Twitter...
+2025-05-03 00:27:14 - src.social.twitter_poster - INFO - Attempting to post tweet for: This data set helps researchers spot harmful stereotypes in LLMs
+2025-05-03 00:27:14 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-03 00:27:14 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-03 00:27:15 - src.social.twitter_poster - INFO - Image uploaded to Twitter. Media ID: 1918462320499445760
+2025-05-03 00:27:15 - src.social.twitter_poster - INFO - Posting tweet text (length 192): This data set helps researchers spot harmful stereotypes in LLMs
+
+Check it out: https://dacoolaa.netlify.app/home/articles/this-data-set-helps-researchers-spot-harmful-stereotypes-in-llms.html
+2025-05-03 00:27:15 - src.social.twitter_poster - INFO - Successfully posted tweet! Tweet ID: 1918462321862533486
+2025-05-03 00:27:15 - main_orchestrator - INFO - Successfully posted 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa to Twitter.
+2025-05-03 00:27:15 - main_orchestrator - INFO - Attempting to send webhook to Make.com for 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa...
+2025-05-03 00:27:16 - main_orchestrator - INFO - Successfully sent data to Make.com webhook for article ID: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa
+2025-05-03 00:27:16 - main_orchestrator - INFO - Successfully sent webhook for 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa.
+2025-05-03 00:27:16 - main_orchestrator - INFO - Saved final processed data to: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa.json
+2025-05-03 00:27:16 - main_orchestrator - INFO - --- Successfully processed article: 4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa ---
+2025-05-03 00:27:16 - main_orchestrator - INFO - Loaded 50 recent articles from all_articles.json for comparison context.
+2025-05-03 00:27:17 - main_orchestrator - INFO - --- Processing article file: c8a6c1efb3075bd7abbe7d3e7e1494a7bdfd2dd5ce5e5ff4b502fcbdc466e7f3.json ---
+2025-05-03 00:27:17 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: c8a6c1efb3075bd7abbe7d3e7e1494a7bdfd2dd5ce5e5ff4b502fcbdc466e7f3)
+2025-05-03 00:27:17 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c8a6c1efb3075bd7abbe7d3e7e1494a7bdfd2dd5ce5e5ff4b502fcbdc466e7f3 Title: The future of AI processing...
+2025-05-03 00:27:23 - src.agents.filter_news_agent - INFO - Filter verdict received for ID c8a6c1efb3075bd7abbe7d3e7e1494a7bdfd2dd5ce5e5ff4b502fcbdc466e7f3: level=Boring, topic='Hardware', keyword='AI hardware allocation'
+2025-05-03 00:27:23 - main_orchestrator - INFO - Article c8a6c1efb3075bd7abbe7d3e7e1494a7bdfd2dd5ce5e5ff4b502fcbdc466e7f3 classified as Boring by Filter Agent. Skipping.
+2025-05-03 00:27:24 - main_orchestrator - INFO - --- Processing article file: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466.json ---
+2025-05-03 00:27:24 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466)
+2025-05-03 00:27:24 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466 Title: Generative AI is reshaping South Korea’s webcomics industry...
+2025-05-03 00:27:30 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466: level=Interesting, topic='Art & Media', keyword='Generative AI in comics'
+2025-05-03 00:27:30 - main_orchestrator - INFO - Article 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466 classified as Interesting (Topic: Art & Media).
+2025-05-03 00:27:30 - main_orchestrator - INFO - Checking duplicates for 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466...
+2025-05-03 00:27:30 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466)
+2025-05-03 00:27:30 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466 Title: Generative AI is reshaping South Korea’s webcomics industry...
+2025-05-03 00:27:37 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466: is_duplicate=False. Reason: The New Candidate Article discusses the impact of generative AI on South Korea's webcomics industry, which is not covered in any of the Recently Published Articles.
+2025-05-03 00:27:37 - main_orchestrator - INFO - Article 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466 passed similarity check.
+2025-05-03 00:27:37 - main_orchestrator - INFO - Finding image for 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466...
+2025-05-03 00:27:37 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.technologyreview.com/2025/04/22/1114874/generative-ai-south-korea-webcomics/
+2025-05-03 00:27:37 - src.scrapers.image_scraper - INFO - Found og:image: https://wp.technologyreview.com/wp-content/uploads/2025/04/tarot-top.jpg?resize=1200,600
+2025-05-03 00:27:37 - main_orchestrator - INFO - Using scraped image for 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466: https://wp.technologyreview.com/wp-content/uploads/2025/04/tarot-top.jpg?resize=1200,600
+2025-05-03 00:27:37 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466...
+2025-05-03 00:28:04 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466.
+2025-05-03 00:28:04 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466...
+2025-05-03 00:28:09 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466
+2025-05-03 00:28:09 - main_orchestrator - INFO - Rendered HTML: generative-ai-is-reshaping-south-koreas-webcomics-industry.html
+2025-05-03 00:28:09 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-03 00:28:09 - main_orchestrator - INFO - Updated all_articles.json (98 articles).
+2025-05-03 00:28:09 - main_orchestrator - INFO - Attempting to post article 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466 to Twitter...
+2025-05-03 00:28:09 - src.social.twitter_poster - INFO - Attempting to post tweet for: Generative AI is reshaping South Korea’s webcomics industry
+2025-05-03 00:28:09 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-03 00:28:09 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-03 00:28:10 - src.social.twitter_poster - INFO - Image uploaded to Twitter. Media ID: 1918462550900957184
+2025-05-03 00:28:10 - src.social.twitter_poster - INFO - Posting tweet text (length 181): Generative AI is reshaping South Korea’s webcomics industry
+
+Check it out: https://dacoolaa.netlify.app/home/articles/generative-ai-is-reshaping-south-koreas-webcomics-industry.html
+2025-05-03 00:28:10 - src.social.twitter_poster - INFO - Successfully posted tweet! Tweet ID: 1918462552335364310
+2025-05-03 00:28:10 - main_orchestrator - INFO - Successfully posted 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466 to Twitter.
+2025-05-03 00:28:10 - main_orchestrator - INFO - Attempting to send webhook to Make.com for 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466...
+2025-05-03 00:28:10 - main_orchestrator - INFO - Successfully sent data to Make.com webhook for article ID: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466
+2025-05-03 00:28:10 - main_orchestrator - INFO - Successfully sent webhook for 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466.
+2025-05-03 00:28:10 - main_orchestrator - INFO - Saved final processed data to: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466.json
+2025-05-03 00:28:10 - main_orchestrator - INFO - --- Successfully processed article: 94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466 ---
+2025-05-03 00:28:10 - main_orchestrator - INFO - Loaded 50 recent articles from all_articles.json for comparison context.
+2025-05-03 00:28:11 - main_orchestrator - INFO - --- Processing article file: 6dbbf5fbf261924abfb5005ad7a36149a87b1696774065152cbbae267d8751ee.json ---
+2025-05-03 00:28:11 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 6dbbf5fbf261924abfb5005ad7a36149a87b1696774065152cbbae267d8751ee)
+2025-05-03 00:28:11 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 6dbbf5fbf261924abfb5005ad7a36149a87b1696774065152cbbae267d8751ee Title: Seeing AI as a collaborator, not a creator...
+2025-05-03 00:28:18 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 6dbbf5fbf261924abfb5005ad7a36149a87b1696774065152cbbae267d8751ee: level=Boring, topic='Other', keyword='Personal anecdote'
+2025-05-03 00:28:18 - main_orchestrator - INFO - Article 6dbbf5fbf261924abfb5005ad7a36149a87b1696774065152cbbae267d8751ee classified as Boring by Filter Agent. Skipping.
+2025-05-03 00:28:19 - main_orchestrator - INFO - --- Processing article file: ea4bc30aa168d6d431341d6ecd5078f2cd1574186bbda19895b3916a95101947.json ---
+2025-05-03 00:28:19 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: ea4bc30aa168d6d431341d6ecd5078f2cd1574186bbda19895b3916a95101947)
+2025-05-03 00:28:19 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: ea4bc30aa168d6d431341d6ecd5078f2cd1574186bbda19895b3916a95101947 Title: AI is pushing the limits of the physical world...
+2025-05-03 00:28:26 - src.agents.filter_news_agent - INFO - Filter verdict received for ID ea4bc30aa168d6d431341d6ecd5078f2cd1574186bbda19895b3916a95101947: level=Boring, topic='Other', keyword='AI in architecture'
+2025-05-03 00:28:26 - main_orchestrator - INFO - Article ea4bc30aa168d6d431341d6ecd5078f2cd1574186bbda19895b3916a95101947 classified as Boring by Filter Agent. Skipping.
+2025-05-03 00:28:27 - main_orchestrator - INFO - --- Processing article file: 0460ee53eb979af57d45e0fad8377e1f7406509b9764b85217eba3a6438bb6be.json ---
+2025-05-03 00:28:27 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 0460ee53eb979af57d45e0fad8377e1f7406509b9764b85217eba3a6438bb6be)
+2025-05-03 00:28:27 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 0460ee53eb979af57d45e0fad8377e1f7406509b9764b85217eba3a6438bb6be Title: Adapting for AI’s reasoning era...
+2025-05-03 00:28:33 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 0460ee53eb979af57d45e0fad8377e1f7406509b9764b85217eba3a6438bb6be: level=Boring, topic='AI Models', keyword='AI reasoning comparison'
+2025-05-03 00:28:33 - main_orchestrator - INFO - Article 0460ee53eb979af57d45e0fad8377e1f7406509b9764b85217eba3a6438bb6be classified as Boring by Filter Agent. Skipping.
+2025-05-03 00:28:34 - main_orchestrator - INFO - --- Processing article file: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0.json ---
+2025-05-03 00:28:34 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0)
+2025-05-03 00:28:34 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0 Title: A Google Gemini model now has a “dial” to adjust how much it...
+2025-05-03 00:28:40 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0: level=Interesting, topic='AI Models', keyword='AI reasoning control'
+2025-05-03 00:28:40 - main_orchestrator - INFO - Article 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0 classified as Interesting (Topic: AI Models).
+2025-05-03 00:28:40 - main_orchestrator - INFO - Checking duplicates for 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0...
+2025-05-03 00:28:40 - src.agents.similarity_check_agent - WARNING - Truncating new article summary (> 1000 chars) for similarity check (ID: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0)
+2025-05-03 00:28:40 - src.agents.similarity_check_agent - INFO - Running similarity check for article ID: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0 Title: A Google Gemini model now has a “dial” to adjust how much it...
+2025-05-03 00:28:47 - src.agents.similarity_check_agent - INFO - Similarity check result for ID 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0: is_duplicate=False. Reason: No recently published article reports on Google DeepMind's update to a Gemini AI model with a reasoning dial feature.
+2025-05-03 00:28:47 - main_orchestrator - INFO - Article 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0 passed similarity check.
+2025-05-03 00:28:47 - main_orchestrator - INFO - Finding image for 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0...
+2025-05-03 00:28:47 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.technologyreview.com/2025/04/17/1115375/a-google-gemini-model-now-has-a-dial-to-adjust-how-much-it-reasons/
+2025-05-03 00:28:47 - src.scrapers.image_scraper - INFO - Found og:image: https://wp.technologyreview.com/wp-content/uploads/2025/04/thought-dial2a.jpg?resize=1200,600
+2025-05-03 00:28:47 - main_orchestrator - INFO - Using scraped image for 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0: https://wp.technologyreview.com/wp-content/uploads/2025/04/thought-dial2a.jpg?resize=1200,600
+2025-05-03 00:28:47 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0...
+2025-05-03 00:29:17 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0.
+2025-05-03 00:29:17 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0...
+2025-05-03 00:29:24 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0
+2025-05-03 00:29:24 - main_orchestrator - INFO - Rendered HTML: a-google-gemini-model-now-has-a-dial-to-adjust-how-much-it-reasons.html
+2025-05-03 00:29:24 - main_orchestrator - INFO - Updated site_data.json (20 articles).
+2025-05-03 00:29:24 - main_orchestrator - INFO - Updated all_articles.json (99 articles).
+2025-05-03 00:29:24 - main_orchestrator - INFO - Attempting to post article 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0 to Twitter...
+2025-05-03 00:29:24 - src.social.twitter_poster - INFO - Attempting to post tweet for: A Google Gemini model now has a “dial” to adjust how much it reasons
+2025-05-03 00:29:24 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-03 00:29:24 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-03 00:29:24 - src.social.twitter_poster - INFO - Image uploaded to Twitter. Media ID: 1918462863523377152
+2025-05-03 00:29:24 - src.social.twitter_poster - INFO - Posting tweet text (length 198): A Google Gemini model now has a “dial” to adjust how much it reasons
+
+Check it out: https://dacoolaa.netlify.app/home/articles/a-google-gemini-model-now-has-a-dial-to-adjust-how-much-it-reasons.html
+2025-05-03 00:29:25 - src.social.twitter_poster - INFO - Successfully posted tweet! Tweet ID: 1918462864832045102
+2025-05-03 00:29:25 - main_orchestrator - INFO - Successfully posted 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0 to Twitter.
+2025-05-03 00:29:25 - main_orchestrator - INFO - Attempting to send webhook to Make.com for 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0...
+2025-05-03 00:29:25 - main_orchestrator - INFO - Successfully sent data to Make.com webhook for article ID: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0
+2025-05-03 00:29:25 - main_orchestrator - INFO - Successfully sent webhook for 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0.
+2025-05-03 00:29:25 - main_orchestrator - INFO - Saved final processed data to: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0.json
+2025-05-03 00:29:25 - main_orchestrator - INFO - --- Successfully processed article: 4a1de5495527e35c3bfdcd53152167e93a360bdb88603b202e6257b1f588edc0 ---
+2025-05-03 00:29:25 - main_orchestrator - INFO - Loaded 50 recent articles from all_articles.json for comparison context.
+2025-05-03 00:29:26 - main_orchestrator - INFO - --- Processing article file: a527ed9765a4b640f307d6569a61c4a1063a5d511a6af51f0167cd27edaf7567.json ---
+2025-05-03 00:29:26 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: a527ed9765a4b640f307d6569a61c4a1063a5d511a6af51f0167cd27edaf7567)
+2025-05-03 00:29:26 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a527ed9765a4b640f307d6569a61c4a1063a5d511a6af51f0167cd27edaf7567 Title: AI is coming for music, too...
+2025-05-03 00:29:33 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a527ed9765a4b640f307d6569a61c4a1063a5d511a6af51f0167cd27edaf7567: level=Boring, topic='Art & Media', keyword='AI in music'
+2025-05-03 00:29:33 - main_orchestrator - INFO - Article a527ed9765a4b640f307d6569a61c4a1063a5d511a6af51f0167cd27edaf7567 classified as Boring by Filter Agent. Skipping.
+2025-05-03 00:29:34 - main_orchestrator - INFO - Processing cycle complete. Successfully processed: 4, Failed/Skipped/Duplicate: 11
+2025-05-03 00:29:34 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (285.30 seconds) === ---
