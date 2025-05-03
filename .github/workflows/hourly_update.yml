@@ -15,13 +15,13 @@ jobs:
       group: ${{ github.workflow }}
       cancel-in-progress: true
     permissions:
-      contents: write
+      contents: write # Need write permissions to push changes
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Fetches all history for accurate pulls/rebases
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
@@ -43,6 +43,7 @@ jobs:
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
           YOUR_WEBSITE_NAME: ${{ secrets.YOUR_WEBSITE_NAME || vars.YOUR_WEBSITE_NAME || 'Dacoola' }}
           YOUR_WEBSITE_LOGO_URL: ${{ secrets.YOUR_WEBSITE_LOGO_URL || vars.YOUR_WEBSITE_LOGO_URL || '' }}
+          # IMPORTANT: Ensure YOUR_SITE_BASE_URL secret/variable includes the trailing slash if needed by your sitemap script
           YOUR_SITE_BASE_URL: ${{ secrets.YOUR_SITE_BASE_URL || vars.YOUR_SITE_BASE_URL || '' }}
           MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES || vars.MAX_HOME_PAGE_ARTICLES || 20 }} # Used by JS
           TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
@@ -52,16 +53,28 @@ jobs:
           MAKE_INSTAGRAM_WEBHOOK_URL: ${{ secrets.MAKE_INSTAGRAM_WEBHOOK_URL }}
         run: python src/main.py
 
+      # --- NEW STEP ADDED HERE ---
+      - name: Generate Sitemap
+        # Ensure the script uses the same YOUR_SITE_BASE_URL environment variable
+        env:
+          YOUR_SITE_BASE_URL: ${{ secrets.YOUR_SITE_BASE_URL || vars.YOUR_SITE_BASE_URL || '' }}
+        run: python generate_sitemap.py
+        # Optionally, only run if main.py was successful:
+        # if: success()
+      # --- END NEW STEP ---
+
       - name: Commit and Push Changes
         run: |
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
           # Add generated content and state files explicitly
+          git add public/sitemap.xml || echo "Sitemap not found or no changes." # <<< ADD SITEMAP
           git add public/ # Includes articles/ and JSON files
           git add data/processed_json/ # Add processed state
           # Add log and ID list if they changed
           git add dacola.log || echo "Log file not found or no changes."
+          # NOTE: processed_article_ids.txt IS modified by news_scraper, so should be added
           git add data/processed_article_ids.txt || echo "Processed IDs file not found or no changes."
           git add data/twitter_daily_limit.json || echo "Twitter limit file not found or no changes."
 
@@ -71,40 +84,49 @@ jobs:
             echo "No content changes detected to commit."
           else
             echo "Content changes detected. Committing..."
-            git commit -m "Automated news update [skip ci]"
+            # Commit with [skip ci] to prevent triggering another workflow run
+            git commit -m "Automated news update and sitemap generation [skip ci]"
 
             echo "Stashing any potentially unstaged changes..."
             git stash push --include-untracked # Stash everything not committed
 
-            echo "Pulling latest changes before push..."
+            echo "Pulling latest changes before push (rebase strategy)..."
+            # Using rebase to avoid merge commits, requires force-push permissions if conflicts happen often
+            # Make sure the branch name is correct (using github.ref_name)
             git pull origin ${{ github.ref_name }} --rebase || { echo "::error::git pull --rebase failed"; exit 1; }
 
-            # echo "Applying stashed changes (if any)..." # Usually not needed for CI
+            # Applying stashed changes might be complex after a rebase, usually not needed for CI
             # git stash pop || echo "No stash to pop."
 
             echo "Attempting to push changes..."
             retry_count=0; max_retries=3; delay=5;
+            # Loop until push succeeds or retries are exhausted
             until git push origin ${{ github.ref_name }} || [ $retry_count -ge $max_retries ]; do
               retry_count=$((retry_count+1))
               echo "Push failed. Retrying (${retry_count}/${max_retries})..."
               sleep $delay
-              # Optional: Re-pull inside loop? Might cause complex merge conflicts
+              # Re-pulling inside the loop can be dangerous with rebase, might try fetch/reset instead
               # git pull origin ${{ github.ref_name }} --rebase || echo "Pull inside retry failed"
             done
 
             if [ $retry_count -ge $max_retries ]; then
               echo "::error::Push failed after $max_retries attempts."
+              # Consider adding steps here to reset the repo or notify someone
               exit 1
             fi
             echo "Changes pushed successfully."
           fi
         env:
+          # GITHUB_TOKEN is automatically available with correct permissions
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Netlify CLI
+        # Only run if there were changes pushed or if deployment is always needed
+        # Consider adding an 'if' condition based on the commit step output/status
         run: npm install -g netlify-cli
 
       - name: Deploy to Netlify
+        # Only run if there were changes pushed or if deployment is always needed
         run: netlify deploy --dir=public --prod --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
