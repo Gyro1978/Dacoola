@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "2911f7cf83c993a6c708c4117a381dc5a83569e2354d27ee2f043ad202b52cdc",
+      "title": "Co-op cyber attack affects customer data, firm admits, after hackers contact BBC",
+      "link": "articles/co-op-cyber-attack-affects-customer-data-firm-admits-after-hackers-contact-bbc.html",
+      "published_iso": "2025-05-02T21:08:24Z",
+      "summary_short": "A cyber attack on Co-op has exposed customer data, contradicting the firm's earlier claims of no breach.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/46b9/live/35aeafb0-276b-11f0-9ebe-cd0e86e27cba.png",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "Co-op cyber attack",
+        "customer data breach",
+        "cybersecurity disclosure",
+        "retail data security",
+        "hacker communication",
+        "corporate transparency",
+        "cyber threat response",
+        "data protection concerns"
+      ],
+      "audio_url": null,
+      "trend_score": 13.76
+    },
+    {
       "id": "96b08048a8525d89edaae12a049c2dbe4f8d74d2cf9626fb1728d8088d63fbfc",
       "title": "Aurora launches its driverless commercial trucking service, and a surprise bidder joins Canoo’s bankruptcy case",
       "link": "articles/aurora-launches-its-driverless-commercial-trucking-service-and-a-surprise-bidder.html",
@@ -618,6 +640,30 @@
       "trend_score": 14.0
     },
     {
+      "id": "8deaff8501a1eb567fb9ff214ac896f432daaea38f45a4b0e00e6d1df920785a",
+      "title": "Wandercraft Begins Clinical Trials for Physical AI-Powered Personal Exoskeleton",
+      "link": "articles/wandercraft-begins-clinical-trials-for-physical-ai-powered-personal-exoskeleton.html",
+      "published_iso": "2025-05-01T13:00:30Z",
+      "summary_short": "Wandercraft's AI-powered exoskeleton begins clinical trials, offering mobility solutions for wheelchair users with NVIDIA's physical AI technology.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/EXO-Paris-1.jpg",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "Wandercraft",
+        "AI-powered exoskeleton",
+        "mobility assistance",
+        "physical AI",
+        "NVIDIA Isaac Sim",
+        "FDA clearance",
+        "rehabilitation robotics",
+        "edge computing",
+        "spinal stroke recovery",
+        "Medicare coverage"
+      ],
+      "audio_url": null,
+      "trend_score": 13.81
+    },
+    {
       "id": "037705e09113b0b95778bd12da8f50bf77de3d550c57d812433d012f36185a19",
       "title": "Meta forecasted it would make $1.4T in revenue from generative AI by 2035",
       "link": "articles/meta-forecasted-it-would-make-14t-in-revenue-from-generative-ai-by-2035.html",
@@ -1083,6 +1129,30 @@
       "trend_score": 13.41
     },
     {
+      "id": "5ae7564e0b01cc4c1a88a1b18f1a88b27a4689a3f86c6c38a8275fe0b1a06d2e",
+      "title": "From Kitchen to Drive-Thru: How Yum! Brands Is Accelerating Restaurant Innovation With AI",
+      "link": "articles/from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation-.html",
+      "published_iso": "2025-04-30T16:00:04Z",
+      "summary_short": "Yum! Brands partners with NVIDIA to deploy AI in 500 restaurants, optimizing everything from drive-thrus to kitchen efficiency.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/yum-podcast-blog-1280x680-1.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "AI in restaurants",
+        "Yum! Brands",
+        "NVIDIA",
+        "quick-service restaurant industry",
+        "machine learning in food service",
+        "AI-powered kitchen optimization",
+        "computer vision in drive-thrus",
+        "Byte by Yum!",
+        "voice AI for order accuracy",
+        "restaurant operational efficiency"
+      ],
+      "audio_url": null,
+      "trend_score": 13.18
+    },
+    {
       "id": "245c0eaa1c4e0e749193d7433fce73c44bd96279c1f6f26d12145dde3eada111",
       "title": "These Startups Are Building Advanced AI Models Without Data Centers",
       "link": "articles/these-startups-are-building-advanced-ai-models-without-data-centers.html",
@@ -1103,6 +1173,30 @@
         "Open AI Collaboration"
       ],
       "trend_score": 12.78
+    },
+    {
+      "id": "614dc6817bdf48a2b3743fcb59ad1261379bac32d2b3d0256e2b43316d9ebec2",
+      "title": "Control the Composition of AI-Generated Images With the NVIDIA AI Blueprint for 3D-Guided Generative AI",
+      "link": "articles/control-the-composition-of-ai-generated-images-with-the-nvidia-ai-blueprint-for-.html",
+      "published_iso": "2025-04-30T13:00:25Z",
+      "summary_short": "NVIDIA's new AI Blueprint offers precise AI image generation control using 3D-guided workflows, simplifying advanced creative adjustments.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/ai-3d-blueprint-nv-blog-1280x680-1.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA AI Blueprint",
+        "3D-guided generative AI",
+        "AI image generation control",
+        "ComfyUI",
+        "RTX GPUs",
+        "TensorRT acceleration",
+        "Blender integration",
+        "FLUX.1-dev model",
+        "AI-generated imagery",
+        "GeForce RTX 4080"
+      ],
+      "audio_url": null,
+      "trend_score": 13.09
     },
     {
       "id": "a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4",
@@ -1334,6 +1428,78 @@
       ],
       "audio_url": null,
       "trend_score": 10.0
+    },
+    {
+      "id": "0e3e561349ec501e36e62ede6c27e43896ce893df9e1a5cd07e4da51b5350855",
+      "title": "How Agentic AI Enables the Next Leap in Cybersecurity",
+      "link": "articles/how-agentic-ai-enables-the-next-leap-in-cybersecurity.html",
+      "published_iso": "2025-04-28T15:00:54Z",
+      "summary_short": "Discover how Agentic AI is transforming cybersecurity, offering autonomous threat detection while introducing new risks. Learn about NVIDIA's role in this evolution.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/agentic-ai-cybersecurity.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Agentic AI",
+        "Cybersecurity",
+        "NVIDIA AI Frameworks",
+        "AI Threat Detection",
+        "AI Security Challenges",
+        "Confidential Computing",
+        "AI Infrastructure Security",
+        "CrowdStrike",
+        "Palo Alto Networks",
+        "Google Cloud"
+      ],
+      "audio_url": null,
+      "trend_score": 11.72
+    },
+    {
+      "id": "1f3c91b8394e2599ef0f846e628b4e2ae7acec4c05cabfa57c676c1d22ad06a7",
+      "title": "NVIDIA Brings Cybersecurity to Every AI Factory",
+      "link": "articles/nvidia-brings-cybersecurity-to-every-ai-factory.html",
+      "published_iso": "2025-04-28T15:00:34Z",
+      "summary_short": "NVIDIA introduces DOCA Argus, an AI cybersecurity framework for real-time threat detection in AI factories, enhancing runtime protection.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/bluefield-corp-blog-cybersecurity-1280x680-1.png",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA cybersecurity",
+        "AI factory security",
+        "DOCA Argus",
+        "BlueField networking",
+        "AI threat detection",
+        "containerized workloads",
+        "real-time memory forensics",
+        "enterprise AI security",
+        "Cisco AI collaboration",
+        "agentless cybersecurity"
+      ],
+      "audio_url": null,
+      "trend_score": 11.72
+    },
+    {
+      "id": "156e4b5157f9ced6fec01432e1737d4ba5ee7ea57a0d2ad2b762d4d98468faba",
+      "title": "Oracle Cloud Infrastructure Deploys Thousands of NVIDIA Blackwell GPUs for Agentic AI and Reasoning Models",
+      "link": "articles/oracle-cloud-infrastructure-deploys-thousands-of-nvidia-blackwell-gpus-for-agent.html",
+      "published_iso": "2025-04-28T13:00:25Z",
+      "summary_short": "Oracle Cloud Infrastructure rolls out thousands of NVIDIA Blackwell GPUs to power next-gen AI agents and reasoning models.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/04/blackwell-corp-blog-oci-blackwell-momentum-1280x680-r1.png",
+      "topic": "Compute",
+      "is_breaking": false,
+      "tags": [
+        "Oracle Cloud Infrastructure",
+        "NVIDIA Blackwell GPUs",
+        "AI factories",
+        "NVIDIA DGX Cloud",
+        "agentic AI",
+        "reasoning models",
+        "OCI Superclusters",
+        "NVIDIA GB200 NVL72",
+        "accelerated computing",
+        "AI inference"
+      ],
+      "audio_url": null,
+      "trend_score": 11.66
     },
     {
       "id": "568120b2d11b44abca19fd0d3ca926b3ef80df14fa1e7eec0ab6e5aef0d09492",
