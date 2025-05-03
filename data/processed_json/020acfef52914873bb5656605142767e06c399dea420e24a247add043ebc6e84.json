@@ -1,0 +1,42 @@
+{
+    "id": "020acfef52914873bb5656605142767e06c399dea420e24a247add043ebc6e84",
+    "title": "xMEMS extends micro cooling fan-on-a-chip tech to AI data centers",
+    "link": "https://venturebeat.com/game-development/xmems-extends-micro-cooling-fan-on-a-chip-tech-to-ai-data-centers/",
+    "published_iso": "2025-04-29T13:00:00Z",
+    "summary": "<img alt=\"\" class=\"attachment-single-feed size-single-feed wp-post-image\" height=\"325\" src=\"https://venturebeat.com/wp-content/uploads/2025/02/AdobeStock_958211993.jpeg?w=578\" width=\"578\" /><hr />xMEMS Labs, a pioneer of MEMS-based chips, announced that its innovative µCooling fan-on-a-chip tech will be expanded to AI data centers.<a href=\"https://venturebeat.com/game-development/xmems-extends-micro-cooling-fan-on-a-chip-tech-to-ai-data-centers/\" target=\"_blank\">Read More</a>",
+    "source_feed": "https://venturebeat.com/category/ai/feed/",
+    "scraped_at_iso": "2025-05-03T20:34:22Z",
+    "selected_image_url": "https://venturebeat.com/wp-content/uploads/2025/02/AdobeStock_958211993.jpeg?w=1024?w=1200&strip=all",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Hardware",
+        "reasoning_summary": "The article reports on xMEMS Labs expanding its µCooling fan-on-a-chip technology to AI data centers, which is a verifiable and novel development in hardware relevant to AI infrastructure.",
+        "primary_topic_keyword": "micro cooling fan"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-03T20:40:54Z",
+    "topic": "Hardware",
+    "is_breaking": false,
+    "primary_keyword": "micro cooling fan",
+    "seo_agent_results": {
+        "generated_title_tag": "xMEMS Brings Micro Cooling Fan Tech to AI Data Centers",
+        "generated_meta_description": "xMEMS Labs expands its micro cooling fan-on-a-chip technology to AI data centers, promising efficient thermal management.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"xMEMS Brings Micro Cooling Fan Tech to AI Data Centers\",  \n  \"description\": \"xMEMS Labs expands its micro cooling fan-on-a-chip technology to AI data centers, promising efficient thermal management.\",  \n  \"keywords\": [\"micro cooling fan\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://venturebeat.com/game-development/xmems-extends-micro-cooling-fan-on-a-chip-tech-to-ai-data-centers/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://venturebeat.com/wp-content/uploads/2025/02/AdobeStock_958211993.jpeg?w=1024?w=1200&strip=all\" },  \n  \"datePublished\": \"2025-04-29T13:00:00Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## xMEMS Extends Micro Cooling Fan-on-a-Chip Tech to AI Data Centers  \nxMEMS Labs, a leader in MEMS-based chip technology, has announced the expansion of its µCooling fan-on-a-chip solution to AI data centers. The innovative micro cooling fan system is designed to enhance thermal management in high-performance computing environments.  \n\n### Why It Matters  \nAs AI workloads intensify, data centers face increasing challenges in heat dissipation and energy efficiency. xMEMS' micro cooling fan technology could offer a compact, scalable solution to reduce power consumption and improve cooling performance. This move aligns with the growing demand for sustainable and high-density cooling systems in next-gen AI infrastructure."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "xMEMS",
+        "Micro Cooling Fan",
+        "AI Data Centers",
+        "Thermal Management",
+        "MEMS Technology",
+        "High-Performance Computing",
+        "Energy Efficiency",
+        "Sustainable Cooling",
+        "Next-Gen AI Infrastructure"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 11.41,
+    "audio_url": null
+}

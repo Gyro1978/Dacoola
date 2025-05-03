@@ -1,0 +1,43 @@
+{
+    "id": "582e34c0d8cd196888749395c9479a298cb80284a6ace8725393c080a85fecdb",
+    "title": "Trump&#8217;s 2026 NASA budget would slash ISS crew and allocate more money for Elon",
+    "link": "https://www.theverge.com/news/660721/trump-2026-nasa-budget-cuts",
+    "published_iso": "2025-05-03T17:24:25Z",
+    "summary": "<figure>\n\n<img alt=\"\" src=\"https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/International-Space-Station.png?quality=90&#038;strip=all&#038;crop=0,0,100,100\" />\n\t<figcaption></figcaption>\n</figure>\n<p class=\"has-text-align-none\">The Trump administration has <a href=\"https://www.nasa.gov/budget\">released a proposal</a> to cut about a quarter of NASA’s 2026 budget, slashing both International Space Station crew sizes and the amount of research done there. At the same time, it sets up new funding that would likely benefit Elon Musk’s SpaceX by prioritizing human missions to Mars, and refocuses on “beating China back to the Moon.”</p>\n\n<p class=\"has-text-align-none\">The suggested cuts are part of President Trump’s budget proposal for next year. It would slash $508 million from the ISS, cutting its crew size and focusing its “reduced research capacity … on efforts critical to the Moon and Mars exploration programs.” It also cuts $2.265 billion from space science missions, and includes terminating things like the Mars Sample Return mission, the objectives of which it says would be achieved by human flights to the red planet. </p>\n\n<p class=\"has-text-align-none\">At the same time, the proposal offers $1 billion in spending on “Mars-focused programs,” with no specifics about where that money would go. As <a href=\"https://www.nytimes.com/2025/05/02/us/politics/trump-budget-nasa-cuts.html\"><em>The New York Times</em> writes</a>, Musk’s SpaceX will “presumably” seek NASA funding to help with an uncrewed Starship flight to Mars that Musk has claimed will launch next year. Another $7 billion would be allocated to lunar exploration but suggests phasing out NASA’s SLS rocket and Orion capsule in favor of future commercial alternatives. It would end the Lunar Gateway program after the Artemis III mission, <a href=\"https://www.nasa.gov/news-release/president-trumps-fy26-budget-revitalizes-human-space-exploration/\">according to NASA</a>.</p>\n\n<p class=\"has-text-align-none\">The plan cuts $1.161 billion from earth sciences, eliminating funding for things like “low-priority climate monitoring satellites.” And it would slash $346 million in spending on “climate-focused ’green aviation’” in favor of air traffic control and defense spending, as well as $143 million in STEM engagement programs.</p>\n\n<p class=\"has-text-align-none\">Russell Vought, director of the US Office of Management and Budget, <a href=\"https://www.whitehouse.gov/wp-content/uploads/2025/05/Fiscal-Year-2026-Discretionary-Budget-Request.pdf\">sent President Trump’s budget proposal</a> to the Senate Committee on Appropriations on Friday, writing that a “full fiscal plan” would follow. <a href=\"https://arstechnica.com/space/2025/05/white-house-budget-seeks-to-end-sls-orion-and-lunar-gateway-programs/\">As <em>Ars Technica</em> notes</a>, Congress will be responsible for actually writing the budget.</p>\n\n<p class=\"has-text-align-none\">Casey Dreier, chief of space policy at space exploration advocate nonprofit Planetary Society, <a href=\"https://www.nytimes.com/2025/05/02/us/politics/trump-budget-nasa-cuts.html\">told <em>The New York Times</em></a> that the proposal is “the largest single-year cut to NASA in American history” and that it signals that “America is done leading the world in space, that we are a nation turning inward.” </p>",
+    "source_feed": "https://www.theverge.com/rss/index.xml",
+    "scraped_at_iso": "2025-05-03T20:49:53Z",
+    "selected_image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/International-Space-Station.png?quality=90&strip=all&crop=0%2C10.723165084465%2C100%2C78.55366983107&w=1200",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Other",
+        "reasoning_summary": "The article reports on a concrete budget proposal by the Trump administration affecting NASA's operations and funding priorities, including cuts to ISS crew and research, and reallocation towards Mars missions and lunar exploration. This is a factual and significant policy shift with potential industry implications.",
+        "primary_topic_keyword": "NASA budget proposal"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-03T20:53:49Z",
+    "topic": "Other",
+    "is_breaking": false,
+    "primary_keyword": "NASA budget proposal",
+    "seo_agent_results": {
+        "generated_title_tag": "Trump’s NASA Budget Proposal Cuts ISS, Boosts Mars Funding",
+        "generated_meta_description": "Trump’s 2026 NASA budget proposal slashes ISS crew and research while prioritizing Mars missions, potentially benefiting SpaceX.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Trump’s NASA Budget Proposal Cuts ISS, Boosts Mars Funding\",  \n  \"description\": \"Trump’s 2026 NASA budget proposal slashes ISS crew and research while prioritizing Mars missions, potentially benefiting SpaceX.\",  \n  \"keywords\": [\"NASA budget proposal\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.theverge.com/news/660721/trump-2026-nasa-budget-cuts\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/International-Space-Station.png?quality=90&strip=all&crop=0%2C10.723165084465%2C100%2C78.55366983107&w=1200\" },  \n  \"datePublished\": \"2025-05-03T17:24:25Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Trump’s 2026 NASA Budget Would Slash ISS Crew and Allocate More Money for Elon  \n\nThe Trump administration has proposed cutting about a quarter of NASA’s 2026 budget, significantly reducing International Space Station (ISS) crew sizes and research capacity while reallocating funds toward Mars exploration and lunar missions. The **NASA budget proposal** includes a $508 million cut to the ISS, along with $2.265 billion slashed from space science missions, including the termination of the Mars Sample Return mission. Meanwhile, $1 billion is earmarked for Mars-focused programs, likely benefiting SpaceX’s Starship ambitions, and $7 billion is allocated for lunar exploration—potentially phasing out NASA’s SLS rocket and Orion capsule.  \n\n### Why It Matters  \n\nThis budget signals a dramatic shift in U.S. space priorities, moving away from Earth-focused research (including climate monitoring) and toward human-led Mars and Moon missions. The cuts could weaken America’s leadership in space science and international collaboration, particularly with the ISS. However, the emphasis on commercial alternatives like SpaceX aligns with growing privatization trends in space exploration. Congress will ultimately decide the final budget, but this proposal sets the stage for a contentious debate over NASA’s future direction."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "NASA budget 2026",
+        "International Space Station cuts",
+        "Mars exploration funding",
+        "SpaceX Starship",
+        "lunar missions",
+        "NASA SLS rocket",
+        "space privatization",
+        "Trump space policy",
+        "Mars Sample Return mission",
+        "NASA budget debate"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.9,
+    "audio_url": null
+}

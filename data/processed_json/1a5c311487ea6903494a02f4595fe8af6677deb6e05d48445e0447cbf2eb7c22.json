@@ -1,0 +1,43 @@
+{
+    "id": "1a5c311487ea6903494a02f4595fe8af6677deb6e05d48445e0447cbf2eb7c22",
+    "title": "Inside the Battle Over OpenAI’s Corporate Restructuring",
+    "link": "https://www.wired.com/story/open-ai-nonprofit-transition-activism/",
+    "published_iso": "2025-05-02T09:00:00Z",
+    "summary": "A group of activists is turning to an old playbook to influence the future of one of the world’s most powerful AI companies.",
+    "source_feed": "https://www.wired.com/feed/tag/ai/latest/rss",
+    "scraped_at_iso": "2025-05-03T20:49:53Z",
+    "selected_image_url": "https://media.wired.com/photos/680fc9cf79a3b59ab5a0a5f9/191:100/w_1280,c_limit/Activists-OpenAI-Fleecing-Taxpayers-Business-2198379531.jpg",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Business",
+        "reasoning_summary": "The summary discusses a significant internal conflict at OpenAI, a major AI company, involving activists influencing its corporate restructuring, which is a verifiable and notable event in the AI industry.",
+        "primary_topic_keyword": "OpenAI corporate restructuring"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-03T20:52:47Z",
+    "topic": "Business",
+    "is_breaking": false,
+    "primary_keyword": "OpenAI corporate restructuring",
+    "seo_agent_results": {
+        "generated_title_tag": "Activists Challenge OpenAI Corporate Restructuring",
+        "generated_meta_description": "Activists are pushing to influence OpenAI corporate restructuring, aiming to reshape the AI giant's future direction.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Activists Challenge OpenAI Corporate Restructuring\",  \n  \"description\": \"Activists are pushing to influence OpenAI corporate restructuring, aiming to reshape the AI giant's future direction.\",  \n  \"keywords\": [\"OpenAI corporate restructuring\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.wired.com/story/open-ai-nonprofit-transition-activism/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://media.wired.com/photos/680fc9cf79a3b59ab5a0a5f9/191:100/w_1280,c_limit/Activists-OpenAI-Fleecing-Taxpayers-Business-2198379531.jpg\" },  \n  \"datePublished\": \"2025-05-02T09:00:00Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Inside the Battle Over OpenAI’s Corporate Restructuring  \nA group of activists is leveraging traditional strategies to sway the future of OpenAI, one of the world’s most influential AI companies. Their efforts focus on the ongoing OpenAI corporate restructuring, aiming to steer the organization toward their preferred governance and operational model.  \n\n### Why It Matters  \nThe involvement of activists in OpenAI’s restructuring highlights growing public scrutiny over how major AI firms operate. Given OpenAI’s pivotal role in AI development, any shifts in its structure could have far-reaching implications for ethical AI governance and industry standards. This push reflects broader concerns about transparency and accountability in tech leadership."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "OpenAI corporate restructuring",
+        "AI governance",
+        "ethical AI",
+        "tech activism",
+        "AI industry standards",
+        "transparency in tech",
+        "accountability in AI",
+        "AI leadership",
+        "public scrutiny of AI",
+        "AI operational models"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 13.93,
+    "audio_url": null
+}
