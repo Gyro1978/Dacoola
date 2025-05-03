@@ -900,6 +900,29 @@
       "trend_score": 12.34
     },
     {
+      "id": "ed0839154131ed5f9fcf2c49190310162f72c6ca07f252462947136c91824214",
+      "title": "Salesforce research lays the foundations for more reliable enterprise AI agents",
+      "link": "articles/salesforce-research-lays-the-foundations-for-more-reliable-enterprise-ai-agents.html",
+      "published_iso": "2025-05-01T12:00:17Z",
+      "summary_short": "Salesforce's new research addresses enterprise AI benchmarks to help businesses overcome challenges in deploying AI agents effectively.",
+      "image_url": "https://www.zdnet.com/a/img/resize/e28f4c8d948ec204ff4c11a7e0a2a122081f5582/2025/04/30/58dd235e-7ca5-46b2-ad12-baf09a7ce101/gettyimages-2205534708.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "Salesforce Research",
+        "Enterprise AI Agents",
+        "AI Reliability Benchmarks",
+        "AI Deployment Risks",
+        "AI Performance Metrics",
+        "AI Adoption Challenges",
+        "Trustworthy AI",
+        "AI-Driven Decision Making",
+        "Enterprise AI Integration"
+      ],
+      "audio_url": null,
+      "trend_score": 12.78
+    },
+    {
       "id": "7adcc049e963656062e2cf6f2fd94e4262c342cbf5fe7fe587b6bc001dbb2bea",
       "title": "Salesforce takes aim at ‘jagged intelligence’ in push for more reliable AI",
       "link": "articles/salesforce-takes-aim-at-jagged-intelligence-in-push-for-more-reliable-ai.html",
@@ -922,6 +945,29 @@
       ],
       "audio_url": null,
       "trend_score": 13.32
+    },
+    {
+      "id": "2eaf758b0ac2515473f7d73e1af14823825e9da1376aa88d5147fa684810b1d1",
+      "title": "RAG can make AI models riskier and less reliable, new research shows",
+      "link": "articles/rag-can-make-ai-models-riskier-and-less-reliable-new-research-shows.html",
+      "published_iso": "2025-05-01T09:00:00Z",
+      "summary_short": "New research reveals RAG AI risks, showing the framework may increase dangerous outputs. Learn why this matters for AI safety.",
+      "image_url": "https://www.zdnet.com/a/img/resize/1f2cf68e1120d59dd66d54062a4b4844ee244af7/2025/04/30/7dd9b7b4-e6bc-4a3e-9aab-722a96a07281/brokenplasticgettyimages-988065734.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Retrieval-Augmented Generation",
+        "AI Model Risks",
+        "AI Reliability",
+        "RAG Framework",
+        "AI Safety",
+        "Content Filtering",
+        "AI Validation Mechanisms",
+        "AI Risk Management",
+        "Bloomberg AI Research"
+      ],
+      "audio_url": null,
+      "trend_score": 12.69
     },
     {
       "id": "037705e09113b0b95778bd12da8f50bf77de3d550c57d812433d012f36185a19",
