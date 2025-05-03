@@ -482,6 +482,30 @@
       "trend_score": 15.0
     },
     {
+      "id": "e57e9a7ac9187c7316319e59a970f5b4ccd37339ae790c336574696a52cc9c11",
+      "title": "Hidden costs in AI deployment: Why Claude models may be 20-30% more expensive than GPT in enterprise settings",
+      "link": "articles/hidden-costs-in-ai-deployment-why-claude-models-may-be-20-30-more-expensive-than.html",
+      "published_iso": "2025-05-01T20:14:04Z",
+      "summary_short": "Claude AI models may cost 20-30% more than GPT in enterprise settings due to tokenization differences, impacting AI deployment costs.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/ChatGPT-Image-May-1-2025-11_45_21-AM.png?w=1024?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "AI deployment costs",
+        "Claude models",
+        "GPT models",
+        "tokenization impact",
+        "enterprise AI pricing",
+        "API pricing models",
+        "AI model comparison",
+        "hidden AI expenses",
+        "tokenizer efficiency",
+        "AI cost optimization"
+      ],
+      "audio_url": null,
+      "trend_score": 13.56
+    },
+    {
       "id": "b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043",
       "title": "Ai2’s new small AI model outperforms similarly-sized models from Google, Meta",
       "link": "articles/ai2s-new-small-ai-model-outperforms-similarly-sized-models-from-google-meta.html",
@@ -662,6 +686,76 @@
       ],
       "audio_url": null,
       "trend_score": 13.81
+    },
+    {
+      "id": "650e36aa56c1b8465a62007bc2dc3aefc4e871a1ded87ab9c7b663d966fe4fc1",
+      "title": "Astronomer’s $93M raise underscores a new reality: Orchestration is king in AI infrastructure",
+      "link": "articles/astronomers-93m-raise-underscores-a-new-reality-orchestration-is-king-in-ai-infr.html",
+      "published_iso": "2025-05-01T13:00:00Z",
+      "summary_short": "Astronomer raises $93M to streamline AI workflows, highlighting the growing importance of orchestration in AI infrastructure funding.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/nuneybits_Vector_art_of_an_astronomer_3d788534-ac39-4092-b6f9-d8f7af309852.webp?w=1024?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "AI Infrastructure",
+        "Data Orchestration",
+        "AI Implementation",
+        "Enterprise AI",
+        "Workflow Management",
+        "AI Deployment",
+        "Series D Funding",
+        "Astronomer",
+        "AI Operationalization",
+        "Tech Industry Trends"
+      ],
+      "audio_url": null,
+      "trend_score": 13.34
+    },
+    {
+      "id": "95d91a4308e0d17bd16e262d51ad230a659532bea090dc4b80e23557c53920d3",
+      "title": "Microsoft launches Phi-4-Reasoning-Plus, a small, powerful, open weights reasoning model!",
+      "link": "articles/microsoft-launches-phi-4-reasoning-plus-a-small-powerful-open-weights-reasoning-.html",
+      "published_iso": "2025-05-01T12:41:29Z",
+      "summary_short": "Microsoft launches Phi-4-Reasoning-Plus, a compact yet powerful open-weight reasoning model, showcasing efficient AI performance.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_minimalist_2D_flat_vector_style_small_robot_looking_u_f27d3fd8-4e61-47b3-9c41-cf963278731b_3_b1cc86.png?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Microsoft Phi-4-Reasoning-Plus",
+        "Open-weight AI models",
+        "AI reasoning performance",
+        "Small AI models",
+        "AI democratization",
+        "Computational efficiency in AI",
+        "AI research tools",
+        "Logical reasoning AI"
+      ],
+      "audio_url": null,
+      "trend_score": 12.34
+    },
+    {
+      "id": "7adcc049e963656062e2cf6f2fd94e4262c342cbf5fe7fe587b6bc001dbb2bea",
+      "title": "Salesforce takes aim at ‘jagged intelligence’ in push for more reliable AI",
+      "link": "articles/salesforce-takes-aim-at-jagged-intelligence-in-push-for-more-reliable-ai.html",
+      "published_iso": "2025-05-01T12:00:00Z",
+      "summary_short": "Salesforce introduces new AI benchmarks and models to enhance enterprise AI reliability, addressing \"jagged intelligence\" challenges.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/Salesforce-handshake.webp?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Salesforce AI",
+        "Jagged Intelligence",
+        "AI Reliability",
+        "Enterprise AI",
+        "AI Benchmarks",
+        "AI Guardrails",
+        "AI Performance",
+        "Business AI",
+        "AI Trust",
+        "AI Integration"
+      ],
+      "audio_url": null,
+      "trend_score": 13.32
     },
     {
       "id": "037705e09113b0b95778bd12da8f50bf77de3d550c57d812433d012f36185a19",
@@ -1151,6 +1245,29 @@
       "trend_score": 12.78
     },
     {
+      "id": "7ca1b73be51f5cbef62bddb4eaae7e44a45af9db71c64b77a5599c3000d95e09",
+      "title": "OpenAI rolls back ChatGPT’s sycophancy and explains what went wrong",
+      "link": "articles/openai-rolls-back-chatgpts-sycophancy-and-explains-what-went-wrong.html",
+      "published_iso": "2025-04-30T15:14:48Z",
+      "summary_short": "OpenAI addresses and rolls back a problematic ChatGPT behavior update, sparking discussions on AI reliability.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/8099E983-7E07-4777-BB3B-D8C1F6604290.png?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "ChatGPT behavior update",
+        "OpenAI sycophancy issue",
+        "AI reliability challenges",
+        "open-source AI alternatives",
+        "enterprise AI control",
+        "AI transparency",
+        "proprietary AI trust",
+        "AI fine-tuning",
+        "ChatGPT updates"
+      ],
+      "audio_url": null,
+      "trend_score": 12.2
+    },
+    {
       "id": "a69519c9558f2a422750ccc1bb021c4d0c4d238ae7692c4e995a687c501b91e4",
       "title": "The end of an AI that shocked the world: OpenAI retires GPT-4",
       "link": "articles/the-end-of-an-ai-that-shocked-the-world-openai-retires-gpt-4.html",
@@ -1223,6 +1340,76 @@
       "trend_score": 13.65
     },
     {
+      "id": "ddadcbb6305f08ff19a92e3f2af8ac57c4d8f9687e89f938b25377af1b056355",
+      "title": "No more window switching: Mastercard’s Agent Pay transforms how enterprises use AI search",
+      "link": "articles/no-more-window-switching-mastercards-agent-pay-transforms-how-enterprises-use-ai.html",
+      "published_iso": "2025-04-29T22:24:52Z",
+      "summary_short": "Mastercard collaborates with AI firms and banks to enable seamless AI payment facilitation, transforming enterprise transactions.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/cute-robot-paying-with-a-card-dalle.png?w=1024?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Mastercard Agent Pay",
+        "AI payment facilitation",
+        "AI-driven workflows",
+        "fintech innovation",
+        "enterprise AI transactions",
+        "AI and banking integration",
+        "automated commerce",
+        "AI financial operations"
+      ],
+      "audio_url": null,
+      "trend_score": 11.2
+    },
+    {
+      "id": "96d26635a64d56338cba3538adc07983f5a1d1e273adb93c81f5ca8cde9dc440",
+      "title": "Meta unleashes Llama API running 18x faster than OpenAI: Cerebras partnership delivers 2,600 tokens per second",
+      "link": "articles/meta-unleashes-llama-api-running-18x-faster-than-openai-cerebras-partnership-del.html",
+      "published_iso": "2025-04-29T20:02:04Z",
+      "summary_short": "Meta's new Llama API, powered by Cerebras, delivers AI inference speeds 18x faster than OpenAI, reaching 2,600 tokens per second.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/nuneybits_Vector_art_of_a_computer_chip_in_the_colors_of_Goolge_71db7087-b8f7-4ae3-ae07-4b36bdee2086.webp?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Meta Llama API",
+        "AI inference speed",
+        "Cerebras partnership",
+        "OpenAI competition",
+        "AI infrastructure",
+        "tokens per second",
+        "AI performance optimization",
+        "GPU alternatives",
+        "AI market trends",
+        "large-scale AI deployment"
+      ],
+      "audio_url": null,
+      "trend_score": 12.12
+    },
+    {
+      "id": "771de2c58074761438ac399b5c1c83c176ac0801fb37407bc4ada03364835dfa",
+      "title": "Meta’s first dedicated AI app is here with Llama 4 — but it’s more consumer than productivity or business oriented",
+      "link": "articles/metas-first-dedicated-ai-app-is-here-with-llama-4-but-its-more-consumer-than-pro.html",
+      "published_iso": "2025-04-29T18:19:30Z",
+      "summary_short": "Meta's new AI app, Llama 4, focuses on consumer use rather than business productivity. Discover the implications of this shift.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/mark_zuckerberg_staring_with_amazement_at_a-2.jpeg?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Meta AI app",
+        "Llama 4",
+        "consumer AI applications",
+        "AI-powered consumer experiences",
+        "AI-driven consumer platforms",
+        "AI integration",
+        "social media AI",
+        "virtual assistants",
+        "AI competition",
+        "tech industry trends"
+      ],
+      "audio_url": null,
+      "trend_score": 12.07
+    },
+    {
       "id": "bc8323ec2023c8ad859cbd92c1d19c769d7d3c0fb30fedf19bdb1acc81a8c5ee",
       "title": "WhatsApp Is Walking a Tightrope Between AI Features and Privacy",
       "link": "articles/whatsapp-is-walking-a-tightrope-between-ai-features-and-privacy.html",
@@ -1244,6 +1431,29 @@
         "WhatsApp security"
       ],
       "trend_score": 10.9
+    },
+    {
+      "id": "020acfef52914873bb5656605142767e06c399dea420e24a247add043ebc6e84",
+      "title": "xMEMS extends micro cooling fan-on-a-chip tech to AI data centers",
+      "link": "articles/xmems-extends-micro-cooling-fan-on-a-chip-tech-to-ai-data-centers.html",
+      "published_iso": "2025-04-29T13:00:00Z",
+      "summary_short": "xMEMS Labs expands its micro cooling fan-on-a-chip technology to AI data centers, promising efficient thermal management.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/02/AdobeStock_958211993.jpeg?w=1024?w=1200&strip=all",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "xMEMS",
+        "Micro Cooling Fan",
+        "AI Data Centers",
+        "Thermal Management",
+        "MEMS Technology",
+        "High-Performance Computing",
+        "Energy Efficiency",
+        "Sustainable Cooling",
+        "Next-Gen AI Infrastructure"
+      ],
+      "audio_url": null,
+      "trend_score": 11.41
     },
     {
       "id": "7be975b3dc7f2abfacf6f9b2dd2d312bc8c57ca6d3996cacd02b3418cdd0870e",

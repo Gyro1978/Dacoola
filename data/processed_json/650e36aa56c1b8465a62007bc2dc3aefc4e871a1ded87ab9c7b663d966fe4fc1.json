@@ -1,0 +1,43 @@
+{
+    "id": "650e36aa56c1b8465a62007bc2dc3aefc4e871a1ded87ab9c7b663d966fe4fc1",
+    "title": "Astronomer’s $93M raise underscores a new reality: Orchestration is king in AI infrastructure",
+    "link": "https://venturebeat.com/ai/astronomer-93m-raise-underscores-a-new-reality-orchestration-is-king-in-ai-infrastructure/",
+    "published_iso": "2025-05-01T13:00:00Z",
+    "summary": "<img alt=\"Credit: VentureBeat made with Midjourney\" class=\"attachment-single-feed size-single-feed wp-post-image\" height=\"324\" src=\"https://venturebeat.com/wp-content/uploads/2025/04/nuneybits_Vector_art_of_an_astronomer_3d788534-ac39-4092-b6f9-d8f7af309852.webp?w=578\" width=\"578\" /><hr />Astronomer secures $93 million in Series D funding to solve the AI implementation gap through data orchestration, helping enterprises streamline complex workflows and operationalize AI initiatives at scale.<a href=\"https://venturebeat.com/ai/astronomer-93m-raise-underscores-a-new-reality-orchestration-is-king-in-ai-infrastructure/\" target=\"_blank\">Read More</a>",
+    "source_feed": "https://venturebeat.com/category/ai/feed/",
+    "scraped_at_iso": "2025-05-03T20:34:22Z",
+    "selected_image_url": "https://venturebeat.com/wp-content/uploads/2025/04/nuneybits_Vector_art_of_an_astronomer_3d788534-ac39-4092-b6f9-d8f7af309852.webp?w=1024?w=1200&strip=all",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Business",
+        "reasoning_summary": "Astronomer's $93M Series D funding is a significant late-stage investment in AI infrastructure, indicating a notable business development in the AI sector.",
+        "primary_topic_keyword": "AI infrastructure funding"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-03T20:37:00Z",
+    "topic": "Business",
+    "is_breaking": false,
+    "primary_keyword": "AI infrastructure funding",
+    "seo_agent_results": {
+        "generated_title_tag": "Astronomer Secures $93M in AI Infrastructure Funding",
+        "generated_meta_description": "Astronomer raises $93M to streamline AI workflows, highlighting the growing importance of orchestration in AI infrastructure funding.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Astronomer Secures $93M in AI Infrastructure Funding\",  \n  \"description\": \"Astronomer raises $93M to streamline AI workflows, highlighting the growing importance of orchestration in AI infrastructure funding.\",  \n  \"keywords\": [\"AI infrastructure funding\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://venturebeat.com/ai/astronomer-93m-raise-underscores-a-new-reality-orchestration-is-king-in-ai-infrastructure/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://venturebeat.com/wp-content/uploads/2025/04/nuneybits_Vector_art_of_an_astronomer_3d788534-ac39-4092-b6f9-d8f7af309852.webp?w=1024?w=1200&strip=all\" },  \n  \"datePublished\": \"2025-05-01T13:00:00Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Astronomer’s $93M Raise Underscores a New Reality: Orchestration Is King in AI Infrastructure  \n\nAstronomer has secured $93 million in Series D funding to address the AI implementation gap through data orchestration. The company aims to help enterprises streamline complex workflows and operationalize AI initiatives at scale, emphasizing the critical role of orchestration in modern AI infrastructure funding.  \n\n### Why It Matters  \n\nThis funding round signals a shift in the AI landscape, where efficient orchestration is becoming as crucial as the models themselves. As enterprises struggle to deploy AI at scale, tools that simplify workflow management and data integration are gaining traction. Astronomer’s success reflects a broader industry trend: the need for infrastructure that bridges the gap between AI development and real-world deployment. With this investment, the company is poised to play a key role in shaping how businesses operationalize AI, making it more accessible and effective."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "AI Infrastructure",
+        "Data Orchestration",
+        "AI Implementation",
+        "Enterprise AI",
+        "Workflow Management",
+        "AI Deployment",
+        "Series D Funding",
+        "Astronomer",
+        "AI Operationalization",
+        "Tech Industry Trends"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 13.34,
+    "audio_url": null
+}

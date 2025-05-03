@@ -1,0 +1,43 @@
+{
+    "id": "771de2c58074761438ac399b5c1c83c176ac0801fb37407bc4ada03364835dfa",
+    "title": "Meta’s first dedicated AI app is here with Llama 4 — but it’s more consumer than productivity or business oriented",
+    "link": "https://venturebeat.com/ai/metas-first-dedicated-ai-app-is-here-with-llama-4-but-its-more-consumer-than-productivity-or-business-oriented/",
+    "published_iso": "2025-04-29T18:19:30Z",
+    "summary": "<img alt=\"Meta AI CEO Mark Zuckerberg wearing a metal armor suit and blue goggles surrounded by emoji in a neon lit room\" class=\"attachment-single-feed size-single-feed wp-post-image\" height=\"325\" src=\"https://venturebeat.com/wp-content/uploads/2025/04/mark_zuckerberg_staring_with_amazement_at_a-2.jpeg?w=578\" width=\"578\" /><hr />This mainstream exposure will likely accelerate a shift in what people expect not just from consumer apps, but from workplaces...<a href=\"https://venturebeat.com/ai/metas-first-dedicated-ai-app-is-here-with-llama-4-but-its-more-consumer-than-productivity-or-business-oriented/\" target=\"_blank\">Read More</a>",
+    "source_feed": "https://venturebeat.com/category/ai/feed/",
+    "scraped_at_iso": "2025-05-03T20:34:22Z",
+    "selected_image_url": "https://venturebeat.com/wp-content/uploads/2025/04/mark_zuckerberg_staring_with_amazement_at_a-2.jpeg?w=1024?w=1200&strip=all",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "AI Models",
+        "reasoning_summary": "Meta's release of a dedicated AI app with Llama 4 represents a new, verifiable development in consumer-facing AI applications, though not groundbreaking enough to be Breaking.",
+        "primary_topic_keyword": "Meta AI app"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-03T20:39:17Z",
+    "topic": "AI Models",
+    "is_breaking": false,
+    "primary_keyword": "Meta AI app",
+    "seo_agent_results": {
+        "generated_title_tag": "Meta AI App Launches Llama 4 for Consumers",
+        "generated_meta_description": "Meta's new AI app, Llama 4, focuses on consumer use rather than business productivity. Discover the implications of this shift.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Meta AI App Launches Llama 4 for Consumers\",  \n  \"description\": \"Meta's new AI app, Llama 4, focuses on consumer use rather than business productivity. Discover the implications of this shift.\",  \n  \"keywords\": [\"Meta AI app\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://venturebeat.com/ai/metas-first-dedicated-ai-app-is-here-with-llama-4-but-its-more-consumer-than-productivity-or-business-oriented/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://venturebeat.com/wp-content/uploads/2025/04/mark_zuckerberg_staring_with_amazement_at_a-2.jpeg?w=1024?w=1200&strip=all\" },  \n  \"datePublished\": \"2025-04-29T18:19:30Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Meta’s first dedicated AI app is here with Llama 4 — but it’s more consumer than productivity or business oriented  \n\nMeta has introduced its first standalone **Meta AI app**, Llama 4, with a clear focus on consumer applications rather than business or productivity tools. The move signals a strategic push into mainstream AI adoption, potentially reshaping user expectations for AI-powered consumer experiences.  \n\n### Why It Matters  \n\nBy prioritizing consumer use over enterprise applications, Meta is positioning itself to directly compete with popular AI-driven consumer platforms like chatbots and virtual assistants. This shift could accelerate AI integration into everyday digital interactions, influencing how people engage with social media, entertainment, and communication tools. However, the lack of a strong business focus may limit immediate adoption in professional settings, leaving room for competitors to dominate the productivity AI space."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Meta AI app",
+        "Llama 4",
+        "consumer AI applications",
+        "AI-powered consumer experiences",
+        "AI-driven consumer platforms",
+        "AI integration",
+        "social media AI",
+        "virtual assistants",
+        "AI competition",
+        "tech industry trends"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 12.07,
+    "audio_url": null
+}
