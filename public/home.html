@@ -20,7 +20,7 @@
     <!-- *** OPEN GRAPH (Facebook, LinkedIn, etc.) *** -->
     <!-- REPLACE og:title, og:description, og:image, og:url, og:site_name with your actual info -->
     <meta property="og:title" content="Dacoola - AI & Tech News, Analysis, and Updates">
-    <meta property="og:description" content="Stay updated with the latest breaking news, analysis, and trends in Artificial Intelligence (AI) and technology from Dacoola.">
+    <meta property="og:description" content="Stay updated with the latest breaking AI & tech news, analysis, and trends in Artificial Intelligence from Dacoola. Discover insights on models, hardware, and more.">
     <meta property="og:image" content="https://i.imgur.com/A5Wdp6f.png"> <!-- Your main site logo or a featured image -->
     <meta property="og:url" content="https://www.yourdacoolasite.com/home.html"> <!-- Use the canonical URL -->
     <meta property="og:type" content="website"> <!-- Homepage is 'website' type -->
@@ -30,7 +30,7 @@
     <!-- REPLACE with your actual info -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dacoola - AI & Tech News, Analysis, and Updates">
-    <meta name="twitter:description" content="Stay updated with the latest breaking news, analysis, and trends in Artificial Intelligence (AI) and technology from Dacoola.">
+    <meta name="twitter:description" content="Stay updated with the latest breaking AI & tech news, analysis, and trends in Artificial Intelligence from Dacoola. Discover insights on models, hardware, and more.">
     <meta name="twitter:image" content="https://i.imgur.com/A5Wdp6f.png"> <!-- Your main site logo or featured image -->
     <!-- Optional: <meta name="twitter:site" content="@YourTwitterHandle"> -->
 
@@ -41,32 +41,33 @@
     <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> <!-- Adjust path relative to public root -->
     <meta name="google-adsense-account" content="ca-pub-8839663991354998">
     <meta name="google-site-verification" content="anumA09X-jkdohnde5NgKF_oSn-KYlNPhGT_QTdeNvA" />
+    <link rel="canonical" href="https://dacoolaa.netlify.app/">
 
     <!-- *** JSON-LD Structured Data for Website *** -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Dacoola", // REPLACE with your site name
-      "url": "https://www.yourdacoolasite.com/", // REPLACE with your site's base URL
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-            "@type": "EntryPoint",
-             "urlTemplate": "https://www.yourdacoolasite.com/search.html?q={search_term_string}" // REPLACE base URL
-        },
-        "query-input": "required name=search_term_string"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Dacoola", // REPLACE with your site name/org name
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://i.imgur.com/A5Wdp6f.png" // REPLACE with your actual logo URL
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Dacoola",
+          "url": "https://dacoolaa.netlify.app/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                 "urlTemplate": "https://dacoolaa.netlify.app/search.html?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Dacoola",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://ibb.co/tpKjc98q" // Assuming this is your intended logo URL from .env
+            }
+          }
         }
-      }
-    }
-    </script>
+        </script>
 
 </head>
 <body>
@@ -75,7 +76,6 @@
         <!-- Navbar loaded by JS -->
     </header>
 
-    <h1>Dacoola - AI & Tech News</h1>
 
     <main class="container home-container">
 
@@ -86,6 +86,10 @@
                 <p class="placeholder">Loading banner news...</p>
             </div>
         </section>
+
+        <center>
+            <h1>Dacoola - AI & Tech News</h1>
+        </center>
 
         <!-- Latest News Section -->
         <section id="latest-news-section" class="home-section">

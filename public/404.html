@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Dacoola</title>
+    <meta name="description" content="The page you were looking for was not found on Dacoola.">
+    <!-- Link your main stylesheet (optional, base styles below might suffice) -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png">
+    <!-- Prevent indexing -->
+    <meta name="robots" content="noindex">
+    <style>
+        /* Basic Reset & Body Styling */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0; /* Ensure no extra padding */
+            background-color: var(--bg-dark, #1a1a1d); /* Dark background */
+            color: var(--text-light, #f0f0f0); /* Ensure light text */
+            font-family: var(--font-primary, sans-serif); /* Ensure consistent font */
+            line-height: 1.6;
+            display: flex; /* Still use flex for easy centering */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure it tries to fill height */
+            padding: 20px; /* Add padding around the body for spacing on mobile */
+            position: relative; /* Needed for snow positioning */
+            overflow-x: hidden; /* Prevent horizontal scroll from snow */
+            /* Allow vertical scroll */
+        }
+
+        /* Error Container Styling - Responsive */
+        .error-container {
+            width: 100%; /* Take available width */
+            max-width: 650px;  /* Maximum width on larger screens */
+            text-align: center;
+            padding: 80px 30px; /* Increased Top/Bottom Padding Further */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(44, 47, 51, 0.85);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 10px;
+            border: 1px solid var(--border-color, #444);
+            position: relative;
+            z-index: 2;
+            min-height: 300px; /* Minimum height, will grow with content */
+        }
+
+        /* Heading styles */
+        .error-container h1 {
+            font-size: clamp(3em, 12vw, 5em); /* Responsive size */
+            color: var(--accent-blue, #00aeff);
+            margin-bottom: 10px;
+            font-weight: 700;
+            line-height: 1;
+        }
+         .error-container h2 {
+            font-size: clamp(1.2em, 5vw, 1.6em); /* Responsive size */
+            color: var(--text-light, #f0f0f0);
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        .error-container p {
+            font-size: clamp(0.9em, 3.5vw, 1.1em); /* Responsive size */
+            margin-bottom: 35px;
+            color: var(--text-muted, #a0a0a0);
+            max-width: 90%;
+        }
+
+        /* Button styles */
+        .error-container a.button-link {
+            display: inline-block;
+            background-color: var(--accent-blue, #00aeff);
+            color: var(--bg-dark, #1a1a1d);
+            padding: 12px 30px; /* Default padding */
+            border-radius: 5px;
+            font-weight: 600;
+             font-size: 1em; /* Default font size */
+            text-decoration: none;
+            border: 1px solid var(--accent-blue, #00aeff);
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            white-space: nowrap;
+        }
+        .error-container a.button-link:hover {
+            background-color: var(--accent-blue-darker, #0090d1);
+            border-color: var(--accent-blue-darker, #0090d1);
+            color: var(--bg-dark, #1a1a1d);
+        }
+
+        /* --- Clean Snow Animation --- */
+        @keyframes snowfall {
+            0% { transform: translateY(-10vh); }
+            100% { transform: translateY(110vh); }
+        }
+        .snow {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none; z-index: 1;
+        }
+        .snow-flake {
+            position: absolute; top: -10vh; background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%; animation: snowfall linear infinite; opacity: 0;
+        }
+        /* Snow styling remains the same */
+        .snow-flake:nth-child(5n) { width: 3px; height: 3px; animation-duration: 10s; animation-delay: -1s; opacity: 0.6; }
+        .snow-flake:nth-child(5n + 1) { width: 4px; height: 4px; animation-duration: 9s; animation-delay: -3s; opacity: 0.7; }
+        .snow-flake:nth-child(5n + 2) { width: 5px; height: 5px; animation-duration: 8s; animation-delay: -5s; opacity: 0.8; }
+        .snow-flake:nth-child(5n + 3) { width: 6px; height: 6px; animation-duration: 7s; animation-delay: -7s; opacity: 0.85; }
+        .snow-flake:nth-child(5n + 4) { width: 7px; height: 7px; animation-duration: 6s; animation-delay: -9s; opacity: 0.9; }
+        /* Horizontal distribution applied by JS */
+
+        /* --- Media Query for smaller screens (Phones) --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px; /* Slightly less padding */
+                align-items: flex-start; /* Align container to top */
+                min-height: unset; /* Allow natural height */
+                height: 100%; /* Allow scrolling */
+            }
+            .error-container {
+                width: 100%; /* Full width */
+                max-width: none; /* Remove max-width */
+                margin-top: 10vh; /* Push down from top */
+                margin-bottom: 10vh;
+                padding: 50px 20px; /* Adjust padding for mobile */
+                height: auto; /* Let height be determined by content */
+                min-height: unset; /* Remove min-height */
+            }
+             .error-container h1 {
+                 font-size: 3em; /* Slightly smaller on mobile */
+             }
+             .error-container h2 {
+                 font-size: 1.2em;
+             }
+             .error-container p {
+                 font-size: 0.95em;
+             }
+            /* --- Button resizing for mobile --- */
+            .error-container a.button-link {
+                 padding: 10px 20px; /* Smaller padding */
+                 font-size: 0.9em; /* Smaller font size */
+             }
+            /* --- End button resizing --- */
+        }
+
+    </style>
+</head>
+<body>
+
+    <header id="navbar-placeholder">
+        <!-- Navbar loaded by JS -->
+    </header>
+
+    <!-- Snow Container - requires JS to add flakes or many manual divs -->
+    <div class="snow" id="snow-container">
+       <!-- Empty container - flakes will be added via JS -->
+       <!-- OR you could manually add many <div class="snow-flake"></div> here -->
+    </div>
+
+
+    <!-- Main Content Wrapper (if needed, otherwise body handles centering) -->
+    <!-- <div class="page-wrapper"> -->
+        <div class="error-container">
+            <h1>404</h1>
+            <h2>Page Not Found</h2>
+            <p>Sorry, we couldn't find the page you were looking for. It might have been moved or deleted.</p>
+            <a href="/" class="button-link">Go to Homepage</a>
+        </div>
+    <!-- </div> -->
+
+
+    <!-- JavaScript to generate snowflakes -->
+    <script>
+        // Simple JS to add snow flakes dynamically
+        function createSnowflakes(containerId, count) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            for (let i = 0; i < count; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'snow-flake';
+                // Randomize initial horizontal position and animation delay slightly more
+                flake.style.left = `${Math.random() * 100}%`;
+                flake.style.animationDelay = `-${Math.random() * 10}s`;
+                // Optionally randomize duration slightly too
+                // flake.style.animationDuration = `${6 + Math.random() * 4}s`;
+                container.appendChild(flake);
+            }
+        }
+        // Add snowflakes on load
+        document.addEventListener('DOMContentLoaded', () => {
+            createSnowflakes('snow-container', 100); // Adjust count as needed for density
+        });
+    </script>
+
+</body>
+</html>
