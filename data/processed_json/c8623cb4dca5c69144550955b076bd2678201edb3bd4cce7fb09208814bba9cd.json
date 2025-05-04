@@ -1,0 +1,43 @@
+{
+    "id": "c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd",
+    "title": "What is bug hunting and why is it changing?",
+    "link": "https://www.bbc.com/news/articles/c99n8r38rdlo",
+    "published_iso": "2025-04-28T23:06:23Z",
+    "summary": "Bug hunters make money by funding flaws in software, but AI is changing the way they work.",
+    "source_feed": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+    "scraped_at_iso": "2025-05-04T04:41:30Z",
+    "selected_image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/7304/live/574114a0-08ae-11f0-88b7-5556e7b55c5e.jpg",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Software",
+        "reasoning_summary": "The summary discusses a verifiable shift in bug hunting practices due to AI, presenting new, factual information relevant to the tech industry.",
+        "primary_topic_keyword": "AI in bug hunting"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-04T04:43:28Z",
+    "topic": "Software",
+    "is_breaking": false,
+    "primary_keyword": "AI in bug hunting",
+    "seo_agent_results": {
+        "generated_title_tag": "How AI in Bug Hunting is Transforming Cybersecurity",
+        "generated_meta_description": "Discover how AI is reshaping bug hunting, changing how security flaws are found and monetized. Learn about AI in bug hunting today.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"How AI in Bug Hunting is Transforming Cybersecurity\",  \n  \"description\": \"Discover how AI is reshaping bug hunting, changing how security flaws are found and monetized. Learn about AI in bug hunting today.\",  \n  \"keywords\": [\"AI in bug hunting\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.bbc.com/news/articles/c99n8r38rdlo\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://ichef.bbci.co.uk/news/1024/branded_news/7304/live/574114a0-08ae-11f0-88b7-5556e7b55c5e.jpg\" },  \n  \"datePublished\": \"2025-04-28T23:06:23Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## What is Bug Hunting and Why is it Changing?  \nBug hunters earn money by identifying and reporting software vulnerabilities, but the rise of AI is transforming their role. AI in bug hunting is automating parts of the process, making it faster and more efficient, while also altering how security researchers operate.  \n\n### Why It Matters  \nThe integration of AI into bug hunting signals a major shift in cybersecurity. While AI can accelerate vulnerability detection, it may also reduce the need for manual testing, impacting traditional bug hunters. This evolution highlights the growing role of automation in security, raising questions about the future balance between human expertise and AI-driven solutions."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Bug Hunting",
+        "AI in Cybersecurity",
+        "Software Vulnerabilities",
+        "Automated Security Testing",
+        "Cybersecurity Trends",
+        "AI and Human Expertise",
+        "Vulnerability Detection",
+        "Bug Bounty Programs",
+        "Future of Bug Hunting"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 13.63,
+    "slug": "what-is-bug-hunting-and-why-is-it-changing",
+    "audio_url": null
+}

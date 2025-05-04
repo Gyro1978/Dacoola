@@ -1876,6 +1876,29 @@
       "audio_url": null
     },
     {
+      "id": "c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd",
+      "title": "What is bug hunting and why is it changing?",
+      "link": "articles/what-is-bug-hunting-and-why-is-it-changing.html",
+      "published_iso": "2025-04-28T23:06:23Z",
+      "summary_short": "Discover how AI is reshaping bug hunting, changing how security flaws are found and monetized. Learn about AI in bug hunting today.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/7304/live/574114a0-08ae-11f0-88b7-5556e7b55c5e.jpg",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Bug Hunting",
+        "AI in Cybersecurity",
+        "Software Vulnerabilities",
+        "Automated Security Testing",
+        "Cybersecurity Trends",
+        "AI and Human Expertise",
+        "Vulnerability Detection",
+        "Bug Bounty Programs",
+        "Future of Bug Hunting"
+      ],
+      "audio_url": null,
+      "trend_score": 13.63
+    },
+    {
       "id": "71281c3e0499efe961268e5b24bd6e4054e35a8471f37dd3781ee3536ac5e35c",
       "title": "Ex-OpenAI CEO and power users sound alarm over AI sycophancy and flattery of users",
       "link": "articles/ex-openai-ceo-and-power-users-sound-alarm-over-ai-sycophancy-and-flattery-of-use.html",

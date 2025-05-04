@@ -843,3 +843,266 @@ Check it out: https://dacoolaa.netlify.app/articles/films-made-with-ai-can-win-o
 2025-05-04 03:40:22 - generate_sitemap - INFO - Sitemap successfully generated with 120 URLs and saved to /home/runner/work/Dacoola/Dacoola/public/sitemap.xml
 2025-05-04 03:40:22 - main_orchestrator - INFO - Sitemap generation completed successfully.
 2025-05-04 03:40:22 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (290.24 seconds) === ---
+2025-05-04 04:41:25 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/
+2025-05-04 04:41:25 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-04 04:41:25 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-04T04:41:25.914326+00:00) === ---
+2025-05-04 04:41:25 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-04 04:41:25 - main_orchestrator - INFO - Found 309 already fully processed articles.
+2025-05-04 04:41:25 - main_orchestrator - INFO - Total initial processed IDs passed to scraper: 981
+2025-05-04 04:41:25 - main_orchestrator - INFO - --- Stage 1: Running News Scraper ---
+2025-05-04 04:41:25 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (17 feeds) ---
+2025-05-04 04:41:25 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-04 04:41:26 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-04 04:41:26 - src.scrapers.news_scraper - INFO - Finished https://techcrunch.com/feed/. Saved 0.
+2025-05-04 04:41:26 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-04 04:41:26 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-04 04:41:26 - src.scrapers.news_scraper - INFO - Finished https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0.
+2025-05-04 04:41:26 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-04 04:41:27 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-04 04:41:27 - src.scrapers.news_scraper - INFO - Finished https://blogs.nvidia.com/feed/. Saved 0.
+2025-05-04 04:41:27 - src.scrapers.news_scraper - INFO - Checking feed: https://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-04 04:41:27 - src.scrapers.news_scraper - INFO - Feed https://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-04 04:41:27 - src.scrapers.news_scraper - INFO - Finished https://feeds.arstechnica.com/arstechnica/technology-lab. Saved 0.
+2025-05-04 04:41:27 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Finished https://venturebeat.com/category/ai/feed/. Saved 0.
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Contains 10 entries.
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Finished https://www.wired.com/feed/tag/ai/latest/rss. Saved 0.
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Checking feed: https://www.theverge.com/rss/index.xml
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Feed https://www.theverge.com/rss/index.xml fetched. Contains 10 entries.
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Finished https://www.theverge.com/rss/index.xml. Saved 0.
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Checking feed: https://www.zdnet.com/topic/artificial-intelligence/rss.xml
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Feed https://www.zdnet.com/topic/artificial-intelligence/rss.xml fetched. Contains 20 entries.
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Finished https://www.zdnet.com/topic/artificial-intelligence/rss.xml. Saved 0.
+2025-05-04 04:41:28 - src.scrapers.news_scraper - INFO - Checking feed: https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - Feed https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - Finished https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/. Saved 0.
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - Checking feed: https://feeds.bbci.co.uk/news/technology/rss.xml
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - Feed https://feeds.bbci.co.uk/news/technology/rss.xml fetched. Contains 48 entries.
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 91d3dadfa76e559432d800b2417aa7dd4e7e03cf5c1f9f338dcc7755005f9fb2.json (T: Long-distance romance and closure from husband's d...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 0bbfeb67a47e0487baf4b82ceda249638feefd95511d8f04497330b0227b653d.json (T: Co-op cyber attack: Staff told to keep cameras on ...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd.json (T: What is bug hunting and why is it changing?...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a688d63be034a6ce3126140052c50b3d3189544309bd6c584a0687b73827fd50.json (T: Finland's bid to win Europe's start-up crown...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 7780ba26f511148c161d8660e18c58181690b2ca2654add944b6bcbc560e72e1.json (T: A revolution is under way in India's trainer indus...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 6402c9dc9022682e17d55f96955aa3c24b2d0b5cffe15ed4eb081459686b7c98.json (T: What's next for social media?...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 16495909a44ce19d80840777ca04ff6109f5c54fc0a9a4ed458b9295524dfa1a.json (T: The slow but steady advance of driverless vehicles...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: bdba109ea9fe616a45363b47ffdd38f32a36a0b91868b7b010b63b19e7b4c9cb.json (T: Disasters spur investment in flood and fire risk t...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - Finished https://feeds.bbci.co.uk/news/technology/rss.xml. Saved 8.
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - Checking feed: https://www.cnet.com/rss/news/
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - Feed https://www.cnet.com/rss/news/ fetched. Contains 25 entries.
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 112104f83b3bbcd6d6c5f9310fba198eae16a39f621d2978d5ac8807722d4b8a.json (T: Today's NYT Connections: Sports Edition Hints and ...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 4fc8b9876a4cc571e61019108bfff3ff52a319398ad885b4f3376e68e903b026.json (T: Today's NYT Mini Crossword Answers for Sunday, May...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: bd70c966ca4c8a797b14a929391a24a6ebd0c43cf6011a281fc2556d9d6d7aa2.json (T: Premier League Soccer: Stream Brentford vs. Man Un...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 5ae18e96f98316792acb1c9adb7e69a45f3010c6e086235c1ccc78c37c94efea.json (T: Premier League Soccer: Stream West Ham vs. Tottenh...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 587e2e8ef48b64eb8dd80faecd4da42f9254e112077deaf653541cd73133135a.json (T: Premier League Soccer: Stream Chelsea vs. Liverpoo...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 71b006ffb00d39eb568d376b9a7689f56e3fc4dc428d311436225e3e21a3958d.json (T: 'Thunderbolts*': Is There a Post-Credits Scene?...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8c18e8f125b8da3230e996e5fbdd0a02e63c8c27b2218961965ebdf9ae082d5c.json (T: Today's NYT Connections Hints, Answers and Help fo...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f8cd566844324a73415084582fb10ab651fd8628d59c0e06585a0e67fc0b347e.json (T: Today's NYT Strands Hints, Answers and Help for Ma...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 9c93fd23228e6d43783fbc98aee9e6b698e2a87343b761ed92724eedc001c9af.json (T: Today's Wordle Hints, Answer and Help for May 4, #...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 5b6483023bb22363f7fe23aa01797df90ecbe7a0942bc55c66f33ff5ab3935c5.json (T: Best WordPress Hosting for Easy Website Creation i...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 44fd4cfd986135c576376718de0c87273a7b8b88b54ca6d2138bab070a03dd21.json (T: 'The Righteous Gemstones' Is Ending: When to Watch...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: eb67cbe11e1d888b54a3612db83c0fac29128f7d0467807c313cc96712b54dfd.json (T: La Liga Soccer Livestream: How to Watch Real Valla...)
+2025-05-04 04:41:30 - src.scrapers.news_scraper - WARNING - Hit max (20) processing https://www.cnet.com/rss/news/.
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - Finished https://www.cnet.com/rss/news/. Saved 12.
+2025-05-04 04:41:30 - src.scrapers.news_scraper - WARNING - Hit max articles (20). Stop scrape.
+2025-05-04 04:41:30 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved: 20 ---
+2025-05-04 04:41:30 - main_orchestrator - INFO - Scraper run completed. Saved 20 new raw files.
+2025-05-04 04:41:30 - main_orchestrator - INFO - --- Stage 2: Running Processing Cycle ---
+2025-05-04 04:41:30 - main_orchestrator - INFO - Loaded 119 articles from all_articles.json.
+2025-05-04 04:41:30 - main_orchestrator - INFO - Loaded 119 articles from all_articles.json for context.
+2025-05-04 04:41:30 - main_orchestrator - INFO - Found 20 scraped articles to process.
+2025-05-04 04:41:30 - main_orchestrator - INFO - Sorted scraped files by modification time (newest first).
+2025-05-04 04:41:30 - main_orchestrator - INFO - --- Processing article file: eb67cbe11e1d888b54a3612db83c0fac29128f7d0467807c313cc96712b54dfd.json ---
+2025-05-04 04:41:30 - main_orchestrator - INFO - Finding image for article ID: eb67cbe11e1d888b54a3612db83c0fac29128f7d0467807c313cc96712b54dfd...
+2025-05-04 04:41:30 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/services-and-software/la-liga-soccer-livestream-how-to-watch-real-valladolid-vs-barcelona-from-anywhere/#ftag=CAD590a51e
+2025-05-04 04:41:31 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/1c6a372ff571b41d1133ff48bf5501c2abf20646/hub/2025/05/03/115c25e6-3087-4239-b170-286932da860a/gettyimages-2212162630.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:41:31 - main_orchestrator - INFO - Found image via source scrape for eb67cbe11e1d888b54a3612db83c0fac29128f7d0467807c313cc96712b54dfd.
+2025-05-04 04:41:31 - main_orchestrator - INFO - Article ID eb67cbe11e1d888b54a3612db83c0fac29128f7d0467807c313cc96712b54dfd passed Title+Image duplicate check.
+2025-05-04 04:41:31 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: eb67cbe11e1d888b54a3612db83c0fac29128f7d0467807c313cc96712b54dfd Title: La Liga Soccer Livestream: How to Watch Real Valladolid vs. ...
+2025-05-04 04:41:37 - src.agents.filter_news_agent - INFO - Filter verdict received for ID eb67cbe11e1d888b54a3612db83c0fac29128f7d0467807c313cc96712b54dfd: level=Boring, topic='Other', keyword='soccer livestream'
+2025-05-04 04:41:37 - main_orchestrator - INFO - Article ID eb67cbe11e1d888b54a3612db83c0fac29128f7d0467807c313cc96712b54dfd classified as 'Boring'. Skipping.
+2025-05-04 04:41:37 - main_orchestrator - INFO - --- Processing article file: 9c93fd23228e6d43783fbc98aee9e6b698e2a87343b761ed92724eedc001c9af.json ---
+2025-05-04 04:41:37 - main_orchestrator - INFO - Finding image for article ID: 9c93fd23228e6d43783fbc98aee9e6b698e2a87343b761ed92724eedc001c9af...
+2025-05-04 04:41:37 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/gaming/todays-wordle-hints-answer-and-help-for-may-4-1415/#ftag=CAD590a51e
+2025-05-04 04:41:37 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/c2b8d1e2686bcca5e387fa0b6c89fa264d27a6c4/hub/2024/05/28/20480816-214e-4fcc-a9b4-b02f0ac71e7c/wordle-word-game-hints-puzzle-8667.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:41:37 - main_orchestrator - INFO - Found image via source scrape for 9c93fd23228e6d43783fbc98aee9e6b698e2a87343b761ed92724eedc001c9af.
+2025-05-04 04:41:37 - main_orchestrator - INFO - Article ID 9c93fd23228e6d43783fbc98aee9e6b698e2a87343b761ed92724eedc001c9af passed Title+Image duplicate check.
+2025-05-04 04:41:37 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 9c93fd23228e6d43783fbc98aee9e6b698e2a87343b761ed92724eedc001c9af Title: Today's Wordle Hints, Answer and Help for May 4, #1415...
+2025-05-04 04:41:46 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 9c93fd23228e6d43783fbc98aee9e6b698e2a87343b761ed92724eedc001c9af: level=Boring, topic='Other', keyword='Wordle game hints'
+2025-05-04 04:41:46 - main_orchestrator - INFO - Article ID 9c93fd23228e6d43783fbc98aee9e6b698e2a87343b761ed92724eedc001c9af classified as 'Boring'. Skipping.
+2025-05-04 04:41:46 - main_orchestrator - INFO - --- Processing article file: f8cd566844324a73415084582fb10ab651fd8628d59c0e06585a0e67fc0b347e.json ---
+2025-05-04 04:41:46 - main_orchestrator - INFO - Finding image for article ID: f8cd566844324a73415084582fb10ab651fd8628d59c0e06585a0e67fc0b347e...
+2025-05-04 04:41:46 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/gaming/todays-nyt-strands-hints-answers-and-help-for-may-4-427/#ftag=CAD590a51e
+2025-05-04 04:41:46 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/38504a76ffbe2999a9c021f1ef73ea3c567fde74/hub/2024/05/15/f6bde1ee-6b73-41f1-87b5-8421e159d837/nyt-new-york-times-strands-2043.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:41:46 - main_orchestrator - INFO - Found image via source scrape for f8cd566844324a73415084582fb10ab651fd8628d59c0e06585a0e67fc0b347e.
+2025-05-04 04:41:46 - main_orchestrator - INFO - Article ID f8cd566844324a73415084582fb10ab651fd8628d59c0e06585a0e67fc0b347e passed Title+Image duplicate check.
+2025-05-04 04:41:46 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f8cd566844324a73415084582fb10ab651fd8628d59c0e06585a0e67fc0b347e Title: Today's NYT Strands Hints, Answers and Help for May 4, #427...
+2025-05-04 04:41:52 - src.agents.filter_news_agent - INFO - Filter verdict received for ID f8cd566844324a73415084582fb10ab651fd8628d59c0e06585a0e67fc0b347e: level=Boring, topic='Other', keyword='NYT Strands puzzle'
+2025-05-04 04:41:52 - main_orchestrator - INFO - Article ID f8cd566844324a73415084582fb10ab651fd8628d59c0e06585a0e67fc0b347e classified as 'Boring'. Skipping.
+2025-05-04 04:41:52 - main_orchestrator - INFO - --- Processing article file: 5b6483023bb22363f7fe23aa01797df90ecbe7a0942bc55c66f33ff5ab3935c5.json ---
+2025-05-04 04:41:52 - main_orchestrator - INFO - Finding image for article ID: 5b6483023bb22363f7fe23aa01797df90ecbe7a0942bc55c66f33ff5ab3935c5...
+2025-05-04 04:41:52 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/services-and-software/best-wordpress-hosting/#ftag=CAD590a51e
+2025-05-04 04:41:52 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/fc9c94ead1e744e67b02170667fcc3fde933e24b/hub/2024/05/31/86bdd916-4b18-4cc1-bf91-7833a5512325/wordpress-hosting.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:41:52 - main_orchestrator - INFO - Found image via source scrape for 5b6483023bb22363f7fe23aa01797df90ecbe7a0942bc55c66f33ff5ab3935c5.
+2025-05-04 04:41:52 - main_orchestrator - INFO - Article ID 5b6483023bb22363f7fe23aa01797df90ecbe7a0942bc55c66f33ff5ab3935c5 passed Title+Image duplicate check.
+2025-05-04 04:41:52 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 5b6483023bb22363f7fe23aa01797df90ecbe7a0942bc55c66f33ff5ab3935c5 Title: Best WordPress Hosting for Easy Website Creation in 2025...
+2025-05-04 04:41:59 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 5b6483023bb22363f7fe23aa01797df90ecbe7a0942bc55c66f33ff5ab3935c5: level=Boring, topic='Other', keyword='WordPress hosting comparison'
+2025-05-04 04:41:59 - main_orchestrator - INFO - Article ID 5b6483023bb22363f7fe23aa01797df90ecbe7a0942bc55c66f33ff5ab3935c5 classified as 'Boring'. Skipping.
+2025-05-04 04:41:59 - main_orchestrator - INFO - --- Processing article file: 44fd4cfd986135c576376718de0c87273a7b8b88b54ca6d2138bab070a03dd21.json ---
+2025-05-04 04:41:59 - main_orchestrator - INFO - Finding image for article ID: 44fd4cfd986135c576376718de0c87273a7b8b88b54ca6d2138bab070a03dd21...
+2025-05-04 04:41:59 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/services-and-software/the-righteous-gemstones-is-ending-when-to-watch-emotional-series-finale/#ftag=CAD590a51e
+2025-05-04 04:41:59 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/62614906f095c983eb37a4563271ed9419017914/hub/2025/05/01/40ae5e56-b573-4f07-a33c-4d6af0148740/righteous-gemstones-season-4-adam-devine-edi-patterson-john-goodman-danny-mcbride.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:41:59 - main_orchestrator - INFO - Found image via source scrape for 44fd4cfd986135c576376718de0c87273a7b8b88b54ca6d2138bab070a03dd21.
+2025-05-04 04:41:59 - main_orchestrator - INFO - Article ID 44fd4cfd986135c576376718de0c87273a7b8b88b54ca6d2138bab070a03dd21 passed Title+Image duplicate check.
+2025-05-04 04:41:59 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 44fd4cfd986135c576376718de0c87273a7b8b88b54ca6d2138bab070a03dd21 Title: 'The Righteous Gemstones' Is Ending: When to Watch the Emoti...
+2025-05-04 04:42:07 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 44fd4cfd986135c576376718de0c87273a7b8b88b54ca6d2138bab070a03dd21: level=Boring, topic='Other', keyword='TV series finale'
+2025-05-04 04:42:07 - main_orchestrator - INFO - Article ID 44fd4cfd986135c576376718de0c87273a7b8b88b54ca6d2138bab070a03dd21 classified as 'Boring'. Skipping.
+2025-05-04 04:42:07 - main_orchestrator - INFO - --- Processing article file: 5ae18e96f98316792acb1c9adb7e69a45f3010c6e086235c1ccc78c37c94efea.json ---
+2025-05-04 04:42:07 - main_orchestrator - INFO - Finding image for article ID: 5ae18e96f98316792acb1c9adb7e69a45f3010c6e086235c1ccc78c37c94efea...
+2025-05-04 04:42:07 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/services-and-software/premier-league-soccer-stream-west-ham-vs-tottenham-live-from-anywhere/#ftag=CAD590a51e
+2025-05-04 04:42:07 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/5eb8efb534d5cffdede314e84edb7b62f4b5de6d/hub/2025/05/02/053e5854-ea6f-40f4-aeff-42df6ce7160e/gettyimages-2212091720.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:42:07 - main_orchestrator - INFO - Found image via source scrape for 5ae18e96f98316792acb1c9adb7e69a45f3010c6e086235c1ccc78c37c94efea.
+2025-05-04 04:42:07 - main_orchestrator - INFO - Article ID 5ae18e96f98316792acb1c9adb7e69a45f3010c6e086235c1ccc78c37c94efea passed Title+Image duplicate check.
+2025-05-04 04:42:07 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 5ae18e96f98316792acb1c9adb7e69a45f3010c6e086235c1ccc78c37c94efea Title: Premier League Soccer: Stream West Ham vs. Tottenham Live Fr...
+2025-05-04 04:42:16 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 5ae18e96f98316792acb1c9adb7e69a45f3010c6e086235c1ccc78c37c94efea: level=Boring, topic='Other', keyword='Premier League soccer'
+2025-05-04 04:42:16 - main_orchestrator - INFO - Article ID 5ae18e96f98316792acb1c9adb7e69a45f3010c6e086235c1ccc78c37c94efea classified as 'Boring'. Skipping.
+2025-05-04 04:42:16 - main_orchestrator - INFO - --- Processing article file: 71b006ffb00d39eb568d376b9a7689f56e3fc4dc428d311436225e3e21a3958d.json ---
+2025-05-04 04:42:16 - main_orchestrator - INFO - Finding image for article ID: 71b006ffb00d39eb568d376b9a7689f56e3fc4dc428d311436225e3e21a3958d...
+2025-05-04 04:42:16 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/services-and-software/thunderbolts-is-there-a-post-credits-scene/#ftag=CAD590a51e
+2025-05-04 04:42:16 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/15ec7bc29904db19d0631fc61a17302a99f0365a/hub/2025/04/29/8d98779f-bcd9-4627-9e05-3e8c0d126d2c/oab-trl3-still-uhd-1-1-6.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:42:16 - main_orchestrator - INFO - Found image via source scrape for 71b006ffb00d39eb568d376b9a7689f56e3fc4dc428d311436225e3e21a3958d.
+2025-05-04 04:42:16 - main_orchestrator - INFO - Article ID 71b006ffb00d39eb568d376b9a7689f56e3fc4dc428d311436225e3e21a3958d passed Title+Image duplicate check.
+2025-05-04 04:42:16 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 71b006ffb00d39eb568d376b9a7689f56e3fc4dc428d311436225e3e21a3958d Title: 'Thunderbolts*': Is There a Post-Credits Scene?...
+2025-05-04 04:42:23 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 71b006ffb00d39eb568d376b9a7689f56e3fc4dc428d311436225e3e21a3958d: level=Boring, topic='Other', keyword='Marvel movie'
+2025-05-04 04:42:23 - main_orchestrator - INFO - Article ID 71b006ffb00d39eb568d376b9a7689f56e3fc4dc428d311436225e3e21a3958d classified as 'Boring'. Skipping.
+2025-05-04 04:42:23 - main_orchestrator - INFO - --- Processing article file: 8c18e8f125b8da3230e996e5fbdd0a02e63c8c27b2218961965ebdf9ae082d5c.json ---
+2025-05-04 04:42:23 - main_orchestrator - INFO - Finding image for article ID: 8c18e8f125b8da3230e996e5fbdd0a02e63c8c27b2218961965ebdf9ae082d5c...
+2025-05-04 04:42:23 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/gaming/todays-nyt-connections-hints-answers-and-help-for-may-4-693/#ftag=CAD590a51e
+2025-05-04 04:42:23 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/4479965e66e87adf111a6c2bc6765477e0b99c5e/hub/2024/04/30/cdc97512-da91-4895-8db4-90fa31dd8d25/word-games-connections-ny-times-9453.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:42:23 - main_orchestrator - INFO - Found image via source scrape for 8c18e8f125b8da3230e996e5fbdd0a02e63c8c27b2218961965ebdf9ae082d5c.
+2025-05-04 04:42:23 - main_orchestrator - INFO - Article ID 8c18e8f125b8da3230e996e5fbdd0a02e63c8c27b2218961965ebdf9ae082d5c passed Title+Image duplicate check.
+2025-05-04 04:42:23 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 8c18e8f125b8da3230e996e5fbdd0a02e63c8c27b2218961965ebdf9ae082d5c Title: Today's NYT Connections Hints, Answers and Help for May 4, #...
+2025-05-04 04:42:30 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 8c18e8f125b8da3230e996e5fbdd0a02e63c8c27b2218961965ebdf9ae082d5c: level=Boring, topic='Other', keyword='Game hints'
+2025-05-04 04:42:30 - main_orchestrator - INFO - Article ID 8c18e8f125b8da3230e996e5fbdd0a02e63c8c27b2218961965ebdf9ae082d5c classified as 'Boring'. Skipping.
+2025-05-04 04:42:30 - main_orchestrator - INFO - --- Processing article file: 587e2e8ef48b64eb8dd80faecd4da42f9254e112077deaf653541cd73133135a.json ---
+2025-05-04 04:42:30 - main_orchestrator - INFO - Finding image for article ID: 587e2e8ef48b64eb8dd80faecd4da42f9254e112077deaf653541cd73133135a...
+2025-05-04 04:42:30 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/services-and-software/premier-league-soccer-stream-chelsea-vs-liverpool-live-from-anywhere/#ftag=CAD590a51e
+2025-05-04 04:42:30 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/7cd5e6967fdbbb4e520eb1237f72646699d71961/hub/2025/05/02/fbb0f252-7c26-4d25-a02b-c6687009b368/gettyimages-2210836790.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:42:30 - main_orchestrator - INFO - Found image via source scrape for 587e2e8ef48b64eb8dd80faecd4da42f9254e112077deaf653541cd73133135a.
+2025-05-04 04:42:30 - main_orchestrator - INFO - Article ID 587e2e8ef48b64eb8dd80faecd4da42f9254e112077deaf653541cd73133135a passed Title+Image duplicate check.
+2025-05-04 04:42:30 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 587e2e8ef48b64eb8dd80faecd4da42f9254e112077deaf653541cd73133135a Title: Premier League Soccer: Stream Chelsea vs. Liverpool Live Fro...
+2025-05-04 04:42:37 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 587e2e8ef48b64eb8dd80faecd4da42f9254e112077deaf653541cd73133135a: level=Boring, topic='Other', keyword='Premier League Soccer'
+2025-05-04 04:42:37 - main_orchestrator - INFO - Article ID 587e2e8ef48b64eb8dd80faecd4da42f9254e112077deaf653541cd73133135a classified as 'Boring'. Skipping.
+2025-05-04 04:42:37 - main_orchestrator - INFO - --- Processing article file: bd70c966ca4c8a797b14a929391a24a6ebd0c43cf6011a281fc2556d9d6d7aa2.json ---
+2025-05-04 04:42:37 - main_orchestrator - INFO - Finding image for article ID: bd70c966ca4c8a797b14a929391a24a6ebd0c43cf6011a281fc2556d9d6d7aa2...
+2025-05-04 04:42:37 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/services-and-software/premier-league-soccer-stream-brentford-vs-man-united-live-from-anywhere/#ftag=CAD590a51e
+2025-05-04 04:42:37 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/0a3fa773ae4a0f28d0580e303248c43d2e0e39bf/hub/2025/05/02/e8f6a50e-9928-4e74-99d9-702ca99b0f57/gettyimages-2212946496.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:42:37 - main_orchestrator - INFO - Found image via source scrape for bd70c966ca4c8a797b14a929391a24a6ebd0c43cf6011a281fc2556d9d6d7aa2.
+2025-05-04 04:42:37 - main_orchestrator - INFO - Article ID bd70c966ca4c8a797b14a929391a24a6ebd0c43cf6011a281fc2556d9d6d7aa2 passed Title+Image duplicate check.
+2025-05-04 04:42:37 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: bd70c966ca4c8a797b14a929391a24a6ebd0c43cf6011a281fc2556d9d6d7aa2 Title: Premier League Soccer: Stream Brentford vs. Man United Live ...
+2025-05-04 04:42:43 - src.agents.filter_news_agent - INFO - Filter verdict received for ID bd70c966ca4c8a797b14a929391a24a6ebd0c43cf6011a281fc2556d9d6d7aa2: level=Boring, topic='Other', keyword='Premier League Soccer'
+2025-05-04 04:42:43 - main_orchestrator - INFO - Article ID bd70c966ca4c8a797b14a929391a24a6ebd0c43cf6011a281fc2556d9d6d7aa2 classified as 'Boring'. Skipping.
+2025-05-04 04:42:43 - main_orchestrator - INFO - --- Processing article file: 112104f83b3bbcd6d6c5f9310fba198eae16a39f621d2978d5ac8807722d4b8a.json ---
+2025-05-04 04:42:43 - main_orchestrator - INFO - Finding image for article ID: 112104f83b3bbcd6d6c5f9310fba198eae16a39f621d2978d5ac8807722d4b8a...
+2025-05-04 04:42:43 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/gaming/todays-nyt-connections-sports-edition-hints-and-answers-for-may-4-223/#ftag=CAD590a51e
+2025-05-04 04:42:43 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/a51721727ac6b71b8d078d611ca37505b9006739/hub/2024/10/16/ae3b5078-3ced-47c9-91dd-6b5b1b1a5809/connections-sports-edition-6832.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:42:43 - main_orchestrator - INFO - Found image via source scrape for 112104f83b3bbcd6d6c5f9310fba198eae16a39f621d2978d5ac8807722d4b8a.
+2025-05-04 04:42:43 - main_orchestrator - INFO - Article ID 112104f83b3bbcd6d6c5f9310fba198eae16a39f621d2978d5ac8807722d4b8a passed Title+Image duplicate check.
+2025-05-04 04:42:43 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 112104f83b3bbcd6d6c5f9310fba198eae16a39f621d2978d5ac8807722d4b8a Title: Today's NYT Connections: Sports Edition Hints and Answers fo...
+2025-05-04 04:42:52 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 112104f83b3bbcd6d6c5f9310fba198eae16a39f621d2978d5ac8807722d4b8a: level=Boring, topic='Other', keyword='NYT Connections puzzle'
+2025-05-04 04:42:52 - main_orchestrator - INFO - Article ID 112104f83b3bbcd6d6c5f9310fba198eae16a39f621d2978d5ac8807722d4b8a classified as 'Boring'. Skipping.
+2025-05-04 04:42:52 - main_orchestrator - INFO - --- Processing article file: 4fc8b9876a4cc571e61019108bfff3ff52a319398ad885b4f3376e68e903b026.json ---
+2025-05-04 04:42:52 - main_orchestrator - INFO - Finding image for article ID: 4fc8b9876a4cc571e61019108bfff3ff52a319398ad885b4f3376e68e903b026...
+2025-05-04 04:42:52 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/gaming/todays-nyt-mini-crossword-answers-for-sunday-may-4/#ftag=CAD590a51e
+2025-05-04 04:42:52 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/5a44b4083f306f5c685f3e792be0473edc33c848/hub/2024/07/19/a459b55d-d069-4efa-bab4-4a28dfe8cc45/nyt-mini-crossword.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:42:52 - main_orchestrator - INFO - Found image via source scrape for 4fc8b9876a4cc571e61019108bfff3ff52a319398ad885b4f3376e68e903b026.
+2025-05-04 04:42:52 - main_orchestrator - INFO - Article ID 4fc8b9876a4cc571e61019108bfff3ff52a319398ad885b4f3376e68e903b026 passed Title+Image duplicate check.
+2025-05-04 04:42:52 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 4fc8b9876a4cc571e61019108bfff3ff52a319398ad885b4f3376e68e903b026 Title: Today's NYT Mini Crossword Answers for Sunday, May 4...
+2025-05-04 04:42:58 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 4fc8b9876a4cc571e61019108bfff3ff52a319398ad885b4f3376e68e903b026: level=Boring, topic='Other', keyword='Crossword puzzle answers'
+2025-05-04 04:42:58 - main_orchestrator - INFO - Article ID 4fc8b9876a4cc571e61019108bfff3ff52a319398ad885b4f3376e68e903b026 classified as 'Boring'. Skipping.
+2025-05-04 04:42:58 - main_orchestrator - INFO - --- Processing article file: bdba109ea9fe616a45363b47ffdd38f32a36a0b91868b7b010b63b19e7b4c9cb.json ---
+2025-05-04 04:42:58 - main_orchestrator - INFO - Article ID bdba109ea9fe616a45363b47ffdd38f32a36a0b91868b7b010b63b19e7b4c9cb is older than 30 days (2025-03-18). Skipping.
+2025-05-04 04:42:58 - main_orchestrator - INFO - --- Processing article file: 16495909a44ce19d80840777ca04ff6109f5c54fc0a9a4ed458b9295524dfa1a.json ---
+2025-05-04 04:42:58 - main_orchestrator - INFO - Article ID 16495909a44ce19d80840777ca04ff6109f5c54fc0a9a4ed458b9295524dfa1a is older than 30 days (2025-03-21). Skipping.
+2025-05-04 04:42:58 - main_orchestrator - INFO - --- Processing article file: 6402c9dc9022682e17d55f96955aa3c24b2d0b5cffe15ed4eb081459686b7c98.json ---
+2025-05-04 04:42:58 - main_orchestrator - INFO - Article ID 6402c9dc9022682e17d55f96955aa3c24b2d0b5cffe15ed4eb081459686b7c98 is older than 30 days (2025-03-28). Skipping.
+2025-05-04 04:42:58 - main_orchestrator - INFO - --- Processing article file: a688d63be034a6ce3126140052c50b3d3189544309bd6c584a0687b73827fd50.json ---
+2025-05-04 04:42:58 - main_orchestrator - INFO - Finding image for article ID: a688d63be034a6ce3126140052c50b3d3189544309bd6c584a0687b73827fd50...
+2025-05-04 04:42:58 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cx28y8jj4lxo
+2025-05-04 04:42:59 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/6686/live/95a1d9d0-106c-11f0-b234-07dc7691c360.jpg
+2025-05-04 04:42:59 - main_orchestrator - INFO - Found image via source scrape for a688d63be034a6ce3126140052c50b3d3189544309bd6c584a0687b73827fd50.
+2025-05-04 04:42:59 - main_orchestrator - INFO - Article ID a688d63be034a6ce3126140052c50b3d3189544309bd6c584a0687b73827fd50 passed Title+Image duplicate check.
+2025-05-04 04:42:59 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a688d63be034a6ce3126140052c50b3d3189544309bd6c584a0687b73827fd50 Title: Finland's bid to win Europe's start-up crown...
+2025-05-04 04:43:08 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a688d63be034a6ce3126140052c50b3d3189544309bd6c584a0687b73827fd50: level=Boring, topic='Startups', keyword='European start-up hub'
+2025-05-04 04:43:08 - main_orchestrator - INFO - Article ID a688d63be034a6ce3126140052c50b3d3189544309bd6c584a0687b73827fd50 classified as 'Boring'. Skipping.
+2025-05-04 04:43:08 - main_orchestrator - INFO - --- Processing article file: 7780ba26f511148c161d8660e18c58181690b2ca2654add944b6bcbc560e72e1.json ---
+2025-05-04 04:43:08 - main_orchestrator - INFO - Finding image for article ID: 7780ba26f511148c161d8660e18c58181690b2ca2654add944b6bcbc560e72e1...
+2025-05-04 04:43:08 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cm2nplgm2kpo
+2025-05-04 04:43:08 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/3100/live/90b206a0-04c5-11f0-8acd-09ec89d7a0aa.jpg
+2025-05-04 04:43:08 - main_orchestrator - INFO - Found image via source scrape for 7780ba26f511148c161d8660e18c58181690b2ca2654add944b6bcbc560e72e1.
+2025-05-04 04:43:08 - main_orchestrator - INFO - Article ID 7780ba26f511148c161d8660e18c58181690b2ca2654add944b6bcbc560e72e1 passed Title+Image duplicate check.
+2025-05-04 04:43:08 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 7780ba26f511148c161d8660e18c58181690b2ca2654add944b6bcbc560e72e1 Title: A revolution is under way in India's trainer industry...
+2025-05-04 04:43:15 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 7780ba26f511148c161d8660e18c58181690b2ca2654add944b6bcbc560e72e1: level=Boring, topic='Other', keyword='India trainer industry'
+2025-05-04 04:43:15 - main_orchestrator - INFO - Article ID 7780ba26f511148c161d8660e18c58181690b2ca2654add944b6bcbc560e72e1 classified as 'Boring'. Skipping.
+2025-05-04 04:43:15 - main_orchestrator - INFO - --- Processing article file: 0bbfeb67a47e0487baf4b82ceda249638feefd95511d8f04497330b0227b653d.json ---
+2025-05-04 04:43:15 - main_orchestrator - INFO - Finding image for article ID: 0bbfeb67a47e0487baf4b82ceda249638feefd95511d8f04497330b0227b653d...
+2025-05-04 04:43:15 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cg72k851dd8o
+2025-05-04 04:43:15 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/1d56/live/6abfd650-267d-11f0-b26b-ab62c890638b.jpg
+2025-05-04 04:43:15 - main_orchestrator - INFO - Found image via source scrape for 0bbfeb67a47e0487baf4b82ceda249638feefd95511d8f04497330b0227b653d.
+2025-05-04 04:43:15 - main_orchestrator - INFO - Article ID 0bbfeb67a47e0487baf4b82ceda249638feefd95511d8f04497330b0227b653d passed Title+Image duplicate check.
+2025-05-04 04:43:15 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 0bbfeb67a47e0487baf4b82ceda249638feefd95511d8f04497330b0227b653d Title: Co-op cyber attack: Staff told to keep cameras on in meeting...
+2025-05-04 04:43:22 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 0bbfeb67a47e0487baf4b82ceda249638feefd95511d8f04497330b0227b653d: level=Boring, topic='Other', keyword='cyber security measure'
+2025-05-04 04:43:22 - main_orchestrator - INFO - Article ID 0bbfeb67a47e0487baf4b82ceda249638feefd95511d8f04497330b0227b653d classified as 'Boring'. Skipping.
+2025-05-04 04:43:22 - main_orchestrator - INFO - --- Processing article file: c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd.json ---
+2025-05-04 04:43:22 - main_orchestrator - INFO - Finding image for article ID: c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd...
+2025-05-04 04:43:22 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/c99n8r38rdlo
+2025-05-04 04:43:22 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/7304/live/574114a0-08ae-11f0-88b7-5556e7b55c5e.jpg
+2025-05-04 04:43:22 - main_orchestrator - INFO - Found image via source scrape for c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd.
+2025-05-04 04:43:22 - main_orchestrator - INFO - Article ID c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd passed Title+Image duplicate check.
+2025-05-04 04:43:22 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd Title: What is bug hunting and why is it changing?...
+2025-05-04 04:43:28 - src.agents.filter_news_agent - INFO - Filter verdict received for ID c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd: level=Interesting, topic='Software', keyword='AI in bug hunting'
+2025-05-04 04:43:28 - main_orchestrator - INFO - Article ID c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd classified Interesting (Topic: Software).
+2025-05-04 04:43:28 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd (with 'Why It Matters')...
+2025-05-04 04:43:52 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd.
+2025-05-04 04:43:52 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd...
+2025-05-04 04:43:57 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd
+2025-05-04 04:43:57 - main_orchestrator - INFO - Rendered HTML page to: what-is-bug-hunting-and-why-is-it-changing.html
+2025-05-04 04:43:57 - main_orchestrator - INFO - Loaded 119 articles from all_articles.json.
+2025-05-04 04:43:57 - main_orchestrator - INFO - Updated all_articles.json (now contains 120 articles).
+2025-05-04 04:43:57 - main_orchestrator - INFO - Checking Twitter daily limit for article ID: c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd...
+2025-05-04 04:43:57 - main_orchestrator - INFO - Tweet tracker file /home/runner/work/Dacoola/Dacoola/data/twitter_daily_limit.json not found. Start fresh.
+2025-05-04 04:43:57 - main_orchestrator - INFO - New day (2025-05-04). Resetting Twitter count.
+2025-05-04 04:43:57 - main_orchestrator - INFO - Updated tweet tracker: Date=2025-05-04, Count=0
+2025-05-04 04:43:57 - main_orchestrator - INFO - Twitter limit check passed (0/3). Preparing tweet for c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd...
+2025-05-04 04:43:57 - src.social.twitter_poster - INFO - Attempting to post tweet for: What is bug hunting and why is it changing?
+2025-05-04 04:43:57 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-04 04:43:57 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-04 04:43:58 - src.social.twitter_poster - INFO - Image uploaded to Twitter. Media ID: 1918889312772595712
+2025-05-04 04:43:58 - src.social.twitter_poster - INFO - Posting tweet text (length 144): What is bug hunting and why is it changing?
+
+Check it out: https://dacoolaa.netlify.app/articles/what-is-bug-hunting-and-why-is-it-changing.html
+2025-05-04 04:43:58 - src.social.twitter_poster - INFO - Successfully posted tweet! Tweet ID: 1918889314446082209
+2025-05-04 04:43:58 - main_orchestrator - INFO - Tweet successful for c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd. Incrementing count.
+2025-05-04 04:43:58 - main_orchestrator - INFO - Updated tweet tracker: Date=2025-05-04, Count=1
+2025-05-04 04:43:58 - main_orchestrator - INFO - Saved final processed data to: c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd.json
+2025-05-04 04:43:58 - main_orchestrator - INFO - --- Successfully processed article: c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd ---
+2025-05-04 04:43:58 - main_orchestrator - INFO - --- Processing article file: 91d3dadfa76e559432d800b2417aa7dd4e7e03cf5c1f9f338dcc7755005f9fb2.json ---
+2025-05-04 04:43:58 - main_orchestrator - INFO - Finding image for article ID: 91d3dadfa76e559432d800b2417aa7dd4e7e03cf5c1f9f338dcc7755005f9fb2...
+2025-05-04 04:43:58 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cp913ze3k9jo
+2025-05-04 04:43:58 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/379d/live/b02631c0-283b-11f0-b5a0-212f3662e1cf.jpg
+2025-05-04 04:43:58 - main_orchestrator - INFO - Found image via source scrape for 91d3dadfa76e559432d800b2417aa7dd4e7e03cf5c1f9f338dcc7755005f9fb2.
+2025-05-04 04:43:58 - main_orchestrator - INFO - Article ID 91d3dadfa76e559432d800b2417aa7dd4e7e03cf5c1f9f338dcc7755005f9fb2 passed Title+Image duplicate check.
+2025-05-04 04:43:58 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 91d3dadfa76e559432d800b2417aa7dd4e7e03cf5c1f9f338dcc7755005f9fb2 Title: Long-distance romance and closure from husband's death - you...
+2025-05-04 04:44:06 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 91d3dadfa76e559432d800b2417aa7dd4e7e03cf5c1f9f338dcc7755005f9fb2: level=Boring, topic='Other', keyword='Skype shutdown memories'
+2025-05-04 04:44:06 - main_orchestrator - INFO - Article ID 91d3dadfa76e559432d800b2417aa7dd4e7e03cf5c1f9f338dcc7755005f9fb2 classified as 'Boring'. Skipping.
+2025-05-04 04:44:06 - main_orchestrator - INFO - Processing cycle complete. Success: 1, Failed/Skipped/Duplicate: 19
+2025-05-04 04:44:06 - main_orchestrator - INFO - --- Stage 2.5: Sending Batched Make.com Webhook (1 articles) ---
+2025-05-04 04:44:07 - main_orchestrator - INFO - Successfully sent data to Make webhook for batch of 1 articles
+2025-05-04 04:44:07 - main_orchestrator - INFO - Batched Make.com webhook sent successfully.
+2025-05-04 04:44:07 - main_orchestrator - INFO - --- Stage 3: Generating Sitemap ---
+2025-05-04 04:44:07 - generate_sitemap - INFO - Starting sitemap generation...
+2025-05-04 04:44:07 - generate_sitemap - INFO - Loaded 120 articles.
+2025-05-04 04:44:07 - generate_sitemap - INFO - Sitemap successfully generated with 121 URLs and saved to /home/runner/work/Dacoola/Dacoola/public/sitemap.xml
+2025-05-04 04:44:07 - main_orchestrator - INFO - Sitemap generation completed successfully.
+2025-05-04 04:44:07 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (161.15 seconds) === ---
