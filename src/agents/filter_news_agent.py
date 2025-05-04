@@ -4,6 +4,7 @@ import sys # Added sys for path check below
 import requests
 import json
 import logging
+import re # Added for simple text matching
 from dotenv import load_dotenv
 from datetime import datetime, timezone
 
@@ -38,12 +39,76 @@ TEMPERATURE = 0.1 # Low temperature for more deterministic filtering/classificat
 
 # List of allowed topics for classification
 ALLOWED_TOPICS = [
-    "AI Models", "Hardware", "Software", "Ethics", "Society", "Business",
-    "Startups", "Regulation", "Robotics", "Research", "Open Source",
-    "Health", "Finance", "Art & Media", "Compute", "Other" # Fallback topic
+    # Core AI/Tech
+    "AI Models", "Hardware", "Software", "Robotics", "Compute",
+    "Research", "Open Source",
+    # Impact / Application
+    "Business", "Startups", "Finance", "Health", "Society",
+    "Ethics", "Regulation", "Art & Media", "Environment",
+    "Education", "Security", "Gaming", "Transportation",
+    # Broader Tech (Optional, keep focus)
+    # "Cloud Computing", "Quantum Computing", "Space Tech",
+    "Other" # Fallback topic
 ]
 
+# --- Keywords for Importance Override ---
+# Keywords should be lowercase for case-insensitive matching
+IMPORTANT_PEOPLE = [
+    # CEOs / Founders / Execs
+    "elon musk", "jeff bezos", "tim cook", "sam altman", "satya nadella",
+    "sundar pichai", "mark zuckerberg", "jensen huang", "dario amodei",
+    "demis hassabis", "larry page", "sergey brin", "bill gates",
+    "steve jobs", # Historical but still relevant contextually
+    "masayoshi son", "lisa su", "pat gelsinger", "andy jassy",
+    "mustafa suleyman", "reid hoffman", "peter thiel", "marc andreessen",
+    "vinod khosla",
+    # Researchers / Academics
+    "yann lecun", "geoffrey hinton", "andrew ng", "fei-fei li", "yoshua bengio",
+    "ilya sutskever", "jurgen schmidhuber", "oriol vinyals", "andrej karpathy",
+    # Regulators / Politicians (if relevant to your scope)
+    "donald trump", "joe biden", "margrethe vestager", "lina khan", "gina raimondo",
+    "xi jinping"
+]
+IMPORTANT_COMPANIES_PRODUCTS = [
+    # Major AI Labs / Companies
+    "openai", "chatgpt", "gpt-3", "gpt-4", "gpt-5", "gpt-4o", "dall-e", "sora", # OpenAI
+    "google", "alphabet", "deepmind", "gemini", "google ai", "google cloud", "waymo", "bard", "tensorflow", "keras", # Google
+    "meta", "facebook", "instagram", "whatsapp", "llama", "llama 2", "llama 3", "meta ai", "pytorch", # Meta
+    "microsoft", "azure", "copilot", "bing", # Microsoft
+    "apple", "siri", "vision pro", "core ml", # Apple
+    "amazon", "aws", "alexa", "bedrock", "sagemaker", # Amazon
+    "anthropic", "claude", "claude 2", "claude 3", # Anthropic
+    "mistral ai", # Mistral
+    "stability ai", "stable diffusion", "sdxl", # Stability AI
+    "cohere", # Cohere
+    "ai21 labs", # AI21
+    "inflection ai", # Inflection
+    "cerebras", # Cerebras
+    # Hardware / Semiconductors
+    "nvidia", "h100", "a100", "b100", "b200", "blackwell", "grace hopper", "cuda", "tensorrt", # Nvidia
+    "intel", "gaudi", "xeon", # Intel
+    "amd", "instinct", "ryzen", "epyc", # AMD
+    "arm", "qualcomm", "tsmc", "samsung electronics", "asml",
+    # Musk Companies
+    "tesla", "spacex", "starlink", "neuralink", "xai", "grok", "x corp", "twitter", # Note: Twitter might overlap with general news
+    # Cloud / Infrastructure
+    "oracle cloud", "ibm cloud", "cloudflare",
+    # Other Key Tech / Startups / VC
+    "softbank", "a16z", "sequoia capital", "y combinator", "yc",
+    "hugging face", "databricks", "snowflake",
+    "palantir",
+    # Relevant Acronyms / Concepts (Use carefully, might be too broad)
+    "agi", "asi", "sota", "llm", "vlm", "transformer", # Maybe too generic?
+    # Government / Regulation Bodies (Use if tracking policy)
+    "sec", "ftc", "doj", "european union", "eu commission", "nist"
+]
+# Combine lists for easier checking
+IMPORTANT_ENTITIES = IMPORTANT_PEOPLE + IMPORTANT_COMPANIES_PRODUCTS
+# --- End Keywords ---
+
+
 # --- Agent Prompts ---
+# Prompts remain the same - the override happens *after* the LLM call
 FILTER_PROMPT_SYSTEM = """
 You are an **Expert News Analyst and Content Curator AI**, powered by DeepSeek. Your core competency is to **critically evaluate** news article summaries/headlines to discern importance, **factual basis**, and direct relevance for an audience interested in **substantive AI, Technology, and major related industry/world news**. Your primary function is to **aggressively filter out** non-essential content (routine updates, marketing, basic financial reports, opinion, speculation, satire). You MUST identify only truly **Breaking** or genuinely **Interesting** developments based on verifiable events, data, or significant announcements presented in the summary. Mundane, routine, low-impact, non-factual, purely speculative, or clearly off-topic updates **must** be classified as **Boring**. You operate based on strict criteria focusing on novelty, significance, impact, verifiable claims, and major players/events. Classify news into **exactly one** level: "Breaking", "Interesting", or "Boring". Select the **single most relevant topic** from the provided list. Employ step-by-step reasoning internally but **ONLY output the final JSON**. Your output must strictly adhere to the specified JSON format and contain NO other text, explanations, or formatting.
 """
@@ -153,24 +218,26 @@ def call_deepseek_api(system_prompt, user_prompt):
 def run_filter_agent(article_data):
     """
     Takes article data, runs the filter agent, validates the response,
+    overrides "Boring" if important entities are present,
     and adds the parsed JSON verdict or error info back into the article_data dict.
     """
     # Basic input validation
     if not isinstance(article_data, dict) or not article_data.get('title') or not article_data.get('summary'):
         logger.error("Invalid or incomplete article_data provided to filter agent.")
-        # Ensure consistent return structure even on input error
         if isinstance(article_data, dict):
              article_data['filter_verdict'] = None
              article_data['filter_error'] = "Invalid input data (missing title or summary)"
         else:
-             # If article_data wasn't even a dict, we can't modify it
              logger.error("Input 'article_data' was not a dictionary.")
-             return None # Or handle appropriately
+             return None
         return article_data
 
     article_title = article_data['title']
     article_summary = article_data['summary']
     article_id = article_data.get('id', 'N/A') # For logging
+
+    # Store original text for keyword check later
+    original_text_combined = f"{article_title} {article_summary}".lower()
 
     # Truncate summary if it's excessively long for the API context/cost
     max_summary_length = 1000 # Keep summary reasonable
@@ -217,21 +284,42 @@ def run_filter_agent(article_data):
         valid_levels = ["Breaking", "Interesting", "Boring"]
         received_level = filter_verdict.get('importance_level')
         if received_level not in valid_levels:
-             logger.error(f"Invalid importance_level received: '{received_level}'")
-             raise ValueError(f"Invalid importance_level value: {received_level}")
+             logger.warning(f"Invalid importance_level received: '{received_level}'. Forcing to 'Boring'.")
+             filter_verdict['importance_level'] = "Boring" # Force to Boring if invalid
+             received_level = "Boring"
+             # Optionally, raise ValueError for stricter validation:
+             # raise ValueError(f"Invalid importance_level value: {received_level}")
+
 
         # Validate topic against allowed list (with fallback)
         received_topic = filter_verdict.get('topic')
         if received_topic not in ALLOWED_TOPICS:
              logger.warning(f"Topic '{received_topic}' not in allowed list for article ID {article_id}. Forcing to 'Other'.")
              filter_verdict['topic'] = "Other" # Apply fallback
-             # Optionally, store the original invalid topic if needed for analysis
-             # filter_verdict['original_invalid_topic'] = received_topic
-             # Alternatively, raise ValueError for stricter validation:
-             # raise ValueError(f"Invalid topic value: {received_topic}")
+
+        # --- *** IMPORTANCE OVERRIDE LOGIC *** ---
+        overridden = False
+        if filter_verdict['importance_level'] == "Boring":
+            found_entity = None
+            # Check if any important entity is mentioned (case-insensitive)
+            for entity in IMPORTANT_ENTITIES:
+                 # Use \b for word boundaries to avoid partial matches (e.g., 'ai' in 'train')
+                 if re.search(r'\b' + re.escape(entity) + r'\b', original_text_combined):
+                      found_entity = entity
+                      break # Stop after first match
+
+            if found_entity:
+                 logger.info(f"Overriding 'Boring' verdict for article ID {article_id}. Found important entity: '{found_entity}'. Setting to 'Interesting'.")
+                 filter_verdict['importance_level'] = "Interesting"
+                 # Optionally update reasoning
+                 filter_verdict['reasoning_summary'] = f"Promoted from Boring due to mention of '{found_entity}'. Original reason: {filter_verdict.get('reasoning_summary', '')}"
+                 overridden = True
+        # --- *** END OVERRIDE LOGIC *** ---
+
 
         # --- Success Case ---
-        logger.info(f"Filter verdict received for ID {article_id}: level={filter_verdict['importance_level']}, topic='{filter_verdict['topic']}', keyword='{filter_verdict['primary_topic_keyword']}'")
+        log_suffix = " (Overridden from Boring)" if overridden else ""
+        logger.info(f"Filter verdict received for ID {article_id}: level={filter_verdict['importance_level']}, topic='{filter_verdict['topic']}', keyword='{filter_verdict['primary_topic_keyword']}'{log_suffix}")
         article_data['filter_verdict'] = filter_verdict
         article_data['filter_error'] = None # Clear any previous error state on success
         # Add timestamp using standard UTC 'Z' format
@@ -264,7 +352,9 @@ if __name__ == "__main__":
     test_article_data_breaking = { 'id': 'test-breaking-001', 'title': "BREAKING: OpenAI CEO Sam Altman Steps Down Unexpectedly Amid Board Conflict", 'summary': "In a shocking move, OpenAI announced CEO Sam Altman is leaving the company immediately following a board review citing a lack of consistent candor. CTO Mira Murati appointed interim CEO. Major implications for the AI industry.", }
     test_article_data_interesting = { 'id': 'test-interesting-002', 'title': "Anthropic Releases Claude 3.5 Sonnet, Outperforms GPT-4o", 'summary': "Anthropic launched Claude 3.5 Sonnet, claiming state-of-the-art performance surpassing OpenAI's GPT-4o and Google's Gemini on key benchmarks, particularly in coding and vision tasks. Includes new 'Artifacts' feature.", }
     test_article_data_boring = { 'id': 'test-boring-003', 'title': "AI Startup 'InnovateAI' Secures $5M Seed Funding", 'summary': "InnovateAI, a company developing AI tools for marketing automation, announced it has closed a $5 million seed funding round led by Venture Partners. Funds will be used for hiring and product development.", }
+    test_article_override = { 'id': 'test-override-004', 'title': "Stock Analyst Discusses Tesla Q2 Earnings Preview", 'summary': "Ahead of Tesla's earnings report, market watchers speculate on delivery numbers and potential impact of Elon Musk's recent focus shifts on company performance.", }
     test_article_invalid_input = {'id': 'test-invalid-input', 'title': 'Just a title'}
+
 
     logger.info("\n--- Running Filter Agent Standalone Test ---")
 
@@ -279,6 +369,10 @@ if __name__ == "__main__":
     logger.info("\nTesting BORING article...")
     result_boring = run_filter_agent(test_article_data_boring.copy())
     print("Result:", json.dumps(result_boring, indent=2))
+
+    logger.info("\nTesting BORING article that SHOULD BE OVERRIDDEN...")
+    result_override = run_filter_agent(test_article_override.copy())
+    print("Result:", json.dumps(result_override, indent=2)) # Expect 'Interesting'
 
     logger.info("\nTesting INVALID INPUT article...")
     result_invalid = run_filter_agent(test_article_invalid_input.copy())

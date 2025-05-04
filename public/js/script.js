@@ -117,7 +117,20 @@ function renderLatestNews(articles) {
 }
 
 function renderTopics() {
-    const container = document.querySelector('#topics-section .topics-list'); if (!container) { return; } container.innerHTML = ''; const predefinedTopics = [ "AI Models", "Hardware", "Software", "Ethics", "Society", "Business", "Startups", "Regulation", "Robotics", "Research", "Open Source", "Health", "Finance", "Art & Media", "Compute" ]; if (predefinedTopics.length === 0) { container.innerHTML = '<p class="placeholder">No topics.</p>'; return; } predefinedTopics.forEach(topic => { const button = document.createElement('a'); button.href = `/topic.html?name=${encodeURIComponent(topic)}`; button.className = 'topic-button'; button.textContent = topic; container.appendChild(button); }); console.log("Rendered topics section.");
+    const container = document.querySelector('#topics-section .topics-list'); if (!container) { return; } container.innerHTML = ''; 
+    
+    const predefinedTopics = [
+        // Core AI/Tech
+        "AI Models", "Hardware", "Software", "Robotics", "Compute",
+        "Research", "Open Source",
+        // Impact / Application
+        "Business", "Startups", "Finance", "Health", "Society",
+        "Ethics", "Regulation", "Art & Media", "Environment",
+        "Education", "Security", "Gaming", "Transportation",
+         // Add the same new topics here
+     ];
+     
+     if (predefinedTopics.length === 0) { container.innerHTML = '<p class="placeholder">No topics.</p>'; return; } predefinedTopics.forEach(topic => { const button = document.createElement('a'); button.href = `/topic.html?name=${encodeURIComponent(topic)}`; button.className = 'topic-button'; button.textContent = topic; container.appendChild(button); }); console.log("Rendered topics section.");
 }
 
 function renderTrendingNews(articles) {
