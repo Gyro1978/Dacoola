@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "f1a0be4d5a7c6be7738bb298e1bfcf35223d5f6d565ed1fb5ec2a08b38eba8c4",
+      "title": "Is Duolingo the face of an AI jobs crisis?",
+      "link": "articles/is-duolingo-the-face-of-an-ai-jobs-crisis.html",
+      "published_iso": "2025-05-04T20:48:09Z",
+      "summary_short": "Duolingo shifts to AI-first, cutting contractors—raising concerns about AI job displacement in tech. Learn the implications.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/12/OwlGame_Duolingo.jpg?w=1200",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "AI job displacement",
+        "Duolingo",
+        "workforce automation",
+        "AI-first company",
+        "job security",
+        "reskilling needs",
+        "socioeconomic impact of automation",
+        "tech sector trends",
+        "AI in language services"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
       "id": "365bdca28a4da68673538ee2d2609f31ee8b749fbd8ffe9d3b3fbba0b76df546",
       "title": "Trump says he’s willing to delay TikTok ban again",
       "link": "articles/trump-says-he’s-willing-to-delay-tiktok-ban-again.html",
