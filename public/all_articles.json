@@ -390,6 +390,30 @@
       "trend_score": 14.5
     },
     {
+      "id": "9c3903b60a0a1926f676a46cff4bd0fc70d07b3fb98524c29a17c8ac42b22e31",
+      "title": "Tiny “Fans-on-Chips” Could Cool Big Data Centers",
+      "link": "articles/tiny-“fans-on-chips”-could-cool-big-data-centers.html",
+      "published_iso": "2025-05-02T13:00:03Z",
+      "summary_short": "xMEMS Labs' ultrasonic MEMS cooling tech could slash heat in optical transceivers, boosting AI data center efficiency.",
+      "image_url": "https://spectrum.ieee.org/media-library/image.jpg?id=60071310&width=1200&height=600&coordinates=0%2C57%2C0%2C807",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "data center cooling",
+        "MEMS technology",
+        "optical transceivers",
+        "AI workloads",
+        "thermal management",
+        "energy efficiency",
+        "xMEMS Labs",
+        "ultrasonic cooling",
+        "high-speed transceivers",
+        "electronics cooling"
+      ],
+      "audio_url": null,
+      "trend_score": 14.72
+    },
+    {
       "id": "d258795700e13ea6386f612f62ba6de3f411ca2900db973f4ea99062c5ac7241",
       "title": "Dozens of YouTube Channels Are Showing AI-Generated Cartoon Gore and Fetish Content",
       "link": "articles/dozens-of-youtube-channels-are-showing-ai-generated-cartoon-gore-and-fetish-cont.html",
@@ -877,6 +901,30 @@
       "trend_score": 14.0
     },
     {
+      "id": "9337e4bdaa3f291055015b70671b5b57ead286921f66c024ec0418c7789f2d54",
+      "title": "We Need to Talk About AI’s Impact on Public Health",
+      "link": "articles/we-need-to-talk-about-ai’s-impact-on-public-health.html",
+      "published_iso": "2025-05-01T14:47:17Z",
+      "summary_short": "AI's environmental impact extends beyond carbon emissions, posing serious public health risks from air pollution. Learn the hidden costs.",
+      "image_url": "https://spectrum.ieee.org/media-library/black-and-white-3d-illustration-of-a-crowd-in-front-of-large-ai-letters-with-numeric-patterns-and-a-smoky-looking-background.jpg?id=60046447&width=1200&height=600&coordinates=0%2C15%2C0%2C15",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "AI environmental impact",
+        "data center energy consumption",
+        "public health damages",
+        "AI and air pollution",
+        "AI public health risks",
+        "sustainable AI deployment",
+        "AI workload routing",
+        "AI as public utility",
+        "health considerations in AI",
+        "AI and premature deaths"
+      ],
+      "audio_url": null,
+      "trend_score": 14.56
+    },
+    {
       "id": "8deaff8501a1eb567fb9ff214ac896f432daaea38f45a4b0e00e6d1df920785a",
       "title": "Wandercraft Begins Clinical Trials for Physical AI-Powered Personal Exoskeleton",
       "link": "articles/wandercraft-begins-clinical-trials-for-physical-ai-powered-personal-exoskeleton.html",
@@ -1129,6 +1177,30 @@
         "anticompetitive pricing"
       ],
       "audio_url": null
+    },
+    {
+      "id": "d477e8bcad7566ac0dc90523b6a36e43d1f5541ce5b508f5b2b07daa369d4ee4",
+      "title": "Amazon Bedrock Model Distillation: Boost function calling accuracy while reducing cost and latency",
+      "link": "articles/amazon-bedrock-model-distillation-boost-function-calling-accuracy-while-reducing.html",
+      "published_iso": "2025-05-01T01:04:26Z",
+      "summary_short": "Amazon Bedrock's AI model distillation enhances function calling accuracy while reducing latency and costs, making generative AI more efficient.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/30/abmd-1120x630.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Amazon Bedrock",
+        "Model Distillation",
+        "Generative AI",
+        "Function Calling",
+        "AI Cost Optimization",
+        "AI Latency Reduction",
+        "Meta Llama Models",
+        "AI Deployment",
+        "Foundation Models",
+        "AI Performance Improvement"
+      ],
+      "audio_url": null,
+      "trend_score": 14.47
     },
     {
       "id": "f606becdcfa406be59638e79566fba00319a2de7b8eae623aa01d1693f6a2658",
@@ -1786,6 +1858,30 @@
       "trend_score": 10.9
     },
     {
+      "id": "3fb2ec7db9f21bf97143f9b99741e639bcd1cde7fa9ac8bab4cbef5e0831f1cc",
+      "title": "When Does an AI Image Become Art?",
+      "link": "articles/when-does-an-ai-image-become-art.html",
+      "published_iso": "2025-04-29T14:00:03Z",
+      "summary_short": "Discover how AI-generated images are reshaping art, from early expert systems like AARON to today's text-to-image models.",
+      "image_url": "https://spectrum.ieee.org/media-library/image.png?id=60032107&width=1200&height=600&coordinates=0%2C225%2C0%2C226",
+      "topic": "Art & Media",
+      "is_breaking": false,
+      "tags": [
+        "AI-generated art",
+        "Midjourney",
+        "DALL-E",
+        "AARON expert system",
+        "AI in creative fields",
+        "AI authorship debate",
+        "AI and artistic agency",
+        "Christiane Paul Whitney Museum",
+        "AI art evolution",
+        "technology in art"
+      ],
+      "audio_url": null,
+      "trend_score": 14.22
+    },
+    {
       "id": "020acfef52914873bb5656605142767e06c399dea420e24a247add043ebc6e84",
       "title": "xMEMS extends micro cooling fan-on-a-chip tech to AI data centers",
       "link": "articles/xmems-extends-micro-cooling-fan-on-a-chip-tech-to-ai-data-centers.html",
@@ -2339,6 +2435,30 @@
       ],
       "audio_url": null,
       "trend_score": 12.39
+    },
+    {
+      "id": "6487a7aacbe4b618adb40f5b28f161c136d1959b591115aef5fbfbaa68ba1e3c",
+      "title": "Build an AI-powered document processing platform with open source NER model and LLM on Amazon SageMaker",
+      "link": "articles/build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-.html",
+      "published_iso": "2025-04-23T16:06:35Z",
+      "summary_short": "Learn how AI document processing using open-source NER and LLMs on Amazon SageMaker improves archival data accessibility and efficiency.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/document-processing-sagemaker-1120x630.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI document processing",
+        "Amazon SageMaker",
+        "NER model",
+        "LLM",
+        "BERT-based NER",
+        "Mixtral-8x7B",
+        "serverless architecture",
+        "metadata extraction",
+        "abstractive summarization",
+        "digital transformation"
+      ],
+      "audio_url": null,
+      "trend_score": 13.24
     },
     {
       "id": "e2b1b91ef607c28217f93b58b5813fb507c23b5ca01a868d1dc7d16e3f98eda4",
