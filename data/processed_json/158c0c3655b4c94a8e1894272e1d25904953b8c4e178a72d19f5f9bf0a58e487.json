@@ -1,0 +1,43 @@
+{
+    "id": "158c0c3655b4c94a8e1894272e1d25904953b8c4e178a72d19f5f9bf0a58e487",
+    "title": "The FDA Just Approved the First CRISPR-Edited Pigs for Food",
+    "link": "https://gizmodo.com/the-fda-just-approved-the-first-crispr-edited-pigs-for-food-2000597425",
+    "published_iso": "2025-05-03T12:00:22Z",
+    "summary": "<img alt=\"Pigs\" class=\"attachment-full size-full wp-post-image\" height=\"1000\" src=\"https://gizmodo.com/app/uploads/2025/05/pigs.jpg\" width=\"1500\" /><br /><br />PIC's gene-edited pigs are highly resistant to one of the most harmful viruses affecting pig populations worldwide today.",
+    "source_feed": "https://gizmodo.com/rss",
+    "scraped_at_iso": "2025-05-04T00:06:37Z",
+    "selected_image_url": "https://gizmodo.com/app/uploads/2025/05/pigs.jpg",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Health",
+        "reasoning_summary": "The FDA's approval of CRISPR-edited pigs for food is a significant and verifiable event in biotechnology, demonstrating a novel application of gene-editing technology with potential health and agricultural impacts.",
+        "primary_topic_keyword": "CRISPR-edited pigs"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-04T00:06:51Z",
+    "topic": "Health",
+    "is_breaking": false,
+    "primary_keyword": "CRISPR-edited pigs",
+    "seo_agent_results": {
+        "generated_title_tag": "FDA Approves First CRISPR-Edited Pigs for Food",
+        "generated_meta_description": "The FDA greenlights CRISPR-edited pigs resistant to a major virus, marking a milestone in gene-edited food. Learn more about this breakthrough.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"FDA Approves First CRISPR-Edited Pigs for Food\",  \n  \"description\": \"The FDA greenlights CRISPR-edited pigs resistant to a major virus, marking a milestone in gene-edited food. Learn more about this breakthrough.\",  \n  \"keywords\": [\"CRISPR-edited pigs\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://gizmodo.com/the-fda-just-approved-the-first-crispr-edited-pigs-for-food-2000597425\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://gizmodo.com/app/uploads/2025/05/pigs.jpg\" },  \n  \"datePublished\": \"2025-05-03T12:00:22Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## The FDA Just Approved the First CRISPR-Edited Pigs for Food  \n\nThe FDA has approved the first **CRISPR-edited pigs** for human consumption, developed by PIC. These pigs are engineered to be highly resistant to a harmful virus affecting global pig populations. This marks a significant step in the commercialization of gene-edited livestock.  \n\n### Why It Matters  \n\nThis approval signals a major shift in food technology, as CRISPR-edited animals move closer to mainstream agriculture. By making pigs resistant to a devastating virus, the innovation could reduce livestock losses, lower production costs, and improve food security. However, it also raises questions about regulatory oversight and public acceptance of gene-edited meat. The decision could pave the way for more CRISPR-modified food products in the future."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "CRISPR-edited pigs",
+        "FDA approval",
+        "gene-edited livestock",
+        "food technology",
+        "agricultural innovation",
+        "virus-resistant pigs",
+        "CRISPR food products",
+        "regulatory oversight",
+        "public acceptance",
+        "food security"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.64,
+    "audio_url": null
+}

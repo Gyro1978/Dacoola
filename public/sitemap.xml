@@ -13,6 +13,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://dacoolaa.netlify.app/articles/the-fda-just-approved-the-first-crispr-edited-pigs-for-food.html</loc>
+    <lastmod>2025-05-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://dacoolaa.netlify.app/articles/google-is-going-to-let-kids-use-its-gemini-ai.html</loc>
     <lastmod>2025-05-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -253,6 +259,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://dacoolaa.netlify.app/articles/exclusive-danish-supercomputer-powers-ai-care-companion-for-hospitals.html</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://dacoolaa.netlify.app/articles/rag-can-make-ai-models-riskier-and-less-reliable-new-research-shows.html</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -451,6 +463,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://dacoolaa.netlify.app/articles/giant-radar-umbrella-launches-into-space-on-mission-to-transform-climate-science.html</loc>
+    <lastmod>2025-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://dacoolaa.netlify.app/articles/alibaba-launches-open-source-qwen3-model-that-surpasses-openai-o1-and-deepseek-r.html</loc>
     <lastmod>2025-04-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -518,6 +536,12 @@
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/does-rag-make-llms-less-safe-bloomberg-research-reveals-hidden-dangers.html</loc>
+    <lastmod>2025-04-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/arx-robotics-rides-defence-tech-wave-with-31m-for-battlefield-robots.html</loc>
     <lastmod>2025-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -603,6 +627,30 @@
   <url>
     <loc>https://dacoolaa.netlify.app/articles/singapore-develops-asias-first-ai-based-mobile-app-for-shark-and-ray-fin-identif.html</loc>
     <lastmod>2022-06-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/next-generation-architectures-bridge-gap-between-neural-and-symbolic-representat.html</loc>
+    <lastmod>2019-12-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/project-petridish-efficient-forward-neural-architecture-search.html</loc>
+    <lastmod>2019-12-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/introducing-mass-a-pre-training-method-that-outperforms-bert-and-gpt-in-sequence.html</loc>
+    <lastmod>2019-06-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/autonomous-soaring-ai-on-the-fly.html</loc>
+    <lastmod>2019-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
