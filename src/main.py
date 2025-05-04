@@ -566,14 +566,104 @@ if __name__ == "__main__":
     initial_processed_ids_for_scraper = scraper_processed_ids_on_disk.union(completed_article_ids)
     logger.info(f"Total initial processed IDs passed to scraper: {len(initial_processed_ids_for_scraper)}")
 
-    logger.info("--- Stage 1: Running News Scraper ---")
+    # --- HTML Regeneration Step ---
+    logger.info("--- Stage 1: Checking for Missing HTML from Processed Data ---") # Renumbered stages
+    processed_json_files_for_regen = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
+    regenerated_count = 0
+    if processed_json_files_for_regen:
+        logger.info(f"Found {len(processed_json_files_for_regen)} processed JSON files to check for HTML regeneration.")
+        for proc_filepath in processed_json_files_for_regen:
+            try:
+                article_data = load_article_data(proc_filepath)
+                if not article_data or not isinstance(article_data, dict):
+                    logger.warning(f"Skipping invalid processed JSON during regen: {os.path.basename(proc_filepath)}")
+                    continue
+
+                article_id = article_data.get('id')
+                slug = article_data.get('slug')
+                if not article_id or not slug:
+                    logger.warning(f"Skipping processed JSON missing id or slug during regen: {os.path.basename(proc_filepath)}")
+                    continue
+
+                expected_html_path = os.path.join(OUTPUT_HTML_DIR, f"{slug}.html")
+
+                # Regenerate HTML only if it's missing
+                if not os.path.exists(expected_html_path):
+                    logger.info(f"HTML missing for {article_id} ({slug}.html). Regenerating...")
+
+                    # --- Prepare Template Variables from Processed Data ---
+                    seo_results = article_data.get('seo_agent_results', {})
+                    body_md = seo_results.get('generated_article_body_md', '')
+                    body_html = f"<p><i>Content generation error.</i></p><pre>{body_md}</pre>" # Fallback
+                    try:
+                        body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables', 'nl2br'])
+                    except Exception as md_err:
+                        logger.error(f"Markdown failed during regen {article_id}: {md_err}")
+
+                    tags_list = article_data.get('generated_tags', [])
+                    tags_html = format_tags_html(tags_list)
+
+                    publish_date_iso_for_meta = article_data.get('published_iso', datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'))
+                    publish_date_formatted = "Date Unknown"
+                    try:
+                        publish_dt = get_sort_key(article_data)
+                        publish_date_formatted = publish_dt.strftime('%B %d, %Y')
+                    except Exception:
+                        logger.warning(f"Publish date format error during regen {article_id}")
+
+                    page_title = seo_results.get('generated_title_tag', article_data.get('title', 'AI News'))
+                    meta_description = seo_results.get('generated_meta_description', article_data.get('summary', '')[:160])
+
+                    article_relative_path = f"articles/{slug}.html"
+                    canonical_url = urljoin(YOUR_SITE_BASE_URL.rstrip('/') + '/', article_relative_path.lstrip('/')) if YOUR_SITE_BASE_URL else f"/{article_relative_path.lstrip('/')}"
+
+                    template_vars = {
+                        'PAGE_TITLE': page_title,
+                        'META_DESCRIPTION': meta_description,
+                        'AUTHOR_NAME': article_data.get('author', AUTHOR_NAME_DEFAULT),
+                        'META_KEYWORDS': ", ".join(tags_list),
+                        'CANONICAL_URL': canonical_url,
+                        'SITE_NAME': YOUR_WEBSITE_NAME,
+                        'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
+                        'IMAGE_URL': article_data.get('selected_image_url', ''),
+                        'IMAGE_ALT_TEXT': page_title,
+                        'META_KEYWORDS_LIST': tags_list,
+                        'PUBLISH_ISO_FOR_META': publish_date_iso_for_meta,
+                        'JSON_LD_SCRIPT_BLOCK': seo_results.get('generated_json_ld', ''),
+                        'ARTICLE_HEADLINE': article_data.get('title', 'Article'),
+                        'PUBLISH_DATE': publish_date_formatted,
+                        'ARTICLE_BODY_HTML': body_html,
+                        'ARTICLE_TAGS_HTML': tags_html,
+                        'SOURCE_ARTICLE_URL': article_data.get('link', '#'),
+                        'ARTICLE_TITLE': article_data.get('title'),
+                        'id': article_id,
+                        'CURRENT_ARTICLE_ID': article_id, # For sidebar context if needed by template
+                        'CURRENT_ARTICLE_TOPIC': article_data.get('topic', ''), # For sidebar context
+                        'CURRENT_ARTICLE_TAGS_JSON': json.dumps(tags_list), # For sidebar context
+                        'AUDIO_URL': article_data.get('audio_url') # Pass existing audio URL if any
+                    }
+                    # --- End Template Variable Prep ---
+
+                    if render_post_page(template_vars, slug):
+                        regenerated_count += 1
+                    else:
+                        logger.error(f"Failed to regenerate HTML for {article_id}.")
+            except Exception as regen_e:
+                logger.exception(f"Error during HTML regeneration loop for {os.path.basename(proc_filepath)}: {regen_e}")
+    else:
+        logger.info("No processed JSON files found to check for regeneration.")
+    logger.info(f"--- HTML Regeneration Check Complete. Regenerated {regenerated_count} files. ---")
+
+
+    # --- Proceed with Scraper and Processing Cycle ---
+    logger.info("--- Stage 2: Running News Scraper ---")
     new_articles_found_count = 0
     try: new_articles_found_count = scrape_news(NEWS_FEED_URLS, initial_processed_ids_for_scraper)
     except Exception as scrape_e: logger.exception(f"Scraper error: {scrape_e}"); logger.error("Proceeding despite scraper error.")
     logger.info(f"Scraper run completed. Saved {new_articles_found_count} new raw files.")
 
-    logger.info("--- Stage 2: Running Processing Cycle ---")
-    existing_articles_data = load_all_articles_data() # Load historical data for dup checks
+    logger.info("--- Stage 3: Running Processing Cycle ---")
+    existing_articles_data = load_all_articles_data() # Reload data *after* potential regeneration
     logger.info(f"Loaded {len(existing_articles_data)} articles from {os.path.basename(ALL_ARTICLES_FILE)} for context.")
 
     json_files_to_process = []
@@ -630,7 +720,7 @@ if __name__ == "__main__":
 
     # --- Send Batched Webhook ---
     if successful_articles_for_webhook:
-        logger.info(f"--- Stage 2.5: Sending Batched Make.com Webhook ({len(successful_articles_for_webhook)} articles) ---")
+        logger.info(f"--- Stage 3.5: Sending Batched Make.com Webhook ({len(successful_articles_for_webhook)} articles) ---")
         if MAKE_WEBHOOK_URL:
             if send_make_webhook(MAKE_WEBHOOK_URL, successful_articles_for_webhook):
                 logger.info("Batched Make.com webhook sent successfully.")
@@ -641,7 +731,8 @@ if __name__ == "__main__":
     else:
         logger.info("No successful articles processed in this run to send to Make.com webhook.")
 
-    logger.info("--- Stage 3: Generating Sitemap ---")
+    # --- Sitemap Generation ---
+    logger.info("--- Stage 4: Generating Sitemap ---")
     if not YOUR_SITE_BASE_URL:
         logger.error("Sitemap generation SKIPPED: YOUR_SITE_BASE_URL is not set in the environment.")
     else:
