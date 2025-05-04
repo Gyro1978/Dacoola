@@ -5,58 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Page Not Found | Dacoola</title>
     <meta name="description" content="The page you were looking for was not found on Dacoola.">
-    <!-- Link your main stylesheet (optional, base styles below might suffice) -->
-    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Use root path for CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png">
     <!-- Prevent indexing -->
     <meta name="robots" content="noindex">
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- Google tag (gtag.js) - Optional on 404, but doesn't hurt -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-WGJ5MFBC6X');
+    </script>
 </head>
-<body>
+<body class="page-404"> <!-- Added class for potential specific styling -->
 
     <header id="navbar-placeholder">
         <!-- Navbar loaded by JS -->
     </header>
 
-    <!-- Snow Container - requires JS to add flakes or many manual divs -->
+    <!-- Snow Container -->
     <div class="snow" id="snow-container">
-       <!-- Empty container - flakes will be added via JS -->
-       <!-- OR you could manually add many <div class="snow-flake"></div> here -->
+       <!-- Flakes added via JS -->
     </div>
 
-
-    <!-- Main Content Wrapper (if needed, otherwise body handles centering) -->
-    <!-- <div class="page-wrapper"> -->
+    <!-- Error Content -->
+    <main class="container page-container error-page-main"> <!-- Reused page-container for consistency -->
         <div class="error-container">
             <h1>404</h1>
             <h2>Page Not Found</h2>
-            <p>Sorry, we couldn't find the page you were looking for. It might have been moved or deleted.</p>
-            <a href="/" class="button-link">Go to Homepage</a>
+            <p>Sorry, we couldn't find the page you were looking for. It might have been moved, deleted, or perhaps never existed.</p>
+            <a href="/home.html" class="button-link">Go to Homepage</a> <!-- Link to home.html -->
         </div>
-    <!-- </div> -->
 
+        <!-- Latest News Section Placeholder (similar to homepage) -->
+        <section id="latest-news-section" class="home-section" style="margin-top: 60px;"> <!-- Added margin -->
+            <div class="section-header">
+                <h2>Latest News</h2>
+                <a href="/latest.html" class="view-all-button">View All →</a> <!-- Link to latest.html -->
+            </div>
+            <div id="page-content-area" class="latest-news-grid"> <!-- Use ID for JS targeting -->
+                <p class="placeholder">Loading latest news...</p>
+            </div>
+        </section>
+    </main>
 
-    <!-- JavaScript to generate snowflakes -->
+    <!-- JavaScript -->
+    <script src="/js/script.js"></script> <!-- Use root path for JS -->
     <script>
-        // Simple JS to add snow flakes dynamically
+        // Snowflakes JS (same as before)
         function createSnowflakes(containerId, count) {
             const container = document.getElementById(containerId);
             if (!container) return;
             for (let i = 0; i < count; i++) {
                 const flake = document.createElement('div');
                 flake.className = 'snow-flake';
-                // Randomize initial horizontal position and animation delay slightly more
                 flake.style.left = `${Math.random() * 100}%`;
                 flake.style.animationDelay = `-${Math.random() * 10}s`;
-                // Optionally randomize duration slightly too
-                // flake.style.animationDuration = `${6 + Math.random() * 4}s`;
                 container.appendChild(flake);
             }
         }
-        // Add snowflakes on load
         document.addEventListener('DOMContentLoaded', () => {
-            createSnowflakes('snow-container', 100); // Adjust count as needed for density
+            createSnowflakes('snow-container', 100);
+            // Note: The main script.js will handle loading the navbar and latest news
         });
     </script>
 
