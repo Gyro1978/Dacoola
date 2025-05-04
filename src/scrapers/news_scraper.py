@@ -40,7 +40,9 @@ NEWS_FEED_URLS = [
     "https://blog.google/technology/ai/rss/", # Google AI Blog (New URL)
     "https://ai.meta.com/results/?content_types[0]=blog&rss=1", # Meta AI Blog (New URL, check if works)
     "https://research.googleblog.com/feeds/posts/default?alt=rss", # Google Research
-]
+    "https://ir.thomsonreuters.com/rss/news-releases.xml?items=15",
+    
+    ]
 
 # File to store IDs of processed articles
 PROCESSED_IDS_FILE = os.path.join(DATA_DIR, 'processed_article_ids.txt')
