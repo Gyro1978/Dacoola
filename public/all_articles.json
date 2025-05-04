@@ -25,6 +25,30 @@
       "trend_score": 14.9
     },
     {
+      "id": "158c0c3655b4c94a8e1894272e1d25904953b8c4e178a72d19f5f9bf0a58e487",
+      "title": "The FDA Just Approved the First CRISPR-Edited Pigs for Food",
+      "link": "articles/the-fda-just-approved-the-first-crispr-edited-pigs-for-food.html",
+      "published_iso": "2025-05-03T12:00:22Z",
+      "summary_short": "The FDA greenlights CRISPR-edited pigs resistant to a major virus, marking a milestone in gene-edited food. Learn more about this breakthrough.",
+      "image_url": "https://gizmodo.com/app/uploads/2025/05/pigs.jpg",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "CRISPR-edited pigs",
+        "FDA approval",
+        "gene-edited livestock",
+        "food technology",
+        "agricultural innovation",
+        "virus-resistant pigs",
+        "CRISPR food products",
+        "regulatory oversight",
+        "public acceptance",
+        "food security"
+      ],
+      "audio_url": null,
+      "trend_score": 14.64
+    },
+    {
       "id": "fd60fa29488c1c50788d38fccb5f0f6bffdd0919a7688c62c19186c60f88cfaf",
       "title": "Google is going to let kids use its Gemini AI",
       "link": "articles/google-is-going-to-let-kids-use-its-gemini-ai.html",
@@ -947,6 +971,30 @@
       "trend_score": 13.32
     },
     {
+      "id": "d7eeaf946e78b5fa9eb2439eefb91fc7d84db1c1a7ccdb3ccb9af529bd3381c3",
+      "title": "Exclusive: Danish supercomputer powers AI care ‘companion’ for hospitals",
+      "link": "articles/exclusive-danish-supercomputer-powers-ai-care-companion-for-hospitals.html",
+      "published_iso": "2025-05-01T11:53:15Z",
+      "summary_short": "A Danish startup uses Europe's powerful Gefion supercomputer to develop an AI healthcare companion for hospitals, enhancing patient monitoring.",
+      "image_url": "https://img-cdn.tnwcdn.com/image/tnw-blurple?filter_last=1&fit=1280%2C640&url=https%3A%2F%2Fcdn0.tnwcdn.com%2Fwp-content%2Fblogs.dir%2F1%2Ffiles%2F2025%2F05%2Fteton-AI-digital-twin-hospital.jpg&signature=94ea77d00c50c821840f6dcdded8a4e2",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "AI healthcare",
+        "supercomputers in healthcare",
+        "digital twin technology",
+        "patient monitoring systems",
+        "hospital efficiency",
+        "AI ethics in healthcare",
+        "real-time data processing",
+        "staffing shortages in hospitals",
+        "privacy in AI",
+        "Teton AI"
+      ],
+      "audio_url": null,
+      "trend_score": 13.21
+    },
+    {
       "id": "2eaf758b0ac2515473f7d73e1af14823825e9da1376aa88d5147fa684810b1d1",
       "title": "RAG can make AI models riskier and less reliable, new research shows",
       "link": "articles/rag-can-make-ai-models-riskier-and-less-reliable-new-research-shows.html",
@@ -1691,6 +1739,29 @@
       "trend_score": 12.0
     },
     {
+      "id": "178a8c890e12376890c74f4109861cd582e779128377650dd64b8da71644cbb0",
+      "title": "Giant radar ‘umbrella’ launches into space on mission to transform climate science",
+      "link": "articles/giant-radar-umbrella-launches-into-space-on-mission-to-transform-climate-science.html",
+      "published_iso": "2025-04-29T09:22:42Z",
+      "summary_short": "The ESA's Biomass satellite, equipped with a giant radar \"umbrella,\" has launched to monitor Earth's forests and climate.",
+      "image_url": "https://img-cdn.tnwcdn.com/image/tnw-blurple?filter_last=1&fit=1280%2C640&url=https%3A%2F%2Fcdn0.tnwcdn.com%2Fwp-content%2Fblogs.dir%2F1%2Ffiles%2F2025%2F04%2Fbiomass-satellite-space-umbrella-.jpg&signature=aa46d46754b1d1eda192a912fa12bd3e",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "Biomass satellite",
+        "ESA climate mission",
+        "P-band radar technology",
+        "forest biomass monitoring",
+        "space radar satellite",
+        "climate change research",
+        "Earth observation technologies",
+        "Vega-C rocket launch",
+        "L3 Harris radar antenna"
+      ],
+      "audio_url": null,
+      "trend_score": 11.2
+    },
+    {
       "id": "4860c6f3cd4ebe3da43f1121424fc2f94c1b71927359b860d9e2725a28fbad34",
       "title": "Alibaba launches open source Qwen3 model that surpasses OpenAI o1 and DeepSeek R1",
       "link": "articles/alibaba-launches-open-source-qwen3-model-that-surpasses-openai-o1-and-deepseek-r.html",
@@ -1969,6 +2040,30 @@
       ],
       "audio_url": null,
       "trend_score": 9.5
+    },
+    {
+      "id": "d9e28828662276cc15c85c7983ccfff2f6bc2344e9beb6b846e42f7b380625e2",
+      "title": "ARX Robotics rides defence tech wave with €31M for battlefield robots",
+      "link": "articles/arx-robotics-rides-defence-tech-wave-with-31m-for-battlefield-robots.html",
+      "published_iso": "2025-04-28T08:52:26Z",
+      "summary_short": "German startup ARX Robotics raises €31M for autonomous battlefield robots, backed by NATO’s Innovation Fund. Learn more about defense robotics funding.",
+      "image_url": "https://img-cdn.tnwcdn.com/image/tnw-blurple?filter_last=1&fit=1280%2C640&url=https%3A%2F%2Fcdn0.tnwcdn.com%2Fwp-content%2Fblogs.dir%2F1%2Ffiles%2F2025%2F04%2FARX_Founders-startup-defence.jpg&signature=03590f4bd976ed95ccaafff134586fac",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "ARX Robotics",
+        "defense tech",
+        "battlefield robots",
+        "autonomous vehicles",
+        "NATO Innovation Fund",
+        "Mithras OS",
+        "military robotics",
+        "AI in defense",
+        "defense modernization",
+        "autonomous driving"
+      ],
+      "audio_url": null,
+      "trend_score": 10.97
     },
     {
       "id": "bf1e6e6bf6737a2cc308a61ae5a8038e34fd3495a56249f85f9901626b81b79f",

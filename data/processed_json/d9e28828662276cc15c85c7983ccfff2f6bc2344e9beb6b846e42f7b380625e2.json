@@ -1,0 +1,43 @@
+{
+    "id": "d9e28828662276cc15c85c7983ccfff2f6bc2344e9beb6b846e42f7b380625e2",
+    "title": "ARX Robotics rides defence tech wave with €31M for battlefield robots",
+    "link": "https://thenextweb.com/news/arx-robotics-rides-defence-tech-wave-with-e31m-for-battlefield-robots",
+    "published_iso": "2025-04-28T08:52:26Z",
+    "summary": "<img height=\"417\" src=\"https://img-cdn.tnwcdn.com/image?fit=796%2C417&url=https%3A%2F%2Fcdn0.tnwcdn.com%2Fwp-content%2Fblogs.dir%2F1%2Ffiles%2F2025%2F04%2FARX_Founders-startup-defence.jpg&signature=7f72f6d86f37c0535d2548b9819b7afb\" width=\"796\" /><br />German defence tech startup ARX Robotics has secured €31mn to ramp up production of its autonomous battlefield robots, which look like mini tanks — minus the guns.  ARX — backed by NATO’s Innovation Fund — will also use the fresh capital to advance its operating system, Mithras OS. The software is designed to modernise existing military vehicles through AI, sensor systems, and autonomous driving capabilities. The company estimates it can retrofit 50,000 NATO vehicles with the tech. The co-founder and CEO of ARX, Marc Wietfeld — who will speak at TNW Conference and the Assembly in June — wants his…<br /><br /><a href=\"https://thenextweb.com/news/arx-robotics-rides-defence-tech-wave-with-e31m-for-battlefield-robots?utm_source=social&utm_medium=feed&utm_campaign=profeed\">This story continues</a> at The Next Web",
+    "source_feed": "https://thenextweb.com/feed",
+    "scraped_at_iso": "2025-05-04T00:06:37Z",
+    "selected_image_url": "https://img-cdn.tnwcdn.com/image/tnw-blurple?filter_last=1&fit=1280%2C640&url=https%3A%2F%2Fcdn0.tnwcdn.com%2Fwp-content%2Fblogs.dir%2F1%2Ffiles%2F2025%2F04%2FARX_Founders-startup-defence.jpg&signature=03590f4bd976ed95ccaafff134586fac",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Robotics",
+        "reasoning_summary": "The article reports a significant funding round (€31M) for ARX Robotics, a defense tech startup, to advance autonomous battlefield robots and retrofit NATO vehicles with AI and autonomous capabilities. This is a verifiable, concrete development with potential impact in defense and robotics sectors.",
+        "primary_topic_keyword": "defense robotics funding"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-04T00:10:41Z",
+    "topic": "Robotics",
+    "is_breaking": false,
+    "primary_keyword": "defense robotics funding",
+    "seo_agent_results": {
+        "generated_title_tag": "ARX Robotics Secures €31M in Defense Robotics Funding",
+        "generated_meta_description": "German startup ARX Robotics raises €31M for autonomous battlefield robots, backed by NATO’s Innovation Fund. Learn more about defense robotics funding.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"ARX Robotics Secures €31M in Defense Robotics Funding\",  \n  \"description\": \"German startup ARX Robotics raises €31M for autonomous battlefield robots, backed by NATO’s Innovation Fund. Learn more about defense robotics funding.\",  \n  \"keywords\": [\"defense robotics funding\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://thenextweb.com/news/arx-robotics-rides-defence-tech-wave-with-e31m-for-battlefield-robots\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://img-cdn.tnwcdn.com/image/tnw-blurple?filter_last=1&fit=1280%2C640&url=https%3A%2F%2Fcdn0.tnwcdn.com%2Fwp-content%2Fblogs.dir%2F1%2Ffiles%2F2025%2F04%2FARX_Founders-startup-defence.jpg&signature=03590f4bd976ed95ccaafff134586fac\" },  \n  \"datePublished\": \"2025-04-28T08:52:26Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## ARX Robotics Rides Defence Tech Wave with €31M for Battlefield Robots  \n\nGerman defense tech startup ARX Robotics has secured €31 million to scale production of its autonomous battlefield robots, which resemble mini tanks without weaponry. Backed by NATO’s Innovation Fund, the company will also advance its Mithras OS, an AI-powered system designed to retrofit up to 50,000 NATO vehicles with autonomous driving and sensor capabilities. ARX’s CEO, Marc Wietfeld, will discuss the technology at upcoming industry events.  \n\n### Why It Matters  \n\nThe funding highlights the growing investment in defense robotics as militaries seek to modernize with AI and automation. ARX’s focus on retrofitting existing NATO vehicles suggests a strategic shift toward cost-effective upgrades rather than entirely new systems. This move could accelerate the adoption of autonomous tech in defense, reducing human risk in combat zones while enhancing operational efficiency. The NATO backing also signals strong institutional support for innovation in military robotics."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "ARX Robotics",
+        "defense tech",
+        "battlefield robots",
+        "autonomous vehicles",
+        "NATO Innovation Fund",
+        "Mithras OS",
+        "military robotics",
+        "AI in defense",
+        "defense modernization",
+        "autonomous driving"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 10.97,
+    "audio_url": null
+}
