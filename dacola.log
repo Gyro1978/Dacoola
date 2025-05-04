@@ -108,3 +108,58 @@
 2025-05-04 02:06:29 - generate_sitemap - INFO - Sitemap successfully generated with 109 URLs and saved to /home/runner/work/Dacoola/Dacoola/public/sitemap.xml
 2025-05-04 02:06:29 - main_orchestrator - INFO - Sitemap generation completed successfully.
 2025-05-04 02:06:29 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (6.28 seconds) === ---
+2025-05-04 02:22:16 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/
+2025-05-04 02:22:16 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-04 02:22:16 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-04T02:22:16.334695+00:00) === ---
+2025-05-04 02:22:16 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-04 02:22:16 - main_orchestrator - INFO - Found 298 already fully processed articles.
+2025-05-04 02:22:16 - main_orchestrator - INFO - Total initial processed IDs passed to scraper: 941
+2025-05-04 02:22:16 - main_orchestrator - INFO - --- Stage 1: Running News Scraper ---
+2025-05-04 02:22:16 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (12 feeds) ---
+2025-05-04 02:22:16 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-04 02:22:16 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-04 02:22:16 - src.scrapers.news_scraper - INFO - Finished https://techcrunch.com/feed/. Saved 0.
+2025-05-04 02:22:16 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-04 02:22:16 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-04 02:22:16 - src.scrapers.news_scraper - INFO - Finished https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0.
+2025-05-04 02:22:16 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Finished https://blogs.nvidia.com/feed/. Saved 0.
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Checking feed: https://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Feed https://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Finished https://feeds.arstechnica.com/arstechnica/technology-lab. Saved 0.
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Finished https://venturebeat.com/category/ai/feed/. Saved 0.
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Contains 10 entries.
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Finished https://www.wired.com/feed/tag/ai/latest/rss. Saved 0.
+2025-05-04 02:22:17 - src.scrapers.news_scraper - INFO - Checking feed: https://www.theverge.com/rss/index.xml
+2025-05-04 02:22:18 - src.scrapers.news_scraper - INFO - Feed https://www.theverge.com/rss/index.xml fetched. Contains 10 entries.
+2025-05-04 02:22:18 - src.scrapers.news_scraper - INFO - Finished https://www.theverge.com/rss/index.xml. Saved 0.
+2025-05-04 02:22:18 - src.scrapers.news_scraper - INFO - Checking feed: https://www.zdnet.com/topic/artificial-intelligence/rss.xml
+2025-05-04 02:22:18 - src.scrapers.news_scraper - INFO - Feed https://www.zdnet.com/topic/artificial-intelligence/rss.xml fetched. Contains 20 entries.
+2025-05-04 02:22:18 - src.scrapers.news_scraper - INFO - Finished https://www.zdnet.com/topic/artificial-intelligence/rss.xml. Saved 0.
+2025-05-04 02:22:18 - src.scrapers.news_scraper - INFO - Checking feed: https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/
+2025-05-04 02:22:18 - src.scrapers.news_scraper - INFO - Feed https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-04 02:22:18 - src.scrapers.news_scraper - INFO - Finished https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/. Saved 0.
+2025-05-04 02:22:18 - src.scrapers.news_scraper - INFO - Checking feed: https://openai.com/blog/rss.xml
+2025-05-04 02:22:18 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://openai.com/blog/rss.xml. HTTP Status: 403
+2025-05-04 02:22:18 - src.scrapers.news_scraper - INFO - Checking feed: https://artificialintelligence-news.com/feed/
+2025-05-04 02:22:21 - src.scrapers.news_scraper - WARNING - Feed https://artificialintelligence-news.com/feed/ potentially malformed (bozo). Reason: <unknown>:2:0: syntax error. Attempting to process...
+2025-05-04 02:22:21 - src.scrapers.news_scraper - INFO - No entries found in feed: https://artificialintelligence-news.com/feed/
+2025-05-04 02:22:21 - src.scrapers.news_scraper - INFO - Checking feed: https://www.reuters.com/technology/feed
+2025-05-04 02:22:21 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://www.reuters.com/technology/feed. HTTP Status: 403
+2025-05-04 02:22:21 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved: 0 ---
+2025-05-04 02:22:21 - main_orchestrator - INFO - Scraper run completed. Saved 0 new raw files.
+2025-05-04 02:22:21 - main_orchestrator - INFO - --- Stage 2: Running Processing Cycle ---
+2025-05-04 02:22:21 - main_orchestrator - INFO - Loaded 108 articles from all_articles.json.
+2025-05-04 02:22:21 - main_orchestrator - INFO - Loaded 108 articles from all_articles.json for context.
+2025-05-04 02:22:21 - main_orchestrator - INFO - No new scraped articles to process.
+2025-05-04 02:22:21 - main_orchestrator - INFO - No successful articles processed in this run to send to Make.com webhook.
+2025-05-04 02:22:21 - main_orchestrator - INFO - --- Stage 3: Generating Sitemap ---
+2025-05-04 02:22:21 - generate_sitemap - INFO - Starting sitemap generation...
+2025-05-04 02:22:21 - generate_sitemap - INFO - Loaded 108 articles.
+2025-05-04 02:22:21 - generate_sitemap - INFO - Sitemap successfully generated with 109 URLs and saved to /home/runner/work/Dacoola/Dacoola/public/sitemap.xml
+2025-05-04 02:22:21 - main_orchestrator - INFO - Sitemap generation completed successfully.
+2025-05-04 02:22:21 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (5.04 seconds) === ---
