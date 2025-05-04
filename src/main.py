@@ -439,7 +439,7 @@ def process_single_article(json_filepath, existing_articles_data, processed_in_t
 
         # --- Slug and URL Generation ---
         original_title = article_data.get('title', f'article-{article_id}'); slug = original_title.lower()
-        slug = re.sub(r'[<>:"/\\|?*%\.]+', '', slug).strip().lower().replace(' ', '-')
+        slug = re.sub(r'[<>:"/\\|?*%\.\'"]+', '', slug).strip().lower().replace(' ', '-') # Remove invalid chars including quotes
         slug = re.sub(r'-+', '-', slug).strip('-')[:80]
         if not slug: slug = f'article-{article_id}'
         article_data['slug'] = slug # Save the generated slug
