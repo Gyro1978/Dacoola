@@ -391,6 +391,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://dacoolaa.netlify.app/articles/investing-in-workforce,-energy-infrastructure-and-the-policies-needed-to-power-t.html</loc>
+    <lastmod>2025-04-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://dacoolaa.netlify.app/articles/doge-put-a-college-student-in-charge-of-using-ai-to-rewrite-regulations.html</loc>
     <lastmod>2025-04-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -705,6 +711,18 @@
   <url>
     <loc>https://dacoolaa.netlify.app/articles/researchers-claim-breakthrough-in-fight-against-ais-frustrating-security-hole.html</loc>
     <lastmod>2025-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/dolphingemma-how-google-ai-is-helping-decode-dolphin-communication.html</loc>
+    <lastmod>2025-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/ironwood-the-first-google-tpu-for-the-age-of-inference.html</loc>
+    <lastmod>2025-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

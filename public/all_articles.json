@@ -1467,6 +1467,28 @@
       "audio_url": null
     },
     {
+      "id": "2146c330d4cd0ab4892272105cc8fe0c36783db6f5c0af07e4144e20ba36d59c",
+      "title": "Investing in workforce, energy infrastructure and the policies needed to power the AI opportunity",
+      "link": "articles/investing-in-workforce,-energy-infrastructure-and-the-policies-needed-to-power-t.html",
+      "published_iso": "2025-04-30T20:00:00Z",
+      "summary_short": "Google supports training 100,000 electrical workers and 30,000 apprentices in the U.S. to meet AI's energy demands. Learn about this workforce training initiative.",
+      "image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/ElectriciansEnergy_SS_1920x1080.width-1300.png",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "Google workforce training",
+        "AI energy demand",
+        "data center infrastructure",
+        "electrical worker training",
+        "AI adoption impact",
+        "sustainable tech growth",
+        "U.S. energy infrastructure",
+        "AI-driven economic opportunities"
+      ],
+      "audio_url": null,
+      "trend_score": 13.42
+    },
+    {
       "id": "cd1c316194d3b74c5e428cb7c277bc06aa9efe9fa3ba6757e344bca284e860da",
       "title": "DOGE Put a College Student in Charge of Using AI to Rewrite Regulations",
       "link": "articles/doge-put-a-college-student-in-charge-of-using-ai-to-rewrite-regulations.html",
@@ -2692,6 +2714,52 @@
       ],
       "audio_url": null,
       "trend_score": 9.5
+    },
+    {
+      "id": "f66246bcda64f7e0d230036515c14915431965189237bd35f2146c2db3c9e147",
+      "title": "DolphinGemma: How Google AI is helping decode dolphin communication",
+      "link": "articles/dolphingemma-how-google-ai-is-helping-decode-dolphin-communication.html",
+      "published_iso": "2025-04-14T13:00:00Z",
+      "summary_short": "Google's AI and Pixel phones help researchers decode dolphin communication, advancing our understanding of marine life.",
+      "image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/DolphinGemma_SocialExplainers_16x9_DolphinGem.width-1300.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Google AI",
+        "Dolphin Communication",
+        "Gemma AI Model",
+        "Marine Biology",
+        "Interspecies Communication",
+        "AI in Wildlife Research",
+        "Dolphin Intelligence",
+        "Pixel Phones",
+        "Animal Behavior"
+      ],
+      "audio_url": null,
+      "trend_score": 11.21
+    },
+    {
+      "id": "0f94cfba243755782010971c3caf88b23e4655f9039325b11a176fbcc8cafc99",
+      "title": "Ironwood: The first Google TPU for the age of inference",
+      "link": "articles/ironwood-the-first-google-tpu-for-the-age-of-inference.html",
+      "published_iso": "2025-04-09T12:00:00Z",
+      "summary_short": "Google unveils Ironwood, its 7th-gen TPU optimized for generative AI inference workloads. Discover the impact of this Google TPU Ironwood.",
+      "image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/TPUv7_Social-Share_1920x1080.width-1300.png",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "Google TPU Ironwood",
+        "Tensor Processing Unit",
+        "Generative AI Inference",
+        "AI Hardware Acceleration",
+        "Google AI Infrastructure",
+        "AI Model Optimization",
+        "Real-time AI Applications",
+        "Energy-efficient AI",
+        "AI Workload Scalability"
+      ],
+      "audio_url": null,
+      "trend_score": 10.37
     },
     {
       "id": "fbbf584df0181efecac72d5452da19519ad15668be0fd61faf8dc72221a540a1",
