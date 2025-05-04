@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "4632a69870fcc4b2739a49074ef70346a69c0cba6275d65a27d05041b12d6bb6",
+      "title": "Backstage access: Spotify’s dev tools side-hustle is growing legs",
+      "link": "articles/backstage-access-spotify’s-dev-tools-side-hustle-is-growing-legs.html",
+      "published_iso": "2025-05-04T14:00:00Z",
+      "summary_short": "Spotify's Backstage developer tool now used by 2M+ developers across 3,400 firms, signaling growth beyond music streaming.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/04/Tyson-Singer-1-e1744729802703.jpg?w=960",
+      "topic": "Open Source",
+      "is_breaking": false,
+      "tags": [
+        "Spotify Backstage",
+        "Developer Tools",
+        "Open Source Software",
+        "DevOps Ecosystem",
+        "Software Development Workflows",
+        "Tech Industry Diversification",
+        "Enterprise Developer Portals",
+        "Spotify Revenue Streams",
+        "Developer Infrastructure"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
       "id": "582e34c0d8cd196888749395c9479a298cb80284a6ace8725393c080a85fecdb",
       "title": "Trump&#8217;s 2026 NASA budget would slash ISS crew and allocate more money for Elon",
       "link": "articles/trump8217s-2026-nasa-budget-would-slash-iss-crew-and-allocate-more-money-for-elo.html",
