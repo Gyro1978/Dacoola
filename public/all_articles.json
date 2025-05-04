@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "e2ef4e47816a78b7077662ff6c5cfde61b6098164de991c0a1ba682f5e88a80d",
+      "title": "The best iPad deals you can get right now",
+      "link": "articles/the-best-ipad-deals-you-can-get-right-now.html",
+      "published_iso": "2025-05-04T21:30:00Z",
+      "summary_short": "Discover the latest iPad deals, including discounts on the iPad Mini, Air, and Pro models. Save up to $100 on select iPads today.",
+      "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25691621/iPad_Mini_1.jpg?quality=90&strip=all&crop=0%2C10.806933475316%2C100%2C78.386133049368&w=1200",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "iPad deals",
+        "iPad Mini discount",
+        "10th-gen iPad sale",
+        "11th-gen iPad price",
+        "iPad Air deals",
+        "iPad Pro discounts",
+        "M4 iPad Pro",
+        "A17 Pro iPad Mini",
+        "tablet savings",
+        "tech discounts"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "f1a0be4d5a7c6be7738bb298e1bfcf35223d5f6d565ed1fb5ec2a08b38eba8c4",
       "title": "Is Duolingo the face of an AI jobs crisis?",
       "link": "articles/is-duolingo-the-face-of-an-ai-jobs-crisis.html",
