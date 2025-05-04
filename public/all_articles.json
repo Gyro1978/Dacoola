@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "365bdca28a4da68673538ee2d2609f31ee8b749fbd8ffe9d3b3fbba0b76df546",
+      "title": "Trump says he’s willing to delay TikTok ban again",
+      "link": "articles/trump-says-he’s-willing-to-delay-tiktok-ban-again.html",
+      "published_iso": "2025-05-04T20:03:21Z",
+      "summary_short": "President Trump signals another potential TikTok ban delay if a U.S. ownership deal isn’t finalized by June 19.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/01/GettyImages-2193244774.jpg?w=1024",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "TikTok ban",
+        "Donald Trump",
+        "TikTok US operations",
+        "national security concerns",
+        "social media regulation",
+        "Meet the Press interview",
+        "June 19 deadline",
+        "TikTok negotiations"
+      ],
+      "audio_url": null,
+      "trend_score": 14.0
+    },
+    {
       "id": "4632a69870fcc4b2739a49074ef70346a69c0cba6275d65a27d05041b12d6bb6",
       "title": "Backstage access: Spotify’s dev tools side-hustle is growing legs",
       "link": "articles/backstage-access-spotify’s-dev-tools-side-hustle-is-growing-legs.html",

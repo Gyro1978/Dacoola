@@ -1,0 +1,42 @@
+{
+    "id": "365bdca28a4da68673538ee2d2609f31ee8b749fbd8ffe9d3b3fbba0b76df546",
+    "title": "Trump says he’s willing to delay TikTok ban again",
+    "link": "https://techcrunch.com/2025/05/04/trump-says-hes-willing-to-delay-tiktok-ban-again/",
+    "published_iso": "2025-05-04T20:03:21Z",
+    "summary": "President Donald Trump has already delayed a TikTok ban twice, and he said Sunday that he’s willing to do it again. Axios reports that during an interview with NBC’s “Meet the Press,” Trump said that if a deal isn’t made to sell TikTok’s U.S. operations to American owners before the current June 19 deadline, he […]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-04T20:36:11Z",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2025/01/GettyImages-2193244774.jpg?w=1024",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Other",
+        "reasoning_summary": "Promoted from Boring due to mention of 'donald trump'. Original reason: The article discusses a potential delay in the TikTok ban, which is a routine political development without direct AI/Tech novelty or impact.",
+        "primary_topic_keyword": "TikTok ban delay"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-04T20:41:13Z",
+    "topic": "Other",
+    "is_breaking": false,
+    "primary_keyword": "TikTok ban delay",
+    "seo_agent_results": {
+        "generated_title_tag": "Trump Open to TikTok Ban Delay Again Amid Deal Talks",
+        "generated_meta_description": "President Trump signals another potential TikTok ban delay if a U.S. ownership deal isn’t finalized by June 19.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Trump Open to TikTok Ban Delay Again Amid Deal Talks\",  \n  \"description\": \"President Trump signals another potential TikTok ban delay if a U.S. ownership deal isn’t finalized by June 19.\",  \n  \"keywords\": [\"TikTok ban delay\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/04/trump-says-hes-willing-to-delay-tiktok-ban-again/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2025/01/GettyImages-2193244774.jpg?w=1024\" },  \n  \"datePublished\": \"2025-05-04T20:03:21Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Trump Says He’s Willing to Delay TikTok Ban Again  \n\nPresident Donald Trump has indicated he may delay the TikTok ban for a third time if a deal to sell the app’s U.S. operations to American owners isn’t reached by the current June 19 deadline. During an interview on NBC’s *Meet the Press*, Trump reiterated his openness to extending the deadline, having already postponed the ban twice before.  \n\n### Why It Matters  \n\nThe repeated delays highlight the ongoing uncertainty surrounding TikTok’s future in the U.S. While the Trump administration has pushed for American ownership to address national security concerns, the lack of a finalized deal suggests negotiations remain complex. Another extension could buy time for stakeholders, but it also prolongs regulatory limbo for millions of TikTok users and businesses reliant on the platform."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "TikTok ban",
+        "Donald Trump",
+        "TikTok US operations",
+        "national security concerns",
+        "social media regulation",
+        "Meet the Press interview",
+        "June 19 deadline",
+        "TikTok negotiations"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.0,
+    "slug": "trump-says-he’s-willing-to-delay-tiktok-ban-again",
+    "audio_url": null
+}
