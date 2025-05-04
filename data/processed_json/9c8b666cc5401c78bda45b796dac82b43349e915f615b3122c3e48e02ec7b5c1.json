@@ -1,0 +1,43 @@
+{
+    "id": "9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1",
+    "title": "Meta warns of 'worse' experience for European users",
+    "link": "https://www.bbc.com/news/articles/czd3mey1ej2o",
+    "published_iso": "2025-05-01T11:53:52Z",
+    "summary": "Meta said the negative impact could kick in as soon as the third quarter of this year.",
+    "source_feed": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+    "scraped_at_iso": "2025-05-04T03:02:17Z",
+    "selected_image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/fc52/live/92909fa0-260c-11f0-8770-f1e3109cdd77.jpg",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Regulation",
+        "reasoning_summary": "Meta's warning about a worse user experience in Europe due to potential regulatory impacts is a significant and verifiable statement from a major tech player, indicating concrete consequences of regulatory changes.",
+        "primary_topic_keyword": "Meta EU regulation impact"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-04T03:06:50Z",
+    "topic": "Regulation",
+    "is_breaking": false,
+    "primary_keyword": "Meta EU regulation impact",
+    "seo_agent_results": {
+        "generated_title_tag": "Meta EU regulation impact may worsen user experience",
+        "generated_meta_description": "Meta warns of a 'worse' experience for European users due to regulatory changes, with effects expected by Q3 2025.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Meta EU regulation impact may worsen user experience\",  \n  \"description\": \"Meta warns of a 'worse' experience for European users due to regulatory changes, with effects expected by Q3 2025.\",  \n  \"keywords\": [\"Meta EU regulation impact\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.bbc.com/news/articles/czd3mey1ej2o\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://ichef.bbci.co.uk/news/1024/branded_news/fc52/live/92909fa0-260c-11f0-8770-f1e3109cdd77.jpg\" },  \n  \"datePublished\": \"2025-05-01T11:53:52Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Meta warns of 'worse' experience for European users  \n\nMeta has indicated that European users could face a degraded experience on its platforms as early as the third quarter of this year. The company attributes this potential decline to regulatory pressures, highlighting the Meta EU regulation impact on its operations.  \n\n### Why It Matters  \n\nThis warning underscores the growing tension between tech giants and EU regulators, who have been tightening data privacy and competition rules. If Meta follows through, European users may see reduced functionality or slower service, setting a precedent for how global platforms adapt to stricter regional laws. The move could also signal broader challenges for other tech firms navigating compliance while maintaining user satisfaction."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Meta EU regulation",
+        "European data privacy",
+        "Tech giants compliance",
+        "EU tech regulations",
+        "User experience degradation",
+        "Meta platform changes",
+        "Data privacy laws",
+        "Tech industry regulation",
+        "European Union tech policy"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.06,
+    "slug": "meta-warns-of-'worse'-experience-for-european-users",
+    "audio_url": null
+}

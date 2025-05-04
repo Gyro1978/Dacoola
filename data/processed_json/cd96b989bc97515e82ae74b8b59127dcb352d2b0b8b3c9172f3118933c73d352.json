@@ -1,0 +1,43 @@
+{
+    "id": "cd96b989bc97515e82ae74b8b59127dcb352d2b0b8b3c9172f3118933c73d352",
+    "title": "Films made with AI can win Oscars, Academy says",
+    "link": "https://www.bbc.com/news/articles/cqx4y1lrz2vo",
+    "published_iso": "2025-04-22T11:15:11Z",
+    "summary": "But it said it would still consider human involvement when selecting winners.",
+    "source_feed": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+    "scraped_at_iso": "2025-05-04T03:35:35Z",
+    "selected_image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/6bb0/live/c35e9800-1f70-11f0-b265-abe347419ae3.jpg",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Art & Media",
+        "reasoning_summary": "The Academy's decision on AI-made films and human involvement in Oscars is a notable development in the intersection of AI and media, presenting new, verifiable information.",
+        "primary_topic_keyword": "AI in Oscars"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-04T03:38:07Z",
+    "topic": "Art & Media",
+    "is_breaking": false,
+    "primary_keyword": "AI in Oscars",
+    "seo_agent_results": {
+        "generated_title_tag": "AI in Oscars: Academy Allows AI Films to Compete",
+        "generated_meta_description": "The Academy confirms AI-made films can win Oscars but will weigh human involvement. Explore the implications of AI in Oscars.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"AI in Oscars: Academy Allows AI Films to Compete\",  \n  \"description\": \"The Academy confirms AI-made films can win Oscars but will weigh human involvement. Explore the implications of AI in Oscars.\",  \n  \"keywords\": [\"AI in Oscars\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.bbc.com/news/articles/cqx4y1lrz2vo\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://ichef.bbci.co.uk/news/1024/branded_news/6bb0/live/c35e9800-1f70-11f0-b265-abe347419ae3.jpg\" },  \n  \"datePublished\": \"2025-04-22T11:15:11Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Films made with AI can win Oscars, Academy says  \n\nThe Academy of Motion Picture Arts and Sciences has clarified that films created with **AI in Oscars** consideration are eligible to win awards, though human involvement will still be a key factor in selecting winners. This decision acknowledges the growing role of AI in filmmaking while maintaining the importance of human creativity.  \n\n### Why It Matters  \n\nThis ruling marks a significant moment for the entertainment industry as AI tools become more sophisticated in generating scripts, visuals, and even performances. While the Academy is open to recognizing AI-assisted films, its emphasis on human input suggests a balancing act between innovation and artistic tradition. The move could encourage experimentation with AI while ensuring that storytelling remains deeply human-centered—a debate likely to intensify as AI's role in Hollywood expands."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "AI in Oscars",
+        "Academy Awards AI films",
+        "AI filmmaking",
+        "Human creativity in AI films",
+        "AI in entertainment industry",
+        "Oscars eligibility rules",
+        "AI-generated scripts",
+        "Hollywood AI debate",
+        "AI and artistic tradition"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 12.55,
+    "slug": "films-made-with-ai-can-win-oscars,-academy-says",
+    "audio_url": null
+}

@@ -462,6 +462,29 @@
       "trend_score": 13.93
     },
     {
+      "id": "bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3",
+      "title": "Apple says most US-bound iPhones no longer made in China",
+      "link": "articles/apple-says-most-us-bound-iphones-no-longer-made-in-china.html",
+      "published_iso": "2025-05-02T06:29:46Z",
+      "summary_short": "Apple confirms most US-bound iPhones are no longer made in China, citing $900M in tariff costs. Explore the iPhone manufacturing shift.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/ffe1/live/c7378110-26f2-11f0-abc5-57500d47969e.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "iPhone manufacturing",
+        "Apple supply chain",
+        "US-China trade tariffs",
+        "tech industry trends",
+        "global supply chain shift",
+        "iPhone production costs",
+        "geopolitical impact on tech",
+        "manufacturing diversification",
+        "US market iPhones"
+      ],
+      "audio_url": null,
+      "trend_score": 14.19
+    },
+    {
       "id": "144be37c7e9c4562c4dd6b34b4da528113a64f31c57f75fce177bcc9d46de149",
       "title": "Study uses artificial intelligence to classify patient pain archetypes after knee replacement - News-Medical",
       "link": "articles/study-uses-artificial-intelligence-to-classify-patient-pain-archetypes-after-kne.html",
@@ -971,6 +994,29 @@
       "trend_score": 13.32
     },
     {
+      "id": "9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1",
+      "title": "Meta warns of 'worse' experience for European users",
+      "link": "articles/meta-warns-of-'worse'-experience-for-european-users.html",
+      "published_iso": "2025-05-01T11:53:52Z",
+      "summary_short": "Meta warns of a 'worse' experience for European users due to regulatory changes, with effects expected by Q3 2025.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/fc52/live/92909fa0-260c-11f0-8770-f1e3109cdd77.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Meta EU regulation",
+        "European data privacy",
+        "Tech giants compliance",
+        "EU tech regulations",
+        "User experience degradation",
+        "Meta platform changes",
+        "Data privacy laws",
+        "Tech industry regulation",
+        "European Union tech policy"
+      ],
+      "audio_url": null,
+      "trend_score": 14.06
+    },
+    {
       "id": "d7eeaf946e78b5fa9eb2439eefb91fc7d84db1c1a7ccdb3ccb9af529bd3381c3",
       "title": "Exclusive: Danish supercomputer powers AI care ‘companion’ for hospitals",
       "link": "articles/exclusive-danish-supercomputer-powers-ai-care-companion-for-hospitals.html",
@@ -1016,6 +1062,30 @@
       ],
       "audio_url": null,
       "trend_score": 12.69
+    },
+    {
+      "id": "e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09",
+      "title": "Apple referred for possible criminal contempt investigation",
+      "link": "articles/apple-referred-for-possible-criminal-contempt-investigation.html",
+      "published_iso": "2025-05-01T01:54:35Z",
+      "summary_short": "Apple could face a criminal contempt investigation for failing to comply with 2021 App Store regulation orders.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/c90a/live/77438240-261f-11f0-b26b-ab62c890638b.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Apple App Store",
+        "Antitrust Investigation",
+        "Criminal Contempt",
+        "App Store Policies",
+        "Tech Regulation",
+        "Competition in Tech",
+        "Apple Legal Issues",
+        "Payment Options",
+        "Walled Ecosystems",
+        "Developer Fairness"
+      ],
+      "audio_url": null,
+      "trend_score": 14.49
     },
     {
       "id": "037705e09113b0b95778bd12da8f50bf77de3d550c57d812433d012f36185a19",
@@ -1552,6 +1622,29 @@
       "trend_score": 13.22
     },
     {
+      "id": "23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c",
+      "title": "Update that made ChatGPT 'dangerously' sycophantic pulled",
+      "link": "articles/update-that-made-chatgpt-'dangerously'-sycophantic-pulled.html",
+      "published_iso": "2025-04-30T10:48:33Z",
+      "summary_short": "OpenAI removed a ChatGPT update after users reported harmful behavior, including endorsing dangerous advice.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/f6d1/live/413b9fe0-25aa-11f0-a4b5-cf8d960fb818.jpg",
+      "topic": "Ethics",
+      "is_breaking": false,
+      "tags": [
+        "ChatGPT update",
+        "AI harmful behavior",
+        "OpenAI safety measures",
+        "AI alignment challenges",
+        "AI ethics",
+        "ChatGPT rollback",
+        "AI assistant safety",
+        "AI real-world consequences",
+        "AI testing protocols"
+      ],
+      "audio_url": null,
+      "trend_score": 13.89
+    },
+    {
       "id": "4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa",
       "title": "This data set helps researchers spot harmful stereotypes in LLMs",
       "link": "articles/this-data-set-helps-researchers-spot-harmful-stereotypes-in-llms.html",
@@ -1781,6 +1874,29 @@
         "AI research advancements"
       ],
       "audio_url": null
+    },
+    {
+      "id": "c8623cb4dca5c69144550955b076bd2678201edb3bd4cce7fb09208814bba9cd",
+      "title": "What is bug hunting and why is it changing?",
+      "link": "articles/what-is-bug-hunting-and-why-is-it-changing.html",
+      "published_iso": "2025-04-28T23:06:23Z",
+      "summary_short": "Discover how AI is reshaping bug hunting, changing how security flaws are found and monetized. Learn about AI in bug hunting today.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/7304/live/574114a0-08ae-11f0-88b7-5556e7b55c5e.jpg",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Bug Hunting",
+        "AI in Cybersecurity",
+        "Software Vulnerabilities",
+        "Automated Security Testing",
+        "Cybersecurity Trends",
+        "AI and Human Expertise",
+        "Vulnerability Detection",
+        "Bug Bounty Programs",
+        "Future of Bug Hunting"
+      ],
+      "audio_url": null,
+      "trend_score": 13.63
     },
     {
       "id": "71281c3e0499efe961268e5b24bd6e4054e35a8471f37dd3781ee3536ac5e35c",
@@ -2088,6 +2204,29 @@
       "trend_score": 9.0
     },
     {
+      "id": "47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07",
+      "title": "M&S stops online orders and issues refunds after cyber attack",
+      "link": "articles/m&s-stops-online-orders-and-issues-refunds-after-cyber-attack.html",
+      "published_iso": "2025-04-26T08:42:17Z",
+      "summary_short": "M&S suspends online orders and issues refunds following a cyber attack impact, disrupting food and clothing sales.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/b3dc/live/9524bd20-21dc-11f0-8c2e-77498b1ce297.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "M&S cyber attack",
+        "Marks & Spencer online orders",
+        "retail cybersecurity",
+        "cyber attack impact",
+        "data security concerns",
+        "online retail disruption",
+        "customer refunds cyber attack",
+        "retail vulnerability",
+        "cyber threats retail"
+      ],
+      "audio_url": null,
+      "trend_score": 13.21
+    },
+    {
       "id": "8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778",
       "title": "New study shows why simulated reasoning AI models don’t yet live up to their billing",
       "link": "articles/new-study-shows-why-simulated-reasoning-ai-models-dont-yet-live-up-to-their-bill.html",
@@ -2180,6 +2319,120 @@
       "trend_score": 10.0
     },
     {
+      "id": "b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709",
+      "title": "Overhaul algorithms and age checks or face fines, tech firms told",
+      "link": "articles/overhaul-algorithms-and-age-checks-or-face-fines,-tech-firms-told.html",
+      "published_iso": "2025-04-24T11:20:59Z",
+      "summary_short": "New tech regulation updates mandate stricter age verification and algorithm changes for youth protection—or face penalties.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/1ac0/live/9dd349a0-20d8-11f0-b0e5-d9ee068af7b4.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Tech Regulation",
+        "Age Verification",
+        "Child Safety Online",
+        "Algorithm Updates",
+        "Digital Safety",
+        "Regulatory Fines",
+        "Online Content Moderation",
+        "Tech Compliance"
+      ],
+      "audio_url": null,
+      "trend_score": 12.39
+    },
+    {
+      "id": "e2b1b91ef607c28217f93b58b5813fb507c23b5ca01a868d1dc7d16e3f98eda4",
+      "title": "Instagram still posing serious risks to children, campaigners say",
+      "link": "articles/instagram-still-posing-serious-risks-to-children,-campaigners-say.html",
+      "published_iso": "2025-04-23T16:01:05Z",
+      "summary_short": "Instagram's child safety measures fall short as users still face sexualized content and stereotypes, researchers warn.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/43e7/live/e8b73820-1f7d-11f0-acbf-41bf5b8e34ef.jpg",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "Instagram child safety",
+        "social media risks for children",
+        "harmful content on Instagram",
+        "child protection on social media",
+        "Instagram safety measures",
+        "mental health impact on minors",
+        "social media regulation",
+        "algorithmic moderation",
+        "online safety for young users"
+      ],
+      "audio_url": null,
+      "trend_score": 12.75
+    },
+    {
+      "id": "f303e63c753f426187329158cfa9b1ed4431ab058860eca24cc39bd8915129c5",
+      "title": "Apple and Meta attack 'unfair' €700m EU fines",
+      "link": "articles/apple-and-meta-attack-'unfair'-€700m-eu-fines.html",
+      "published_iso": "2025-04-23T15:46:36Z",
+      "summary_short": "Apple and Meta accuse the EU of unfairly targeting US firms with €700m fines. Read about the escalating EU fines on tech dispute.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/10b2/live/30e26320-202f-11f0-8ff6-2f179a342bec.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Apple",
+        "Meta",
+        "EU fines",
+        "Big Tech regulation",
+        "US tech companies",
+        "European Union antitrust",
+        "tech industry compliance",
+        "regulatory penalties",
+        "digital market oversight"
+      ],
+      "audio_url": null,
+      "trend_score": 12.75
+    },
+    {
+      "id": "84885ddaa246a57537d177617b8328e47e79297c163ebbf408802dc52f8c8dd2",
+      "title": "Tech Life",
+      "link": "articles/tech-life.html",
+      "published_iso": "2025-04-22T19:30:00Z",
+      "summary_short": "Discover how AI dolphin communication research is decoding the secrets of marine life interactions. Learn more about this breakthrough.",
+      "image_url": "https://ichef.bbci.co.uk/images/ic/1024x576/p0l5v4kn.jpg",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "Artificial Intelligence",
+        "Dolphin Communication",
+        "Machine Learning",
+        "Marine Biology",
+        "AI Research",
+        "Interspecies Communication",
+        "Conservation Efforts",
+        "Behavioral Patterns",
+        "Non-Human Languages"
+      ],
+      "audio_url": null,
+      "trend_score": 12.61
+    },
+    {
+      "id": "cd96b989bc97515e82ae74b8b59127dcb352d2b0b8b3c9172f3118933c73d352",
+      "title": "Films made with AI can win Oscars, Academy says",
+      "link": "articles/films-made-with-ai-can-win-oscars,-academy-says.html",
+      "published_iso": "2025-04-22T11:15:11Z",
+      "summary_short": "The Academy confirms AI-made films can win Oscars but will weigh human involvement. Explore the implications of AI in Oscars.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/6bb0/live/c35e9800-1f70-11f0-b265-abe347419ae3.jpg",
+      "topic": "Art & Media",
+      "is_breaking": false,
+      "tags": [
+        "AI in Oscars",
+        "Academy Awards AI films",
+        "AI filmmaking",
+        "Human creativity in AI films",
+        "AI in entertainment industry",
+        "Oscars eligibility rules",
+        "AI-generated scripts",
+        "Hollywood AI debate",
+        "AI and artistic tradition"
+      ],
+      "audio_url": null,
+      "trend_score": 12.55
+    },
+    {
       "id": "94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466",
       "title": "Generative AI is reshaping South Korea’s webcomics industry",
       "link": "articles/generative-ai-is-reshaping-south-koreas-webcomics-industry.html",
@@ -2202,6 +2455,28 @@
       ],
       "audio_url": null,
       "trend_score": 10.0
+    },
+    {
+      "id": "3b49c01a0fcdd404db40599697d097e26866287d99cf906b0ad144498184a46b",
+      "title": "US sets tariffs of up to 3,521% on South East Asia solar panels",
+      "link": "articles/us-sets-tariffs-of-up-to-3,521-on-south-east-asia-solar-panels.html",
+      "published_iso": "2025-04-22T06:49:22Z",
+      "summary_short": "The US has set steep solar panel tariffs of up to 3,521% on Chinese companies operating in South East Asia. Learn the impact.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/933e/live/9c106800-1fe8-11f0-89df-fbfd5d939728.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "US Solar Tariffs",
+        "South East Asia Solar Panels",
+        "Chinese Solar Manufacturers",
+        "Trade Restrictions",
+        "Renewable Energy Transition",
+        "Domestic Solar Manufacturing",
+        "Solar Supply Chains",
+        "Solar Project Costs"
+      ],
+      "audio_url": null,
+      "trend_score": 12.02
     },
     {
       "id": "6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b",
