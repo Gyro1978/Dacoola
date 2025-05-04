@@ -1106,3 +1106,472 @@ Check it out: https://dacoolaa.netlify.app/articles/what-is-bug-hunting-and-why-
 2025-05-04 04:44:07 - generate_sitemap - INFO - Sitemap successfully generated with 121 URLs and saved to /home/runner/work/Dacoola/Dacoola/public/sitemap.xml
 2025-05-04 04:44:07 - main_orchestrator - INFO - Sitemap generation completed successfully.
 2025-05-04 04:44:07 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (161.15 seconds) === ---
+2025-05-04 04:55:06 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/
+2025-05-04 04:55:06 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-04 04:55:06 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-04T04:55:06.212789+00:00) === ---
+2025-05-04 04:55:06 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-04 04:55:06 - main_orchestrator - INFO - Found 310 already fully processed articles.
+2025-05-04 04:55:06 - main_orchestrator - INFO - Total initial processed IDs passed to scraper: 1001
+2025-05-04 04:55:06 - main_orchestrator - INFO - --- Stage 1: Checking for Missing HTML from Processed Data ---
+2025-05-04 04:55:06 - main_orchestrator - INFO - Found 310 processed JSON files to check for HTML regeneration.
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2f0768641f700b4396799fec7db22d664f143ba908e701a0cf0191b546789746.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7cd0b43f57decc924626a2a678428eb6965bd6cc953817f5dc1406b2169ebe68.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e57e9a7ac9187c7316319e59a970f5b4ccd37339ae790c336574696a52cc9c11.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d7eeaf946e78b5fa9eb2439eefb91fc7d84db1c1a7ccdb3ccb9af529bd3381c3.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d12c3417bb5a6dfeb5953bed99de0ff1232b8614a935fa4bc7cbf15f636acad1.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b1d7a41952a88a838f93071ea68fb6558f658709a6770689edc8936327c64829.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5dd5bbd9c4c8fef0868378fe57b6ede1525655656e7d05d7363e1dd42fca32d4.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b4824683ada96d7d9569647d5eb96d9932606709c2305775a481957a05d92689.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9032735e26a53478a41aa5500c492bcf834657236f64bfc5463b6654d9c0fa04.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 38c01d96959c1f25cd744f8633e8d8fff93eaece28f4348ceb9efe87e7382edc.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 94f957a5cfe9c7446512fab63f2c2aacbbdc769af49b2b68b019d3f7c76daf3f.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1f3c91b8394e2599ef0f846e628b4e2ae7acec4c05cabfa57c676c1d22ad06a7.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 156e4b5157f9ced6fec01432e1737d4ba5ee7ea57a0d2ad2b762d4d98468faba.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c02aa6c17194e34c74ff5925cde9c707b04108daec242a8dbce5a1e611aecd77.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9d5ac93551e61fe1604c8c0d570d500fb8311c140366fce92907b323150dba3d.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2911f7cf83c993a6c708c4117a381dc5a83569e2354d27ee2f043ad202b52cdc.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 317bb9bb1d3c5937619a732bbc3f5a2e2a72f71e05fc7e6306b593101282042a.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8deaff8501a1eb567fb9ff214ac896f432daaea38f45a4b0e00e6d1df920785a.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6a82f3849ca43f5f382a576519c3117b4b29268a1d635e8cecb29c2bde6d1fad.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 588203f9ce21cbc1d7fccb9be1b7a8eac93285a8f6da2cf1148c05a763b9ca58.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 95d91a4308e0d17bd16e262d51ad230a659532bea090dc4b80e23557c53920d3.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b0d83a49005fb636e2342c18a9febadcfc48cd6b0ddf233265ed106bd3fb762.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 142f41a5ca2eb00780084f3f72518959f11fe5a6af78fd986b59d712d83bfa9c.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for b1f073b77c341fe55c03cb6fb692ff44f06accf000fd5e2531a148ba1b8414fc (amazon-bedrock-model-distillation-boost-function-calling-accuracy-while-reducing.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: amazon-bedrock-model-distillation-boost-function-calling-accuracy-while-reducing.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7b9c794995ed7a4ece7a1a4c41998c49c23ee51b9156f1c4974bf5d18a3f8437.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 900177fbc73594e20301d5cb880109ebabf504555c712b33380b358a57d0e8b8.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d8967952145ea68921b0755c898ea3c5407e7e775a85bfb261b448caf0701936.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7adcc049e963656062e2cf6f2fd94e4262c342cbf5fe7fe587b6bc001dbb2bea.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 26e7fd4f90fb7cb42c6e719365761bcada452fae0d91a1f37f74d9fc9484124b.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for 6a0dd057cf761ab62ae0bf3bbc5dedb3e1c9953ca0a04fd5da11ca354f347374 (from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation-.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c5ce8ebf9dd2aa85979a70bdcb89d3d6cd3f0d40834470864d12050232f72857.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d22a6e01d6aa57ae033489af9827c5eb29088c0271ef1174238caa02aef4bf64.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for 3744354b457d8af2cf77b12ccff14bdbf0ba9eaee4f419bea9228abded88c5d4 (from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation-.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 0e3e561349ec501e36e62ede6c27e43896ce893df9e1a5cd07e4da51b5350855.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: bd949f58f8bb83a470024966b5c8624e959a4dda0700934b6aeed5f3005facf0.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: f435f5756eed9e6e6b4a5d269a441e14274262b8726205ede209d501a1549c84.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 85032e5d0321bacace66f34ed0d7cd6b18bb3453bc70ccc50758b404916d6786.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e6f8336c83b3e525d965d33a8aabe131db678c46ca5e85f51c6d423d913f7b7a.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ddadcbb6305f08ff19a92e3f2af8ac57c4d8f9687e89f938b25377af1b056355.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1adb67098f82ef835e4c7b2426408a4fdf2435244e8c3691b5901efc6b71a9df.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for 9ad1199e694d1beafdfa117ec14bc96a866bd4e5503342e59a0e5e6b676136e1 (making-brain-waves-ai-startup-speeds-disease-research-with-lab-in-the-loop.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: making-brain-waves-ai-startup-speeds-disease-research-with-lab-in-the-loop.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fc2def72788e76853c9b3127740810d208882431a3eee1dc1b21fe419c3889a4.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3a325632a51ca7448d0ff35e6b53661edccc714109bdb29b6e1fa4e2ce5b7af8.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 79f36e3be9ab23bb0ddb070e6cf4c5a5352e8c06d57b3d29a7cf4976eb4d9649.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6709b53011f45193bc3110bc15da100c0df62aa8c116da88c3b9c82299283bc3.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 771de2c58074761438ac399b5c1c83c176ac0801fb37407bc4ada03364835dfa.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a9ef100eeacda721c557b8ce9b67f81280e870fa2c211cef7c5c02e78432009b.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6ed46dc607daea2150d69b3695da42503046a54a36d67b197e9e319f631e388f.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 614dc6817bdf48a2b3743fcb59ad1261379bac32d2b3d0256e2b43316d9ebec2.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5eca8d901c92070eba65c671077d1444d7dc592d4c128f252acdc0436c75cd65.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b3236173789c16c8cc84db281c30533ffaab65a968348c60fa777d285e4d4625.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for e1e0227807af9d695fdf8111efdce2908fedf7ae7fd7ae096263abac99faf256 (nvidia-research-at-iclr-pioneering-the-next-wave-of-multimodal-generative-ai.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: nvidia-research-at-iclr-pioneering-the-next-wave-of-multimodal-generative-ai.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 84de0933fcd50fd1455db5a5e62e92909370ebb8719b9b777d027f6cdaafac66.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 4cda71ad1afda77b1f0a3401dc405c59dd9152a6e7c9df940831b56d758c3c83.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 10d80648ff0976207f6af23d4e93e1441273a007d87039cb467fbf847156fa33.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: acd78ab4faadbb4f5a48b4621bc0c59ada154d656316338ba19267c7c37ef3fd.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c8169c21fb7dc54b0d1f7647261455a47bfdfc72e43849fea5c668646493b10f.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 43c25f0e18feb189b6748f510bd57cb6a0cc3aac79a5f8385d679e7445d9ea3c.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b75036003ee55bd011aecf8d77a417f98460968512a0ec8e858d3ee41db194b.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 650e36aa56c1b8465a62007bc2dc3aefc4e871a1ded87ab9c7b663d966fe4fc1.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 735c08d32c61649de6fa56944d2515b92f7a307981584c2c5a5593883cfafab0.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 0b7f12268f2bd279e1f6c0650147b1739e5169b230da68df3f42959b482edd80.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6feca0c6ca4c3ee4326c675d3acfecd13e1fee863c52c61b736d21f3e7ad5283.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: cb83387fc9c5e02e3cfcf9a6041e9ada62a132508a256c14ad562cb7761782c3.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 91b6beb3b4efc05af032bbf589ac141d4f546f025c83a01b3e95b8acfc33bb19.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 81638891647a3b1f27fc16fb5fc65c6c3be5c383896c8e7f3b75107e21a835f2.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ed0839154131ed5f9fcf2c49190310162f72c6ca07f252462947136c91824214.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2c519bbff265b5b55999e81a36adc2bb619c67406401d0d7cc6882e74522eb14.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1a5c311487ea6903494a02f4595fe8af6677deb6e05d48445e0447cbf2eb7c22.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9c4d43d552f35a0dd016abbe9d811e7bff5313ec4956a7ca27e8108c677f53b2.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c28d786df7cb0adc5d1a9829f3ae0d8fcc2186700991f55c8b72296a864d8de6.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 114be36ab2e121dec66e6e5a2e9ca36f7deaf2bd5a4534eac5fbe7efff988047.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 61e6e53aa5d82aa2bb723eb49768b36c8b1bf102431df0648af18c20ae09b67c.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 59b94f4af68661530ef37d1f8c29616a586771713facae3d9af7365893da8ff0.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: f195d28093daa98a27686b903f3db4f77d95e0b55391791e448cbdd4600281b8.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d32c1c77bc8811677c55dbf80f24ebbca749b093baf75fd2356682c888f344a2.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 582e34c0d8cd196888749395c9479a298cb80284a6ace8725393c080a85fecdb.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7e6215340ace5fdd85cc5e1446cab2ec0a3810009e0290d797accc59a9b0cf9b.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d258795700e13ea6386f612f62ba6de3f411ca2900db973f4ea99062c5ac7241.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9257818db97e53e0f5e52c899d8e9cb13188e86f9b61c53dc7e5a1270d750cab.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: edc62bd5ef94119cf4c77ed954f1f3e22c0fd7444c062203d0a9c9d2dc0411fc.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 04673665cca0f54847574ce6ea055fc35616a99f511193b9fcc8d7d7e97df7d2.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fa472c7d3c7fdc6e8c02dd3f8f75aae7852d1d771232de3faf0f8ec72ebba3ea.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 178a8c890e12376890c74f4109861cd582e779128377650dd64b8da71644cbb0.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b19f496319ea92a1eef9d013f5ffaa4f5c3e46555c6ca1627f32648dea6b250.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d677f51648da74f3159fcffb42726c55c0931c9841baf3881d0fccd04f64ecf1.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3baa0141917f0ec511b8b8b2704ad27396872daa1a47170da8e993eaebd31cba.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a51dd2dc3794da378c72ec4bcd72ffb8a89d3d8c7ad476b6858da82b101a55f6.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 96d26635a64d56338cba3538adc07983f5a1d1e273adb93c81f5ca8cde9dc440.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 90497bdc05ca7f137886b8750fa8258909a53d38ac1c3993a978f2f82a679b1a.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: cc21f25d2f206d5f07d5bdf7c78f69adf330621d7b803c412dade40f9db7ce99.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 371777a04adecf9ce6631756e552cbea75cb8d76738e2ab4f37f9abaa258c629.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3c6086abba9b10018c80779625a59404ea28f8e922c1150b1850334292ad6654.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 90a2d60cd482e6b8e1332f946efb63034e4edf3071480aed517a61a46bb48520.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 53200985953c8ec14e710d9388c9d2209da31acdd397fa0515355dc8d6a5eae9.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b76f01663f577882809b1c896176d5a0f0091634d751e8ddc96c4b5726f545d5.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ef02b174fd0f7e62c4f137a31a154990b456486f4c85dde989d99db5e84934ab.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 37ebd444d31e088b823454ed12cfee96f8384e131c4b530b335101a3e465236b.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 96b957c2d1f55fa8feea8671dbb769c2bd1e41bec26ae2ff6dde540fc0682f63.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ee92e3becca90cd83660b7478dbe930296d982adb64a861ca656e6c80c5c87d1.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for 12c9c1e579825225494f547333bda78493cd6dac9a7cb0ce08c95fc0682476f3 (ai-code-hallucinations-increase-the-risk-of-package-confusion-attacks.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: ai-code-hallucinations-increase-the-risk-of-package-confusion-attacks.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 12f1bb5ccd096986516d61e6785d3d4051fe89933939898be31a10d51a2c3c58.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 87f56955a51091cb9e288ac242e2611b14260341c53b9a87f78e86b1d3321767.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for c450cd757814b4c2960e0a151b9523bb99ef12bc707dae88daafd9b8cca1c763 (chill-factor-nvidia-blackwell-platform-boosts-water-efficiency-by-over-300x.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: chill-factor-nvidia-blackwell-platform-boosts-water-efficiency-by-over-300x.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5f77c2f41e6e71c61eb5fcb6d2d339b811fbf93d621160b4df0f355c50ab1a82.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 0b5d107994844ad167273ca859f911843d5ffa7f6ff1b09cd2994973b51a61f5.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 67cce41e169049aee015d2bf12cb7871c9961ec0a96b59448db3f165ad736fe5.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5186858cfa77a44867a016f0e5b4719326aadcb8cb0f93788fad01063c98ce23.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for ff4da2ffaf28d77a9d0fcdd156bf6e626e579d63226b1f1bef05b9b64bd4279a (google-now-injects-hyper-personalized-ads-into-third-party-ai-chats-computerworl.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: google-now-injects-hyper-personalized-ads-into-third-party-ai-chats-computerworl.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 18377dcb4eff1e247d5458c013ace5e45a41c2742b31643947b67634eb67104f.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b02e19046a87c704c410bc897357a861cdbefbc0561b9b2d162870c8705aabf6.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 098be7f71cf4c5b5d4d56917ad60ab1dd54ce677010580def1f434e97df95749.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d27e397d31f2b26a313987753af5b227d0a71fab4b6e7cd77b6397d39579614d.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ee95d76305f40e44e34c7d2ccfad41b26beac608c076f9253fc849ef23d5536a.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 77bae08d3c6ec14e291a619fba432b6b028c71e293ea71487e008ca3ae1a84e6.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170 (rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ed46ab48413a75fd7e557505ca0608ad873e2aac93204e65e7a1e71bb7e6b2db.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 90f78ba768f6ba211795b75715e77920e7bc09b623574339999cafac127fed8c.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2fcd1b41f3881f05a3e7d2be5041ac41a52928f1176203a5838a1e784ce58e1b.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a17f57a1a71a97e98abd321b7175b8341fdf0a6edba275fc894376d151e39396.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 26b216e0e904f7f7de0737613ebf4789e92bdcf2f4a1a8eec16bda01cb150e2c.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 4b7d6b187a9c53d80bf308a89d86b6a839875a525934c328ab33e66155e7f34a.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1dcaeef7181fb897cc8e52394bb1c2c7ee347fc893074d73f7ddf551b2489fb8.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 45398ba78757676d7ef377eea58384eabe395e11b2d8ed0440d7bf3f4f292a43.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 72871c2937083dd132b5759ee5d694480c17c5da04ea3bbfe4028acb12347be7.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: eeef6f4c120085ff0ea841a48890ed0e841a50fd73908609611ff40a7255c24f.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7 (rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b1f09f4b54ce2a9733ee0d28bc07fad6ff3eb7260de4c0198d0c32aa887890fd.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 158c0c3655b4c94a8e1894272e1d25904953b8c4e178a72d19f5f9bf0a58e487.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e5bc1259d88eafc6bcc80d9f9e34d835fe07040fce2b7ba046b61d30ba2fd3e7.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 020acfef52914873bb5656605142767e06c399dea420e24a247add043ebc6e84.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5ae7564e0b01cc4c1a88a1b18f1a88b27a4689a3f86c6c38a8275fe0b1a06d2e.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for 9df3d8e0130ec5d428f4b88feeafa658253ead0117476b1139dcaaab59da3c55 (new-federal-circuit-decision-expect-getting-aimachine-learning-patents-past-101-.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: new-federal-circuit-decision-expect-getting-aimachine-learning-patents-past-101.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7ca1b73be51f5cbef62bddb4eaae7e44a45af9db71c64b77a5599c3000d95e09.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2eaf758b0ac2515473f7d73e1af14823825e9da1376aa88d5147fa684810b1d1.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a81eb23a5d1f5b8e18a195bcd820d98d03ce9d76cf252b3d187572d7d696c0de.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for efe62474db8795db977316ba61228b5b3d107c83699ce2435773df2eea6142c7 (control-the-composition-of-ai-generated-images-with-the-nvidia-ai-blueprint-for-.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: control-the-composition-of-ai-generated-images-with-the-nvidia-ai-blueprint-for.html
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for 68e23f74e033ed89a4907bb1e8a34b28fda6fdaff682e2ba48e7e66fbfbf9078 (ai-bites-back-researchers-develop-model-to-detect-malaria-amid-venezuelan-gold-r.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: ai-bites-back-researchers-develop-model-to-detect-malaria-amid-venezuelan-gold-r.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fd60fa29488c1c50788d38fccb5f0f6bffdd0919a7688c62c19186c60f88cfaf.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 715154667f33ccf47a0ca66bc1771253bbcef15a405e361c427e32e9c1594506.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 91256c6988b7328694674483e956e06616bb743215839d52f8f2fac1304f73d9.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for 31de4490ab9d73d20a27ac519611a83100225cfd9d11cc1f9115e23366bddaea (nvidia-ceo-jensen-huang-sounds-alarm-as-50-of-ai-researchers-are-chinese-urges-a.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: nvidia-ceo-jensen-huang-sounds-alarm-as-50-of-ai-researchers-are-chinese-urges-a.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d9e28828662276cc15c85c7983ccfff2f6bc2344e9beb6b846e42f7b380625e2.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: cc1084f48502eac3487ecaaea1f10eb446c432a5a2a3beb269f2e3a91f92b379.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 568de3a4d35a9fe995e18bcd826add02d6d17d0dfb7adc8aab25ea4e344106a3.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 00ec866612e1e9d2c47326f74cec91b647010ddb30829776c8121ba41e42bf32.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ada6dcaba02baf53fa3c9a31c00c32a23725ee730027043491532685f9421ae8.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: aa475582ad484b2f6dbcc3ce95dbbe4ff38a4509d18dc140c186094ec731121f.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8d12e3de8a9801c14a46f48e65511c514c46898c58785079d545fe7af030ab4b.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8edac92bf197d843b15444951c214bc82b783cc84c665db5f1565b2cb7babd7c.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8ed04dbd4a04be030e5099267897ed13f01f21c88e7c0bbf09a12899377f124a.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c7922a64d49601363154c653babc4ddc04b589781fda7a2df36c0de5dcdb1fa1.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 08daf7349dea3f7338983273028d017e6db5fe27ab6a12808905c1e540708566.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 74c5cf5775d86830e432ec5969d175ee735013a16cd321d3e11e2fd7762cd2b1.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e015af8a3d4bc7adc4279c27de5b94f53c6e275c54846228b7fb6f9a75587874.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5cfcb338e6e6dec698c89de7e26b24d66ee75f6883e516570b8f5cf0912fba6d.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3629618a13fbc941386b6b52de8b0618478410a6102eee69cf48abda4c9eb5ab.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5d6fae9fe966c742d60f8e8d8119bafe0af6f5c8efac0940e6f5ba6782681701.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 82cb6552ea7a0f986f7bcd42cde819232f4c51d79cc0cb11c5fff74c85e8e5c9.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 30358a502720f404cf1ea898289186a085e80d0a167de7365793df28d437d772.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 56473abaab09a5d7d22a1c9956a5f5652ee1ebd76389b7e58ecfa9110c0be568.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b9c8c460319b1550247bd6c6609f6ff9207bd854bb7ed03e090299ed2bc86bc.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3e0fbfad2ee4a3e8868dafd58132c612f6c4abba40344356294c779759d7ff28.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9fb241eca1994da65156bd4a36fa5d271306309ec547e49fc173873047f1a820.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d2cff7361a355729a43908692956c449ecca5ac0e59128c4e60cae1c30802417.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 51a13a683ec1d4eb472cec5bdcda347569a0e57bec925298a4a9b97367535260.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5444ac72fbb424612ec49134293023aa246ce384cef4a1699a7f155e543d1016.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - HTML missing for 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f (build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-.html). Regenerating...
+2025-05-04 04:55:06 - main_orchestrator - INFO - Rendered HTML page to: build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and.html
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b9d80f7cdc834fc3ae1e95769fcda3c6e3bc393ea67010afd423e185013ca237.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5275cc7f788a872926ea51fb66f1c2d285443f3fd705fb52d886e366802a7a39.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d8e05070997d6886acd74f3c079d321e699af13d0d6314226742906e6d7bc6cf.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c41262208380bf62d6d376a6e761b5e588148e8cc06eeaa671471bb80000f48b.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b321a33910418791a4de28182c574b4fd37b976fa600908a529f50411df7321a.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ea048d1d4ca5f048e7e77cfd038b8ae8729ea1a1b340a4bd0410f4201da85123.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b2a01fa4f5ac3d739fb12778206f724b25a21d39770dddf020553a731d9d03d9.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 224ff37fe948def5a75343ac972b9830c3a5e9de492056547de9daa8af83c256.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ecb86b3211ce1303167ec928426fcd9d48001148df3237b36f821d32e24e1c56.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 75473e2307b8beaa86ccc0f49600c5d6e08a35a5b908bed0f40f543cde584314.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 66edcb9bc5fd1c783cccfcd6a39045e792f265e211293eec43c979cc5be9fa35.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fee1305f6dd170b02599af0d5c860b203d0707407152cb655b68b88dac41b6e1.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 990bfc5e8605f0d7bd6d0a9de93531fb4cf3a852a7fd915dbb7296e7e643e10d.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: de0aeb4f36593d9063e32e99248a5fefeb0ac92fe6cfab7cb3d0adbcaa4d26a2.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e4b328eb3dbdfbc4151f33cb2046d780402fe78915206869e457f22509a3f2ce.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6bc8a66222d7276ea048011396587d674e2d1367775e07448a7284eb0b61aff3.json
+2025-05-04 04:55:06 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 745f92ac7a1a3e26d208e167b1c2aa92f516a3981d659f4cffc0143464ebb2ea.json
+2025-05-04 04:55:06 - main_orchestrator - INFO - --- HTML Regeneration Check Complete. Regenerated 15 files. ---
+2025-05-04 04:55:06 - main_orchestrator - INFO - --- Stage 2: Running News Scraper ---
+2025-05-04 04:55:06 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (17 feeds) ---
+2025-05-04 04:55:06 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-04 04:55:06 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-04 04:55:06 - src.scrapers.news_scraper - INFO - Finished https://techcrunch.com/feed/. Saved 0.
+2025-05-04 04:55:06 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-04 04:55:06 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-04 04:55:06 - src.scrapers.news_scraper - INFO - Finished https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0.
+2025-05-04 04:55:06 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Finished https://blogs.nvidia.com/feed/. Saved 0.
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Checking feed: https://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Feed https://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Finished https://feeds.arstechnica.com/arstechnica/technology-lab. Saved 0.
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Finished https://venturebeat.com/category/ai/feed/. Saved 0.
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Contains 10 entries.
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Finished https://www.wired.com/feed/tag/ai/latest/rss. Saved 0.
+2025-05-04 04:55:07 - src.scrapers.news_scraper - INFO - Checking feed: https://www.theverge.com/rss/index.xml
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Feed https://www.theverge.com/rss/index.xml fetched. Contains 10 entries.
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Finished https://www.theverge.com/rss/index.xml. Saved 0.
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Checking feed: https://www.zdnet.com/topic/artificial-intelligence/rss.xml
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Feed https://www.zdnet.com/topic/artificial-intelligence/rss.xml fetched. Contains 20 entries.
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Finished https://www.zdnet.com/topic/artificial-intelligence/rss.xml. Saved 0.
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Checking feed: https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Feed https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Finished https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/. Saved 0.
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Checking feed: https://feeds.bbci.co.uk/news/technology/rss.xml
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Feed https://feeds.bbci.co.uk/news/technology/rss.xml fetched. Contains 48 entries.
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Finished https://feeds.bbci.co.uk/news/technology/rss.xml. Saved 0.
+2025-05-04 04:55:08 - src.scrapers.news_scraper - INFO - Checking feed: https://www.cnet.com/rss/news/
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - Feed https://www.cnet.com/rss/news/ fetched. Contains 25 entries.
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: c31c341d4e6f0655560b658aad3580d266e6bc97af60886bd01999bd2e4fa8bb.json (T: Best Garden and Seed Delivery Services for 2025...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 056b38a267609afdaa02dd5756b0256626893da2c5c8f604ef877ba735071d2d.json (T: Fitness Experts Reveal the Truth About Vibration P...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 933c1e40459c816a084244358de18bca4f224a1f6a7b5810169c1fb221f44f4a.json (T: The Next Interest Rate Decision Could Affect Your ...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 2cb7b67f51dbc868f11c964ae5b43b511dfd1d2c6a35bf8309a7a13cdaf90bfb.json (T: 'MobLand' Release Schedule: How to Watch Episode 6...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: bab8eb1d13c152c60217394637c4308160bceb4d14fd656efff7ae3c0e0d7aa0.json (T: Are Shokz' New OpenDots One Better Than Bose's Ult...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: f2c962515b78837f5c75553078a98ab29b0531d8670238a9b64fe38a526e781e.json (T: Spring Cleaning for Tech: How to Recycle Computers...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d59435454c4333ca15fc220872b4a73e4728d078b76d32b94a02c7ecd0686181.json (T: Microsoft Is Just the First to Announce Higher Gam...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d6a49824dd692db1756ce91e066f6b41439155a6f8ab668c544f02a739e5ff6e.json (T: Best Cooling Comforters of 2025, Approved by a Sle...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: b6ae31c2f286a25d5248da11d0000ae1bd6c32664fb5974ff8001777ef285069.json (T: Mother’s Day Fitness Gift Guide: 10 Gift Ideas Fro...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 9770f737908035934ba567d53b521ee9b2b365ba6534a729f700fc1f08a55021.json (T: Missed the Switch 2 Preorder? Why It's OK to Wait...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 21fc85d3894bbbea289792b09916ef57c3237475f857df08a86b43ba068ec19b.json (T: iPhone 16 Pro Max vs. Pixel 9 Pro XL: Massive Phon...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 3d92edd00282fd19e2e9d52e9919a2cf7ae1986d92e7e0ebec1359970eb4c4fd.json (T: What Is Wi-Fi 6E and Is It Worth Your Money?...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 3b4044b68ad98f8bd8e3ea26642d03c0dc2ae1607fa1e61a348756c01b0bdfc6.json (T: TCL A1 Projector Review: HAL 9000 Look-Alike Is Af...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - Finished https://www.cnet.com/rss/news/. Saved 13.
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - Checking feed: https://aws.amazon.com/blogs/machine-learning/feed/
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - Feed https://aws.amazon.com/blogs/machine-learning/feed/ fetched. Contains 20 entries.
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 03afcc08d94cdd18f4cb711ea43f073cdd21ab03cc90281c7d7368ea8b94b933.json (T: Build a gen AI–powered financial assistant with Am...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 03d9ffbdacdee098579ec3999efbe20b5054062c465a8e80e3343ef84003ebae.json (T: WordFinder app: Harnessing generative AI on AWS fo...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 4fb8db0fb6fea05a7ee657e22911995f5fae78d6c55e0cade8c3d2123a928e83.json (T: Get faster and actionable AWS Trusted Advisor insi...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8c720638603302506e9a10ad0975764249e9715202540642623ef90152d175a0.json (T: Best practices for Meta Llama 3.2 multimodal fine-...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 8e0690ab91d84ae4cf6b9b20ec73ed29803ced62b5f3382b7d7fc7edaec9dc0e.json (T: Extend large language models powered by Amazon Sag...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: eace7cf5fab89fcd3225cdc92b062bd36cbe95f143ffe1fd7176392c0b71adff.json (T: Automate document translation and standardization ...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a96280e6001c76efb3c21f0475e99ab63626d77560b53a3a5bc27092ce36d93c.json (T: Autonomous mortgage processing using Amazon Bedroc...)
+2025-05-04 04:55:09 - src.scrapers.news_scraper - WARNING - Hit max (20) processing https://aws.amazon.com/blogs/machine-learning/feed/.
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - Finished https://aws.amazon.com/blogs/machine-learning/feed/. Saved 7.
+2025-05-04 04:55:09 - src.scrapers.news_scraper - WARNING - Hit max articles (20). Stop scrape.
+2025-05-04 04:55:09 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved: 20 ---
+2025-05-04 04:55:09 - main_orchestrator - INFO - Scraper run completed. Saved 20 new raw files.
+2025-05-04 04:55:09 - main_orchestrator - INFO - --- Stage 3: Running Processing Cycle ---
+2025-05-04 04:55:09 - main_orchestrator - INFO - Loaded 120 articles from all_articles.json.
+2025-05-04 04:55:09 - main_orchestrator - INFO - Loaded 120 articles from all_articles.json for context.
+2025-05-04 04:55:09 - main_orchestrator - INFO - Found 20 scraped articles to process.
+2025-05-04 04:55:09 - main_orchestrator - INFO - Sorted scraped files by modification time (newest first).
+2025-05-04 04:55:09 - main_orchestrator - INFO - --- Processing article file: a96280e6001c76efb3c21f0475e99ab63626d77560b53a3a5bc27092ce36d93c.json ---
+2025-05-04 04:55:09 - main_orchestrator - INFO - Finding image for article ID: a96280e6001c76efb3c21f0475e99ab63626d77560b53a3a5bc27092ce36d93c...
+2025-05-04 04:55:09 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/autonomous-mortgage-processing-using-amazon-bedrock-data-automation-and-amazon-bedrock-agents/
+2025-05-04 04:55:09 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/05/01/ML-18689-IDP_in_mortgage_processing-1105x630.jpg
+2025-05-04 04:55:09 - main_orchestrator - INFO - Found image via source scrape for a96280e6001c76efb3c21f0475e99ab63626d77560b53a3a5bc27092ce36d93c.
+2025-05-04 04:55:09 - main_orchestrator - INFO - Article ID a96280e6001c76efb3c21f0475e99ab63626d77560b53a3a5bc27092ce36d93c passed Title+Image duplicate check.
+2025-05-04 04:55:09 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: a96280e6001c76efb3c21f0475e99ab63626d77560b53a3a5bc27092ce36d93c)
+2025-05-04 04:55:09 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a96280e6001c76efb3c21f0475e99ab63626d77560b53a3a5bc27092ce36d93c Title: Autonomous mortgage processing using Amazon Bedrock Data Aut...
+2025-05-04 04:55:18 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a96280e6001c76efb3c21f0475e99ab63626d77560b53a3a5bc27092ce36d93c: level=Boring, topic='Business', keyword='AI mortgage processing'
+2025-05-04 04:55:18 - main_orchestrator - INFO - Article ID a96280e6001c76efb3c21f0475e99ab63626d77560b53a3a5bc27092ce36d93c classified as 'Boring'. Skipping.
+2025-05-04 04:55:18 - main_orchestrator - INFO - --- Processing article file: eace7cf5fab89fcd3225cdc92b062bd36cbe95f143ffe1fd7176392c0b71adff.json ---
+2025-05-04 04:55:18 - main_orchestrator - INFO - Finding image for article ID: eace7cf5fab89fcd3225cdc92b062bd36cbe95f143ffe1fd7176392c0b71adff...
+2025-05-04 04:55:18 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/automate-document-translation-and-standardization-with-amazon-bedrock-and-amazon-translate/
+2025-05-04 04:55:18 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/ML-17090-updated-arch-856x630.png
+2025-05-04 04:55:18 - main_orchestrator - INFO - Found image via source scrape for eace7cf5fab89fcd3225cdc92b062bd36cbe95f143ffe1fd7176392c0b71adff.
+2025-05-04 04:55:18 - main_orchestrator - INFO - Article ID eace7cf5fab89fcd3225cdc92b062bd36cbe95f143ffe1fd7176392c0b71adff passed Title+Image duplicate check.
+2025-05-04 04:55:18 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: eace7cf5fab89fcd3225cdc92b062bd36cbe95f143ffe1fd7176392c0b71adff)
+2025-05-04 04:55:18 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: eace7cf5fab89fcd3225cdc92b062bd36cbe95f143ffe1fd7176392c0b71adff Title: Automate document translation and standardization with Amazo...
+2025-05-04 04:55:24 - src.agents.filter_news_agent - INFO - Filter verdict received for ID eace7cf5fab89fcd3225cdc92b062bd36cbe95f143ffe1fd7176392c0b71adff: level=Boring, topic='Software', keyword='AWS document translation'
+2025-05-04 04:55:24 - main_orchestrator - INFO - Article ID eace7cf5fab89fcd3225cdc92b062bd36cbe95f143ffe1fd7176392c0b71adff classified as 'Boring'. Skipping.
+2025-05-04 04:55:24 - main_orchestrator - INFO - --- Processing article file: 8c720638603302506e9a10ad0975764249e9715202540642623ef90152d175a0.json ---
+2025-05-04 04:55:24 - main_orchestrator - INFO - Finding image for article ID: 8c720638603302506e9a10ad0975764249e9715202540642623ef90152d175a0...
+2025-05-04 04:55:24 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/best-practices-for-meta-llama-3-2-multimodal-fine-tuning-on-amazon-bedrock/
+2025-05-04 04:55:24 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/05/01/best-practices-meta-llama-1120x630.jpg
+2025-05-04 04:55:24 - main_orchestrator - INFO - Found image via source scrape for 8c720638603302506e9a10ad0975764249e9715202540642623ef90152d175a0.
+2025-05-04 04:55:24 - main_orchestrator - INFO - Article ID 8c720638603302506e9a10ad0975764249e9715202540642623ef90152d175a0 passed Title+Image duplicate check.
+2025-05-04 04:55:24 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 8c720638603302506e9a10ad0975764249e9715202540642623ef90152d175a0)
+2025-05-04 04:55:24 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 8c720638603302506e9a10ad0975764249e9715202540642623ef90152d175a0 Title: Best practices for Meta Llama 3.2 multimodal fine-tuning on ...
+2025-05-04 04:55:32 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 8c720638603302506e9a10ad0975764249e9715202540642623ef90152d175a0: level=Boring, topic='Software', keyword='Multimodal fine-tuning'
+2025-05-04 04:55:32 - main_orchestrator - INFO - Article ID 8c720638603302506e9a10ad0975764249e9715202540642623ef90152d175a0 classified as 'Boring'. Skipping.
+2025-05-04 04:55:32 - main_orchestrator - INFO - --- Processing article file: 8e0690ab91d84ae4cf6b9b20ec73ed29803ced62b5f3382b7d7fc7edaec9dc0e.json ---
+2025-05-04 04:55:32 - main_orchestrator - INFO - Finding image for article ID: 8e0690ab91d84ae4cf6b9b20ec73ed29803ced62b5f3382b7d7fc7edaec9dc0e...
+2025-05-04 04:55:32 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/extend-large-language-models-powered-by-amazon-sagemaker-ai-using-model-context-protocol/
+2025-05-04 04:55:32 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/27/blogimage02-1.png
+2025-05-04 04:55:32 - main_orchestrator - INFO - Found image via source scrape for 8e0690ab91d84ae4cf6b9b20ec73ed29803ced62b5f3382b7d7fc7edaec9dc0e.
+2025-05-04 04:55:32 - main_orchestrator - INFO - Article ID 8e0690ab91d84ae4cf6b9b20ec73ed29803ced62b5f3382b7d7fc7edaec9dc0e passed Title+Image duplicate check.
+2025-05-04 04:55:32 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 8e0690ab91d84ae4cf6b9b20ec73ed29803ced62b5f3382b7d7fc7edaec9dc0e)
+2025-05-04 04:55:32 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 8e0690ab91d84ae4cf6b9b20ec73ed29803ced62b5f3382b7d7fc7edaec9dc0e Title: Extend large language models powered by Amazon SageMaker AI ...
+2025-05-04 04:55:40 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 8e0690ab91d84ae4cf6b9b20ec73ed29803ced62b5f3382b7d7fc7edaec9dc0e: level=Boring, topic='Software', keyword='agent-based systems integration'
+2025-05-04 04:55:40 - main_orchestrator - INFO - Article ID 8e0690ab91d84ae4cf6b9b20ec73ed29803ced62b5f3382b7d7fc7edaec9dc0e classified as 'Boring'. Skipping.
+2025-05-04 04:55:40 - main_orchestrator - INFO - --- Processing article file: 4fb8db0fb6fea05a7ee657e22911995f5fae78d6c55e0cade8c3d2123a928e83.json ---
+2025-05-04 04:55:40 - main_orchestrator - INFO - Finding image for article ID: 4fb8db0fb6fea05a7ee657e22911995f5fae78d6c55e0cade8c3d2123a928e83...
+2025-05-04 04:55:40 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/get-faster-and-actionable-aws-trusted-advisor-insights-to-make-data-driven-decisions-using-amazon-q-business/
+2025-05-04 04:55:40 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/05/02/SA_2-850x630.jpg
+2025-05-04 04:55:40 - main_orchestrator - INFO - Found image via source scrape for 4fb8db0fb6fea05a7ee657e22911995f5fae78d6c55e0cade8c3d2123a928e83.
+2025-05-04 04:55:40 - main_orchestrator - INFO - Article ID 4fb8db0fb6fea05a7ee657e22911995f5fae78d6c55e0cade8c3d2123a928e83 passed Title+Image duplicate check.
+2025-05-04 04:55:40 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 4fb8db0fb6fea05a7ee657e22911995f5fae78d6c55e0cade8c3d2123a928e83)
+2025-05-04 04:55:40 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 4fb8db0fb6fea05a7ee657e22911995f5fae78d6c55e0cade8c3d2123a928e83 Title: Get faster and actionable AWS Trusted Advisor insights to ma...
+2025-05-04 04:55:50 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 4fb8db0fb6fea05a7ee657e22911995f5fae78d6c55e0cade8c3d2123a928e83: level=Boring, topic='Software', keyword='AWS product update'
+2025-05-04 04:55:50 - main_orchestrator - INFO - Article ID 4fb8db0fb6fea05a7ee657e22911995f5fae78d6c55e0cade8c3d2123a928e83 classified as 'Boring'. Skipping.
+2025-05-04 04:55:50 - main_orchestrator - INFO - --- Processing article file: 03d9ffbdacdee098579ec3999efbe20b5054062c465a8e80e3343ef84003ebae.json ---
+2025-05-04 04:55:50 - main_orchestrator - INFO - Finding image for article ID: 03d9ffbdacdee098579ec3999efbe20b5054062c465a8e80e3343ef84003ebae...
+2025-05-04 04:55:50 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/wordfinder-app-harnessing-generative-ai-on-aws-for-aphasia-communication/
+2025-05-04 04:55:50 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/04/ML-16892WordFinder-app-Architecture.png
+2025-05-04 04:55:50 - main_orchestrator - INFO - Found image via source scrape for 03d9ffbdacdee098579ec3999efbe20b5054062c465a8e80e3343ef84003ebae.
+2025-05-04 04:55:50 - main_orchestrator - WARNING - Article ID 03d9ffbdacdee098579ec3999efbe20b5054062c465a8e80e3343ef84003ebae is DUPLICATE (Title & Image) of c942fb7066023a0c46d613f5c513f2c2f40fb0764eba0f12eacde6c0d087b115. Skipping.
+2025-05-04 04:55:50 - main_orchestrator - INFO - --- Processing article file: 03afcc08d94cdd18f4cb711ea43f073cdd21ab03cc90281c7d7368ea8b94b933.json ---
+2025-05-04 04:55:50 - main_orchestrator - INFO - Finding image for article ID: 03afcc08d94cdd18f4cb711ea43f073cdd21ab03cc90281c7d7368ea8b94b933...
+2025-05-04 04:55:50 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://aws.amazon.com/blogs/machine-learning/build-a-gen-ai-powered-financial-assistant-with-amazon-bedrock-multi-agent-collaboration/
+2025-05-04 04:55:50 - src.scrapers.image_scraper - INFO - Found og:image: https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/16/image001-1-1047x630.jpg
+2025-05-04 04:55:50 - main_orchestrator - INFO - Found image via source scrape for 03afcc08d94cdd18f4cb711ea43f073cdd21ab03cc90281c7d7368ea8b94b933.
+2025-05-04 04:55:50 - main_orchestrator - INFO - Article ID 03afcc08d94cdd18f4cb711ea43f073cdd21ab03cc90281c7d7368ea8b94b933 passed Title+Image duplicate check.
+2025-05-04 04:55:50 - src.agents.filter_news_agent - WARNING - Truncating summary (> 1000 chars) for filtering (Article ID: 03afcc08d94cdd18f4cb711ea43f073cdd21ab03cc90281c7d7368ea8b94b933)
+2025-05-04 04:55:50 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 03afcc08d94cdd18f4cb711ea43f073cdd21ab03cc90281c7d7368ea8b94b933 Title: Build a gen AI–powered financial assistant with Amazon Bedro...
+2025-05-04 04:55:56 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 03afcc08d94cdd18f4cb711ea43f073cdd21ab03cc90281c7d7368ea8b94b933: level=Boring, topic='Software', keyword='Amazon Bedrock feature'
+2025-05-04 04:55:56 - main_orchestrator - INFO - Article ID 03afcc08d94cdd18f4cb711ea43f073cdd21ab03cc90281c7d7368ea8b94b933 classified as 'Boring'. Skipping.
+2025-05-04 04:55:56 - main_orchestrator - INFO - --- Processing article file: 3b4044b68ad98f8bd8e3ea26642d03c0dc2ae1607fa1e61a348756c01b0bdfc6.json ---
+2025-05-04 04:55:56 - main_orchestrator - INFO - Finding image for article ID: 3b4044b68ad98f8bd8e3ea26642d03c0dc2ae1607fa1e61a348756c01b0bdfc6...
+2025-05-04 04:55:56 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/home-entertainment/tcl-a1-projector-review-hal9000-lookalike-is-affordable-but-flawed/#ftag=CAD590a51e
+2025-05-04 04:55:57 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/3f6951dd6b0e970955cde67d97e7c40295493847/hub/2025/02/23/81630776-7a59-4057-85f4-63cc825c04a6/tcl-a1-projector-3-of-5.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:55:57 - main_orchestrator - INFO - Found image via source scrape for 3b4044b68ad98f8bd8e3ea26642d03c0dc2ae1607fa1e61a348756c01b0bdfc6.
+2025-05-04 04:55:57 - main_orchestrator - INFO - Article ID 3b4044b68ad98f8bd8e3ea26642d03c0dc2ae1607fa1e61a348756c01b0bdfc6 passed Title+Image duplicate check.
+2025-05-04 04:55:57 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 3b4044b68ad98f8bd8e3ea26642d03c0dc2ae1607fa1e61a348756c01b0bdfc6 Title: TCL A1 Projector Review: HAL 9000 Look-Alike Is Affordable, ...
+2025-05-04 04:56:04 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 3b4044b68ad98f8bd8e3ea26642d03c0dc2ae1607fa1e61a348756c01b0bdfc6: level=Boring, topic='Hardware', keyword='TCL A1 projector'
+2025-05-04 04:56:04 - main_orchestrator - INFO - Article ID 3b4044b68ad98f8bd8e3ea26642d03c0dc2ae1607fa1e61a348756c01b0bdfc6 classified as 'Boring'. Skipping.
+2025-05-04 04:56:04 - main_orchestrator - INFO - --- Processing article file: 21fc85d3894bbbea289792b09916ef57c3237475f857df08a86b43ba068ec19b.json ---
+2025-05-04 04:56:04 - main_orchestrator - INFO - Finding image for article ID: 21fc85d3894bbbea289792b09916ef57c3237475f857df08a86b43ba068ec19b...
+2025-05-04 04:56:04 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/mobile/iphone-16-pro-max-vs-google-pixel-9-pro-xl-massive-phone-specs-compared/#ftag=CAD590a51e
+2025-05-04 04:56:04 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/cae07fea2d39297d6f74393a01627655bcc37668/hub/2024/09/11/4672f44e-e4bb-4ca3-9a45-92810c6b8ca2/apple-iphone-16-pro-vs-pixel-9-pro.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:56:04 - main_orchestrator - INFO - Found image via source scrape for 21fc85d3894bbbea289792b09916ef57c3237475f857df08a86b43ba068ec19b.
+2025-05-04 04:56:04 - main_orchestrator - INFO - Article ID 21fc85d3894bbbea289792b09916ef57c3237475f857df08a86b43ba068ec19b passed Title+Image duplicate check.
+2025-05-04 04:56:04 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 21fc85d3894bbbea289792b09916ef57c3237475f857df08a86b43ba068ec19b Title: iPhone 16 Pro Max vs. Pixel 9 Pro XL: Massive Phone Specs Co...
+2025-05-04 04:56:11 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 21fc85d3894bbbea289792b09916ef57c3237475f857df08a86b43ba068ec19b: level=Boring, topic='Hardware', keyword='Phone specs comparison'
+2025-05-04 04:56:11 - main_orchestrator - INFO - Article ID 21fc85d3894bbbea289792b09916ef57c3237475f857df08a86b43ba068ec19b classified as 'Boring'. Skipping.
+2025-05-04 04:56:11 - main_orchestrator - INFO - --- Processing article file: 3d92edd00282fd19e2e9d52e9919a2cf7ae1986d92e7e0ebec1359970eb4c4fd.json ---
+2025-05-04 04:56:11 - main_orchestrator - INFO - Finding image for article ID: 3d92edd00282fd19e2e9d52e9919a2cf7ae1986d92e7e0ebec1359970eb4c4fd...
+2025-05-04 04:56:11 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/home/internet/what-is-wi-fi-6e-and-is-it-worth-your-money/#ftag=CAD590a51e
+2025-05-04 04:56:11 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/f3a833bece58aa6f4706a33e43640ac3299c8416/hub/2025/04/28/be695ed4-c7af-4f84-a1bd-c9c0d5655c8f/gettyimages-1129117755-1.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:56:11 - main_orchestrator - INFO - Found image via source scrape for 3d92edd00282fd19e2e9d52e9919a2cf7ae1986d92e7e0ebec1359970eb4c4fd.
+2025-05-04 04:56:11 - main_orchestrator - INFO - Article ID 3d92edd00282fd19e2e9d52e9919a2cf7ae1986d92e7e0ebec1359970eb4c4fd passed Title+Image duplicate check.
+2025-05-04 04:56:11 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 3d92edd00282fd19e2e9d52e9919a2cf7ae1986d92e7e0ebec1359970eb4c4fd Title: What Is Wi-Fi 6E and Is It Worth Your Money?...
+2025-05-04 04:56:18 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 3d92edd00282fd19e2e9d52e9919a2cf7ae1986d92e7e0ebec1359970eb4c4fd: level=Boring, topic='Hardware', keyword='Wi-Fi 6E routers'
+2025-05-04 04:56:18 - main_orchestrator - INFO - Article ID 3d92edd00282fd19e2e9d52e9919a2cf7ae1986d92e7e0ebec1359970eb4c4fd classified as 'Boring'. Skipping.
+2025-05-04 04:56:18 - main_orchestrator - INFO - --- Processing article file: 9770f737908035934ba567d53b521ee9b2b365ba6534a729f700fc1f08a55021.json ---
+2025-05-04 04:56:18 - main_orchestrator - INFO - Finding image for article ID: 9770f737908035934ba567d53b521ee9b2b365ba6534a729f700fc1f08a55021...
+2025-05-04 04:56:18 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/gaming/missed-the-switch-2-preorder-why-its-ok-to-wait/#ftag=CAD590a51e
+2025-05-04 04:56:19 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/d7cc16dd5f03a8e6c9af74a8a1218f05e6d8db39/hub/2025/04/07/f17e8bda-0710-426b-bb07-9edc3505536c/switch-2-and-switch-specs-comparison-cnet-thumb-2.png?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:56:19 - main_orchestrator - INFO - Found image via source scrape for 9770f737908035934ba567d53b521ee9b2b365ba6534a729f700fc1f08a55021.
+2025-05-04 04:56:19 - main_orchestrator - INFO - Article ID 9770f737908035934ba567d53b521ee9b2b365ba6534a729f700fc1f08a55021 passed Title+Image duplicate check.
+2025-05-04 04:56:19 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 9770f737908035934ba567d53b521ee9b2b365ba6534a729f700fc1f08a55021 Title: Missed the Switch 2 Preorder? Why It's OK to Wait...
+2025-05-04 04:56:26 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 9770f737908035934ba567d53b521ee9b2b365ba6534a729f700fc1f08a55021: level=Boring, topic='Other', keyword='Switch 2 commentary'
+2025-05-04 04:56:26 - main_orchestrator - INFO - Article ID 9770f737908035934ba567d53b521ee9b2b365ba6534a729f700fc1f08a55021 classified as 'Boring'. Skipping.
+2025-05-04 04:56:26 - main_orchestrator - INFO - --- Processing article file: d6a49824dd692db1756ce91e066f6b41439155a6f8ab668c544f02a739e5ff6e.json ---
+2025-05-04 04:56:26 - main_orchestrator - INFO - Finding image for article ID: d6a49824dd692db1756ce91e066f6b41439155a6f8ab668c544f02a739e5ff6e...
+2025-05-04 04:56:26 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/health/sleep/best-cooling-comforters/#ftag=CAD590a51e
+2025-05-04 04:56:26 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/95f19531a7760d7e24a06363fd08ab884758b5e2/hub/2023/07/31/7f4412f0-e1cf-486c-a4a7-bd77cc9a0804/img-4406.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:56:26 - main_orchestrator - INFO - Found image via source scrape for d6a49824dd692db1756ce91e066f6b41439155a6f8ab668c544f02a739e5ff6e.
+2025-05-04 04:56:26 - main_orchestrator - INFO - Article ID d6a49824dd692db1756ce91e066f6b41439155a6f8ab668c544f02a739e5ff6e passed Title+Image duplicate check.
+2025-05-04 04:56:26 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d6a49824dd692db1756ce91e066f6b41439155a6f8ab668c544f02a739e5ff6e Title: Best Cooling Comforters of 2025, Approved by a Sleep Expert ...
+2025-05-04 04:56:35 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d6a49824dd692db1756ce91e066f6b41439155a6f8ab668c544f02a739e5ff6e: level=Boring, topic='Other', keyword='cooling comforters'
+2025-05-04 04:56:35 - main_orchestrator - INFO - Article ID d6a49824dd692db1756ce91e066f6b41439155a6f8ab668c544f02a739e5ff6e classified as 'Boring'. Skipping.
+2025-05-04 04:56:35 - main_orchestrator - INFO - --- Processing article file: d59435454c4333ca15fc220872b4a73e4728d078b76d32b94a02c7ecd0686181.json ---
+2025-05-04 04:56:35 - main_orchestrator - INFO - Finding image for article ID: d59435454c4333ca15fc220872b4a73e4728d078b76d32b94a02c7ecd0686181...
+2025-05-04 04:56:35 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/personal-finance/video-game-prices-might-increase-this-year-heres-why-i-dont-mind-paying-more/#ftag=CAD590a51e
+2025-05-04 04:56:35 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/cbad4def5245021957c2b110c553b347e8100657/hub/2025/04/11/4d5d8f7c-14da-4178-8d09-3d624f13105c/cnet-money-background.png?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:56:35 - main_orchestrator - INFO - Found image via source scrape for d59435454c4333ca15fc220872b4a73e4728d078b76d32b94a02c7ecd0686181.
+2025-05-04 04:56:35 - main_orchestrator - INFO - Article ID d59435454c4333ca15fc220872b4a73e4728d078b76d32b94a02c7ecd0686181 passed Title+Image duplicate check.
+2025-05-04 04:56:35 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d59435454c4333ca15fc220872b4a73e4728d078b76d32b94a02c7ecd0686181 Title: Microsoft Is Just the First to Announce Higher Game Prices, ...
+2025-05-04 04:56:41 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d59435454c4333ca15fc220872b4a73e4728d078b76d32b94a02c7ecd0686181: level=Boring, topic='Other', keyword='game price increases'
+2025-05-04 04:56:41 - main_orchestrator - INFO - Article ID d59435454c4333ca15fc220872b4a73e4728d078b76d32b94a02c7ecd0686181 classified as 'Boring'. Skipping.
+2025-05-04 04:56:41 - main_orchestrator - INFO - --- Processing article file: b6ae31c2f286a25d5248da11d0000ae1bd6c32664fb5974ff8001777ef285069.json ---
+2025-05-04 04:56:41 - main_orchestrator - INFO - Finding image for article ID: b6ae31c2f286a25d5248da11d0000ae1bd6c32664fb5974ff8001777ef285069...
+2025-05-04 04:56:41 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/health/fitness/mothers-day-fitness-gift-guide-gift-ideas-from-mom-fitness-expert/#ftag=CAD590a51e
+2025-05-04 04:56:42 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/c733c6d65ddbfeda8131ba077d6ae6ac9b2bdee0/hub/2025/05/02/1edd565a-de40-4cd5-aeb6-7bf6ef497df5/promo.png?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:56:42 - main_orchestrator - INFO - Found image via source scrape for b6ae31c2f286a25d5248da11d0000ae1bd6c32664fb5974ff8001777ef285069.
+2025-05-04 04:56:42 - main_orchestrator - INFO - Article ID b6ae31c2f286a25d5248da11d0000ae1bd6c32664fb5974ff8001777ef285069 passed Title+Image duplicate check.
+2025-05-04 04:56:42 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: b6ae31c2f286a25d5248da11d0000ae1bd6c32664fb5974ff8001777ef285069 Title: Mother’s Day Fitness Gift Guide: 10 Gift Ideas From a Mom an...
+2025-05-04 04:56:48 - src.agents.filter_news_agent - INFO - Filter verdict received for ID b6ae31c2f286a25d5248da11d0000ae1bd6c32664fb5974ff8001777ef285069: level=Boring, topic='Other', keyword='Mother's Day gifts'
+2025-05-04 04:56:48 - main_orchestrator - INFO - Article ID b6ae31c2f286a25d5248da11d0000ae1bd6c32664fb5974ff8001777ef285069 classified as 'Boring'. Skipping.
+2025-05-04 04:56:48 - main_orchestrator - INFO - --- Processing article file: f2c962515b78837f5c75553078a98ab29b0531d8670238a9b64fe38a526e781e.json ---
+2025-05-04 04:56:48 - main_orchestrator - INFO - Finding image for article ID: f2c962515b78837f5c75553078a98ab29b0531d8670238a9b64fe38a526e781e...
+2025-05-04 04:56:48 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/computing/spring-cleaning-for-tech-how-to-recycle-computers-and-printers-for-free/#ftag=CAD590a51e
+2025-05-04 04:56:48 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/dbff43b9aec33a7ba030a71627e94dbfdc4b29c9/hub/2025/04/09/cbcd5942-8195-4883-959e-0b8545b8db2a/gettyimages-77510867.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:56:48 - main_orchestrator - INFO - Found image via source scrape for f2c962515b78837f5c75553078a98ab29b0531d8670238a9b64fe38a526e781e.
+2025-05-04 04:56:48 - main_orchestrator - INFO - Article ID f2c962515b78837f5c75553078a98ab29b0531d8670238a9b64fe38a526e781e passed Title+Image duplicate check.
+2025-05-04 04:56:48 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: f2c962515b78837f5c75553078a98ab29b0531d8670238a9b64fe38a526e781e Title: Spring Cleaning for Tech: How to Recycle Computers and Print...
+2025-05-04 04:56:55 - src.agents.filter_news_agent - INFO - Filter verdict received for ID f2c962515b78837f5c75553078a98ab29b0531d8670238a9b64fe38a526e781e: level=Boring, topic='Other', keyword='Tech recycling tips'
+2025-05-04 04:56:55 - main_orchestrator - INFO - Article ID f2c962515b78837f5c75553078a98ab29b0531d8670238a9b64fe38a526e781e classified as 'Boring'. Skipping.
+2025-05-04 04:56:55 - main_orchestrator - INFO - --- Processing article file: 2cb7b67f51dbc868f11c964ae5b43b511dfd1d2c6a35bf8309a7a13cdaf90bfb.json ---
+2025-05-04 04:56:55 - main_orchestrator - INFO - Finding image for article ID: 2cb7b67f51dbc868f11c964ae5b43b511dfd1d2c6a35bf8309a7a13cdaf90bfb...
+2025-05-04 04:56:55 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/services-and-software/mobland-release-schedule-how-to-watch-episode-6-of-the-tom-hardy-series/#ftag=CAD590a51e
+2025-05-04 04:56:55 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/f984bc5ccbaa46e9b65504b74df7ac55716eb6f5/hub/2025/05/02/d32c12af-663d-4e6a-8491-e63036bd189b/mobland-106-lv-250128-01007-rt-3.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:56:55 - main_orchestrator - INFO - Found image via source scrape for 2cb7b67f51dbc868f11c964ae5b43b511dfd1d2c6a35bf8309a7a13cdaf90bfb.
+2025-05-04 04:56:55 - main_orchestrator - INFO - Article ID 2cb7b67f51dbc868f11c964ae5b43b511dfd1d2c6a35bf8309a7a13cdaf90bfb passed Title+Image duplicate check.
+2025-05-04 04:56:55 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 2cb7b67f51dbc868f11c964ae5b43b511dfd1d2c6a35bf8309a7a13cdaf90bfb Title: 'MobLand' Release Schedule: How to Watch Episode 6 of the To...
+2025-05-04 04:57:04 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 2cb7b67f51dbc868f11c964ae5b43b511dfd1d2c6a35bf8309a7a13cdaf90bfb: level=Boring, topic='Other', keyword='TV show release'
+2025-05-04 04:57:04 - main_orchestrator - INFO - Article ID 2cb7b67f51dbc868f11c964ae5b43b511dfd1d2c6a35bf8309a7a13cdaf90bfb classified as 'Boring'. Skipping.
+2025-05-04 04:57:04 - main_orchestrator - INFO - --- Processing article file: bab8eb1d13c152c60217394637c4308160bceb4d14fd656efff7ae3c0e0d7aa0.json ---
+2025-05-04 04:57:04 - main_orchestrator - INFO - Finding image for article ID: bab8eb1d13c152c60217394637c4308160bceb4d14fd656efff7ae3c0e0d7aa0...
+2025-05-04 04:57:04 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/mobile/are-shokz-new-opendots-one-better-than-boses-ultra-open-earbuds/#ftag=CAD590a51e
+2025-05-04 04:57:04 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/ebe569e8ce100a39f68d58fe00dcf549acad4ea7/hub/2025/05/02/90ff1f5e-8a7d-442c-a03f-99d09fd8335a/shokz-opendots-one-in-hand.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:57:04 - main_orchestrator - INFO - Found image via source scrape for bab8eb1d13c152c60217394637c4308160bceb4d14fd656efff7ae3c0e0d7aa0.
+2025-05-04 04:57:04 - main_orchestrator - INFO - Article ID bab8eb1d13c152c60217394637c4308160bceb4d14fd656efff7ae3c0e0d7aa0 passed Title+Image duplicate check.
+2025-05-04 04:57:04 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: bab8eb1d13c152c60217394637c4308160bceb4d14fd656efff7ae3c0e0d7aa0 Title: Are Shokz' New OpenDots One Better Than Bose's Ultra Open Ea...
+2025-05-04 04:57:12 - src.agents.filter_news_agent - INFO - Filter verdict received for ID bab8eb1d13c152c60217394637c4308160bceb4d14fd656efff7ae3c0e0d7aa0: level=Boring, topic='Hardware', keyword='clip-on earbuds'
+2025-05-04 04:57:12 - main_orchestrator - INFO - Article ID bab8eb1d13c152c60217394637c4308160bceb4d14fd656efff7ae3c0e0d7aa0 classified as 'Boring'. Skipping.
+2025-05-04 04:57:12 - main_orchestrator - INFO - --- Processing article file: 056b38a267609afdaa02dd5756b0256626893da2c5c8f604ef877ba735071d2d.json ---
+2025-05-04 04:57:12 - main_orchestrator - INFO - Finding image for article ID: 056b38a267609afdaa02dd5756b0256626893da2c5c8f604ef877ba735071d2d...
+2025-05-04 04:57:12 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/health/fitness/fitness-experts-reveal-the-truth-about-vibration-plates/#ftag=CAD590a51e
+2025-05-04 04:57:12 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/371765ce18a9feee45cf63109148c8b552bf9b7a/hub/2025/01/09/ce0bddc4-e164-4864-8e49-76bfcf91327a/person-exercising-on-vibration-plate.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:57:12 - main_orchestrator - INFO - Found image via source scrape for 056b38a267609afdaa02dd5756b0256626893da2c5c8f604ef877ba735071d2d.
+2025-05-04 04:57:12 - main_orchestrator - INFO - Article ID 056b38a267609afdaa02dd5756b0256626893da2c5c8f604ef877ba735071d2d passed Title+Image duplicate check.
+2025-05-04 04:57:12 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 056b38a267609afdaa02dd5756b0256626893da2c5c8f604ef877ba735071d2d Title: Fitness Experts Reveal the Truth About Vibration Plates...
+2025-05-04 04:57:19 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 056b38a267609afdaa02dd5756b0256626893da2c5c8f604ef877ba735071d2d: level=Boring, topic='Other', keyword='fitness equipment'
+2025-05-04 04:57:19 - main_orchestrator - INFO - Article ID 056b38a267609afdaa02dd5756b0256626893da2c5c8f604ef877ba735071d2d classified as 'Boring'. Skipping.
+2025-05-04 04:57:19 - main_orchestrator - INFO - --- Processing article file: c31c341d4e6f0655560b658aad3580d266e6bc97af60886bd01999bd2e4fa8bb.json ---
+2025-05-04 04:57:19 - main_orchestrator - INFO - Finding image for article ID: c31c341d4e6f0655560b658aad3580d266e6bc97af60886bd01999bd2e4fa8bb...
+2025-05-04 04:57:19 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/news/best-garden-subscription-and-seed-delivery/#ftag=CAD590a51e
+2025-05-04 04:57:20 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/5dc7d49cdca6570935c2a3806985a131735650a7/hub/2025/04/29/6b4ea735-e71e-48c3-bf71-50e5644556fa/gettyimages-1742966229.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:57:20 - main_orchestrator - INFO - Found image via source scrape for c31c341d4e6f0655560b658aad3580d266e6bc97af60886bd01999bd2e4fa8bb.
+2025-05-04 04:57:20 - main_orchestrator - INFO - Article ID c31c341d4e6f0655560b658aad3580d266e6bc97af60886bd01999bd2e4fa8bb passed Title+Image duplicate check.
+2025-05-04 04:57:20 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: c31c341d4e6f0655560b658aad3580d266e6bc97af60886bd01999bd2e4fa8bb Title: Best Garden and Seed Delivery Services for 2025...
+2025-05-04 04:57:29 - src.agents.filter_news_agent - INFO - Filter verdict received for ID c31c341d4e6f0655560b658aad3580d266e6bc97af60886bd01999bd2e4fa8bb: level=Boring, topic='Other', keyword='garden delivery services'
+2025-05-04 04:57:29 - main_orchestrator - INFO - Article ID c31c341d4e6f0655560b658aad3580d266e6bc97af60886bd01999bd2e4fa8bb classified as 'Boring'. Skipping.
+2025-05-04 04:57:29 - main_orchestrator - INFO - --- Processing article file: 933c1e40459c816a084244358de18bca4f224a1f6a7b5810169c1fb221f44f4a.json ---
+2025-05-04 04:57:29 - main_orchestrator - INFO - Finding image for article ID: 933c1e40459c816a084244358de18bca4f224a1f6a7b5810169c1fb221f44f4a...
+2025-05-04 04:57:29 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/personal-finance/banking/the-next-interest-rate-decision-could-affect-your-finances-more-than-you-think/#ftag=CAD590a51e
+2025-05-04 04:57:29 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/7d27324fd7b1f48f088fddccaa3b204dfc35493c/hub/2024/08/05/bc53700b-a2c3-4a54-900f-e5ead2ce2d0a/fed-interest-rate.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-04 04:57:29 - main_orchestrator - INFO - Found image via source scrape for 933c1e40459c816a084244358de18bca4f224a1f6a7b5810169c1fb221f44f4a.
+2025-05-04 04:57:29 - main_orchestrator - INFO - Article ID 933c1e40459c816a084244358de18bca4f224a1f6a7b5810169c1fb221f44f4a passed Title+Image duplicate check.
+2025-05-04 04:57:29 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 933c1e40459c816a084244358de18bca4f224a1f6a7b5810169c1fb221f44f4a Title: The Next Interest Rate Decision Could Affect Your Finances M...
+2025-05-04 04:57:37 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 933c1e40459c816a084244358de18bca4f224a1f6a7b5810169c1fb221f44f4a: level=Boring, topic='Finance', keyword='interest rate impact'
+2025-05-04 04:57:37 - main_orchestrator - INFO - Article ID 933c1e40459c816a084244358de18bca4f224a1f6a7b5810169c1fb221f44f4a classified as 'Boring'. Skipping.
+2025-05-04 04:57:37 - main_orchestrator - INFO - Processing cycle complete. Success: 0, Failed/Skipped/Duplicate: 20
+2025-05-04 04:57:37 - main_orchestrator - INFO - No successful articles processed in this run to send to Make.com webhook.
+2025-05-04 04:57:37 - main_orchestrator - INFO - --- Stage 4: Generating Sitemap ---
+2025-05-04 04:57:37 - generate_sitemap - INFO - Starting sitemap generation...
+2025-05-04 04:57:37 - generate_sitemap - INFO - Loaded 120 articles.
+2025-05-04 04:57:37 - generate_sitemap - INFO - Sitemap successfully generated with 121 URLs and saved to /home/runner/work/Dacoola/Dacoola/public/sitemap.xml
+2025-05-04 04:57:37 - main_orchestrator - INFO - Sitemap generation completed successfully.
+2025-05-04 04:57:37 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (151.05 seconds) === ---
