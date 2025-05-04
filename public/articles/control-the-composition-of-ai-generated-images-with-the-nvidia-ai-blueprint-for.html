@@ -52,7 +52,7 @@
     <!-- *** Stylesheets & Icons *** -->
     <link rel="stylesheet" href="../css/styles.css"> <!-- Path relative to public/articles/ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Favicon: Using absolute URL -->
+    <!-- Favicon: Using local path assuming it exists in public/images/ -->
     <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png">
 
     <!-- *** JSON-LD Structured Data *** -->
@@ -76,14 +76,14 @@
     </script>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-      gtag('config', 'G-WGJ5MFBC6X');
-    </script>
+  gtag('config', 'G-WGJ5MFBC6X');
+</script>
 
 </head>
 <body>
@@ -158,13 +158,13 @@
 
     <!-- *** GLOBAL FIXED BROWSER TTS PLAYER BUTTON & ELEMENT *** -->
     <!-- This button will trigger SpeechSynthesis for the main article content -->
-    <!-- Removed extra div wrapper -->
-    <button id="global-tts-player-button" title="Listen to article (Browser TTS)">
-        <i class="fas fa-headphones"></i> <!-- Headphones Icon -->
-    </button>
-    <!-- Hidden audio element (still useful if you ever re-add pre-generated audio fallback) -->
-    <audio id="global-audio-player" preload="none"></audio>
-
+    <div class="article-card-actions"> <!-- Using this class for styling consistency, maybe rename later -->
+        <button id="global-tts-player-button" title="Listen to article (Browser TTS)">
+            <i class="fas fa-headphones"></i> <!-- Headphones Icon -->
+        </button>
+        <!-- Hidden audio element (still useful if you ever re-add pre-generated audio fallback) -->
+        <audio id="global-audio-player" preload="none"></audio>
+    </div>
 
     <!-- Link JS -->
     <script src="../js/script.js"></script> <!-- Path relative to public/articles/ -->
