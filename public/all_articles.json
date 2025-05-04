@@ -2318,6 +2318,98 @@
       "trend_score": 12.39
     },
     {
+      "id": "e2b1b91ef607c28217f93b58b5813fb507c23b5ca01a868d1dc7d16e3f98eda4",
+      "title": "Instagram still posing serious risks to children, campaigners say",
+      "link": "articles/instagram-still-posing-serious-risks-to-children,-campaigners-say.html",
+      "published_iso": "2025-04-23T16:01:05Z",
+      "summary_short": "Instagram's child safety measures fall short as users still face sexualized content and stereotypes, researchers warn.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/43e7/live/e8b73820-1f7d-11f0-acbf-41bf5b8e34ef.jpg",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "Instagram child safety",
+        "social media risks for children",
+        "harmful content on Instagram",
+        "child protection on social media",
+        "Instagram safety measures",
+        "mental health impact on minors",
+        "social media regulation",
+        "algorithmic moderation",
+        "online safety for young users"
+      ],
+      "audio_url": null,
+      "trend_score": 12.75
+    },
+    {
+      "id": "f303e63c753f426187329158cfa9b1ed4431ab058860eca24cc39bd8915129c5",
+      "title": "Apple and Meta attack 'unfair' €700m EU fines",
+      "link": "articles/apple-and-meta-attack-'unfair'-€700m-eu-fines.html",
+      "published_iso": "2025-04-23T15:46:36Z",
+      "summary_short": "Apple and Meta accuse the EU of unfairly targeting US firms with €700m fines. Read about the escalating EU fines on tech dispute.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/10b2/live/30e26320-202f-11f0-8ff6-2f179a342bec.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Apple",
+        "Meta",
+        "EU fines",
+        "Big Tech regulation",
+        "US tech companies",
+        "European Union antitrust",
+        "tech industry compliance",
+        "regulatory penalties",
+        "digital market oversight"
+      ],
+      "audio_url": null,
+      "trend_score": 12.75
+    },
+    {
+      "id": "84885ddaa246a57537d177617b8328e47e79297c163ebbf408802dc52f8c8dd2",
+      "title": "Tech Life",
+      "link": "articles/tech-life.html",
+      "published_iso": "2025-04-22T19:30:00Z",
+      "summary_short": "Discover how AI dolphin communication research is decoding the secrets of marine life interactions. Learn more about this breakthrough.",
+      "image_url": "https://ichef.bbci.co.uk/images/ic/1024x576/p0l5v4kn.jpg",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "Artificial Intelligence",
+        "Dolphin Communication",
+        "Machine Learning",
+        "Marine Biology",
+        "AI Research",
+        "Interspecies Communication",
+        "Conservation Efforts",
+        "Behavioral Patterns",
+        "Non-Human Languages"
+      ],
+      "audio_url": null,
+      "trend_score": 12.61
+    },
+    {
+      "id": "cd96b989bc97515e82ae74b8b59127dcb352d2b0b8b3c9172f3118933c73d352",
+      "title": "Films made with AI can win Oscars, Academy says",
+      "link": "articles/films-made-with-ai-can-win-oscars,-academy-says.html",
+      "published_iso": "2025-04-22T11:15:11Z",
+      "summary_short": "The Academy confirms AI-made films can win Oscars but will weigh human involvement. Explore the implications of AI in Oscars.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/6bb0/live/c35e9800-1f70-11f0-b265-abe347419ae3.jpg",
+      "topic": "Art & Media",
+      "is_breaking": false,
+      "tags": [
+        "AI in Oscars",
+        "Academy Awards AI films",
+        "AI filmmaking",
+        "Human creativity in AI films",
+        "AI in entertainment industry",
+        "Oscars eligibility rules",
+        "AI-generated scripts",
+        "Hollywood AI debate",
+        "AI and artistic tradition"
+      ],
+      "audio_url": null,
+      "trend_score": 12.55
+    },
+    {
       "id": "94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466",
       "title": "Generative AI is reshaping South Korea’s webcomics industry",
       "link": "articles/generative-ai-is-reshaping-south-koreas-webcomics-industry.html",
@@ -2340,6 +2432,28 @@
       ],
       "audio_url": null,
       "trend_score": 10.0
+    },
+    {
+      "id": "3b49c01a0fcdd404db40599697d097e26866287d99cf906b0ad144498184a46b",
+      "title": "US sets tariffs of up to 3,521% on South East Asia solar panels",
+      "link": "articles/us-sets-tariffs-of-up-to-3,521-on-south-east-asia-solar-panels.html",
+      "published_iso": "2025-04-22T06:49:22Z",
+      "summary_short": "The US has set steep solar panel tariffs of up to 3,521% on Chinese companies operating in South East Asia. Learn the impact.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/933e/live/9c106800-1fe8-11f0-89df-fbfd5d939728.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "US Solar Tariffs",
+        "South East Asia Solar Panels",
+        "Chinese Solar Manufacturers",
+        "Trade Restrictions",
+        "Renewable Energy Transition",
+        "Domestic Solar Manufacturing",
+        "Solar Supply Chains",
+        "Solar Project Costs"
+      ],
+      "audio_url": null,
+      "trend_score": 12.02
     },
     {
       "id": "6c9a3b07b6c6e73549b5edf5a8aa8b5f1563de1e099df5fb85064e4df0b1383b",

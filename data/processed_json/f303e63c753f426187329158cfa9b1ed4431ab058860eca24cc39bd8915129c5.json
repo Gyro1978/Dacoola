@@ -1,0 +1,43 @@
+{
+    "id": "f303e63c753f426187329158cfa9b1ed4431ab058860eca24cc39bd8915129c5",
+    "title": "Apple and Meta attack 'unfair' €700m EU fines",
+    "link": "https://www.bbc.com/news/articles/cm248vzg9jwo",
+    "published_iso": "2025-04-23T15:46:36Z",
+    "summary": "The tech giants have reacted with fury, accusing the EU of unfairly pursuing US companies.",
+    "source_feed": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+    "scraped_at_iso": "2025-05-04T03:35:35Z",
+    "selected_image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/10b2/live/30e26320-202f-11f0-8ff6-2f179a342bec.jpg",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Regulation",
+        "reasoning_summary": "The summary reports a concrete event involving major tech companies reacting to significant EU fines, indicating a notable regulatory action with potential industry-wide implications.",
+        "primary_topic_keyword": "EU fines on tech"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-04T03:39:45Z",
+    "topic": "Regulation",
+    "is_breaking": false,
+    "primary_keyword": "EU fines on tech",
+    "seo_agent_results": {
+        "generated_title_tag": "Apple, Meta Challenge €700m EU Fines on Tech",
+        "generated_meta_description": "Apple and Meta accuse the EU of unfairly targeting US firms with €700m fines. Read about the escalating EU fines on tech dispute.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Apple, Meta Challenge €700m EU Fines on Tech\",  \n  \"description\": \"Apple and Meta accuse the EU of unfairly targeting US firms with €700m fines. Read about the escalating EU fines on tech dispute.\",  \n  \"keywords\": [\"EU fines on tech\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.bbc.com/news/articles/cm248vzg9jwo\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://ichef.bbci.co.uk/news/1024/branded_news/10b2/live/30e26320-202f-11f0-8ff6-2f179a342bec.jpg\" },  \n  \"datePublished\": \"2025-04-23T15:46:36Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Apple and Meta Attack 'Unfair' €700m EU Fines  \nApple and Meta have strongly criticized the European Union, accusing regulators of unfairly targeting US tech companies with hefty fines totaling €700 million. The firms argue that the penalties are unjust and reflect bias against American corporations.  \n\n### Why It Matters  \nThis dispute highlights growing tensions between Big Tech and EU regulators, who have been tightening oversight of digital markets. The fines could set a precedent for future enforcement actions, signaling stricter compliance demands for global tech firms operating in Europe. If upheld, these penalties may push companies to reconsider their regulatory strategies in the region."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Apple",
+        "Meta",
+        "EU fines",
+        "Big Tech regulation",
+        "US tech companies",
+        "European Union antitrust",
+        "tech industry compliance",
+        "regulatory penalties",
+        "digital market oversight"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 12.75,
+    "slug": "apple-and-meta-attack-'unfair'-€700m-eu-fines",
+    "audio_url": null
+}
