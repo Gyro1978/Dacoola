@@ -163,3 +163,359 @@
 2025-05-04 02:22:21 - generate_sitemap - INFO - Sitemap successfully generated with 109 URLs and saved to /home/runner/work/Dacoola/Dacoola/public/sitemap.xml
 2025-05-04 02:22:21 - main_orchestrator - INFO - Sitemap generation completed successfully.
 2025-05-04 02:22:21 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (5.04 seconds) === ---
+2025-05-04 03:02:15 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/
+2025-05-04 03:02:15 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-04 03:02:15 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-04T03:02:15.194997+00:00) === ---
+2025-05-04 03:02:15 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-04 03:02:15 - main_orchestrator - INFO - Found 298 already fully processed articles.
+2025-05-04 03:02:15 - main_orchestrator - INFO - Total initial processed IDs passed to scraper: 941
+2025-05-04 03:02:15 - main_orchestrator - INFO - --- Stage 1: Running News Scraper ---
+2025-05-04 03:02:15 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (17 feeds) ---
+2025-05-04 03:02:15 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-04 03:02:15 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-04 03:02:15 - src.scrapers.news_scraper - INFO - Finished https://techcrunch.com/feed/. Saved 0.
+2025-05-04 03:02:15 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-04 03:02:15 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-04 03:02:15 - src.scrapers.news_scraper - INFO - Finished https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0.
+2025-05-04 03:02:15 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Finished https://blogs.nvidia.com/feed/. Saved 0.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Checking feed: https://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Feed https://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Finished https://feeds.arstechnica.com/arstechnica/technology-lab. Saved 0.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Finished https://venturebeat.com/category/ai/feed/. Saved 0.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Contains 10 entries.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Finished https://www.wired.com/feed/tag/ai/latest/rss. Saved 0.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Checking feed: https://www.theverge.com/rss/index.xml
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Feed https://www.theverge.com/rss/index.xml fetched. Contains 10 entries.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Finished https://www.theverge.com/rss/index.xml. Saved 0.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Checking feed: https://www.zdnet.com/topic/artificial-intelligence/rss.xml
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Feed https://www.zdnet.com/topic/artificial-intelligence/rss.xml fetched. Contains 20 entries.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Finished https://www.zdnet.com/topic/artificial-intelligence/rss.xml. Saved 0.
+2025-05-04 03:02:16 - src.scrapers.news_scraper - INFO - Checking feed: https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - Feed https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - Finished https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/. Saved 0.
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - Checking feed: https://feeds.bbci.co.uk/news/technology/rss.xml
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - Feed https://feeds.bbci.co.uk/news/technology/rss.xml fetched. Contains 48 entries.
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3.json (T: Apple says most US-bound iPhones no longer made in...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: e789768c544ba356de2b3899cbd7f5a707abd5147dafa0feedbb155464a51c6e.json (T: Harrods latest retailer to be hit by cyber attack...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 9558fa54379777cb76775ca4c8b61e8188ece42a04f313f4342ad151d65b983b.json (T: Xbox prices hiked worldwide amid tariff uncertaint...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 828d2002711baa52b6d73453b964cace97bbefc1ab932cf85703fb21f6398ee4.json (T: 'They wanted $4m': Lessons for M&S from other cybe...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d02dea74797a463a29d00f1484d02d3f95e8f378259c9f25e2faa08fbcd9bb07.json (T: Co-op cyber attack: Staff told to keep cameras on ...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d3c3af1df6ee4eb8fc9f726d7923e91a664bd03785576d591b8ef5531aeaed34.json (T: Tesla denies contacting headhunters to replace Mus...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1.json (T: Meta warns of 'worse' experience for European user...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09.json (T: Apple referred for possible criminal contempt inve...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: e7f35460f49d15e768369b0ef563fa1e315cb33b5e2acfae40f6bbbee0a0f69c.json (T: Hackers target the Co-op as police probe M&S cyber...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c.json (T: Update that made ChatGPT 'dangerously' sycophantic...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 02d892667a3e033e19e0f0cbbbb2f4e64dab81a951709a04e5d551a217357391.json (T: Robot vacuums 'could water plants or play with cat...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: d763cc775d75c066e8ded61acea7560bab30e0bd8d6a96db6a2538eb5da9efad.json (T: Why is the M&S cyber attack chaos taking so long t...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: a0c7c3c2bcd74370402a92ebeee6a41c42389e682a8354cfe4e048f29635ea4d.json (T: Some M&S stores left with empty shelves after cybe...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07.json (T: M&S stops online orders and issues refunds after c...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 3d5b377880fa3829f2eb05e9995b91c348259015d5fd21b04e0ce20fe214720f.json (T: How Armenia is trying to build a Silicon Valley in...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709.json (T: Overhaul algorithms and age checks or face fines, ...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 7129aac8e78b06ec6c84bc432a4848322e60102fa4642fff65735e121fcd08ab.json (T: How can you keep your child safe online?...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 0b2ef1392058c61b8f49bd217bab845c7ecb5215e07b9a534bd6e4f945cab4ab.json (T: Trump crypto soars as president offers dinner to t...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 5e189574c740b0df0bf41b120f62744a11647c666fd3676e5626f0eba3ae45b0.json (T: ChatGPT-maker wants to buy Google Chrome...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: 42dc26578ab6f2bb81c4bd5d115d673f0fc7d3bb717475c2b69ae4ec554718d5.json (T: WhatsApp defends 'optional' AI tool that cannot be...)
+2025-05-04 03:02:17 - src.scrapers.news_scraper - WARNING - Hit max (20) processing https://feeds.bbci.co.uk/news/technology/rss.xml.
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - Finished https://feeds.bbci.co.uk/news/technology/rss.xml. Saved 20.
+2025-05-04 03:02:17 - src.scrapers.news_scraper - WARNING - Hit max articles (20). Stop scrape.
+2025-05-04 03:02:17 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved: 20 ---
+2025-05-04 03:02:17 - main_orchestrator - INFO - Scraper run completed. Saved 20 new raw files.
+2025-05-04 03:02:17 - main_orchestrator - INFO - --- Stage 2: Running Processing Cycle ---
+2025-05-04 03:02:17 - main_orchestrator - INFO - Loaded 108 articles from all_articles.json.
+2025-05-04 03:02:17 - main_orchestrator - INFO - Loaded 108 articles from all_articles.json for context.
+2025-05-04 03:02:17 - main_orchestrator - INFO - Found 20 scraped articles to process.
+2025-05-04 03:02:17 - main_orchestrator - INFO - Sorted scraped files by modification time (newest first).
+2025-05-04 03:02:17 - main_orchestrator - INFO - --- Processing article file: 42dc26578ab6f2bb81c4bd5d115d673f0fc7d3bb717475c2b69ae4ec554718d5.json ---
+2025-05-04 03:02:17 - main_orchestrator - INFO - Finding image for article ID: 42dc26578ab6f2bb81c4bd5d115d673f0fc7d3bb717475c2b69ae4ec554718d5...
+2025-05-04 03:02:17 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cd7vzw78gz9o
+2025-05-04 03:02:18 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/821f/live/010a6e10-1f79-11f0-bdfc-33d5f1a51c32.jpg
+2025-05-04 03:02:18 - main_orchestrator - INFO - Found image via source scrape for 42dc26578ab6f2bb81c4bd5d115d673f0fc7d3bb717475c2b69ae4ec554718d5.
+2025-05-04 03:02:18 - main_orchestrator - INFO - Article ID 42dc26578ab6f2bb81c4bd5d115d673f0fc7d3bb717475c2b69ae4ec554718d5 passed Title+Image duplicate check.
+2025-05-04 03:02:18 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 42dc26578ab6f2bb81c4bd5d115d673f0fc7d3bb717475c2b69ae4ec554718d5 Title: WhatsApp defends 'optional' AI tool that cannot be turned of...
+2025-05-04 03:02:26 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 42dc26578ab6f2bb81c4bd5d115d673f0fc7d3bb717475c2b69ae4ec554718d5: level=Boring, topic='Software', keyword='WhatsApp AI tool'
+2025-05-04 03:02:26 - main_orchestrator - INFO - Article ID 42dc26578ab6f2bb81c4bd5d115d673f0fc7d3bb717475c2b69ae4ec554718d5 classified as 'Boring'. Skipping.
+2025-05-04 03:02:26 - main_orchestrator - INFO - --- Processing article file: 5e189574c740b0df0bf41b120f62744a11647c666fd3676e5626f0eba3ae45b0.json ---
+2025-05-04 03:02:26 - main_orchestrator - INFO - Finding image for article ID: 5e189574c740b0df0bf41b120f62744a11647c666fd3676e5626f0eba3ae45b0...
+2025-05-04 03:02:26 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/c1dr6neg766o
+2025-05-04 03:02:27 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/beda/live/405041a0-201c-11f0-93d4-c157523ad7ce.jpg
+2025-05-04 03:02:27 - main_orchestrator - INFO - Found image via source scrape for 5e189574c740b0df0bf41b120f62744a11647c666fd3676e5626f0eba3ae45b0.
+2025-05-04 03:02:27 - main_orchestrator - INFO - Article ID 5e189574c740b0df0bf41b120f62744a11647c666fd3676e5626f0eba3ae45b0 passed Title+Image duplicate check.
+2025-05-04 03:02:27 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 5e189574c740b0df0bf41b120f62744a11647c666fd3676e5626f0eba3ae45b0 Title: ChatGPT-maker wants to buy Google Chrome...
+2025-05-04 03:02:33 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 5e189574c740b0df0bf41b120f62744a11647c666fd3676e5626f0eba3ae45b0: level=Boring, topic='Business', keyword='OpenAI acquisition interest'
+2025-05-04 03:02:33 - main_orchestrator - INFO - Article ID 5e189574c740b0df0bf41b120f62744a11647c666fd3676e5626f0eba3ae45b0 classified as 'Boring'. Skipping.
+2025-05-04 03:02:33 - main_orchestrator - INFO - --- Processing article file: 0b2ef1392058c61b8f49bd217bab845c7ecb5215e07b9a534bd6e4f945cab4ab.json ---
+2025-05-04 03:02:33 - main_orchestrator - INFO - Finding image for article ID: 0b2ef1392058c61b8f49bd217bab845c7ecb5215e07b9a534bd6e4f945cab4ab...
+2025-05-04 03:02:33 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/ce8g2kpzx0go
+2025-05-04 03:02:34 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/4fe0/live/a7382ac0-20b9-11f0-8795-4f2eeb44dbb2.jpg
+2025-05-04 03:02:34 - main_orchestrator - INFO - Found image via source scrape for 0b2ef1392058c61b8f49bd217bab845c7ecb5215e07b9a534bd6e4f945cab4ab.
+2025-05-04 03:02:34 - main_orchestrator - INFO - Article ID 0b2ef1392058c61b8f49bd217bab845c7ecb5215e07b9a534bd6e4f945cab4ab passed Title+Image duplicate check.
+2025-05-04 03:02:34 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 0b2ef1392058c61b8f49bd217bab845c7ecb5215e07b9a534bd6e4f945cab4ab Title: Trump crypto soars as president offers dinner to top holders...
+2025-05-04 03:02:42 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 0b2ef1392058c61b8f49bd217bab845c7ecb5215e07b9a534bd6e4f945cab4ab: level=Boring, topic='Other', keyword='Trump crypto meme'
+2025-05-04 03:02:42 - main_orchestrator - INFO - Article ID 0b2ef1392058c61b8f49bd217bab845c7ecb5215e07b9a534bd6e4f945cab4ab classified as 'Boring'. Skipping.
+2025-05-04 03:02:42 - main_orchestrator - INFO - --- Processing article file: 7129aac8e78b06ec6c84bc432a4848322e60102fa4642fff65735e121fcd08ab.json ---
+2025-05-04 03:02:42 - main_orchestrator - INFO - Finding image for article ID: 7129aac8e78b06ec6c84bc432a4848322e60102fa4642fff65735e121fcd08ab...
+2025-05-04 03:02:42 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.co.uk/news/technology-68225707
+2025-05-04 03:02:42 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/888E/production/_132585943_gettyimages-1078696726.jpg
+2025-05-04 03:02:42 - main_orchestrator - INFO - Found image via source scrape for 7129aac8e78b06ec6c84bc432a4848322e60102fa4642fff65735e121fcd08ab.
+2025-05-04 03:02:42 - main_orchestrator - INFO - Article ID 7129aac8e78b06ec6c84bc432a4848322e60102fa4642fff65735e121fcd08ab passed Title+Image duplicate check.
+2025-05-04 03:02:42 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 7129aac8e78b06ec6c84bc432a4848322e60102fa4642fff65735e121fcd08ab Title: How can you keep your child safe online?...
+2025-05-04 03:02:49 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 7129aac8e78b06ec6c84bc432a4848322e60102fa4642fff65735e121fcd08ab: level=Boring, topic='Society', keyword='child online safety'
+2025-05-04 03:02:49 - main_orchestrator - INFO - Article ID 7129aac8e78b06ec6c84bc432a4848322e60102fa4642fff65735e121fcd08ab classified as 'Boring'. Skipping.
+2025-05-04 03:02:49 - main_orchestrator - INFO - --- Processing article file: b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709.json ---
+2025-05-04 03:02:49 - main_orchestrator - INFO - Finding image for article ID: b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709...
+2025-05-04 03:02:49 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/c5yljn2vkn1o
+2025-05-04 03:02:49 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/1ac0/live/9dd349a0-20d8-11f0-b0e5-d9ee068af7b4.jpg
+2025-05-04 03:02:49 - main_orchestrator - INFO - Found image via source scrape for b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709.
+2025-05-04 03:02:49 - main_orchestrator - INFO - Article ID b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709 passed Title+Image duplicate check.
+2025-05-04 03:02:49 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709 Title: Overhaul algorithms and age checks or face fines, tech firms...
+2025-05-04 03:02:56 - src.agents.filter_news_agent - INFO - Filter verdict received for ID b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709: level=Interesting, topic='Regulation', keyword='tech regulation updates'
+2025-05-04 03:02:56 - main_orchestrator - INFO - Article ID b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709 classified Interesting (Topic: Regulation).
+2025-05-04 03:02:56 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709 (with 'Why It Matters')...
+2025-05-04 03:03:21 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709.
+2025-05-04 03:03:21 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709...
+2025-05-04 03:03:28 - src.agents.tags_generator_agent - INFO - Successfully generated 8 tags for article ID: b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709
+2025-05-04 03:03:28 - main_orchestrator - INFO - Rendered HTML page to: overhaul-algorithms-and-age-checks-or-face-fines,-tech-firms-told.html
+2025-05-04 03:03:28 - main_orchestrator - INFO - Loaded 108 articles from all_articles.json.
+2025-05-04 03:03:28 - main_orchestrator - INFO - Updated all_articles.json (now contains 109 articles).
+2025-05-04 03:03:28 - main_orchestrator - INFO - Checking Twitter daily limit for article ID: b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709...
+2025-05-04 03:03:28 - main_orchestrator - INFO - Tweet tracker file /home/runner/work/Dacoola/Dacoola/data/twitter_daily_limit.json not found. Start fresh.
+2025-05-04 03:03:28 - main_orchestrator - INFO - New day (2025-05-04). Resetting Twitter count.
+2025-05-04 03:03:28 - main_orchestrator - INFO - Updated tweet tracker: Date=2025-05-04, Count=0
+2025-05-04 03:03:28 - main_orchestrator - INFO - Twitter limit check passed (0/3). Preparing tweet for b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709...
+2025-05-04 03:03:28 - src.social.twitter_poster - INFO - Attempting to post tweet for: Overhaul algorithms and age checks or face fines, tech firms told
+2025-05-04 03:03:28 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-04 03:03:28 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-04 03:03:29 - src.social.twitter_poster - INFO - Image uploaded to Twitter. Media ID: 1918864023920984064
+2025-05-04 03:03:29 - src.social.twitter_poster - INFO - Posting tweet text (length 189): Overhaul algorithms and age checks or face fines, tech firms told
+
+Check it out: https://dacoolaa.netlify.app/articles/overhaul-algorithms-and-age-checks-or-face-fines,-tech-firms-told.html
+2025-05-04 03:03:29 - src.social.twitter_poster - INFO - Successfully posted tweet! Tweet ID: 1918864026009776250
+2025-05-04 03:03:29 - main_orchestrator - INFO - Tweet successful for b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709. Incrementing count.
+2025-05-04 03:03:29 - main_orchestrator - INFO - Updated tweet tracker: Date=2025-05-04, Count=1
+2025-05-04 03:03:29 - main_orchestrator - INFO - Saved final processed data to: b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709.json
+2025-05-04 03:03:29 - main_orchestrator - INFO - --- Successfully processed article: b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709 ---
+2025-05-04 03:03:29 - main_orchestrator - INFO - --- Processing article file: 3d5b377880fa3829f2eb05e9995b91c348259015d5fd21b04e0ce20fe214720f.json ---
+2025-05-04 03:03:29 - main_orchestrator - INFO - Finding image for article ID: 3d5b377880fa3829f2eb05e9995b91c348259015d5fd21b04e0ce20fe214720f...
+2025-05-04 03:03:29 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/c2ew48p13y0o
+2025-05-04 03:03:29 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/702b/live/9a119ad0-20e5-11f0-9b17-b99e39a28c13.jpg
+2025-05-04 03:03:29 - main_orchestrator - INFO - Found image via source scrape for 3d5b377880fa3829f2eb05e9995b91c348259015d5fd21b04e0ce20fe214720f.
+2025-05-04 03:03:29 - main_orchestrator - INFO - Article ID 3d5b377880fa3829f2eb05e9995b91c348259015d5fd21b04e0ce20fe214720f passed Title+Image duplicate check.
+2025-05-04 03:03:29 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 3d5b377880fa3829f2eb05e9995b91c348259015d5fd21b04e0ce20fe214720f Title: How Armenia is trying to build a Silicon Valley in the Cauca...
+2025-05-04 03:03:38 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 3d5b377880fa3829f2eb05e9995b91c348259015d5fd21b04e0ce20fe214720f: level=Boring, topic='Other', keyword='Armenia tech education'
+2025-05-04 03:03:38 - main_orchestrator - INFO - Article ID 3d5b377880fa3829f2eb05e9995b91c348259015d5fd21b04e0ce20fe214720f classified as 'Boring'. Skipping.
+2025-05-04 03:03:38 - main_orchestrator - INFO - --- Processing article file: a0c7c3c2bcd74370402a92ebeee6a41c42389e682a8354cfe4e048f29635ea4d.json ---
+2025-05-04 03:03:38 - main_orchestrator - INFO - Finding image for article ID: a0c7c3c2bcd74370402a92ebeee6a41c42389e682a8354cfe4e048f29635ea4d...
+2025-05-04 03:03:38 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cy489zelvx2o
+2025-05-04 03:03:39 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/a716/live/b2299b60-24e4-11f0-b929-6b759e9e13c3.jpg
+2025-05-04 03:03:39 - main_orchestrator - INFO - Found image via source scrape for a0c7c3c2bcd74370402a92ebeee6a41c42389e682a8354cfe4e048f29635ea4d.
+2025-05-04 03:03:39 - main_orchestrator - INFO - Article ID a0c7c3c2bcd74370402a92ebeee6a41c42389e682a8354cfe4e048f29635ea4d passed Title+Image duplicate check.
+2025-05-04 03:03:39 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: a0c7c3c2bcd74370402a92ebeee6a41c42389e682a8354cfe4e048f29635ea4d Title: Some M&S stores left with empty shelves after cyber attack...
+2025-05-04 03:03:49 - src.agents.filter_news_agent - INFO - Filter verdict received for ID a0c7c3c2bcd74370402a92ebeee6a41c42389e682a8354cfe4e048f29635ea4d: level=Boring, topic='Other', keyword='cyber attack retail'
+2025-05-04 03:03:49 - main_orchestrator - INFO - Article ID a0c7c3c2bcd74370402a92ebeee6a41c42389e682a8354cfe4e048f29635ea4d classified as 'Boring'. Skipping.
+2025-05-04 03:03:49 - main_orchestrator - INFO - --- Processing article file: d763cc775d75c066e8ded61acea7560bab30e0bd8d6a96db6a2538eb5da9efad.json ---
+2025-05-04 03:03:49 - main_orchestrator - INFO - Finding image for article ID: d763cc775d75c066e8ded61acea7560bab30e0bd8d6a96db6a2538eb5da9efad...
+2025-05-04 03:03:49 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cz79547nywno
+2025-05-04 03:03:49 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/11bc/live/8b326ad0-24f5-11f0-a669-f39b891d9395.jpg
+2025-05-04 03:03:49 - main_orchestrator - INFO - Found image via source scrape for d763cc775d75c066e8ded61acea7560bab30e0bd8d6a96db6a2538eb5da9efad.
+2025-05-04 03:03:49 - main_orchestrator - INFO - Article ID d763cc775d75c066e8ded61acea7560bab30e0bd8d6a96db6a2538eb5da9efad passed Title+Image duplicate check.
+2025-05-04 03:03:49 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d763cc775d75c066e8ded61acea7560bab30e0bd8d6a96db6a2538eb5da9efad Title: Why is the M&S cyber attack chaos taking so long to resolve?...
+2025-05-04 03:03:57 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d763cc775d75c066e8ded61acea7560bab30e0bd8d6a96db6a2538eb5da9efad: level=Boring, topic='Other', keyword='M&S cyber attack'
+2025-05-04 03:03:57 - main_orchestrator - INFO - Article ID d763cc775d75c066e8ded61acea7560bab30e0bd8d6a96db6a2538eb5da9efad classified as 'Boring'. Skipping.
+2025-05-04 03:03:57 - main_orchestrator - INFO - --- Processing article file: 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07.json ---
+2025-05-04 03:03:57 - main_orchestrator - INFO - Finding image for article ID: 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07...
+2025-05-04 03:03:57 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cdxnkg7rln2o
+2025-05-04 03:03:57 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/b3dc/live/9524bd20-21dc-11f0-8c2e-77498b1ce297.jpg
+2025-05-04 03:03:57 - main_orchestrator - INFO - Found image via source scrape for 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07.
+2025-05-04 03:03:57 - main_orchestrator - INFO - Article ID 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07 passed Title+Image duplicate check.
+2025-05-04 03:03:57 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07 Title: M&S stops online orders and issues refunds after cyber attac...
+2025-05-04 03:04:07 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07: level=Interesting, topic='Business', keyword='cyber attack impact'
+2025-05-04 03:04:07 - main_orchestrator - INFO - Article ID 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07 classified Interesting (Topic: Business).
+2025-05-04 03:04:07 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07 (with 'Why It Matters')...
+2025-05-04 03:04:33 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07.
+2025-05-04 03:04:33 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07...
+2025-05-04 03:04:40 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07
+2025-05-04 03:04:40 - main_orchestrator - INFO - Rendered HTML page to: m&s-stops-online-orders-and-issues-refunds-after-cyber-attack.html
+2025-05-04 03:04:40 - main_orchestrator - INFO - Loaded 109 articles from all_articles.json.
+2025-05-04 03:04:40 - main_orchestrator - INFO - Updated all_articles.json (now contains 110 articles).
+2025-05-04 03:04:40 - main_orchestrator - INFO - Checking Twitter daily limit for article ID: 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07...
+2025-05-04 03:04:40 - main_orchestrator - INFO - Twitter limit check passed (1/3). Preparing tweet for 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07...
+2025-05-04 03:04:40 - src.social.twitter_poster - INFO - Attempting to post tweet for: M&S stops online orders and issues refunds after cyber attack
+2025-05-04 03:04:40 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-04 03:04:40 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-04 03:04:40 - src.social.twitter_poster - INFO - Image uploaded to Twitter. Media ID: 1918864324627517440
+2025-05-04 03:04:40 - src.social.twitter_poster - INFO - Posting tweet text (length 181): M&S stops online orders and issues refunds after cyber attack
+
+Check it out: https://dacoolaa.netlify.app/articles/m&s-stops-online-orders-and-issues-refunds-after-cyber-attack.html
+2025-05-04 03:04:40 - src.social.twitter_poster - INFO - Successfully posted tweet! Tweet ID: 1918864325869002979
+2025-05-04 03:04:40 - main_orchestrator - INFO - Tweet successful for 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07. Incrementing count.
+2025-05-04 03:04:40 - main_orchestrator - INFO - Updated tweet tracker: Date=2025-05-04, Count=2
+2025-05-04 03:04:40 - main_orchestrator - INFO - Saved final processed data to: 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07.json
+2025-05-04 03:04:40 - main_orchestrator - INFO - --- Successfully processed article: 47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07 ---
+2025-05-04 03:04:40 - main_orchestrator - INFO - --- Processing article file: e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09.json ---
+2025-05-04 03:04:40 - main_orchestrator - INFO - Finding image for article ID: e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09...
+2025-05-04 03:04:40 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/c62xv43xqq5o
+2025-05-04 03:04:41 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/c90a/live/77438240-261f-11f0-b26b-ab62c890638b.jpg
+2025-05-04 03:04:41 - main_orchestrator - INFO - Found image via source scrape for e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09.
+2025-05-04 03:04:41 - main_orchestrator - INFO - Article ID e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09 passed Title+Image duplicate check.
+2025-05-04 03:04:41 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09 Title: Apple referred for possible criminal contempt investigation...
+2025-05-04 03:04:50 - src.agents.filter_news_agent - INFO - Filter verdict received for ID e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09: level=Interesting, topic='Regulation', keyword='App Store regulation'
+2025-05-04 03:04:50 - main_orchestrator - INFO - Article ID e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09 classified Interesting (Topic: Regulation).
+2025-05-04 03:04:50 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09 (with 'Why It Matters')...
+2025-05-04 03:05:13 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09.
+2025-05-04 03:05:13 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09...
+2025-05-04 03:05:19 - src.agents.tags_generator_agent - INFO - Successfully generated 10 tags for article ID: e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09
+2025-05-04 03:05:19 - main_orchestrator - INFO - Rendered HTML page to: apple-referred-for-possible-criminal-contempt-investigation.html
+2025-05-04 03:05:19 - main_orchestrator - INFO - Loaded 110 articles from all_articles.json.
+2025-05-04 03:05:19 - main_orchestrator - INFO - Updated all_articles.json (now contains 111 articles).
+2025-05-04 03:05:19 - main_orchestrator - INFO - Checking Twitter daily limit for article ID: e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09...
+2025-05-04 03:05:19 - main_orchestrator - INFO - Twitter limit check passed (2/3). Preparing tweet for e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09...
+2025-05-04 03:05:19 - src.social.twitter_poster - INFO - Attempting to post tweet for: Apple referred for possible criminal contempt investigation
+2025-05-04 03:05:19 - src.social.twitter_poster - INFO - Twitter API v1 authentication successful.
+2025-05-04 03:05:19 - src.social.twitter_poster - INFO - Twitter API v2 client initialized.
+2025-05-04 03:05:20 - src.social.twitter_poster - INFO - Image uploaded to Twitter. Media ID: 1918864491573362688
+2025-05-04 03:05:20 - src.social.twitter_poster - INFO - Posting tweet text (length 177): Apple referred for possible criminal contempt investigation
+
+Check it out: https://dacoolaa.netlify.app/articles/apple-referred-for-possible-criminal-contempt-investigation.html
+2025-05-04 03:05:20 - src.social.twitter_poster - INFO - Successfully posted tweet! Tweet ID: 1918864492928159853
+2025-05-04 03:05:20 - main_orchestrator - INFO - Tweet successful for e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09. Incrementing count.
+2025-05-04 03:05:20 - main_orchestrator - INFO - Updated tweet tracker: Date=2025-05-04, Count=3
+2025-05-04 03:05:20 - main_orchestrator - INFO - Saved final processed data to: e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09.json
+2025-05-04 03:05:20 - main_orchestrator - INFO - --- Successfully processed article: e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09 ---
+2025-05-04 03:05:20 - main_orchestrator - INFO - --- Processing article file: 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c.json ---
+2025-05-04 03:05:20 - main_orchestrator - INFO - Finding image for article ID: 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c...
+2025-05-04 03:05:20 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cn4jnwdvg9qo
+2025-05-04 03:05:21 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/f6d1/live/413b9fe0-25aa-11f0-a4b5-cf8d960fb818.jpg
+2025-05-04 03:05:21 - main_orchestrator - INFO - Found image via source scrape for 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c.
+2025-05-04 03:05:21 - main_orchestrator - INFO - Article ID 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c passed Title+Image duplicate check.
+2025-05-04 03:05:21 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c Title: Update that made ChatGPT 'dangerously' sycophantic pulled...
+2025-05-04 03:05:29 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c: level=Interesting, topic='Ethics', keyword='ChatGPT harmful behavior'
+2025-05-04 03:05:29 - main_orchestrator - INFO - Article ID 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c classified Interesting (Topic: Ethics).
+2025-05-04 03:05:29 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c (with 'Why It Matters')...
+2025-05-04 03:05:56 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c.
+2025-05-04 03:05:56 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c...
+2025-05-04 03:06:05 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c
+2025-05-04 03:06:05 - main_orchestrator - INFO - Rendered HTML page to: update-that-made-chatgpt-'dangerously'-sycophantic-pulled.html
+2025-05-04 03:06:05 - main_orchestrator - INFO - Loaded 111 articles from all_articles.json.
+2025-05-04 03:06:05 - main_orchestrator - INFO - Updated all_articles.json (now contains 112 articles).
+2025-05-04 03:06:05 - main_orchestrator - INFO - Checking Twitter daily limit for article ID: 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c...
+2025-05-04 03:06:05 - main_orchestrator - INFO - Daily Twitter limit (3) reached. Skipping tweet for 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c.
+2025-05-04 03:06:05 - main_orchestrator - INFO - Saved final processed data to: 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c.json
+2025-05-04 03:06:05 - main_orchestrator - INFO - --- Successfully processed article: 23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c ---
+2025-05-04 03:06:05 - main_orchestrator - INFO - --- Processing article file: e7f35460f49d15e768369b0ef563fa1e315cb33b5e2acfae40f6bbbee0a0f69c.json ---
+2025-05-04 03:06:05 - main_orchestrator - INFO - Finding image for article ID: e7f35460f49d15e768369b0ef563fa1e315cb33b5e2acfae40f6bbbee0a0f69c...
+2025-05-04 03:06:05 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/c3wx092exlzo
+2025-05-04 03:06:05 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/9e3d/live/8186f140-25b8-11f0-8f57-b7237f6a66e6.jpg
+2025-05-04 03:06:05 - main_orchestrator - INFO - Found image via source scrape for e7f35460f49d15e768369b0ef563fa1e315cb33b5e2acfae40f6bbbee0a0f69c.
+2025-05-04 03:06:05 - main_orchestrator - INFO - Article ID e7f35460f49d15e768369b0ef563fa1e315cb33b5e2acfae40f6bbbee0a0f69c passed Title+Image duplicate check.
+2025-05-04 03:06:05 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: e7f35460f49d15e768369b0ef563fa1e315cb33b5e2acfae40f6bbbee0a0f69c Title: Hackers target the Co-op as police probe M&S cyber attack...
+2025-05-04 03:06:12 - src.agents.filter_news_agent - INFO - Filter verdict received for ID e7f35460f49d15e768369b0ef563fa1e315cb33b5e2acfae40f6bbbee0a0f69c: level=Boring, topic='Other', keyword='retail cyber attack'
+2025-05-04 03:06:12 - main_orchestrator - INFO - Article ID e7f35460f49d15e768369b0ef563fa1e315cb33b5e2acfae40f6bbbee0a0f69c classified as 'Boring'. Skipping.
+2025-05-04 03:06:12 - main_orchestrator - INFO - --- Processing article file: 02d892667a3e033e19e0f0cbbbb2f4e64dab81a951709a04e5d551a217357391.json ---
+2025-05-04 03:06:12 - main_orchestrator - INFO - Finding image for article ID: 02d892667a3e033e19e0f0cbbbb2f4e64dab81a951709a04e5d551a217357391...
+2025-05-04 03:06:12 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/c5yrzyzke8do
+2025-05-04 03:06:12 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/e131/live/e987ead0-24fd-11f0-8f57-b7237f6a66e6.jpg
+2025-05-04 03:06:12 - main_orchestrator - INFO - Found image via source scrape for 02d892667a3e033e19e0f0cbbbb2f4e64dab81a951709a04e5d551a217357391.
+2025-05-04 03:06:12 - main_orchestrator - INFO - Article ID 02d892667a3e033e19e0f0cbbbb2f4e64dab81a951709a04e5d551a217357391 passed Title+Image duplicate check.
+2025-05-04 03:06:12 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 02d892667a3e033e19e0f0cbbbb2f4e64dab81a951709a04e5d551a217357391 Title: Robot vacuums 'could water plants or play with cat'...
+2025-05-04 03:06:19 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 02d892667a3e033e19e0f0cbbbb2f4e64dab81a951709a04e5d551a217357391: level=Boring, topic='Robotics', keyword='robot vacuum uses'
+2025-05-04 03:06:19 - main_orchestrator - INFO - Article ID 02d892667a3e033e19e0f0cbbbb2f4e64dab81a951709a04e5d551a217357391 classified as 'Boring'. Skipping.
+2025-05-04 03:06:19 - main_orchestrator - INFO - --- Processing article file: d3c3af1df6ee4eb8fc9f726d7923e91a664bd03785576d591b8ef5531aeaed34.json ---
+2025-05-04 03:06:19 - main_orchestrator - INFO - Finding image for article ID: d3c3af1df6ee4eb8fc9f726d7923e91a664bd03785576d591b8ef5531aeaed34...
+2025-05-04 03:06:19 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cr4n94klqg9o
+2025-05-04 03:06:19 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/d1b5/live/25dcddc0-2656-11f0-948d-d3658dc46e25.jpg
+2025-05-04 03:06:19 - main_orchestrator - INFO - Found image via source scrape for d3c3af1df6ee4eb8fc9f726d7923e91a664bd03785576d591b8ef5531aeaed34.
+2025-05-04 03:06:19 - main_orchestrator - INFO - Article ID d3c3af1df6ee4eb8fc9f726d7923e91a664bd03785576d591b8ef5531aeaed34 passed Title+Image duplicate check.
+2025-05-04 03:06:19 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d3c3af1df6ee4eb8fc9f726d7923e91a664bd03785576d591b8ef5531aeaed34 Title: Tesla denies contacting headhunters to replace Musk...
+2025-05-04 03:06:25 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d3c3af1df6ee4eb8fc9f726d7923e91a664bd03785576d591b8ef5531aeaed34: level=Boring, topic='Business', keyword='Tesla leadership rumor'
+2025-05-04 03:06:25 - main_orchestrator - INFO - Article ID d3c3af1df6ee4eb8fc9f726d7923e91a664bd03785576d591b8ef5531aeaed34 classified as 'Boring'. Skipping.
+2025-05-04 03:06:25 - main_orchestrator - INFO - --- Processing article file: d02dea74797a463a29d00f1484d02d3f95e8f378259c9f25e2faa08fbcd9bb07.json ---
+2025-05-04 03:06:25 - main_orchestrator - INFO - Finding image for article ID: d02dea74797a463a29d00f1484d02d3f95e8f378259c9f25e2faa08fbcd9bb07...
+2025-05-04 03:06:25 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cg72k851dd8o
+2025-05-04 03:06:25 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/1d56/live/6abfd650-267d-11f0-b26b-ab62c890638b.jpg
+2025-05-04 03:06:25 - main_orchestrator - INFO - Found image via source scrape for d02dea74797a463a29d00f1484d02d3f95e8f378259c9f25e2faa08fbcd9bb07.
+2025-05-04 03:06:25 - main_orchestrator - INFO - Article ID d02dea74797a463a29d00f1484d02d3f95e8f378259c9f25e2faa08fbcd9bb07 passed Title+Image duplicate check.
+2025-05-04 03:06:25 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: d02dea74797a463a29d00f1484d02d3f95e8f378259c9f25e2faa08fbcd9bb07 Title: Co-op cyber attack: Staff told to keep cameras on in meeting...
+2025-05-04 03:06:33 - src.agents.filter_news_agent - INFO - Filter verdict received for ID d02dea74797a463a29d00f1484d02d3f95e8f378259c9f25e2faa08fbcd9bb07: level=Boring, topic='Other', keyword='cyber security measure'
+2025-05-04 03:06:33 - main_orchestrator - INFO - Article ID d02dea74797a463a29d00f1484d02d3f95e8f378259c9f25e2faa08fbcd9bb07 classified as 'Boring'. Skipping.
+2025-05-04 03:06:33 - main_orchestrator - INFO - --- Processing article file: 828d2002711baa52b6d73453b964cace97bbefc1ab932cf85703fb21f6398ee4.json ---
+2025-05-04 03:06:33 - main_orchestrator - INFO - Finding image for article ID: 828d2002711baa52b6d73453b964cace97bbefc1ab932cf85703fb21f6398ee4...
+2025-05-04 03:06:33 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cg72kg5yn2ko
+2025-05-04 03:06:33 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/9e66/live/ad293370-2690-11f0-a50f-798c692265a7.jpg
+2025-05-04 03:06:33 - main_orchestrator - INFO - Found image via source scrape for 828d2002711baa52b6d73453b964cace97bbefc1ab932cf85703fb21f6398ee4.
+2025-05-04 03:06:33 - main_orchestrator - INFO - Article ID 828d2002711baa52b6d73453b964cace97bbefc1ab932cf85703fb21f6398ee4 passed Title+Image duplicate check.
+2025-05-04 03:06:33 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 828d2002711baa52b6d73453b964cace97bbefc1ab932cf85703fb21f6398ee4 Title: 'They wanted $4m': Lessons for M&S from other cyber attacks...
+2025-05-04 03:06:42 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 828d2002711baa52b6d73453b964cace97bbefc1ab932cf85703fb21f6398ee4: level=Boring, topic='Other', keyword='retail cyber attack'
+2025-05-04 03:06:42 - main_orchestrator - INFO - Article ID 828d2002711baa52b6d73453b964cace97bbefc1ab932cf85703fb21f6398ee4 classified as 'Boring'. Skipping.
+2025-05-04 03:06:42 - main_orchestrator - INFO - --- Processing article file: 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1.json ---
+2025-05-04 03:06:42 - main_orchestrator - INFO - Finding image for article ID: 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1...
+2025-05-04 03:06:42 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/czd3mey1ej2o
+2025-05-04 03:06:42 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/fc52/live/92909fa0-260c-11f0-8770-f1e3109cdd77.jpg
+2025-05-04 03:06:42 - main_orchestrator - INFO - Found image via source scrape for 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1.
+2025-05-04 03:06:42 - main_orchestrator - INFO - Article ID 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1 passed Title+Image duplicate check.
+2025-05-04 03:06:42 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1 Title: Meta warns of 'worse' experience for European users...
+2025-05-04 03:06:50 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1: level=Interesting, topic='Regulation', keyword='Meta EU regulation impact'
+2025-05-04 03:06:50 - main_orchestrator - INFO - Article ID 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1 classified Interesting (Topic: Regulation).
+2025-05-04 03:06:50 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1 (with 'Why It Matters')...
+2025-05-04 03:07:17 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1.
+2025-05-04 03:07:17 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1...
+2025-05-04 03:07:23 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1
+2025-05-04 03:07:23 - main_orchestrator - INFO - Rendered HTML page to: meta-warns-of-'worse'-experience-for-european-users.html
+2025-05-04 03:07:23 - main_orchestrator - INFO - Loaded 112 articles from all_articles.json.
+2025-05-04 03:07:23 - main_orchestrator - INFO - Updated all_articles.json (now contains 113 articles).
+2025-05-04 03:07:23 - main_orchestrator - INFO - Checking Twitter daily limit for article ID: 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1...
+2025-05-04 03:07:23 - main_orchestrator - INFO - Daily Twitter limit (3) reached. Skipping tweet for 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1.
+2025-05-04 03:07:23 - main_orchestrator - INFO - Saved final processed data to: 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1.json
+2025-05-04 03:07:23 - main_orchestrator - INFO - --- Successfully processed article: 9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1 ---
+2025-05-04 03:07:23 - main_orchestrator - INFO - --- Processing article file: bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3.json ---
+2025-05-04 03:07:23 - main_orchestrator - INFO - Finding image for article ID: bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3...
+2025-05-04 03:07:23 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/c86jx18y9e2o
+2025-05-04 03:07:23 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/ffe1/live/c7378110-26f2-11f0-abc5-57500d47969e.jpg
+2025-05-04 03:07:23 - main_orchestrator - INFO - Found image via source scrape for bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3.
+2025-05-04 03:07:23 - main_orchestrator - INFO - Article ID bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3 passed Title+Image duplicate check.
+2025-05-04 03:07:23 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3 Title: Apple says most US-bound iPhones no longer made in China...
+2025-05-04 03:07:33 - src.agents.filter_news_agent - INFO - Filter verdict received for ID bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3: level=Interesting, topic='Business', keyword='iPhone manufacturing shift'
+2025-05-04 03:07:33 - main_orchestrator - INFO - Article ID bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3 classified Interesting (Topic: Business).
+2025-05-04 03:07:33 - src.agents.seo_article_generator_agent - INFO - Running SEO article generator for article ID: bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3 (with 'Why It Matters')...
+2025-05-04 03:08:00 - src.agents.seo_article_generator_agent - INFO - Successfully generated and parsed SEO content for ID: bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3.
+2025-05-04 03:08:00 - src.agents.tags_generator_agent - INFO - Running tags generator agent for article ID: bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3...
+2025-05-04 03:08:06 - src.agents.tags_generator_agent - INFO - Successfully generated 9 tags for article ID: bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3
+2025-05-04 03:08:06 - main_orchestrator - INFO - Rendered HTML page to: apple-says-most-us-bound-iphones-no-longer-made-in-china.html
+2025-05-04 03:08:06 - main_orchestrator - INFO - Loaded 113 articles from all_articles.json.
+2025-05-04 03:08:06 - main_orchestrator - INFO - Updated all_articles.json (now contains 114 articles).
+2025-05-04 03:08:06 - main_orchestrator - INFO - Checking Twitter daily limit for article ID: bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3...
+2025-05-04 03:08:06 - main_orchestrator - INFO - Daily Twitter limit (3) reached. Skipping tweet for bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3.
+2025-05-04 03:08:06 - main_orchestrator - INFO - Saved final processed data to: bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3.json
+2025-05-04 03:08:06 - main_orchestrator - INFO - --- Successfully processed article: bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3 ---
+2025-05-04 03:08:06 - main_orchestrator - INFO - --- Processing article file: 9558fa54379777cb76775ca4c8b61e8188ece42a04f313f4342ad151d65b983b.json ---
+2025-05-04 03:08:06 - main_orchestrator - INFO - Finding image for article ID: 9558fa54379777cb76775ca4c8b61e8188ece42a04f313f4342ad151d65b983b...
+2025-05-04 03:08:06 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/cze1zn9d9p4o
+2025-05-04 03:08:06 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/6fa3/live/f5fd7420-269b-11f0-b6a5-5b4a712b1b63.jpg
+2025-05-04 03:08:06 - main_orchestrator - INFO - Found image via source scrape for 9558fa54379777cb76775ca4c8b61e8188ece42a04f313f4342ad151d65b983b.
+2025-05-04 03:08:06 - main_orchestrator - INFO - Article ID 9558fa54379777cb76775ca4c8b61e8188ece42a04f313f4342ad151d65b983b passed Title+Image duplicate check.
+2025-05-04 03:08:06 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: 9558fa54379777cb76775ca4c8b61e8188ece42a04f313f4342ad151d65b983b Title: Xbox prices hiked worldwide amid tariff uncertainty...
+2025-05-04 03:08:14 - src.agents.filter_news_agent - INFO - Filter verdict received for ID 9558fa54379777cb76775ca4c8b61e8188ece42a04f313f4342ad151d65b983b: level=Boring, topic='Other', keyword='Xbox price hike'
+2025-05-04 03:08:14 - main_orchestrator - INFO - Article ID 9558fa54379777cb76775ca4c8b61e8188ece42a04f313f4342ad151d65b983b classified as 'Boring'. Skipping.
+2025-05-04 03:08:14 - main_orchestrator - INFO - --- Processing article file: e789768c544ba356de2b3899cbd7f5a707abd5147dafa0feedbb155464a51c6e.json ---
+2025-05-04 03:08:14 - main_orchestrator - INFO - Finding image for article ID: e789768c544ba356de2b3899cbd7f5a707abd5147dafa0feedbb155464a51c6e...
+2025-05-04 03:08:14 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.bbc.com/news/articles/c62x4zxe418o
+2025-05-04 03:08:14 - src.scrapers.image_scraper - INFO - Found og:image: https://ichef.bbci.co.uk/news/1024/branded_news/a1cd/live/7ca50250-26aa-11f0-b505-55b7c1f611de.jpg
+2025-05-04 03:08:14 - main_orchestrator - INFO - Found image via source scrape for e789768c544ba356de2b3899cbd7f5a707abd5147dafa0feedbb155464a51c6e.
+2025-05-04 03:08:14 - main_orchestrator - INFO - Article ID e789768c544ba356de2b3899cbd7f5a707abd5147dafa0feedbb155464a51c6e passed Title+Image duplicate check.
+2025-05-04 03:08:14 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: e789768c544ba356de2b3899cbd7f5a707abd5147dafa0feedbb155464a51c6e Title: Harrods latest retailer to be hit by cyber attack...
+2025-05-04 03:08:21 - src.agents.filter_news_agent - INFO - Filter verdict received for ID e789768c544ba356de2b3899cbd7f5a707abd5147dafa0feedbb155464a51c6e: level=Boring, topic='Other', keyword='cyber attack'
+2025-05-04 03:08:21 - main_orchestrator - INFO - Article ID e789768c544ba356de2b3899cbd7f5a707abd5147dafa0feedbb155464a51c6e classified as 'Boring'. Skipping.
+2025-05-04 03:08:21 - main_orchestrator - INFO - Processing cycle complete. Success: 6, Failed/Skipped/Duplicate: 14
+2025-05-04 03:08:21 - main_orchestrator - INFO - --- Stage 2.5: Sending Batched Make.com Webhook (6 articles) ---
+2025-05-04 03:08:22 - main_orchestrator - INFO - Successfully sent data to Make webhook for batch of 6 articles
+2025-05-04 03:08:22 - main_orchestrator - INFO - Batched Make.com webhook sent successfully.
+2025-05-04 03:08:22 - main_orchestrator - INFO - --- Stage 3: Generating Sitemap ---
+2025-05-04 03:08:22 - generate_sitemap - INFO - Starting sitemap generation...
+2025-05-04 03:08:22 - generate_sitemap - INFO - Loaded 114 articles.
+2025-05-04 03:08:22 - generate_sitemap - INFO - Sitemap successfully generated with 115 URLs and saved to /home/runner/work/Dacoola/Dacoola/public/sitemap.xml
+2025-05-04 03:08:22 - main_orchestrator - INFO - Sitemap generation completed successfully.
+2025-05-04 03:08:22 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (366.85 seconds) === ---

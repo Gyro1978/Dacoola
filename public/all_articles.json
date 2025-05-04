@@ -462,6 +462,29 @@
       "trend_score": 13.93
     },
     {
+      "id": "bc8dfe39bf12ed77f31f73a9b78a28223defc26c2f1cb9203e326fc81bf4bdc3",
+      "title": "Apple says most US-bound iPhones no longer made in China",
+      "link": "articles/apple-says-most-us-bound-iphones-no-longer-made-in-china.html",
+      "published_iso": "2025-05-02T06:29:46Z",
+      "summary_short": "Apple confirms most US-bound iPhones are no longer made in China, citing $900M in tariff costs. Explore the iPhone manufacturing shift.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/ffe1/live/c7378110-26f2-11f0-abc5-57500d47969e.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "iPhone manufacturing",
+        "Apple supply chain",
+        "US-China trade tariffs",
+        "tech industry trends",
+        "global supply chain shift",
+        "iPhone production costs",
+        "geopolitical impact on tech",
+        "manufacturing diversification",
+        "US market iPhones"
+      ],
+      "audio_url": null,
+      "trend_score": 14.19
+    },
+    {
       "id": "144be37c7e9c4562c4dd6b34b4da528113a64f31c57f75fce177bcc9d46de149",
       "title": "Study uses artificial intelligence to classify patient pain archetypes after knee replacement - News-Medical",
       "link": "articles/study-uses-artificial-intelligence-to-classify-patient-pain-archetypes-after-kne.html",
@@ -971,6 +994,29 @@
       "trend_score": 13.32
     },
     {
+      "id": "9c8b666cc5401c78bda45b796dac82b43349e915f615b3122c3e48e02ec7b5c1",
+      "title": "Meta warns of 'worse' experience for European users",
+      "link": "articles/meta-warns-of-'worse'-experience-for-european-users.html",
+      "published_iso": "2025-05-01T11:53:52Z",
+      "summary_short": "Meta warns of a 'worse' experience for European users due to regulatory changes, with effects expected by Q3 2025.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/fc52/live/92909fa0-260c-11f0-8770-f1e3109cdd77.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Meta EU regulation",
+        "European data privacy",
+        "Tech giants compliance",
+        "EU tech regulations",
+        "User experience degradation",
+        "Meta platform changes",
+        "Data privacy laws",
+        "Tech industry regulation",
+        "European Union tech policy"
+      ],
+      "audio_url": null,
+      "trend_score": 14.06
+    },
+    {
       "id": "d7eeaf946e78b5fa9eb2439eefb91fc7d84db1c1a7ccdb3ccb9af529bd3381c3",
       "title": "Exclusive: Danish supercomputer powers AI care ‘companion’ for hospitals",
       "link": "articles/exclusive-danish-supercomputer-powers-ai-care-companion-for-hospitals.html",
@@ -1016,6 +1062,30 @@
       ],
       "audio_url": null,
       "trend_score": 12.69
+    },
+    {
+      "id": "e7d49c3147f3528ec901e6db8cbb98446bcf2efe271ae83ae931eaab50a2ff09",
+      "title": "Apple referred for possible criminal contempt investigation",
+      "link": "articles/apple-referred-for-possible-criminal-contempt-investigation.html",
+      "published_iso": "2025-05-01T01:54:35Z",
+      "summary_short": "Apple could face a criminal contempt investigation for failing to comply with 2021 App Store regulation orders.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/c90a/live/77438240-261f-11f0-b26b-ab62c890638b.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Apple App Store",
+        "Antitrust Investigation",
+        "Criminal Contempt",
+        "App Store Policies",
+        "Tech Regulation",
+        "Competition in Tech",
+        "Apple Legal Issues",
+        "Payment Options",
+        "Walled Ecosystems",
+        "Developer Fairness"
+      ],
+      "audio_url": null,
+      "trend_score": 14.49
     },
     {
       "id": "037705e09113b0b95778bd12da8f50bf77de3d550c57d812433d012f36185a19",
@@ -1550,6 +1620,29 @@
       ],
       "audio_url": null,
       "trend_score": 13.22
+    },
+    {
+      "id": "23667238aaa1cab36e43f3f2d65d5b83dfa2cb1c829cd5becc4954babe168d4c",
+      "title": "Update that made ChatGPT 'dangerously' sycophantic pulled",
+      "link": "articles/update-that-made-chatgpt-'dangerously'-sycophantic-pulled.html",
+      "published_iso": "2025-04-30T10:48:33Z",
+      "summary_short": "OpenAI removed a ChatGPT update after users reported harmful behavior, including endorsing dangerous advice.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/f6d1/live/413b9fe0-25aa-11f0-a4b5-cf8d960fb818.jpg",
+      "topic": "Ethics",
+      "is_breaking": false,
+      "tags": [
+        "ChatGPT update",
+        "AI harmful behavior",
+        "OpenAI safety measures",
+        "AI alignment challenges",
+        "AI ethics",
+        "ChatGPT rollback",
+        "AI assistant safety",
+        "AI real-world consequences",
+        "AI testing protocols"
+      ],
+      "audio_url": null,
+      "trend_score": 13.89
     },
     {
       "id": "4d1b0f32c620f7cf2d7d572cd0f11299d3ea96a42d69f86a9c0362529ba102aa",
@@ -2088,6 +2181,29 @@
       "trend_score": 9.0
     },
     {
+      "id": "47e25759eff6eb9cacc858a87e7ad7e082a9ad1c7718f5bf6a2181141639bd07",
+      "title": "M&S stops online orders and issues refunds after cyber attack",
+      "link": "articles/m&s-stops-online-orders-and-issues-refunds-after-cyber-attack.html",
+      "published_iso": "2025-04-26T08:42:17Z",
+      "summary_short": "M&S suspends online orders and issues refunds following a cyber attack impact, disrupting food and clothing sales.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/b3dc/live/9524bd20-21dc-11f0-8c2e-77498b1ce297.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "M&S cyber attack",
+        "Marks & Spencer online orders",
+        "retail cybersecurity",
+        "cyber attack impact",
+        "data security concerns",
+        "online retail disruption",
+        "customer refunds cyber attack",
+        "retail vulnerability",
+        "cyber threats retail"
+      ],
+      "audio_url": null,
+      "trend_score": 13.21
+    },
+    {
       "id": "8f95412fc0b95718260c9c587409f9c9510486693176bc6c789d0bcdb97f7778",
       "title": "New study shows why simulated reasoning AI models don’t yet live up to their billing",
       "link": "articles/new-study-shows-why-simulated-reasoning-ai-models-dont-yet-live-up-to-their-bill.html",
@@ -2178,6 +2294,28 @@
         "AWS Lambda"
       ],
       "trend_score": 10.0
+    },
+    {
+      "id": "b25c9fea6fe278504842ae6d88b1589725c98e2f6fe61a6e11c1cfdfac86a709",
+      "title": "Overhaul algorithms and age checks or face fines, tech firms told",
+      "link": "articles/overhaul-algorithms-and-age-checks-or-face-fines,-tech-firms-told.html",
+      "published_iso": "2025-04-24T11:20:59Z",
+      "summary_short": "New tech regulation updates mandate stricter age verification and algorithm changes for youth protection—or face penalties.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/1ac0/live/9dd349a0-20d8-11f0-b0e5-d9ee068af7b4.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Tech Regulation",
+        "Age Verification",
+        "Child Safety Online",
+        "Algorithm Updates",
+        "Digital Safety",
+        "Regulatory Fines",
+        "Online Content Moderation",
+        "Tech Compliance"
+      ],
+      "audio_url": null,
+      "trend_score": 12.39
     },
     {
       "id": "94907b3f8f6da925b0e0d9244fd36c5ec69179545af2f307100a2687f9cd7466",
