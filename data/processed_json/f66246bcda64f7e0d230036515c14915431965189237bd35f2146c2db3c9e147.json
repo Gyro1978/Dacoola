@@ -1,0 +1,43 @@
+{
+    "id": "f66246bcda64f7e0d230036515c14915431965189237bd35f2146c2db3c9e147",
+    "title": "DolphinGemma: How Google AI is helping decode dolphin communication",
+    "link": "https://blog.google/technology/ai/dolphingemma/",
+    "published_iso": "2025-04-14T13:00:00Z",
+    "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/DolphinGemma_SocialExplainers_1.max-600x600.format-webp.webp\">Dolphin researchers are using Gemma and Google Pixel phones to try to decipher how dolphins talk to one another.",
+    "source_feed": "https://blog.google/technology/ai/rss/",
+    "scraped_at_iso": "2025-05-04T06:49:42Z",
+    "selected_image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/DolphinGemma_SocialExplainers_16x9_DolphinGem.width-1300.png",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "AI Models",
+        "reasoning_summary": "The article reports on a concrete application of Google's Gemma AI model in dolphin communication research, presenting verifiable information about a novel use case.",
+        "primary_topic_keyword": "AI dolphin communication"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-04T06:50:46Z",
+    "topic": "AI Models",
+    "is_breaking": false,
+    "primary_keyword": "AI dolphin communication",
+    "seo_agent_results": {
+        "generated_title_tag": "Google AI Decodes Dolphin Communication with DolphinGemma",
+        "generated_meta_description": "Google's AI and Pixel phones help researchers decode dolphin communication, advancing our understanding of marine life.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Google AI Decodes Dolphin Communication with DolphinGemma\",  \n  \"description\": \"Google's AI and Pixel phones help researchers decode dolphin communication, advancing our understanding of marine life.\",  \n  \"keywords\": [\"AI dolphin communication\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://blog.google/technology/ai/dolphingemma/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/DolphinGemma_SocialExplainers_16x9_DolphinGem.width-1300.png\" },  \n  \"datePublished\": \"2025-04-14T13:00:00Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## DolphinGemma: How Google AI is helping decode dolphin communication  \nResearchers are leveraging Google's Gemma AI model and Pixel phones to analyze and interpret dolphin communication. This innovative project aims to decipher how dolphins communicate with each other, potentially unlocking new insights into their social behaviors and intelligence.  \n\n### Why It Matters  \nUnderstanding dolphin communication could revolutionize marine biology, offering deeper insights into their complex social structures and cognitive abilities. By applying AI to this challenge, Google is bridging the gap between technology and wildlife research, paving the way for future breakthroughs in interspecies communication. This effort highlights AI's potential to solve real-world scientific mysteries beyond traditional applications."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Google AI",
+        "Dolphin Communication",
+        "Gemma AI Model",
+        "Marine Biology",
+        "Interspecies Communication",
+        "AI in Wildlife Research",
+        "Dolphin Intelligence",
+        "Pixel Phones",
+        "Animal Behavior"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 11.21,
+    "slug": "dolphingemma-how-google-ai-is-helping-decode-dolphin-communication",
+    "audio_url": null
+}

@@ -1,0 +1,43 @@
+{
+    "id": "4632a69870fcc4b2739a49074ef70346a69c0cba6275d65a27d05041b12d6bb6",
+    "title": "Backstage access: Spotify’s dev tools side-hustle is growing legs",
+    "link": "https://techcrunch.com/2025/05/04/backstage-access-spotifys-dev-tools-side-hustle-is-growing-legs/",
+    "published_iso": "2025-05-04T14:00:00Z",
+    "summary": "Spotify generates the vast bulk of its income from ads and subscriptions, but for the past few years the music-streaming giant has also been quietly building out a developer tooling business. Backstage, a project it open-sourced in 2020, has been adopted by more than 2 million developers across 3,400 organizations, including Airbnb, LinkedIn, Twilio, and […]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-04T14:36:41Z",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2025/04/Tyson-Singer-1-e1744729802703.jpg?w=960",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Open Source",
+        "reasoning_summary": "The article reports on Spotify's open-source developer tooling business, Backstage, which has seen significant adoption by major organizations, indicating a notable but not urgent development in the tech industry.",
+        "primary_topic_keyword": "Spotify Backstage adoption"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-04T14:36:59Z",
+    "topic": "Open Source",
+    "is_breaking": false,
+    "primary_keyword": "Spotify Backstage adoption",
+    "seo_agent_results": {
+        "generated_title_tag": "Spotify Backstage adoption grows with 2M+ developers",
+        "generated_meta_description": "Spotify's Backstage developer tool now used by 2M+ developers across 3,400 firms, signaling growth beyond music streaming.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Spotify Backstage adoption grows with 2M+ developers\",  \n  \"description\": \"Spotify's Backstage developer tool now used by 2M+ developers across 3,400 firms, signaling growth beyond music streaming.\",  \n  \"keywords\": [\"Spotify Backstage adoption\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/04/backstage-access-spotifys-dev-tools-side-hustle-is-growing-legs/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2025/04/Tyson-Singer-1-e1744729802703.jpg?w=960\" },  \n  \"datePublished\": \"2025-05-04T14:00:00Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Backstage access: Spotify’s dev tools side-hustle is growing legs  \n\nSpotify, primarily known for its music-streaming service, has been quietly expanding its developer tooling business through Backstage, an open-source platform launched in 2020. The tool has now been adopted by over 2 million developers across 3,400 organizations, including major companies like Airbnb, LinkedIn, and Twilio. While ads and subscriptions remain Spotify’s core revenue drivers, Backstage’s rapid adoption highlights the company’s diversification into developer infrastructure.  \n\n### Why It Matters  \n\nSpotify’s Backstage success underscores the growing demand for unified developer portals that streamline software development workflows. By open-sourcing the tool, Spotify has positioned itself as a key player in the DevOps ecosystem, fostering collaboration beyond its traditional market. This expansion could pave the way for monetization opportunities, such as enterprise support or premium features, further diversifying Spotify’s revenue streams in a competitive tech landscape."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Spotify Backstage",
+        "Developer Tools",
+        "Open Source Software",
+        "DevOps Ecosystem",
+        "Software Development Workflows",
+        "Tech Industry Diversification",
+        "Enterprise Developer Portals",
+        "Spotify Revenue Streams",
+        "Developer Infrastructure"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.5,
+    "slug": "backstage-access-spotify’s-dev-tools-side-hustle-is-growing-legs",
+    "audio_url": null
+}
