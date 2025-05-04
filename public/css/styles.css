@@ -579,3 +579,35 @@ img {
              }
             /* --- End button resizing --- */
         }
+
+        /* --- Styling for the 404 Page --- */
+body.page-404 {
+    /* Ensure body can center its main child vertically */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+ }
+ 
+ main.error-page-main {
+    /* Make this main section also use flex to center its content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;     /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
+    flex-grow: 1;            /* Allow it to take available vertical space */
+    width: 100%;             /* Take full width for alignment */
+    padding-top: 40px;       /* Add some top padding */
+    padding-bottom: 40px;    /* Add some bottom padding */
+ }
+ 
+ /* Add some space below the 404 box */
+ .error-page-main .error-container {
+     margin-bottom: 60px;
+ }
+ 
+ /* Ensure the latest news section takes appropriate width */
+ .error-page-main #latest-news-section {
+     width: 90%;
+     max-width: 1200px; /* Or match your .container width */
+ }
+ /* --- End 404 Page Styling --- */
