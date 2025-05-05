@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "e94132b267302b892f2584b2b7dde512caa26fdeae93d0ef66faaf154795032a",
+      "title": "Waymo ramps up robotaxi production at new Arizona factory",
+      "link": "articles/waymo-ramps-up-robotaxi-production-at-new-arizona-factory.html",
+      "published_iso": "2025-05-05T23:31:48Z",
+      "summary_short": "Waymo reveals new details about its robotaxi fleet as production ramps up in Arizona. Learn about the latest in autonomous vehicle growth.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/Waymo_MFG_Exit.jpeg?resize=1200,675",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "Waymo",
+        "robotaxi",
+        "autonomous vehicles",
+        "Jaguar I-Pace EV",
+        "Alphabet",
+        "self-driving technology",
+        "ride-hailing services",
+        "Arizona factory",
+        "autonomous fleet",
+        "commercial operations"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "3d8b8918b0f320061564f488804e1cf3bf68bd934cbe2ba29dccb1720d44a02b",
       "title": "OpenAI says non-profit will remain in control after backlash",
       "link": "articles/openai-says-non-profit-will-remain-in-control-after-backlash.html",
