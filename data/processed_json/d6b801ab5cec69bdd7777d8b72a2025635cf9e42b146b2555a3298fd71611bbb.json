@@ -1,0 +1,44 @@
+{
+    "id": "d6b801ab5cec69bdd7777d8b72a2025635cf9e42b146b2555a3298fd71611bbb",
+    "title": "Take a Tour of All the Essential Features in ChatGPT",
+    "link": "https://www.wired.com/story/subscriber-only-ai-unlocked-seminar-tour-of-chatgpt-features/",
+    "published_iso": "2025-05-05T15:00:00Z",
+    "summary": "If you missed WIRED's live, subscriber-only Q&A focused on the software features of ChatGPT, hosted by Reece Rogers, you can watch the replay here.",
+    "source_feed": "https://www.wired.com/feed/tag/ai/latest/rss",
+    "scraped_at_iso": "2025-05-05T15:38:49Z",
+    "selected_image_url": "https://media.wired.com/photos/662bb0a4686afc207a6e8aec/191:100/w_1280,c_limit/AI-Unlocked_16x9.jpg",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Software",
+        "reasoning_summary": "Promoted from Boring due to mention of 'chatgpt'. Original reason: The content is a replay of a subscriber-only Q&A about ChatGPT features, which is routine and lacks new, verifiable information or significant impact.",
+        "primary_topic_keyword": "ChatGPT features"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T15:47:26Z",
+    "topic": "Software",
+    "is_breaking": false,
+    "primary_keyword": "ChatGPT features",
+    "seo_agent_results": {
+        "generated_title_tag": "Explore Essential ChatGPT Features in WIRED's Replay",
+        "generated_meta_description": "Missed WIRED's ChatGPT features Q&A? Watch the replay to discover key insights on AI tools.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Explore Essential ChatGPT Features in WIRED's Replay\",  \n  \"description\": \"Missed WIRED's ChatGPT features Q&A? Watch the replay to discover key insights on AI tools.\",  \n  \"keywords\": [\"ChatGPT features\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.wired.com/story/subscriber-only-ai-unlocked-seminar-tour-of-chatgpt-features/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://media.wired.com/photos/662bb0a4686afc207a6e8aec/191:100/w_1280,c_limit/AI-Unlocked_16x9.jpg\" },  \n  \"datePublished\": \"2025-05-05T15:00:00Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Take a Tour of All the Essential Features in ChatGPT  \n\nIf you missed WIRED's live, subscriber-only Q&A session on **ChatGPT features**, hosted by Reece Rogers, a replay is now available. The discussion focused on exploring the software's capabilities, offering insights into its essential tools and functionalities.  \n\n### Why It Matters  \n\nUnderstanding ChatGPT's features is crucial for maximizing its potential in both personal and professional settings. WIRED’s session provides a guided overview, helping users navigate the AI’s capabilities more effectively. For those looking to deepen their knowledge, the replay serves as a valuable resource, especially as AI tools become increasingly integrated into daily workflows."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "ChatGPT features",
+        "AI tools",
+        "WIRED Q&A",
+        "Reece Rogers",
+        "AI capabilities",
+        "personal productivity",
+        "professional workflows",
+        "AI integration",
+        "ChatGPT tutorial",
+        "AI software"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.99,
+    "slug": "take-a-tour-of-all-the-essential-features-in-chatgpt",
+    "audio_url": null
+}

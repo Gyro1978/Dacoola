@@ -1,0 +1,44 @@
+{
+    "id": "976f3124b6733e0095687bbf3f724f5e032772bb92b9399c8d521d1c60670f71",
+    "title": "RIP Skype — you were right about almost everything",
+    "link": "https://www.theverge.com/microsoft/660985/skype-shuts-down-rip",
+    "published_iso": "2025-05-05T14:00:00Z",
+    "summary": "<figure>\n\n<img alt=\"\" src=\"https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/VLS_7906.0.webp?quality=90&strip=all&crop=0,0,100,100\" />\n\t<figcaption></figcaption>\n</figure>\n<p class=\"has-text-align-none\">\"When I knew it was over was when I downloaded Skype.\" </p>\n<p class=\"has-text-align-none\">All the way back in 2003, Michael Powell, then the chairman of the FCC and the United States' chief regulator of the telecom industry, <a href=\"https://www.youtube.com/watch?v=h_ZwYqeku_I\">told a roomful</a> of academics and executives at the University of California at San Diego that he had seen the future of communication. \"When the inventors of Kazaa are distributing, for free, a little program that you can talk to anybody else, and the quality is fantastic and it's free, it's over. You can pretend it's not. You can fight these fights. But it is over. The world will change now inevitably.\"</p>\n<p class=\"has-text-align-none\">Powell was right. The world did change, and it changed in Skype's image. Then it left Skype behind.</p>\n<p class=\"has-text-align-none\">On Monday, <a href=\"https://www.theverge.com/news/621353/microsoft-skype-shutting-down-retirement-may-2025\">Microsoft shut Skype down for good</a>, a few days short of 14 years after buying the service for $8.5 billion. Skype still had users until the bitter end, but both Microsoft and the world had more or less moved on. Microsoft has shifted all its investment to Teams, a corporate-focused app that the company swears will someday catch on with regular people. Zoom and Meet and countless other apps do video chat perfectly well. WhatsApp, Signal, Telegram, and dozens of other messaging servic …</p>\n<p><a href=\"https://www.theverge.com/microsoft/660985/skype-shuts-down-rip\">Read the full story at The Verge.</a></p>",
+    "source_feed": "https://www.theverge.com/rss/index.xml",
+    "scraped_at_iso": "2025-05-05T14:54:31Z",
+    "selected_image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/VLS_7906.0.webp?quality=90&strip=all&crop=0,10.887883763438,100,78.224232473125",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Other",
+        "reasoning_summary": "Promoted from Boring due to mention of 'whatsapp'. Original reason: The article is a retrospective opinion piece on Skype's impact, lacking new, verifiable information or significant developments in AI/Tech.",
+        "primary_topic_keyword": "Skype retrospective"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T15:01:40Z",
+    "topic": "Other",
+    "is_breaking": false,
+    "primary_keyword": "Skype retrospective",
+    "seo_agent_results": {
+        "generated_title_tag": "Skype Retrospective: How It Predicted the Future",
+        "generated_meta_description": "A look back at Skype's impact on communication and why its shutdown marks the end of an era. Read our Skype retrospective.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Skype Retrospective: How It Predicted the Future\",  \n  \"description\": \"A look back at Skype's impact on communication and why its shutdown marks the end of an era. Read our Skype retrospective.\",  \n  \"keywords\": [\"Skype retrospective\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.theverge.com/microsoft/660985/skype-shuts-down-rip\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/VLS_7906.0.webp?quality=90&strip=all&crop=0,10.887883763438,100,78.224232473125\" },  \n  \"datePublished\": \"2025-05-05T14:00:00Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## RIP Skype — you were right about almost everything  \n\nMicrosoft officially shut down Skype on May 2025, nearly 14 years after acquiring it for $8.5 billion. The once-revolutionary platform, which FCC chairman Michael Powell in 2003 hailed as the future of communication, ultimately saw its relevance fade as competitors like Zoom, Teams, and WhatsApp took over. Despite its decline, Skype’s early vision of free, high-quality global calls reshaped the telecom industry—only to be left behind by the very trends it pioneered.  \n\n### Why It Matters  \n\nSkype’s shutdown underscores how quickly tech landscapes evolve. It was among the first to prove that internet-based communication could rival traditional telecom, paving the way for today’s dominant apps. Yet, its inability to adapt—while Microsoft shifted focus to Teams—highlights the risks of resting on early success. This Skype retrospective serves as a reminder that even groundbreaking innovations must continuously evolve to stay relevant."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Skype shutdown",
+        "Microsoft acquisition",
+        "VoIP technology",
+        "Zoom competition",
+        "Microsoft Teams",
+        "telecom industry evolution",
+        "internet-based communication",
+        "tech industry trends",
+        "communication apps",
+        "legacy of Skype"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.99,
+    "slug": "rip-skype-—-you-were-right-about-almost-everything",
+    "audio_url": null
+}

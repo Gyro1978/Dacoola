@@ -1,0 +1,43 @@
+{
+    "id": "085fcf2adb4f53733c9ecad111c7295e59f33fe982d5543ef2778bb436a96b08",
+    "title": "Rork’s founders were almost broke when a viral tweet led to $2.8M and a16z",
+    "link": "https://techcrunch.com/2025/05/05/rorks-founders-were-almost-broke-when-a-viral-tweet-led-to-2-8m-and-a16z/",
+    "published_iso": "2025-05-05T16:02:15Z",
+    "summary": "Rork founders Levan Kvirkvelia and Daniel Dhawan are living a life that sounds like a plot for a movie. But it really happened.  They went from broke, life savings spent, and in debt $15,000 apiece on credit cards — Dhawan was even sleeping on a mattress at a friend’s apartment — to $100,000 of revenue […]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-05T16:49:34Z",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2025/05/Rork-founders.jpg?resize=1200,954",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Startups",
+        "reasoning_summary": "Promoted from Boring due to mention of 'a16z'. Original reason: The article describes a personal journey of startup founders but lacks significant AI/Tech relevance or verifiable high-impact event.",
+        "primary_topic_keyword": "Startup funding story"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T16:57:40Z",
+    "topic": "Startups",
+    "is_breaking": false,
+    "primary_keyword": "Startup funding story",
+    "seo_agent_results": {
+        "generated_title_tag": "Rork’s Startup Funding Story: From Broke to $2.8M",
+        "generated_meta_description": "Discover how Rork’s founders turned a viral tweet into $2.8M in funding—a true startup funding story of resilience and luck.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Rork’s Startup Funding Story: From Broke to $2.8M\",  \n  \"description\": \"Discover how Rork’s founders turned a viral tweet into $2.8M in funding—a true startup funding story of resilience and luck.\",  \n  \"keywords\": [\"Startup funding story\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/05/rorks-founders-were-almost-broke-when-a-viral-tweet-led-to-2-8m-and-a16z/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2025/05/Rork-founders.jpg?resize=1200,954\" },  \n  \"datePublished\": \"2025-05-05T16:02:15Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Rork’s founders were almost broke when a viral tweet led to $2.8M and a16z  \nLevan Kvirkvelia and Daniel Dhawan, the founders of Rork, went from financial ruin—spending their life savings and accumulating $15,000 in credit card debt each—to generating $100,000 in revenue after a viral tweet changed their fortunes. Their startup funding story took a dramatic turn when they secured $2.8 million in investment, including backing from Andreessen Horowitz (a16z).  \n\n### Why It Matters  \nThis story highlights the unpredictable nature of startup success, where a single moment—like a viral tweet—can pivot a struggling business into a funded venture. It underscores the power of social media in modern entrepreneurship and serves as a reminder that persistence and timing can be just as crucial as a solid business plan. For aspiring founders, Rork’s journey offers both inspiration and a cautionary tale about the highs and lows of startup life."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Startup Funding",
+        "Viral Tweet Success",
+        "Entrepreneurship",
+        "Andreessen Horowitz",
+        "Rork Startup",
+        "Social Media Impact",
+        "Startup Journey",
+        "Business Pivot",
+        "Founder Stories"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.49,
+    "slug": "rork’s-founders-were-almost-broke-when-a-viral-tweet-led-to-$28m-and-a16z",
+    "audio_url": null
+}

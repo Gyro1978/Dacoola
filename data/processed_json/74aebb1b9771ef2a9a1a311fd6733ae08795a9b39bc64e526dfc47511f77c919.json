@@ -1,0 +1,44 @@
+{
+    "id": "74aebb1b9771ef2a9a1a311fd6733ae08795a9b39bc64e526dfc47511f77c919",
+    "title": "The Pebble’s creator demos his new smartwatch",
+    "link": "https://www.theverge.com/news/661047/eric-migicovsky-pebble-core-devices-core-2-duo-core-time-2-smartwatch",
+    "published_iso": "2025-05-05T15:06:41Z",
+    "summary": "<figure>\n\n<img alt=\"Eric Migicovsky operating the Core Devices Core 2 Duo smartwatch worn on his wrist.\" src=\"https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/core2duo.jpg?quality=90&strip=all&crop=0,0,100,100\" />\n\t<figcaption>Eric Migicovsky demonstrates one of the first Core 2 Duo smartwatches from the factory where they’re being manufactured. | Screenshot: YouTube</figcaption>\n</figure>\n<p class=\"has-text-align-none\">After announcing a new company called Core Devices and a <a href=\"https://www.theverge.com/news/631657/pebble-watch-core-devices-duo-2-time-2\">pair of new smartwatches running the now open-source PebbleOS</a>, the Pebble’s creator, Eric Migicovsky, has launched a podcast. In the first episode of Tick Talk w/ Eric Migicovsky, he gives a brief demo of the Core 2 Duo that’s still in development, talks about potential new features, and addresses concerns over how US tariffs will affect the price and delivery of the new smartwatches.</p>\n\n<p class=\"has-text-align-none\">Migicovsky is still confident the Core 2 Duo — the cheaper model with a black-and-white screen lacking touch capabilities — is going to ship some time in July 2025, but his demo of one of the first units from the factory shows a device with software that’s still under development. The familiar PebbleOS UI is there, but basic features like telling time haven’t been enabled yet, and the Core Devices team is still working on drivers for vibrating notifications and the smartwatch’s accelerometer.</p>\n\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\n<div><div></div></div>\n</div></figure>\n\n<p class=\"has-text-align-none\">The Core 2 Duo will come with a silicone strap reminiscent of the Apple Watch’s with a slot for tucking excess length away while it’s worn, and Migicovsky demonstrated the<a href=\"https://www.theverge.com/news/654440/eric-migicovsky-pebble-usb-charger-smartwatch-core-2-duo\"> tiny USB-C magnetic charging dongle</a> they revealed last month.</p>\n\n<p class=\"has-text-align-none\">Although Migicovsky believes the original Pebble team did a lot of things right a decade ago with the original Pebble watches, there are a few new features he wants to eventually introduce for the Core 2 Duo and the Core Time 2, a follow-up that’s set to ship in December 2025 with a color touchscreen. Watch face widgets would make it easier to see information like the weather or upcoming appointments at a quick glance, while deeper integration with Beeper — the universal chat app Migicovsky developed after selling Pebble to Google — would improve both smartwatches’ communication capabilities.</p>\n\n<p class=\"has-text-align-none\">Better access to AI voice agents is something on Core Devices’ wish list, given that the Core 2 Duo and the Core Time 2 both have speakers and microphones. And thanks to the <a href=\"https://www.theverge.com/24040543/eu-dma-digital-markets-act-big-tech-antitrust\">European Union’s Digital Markets Act (DMA)</a> forcing Apple to open up its devices, Migicovsky says he will support expanded operability with iOS should Apple allow it, potentially allowing users to respond by voice to incoming messages when paired to an iPhone, at least in Europe.</p>\n\n<p class=\"has-text-align-none\">The Core Devices team is also doing a lot of work on PebbleOS’ underlying architecture and porting it to two new Bluetooth chipsets with the goal of expanding the types of devices the operating system can be used with — not just wearables. But what those other devices might be hasn’t been revealed yet.</p>\n\n<p class=\"has-text-align-none\">During the podcast, Migicovsky also addresses the effect President Trump’s tariffs on Chinese-made goods will have on the Core 2 Duo and the Core Time 2, as both smartwatches are manufactured in Shenzhen. With steeper tariffs for these types of devices on pause, Chinese-made smartwatches are currently subjected to 27.5 percent tariffs, he says, which will potentially increase the price of incoming shipments by $10 or $25. But specifics on how that will affect the cost of the $149 Core 2 Duo and $225 Core Time 2 aren’t yet known.</p>",
+    "source_feed": "https://www.theverge.com/rss/index.xml",
+    "scraped_at_iso": "2025-05-05T15:38:49Z",
+    "selected_image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/core2duo.jpg?quality=90&strip=all&crop=0,10.752607989199,100,78.494784021602",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Hardware",
+        "reasoning_summary": "Promoted from Boring due to mention of 'google'. Original reason: The article discusses a new smartwatch demo and podcast launch by the creator of Pebble, which is routine product development and PR activity without significant novelty or impact in the AI/Tech field.",
+        "primary_topic_keyword": "smartwatch demo"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T15:44:46Z",
+    "topic": "Hardware",
+    "is_breaking": false,
+    "primary_keyword": "smartwatch demo",
+    "seo_agent_results": {
+        "generated_title_tag": "Pebble Creator Demos New Smartwatch in Latest Podcast",
+        "generated_meta_description": "Eric Migicovsky showcases the Core 2 Duo smartwatch demo, discussing features, tariffs, and future plans.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Pebble Creator Demos New Smartwatch in Latest Podcast\",  \n  \"description\": \"Eric Migicovsky showcases the Core 2 Duo smartwatch demo, discussing features, tariffs, and future plans.\",  \n  \"keywords\": [\"smartwatch demo\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.theverge.com/news/661047/eric-migicovsky-pebble-core-devices-core-2-duo-core-time-2-smartwatch\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/core2duo.jpg?quality=90&strip=all&crop=0,10.752607989199,100,78.494784021602\" },  \n  \"datePublished\": \"2025-05-05T15:06:41Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## The Pebble’s creator demos his new smartwatch  \n\nEric Migicovsky, creator of the Pebble smartwatch, has debuted a podcast where he demonstrates the upcoming Core 2 Duo smartwatch from his new company, Core Devices. The device, set to ship in July 2025, runs on the open-source PebbleOS but is still in development, with basic features like timekeeping not yet enabled. Migicovsky also addressed concerns over US tariffs affecting pricing, as the watches are manufactured in Shenzhen. The Core 2 Duo features a black-and-white screen, a silicone strap, and a magnetic USB-C charger, while future models like the Core Time 2 will include a color touchscreen.  \n\n### Why It Matters  \n\nMigicovsky’s return to smartwatches signals a revival of Pebble’s minimalist, functional design philosophy in an era dominated by feature-heavy wearables. The focus on open-source software and potential integration with Beeper—a universal chat app—could make these devices appealing to privacy-conscious users. Additionally, the EU’s Digital Markets Act may enable better iOS compatibility, expanding its market reach. However, ongoing tariff uncertainties highlight the challenges of hardware production in a globalized economy, which could impact pricing and adoption."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Pebble smartwatch",
+        "Eric Migicovsky",
+        "Core 2 Duo smartwatch",
+        "PebbleOS",
+        "smartwatch tariffs",
+        "minimalist smartwatch design",
+        "open-source smartwatch",
+        "Beeper integration",
+        "Digital Markets Act",
+        "smartwatch market trends"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 15.0,
+    "slug": "the-pebble’s-creator-demos-his-new-smartwatch",
+    "audio_url": null
+}

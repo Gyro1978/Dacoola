@@ -1,0 +1,44 @@
+{
+    "id": "b8a3df0a2f64449034c1ea6a4ce32402314013c3c361ad1432dc0d42301ec497",
+    "title": "Waymo Expands Self-Driving Fleet with New US Manufacturing Facility",
+    "link": "https://www.cnet.com/roadshow/news/waymo-expands-self-driving-fleet-with-new-us-manufacturing-facility/#ftag=CAD590a51e",
+    "published_iso": "2025-05-05T17:50:32Z",
+    "summary": "Waymo plans to add 2,000 more autonomous vehicles to its fleet by 2026.",
+    "source_feed": "https://www.cnet.com/rss/news/",
+    "scraped_at_iso": "2025-05-05T18:55:49Z",
+    "selected_image_url": "https://www.cnet.com/a/img/resize/8e99f0f51041b8743abc27786aa5d60a22da0624/hub/2025/05/05/e882c8fd-d41a-4b07-8b91-8ba3dc5f0ccc/screenshot-2025-05-05-at-1-29-30pm.png?auto=webp&fit=crop&height=675&width=1200",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Transportation",
+        "reasoning_summary": "Waymo's expansion of its self-driving fleet with a new manufacturing facility represents a significant, verifiable development in autonomous vehicle technology, though not urgent enough to be Breaking.",
+        "primary_topic_keyword": "autonomous vehicle expansion"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T19:01:55Z",
+    "topic": "Transportation",
+    "is_breaking": false,
+    "primary_keyword": "autonomous vehicle expansion",
+    "seo_agent_results": {
+        "generated_title_tag": "Waymo's Autonomous Vehicle Expansion Adds 2,000 More AVs",
+        "generated_meta_description": "Waymo plans to grow its self-driving fleet by 2,000 vehicles by 2026, marking a major autonomous vehicle expansion.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Waymo's Autonomous Vehicle Expansion Adds 2,000 More AVs\",  \n  \"description\": \"Waymo plans to grow its self-driving fleet by 2,000 vehicles by 2026, marking a major autonomous vehicle expansion.\",  \n  \"keywords\": [\"autonomous vehicle expansion\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.cnet.com/roadshow/news/waymo-expands-self-driving-fleet-with-new-us-manufacturing-facility/#ftag=CAD590a51e\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://www.cnet.com/a/img/resize/8e99f0f51041b8743abc27786aa5d60a22da0624/hub/2025/05/05/e882c8fd-d41a-4b07-8b91-8ba3dc5f0ccc/screenshot-2025-05-05-at-1-29-30pm.png?auto=webp&fit=crop&height=675&width=1200\" },  \n  \"datePublished\": \"2025-05-05T17:50:32Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Waymo Expands Self-Driving Fleet with New US Manufacturing Facility  \n\nWaymo is scaling up its autonomous vehicle expansion by adding 2,000 more self-driving cars to its fleet by 2026. The move signals a significant ramp-up in production and deployment of its AV technology.  \n\n### Why It Matters  \n\nThis expansion underscores Waymo's commitment to leading the autonomous vehicle market, reinforcing its position as a key player in the industry. Adding 2,000 vehicles could accelerate real-world testing, improve safety algorithms, and expand service areas, potentially bringing self-driving technology closer to mainstream adoption. The move also highlights growing confidence in AV scalability, despite regulatory and technological hurdles."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Waymo",
+        "Self-Driving Cars",
+        "Autonomous Vehicles",
+        "AV Technology",
+        "Fleet Expansion",
+        "US Manufacturing",
+        "Autonomous Vehicle Market",
+        "AV Scalability",
+        "Regulatory Hurdles",
+        "Mainstream Adoption"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.99,
+    "slug": "waymo-expands-self-driving-fleet-with-new-us-manufacturing-facility",
+    "audio_url": null
+}

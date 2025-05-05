@@ -1,0 +1,44 @@
+{
+    "id": "4df673675a79c9ed66b48c4ae912397e914f1b7e2ffbe3a521282a3fd7e98ab2",
+    "title": "Nvidia launches fully open source transcription AI model Parakeet-TDT-0.6B-V2 on Hugging Face",
+    "link": "https://venturebeat.com/ai/nvidia-launches-fully-open-source-transcription-ai-model-parakeet-tdt-0-6b-v2-on-hugging-face/",
+    "published_iso": "2025-05-05T19:17:19Z",
+    "summary": "<img alt=\"Colorful line art of parakeet with cybernetic face and back standing atop wires against dark gray backdrop\" class=\"attachment-single-feed size-single-feed wp-post-image\" height=\"324\" src=\"https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_cybernetic_parakeet_-chaos_25_-ar_169_-profile_mw9xg_ab003f9b-d14b-4bdf-ae43-ee11fb934b1a.png?w=578\" width=\"578\" /><hr />An attractive proposition for commercial enterprises and indie developers looking to build speech recognition and transcription services...<a href=\"https://venturebeat.com/ai/nvidia-launches-fully-open-source-transcription-ai-model-parakeet-tdt-0-6b-v2-on-hugging-face/\" target=\"_blank\">Read More</a>",
+    "source_feed": "https://venturebeat.com/category/ai/feed/",
+    "scraped_at_iso": "2025-05-05T19:25:18Z",
+    "selected_image_url": "https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_cybernetic_parakeet_-chaos_25_-ar_169_-profile_mw9xg_ab003f9b-d14b-4bdf-ae43-ee11fb934b1a.png?w=1024?w=1200&strip=all",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Open Source",
+        "reasoning_summary": "Nvidia's release of a fully open-source transcription AI model is a verifiable event with potential impact for developers and enterprises, fitting the 'Interesting' criteria due to its novelty and relevance to AI technology.",
+        "primary_topic_keyword": "Open source AI model"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T19:32:48Z",
+    "topic": "Open Source",
+    "is_breaking": false,
+    "primary_keyword": "Open source AI model",
+    "seo_agent_results": {
+        "generated_title_tag": "Nvidia Launches Open Source AI Model for Transcription",
+        "generated_meta_description": "Nvidia's new open source AI model, Parakeet-TDT-0.6B-V2, offers speech recognition and transcription capabilities for developers.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Nvidia Launches Open Source AI Model for Transcription\",  \n  \"description\": \"Nvidia's new open source AI model, Parakeet-TDT-0.6B-V2, offers speech recognition and transcription capabilities for developers.\",  \n  \"keywords\": [\"Open source AI model\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://venturebeat.com/ai/nvidia-launches-fully-open-source-transcription-ai-model-parakeet-tdt-0-6b-v2-on-hugging-face/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_cybernetic_parakeet_-chaos_25_-ar_169_-profile_mw9xg_ab003f9b-d14b-4bdf-ae43-ee11fb934b1a.png?w=1024?w=1200&strip=all\" },  \n  \"datePublished\": \"2025-05-05T19:17:19Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Nvidia Launches Fully Open Source Transcription AI Model Parakeet-TDT-0.6B-V2 on Hugging Face  \n\nNvidia has introduced Parakeet-TDT-0.6B-V2, a fully **open source AI model** designed for speech recognition and transcription. Hosted on Hugging Face, the model aims to serve both commercial enterprises and independent developers looking to integrate advanced transcription capabilities into their applications.  \n\n### Why It Matters  \n\nThe release of Parakeet-TDT-0.6B-V2 underscores Nvidia’s commitment to democratizing AI tools by making them accessible to a broader developer community. Open-source models like this lower barriers to entry, enabling startups and smaller teams to leverage cutting-edge speech recognition without prohibitive costs. Given the growing demand for transcription services in industries like healthcare, legal, and media, this move could accelerate innovation in AI-powered voice applications."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Nvidia",
+        "Open Source AI",
+        "Speech Recognition",
+        "Transcription AI",
+        "Hugging Face",
+        "AI Model Release",
+        "AI Democratization",
+        "Voice Applications",
+        "AI in Healthcare",
+        "AI in Legal"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 15.0,
+    "slug": "nvidia-launches-fully-open-source-transcription-ai-model-parakeet-tdt-06b-v2-on-",
+    "audio_url": null
+}
