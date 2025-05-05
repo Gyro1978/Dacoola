@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "491a3dc06c4e39ab56e72c564a3145bbda8b8e8c24f0dc07f21fe248ab4f7d5e",
+      "title": "Why I love my Brother 1034D Serger",
+      "link": "articles/why-i-love-my-brother-1034d-serger.html",
+      "published_iso": "2025-05-05T19:40:56Z",
+      "summary_short": "Discover why the Brother 1034D Serger is a game-changer for knitwear sewing, offering efficiency and professional finishes.",
+      "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/04/257725_Serger_photos__CVirginia__0000_11.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "Brother 1034D Serger",
+        "sewing knitwear",
+        "serger machine",
+        "sewing tools",
+        "differential feed system",
+        "sewing for beginners",
+        "professional sewing",
+        "stretch fabric sewing",
+        "sewing machine comparison",
+        "craftsmanship"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "55780d28170bce9edfe05750d8bbb1fb26092c0548c380a360a37ab418a523cc",
       "title": "Smart Shirt Tracks Workouts—and Goes Straight to the Wash",
       "link": "articles/smart-shirt-tracks-workouts—and-goes-straight-to-the-wash.html",
