@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "83bddb824ff0efe8919123b6acaae3403b68031395c0d9eb21e9a4756c50a0bc",
+      "title": "Skype shutting down today — these are the best alternatives",
+      "link": "articles/skype-shutting-down-today-—-these-are-the-best-alternatives.html",
+      "published_iso": "2025-05-05T13:31:50Z",
+      "summary_short": "Microsoft confirms the Skype shutdown today. Users can migrate to Teams or explore other alternatives. Learn more here.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/12/GettyImages-2153293575_84455f.jpg?resize=1200,800",
+      "topic": "Software",
+      "is_breaking": true,
+      "tags": [
+        "Skype shutdown",
+        "Microsoft Teams",
+        "video calling alternatives",
+        "digital communication",
+        "Microsoft strategy",
+        "tech industry shifts",
+        "Skype alternatives",
+        "collaboration tools",
+        "end of Skype era"
+      ],
+      "audio_url": null,
+      "trend_score": 19.5
+    },
+    {
       "id": "d4ce4280c841a0151f6a5094c5dfe76045cb88a5c1cc912627f41e606bd44a70",
       "title": "Beware phony IT calls after Co-op and M&S hacks, says UK cyber centre",
       "link": "articles/beware-phony-it-calls-after-co-op-and-m&s-hacks,-says-uk-cyber-centre.html",

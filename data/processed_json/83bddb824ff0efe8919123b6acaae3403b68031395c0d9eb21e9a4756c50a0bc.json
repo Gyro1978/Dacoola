@@ -1,0 +1,43 @@
+{
+    "id": "83bddb824ff0efe8919123b6acaae3403b68031395c0d9eb21e9a4756c50a0bc",
+    "title": "Skype shutting down today — these are the best alternatives",
+    "link": "https://techcrunch.com/2025/05/05/skype-shuts-down-in-may-these-are-the-best-alternatives/",
+    "published_iso": "2025-05-05T13:31:50Z",
+    "summary": "After 23 years of connecting people around the world, Skype, the popular video-calling service, is shutting down on Monday. Microsoft, the parent company, confirmed that the official sunset date for the service is today, May 5, 2025. Skype users can either migrate all their contacts and chat data to Microsoft Teams, or they can choose […]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-05T13:37:18Z",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2024/12/GettyImages-2153293575_84455f.jpg?resize=1200,800",
+    "filter_verdict": {
+        "importance_level": "Breaking",
+        "topic": "Software",
+        "reasoning_summary": "The shutdown of Skype, a major video-calling service, by Microsoft is a verified, high-impact event affecting many users and the tech industry.",
+        "primary_topic_keyword": "Skype shutdown"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T13:42:50Z",
+    "topic": "Software",
+    "is_breaking": true,
+    "primary_keyword": "Skype shutdown",
+    "seo_agent_results": {
+        "generated_title_tag": "Skype Shutdown: Best Alternatives After 23 Years",
+        "generated_meta_description": "Microsoft confirms the Skype shutdown today. Users can migrate to Teams or explore other alternatives. Learn more here.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Skype Shutdown: Best Alternatives After 23 Years\",  \n  \"description\": \"Microsoft confirms the Skype shutdown today. Users can migrate to Teams or explore other alternatives. Learn more here.\",  \n  \"keywords\": [\"Skype shutdown\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/05/skype-shuts-down-in-may-these-are-the-best-alternatives/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2024/12/GettyImages-2153293575_84455f.jpg?resize=1200,800\" },  \n  \"datePublished\": \"2025-05-05T13:31:50Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Skype shutting down today — these are the best alternatives  \n\nAfter 23 years of operation, Skype, the widely used video-calling service, is officially shutting down today, May 5, 2025. Microsoft, its parent company, confirmed the shutdown, urging users to migrate their contacts and chat data to Microsoft Teams or explore other alternatives.  \n\n### Why It Matters  \n\nThe Skype shutdown marks the end of an era for one of the pioneers in digital communication. Its discontinuation reflects Microsoft’s strategic shift toward Teams, which has become its flagship collaboration tool. For long-time Skype users, this transition may require adapting to new platforms, highlighting the evolving nature of tech services and the importance of staying updated with industry shifts."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Skype shutdown",
+        "Microsoft Teams",
+        "video calling alternatives",
+        "digital communication",
+        "Microsoft strategy",
+        "tech industry shifts",
+        "Skype alternatives",
+        "collaboration tools",
+        "end of Skype era"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 19.5,
+    "slug": "skype-shutting-down-today-—-these-are-the-best-alternatives",
+    "audio_url": null
+}
