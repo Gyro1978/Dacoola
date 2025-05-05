@@ -1,0 +1,43 @@
+{
+    "id": "b7a3dee512f03330bd14800fadd7577048b0b91823c89d4817151d1c176c14b5",
+    "title": "Apple ‘iPhone Air’ rumor suggests a bigger screen coming in 2027",
+    "link": "https://www.theverge.com/news/661009/apple-iphone-air-2-slim-2027",
+    "published_iso": "2025-05-05T14:01:37Z",
+    "summary": "<figure>\n\n<img alt=\"\" src=\"https://platform.theverge.com/wp-content/uploads/sites/2/2025/04/STK071_APPLE_H.jpg?quality=90&strip=all&crop=0,0,100,100\" />\n\t<figcaption></figcaption>\n</figure>\n<p class=\"has-text-align-none\">Apple’s <a href=\"https://www.theverge.com/2025/1/20/24344710/apple-iphone-17-air-rumors-specs-display-size-price\">rumored super-slim iPhone “Air”</a> isn’t expected until this fall, but supply chain analyst Ming-Chi Kuo says development has already begun on a redesigned version with a bigger screen.</p>\n\n<p class=\"has-text-align-none\"><a href=\"https://mingchikuo.craft.me/9br1TonGnVzDPP\">According to Kuo</a>, Apple’s second iPhone Air / iPhone “Slim” model is planned for launch in the fall of 2026 as part of the usual annual refresh, but with the same overall size and design before the third iteration expands things the following year. <a href=\"https://www.bloomberg.com/news/newsletters/2025-03-16/apple-iphone-17-air-foldable-iphone-details-ai-crisis-to-haunt-top-100-event-m8bl3a9c?srnd=undefined\"><em>Bloomberg</em> reported in March</a> that the 2025 iPhone Air was originally supposed to come with a 6.9-inch screen, but Apple <a href=\"https://www.theverge.com/news/630917/iphone-17-air-pro-max-dummies-leak\">reduced its size to 6.6 inches</a> to avoid another bendgate scenario.</p>\n\n<p class=\"has-text-align-none\">Kuo’s list also indicates Apple is already working on its second foldable device for release in 2027.</p>\n\n<p class=\"has-text-align-none\">The rumor aligns with a report from <em>The Information </em>over the weekend saying Apple may begin to <a href=\"https://www.theverge.com/news/660739/apple-may-stagger-next-years-iphones-to-make-way-for-a-foldable\">stagger releasing new iPhones</a>. That would see high-end versions of the iPhone 18 – including the Pro, Air, and a rumored foldable iPhone – introduced in the fall, before the cheaper standard model and budget “e” version launch in the spring of 2027.</p>",
+    "source_feed": "https://www.theverge.com/rss/index.xml",
+    "scraped_at_iso": "2025-05-05T14:54:31Z",
+    "selected_image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/04/STK071_APPLE_H.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Hardware",
+        "reasoning_summary": "Promoted from Boring due to mention of 'apple'. Original reason: Rumored future iPhone design changes without verifiable impact or novelty.",
+        "primary_topic_keyword": "iPhone Air rumor"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T15:02:26Z",
+    "topic": "Hardware",
+    "is_breaking": false,
+    "primary_keyword": "iPhone Air rumor",
+    "seo_agent_results": {
+        "generated_title_tag": "iPhone Air Rumor Hints at Bigger Screen in 2027",
+        "generated_meta_description": "Apple's rumored iPhone Air may get a larger display by 2027, according to supply chain analyst Ming-Chi Kuo. Read the latest details.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"iPhone Air Rumor Hints at Bigger Screen in 2027\",  \n  \"description\": \"Apple's rumored iPhone Air may get a larger display by 2027, according to supply chain analyst Ming-Chi Kuo. Read the latest details.\",  \n  \"keywords\": [\"iPhone Air rumor\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.theverge.com/news/661009/apple-iphone-air-2-slim-2027\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://platform.theverge.com/wp-content/uploads/sites/2/2025/04/STK071_APPLE_H.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200\" },  \n  \"datePublished\": \"2025-05-05T14:01:37Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Apple ‘iPhone Air’ Rumor Suggests a Bigger Screen Coming in 2027  \nApple’s rumored super-slim iPhone \"Air\" is expected to debut this fall, but supply chain analyst Ming-Chi Kuo claims development is already underway for a redesigned version with a bigger screen. The second iteration, planned for 2026, will retain the same size before expanding in 2027. Reports suggest Apple initially considered a 6.9-inch display but scaled back to 6.6 inches to avoid structural issues. Additionally, Kuo mentions Apple is working on a second foldable device for 2027, aligning with rumors of staggered iPhone releases.  \n\n### Why It Matters  \nIf accurate, this iPhone Air rumor signals Apple’s long-term strategy to refine its ultra-thin smartphone lineup while balancing durability concerns. A larger screen could position the iPhone Air as a premium alternative to the Pro models, catering to users who prioritize portability without sacrificing display size. The mention of a foldable device further suggests Apple is diversifying its iPhone portfolio to compete with rivals like Samsung. Staggered releases could also help Apple maintain consumer interest year-round, rather than relying solely on annual fall launches."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "iPhone Air",
+        "Apple rumors",
+        "smartphone screen size",
+        "Ming-Chi Kuo",
+        "foldable iPhone",
+        "iPhone release strategy",
+        "ultra-thin smartphone",
+        "Apple supply chain",
+        "iPhone 2027"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.49,
+    "slug": "apple-‘iphone-air’-rumor-suggests-a-bigger-screen-coming-in-2027",
+    "audio_url": null
+}

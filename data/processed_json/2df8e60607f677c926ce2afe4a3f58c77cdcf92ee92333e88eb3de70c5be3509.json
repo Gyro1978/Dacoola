@@ -1,0 +1,43 @@
+{
+    "id": "2df8e60607f677c926ce2afe4a3f58c77cdcf92ee92333e88eb3de70c5be3509",
+    "title": "Tesla sales continue to slump across Europe despite April EV sales swell",
+    "link": "https://techcrunch.com/2025/05/05/tesla-sales-continue-to-slump-across-europe-despite-april-ev-sales-swell/",
+    "published_iso": "2025-05-05T13:56:40Z",
+    "summary": "Tesla’s new car sales in Spain fell 36% in April to just 571 vehicles year-over-year, Reuters reports. That slump comes as sales of electric cars made by other brands rose in the Iberian country. Tesla sales in Spain mirror those in Europe generally, which plunged in the first four months of the year by 37.2%, […]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-05T14:54:30Z",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2025/01/Tesla-sign-Getty.jpg?resize=1200,800",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Other",
+        "reasoning_summary": "Promoted from Boring due to mention of 'tesla'. Original reason: Routine sales data without significant novelty or impact on AI/Tech industry.",
+        "primary_topic_keyword": "Tesla sales slump"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T15:05:35Z",
+    "topic": "Other",
+    "is_breaking": false,
+    "primary_keyword": "Tesla sales slump",
+    "seo_agent_results": {
+        "generated_title_tag": "Tesla sales slump in Europe despite EV market growth",
+        "generated_meta_description": "Tesla sales in Spain fell 36% in April, mirroring a 37.2% Europe-wide decline, even as other EV brands saw growth.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Tesla sales slump in Europe despite EV market growth\",  \n  \"description\": \"Tesla sales in Spain fell 36% in April, mirroring a 37.2% Europe-wide decline, even as other EV brands saw growth.\",  \n  \"keywords\": [\"Tesla sales slump\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/05/tesla-sales-continue-to-slump-across-europe-despite-april-ev-sales-swell/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2025/01/Tesla-sign-Getty.jpg?resize=1200,800\" },  \n  \"datePublished\": \"2025-05-05T13:56:40Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Tesla sales continue to slump across Europe despite April EV sales swell  \n\nTesla’s new car sales in Spain dropped 36% year-over-year in April to just 571 vehicles, according to Reuters. The decline reflects a broader trend across Europe, where Tesla sales plunged 37.2% in the first four months of 2025, even as electric vehicle sales from other brands rose in Spain.  \n\n### Why It Matters  \n\nTesla’s declining market share in Europe highlights growing competition in the EV sector, where legacy automakers and new entrants are gaining traction. The slump suggests Tesla may be losing its early-mover advantage, particularly in markets with strong local competitors. While the broader EV market is expanding, Tesla’s struggles could signal pricing, supply chain, or brand perception challenges that need addressing to regain momentum."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Tesla sales decline",
+        "European EV market",
+        "Tesla competition",
+        "Electric vehicle sales",
+        "EV market trends",
+        "Tesla market share",
+        "Automotive industry",
+        "EV pricing challenges",
+        "Tesla brand perception"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.49,
+    "slug": "tesla-sales-continue-to-slump-across-europe-despite-april-ev-sales-swell",
+    "audio_url": null
+}
