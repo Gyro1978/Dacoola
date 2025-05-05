@@ -22,7 +22,6 @@ DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 # --- Configuration ---
 # List of RSS Feed URLs (User provided list)
 NEWS_FEED_URLS = [
-    # --- Kept Feeds ---
     "https://techcrunch.com/feed/",
     "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
     "https://blogs.nvidia.com/feed/",
@@ -31,17 +30,11 @@ NEWS_FEED_URLS = [
     "https://www.wired.com/feed/tag/ai/latest/rss",
     "https://www.zdnet.com/topic/artificial-intelligence/rss.xml",
     "https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/",
-    "https://feeds.bbci.co.uk/news/technology/rss.xml",
-    "https://www.cnet.com/rss/news/", # General Tech, but usually high quality
     "https://aws.amazon.com/blogs/machine-learning/feed/",
     "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss",
-    "https://news.mit.edu/topic/artificial-intelligence2/feed",
-    "https://blog.google/technology/ai/rss/", # Google AI Blog (New URL)
-    "https://ai.meta.com/results/?content_types[0]=blog&rss=1", # Meta AI Blog (New URL, check if works)
-    "https://research.googleblog.com/feeds/posts/default?alt=rss", # Google Research
-    "https://ir.thomsonreuters.com/rss/news-releases.xml?items=15",
-    
-    ]
+    "https://blog.google/technology/ai/rss/",
+    "https://research.googleblog.com/feeds/posts/default?alt=rss",
+]
 
 # File to store IDs of processed articles
 PROCESSED_IDS_FILE = os.path.join(DATA_DIR, 'processed_article_ids.txt')

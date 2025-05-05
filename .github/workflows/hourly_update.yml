@@ -4,7 +4,7 @@ name: Hourly News Update and Deploy
 
 on:
   schedule:
-    - cron: "0,15,30,45 * * * *"
+    - cron: "0,20,40 * * * *"
   workflow_dispatch:
 
 jobs:
