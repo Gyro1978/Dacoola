@@ -1,0 +1,43 @@
+{
+    "id": "44d7ed6cb36b6562a9848da8f71017cc27b6d7367545ae6749a8327417ee5a68",
+    "title": "Preparing Asia Pacific’s workforce for the AI future",
+    "link": "https://blog.google/around-the-globe/google-asia/ai-opportunity-fund-asia-pacific/",
+    "published_iso": "2025-05-05T00:00:00Z",
+    "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/KWHero.max-600x600.format-webp.webp\">We’re introducing the first 49 recipients of the  Google.org AI Opportunity Fund: Asia-Pacific and announcing the Fund’s expansion by $12 million.",
+    "source_feed": "https://blog.google/technology/ai/rss/",
+    "scraped_at_iso": "2025-05-05T02:48:43Z",
+    "selected_image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/SocialShare_qxJjOcz.width-1300.png",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Other",
+        "reasoning_summary": "Promoted from Boring due to mention of 'google'. Original reason: Routine PR announcement about a funding initiative without significant novelty or high impact in the AI/Tech field.",
+        "primary_topic_keyword": "AI workforce funding"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T02:53:39Z",
+    "topic": "Other",
+    "is_breaking": false,
+    "primary_keyword": "AI workforce funding",
+    "seo_agent_results": {
+        "generated_title_tag": "Google Expands AI Workforce Funding in Asia-Pacific",
+        "generated_meta_description": "Google announces $12M expansion of its AI Opportunity Fund for Asia-Pacific, supporting workforce development in AI.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Google Expands AI Workforce Funding in Asia-Pacific\",  \n  \"description\": \"Google announces $12M expansion of its AI Opportunity Fund for Asia-Pacific, supporting workforce development in AI.\",  \n  \"keywords\": [\"AI workforce funding\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://blog.google/around-the-globe/google-asia/ai-opportunity-fund-asia-pacific/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/SocialShare_qxJjOcz.width-1300.png\" },  \n  \"datePublished\": \"2025-05-05T00:00:00Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Preparing Asia Pacific’s Workforce for the AI Future  \nGoogle has introduced the first 49 recipients of its **Google.org AI Opportunity Fund: Asia-Pacific** and announced an additional $12 million in funding to expand the initiative. The program aims to equip the region’s workforce with AI skills, addressing the growing demand for tech talent.  \n\n### Why It Matters  \nThis expansion highlights the increasing importance of AI workforce funding in bridging the skills gap across Asia-Pacific. As AI adoption accelerates, initiatives like this help ensure workers are prepared for emerging job markets, fostering economic resilience. Google’s investment signals a broader push toward inclusive AI education, which could shape regional competitiveness in the tech-driven future."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Google.org AI Opportunity Fund",
+        "AI workforce training",
+        "Asia-Pacific tech talent",
+        "AI skills gap",
+        "Google AI funding",
+        "AI education initiatives",
+        "Economic resilience in tech",
+        "AI adoption in Asia",
+        "Tech-driven workforce development"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.48,
+    "slug": "preparing-asia-pacific’s-workforce-for-the-ai-future",
+    "audio_url": null
+}

@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "44d7ed6cb36b6562a9848da8f71017cc27b6d7367545ae6749a8327417ee5a68",
+      "title": "Preparing Asia Pacific’s workforce for the AI future",
+      "link": "articles/preparing-asia-pacific’s-workforce-for-the-ai-future.html",
+      "published_iso": "2025-05-05T00:00:00Z",
+      "summary_short": "Google announces $12M expansion of its AI Opportunity Fund for Asia-Pacific, supporting workforce development in AI.",
+      "image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/SocialShare_qxJjOcz.width-1300.png",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "Google.org AI Opportunity Fund",
+        "AI workforce training",
+        "Asia-Pacific tech talent",
+        "AI skills gap",
+        "Google AI funding",
+        "AI education initiatives",
+        "Economic resilience in tech",
+        "AI adoption in Asia",
+        "Tech-driven workforce development"
+      ],
+      "audio_url": null,
+      "trend_score": 14.48
+    },
+    {
       "id": "51c6b77ec9af3555fd9f288fb56bea86d5264c29c63a9d09f8b1b5c493b4f903",
       "title": "Roku is looking into complaints about washed-out HDR streams",
       "link": "articles/roku-is-looking-into-complaints-about-washed-out-hdr-streams.html",
