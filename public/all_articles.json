@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "55780d28170bce9edfe05750d8bbb1fb26092c0548c380a360a37ab418a523cc",
+      "title": "Smart Shirt Tracks Workouts—and Goes Straight to the Wash",
+      "link": "articles/smart-shirt-tracks-workouts—and-goes-straight-to-the-wash.html",
+      "published_iso": "2025-05-05T19:39:50Z",
+      "summary_short": "Cornell researchers developed a smart workout shirt that tracks exercises with 93% accuracy and remains washable—ideal for fitness and rehab.",
+      "image_url": "https://spectrum.ieee.org/media-library/image.jpg?id=60095060&width=1200&height=600&coordinates=0%2C93%2C0%2C547",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "smart workout shirt",
+        "SeamFit",
+        "wearable technology",
+        "fitness tracking",
+        "conductive threads",
+        "AI in fitness",
+        "washable smart clothing",
+        "human motion data",
+        "physical therapy technology",
+        "Cornell University research"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "4df673675a79c9ed66b48c4ae912397e914f1b7e2ffbe3a521282a3fd7e98ab2",
       "title": "Nvidia launches fully open source transcription AI model Parakeet-TDT-0.6B-V2 on Hugging Face",
       "link": "articles/nvidia-launches-fully-open-source-transcription-ai-model-parakeet-tdt-06b-v2-on-.html",
