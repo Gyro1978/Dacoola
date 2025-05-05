@@ -1,0 +1,44 @@
+{
+    "id": "2acbf3d8b2c8121a73a4c5febb675497ea3ded65061ab46f99b08f2b53aa8898",
+    "title": "People struggle to get useful health advice from chatbots, study finds",
+    "link": "https://techcrunch.com/2025/05/05/people-struggle-to-get-useful-health-advice-from-chatbots-study-finds/",
+    "published_iso": "2025-05-05T21:13:50Z",
+    "summary": "With long waiting lists and rising costs in overburdened healthcare systems, many people are turning to AI-powered chatbots like ChatGPT for medical self-diagnosis. About 1 in 6 American adults already use chatbots for health advice at least monthly, according to one recent survey. But placing too much trust in chatbots’ outputs can be risky, in […]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-05T21:32:24Z",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2025/01/GettyImages-1334047539.jpg?resize=1200,960",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Health",
+        "reasoning_summary": "The article reports on a study highlighting the risks and limitations of using AI chatbots for health advice, which is a significant and verifiable issue in the intersection of AI and healthcare.",
+        "primary_topic_keyword": "AI health advice risks"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T21:39:43Z",
+    "topic": "Health",
+    "is_breaking": false,
+    "primary_keyword": "AI health advice risks",
+    "seo_agent_results": {
+        "generated_title_tag": "AI Health Advice Risks: Chatbots Fall Short in Study",
+        "generated_meta_description": "Many turn to AI chatbots for medical advice, but new research highlights AI health advice risks due to unreliable outputs. Learn more.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"AI Health Advice Risks: Chatbots Fall Short in Study\",  \n  \"description\": \"Many turn to AI chatbots for medical advice, but new research highlights AI health advice risks due to unreliable outputs. Learn more.\",  \n  \"keywords\": [\"AI health advice risks\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/05/people-struggle-to-get-useful-health-advice-from-chatbots-study-finds/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2025/01/GettyImages-1334047539.jpg?resize=1200,960\" },  \n  \"datePublished\": \"2025-05-05T21:13:50Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## People struggle to get useful health advice from chatbots, study finds  \n\nWith overburdened healthcare systems leading to long wait times and rising costs, many people are turning to AI-powered chatbots like ChatGPT for medical self-diagnosis. A recent survey found that about 1 in 6 American adults use chatbots for health advice at least monthly. However, relying too heavily on these tools poses significant **AI health advice risks**, as their outputs can be unreliable or misleading.  \n\n### Why It Matters  \n\nThe growing reliance on AI chatbots for medical guidance reflects broader challenges in healthcare accessibility, but this trend comes with serious concerns. Misdiagnoses or incorrect advice from AI could lead to delayed treatment or harmful self-medication. While chatbots may offer convenience, this study underscores the need for caution—AI should supplement, not replace, professional medical consultation. As adoption increases, regulators and developers must prioritize accuracy and transparency to mitigate risks."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "AI health advice risks",
+        "chatbot medical diagnosis",
+        "healthcare accessibility",
+        "AI chatbot reliability",
+        "medical self-diagnosis",
+        "AI in healthcare",
+        "health advice chatbots",
+        "AI medical consultation",
+        "healthcare technology trends",
+        "AI regulation in healthcare"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 15.0,
+    "slug": "people-struggle-to-get-useful-health-advice-from-chatbots,-study-finds",
+    "audio_url": null
+}

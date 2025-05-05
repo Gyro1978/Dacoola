@@ -1,0 +1,44 @@
+{
+    "id": "375a2cdd2006b406eca1753b685d251d4eae04ef0a60cb95a493bc3d001e8a5b",
+    "title": "FTC bans hidden fees for live events and short-term rentals, effective May 12",
+    "link": "https://techcrunch.com/2025/05/05/ftc-bans-hidden-fees-for-live-events-and-short-term-rentals-effective-may-12/",
+    "published_iso": "2025-05-05T21:17:46Z",
+    "summary": "The U.S. Federal Trade Commission (FTC) on Monday released new documentation detailing its new “Rule on Unfair or Deceptive Fees.” The rule, set to take effect on May 12, prohibits hidden fees for live events, hotels, and short-term rentals. It also bans practices such as “bait-and-switch pricing” and any actions that conceal or misrepresent total prices […]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-05T21:32:24Z",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2024/12/GettyImages-2174603749.jpg?w=1024",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Other",
+        "reasoning_summary": "Promoted from Boring due to mention of 'ftc'. Original reason: The news pertains to FTC regulations on hidden fees, which is unrelated to AI, Tech, or major industry news.",
+        "primary_topic_keyword": "FTC fee regulations"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T21:40:59Z",
+    "topic": "Other",
+    "is_breaking": false,
+    "primary_keyword": "FTC fee regulations",
+    "seo_agent_results": {
+        "generated_title_tag": "FTC Fee Regulations Ban Hidden Fees for Events & Rentals",
+        "generated_meta_description": "New FTC fee regulations prohibit hidden charges for live events and short-term rentals, effective May 12. Learn how this impacts consumers.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"FTC Fee Regulations Ban Hidden Fees for Events & Rentals\",  \n  \"description\": \"New FTC fee regulations prohibit hidden charges for live events and short-term rentals, effective May 12. Learn how this impacts consumers.\",  \n  \"keywords\": [\"FTC fee regulations\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/05/ftc-bans-hidden-fees-for-live-events-and-short-term-rentals-effective-may-12/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2024/12/GettyImages-2174603749.jpg?w=1024\" },  \n  \"datePublished\": \"2025-05-05T21:17:46Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## FTC Bans Hidden Fees for Live Events and Short-Term Rentals, Effective May 12  \n\nThe U.S. Federal Trade Commission (FTC) has introduced a new \"Rule on Unfair or Deceptive Fees,\" set to take effect on May 12. The regulation targets hidden fees for live events, hotels, and short-term rentals, while also banning misleading pricing tactics like \"bait-and-switch\" and obscured total costs.  \n\n### Why It Matters  \n\nThis move by the FTC represents a significant step toward greater pricing transparency, directly benefiting consumers who have long faced unexpected charges in industries like ticketing and lodging. By cracking down on deceptive practices, the rule could lead to more honest pricing models and reduce frustration for buyers. The regulation may also pressure businesses to streamline their pricing structures, fostering trust in these sectors."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "FTC regulations",
+        "hidden fees ban",
+        "pricing transparency",
+        "live event tickets",
+        "short-term rentals",
+        "consumer protection",
+        "deceptive pricing",
+        "hotel fees",
+        "bait-and-switch",
+        "FTC Rule on Unfair Fees"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 15.0,
+    "slug": "ftc-bans-hidden-fees-for-live-events-and-short-term-rentals,-effective-may-12",
+    "audio_url": null
+}

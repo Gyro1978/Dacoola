@@ -1,6 +1,146 @@
 {
   "articles": [
     {
+      "id": "6cdfd410a9170b40f30a9643f5f9492021be5dc48d5e47bb07e08872ebf39d3d",
+      "title": "OpenAI Backs Down on Restructuring Amid Pushback",
+      "link": "articles/openai-backs-down-on-restructuring-amid-pushback.html",
+      "published_iso": "2025-05-05T21:26:05Z",
+      "summary_short": "OpenAI maintains its nonprofit control despite restructuring debates, pending regulatory approval. Learn why this matters for AI governance.",
+      "image_url": "https://media.wired.com/photos/681905cdc57b22cc7211d2cb/191:100/w_1280,c_limit/OpenAI-Nonprofit-Structure-Business-2198379497.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI",
+        "ChatGPT",
+        "Nonprofit Control",
+        "AI Governance",
+        "AI Ethics",
+        "Regulatory Approval",
+        "Tech Industry",
+        "AI Innovation",
+        "Corporate Structure"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "375a2cdd2006b406eca1753b685d251d4eae04ef0a60cb95a493bc3d001e8a5b",
+      "title": "FTC bans hidden fees for live events and short-term rentals, effective May 12",
+      "link": "articles/ftc-bans-hidden-fees-for-live-events-and-short-term-rentals,-effective-may-12.html",
+      "published_iso": "2025-05-05T21:17:46Z",
+      "summary_short": "New FTC fee regulations prohibit hidden charges for live events and short-term rentals, effective May 12. Learn how this impacts consumers.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/12/GettyImages-2174603749.jpg?w=1024",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "FTC regulations",
+        "hidden fees ban",
+        "pricing transparency",
+        "live event tickets",
+        "short-term rentals",
+        "consumer protection",
+        "deceptive pricing",
+        "hotel fees",
+        "bait-and-switch",
+        "FTC Rule on Unfair Fees"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "2acbf3d8b2c8121a73a4c5febb675497ea3ded65061ab46f99b08f2b53aa8898",
+      "title": "People struggle to get useful health advice from chatbots, study finds",
+      "link": "articles/people-struggle-to-get-useful-health-advice-from-chatbots,-study-finds.html",
+      "published_iso": "2025-05-05T21:13:50Z",
+      "summary_short": "Many turn to AI chatbots for medical advice, but new research highlights AI health advice risks due to unreliable outputs. Learn more.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/01/GettyImages-1334047539.jpg?resize=1200,960",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "AI health advice risks",
+        "chatbot medical diagnosis",
+        "healthcare accessibility",
+        "AI chatbot reliability",
+        "medical self-diagnosis",
+        "AI in healthcare",
+        "health advice chatbots",
+        "AI medical consultation",
+        "healthcare technology trends",
+        "AI regulation in healthcare"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "3ca20d031e4645ae07899d6865ed450d63bc0cdada5f93e3fe8994abf4c0ad0e",
+      "title": "A stealth AI model beat DALL-E and Midjourney on a popular benchmark. Its creator just landed $30M.",
+      "link": "articles/a-stealth-ai-model-beat-dall-e-and-midjourney-on-a-popular-benchmark-its-creator.html",
+      "published_iso": "2025-05-05T21:12:00Z",
+      "summary_short": "Recraft's AI model outperformed DALL-E and Midjourney in a benchmark, raising $30M in Series B funding. Learn about this AI model benchmark breakthrough.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/image-4.png?resize=1200,906",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Generative AI",
+        "AI Benchmarking",
+        "Recraft",
+        "DALL-E",
+        "Midjourney",
+        "AI Startup Funding",
+        "Series B Investment",
+        "AI-Generated Imagery",
+        "Accel",
+        "Khosla Ventures"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "82f6fa25d6aaf607e74d743dadafd02546a47976ac6b6d9d895b1e365fb52b14",
+      "title": "Google accidentally reveals details about its new Android design language, Material 3 Expressive",
+      "link": "articles/google-accidentally-reveals-details-about-its-new-android-design-language,-mater.html",
+      "published_iso": "2025-05-05T21:11:49Z",
+      "summary_short": "Google accidentally reveals details about its upcoming Android design update, Material 3 Expressive, ahead of Google I/O.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/material-3-expressive-2025-05-05-at-5.03.06PM.jpg?resize=1200,654",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Material 3 Expressive",
+        "Google Android design",
+        "Material Design update",
+        "Google I/O leak",
+        "Android UX trends",
+        "Google design language",
+        "Android interface update",
+        "Material Design evolution"
+      ],
+      "audio_url": null,
+      "trend_score": 14.0
+    },
+    {
+      "id": "be6dd097d22d37583641ecacf367ef3f04a55b4eff7924caf711c606dae2acc6",
+      "title": "Meet the companies racing to build quantum chips",
+      "link": "articles/meet-the-companies-racing-to-build-quantum-chips.html",
+      "published_iso": "2025-05-05T20:54:05Z",
+      "summary_short": "Discover the firms pushing quantum computing chips toward commercial reality, tackling complex problems in medicine, cybersecurity, and more.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/01/GettyImages-1393513219.jpg?resize=1200,568",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "Quantum Computing",
+        "Quantum Chips",
+        "Quantum Computing Companies",
+        "Drug Discovery",
+        "Cybersecurity",
+        "Materials Science",
+        "Quantum Encryption",
+        "Error Correction",
+        "Computational Limits"
+      ],
+      "audio_url": null,
+      "trend_score": 14.49
+    },
+    {
       "id": "52a3f4869adfff0ac52110819162ee38126162269e14eaf7fcd1b8de87342b04",
       "title": "Anduril is working on the difficult AI-related task of real-time edge computing",
       "link": "articles/anduril-is-working-on-the-difficult-ai-related-task-of-real-time-edge-computing.html",
@@ -22,6 +162,29 @@
       ],
       "audio_url": null,
       "trend_score": 14.5
+    },
+    {
+      "id": "fe274e6698c750c8b960c0f1a08bc495fd1b783c9b88ef19d157e2e3301848f0",
+      "title": "OpenAI scraps controversial plan to become for-profit after mounting pressure",
+      "link": "articles/openai-scraps-controversial-plan-to-become-for-profit-after-mounting-pressure.html",
+      "published_iso": "2025-05-05T20:18:31Z",
+      "summary_short": "OpenAI abandons its controversial for-profit shift, reaffirming its nonprofit governance amid mounting criticism. Learn about the OpenAI nonprofit decision.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2024/09/openai_tectonic_shift-1152x648.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI",
+        "Nonprofit AI",
+        "AI Governance",
+        "Ethical AI",
+        "Sam Altman",
+        "Public Benefit Corporation",
+        "AI Ethics",
+        "Tech Industry Scrutiny",
+        "AI Societal Impact"
+      ],
+      "audio_url": null,
+      "trend_score": 14.49
     },
     {
       "id": "a5a7cf9666ec419c62dec282063bbf4a6b60ac2304554a8829839604193f9281",
