@@ -12424,3 +12424,605 @@ http.client.RemoteDisconnected: Remote end closed connection without response
 2025-05-05 03:38:17 - generate_sitemap - INFO - Sitemap successfully generated with 135 URLs and saved to /home/runner/work/Dacoola/Dacoola/public/sitemap.xml
 2025-05-05 03:38:17 - main_orchestrator - INFO - Sitemap generation completed successfully.
 2025-05-05 03:38:17 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (298.82 seconds) === ---
+2025-05-05 04:43:03 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/
+2025-05-05 04:43:03 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-05 04:43:03 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-05T04:43:03.378326+00:00) === ---
+2025-05-05 04:43:03 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-05 04:43:03 - main_orchestrator - INFO - Found 324 already fully processed articles.
+2025-05-05 04:43:03 - main_orchestrator - INFO - Total initial processed IDs passed to scraper: 1137
+2025-05-05 04:43:03 - main_orchestrator - INFO - --- Stage 1: Checking for Missing HTML from Processed Data ---
+2025-05-05 04:43:03 - main_orchestrator - INFO - Found 324 processed JSON files to check for HTML regeneration.
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2f0768641f700b4396799fec7db22d664f143ba908e701a0cf0191b546789746.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7cd0b43f57decc924626a2a678428eb6965bd6cc953817f5dc1406b2169ebe68.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e57e9a7ac9187c7316319e59a970f5b4ccd37339ae790c336574696a52cc9c11.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d7eeaf946e78b5fa9eb2439eefb91fc7d84db1c1a7ccdb3ccb9af529bd3381c3.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d12c3417bb5a6dfeb5953bed99de0ff1232b8614a935fa4bc7cbf15f636acad1.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b1d7a41952a88a838f93071ea68fb6558f658709a6770689edc8936327c64829.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5dd5bbd9c4c8fef0868378fe57b6ede1525655656e7d05d7363e1dd42fca32d4.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b4824683ada96d7d9569647d5eb96d9932606709c2305775a481957a05d92689.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9032735e26a53478a41aa5500c492bcf834657236f64bfc5463b6654d9c0fa04.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 38c01d96959c1f25cd744f8633e8d8fff93eaece28f4348ceb9efe87e7382edc.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 94f957a5cfe9c7446512fab63f2c2aacbbdc769af49b2b68b019d3f7c76daf3f.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1f3c91b8394e2599ef0f846e628b4e2ae7acec4c05cabfa57c676c1d22ad06a7.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 156e4b5157f9ced6fec01432e1737d4ba5ee7ea57a0d2ad2b762d4d98468faba.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c02aa6c17194e34c74ff5925cde9c707b04108daec242a8dbce5a1e611aecd77.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9d5ac93551e61fe1604c8c0d570d500fb8311c140366fce92907b323150dba3d.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2911f7cf83c993a6c708c4117a381dc5a83569e2354d27ee2f043ad202b52cdc.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 317bb9bb1d3c5937619a732bbc3f5a2e2a72f71e05fc7e6306b593101282042a.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8deaff8501a1eb567fb9ff214ac896f432daaea38f45a4b0e00e6d1df920785a.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6a82f3849ca43f5f382a576519c3117b4b29268a1d635e8cecb29c2bde6d1fad.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 588203f9ce21cbc1d7fccb9be1b7a8eac93285a8f6da2cf1148c05a763b9ca58.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 95d91a4308e0d17bd16e262d51ad230a659532bea090dc4b80e23557c53920d3.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b0d83a49005fb636e2342c18a9febadcfc48cd6b0ddf233265ed106bd3fb762.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 142f41a5ca2eb00780084f3f72518959f11fe5a6af78fd986b59d712d83bfa9c.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7b9c794995ed7a4ece7a1a4c41998c49c23ee51b9156f1c4974bf5d18a3f8437.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 900177fbc73594e20301d5cb880109ebabf504555c712b33380b358a57d0e8b8.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d8967952145ea68921b0755c898ea3c5407e7e775a85bfb261b448caf0701936.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7adcc049e963656062e2cf6f2fd94e4262c342cbf5fe7fe587b6bc001dbb2bea.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 26e7fd4f90fb7cb42c6e719365761bcada452fae0d91a1f37f74d9fc9484124b.json
+2025-05-05 04:43:03 - main_orchestrator - INFO - HTML missing for 6a0dd057cf761ab62ae0bf3bbc5dedb3e1c9953ca0a04fd5da11ca354f347374 (from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation-.html). Regenerating...
+2025-05-05 04:43:03 - main_orchestrator - INFO - Rendered HTML page to: from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation.html
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c5ce8ebf9dd2aa85979a70bdcb89d3d6cd3f0d40834470864d12050232f72857.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d22a6e01d6aa57ae033489af9827c5eb29088c0271ef1174238caa02aef4bf64.json
+2025-05-05 04:43:03 - main_orchestrator - INFO - HTML missing for 3744354b457d8af2cf77b12ccff14bdbf0ba9eaee4f419bea9228abded88c5d4 (from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation-.html). Regenerating...
+2025-05-05 04:43:03 - main_orchestrator - INFO - Rendered HTML page to: from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation.html
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 0e3e561349ec501e36e62ede6c27e43896ce893df9e1a5cd07e4da51b5350855.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: bd949f58f8bb83a470024966b5c8624e959a4dda0700934b6aeed5f3005facf0.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: f435f5756eed9e6e6b4a5d269a441e14274262b8726205ede209d501a1549c84.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 85032e5d0321bacace66f34ed0d7cd6b18bb3453bc70ccc50758b404916d6786.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e6f8336c83b3e525d965d33a8aabe131db678c46ca5e85f51c6d423d913f7b7a.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ddadcbb6305f08ff19a92e3f2af8ac57c4d8f9687e89f938b25377af1b056355.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1adb67098f82ef835e4c7b2426408a4fdf2435244e8c3691b5901efc6b71a9df.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fc2def72788e76853c9b3127740810d208882431a3eee1dc1b21fe419c3889a4.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3a325632a51ca7448d0ff35e6b53661edccc714109bdb29b6e1fa4e2ce5b7af8.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 79f36e3be9ab23bb0ddb070e6cf4c5a5352e8c06d57b3d29a7cf4976eb4d9649.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6709b53011f45193bc3110bc15da100c0df62aa8c116da88c3b9c82299283bc3.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 771de2c58074761438ac399b5c1c83c176ac0801fb37407bc4ada03364835dfa.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a9ef100eeacda721c557b8ce9b67f81280e870fa2c211cef7c5c02e78432009b.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6ed46dc607daea2150d69b3695da42503046a54a36d67b197e9e319f631e388f.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 614dc6817bdf48a2b3743fcb59ad1261379bac32d2b3d0256e2b43316d9ebec2.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5eca8d901c92070eba65c671077d1444d7dc592d4c128f252acdc0436c75cd65.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b3236173789c16c8cc84db281c30533ffaab65a968348c60fa777d285e4d4625.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 84de0933fcd50fd1455db5a5e62e92909370ebb8719b9b777d027f6cdaafac66.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 4cda71ad1afda77b1f0a3401dc405c59dd9152a6e7c9df940831b56d758c3c83.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 10d80648ff0976207f6af23d4e93e1441273a007d87039cb467fbf847156fa33.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: acd78ab4faadbb4f5a48b4621bc0c59ada154d656316338ba19267c7c37ef3fd.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c8169c21fb7dc54b0d1f7647261455a47bfdfc72e43849fea5c668646493b10f.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 43c25f0e18feb189b6748f510bd57cb6a0cc3aac79a5f8385d679e7445d9ea3c.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b75036003ee55bd011aecf8d77a417f98460968512a0ec8e858d3ee41db194b.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 650e36aa56c1b8465a62007bc2dc3aefc4e871a1ded87ab9c7b663d966fe4fc1.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 735c08d32c61649de6fa56944d2515b92f7a307981584c2c5a5593883cfafab0.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 0b7f12268f2bd279e1f6c0650147b1739e5169b230da68df3f42959b482edd80.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6feca0c6ca4c3ee4326c675d3acfecd13e1fee863c52c61b736d21f3e7ad5283.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: cb83387fc9c5e02e3cfcf9a6041e9ada62a132508a256c14ad562cb7761782c3.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 91b6beb3b4efc05af032bbf589ac141d4f546f025c83a01b3e95b8acfc33bb19.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 81638891647a3b1f27fc16fb5fc65c6c3be5c383896c8e7f3b75107e21a835f2.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ed0839154131ed5f9fcf2c49190310162f72c6ca07f252462947136c91824214.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2c519bbff265b5b55999e81a36adc2bb619c67406401d0d7cc6882e74522eb14.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1a5c311487ea6903494a02f4595fe8af6677deb6e05d48445e0447cbf2eb7c22.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9c4d43d552f35a0dd016abbe9d811e7bff5313ec4956a7ca27e8108c677f53b2.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c28d786df7cb0adc5d1a9829f3ae0d8fcc2186700991f55c8b72296a864d8de6.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 114be36ab2e121dec66e6e5a2e9ca36f7deaf2bd5a4534eac5fbe7efff988047.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 61e6e53aa5d82aa2bb723eb49768b36c8b1bf102431df0648af18c20ae09b67c.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 59b94f4af68661530ef37d1f8c29616a586771713facae3d9af7365893da8ff0.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: f195d28093daa98a27686b903f3db4f77d95e0b55391791e448cbdd4600281b8.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d32c1c77bc8811677c55dbf80f24ebbca749b093baf75fd2356682c888f344a2.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 582e34c0d8cd196888749395c9479a298cb80284a6ace8725393c080a85fecdb.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7e6215340ace5fdd85cc5e1446cab2ec0a3810009e0290d797accc59a9b0cf9b.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d258795700e13ea6386f612f62ba6de3f411ca2900db973f4ea99062c5ac7241.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9257818db97e53e0f5e52c899d8e9cb13188e86f9b61c53dc7e5a1270d750cab.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: edc62bd5ef94119cf4c77ed954f1f3e22c0fd7444c062203d0a9c9d2dc0411fc.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 04673665cca0f54847574ce6ea055fc35616a99f511193b9fcc8d7d7e97df7d2.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fa472c7d3c7fdc6e8c02dd3f8f75aae7852d1d771232de3faf0f8ec72ebba3ea.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 178a8c890e12376890c74f4109861cd582e779128377650dd64b8da71644cbb0.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b19f496319ea92a1eef9d013f5ffaa4f5c3e46555c6ca1627f32648dea6b250.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d677f51648da74f3159fcffb42726c55c0931c9841baf3881d0fccd04f64ecf1.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3baa0141917f0ec511b8b8b2704ad27396872daa1a47170da8e993eaebd31cba.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a51dd2dc3794da378c72ec4bcd72ffb8a89d3d8c7ad476b6858da82b101a55f6.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 96d26635a64d56338cba3538adc07983f5a1d1e273adb93c81f5ca8cde9dc440.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 90497bdc05ca7f137886b8750fa8258909a53d38ac1c3993a978f2f82a679b1a.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: cc21f25d2f206d5f07d5bdf7c78f69adf330621d7b803c412dade40f9db7ce99.json
+2025-05-05 04:43:03 - main_orchestrator - INFO - HTML missing for 6487a7aacbe4b618adb40f5b28f161c136d1959b591115aef5fbfbaa68ba1e3c (build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-.html). Regenerating...
+2025-05-05 04:43:03 - main_orchestrator - INFO - Rendered HTML page to: build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and.html
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 371777a04adecf9ce6631756e552cbea75cb8d76738e2ab4f37f9abaa258c629.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3c6086abba9b10018c80779625a59404ea28f8e922c1150b1850334292ad6654.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 90a2d60cd482e6b8e1332f946efb63034e4edf3071480aed517a61a46bb48520.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 53200985953c8ec14e710d9388c9d2209da31acdd397fa0515355dc8d6a5eae9.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b76f01663f577882809b1c896176d5a0f0091634d751e8ddc96c4b5726f545d5.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ef02b174fd0f7e62c4f137a31a154990b456486f4c85dde989d99db5e84934ab.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 37ebd444d31e088b823454ed12cfee96f8384e131c4b530b335101a3e465236b.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 96b957c2d1f55fa8feea8671dbb769c2bd1e41bec26ae2ff6dde540fc0682f63.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ee92e3becca90cd83660b7478dbe930296d982adb64a861ca656e6c80c5c87d1.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 12f1bb5ccd096986516d61e6785d3d4051fe89933939898be31a10d51a2c3c58.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 87f56955a51091cb9e288ac242e2611b14260341c53b9a87f78e86b1d3321767.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5f77c2f41e6e71c61eb5fcb6d2d339b811fbf93d621160b4df0f355c50ab1a82.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 0b5d107994844ad167273ca859f911843d5ffa7f6ff1b09cd2994973b51a61f5.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 67cce41e169049aee015d2bf12cb7871c9961ec0a96b59448db3f165ad736fe5.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5186858cfa77a44867a016f0e5b4719326aadcb8cb0f93788fad01063c98ce23.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 18377dcb4eff1e247d5458c013ace5e45a41c2742b31643947b67634eb67104f.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b02e19046a87c704c410bc897357a861cdbefbc0561b9b2d162870c8705aabf6.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 098be7f71cf4c5b5d4d56917ad60ab1dd54ce677010580def1f434e97df95749.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d27e397d31f2b26a313987753af5b227d0a71fab4b6e7cd77b6397d39579614d.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ee95d76305f40e44e34c7d2ccfad41b26beac608c076f9253fc849ef23d5536a.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 77bae08d3c6ec14e291a619fba432b6b028c71e293ea71487e008ca3ae1a84e6.json
+2025-05-05 04:43:03 - main_orchestrator - INFO - HTML missing for bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170 (rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-.html). Regenerating...
+2025-05-05 04:43:03 - main_orchestrator - INFO - Rendered HTML page to: rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources.html
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ed46ab48413a75fd7e557505ca0608ad873e2aac93204e65e7a1e71bb7e6b2db.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 90f78ba768f6ba211795b75715e77920e7bc09b623574339999cafac127fed8c.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2fcd1b41f3881f05a3e7d2be5041ac41a52928f1176203a5838a1e784ce58e1b.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a17f57a1a71a97e98abd321b7175b8341fdf0a6edba275fc894376d151e39396.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 26b216e0e904f7f7de0737613ebf4789e92bdcf2f4a1a8eec16bda01cb150e2c.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 4b7d6b187a9c53d80bf308a89d86b6a839875a525934c328ab33e66155e7f34a.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1dcaeef7181fb897cc8e52394bb1c2c7ee347fc893074d73f7ddf551b2489fb8.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 45398ba78757676d7ef377eea58384eabe395e11b2d8ed0440d7bf3f4f292a43.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 72871c2937083dd132b5759ee5d694480c17c5da04ea3bbfe4028acb12347be7.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: eeef6f4c120085ff0ea841a48890ed0e841a50fd73908609611ff40a7255c24f.json
+2025-05-05 04:43:03 - main_orchestrator - INFO - HTML missing for 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7 (rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-.html). Regenerating...
+2025-05-05 04:43:03 - main_orchestrator - INFO - Rendered HTML page to: rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources.html
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b1f09f4b54ce2a9733ee0d28bc07fad6ff3eb7260de4c0198d0c32aa887890fd.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 158c0c3655b4c94a8e1894272e1d25904953b8c4e178a72d19f5f9bf0a58e487.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e5bc1259d88eafc6bcc80d9f9e34d835fe07040fce2b7ba046b61d30ba2fd3e7.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 020acfef52914873bb5656605142767e06c399dea420e24a247add043ebc6e84.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5ae7564e0b01cc4c1a88a1b18f1a88b27a4689a3f86c6c38a8275fe0b1a06d2e.json
+2025-05-05 04:43:03 - main_orchestrator - INFO - HTML missing for 9df3d8e0130ec5d428f4b88feeafa658253ead0117476b1139dcaaab59da3c55 (new-federal-circuit-decision-expect-getting-aimachine-learning-patents-past-101-.html). Regenerating...
+2025-05-05 04:43:03 - main_orchestrator - INFO - Rendered HTML page to: new-federal-circuit-decision-expect-getting-aimachine-learning-patents-past-101.html
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7ca1b73be51f5cbef62bddb4eaae7e44a45af9db71c64b77a5599c3000d95e09.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2eaf758b0ac2515473f7d73e1af14823825e9da1376aa88d5147fa684810b1d1.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a81eb23a5d1f5b8e18a195bcd820d98d03ce9d76cf252b3d187572d7d696c0de.json
+2025-05-05 04:43:03 - main_orchestrator - INFO - HTML missing for efe62474db8795db977316ba61228b5b3d107c83699ce2435773df2eea6142c7 (control-the-composition-of-ai-generated-images-with-the-nvidia-ai-blueprint-for-.html). Regenerating...
+2025-05-05 04:43:03 - main_orchestrator - INFO - Rendered HTML page to: control-the-composition-of-ai-generated-images-with-the-nvidia-ai-blueprint-for.html
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fd60fa29488c1c50788d38fccb5f0f6bffdd0919a7688c62c19186c60f88cfaf.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 715154667f33ccf47a0ca66bc1771253bbcef15a405e361c427e32e9c1594506.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 91256c6988b7328694674483e956e06616bb743215839d52f8f2fac1304f73d9.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d9e28828662276cc15c85c7983ccfff2f6bc2344e9beb6b846e42f7b380625e2.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: cc1084f48502eac3487ecaaea1f10eb446c432a5a2a3beb269f2e3a91f92b379.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 568de3a4d35a9fe995e18bcd826add02d6d17d0dfb7adc8aab25ea4e344106a3.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 00ec866612e1e9d2c47326f74cec91b647010ddb30829776c8121ba41e42bf32.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ada6dcaba02baf53fa3c9a31c00c32a23725ee730027043491532685f9421ae8.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: aa475582ad484b2f6dbcc3ce95dbbe4ff38a4509d18dc140c186094ec731121f.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8d12e3de8a9801c14a46f48e65511c514c46898c58785079d545fe7af030ab4b.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8edac92bf197d843b15444951c214bc82b783cc84c665db5f1565b2cb7babd7c.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8ed04dbd4a04be030e5099267897ed13f01f21c88e7c0bbf09a12899377f124a.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c7922a64d49601363154c653babc4ddc04b589781fda7a2df36c0de5dcdb1fa1.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 08daf7349dea3f7338983273028d017e6db5fe27ab6a12808905c1e540708566.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 74c5cf5775d86830e432ec5969d175ee735013a16cd321d3e11e2fd7762cd2b1.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e015af8a3d4bc7adc4279c27de5b94f53c6e275c54846228b7fb6f9a75587874.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5cfcb338e6e6dec698c89de7e26b24d66ee75f6883e516570b8f5cf0912fba6d.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3629618a13fbc941386b6b52de8b0618478410a6102eee69cf48abda4c9eb5ab.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5d6fae9fe966c742d60f8e8d8119bafe0af6f5c8efac0940e6f5ba6782681701.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 82cb6552ea7a0f986f7bcd42cde819232f4c51d79cc0cb11c5fff74c85e8e5c9.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 30358a502720f404cf1ea898289186a085e80d0a167de7365793df28d437d772.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 56473abaab09a5d7d22a1c9956a5f5652ee1ebd76389b7e58ecfa9110c0be568.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b9c8c460319b1550247bd6c6609f6ff9207bd854bb7ed03e090299ed2bc86bc.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3e0fbfad2ee4a3e8868dafd58132c612f6c4abba40344356294c779759d7ff28.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9fb241eca1994da65156bd4a36fa5d271306309ec547e49fc173873047f1a820.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d2cff7361a355729a43908692956c449ecca5ac0e59128c4e60cae1c30802417.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 51a13a683ec1d4eb472cec5bdcda347569a0e57bec925298a4a9b97367535260.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5444ac72fbb424612ec49134293023aa246ce384cef4a1699a7f155e543d1016.json
+2025-05-05 04:43:03 - main_orchestrator - INFO - HTML missing for 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f (build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-.html). Regenerating...
+2025-05-05 04:43:03 - main_orchestrator - INFO - Rendered HTML page to: build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and.html
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b9d80f7cdc834fc3ae1e95769fcda3c6e3bc393ea67010afd423e185013ca237.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5275cc7f788a872926ea51fb66f1c2d285443f3fd705fb52d886e366802a7a39.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d8e05070997d6886acd74f3c079d321e699af13d0d6314226742906e6d7bc6cf.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c41262208380bf62d6d376a6e761b5e588148e8cc06eeaa671471bb80000f48b.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b321a33910418791a4de28182c574b4fd37b976fa600908a529f50411df7321a.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ea048d1d4ca5f048e7e77cfd038b8ae8729ea1a1b340a4bd0410f4201da85123.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b2a01fa4f5ac3d739fb12778206f724b25a21d39770dddf020553a731d9d03d9.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 224ff37fe948def5a75343ac972b9830c3a5e9de492056547de9daa8af83c256.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ecb86b3211ce1303167ec928426fcd9d48001148df3237b36f821d32e24e1c56.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 75473e2307b8beaa86ccc0f49600c5d6e08a35a5b908bed0f40f543cde584314.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 66edcb9bc5fd1c783cccfcd6a39045e792f265e211293eec43c979cc5be9fa35.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fee1305f6dd170b02599af0d5c860b203d0707407152cb655b68b88dac41b6e1.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 990bfc5e8605f0d7bd6d0a9de93531fb4cf3a852a7fd915dbb7296e7e643e10d.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: de0aeb4f36593d9063e32e99248a5fefeb0ac92fe6cfab7cb3d0adbcaa4d26a2.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e4b328eb3dbdfbc4151f33cb2046d780402fe78915206869e457f22509a3f2ce.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6bc8a66222d7276ea048011396587d674e2d1367775e07448a7284eb0b61aff3.json
+2025-05-05 04:43:03 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 745f92ac7a1a3e26d208e167b1c2aa92f516a3981d659f4cffc0143464ebb2ea.json
+2025-05-05 04:43:03 - main_orchestrator - INFO - --- HTML Regeneration Check Complete. Regenerated 8 files. ---
+2025-05-05 04:43:03 - main_orchestrator - INFO - --- Stage 2: Running News Scraper ---
+2025-05-05 04:43:03 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (18 feeds) ---
+2025-05-05 04:43:03 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-05 04:43:03 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-05 04:43:03 - src.scrapers.news_scraper - INFO - Finished https://techcrunch.com/feed/. Saved 0.
+2025-05-05 04:43:03 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-05 04:43:03 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-05 04:43:03 - src.scrapers.news_scraper - INFO - Finished https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0.
+2025-05-05 04:43:03 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-05 04:43:04 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-05 04:43:04 - src.scrapers.news_scraper - INFO - Finished https://blogs.nvidia.com/feed/. Saved 0.
+2025-05-05 04:43:04 - src.scrapers.news_scraper - INFO - Checking feed: https://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-05 04:43:04 - src.scrapers.news_scraper - INFO - Feed https://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-05 04:43:04 - src.scrapers.news_scraper - INFO - Finished https://feeds.arstechnica.com/arstechnica/technology-lab. Saved 0.
+2025-05-05 04:43:04 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-05 04:43:04 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-05 04:43:04 - src.scrapers.news_scraper - INFO - Finished https://venturebeat.com/category/ai/feed/. Saved 0.
+2025-05-05 04:43:04 - src.scrapers.news_scraper - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-05 04:43:05 - src.scrapers.news_scraper - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Contains 10 entries.
+2025-05-05 04:43:05 - src.scrapers.news_scraper - INFO - Finished https://www.wired.com/feed/tag/ai/latest/rss. Saved 0.
+2025-05-05 04:43:05 - src.scrapers.news_scraper - INFO - Checking feed: https://www.theverge.com/rss/index.xml
+2025-05-05 04:43:05 - src.scrapers.news_scraper - INFO - Feed https://www.theverge.com/rss/index.xml fetched. Contains 10 entries.
+2025-05-05 04:43:05 - src.scrapers.news_scraper - INFO - Finished https://www.theverge.com/rss/index.xml. Saved 0.
+2025-05-05 04:43:05 - src.scrapers.news_scraper - INFO - Checking feed: https://www.zdnet.com/topic/artificial-intelligence/rss.xml
+2025-05-05 04:43:05 - src.scrapers.news_scraper - INFO - Feed https://www.zdnet.com/topic/artificial-intelligence/rss.xml fetched. Contains 20 entries.
+2025-05-05 04:43:05 - src.scrapers.news_scraper - INFO - Finished https://www.zdnet.com/topic/artificial-intelligence/rss.xml. Saved 0.
+2025-05-05 04:43:05 - src.scrapers.news_scraper - INFO - Checking feed: https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/
+2025-05-05 04:43:06 - src.scrapers.news_scraper - INFO - Feed https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-05 04:43:06 - src.scrapers.news_scraper - INFO - Finished https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/. Saved 0.
+2025-05-05 04:43:06 - src.scrapers.news_scraper - INFO - Checking feed: https://feeds.bbci.co.uk/news/technology/rss.xml
+2025-05-05 04:43:06 - src.scrapers.news_scraper - INFO - Feed https://feeds.bbci.co.uk/news/technology/rss.xml fetched. Contains 48 entries.
+2025-05-05 04:43:06 - src.scrapers.news_scraper - INFO - Finished https://feeds.bbci.co.uk/news/technology/rss.xml. Saved 0.
+2025-05-05 04:43:06 - src.scrapers.news_scraper - INFO - Checking feed: https://www.cnet.com/rss/news/
+2025-05-05 04:43:06 - src.scrapers.news_scraper - INFO - Feed https://www.cnet.com/rss/news/ fetched. Contains 25 entries.
+2025-05-05 04:43:06 - src.scrapers.news_scraper - INFO - SAVED SCRAPED: fab748d302bffe44de22aed47e162b0eabeb0a66fc5b02d68dcdddc11aa438aa.json (T: Today's NYT Connections: Sports Edition Hints and ...)
+2025-05-05 04:43:06 - src.scrapers.news_scraper - INFO - Finished https://www.cnet.com/rss/news/. Saved 1.
+2025-05-05 04:43:06 - src.scrapers.news_scraper - INFO - Checking feed: https://aws.amazon.com/blogs/machine-learning/feed/
+2025-05-05 04:43:07 - src.scrapers.news_scraper - INFO - Feed https://aws.amazon.com/blogs/machine-learning/feed/ fetched. Contains 20 entries.
+2025-05-05 04:43:07 - src.scrapers.news_scraper - INFO - Finished https://aws.amazon.com/blogs/machine-learning/feed/. Saved 0.
+2025-05-05 04:43:07 - src.scrapers.news_scraper - INFO - Checking feed: https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss
+2025-05-05 04:43:07 - src.scrapers.news_scraper - INFO - Feed https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss fetched. Contains 30 entries.
+2025-05-05 04:43:07 - src.scrapers.news_scraper - INFO - Finished https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss. Saved 0.
+2025-05-05 04:43:07 - src.scrapers.news_scraper - INFO - Checking feed: https://news.mit.edu/topic/artificial-intelligence2/feed
+2025-05-05 04:43:07 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://news.mit.edu/topic/artificial-intelligence2/feed. HTTP Status: 404
+2025-05-05 04:43:07 - src.scrapers.news_scraper - INFO - Checking feed: https://blog.google/technology/ai/rss/
+2025-05-05 04:43:07 - src.scrapers.news_scraper - INFO - Feed https://blog.google/technology/ai/rss/ fetched. Contains 20 entries.
+2025-05-05 04:43:07 - src.scrapers.news_scraper - WARNING - Article 'Listen to a podcast deep dive on long context in Gemini models.' (e6b51bd99e575d00659fcb12a1964072b4092ddc690371a5c509372bbdd84983) empty summary. Skip.
+2025-05-05 04:43:07 - src.scrapers.news_scraper - WARNING - Article 'Our new research into zebrafish brains could help us predict brain activity.' (d3aa6df43f77c2f83aafa445c24905d91816aadc11f04485e69a359fa3179ad3) empty summary. Skip.
+2025-05-05 04:43:07 - src.scrapers.news_scraper - WARNING - Article 'Our new C2S-Scale LLM helps researchers have conversations with cells.' (5e61ba97cad5ae14e2dcb878c7ec28b4c0f5818af2520cbba17121fdd11c70e9) empty summary. Skip.
+2025-05-05 04:43:07 - src.scrapers.news_scraper - WARNING - Article 'Our 2024 Ads Safety Report shows how we use AI to safeguard consumers.' (51ff8c4799505f895ec9d85d14ab9b158e42c54de4922c9a23c81e2b024ac590) empty summary. Skip.
+2025-05-05 04:43:07 - src.scrapers.news_scraper - WARNING - Article 'Here’s what’s new with our Google Cloud AI Hypercomputer.' (6a64b2c4670e8e4270952293a72db526144edd5b560bdc78d802d106060dd199) empty summary. Skip.
+2025-05-05 04:43:07 - src.scrapers.news_scraper - INFO - Finished https://blog.google/technology/ai/rss/. Saved 0.
+2025-05-05 04:43:07 - src.scrapers.news_scraper - INFO - Checking feed: https://ai.meta.com/results/?content_types[0]=blog&rss=1
+2025-05-05 04:43:10 - src.scrapers.news_scraper - WARNING - Feed https://ai.meta.com/results/?content_types[0]=blog&rss=1 potentially malformed (bozo). Reason: <unknown>:4:1451: not well-formed (invalid token). Attempting to process...
+2025-05-05 04:43:10 - src.scrapers.news_scraper - INFO - No entries found in feed: https://ai.meta.com/results/?content_types[0]=blog&rss=1
+2025-05-05 04:43:10 - src.scrapers.news_scraper - INFO - Checking feed: https://research.googleblog.com/feeds/posts/default?alt=rss
+2025-05-05 04:43:11 - src.scrapers.news_scraper - INFO - Feed https://research.googleblog.com/feeds/posts/default?alt=rss fetched. Contains 25 entries.
+2025-05-05 04:43:11 - src.scrapers.news_scraper - INFO - Finished https://research.googleblog.com/feeds/posts/default?alt=rss. Saved 0.
+2025-05-05 04:43:11 - src.scrapers.news_scraper - INFO - Checking feed: https://ir.thomsonreuters.com/rss/news-releases.xml?items=15
+2025-05-05 04:47:55 - src.scrapers.news_scraper - ERROR - Unexpected error processing https://ir.thomsonreuters.com/rss/news-releases.xml?items=15: Remote end closed connection without response
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 128, in scrape_news
+    feed_data = feedparser.parse(feed_url, agent=headers['User-Agent'], request_headers=headers)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/site-packages/feedparser/api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/site-packages/feedparser/api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/site-packages/feedparser/http.py", line 171, in get
+    f = opener.open(request)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/urllib/request.py", line 519, in open
+    response = self._open(req, data)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/urllib/request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/urllib/request.py", line 496, in _call_chain
+    result = func(*args)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/urllib/request.py", line 1391, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/urllib/request.py", line 1352, in do_open
+    r = h.getresponse()
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+2025-05-05 04:47:55 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved: 1 ---
+2025-05-05 04:47:55 - main_orchestrator - INFO - Scraper run completed. Saved 1 new raw files.
+2025-05-05 04:47:55 - main_orchestrator - INFO - --- Stage 3: Running Processing Cycle ---
+2025-05-05 04:47:55 - main_orchestrator - INFO - Loaded 134 articles from all_articles.json.
+2025-05-05 04:47:55 - main_orchestrator - INFO - Loaded 134 articles from all_articles.json for context.
+2025-05-05 04:47:55 - main_orchestrator - INFO - Found 1 scraped articles to process.
+2025-05-05 04:47:55 - main_orchestrator - INFO - Sorted scraped files by modification time (newest first).
+2025-05-05 04:47:55 - main_orchestrator - INFO - --- Processing article file: fab748d302bffe44de22aed47e162b0eabeb0a66fc5b02d68dcdddc11aa438aa.json ---
+2025-05-05 04:47:55 - main_orchestrator - INFO - Finding image for article ID: fab748d302bffe44de22aed47e162b0eabeb0a66fc5b02d68dcdddc11aa438aa...
+2025-05-05 04:47:55 - src.scrapers.image_scraper - INFO - Attempting to scrape meta image tag from source: https://www.cnet.com/tech/gaming/todays-nyt-connections-sports-edition-hints-and-answers-for-may-5-224/#ftag=CAD590a51e
+2025-05-05 04:47:55 - src.scrapers.image_scraper - INFO - Found og:image: https://www.cnet.com/a/img/resize/a51721727ac6b71b8d078d611ca37505b9006739/hub/2024/10/16/ae3b5078-3ced-47c9-91dd-6b5b1b1a5809/connections-sports-edition-6832.jpg?auto=webp&fit=crop&height=675&width=1200
+2025-05-05 04:47:55 - main_orchestrator - INFO - Found image via source scrape for fab748d302bffe44de22aed47e162b0eabeb0a66fc5b02d68dcdddc11aa438aa.
+2025-05-05 04:47:55 - main_orchestrator - INFO - Article ID fab748d302bffe44de22aed47e162b0eabeb0a66fc5b02d68dcdddc11aa438aa passed Title+Image duplicate check.
+2025-05-05 04:47:55 - src.agents.filter_news_agent - INFO - Running filter agent for article ID: fab748d302bffe44de22aed47e162b0eabeb0a66fc5b02d68dcdddc11aa438aa Title: Today's NYT Connections: Sports Edition Hints and Answers fo...
+2025-05-05 04:48:02 - src.agents.filter_news_agent - INFO - Filter verdict received for ID fab748d302bffe44de22aed47e162b0eabeb0a66fc5b02d68dcdddc11aa438aa: level=Boring, topic='Other', keyword='NYT Connections puzzle'
+2025-05-05 04:48:02 - main_orchestrator - INFO - Article ID fab748d302bffe44de22aed47e162b0eabeb0a66fc5b02d68dcdddc11aa438aa classified as 'Boring'. Skipping.
+2025-05-05 04:48:02 - main_orchestrator - INFO - Processing cycle complete. Success: 0, Failed/Skipped/Duplicate: 1
+2025-05-05 04:48:02 - main_orchestrator - INFO - No successful articles processed in this run to send to Make.com webhook.
+2025-05-05 04:48:02 - main_orchestrator - INFO - --- Stage 4: Generating Sitemap ---
+2025-05-05 04:48:02 - generate_sitemap - INFO - Starting sitemap generation...
+2025-05-05 04:48:02 - generate_sitemap - INFO - Loaded 134 articles.
+2025-05-05 04:48:02 - generate_sitemap - INFO - Sitemap successfully generated with 135 URLs and saved to /home/runner/work/Dacoola/Dacoola/public/sitemap.xml
+2025-05-05 04:48:02 - main_orchestrator - INFO - Sitemap generation completed successfully.
+2025-05-05 04:48:02 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (299.30 seconds) === ---
+2025-05-05 05:42:44 - main_orchestrator - INFO - Using site base URL: https://dacoolaa.netlify.app/
+2025-05-05 05:42:44 - main_orchestrator - INFO - Jinja2 environment loaded from /home/runner/work/Dacoola/Dacoola/templates
+2025-05-05 05:42:44 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Starting Run (2025-05-05T05:42:44.963827+00:00) === ---
+2025-05-05 05:42:44 - main_orchestrator - INFO - Ensured core directories exist.
+2025-05-05 05:42:44 - main_orchestrator - INFO - Found 324 already fully processed articles.
+2025-05-05 05:42:44 - main_orchestrator - INFO - Total initial processed IDs passed to scraper: 1138
+2025-05-05 05:42:44 - main_orchestrator - INFO - --- Stage 1: Checking for Missing HTML from Processed Data ---
+2025-05-05 05:42:44 - main_orchestrator - INFO - Found 324 processed JSON files to check for HTML regeneration.
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2f0768641f700b4396799fec7db22d664f143ba908e701a0cf0191b546789746.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7cd0b43f57decc924626a2a678428eb6965bd6cc953817f5dc1406b2169ebe68.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e57e9a7ac9187c7316319e59a970f5b4ccd37339ae790c336574696a52cc9c11.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d7eeaf946e78b5fa9eb2439eefb91fc7d84db1c1a7ccdb3ccb9af529bd3381c3.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d12c3417bb5a6dfeb5953bed99de0ff1232b8614a935fa4bc7cbf15f636acad1.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b1d7a41952a88a838f93071ea68fb6558f658709a6770689edc8936327c64829.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5dd5bbd9c4c8fef0868378fe57b6ede1525655656e7d05d7363e1dd42fca32d4.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b4824683ada96d7d9569647d5eb96d9932606709c2305775a481957a05d92689.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9032735e26a53478a41aa5500c492bcf834657236f64bfc5463b6654d9c0fa04.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 38c01d96959c1f25cd744f8633e8d8fff93eaece28f4348ceb9efe87e7382edc.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 94f957a5cfe9c7446512fab63f2c2aacbbdc769af49b2b68b019d3f7c76daf3f.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1f3c91b8394e2599ef0f846e628b4e2ae7acec4c05cabfa57c676c1d22ad06a7.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 156e4b5157f9ced6fec01432e1737d4ba5ee7ea57a0d2ad2b762d4d98468faba.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c02aa6c17194e34c74ff5925cde9c707b04108daec242a8dbce5a1e611aecd77.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9d5ac93551e61fe1604c8c0d570d500fb8311c140366fce92907b323150dba3d.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2911f7cf83c993a6c708c4117a381dc5a83569e2354d27ee2f043ad202b52cdc.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 317bb9bb1d3c5937619a732bbc3f5a2e2a72f71e05fc7e6306b593101282042a.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8deaff8501a1eb567fb9ff214ac896f432daaea38f45a4b0e00e6d1df920785a.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6a82f3849ca43f5f382a576519c3117b4b29268a1d635e8cecb29c2bde6d1fad.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 588203f9ce21cbc1d7fccb9be1b7a8eac93285a8f6da2cf1148c05a763b9ca58.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 95d91a4308e0d17bd16e262d51ad230a659532bea090dc4b80e23557c53920d3.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b0d83a49005fb636e2342c18a9febadcfc48cd6b0ddf233265ed106bd3fb762.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 142f41a5ca2eb00780084f3f72518959f11fe5a6af78fd986b59d712d83bfa9c.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7b9c794995ed7a4ece7a1a4c41998c49c23ee51b9156f1c4974bf5d18a3f8437.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 900177fbc73594e20301d5cb880109ebabf504555c712b33380b358a57d0e8b8.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d8967952145ea68921b0755c898ea3c5407e7e775a85bfb261b448caf0701936.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7adcc049e963656062e2cf6f2fd94e4262c342cbf5fe7fe587b6bc001dbb2bea.json
+2025-05-05 05:42:44 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 26e7fd4f90fb7cb42c6e719365761bcada452fae0d91a1f37f74d9fc9484124b.json
+2025-05-05 05:42:44 - main_orchestrator - INFO - HTML missing for 6a0dd057cf761ab62ae0bf3bbc5dedb3e1c9953ca0a04fd5da11ca354f347374 (from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation-.html). Regenerating...
+2025-05-05 05:42:45 - main_orchestrator - INFO - Rendered HTML page to: from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation.html
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c5ce8ebf9dd2aa85979a70bdcb89d3d6cd3f0d40834470864d12050232f72857.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d22a6e01d6aa57ae033489af9827c5eb29088c0271ef1174238caa02aef4bf64.json
+2025-05-05 05:42:45 - main_orchestrator - INFO - HTML missing for 3744354b457d8af2cf77b12ccff14bdbf0ba9eaee4f419bea9228abded88c5d4 (from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation-.html). Regenerating...
+2025-05-05 05:42:45 - main_orchestrator - INFO - Rendered HTML page to: from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation.html
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 0e3e561349ec501e36e62ede6c27e43896ce893df9e1a5cd07e4da51b5350855.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: bd949f58f8bb83a470024966b5c8624e959a4dda0700934b6aeed5f3005facf0.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: f435f5756eed9e6e6b4a5d269a441e14274262b8726205ede209d501a1549c84.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 85032e5d0321bacace66f34ed0d7cd6b18bb3453bc70ccc50758b404916d6786.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e6f8336c83b3e525d965d33a8aabe131db678c46ca5e85f51c6d423d913f7b7a.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ddadcbb6305f08ff19a92e3f2af8ac57c4d8f9687e89f938b25377af1b056355.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1adb67098f82ef835e4c7b2426408a4fdf2435244e8c3691b5901efc6b71a9df.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fc2def72788e76853c9b3127740810d208882431a3eee1dc1b21fe419c3889a4.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3a325632a51ca7448d0ff35e6b53661edccc714109bdb29b6e1fa4e2ce5b7af8.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 79f36e3be9ab23bb0ddb070e6cf4c5a5352e8c06d57b3d29a7cf4976eb4d9649.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6709b53011f45193bc3110bc15da100c0df62aa8c116da88c3b9c82299283bc3.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 771de2c58074761438ac399b5c1c83c176ac0801fb37407bc4ada03364835dfa.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a9ef100eeacda721c557b8ce9b67f81280e870fa2c211cef7c5c02e78432009b.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6ed46dc607daea2150d69b3695da42503046a54a36d67b197e9e319f631e388f.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 614dc6817bdf48a2b3743fcb59ad1261379bac32d2b3d0256e2b43316d9ebec2.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5eca8d901c92070eba65c671077d1444d7dc592d4c128f252acdc0436c75cd65.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b3236173789c16c8cc84db281c30533ffaab65a968348c60fa777d285e4d4625.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 84de0933fcd50fd1455db5a5e62e92909370ebb8719b9b777d027f6cdaafac66.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 4cda71ad1afda77b1f0a3401dc405c59dd9152a6e7c9df940831b56d758c3c83.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 10d80648ff0976207f6af23d4e93e1441273a007d87039cb467fbf847156fa33.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: acd78ab4faadbb4f5a48b4621bc0c59ada154d656316338ba19267c7c37ef3fd.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c8169c21fb7dc54b0d1f7647261455a47bfdfc72e43849fea5c668646493b10f.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 43c25f0e18feb189b6748f510bd57cb6a0cc3aac79a5f8385d679e7445d9ea3c.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b75036003ee55bd011aecf8d77a417f98460968512a0ec8e858d3ee41db194b.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 650e36aa56c1b8465a62007bc2dc3aefc4e871a1ded87ab9c7b663d966fe4fc1.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 735c08d32c61649de6fa56944d2515b92f7a307981584c2c5a5593883cfafab0.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 0b7f12268f2bd279e1f6c0650147b1739e5169b230da68df3f42959b482edd80.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6feca0c6ca4c3ee4326c675d3acfecd13e1fee863c52c61b736d21f3e7ad5283.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: cb83387fc9c5e02e3cfcf9a6041e9ada62a132508a256c14ad562cb7761782c3.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 91b6beb3b4efc05af032bbf589ac141d4f546f025c83a01b3e95b8acfc33bb19.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 81638891647a3b1f27fc16fb5fc65c6c3be5c383896c8e7f3b75107e21a835f2.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ed0839154131ed5f9fcf2c49190310162f72c6ca07f252462947136c91824214.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2c519bbff265b5b55999e81a36adc2bb619c67406401d0d7cc6882e74522eb14.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1a5c311487ea6903494a02f4595fe8af6677deb6e05d48445e0447cbf2eb7c22.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9c4d43d552f35a0dd016abbe9d811e7bff5313ec4956a7ca27e8108c677f53b2.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c28d786df7cb0adc5d1a9829f3ae0d8fcc2186700991f55c8b72296a864d8de6.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 114be36ab2e121dec66e6e5a2e9ca36f7deaf2bd5a4534eac5fbe7efff988047.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 61e6e53aa5d82aa2bb723eb49768b36c8b1bf102431df0648af18c20ae09b67c.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 59b94f4af68661530ef37d1f8c29616a586771713facae3d9af7365893da8ff0.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: f195d28093daa98a27686b903f3db4f77d95e0b55391791e448cbdd4600281b8.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d32c1c77bc8811677c55dbf80f24ebbca749b093baf75fd2356682c888f344a2.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 582e34c0d8cd196888749395c9479a298cb80284a6ace8725393c080a85fecdb.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7e6215340ace5fdd85cc5e1446cab2ec0a3810009e0290d797accc59a9b0cf9b.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d258795700e13ea6386f612f62ba6de3f411ca2900db973f4ea99062c5ac7241.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9257818db97e53e0f5e52c899d8e9cb13188e86f9b61c53dc7e5a1270d750cab.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: edc62bd5ef94119cf4c77ed954f1f3e22c0fd7444c062203d0a9c9d2dc0411fc.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 04673665cca0f54847574ce6ea055fc35616a99f511193b9fcc8d7d7e97df7d2.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fa472c7d3c7fdc6e8c02dd3f8f75aae7852d1d771232de3faf0f8ec72ebba3ea.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 178a8c890e12376890c74f4109861cd582e779128377650dd64b8da71644cbb0.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b19f496319ea92a1eef9d013f5ffaa4f5c3e46555c6ca1627f32648dea6b250.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d677f51648da74f3159fcffb42726c55c0931c9841baf3881d0fccd04f64ecf1.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3baa0141917f0ec511b8b8b2704ad27396872daa1a47170da8e993eaebd31cba.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a51dd2dc3794da378c72ec4bcd72ffb8a89d3d8c7ad476b6858da82b101a55f6.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 96d26635a64d56338cba3538adc07983f5a1d1e273adb93c81f5ca8cde9dc440.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 90497bdc05ca7f137886b8750fa8258909a53d38ac1c3993a978f2f82a679b1a.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ee40132d15bff79cb114f89ff156512311ad434b946b34f8ca6745df24db0b12.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: cc21f25d2f206d5f07d5bdf7c78f69adf330621d7b803c412dade40f9db7ce99.json
+2025-05-05 05:42:45 - main_orchestrator - INFO - HTML missing for 6487a7aacbe4b618adb40f5b28f161c136d1959b591115aef5fbfbaa68ba1e3c (build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-.html). Regenerating...
+2025-05-05 05:42:45 - main_orchestrator - INFO - Rendered HTML page to: build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and.html
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 371777a04adecf9ce6631756e552cbea75cb8d76738e2ab4f37f9abaa258c629.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3c6086abba9b10018c80779625a59404ea28f8e922c1150b1850334292ad6654.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 90a2d60cd482e6b8e1332f946efb63034e4edf3071480aed517a61a46bb48520.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 53200985953c8ec14e710d9388c9d2209da31acdd397fa0515355dc8d6a5eae9.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b76f01663f577882809b1c896176d5a0f0091634d751e8ddc96c4b5726f545d5.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ef02b174fd0f7e62c4f137a31a154990b456486f4c85dde989d99db5e84934ab.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 37ebd444d31e088b823454ed12cfee96f8384e131c4b530b335101a3e465236b.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 96b957c2d1f55fa8feea8671dbb769c2bd1e41bec26ae2ff6dde540fc0682f63.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ee92e3becca90cd83660b7478dbe930296d982adb64a861ca656e6c80c5c87d1.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 12f1bb5ccd096986516d61e6785d3d4051fe89933939898be31a10d51a2c3c58.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 87f56955a51091cb9e288ac242e2611b14260341c53b9a87f78e86b1d3321767.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5f77c2f41e6e71c61eb5fcb6d2d339b811fbf93d621160b4df0f355c50ab1a82.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 0b5d107994844ad167273ca859f911843d5ffa7f6ff1b09cd2994973b51a61f5.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 67cce41e169049aee015d2bf12cb7871c9961ec0a96b59448db3f165ad736fe5.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5186858cfa77a44867a016f0e5b4719326aadcb8cb0f93788fad01063c98ce23.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 18377dcb4eff1e247d5458c013ace5e45a41c2742b31643947b67634eb67104f.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b02e19046a87c704c410bc897357a861cdbefbc0561b9b2d162870c8705aabf6.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 098be7f71cf4c5b5d4d56917ad60ab1dd54ce677010580def1f434e97df95749.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d27e397d31f2b26a313987753af5b227d0a71fab4b6e7cd77b6397d39579614d.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ee95d76305f40e44e34c7d2ccfad41b26beac608c076f9253fc849ef23d5536a.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 77bae08d3c6ec14e291a619fba432b6b028c71e293ea71487e008ca3ae1a84e6.json
+2025-05-05 05:42:45 - main_orchestrator - INFO - HTML missing for bdd9fbaf36936b4dbfa73446294c17a12293daaaebd61f6618d5573ddc973170 (rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-.html). Regenerating...
+2025-05-05 05:42:45 - main_orchestrator - INFO - Rendered HTML page to: rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources.html
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ed46ab48413a75fd7e557505ca0608ad873e2aac93204e65e7a1e71bb7e6b2db.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 90f78ba768f6ba211795b75715e77920e7bc09b623574339999cafac127fed8c.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2fcd1b41f3881f05a3e7d2be5041ac41a52928f1176203a5838a1e784ce58e1b.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a17f57a1a71a97e98abd321b7175b8341fdf0a6edba275fc894376d151e39396.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 26b216e0e904f7f7de0737613ebf4789e92bdcf2f4a1a8eec16bda01cb150e2c.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 4b7d6b187a9c53d80bf308a89d86b6a839875a525934c328ab33e66155e7f34a.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 1dcaeef7181fb897cc8e52394bb1c2c7ee347fc893074d73f7ddf551b2489fb8.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 45398ba78757676d7ef377eea58384eabe395e11b2d8ed0440d7bf3f4f292a43.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 72871c2937083dd132b5759ee5d694480c17c5da04ea3bbfe4028acb12347be7.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: eeef6f4c120085ff0ea841a48890ed0e841a50fd73908609611ff40a7255c24f.json
+2025-05-05 05:42:45 - main_orchestrator - INFO - HTML missing for 606eeeef155af1a15075307d4de34df94955656f703bbf570969b54ff4a0efa7 (rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-.html). Regenerating...
+2025-05-05 05:42:45 - main_orchestrator - INFO - Rendered HTML page to: rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources.html
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b1f09f4b54ce2a9733ee0d28bc07fad6ff3eb7260de4c0198d0c32aa887890fd.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 158c0c3655b4c94a8e1894272e1d25904953b8c4e178a72d19f5f9bf0a58e487.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e5bc1259d88eafc6bcc80d9f9e34d835fe07040fce2b7ba046b61d30ba2fd3e7.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 020acfef52914873bb5656605142767e06c399dea420e24a247add043ebc6e84.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5ae7564e0b01cc4c1a88a1b18f1a88b27a4689a3f86c6c38a8275fe0b1a06d2e.json
+2025-05-05 05:42:45 - main_orchestrator - INFO - HTML missing for 9df3d8e0130ec5d428f4b88feeafa658253ead0117476b1139dcaaab59da3c55 (new-federal-circuit-decision-expect-getting-aimachine-learning-patents-past-101-.html). Regenerating...
+2025-05-05 05:42:45 - main_orchestrator - INFO - Rendered HTML page to: new-federal-circuit-decision-expect-getting-aimachine-learning-patents-past-101.html
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 7ca1b73be51f5cbef62bddb4eaae7e44a45af9db71c64b77a5599c3000d95e09.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 2eaf758b0ac2515473f7d73e1af14823825e9da1376aa88d5147fa684810b1d1.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: a81eb23a5d1f5b8e18a195bcd820d98d03ce9d76cf252b3d187572d7d696c0de.json
+2025-05-05 05:42:45 - main_orchestrator - INFO - HTML missing for efe62474db8795db977316ba61228b5b3d107c83699ce2435773df2eea6142c7 (control-the-composition-of-ai-generated-images-with-the-nvidia-ai-blueprint-for-.html). Regenerating...
+2025-05-05 05:42:45 - main_orchestrator - INFO - Rendered HTML page to: control-the-composition-of-ai-generated-images-with-the-nvidia-ai-blueprint-for.html
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fd60fa29488c1c50788d38fccb5f0f6bffdd0919a7688c62c19186c60f88cfaf.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 715154667f33ccf47a0ca66bc1771253bbcef15a405e361c427e32e9c1594506.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 91256c6988b7328694674483e956e06616bb743215839d52f8f2fac1304f73d9.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d9e28828662276cc15c85c7983ccfff2f6bc2344e9beb6b846e42f7b380625e2.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: cc1084f48502eac3487ecaaea1f10eb446c432a5a2a3beb269f2e3a91f92b379.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 568de3a4d35a9fe995e18bcd826add02d6d17d0dfb7adc8aab25ea4e344106a3.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 00ec866612e1e9d2c47326f74cec91b647010ddb30829776c8121ba41e42bf32.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ada6dcaba02baf53fa3c9a31c00c32a23725ee730027043491532685f9421ae8.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: aa475582ad484b2f6dbcc3ce95dbbe4ff38a4509d18dc140c186094ec731121f.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8d12e3de8a9801c14a46f48e65511c514c46898c58785079d545fe7af030ab4b.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8edac92bf197d843b15444951c214bc82b783cc84c665db5f1565b2cb7babd7c.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 8ed04dbd4a04be030e5099267897ed13f01f21c88e7c0bbf09a12899377f124a.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c7922a64d49601363154c653babc4ddc04b589781fda7a2df36c0de5dcdb1fa1.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 08daf7349dea3f7338983273028d017e6db5fe27ab6a12808905c1e540708566.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 74c5cf5775d86830e432ec5969d175ee735013a16cd321d3e11e2fd7762cd2b1.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e015af8a3d4bc7adc4279c27de5b94f53c6e275c54846228b7fb6f9a75587874.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5cfcb338e6e6dec698c89de7e26b24d66ee75f6883e516570b8f5cf0912fba6d.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3629618a13fbc941386b6b52de8b0618478410a6102eee69cf48abda4c9eb5ab.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5d6fae9fe966c742d60f8e8d8119bafe0af6f5c8efac0940e6f5ba6782681701.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 82cb6552ea7a0f986f7bcd42cde819232f4c51d79cc0cb11c5fff74c85e8e5c9.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 30358a502720f404cf1ea898289186a085e80d0a167de7365793df28d437d772.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 56473abaab09a5d7d22a1c9956a5f5652ee1ebd76389b7e58ecfa9110c0be568.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6b9c8c460319b1550247bd6c6609f6ff9207bd854bb7ed03e090299ed2bc86bc.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 3e0fbfad2ee4a3e8868dafd58132c612f6c4abba40344356294c779759d7ff28.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 9fb241eca1994da65156bd4a36fa5d271306309ec547e49fc173873047f1a820.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d2cff7361a355729a43908692956c449ecca5ac0e59128c4e60cae1c30802417.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 51a13a683ec1d4eb472cec5bdcda347569a0e57bec925298a4a9b97367535260.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 860921c3caffde2284c7c714c779e46932f59617efee90984ff800e62d1068bd.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5444ac72fbb424612ec49134293023aa246ce384cef4a1699a7f155e543d1016.json
+2025-05-05 05:42:45 - main_orchestrator - INFO - HTML missing for 686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f (build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-.html). Regenerating...
+2025-05-05 05:42:45 - main_orchestrator - INFO - Rendered HTML page to: build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and.html
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b9d80f7cdc834fc3ae1e95769fcda3c6e3bc393ea67010afd423e185013ca237.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 5275cc7f788a872926ea51fb66f1c2d285443f3fd705fb52d886e366802a7a39.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: d8e05070997d6886acd74f3c079d321e699af13d0d6314226742906e6d7bc6cf.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: c41262208380bf62d6d376a6e761b5e588148e8cc06eeaa671471bb80000f48b.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b321a33910418791a4de28182c574b4fd37b976fa600908a529f50411df7321a.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ea048d1d4ca5f048e7e77cfd038b8ae8729ea1a1b340a4bd0410f4201da85123.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: b2a01fa4f5ac3d739fb12778206f724b25a21d39770dddf020553a731d9d03d9.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 224ff37fe948def5a75343ac972b9830c3a5e9de492056547de9daa8af83c256.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: ecb86b3211ce1303167ec928426fcd9d48001148df3237b36f821d32e24e1c56.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 75473e2307b8beaa86ccc0f49600c5d6e08a35a5b908bed0f40f543cde584314.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 66edcb9bc5fd1c783cccfcd6a39045e792f265e211293eec43c979cc5be9fa35.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: fee1305f6dd170b02599af0d5c860b203d0707407152cb655b68b88dac41b6e1.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 990bfc5e8605f0d7bd6d0a9de93531fb4cf3a852a7fd915dbb7296e7e643e10d.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: de0aeb4f36593d9063e32e99248a5fefeb0ac92fe6cfab7cb3d0adbcaa4d26a2.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: e4b328eb3dbdfbc4151f33cb2046d780402fe78915206869e457f22509a3f2ce.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 6bc8a66222d7276ea048011396587d674e2d1367775e07448a7284eb0b61aff3.json
+2025-05-05 05:42:45 - main_orchestrator - WARNING - Skipping processed JSON missing id or slug during regen: 745f92ac7a1a3e26d208e167b1c2aa92f516a3981d659f4cffc0143464ebb2ea.json
+2025-05-05 05:42:45 - main_orchestrator - INFO - --- HTML Regeneration Check Complete. Regenerated 8 files. ---
+2025-05-05 05:42:45 - main_orchestrator - INFO - --- Stage 2: Running News Scraper ---
+2025-05-05 05:42:45 - src.scrapers.news_scraper - INFO - --- Starting News Scraper Run (18 feeds) ---
+2025-05-05 05:42:45 - src.scrapers.news_scraper - INFO - Checking feed: https://techcrunch.com/feed/
+2025-05-05 05:42:45 - src.scrapers.news_scraper - INFO - Feed https://techcrunch.com/feed/ fetched. Contains 20 entries.
+2025-05-05 05:42:45 - src.scrapers.news_scraper - INFO - Finished https://techcrunch.com/feed/. Saved 0.
+2025-05-05 05:42:45 - src.scrapers.news_scraper - INFO - Checking feed: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+2025-05-05 05:42:45 - src.scrapers.news_scraper - INFO - Feed https://www.technologyreview.com/topic/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-05 05:42:45 - src.scrapers.news_scraper - INFO - Finished https://www.technologyreview.com/topic/artificial-intelligence/feed/. Saved 0.
+2025-05-05 05:42:45 - src.scrapers.news_scraper - INFO - Checking feed: https://blogs.nvidia.com/feed/
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Feed https://blogs.nvidia.com/feed/ fetched. Contains 18 entries.
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Finished https://blogs.nvidia.com/feed/. Saved 0.
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Checking feed: https://feeds.arstechnica.com/arstechnica/technology-lab
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Feed https://feeds.arstechnica.com/arstechnica/technology-lab fetched. Contains 20 entries.
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Finished https://feeds.arstechnica.com/arstechnica/technology-lab. Saved 0.
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Checking feed: https://venturebeat.com/category/ai/feed/
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Feed https://venturebeat.com/category/ai/feed/ fetched. Contains 27 entries.
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Finished https://venturebeat.com/category/ai/feed/. Saved 0.
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Checking feed: https://www.wired.com/feed/tag/ai/latest/rss
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Feed https://www.wired.com/feed/tag/ai/latest/rss fetched. Contains 10 entries.
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Finished https://www.wired.com/feed/tag/ai/latest/rss. Saved 0.
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Checking feed: https://www.theverge.com/rss/index.xml
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Feed https://www.theverge.com/rss/index.xml fetched. Contains 10 entries.
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Finished https://www.theverge.com/rss/index.xml. Saved 0.
+2025-05-05 05:42:46 - src.scrapers.news_scraper - INFO - Checking feed: https://www.zdnet.com/topic/artificial-intelligence/rss.xml
+2025-05-05 05:42:47 - src.scrapers.news_scraper - INFO - Feed https://www.zdnet.com/topic/artificial-intelligence/rss.xml fetched. Contains 20 entries.
+2025-05-05 05:42:47 - src.scrapers.news_scraper - INFO - Finished https://www.zdnet.com/topic/artificial-intelligence/rss.xml. Saved 0.
+2025-05-05 05:42:47 - src.scrapers.news_scraper - INFO - Checking feed: https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/
+2025-05-05 05:42:47 - src.scrapers.news_scraper - INFO - Feed https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/ fetched. Contains 10 entries.
+2025-05-05 05:42:47 - src.scrapers.news_scraper - INFO - Finished https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/. Saved 0.
+2025-05-05 05:42:47 - src.scrapers.news_scraper - INFO - Checking feed: https://feeds.bbci.co.uk/news/technology/rss.xml
+2025-05-05 05:42:47 - src.scrapers.news_scraper - INFO - Feed https://feeds.bbci.co.uk/news/technology/rss.xml fetched. Contains 48 entries.
+2025-05-05 05:42:47 - src.scrapers.news_scraper - INFO - Finished https://feeds.bbci.co.uk/news/technology/rss.xml. Saved 0.
+2025-05-05 05:42:47 - src.scrapers.news_scraper - INFO - Checking feed: https://www.cnet.com/rss/news/
+2025-05-05 05:42:48 - src.scrapers.news_scraper - INFO - Feed https://www.cnet.com/rss/news/ fetched. Contains 25 entries.
+2025-05-05 05:42:48 - src.scrapers.news_scraper - INFO - Finished https://www.cnet.com/rss/news/. Saved 0.
+2025-05-05 05:42:48 - src.scrapers.news_scraper - INFO - Checking feed: https://aws.amazon.com/blogs/machine-learning/feed/
+2025-05-05 05:42:48 - src.scrapers.news_scraper - INFO - Feed https://aws.amazon.com/blogs/machine-learning/feed/ fetched. Contains 20 entries.
+2025-05-05 05:42:48 - src.scrapers.news_scraper - INFO - Finished https://aws.amazon.com/blogs/machine-learning/feed/. Saved 0.
+2025-05-05 05:42:48 - src.scrapers.news_scraper - INFO - Checking feed: https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss
+2025-05-05 05:42:49 - src.scrapers.news_scraper - INFO - Feed https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss fetched. Contains 30 entries.
+2025-05-05 05:42:49 - src.scrapers.news_scraper - INFO - Finished https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss. Saved 0.
+2025-05-05 05:42:49 - src.scrapers.news_scraper - INFO - Checking feed: https://news.mit.edu/topic/artificial-intelligence2/feed
+2025-05-05 05:42:49 - src.scrapers.news_scraper - ERROR - Failed to fetch feed https://news.mit.edu/topic/artificial-intelligence2/feed. HTTP Status: 404
+2025-05-05 05:42:49 - src.scrapers.news_scraper - INFO - Checking feed: https://blog.google/technology/ai/rss/
+2025-05-05 05:42:49 - src.scrapers.news_scraper - INFO - Feed https://blog.google/technology/ai/rss/ fetched. Contains 20 entries.
+2025-05-05 05:42:49 - src.scrapers.news_scraper - WARNING - Article 'Listen to a podcast deep dive on long context in Gemini models.' (e6b51bd99e575d00659fcb12a1964072b4092ddc690371a5c509372bbdd84983) empty summary. Skip.
+2025-05-05 05:42:49 - src.scrapers.news_scraper - WARNING - Article 'Our new research into zebrafish brains could help us predict brain activity.' (d3aa6df43f77c2f83aafa445c24905d91816aadc11f04485e69a359fa3179ad3) empty summary. Skip.
+2025-05-05 05:42:49 - src.scrapers.news_scraper - WARNING - Article 'Our new C2S-Scale LLM helps researchers have conversations with cells.' (5e61ba97cad5ae14e2dcb878c7ec28b4c0f5818af2520cbba17121fdd11c70e9) empty summary. Skip.
+2025-05-05 05:42:49 - src.scrapers.news_scraper - WARNING - Article 'Our 2024 Ads Safety Report shows how we use AI to safeguard consumers.' (51ff8c4799505f895ec9d85d14ab9b158e42c54de4922c9a23c81e2b024ac590) empty summary. Skip.
+2025-05-05 05:42:49 - src.scrapers.news_scraper - WARNING - Article 'Here’s what’s new with our Google Cloud AI Hypercomputer.' (6a64b2c4670e8e4270952293a72db526144edd5b560bdc78d802d106060dd199) empty summary. Skip.
+2025-05-05 05:42:49 - src.scrapers.news_scraper - INFO - Finished https://blog.google/technology/ai/rss/. Saved 0.
+2025-05-05 05:42:49 - src.scrapers.news_scraper - INFO - Checking feed: https://ai.meta.com/results/?content_types[0]=blog&rss=1
+2025-05-05 05:42:52 - src.scrapers.news_scraper - WARNING - Feed https://ai.meta.com/results/?content_types[0]=blog&rss=1 potentially malformed (bozo). Reason: <unknown>:4:1451: not well-formed (invalid token). Attempting to process...
+2025-05-05 05:42:52 - src.scrapers.news_scraper - INFO - No entries found in feed: https://ai.meta.com/results/?content_types[0]=blog&rss=1
+2025-05-05 05:42:52 - src.scrapers.news_scraper - INFO - Checking feed: https://research.googleblog.com/feeds/posts/default?alt=rss
+2025-05-05 05:42:52 - src.scrapers.news_scraper - INFO - Feed https://research.googleblog.com/feeds/posts/default?alt=rss fetched. Contains 25 entries.
+2025-05-05 05:42:52 - src.scrapers.news_scraper - INFO - Finished https://research.googleblog.com/feeds/posts/default?alt=rss. Saved 0.
+2025-05-05 05:42:52 - src.scrapers.news_scraper - INFO - Checking feed: https://ir.thomsonreuters.com/rss/news-releases.xml?items=15
+2025-05-05 05:47:35 - src.scrapers.news_scraper - ERROR - Unexpected error processing https://ir.thomsonreuters.com/rss/news-releases.xml?items=15: Remote end closed connection without response
+Traceback (most recent call last):
+  File "/home/runner/work/Dacoola/Dacoola/src/scrapers/news_scraper.py", line 128, in scrape_news
+    feed_data = feedparser.parse(feed_url, agent=headers['User-Agent'], request_headers=headers)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/site-packages/feedparser/api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/site-packages/feedparser/api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/site-packages/feedparser/http.py", line 171, in get
+    f = opener.open(request)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/urllib/request.py", line 519, in open
+    response = self._open(req, data)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/urllib/request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/urllib/request.py", line 496, in _call_chain
+    result = func(*args)
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/urllib/request.py", line 1391, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/urllib/request.py", line 1352, in do_open
+    r = h.getresponse()
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/opt/hostedtoolcache/Python/3.10.17/x64/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+2025-05-05 05:47:35 - src.scrapers.news_scraper - INFO - --- News Scraper Run Finished. Total new articles saved: 0 ---
+2025-05-05 05:47:35 - main_orchestrator - INFO - Scraper run completed. Saved 0 new raw files.
+2025-05-05 05:47:35 - main_orchestrator - INFO - --- Stage 3: Running Processing Cycle ---
+2025-05-05 05:47:35 - main_orchestrator - INFO - Loaded 134 articles from all_articles.json.
+2025-05-05 05:47:35 - main_orchestrator - INFO - Loaded 134 articles from all_articles.json for context.
+2025-05-05 05:47:35 - main_orchestrator - INFO - No new scraped articles to process.
+2025-05-05 05:47:35 - main_orchestrator - INFO - No successful articles processed in this run to send to Make.com webhook.
+2025-05-05 05:47:35 - main_orchestrator - INFO - --- Stage 4: Generating Sitemap ---
+2025-05-05 05:47:35 - generate_sitemap - INFO - Starting sitemap generation...
+2025-05-05 05:47:35 - generate_sitemap - INFO - Loaded 134 articles.
+2025-05-05 05:47:35 - generate_sitemap - INFO - Sitemap successfully generated with 135 URLs and saved to /home/runner/work/Dacoola/Dacoola/public/sitemap.xml
+2025-05-05 05:47:35 - main_orchestrator - INFO - Sitemap generation completed successfully.
+2025-05-05 05:47:35 - main_orchestrator - INFO - --- === Dacoola AI News Orchestrator Run Finished (290.47 seconds) === ---
