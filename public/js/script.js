@@ -101,33 +101,46 @@ async function loadHomepageData() {
         if (!allData?.articles) throw new Error("Invalid all_articles.json format.");
 
         const allArticles = allData.articles;
-        const homepageArticles = allArticles.slice(0, MAX_HOME_PAGE_ARTICLES); // Limit for banner/trending
-        const latestGridArticles = allArticles.slice(0, LATEST_NEWS_COUNT); // Limit for main grid
+        const homepageArticles = allArticles.slice(0, MAX_HOME_PAGE_ARTICLES); // For banner/trending
 
-        console.log(`Loaded ${allArticles.length} total articles, using ${homepageArticles.length} for banner/trending and ${latestGridArticles.length} for latest grid.`);
+        console.log(`Loaded ${allArticles.length} total articles.`);
 
-        renderBreakingNews(homepageArticles);
-        renderLatestNewsGrid(latestGridArticles); // Use specific function for grid
+        // Render banner first to know which IDs are used
+        renderBreakingNews(homepageArticles); // This populates the banner DOM
+
+        // --- Prepare Latest News Grid Data ---
+        const bannerArticleLinks = Array.from(
+            document.querySelectorAll('#breaking-news-content a.breaking-news-item')
+        ).map(a => a.getAttribute('href')); // Get links like "/articles/slug.html"
+
+        const now = new Date();
+        const articlesForGrid = allArticles.filter(a => {
+            // Exclude if it's recent breaking news (likely in banner)
+            const isRecentBreaking = a.is_breaking && a.published_iso && (now - new Date(a.published_iso))/(1000*60*60) <= 6;
+            // Exclude if its link matches one found in the banner DOM
+            const isInBanner = bannerArticleLinks.includes(`/${a.link}`);
+            return !isRecentBreaking && !isInBanner;
+        }).slice(0, LATEST_NEWS_COUNT); // Now slice the *filtered* list
+
+        console.log(`Prepared ${articlesForGrid.length} articles for the latest news grid.`);
+        // --- End Prepare Latest News ---
+
+        // Render sections
+        renderLatestNewsGrid(articlesForGrid); // Pass the pre-filtered and sliced list
         renderTopics();
-        renderTrendingNews(homepageArticles);
-        // Timestamps updated globally after initialization
+        renderTrendingNews(homepageArticles); // Trending can use the original homepage slice
 
     } catch (error) {
         console.error('Error loading or processing homepage data:', error);
-        // <<< CORRECTED CATCH BLOCK >>>
-        // Display errors in placeholders if the element exists
+        // Error handling remains the same
         const breakingContainer = document.querySelector('#breaking-news-section .breaking-news-content');
         if (breakingContainer) breakingContainer.innerHTML = '<p class="placeholder error">Error loading breaking news.</p>';
-
         const latestContainer = document.querySelector('#latest-news-section .latest-news-grid');
         if (latestContainer) latestContainer.innerHTML = '<p class="placeholder error">Error loading latest news.</p>';
-
         const topicsContainer = document.querySelector('#topics-section .topics-list');
         if (topicsContainer) topicsContainer.innerHTML = '<p class="placeholder error">Error loading topics.</p>';
-
         const trendingContainer = document.querySelector('#trending-news-section .trending-news-list');
         if (trendingContainer) trendingContainer.innerHTML = '<p class="placeholder error">Error loading trending news.</p>';
-        // <<< END CORRECTED CATCH BLOCK >>>
     }
 }
 
@@ -439,25 +452,16 @@ function renderBreakingNews(articles) {
 /**
  * Renders the main "Latest News" grid on the homepage.
  */
-function renderLatestNewsGrid(articles) {
+/**
+ * Renders the main "Latest News" grid on the homepage using a pre-filtered list.
+ */
+function renderLatestNewsGrid(articlesToRender) { // Renamed parameter for clarity
     const container = document.querySelector('#latest-news-section .latest-news-grid');
     if (!container) { console.error("Container for latest news grid not found."); return; }
 
-    container.innerHTML = ''; // Clear previous
-    const now = new Date();
-    // Get IDs shown in banner to avoid duplication
-    const breakingIdsInBanner = Array.from(document.querySelectorAll('#breaking-news-content a.breaking-news-item')).map(a => a.getAttribute('href'));
-
-    // Filter out articles shown in banner or breaking news older than 6 hours
-    const articlesForGrid = articles.filter(a => {
-        const isOldBreaking = a.is_breaking && a.published_iso && (now - new Date(a.published_iso))/(1000*60*60) > 6;
-        const isInBanner = breakingIdsInBanner.includes(`/${a.link}`);
-        return (!a.is_breaking || isOldBreaking) && !isInBanner;
-    });
-    // Note: articles are already sorted newest first from the JSON file loading
-
-    renderArticleCardList(container, articlesForGrid.slice(0, LATEST_NEWS_COUNT), "No recent news available.");
-    console.log(`Rendered latest news grid (${articlesForGrid.slice(0, LATEST_NEWS_COUNT).length} articles).`);
+    // No filtering or slicing needed here anymore, the list is already prepared
+    renderArticleCardList(container, articlesToRender, "No recent news available.");
+    console.log(`Rendered latest news grid (${articlesToRender.length} articles).`);
 }
 
 /**

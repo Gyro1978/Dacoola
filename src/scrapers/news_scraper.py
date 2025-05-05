@@ -29,7 +29,6 @@ NEWS_FEED_URLS = [
     "https://feeds.arstechnica.com/arstechnica/technology-lab",
     "https://venturebeat.com/category/ai/feed/",
     "https://www.wired.com/feed/tag/ai/latest/rss",
-    "https://www.theverge.com/rss/index.xml",
     "https://www.zdnet.com/topic/artificial-intelligence/rss.xml",
     "https://www.microsoft.com/en-us/research/blog/category/artificial-intelligence/feed/",
     "https://feeds.bbci.co.uk/news/technology/rss.xml",
