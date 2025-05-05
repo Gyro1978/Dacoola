@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "c1cba77eae0ce78b2fe8131aa4d3c9ee678db5622a5a86e97765e4cf2d20102e",
+      "title": "Anysphere, which makes Cursor, has reportedly raised $900M at $9B valuation",
+      "link": "articles/anysphere,-which-makes-cursor,-has-reportedly-raised-$900m-at-$9b-valuation.html",
+      "published_iso": "2025-05-05T06:27:34Z",
+      "summary_short": "Anysphere, maker of AI coding tool Cursor, secures $900M in funding led by Thrive Capital, valuing the company at $9B.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-1356382582.jpg?resize=1200,800",
+      "topic": "Startups",
+      "is_breaking": false,
+      "tags": [
+        "Anysphere",
+        "Cursor AI",
+        "AI coding tools",
+        "venture capital funding",
+        "Thrive Capital",
+        "Andreessen Horowitz",
+        "GitHub Copilot",
+        "AI-powered development",
+        "software development",
+        "tech startups"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "44d7ed6cb36b6562a9848da8f71017cc27b6d7367545ae6749a8327417ee5a68",
       "title": "Preparing Asia Pacific’s workforce for the AI future",
       "link": "articles/preparing-asia-pacific’s-workforce-for-the-ai-future.html",
