@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "3d8b8918b0f320061564f488804e1cf3bf68bd934cbe2ba29dccb1720d44a02b",
+      "title": "OpenAI says non-profit will remain in control after backlash",
+      "link": "articles/openai-says-non-profit-will-remain-in-control-after-backlash.html",
+      "published_iso": "2025-05-05T23:08:41Z",
+      "summary_short": "OpenAI confirms its non-profit will stay in control following internal disputes. Learn why this matters for AI governance.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/2278/live/cb9b4260-29fd-11f0-ab8b-2701683ffc8a.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI",
+        "Non-profit governance",
+        "AI ethics",
+        "Corporate governance",
+        "AI industry trends",
+        "Mission-driven AI",
+        "Commercial vs ethical AI",
+        "AI backlash",
+        "AI development control"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
       "id": "8014b1e0f6bab90cb6f12e0effa0b66a81053f2691aaec9cd8690385f1e3b578",
       "title": "The best robot vacuums",
       "link": "articles/the-best-robot-vacuums.html",
