@@ -1,6 +1,53 @@
 {
   "articles": [
     {
+      "id": "d4ce4280c841a0151f6a5094c5dfe76045cb88a5c1cc912627f41e606bd44a70",
+      "title": "Beware phony IT calls after Co-op and M&S hacks, says UK cyber centre",
+      "link": "articles/beware-phony-it-calls-after-co-op-and-m&s-hacks,-says-uk-cyber-centre.html",
+      "published_iso": "2025-05-05T10:30:03Z",
+      "summary_short": "The NCSC warns businesses to verify IT help desk calls following Co-op and M&S breaches. Stay alert to phishing risks.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/726a/live/6edd8690-298b-11f0-a5e7-c132ef1a1e68.jpg",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "Cybersecurity",
+        "IT Help Desk Security",
+        "Fraudulent IT Calls",
+        "National Cyber Security Centre",
+        "Co-op Hack",
+        "Marks & Spencer Hack",
+        "Password Reset Security",
+        "Cyberattack Prevention",
+        "Business Cybersecurity"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "d3a78556e008b2c59b983513eda3fdd83fce44999a87e188ccb063b0b6889cd6",
+      "title": "TeleMessage, a modified Signal clone used by US govt. officials, has been hacked",
+      "link": "articles/telemessage,-a-modified-signal-clone-used-by-us-govt-officials,-has-been-hacked.html",
+      "published_iso": "2025-05-05T09:59:25Z",
+      "summary_short": "A hacker exploited TeleMessage, a modified Signal clone used by US officials, to access archived messages. Learn about the breach's implications.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/android-spyware-purple.jpg?w=1099",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "TeleMessage hack",
+        "Signal clone security",
+        "US government data breach",
+        "encrypted messaging vulnerabilities",
+        "third-party app risks",
+        "national security concerns",
+        "404 Media report",
+        "archived message exposure",
+        "government communication security",
+        "custom encryption oversight"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "dc7e251cf972578b4543a500374386773941f5aee194a9dbca620978a4d1f7a0",
       "title": "The Dream of the Metaverse Is Dying. Manufacturing Is Keeping It Alive",
       "link": "articles/the-dream-of-the-metaverse-is-dying-manufacturing-is-keeping-it-alive.html",
