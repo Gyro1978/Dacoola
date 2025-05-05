@@ -1,0 +1,43 @@
+{
+    "id": "bef3d6fd21d6be9eb66943c4b3bdc48af890ae8ab1e9696464606fe9b1ef04aa",
+    "title": "Google just leaked Android’s new design language",
+    "link": "https://www.theverge.com/news/661483/google-leak-material-3-expressive-android-design",
+    "published_iso": "2025-05-05T21:58:17Z",
+    "summary": "<figure>\n\n<img alt=\"\" src=\"https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/google-material-3-expressive.png?quality=90&strip=all&crop=0,0,100,100\" />\n\t<figcaption></figcaption>\n</figure>\n<p class=\"has-text-align-none\">Google just accidentally revealed its next big Android redesign: Material 3 Expressive. In a now-deleted blog post <a href=\"https://9to5google.com/2025/05/05/material-3-expressive-leak/\">spotted by <em>9to5Google</em></a>, the company describes the change as the “most researched” update yet, with the goal of making its interface more appealing and easier to use.</p>\n\n<p class=\"has-text-align-none\">You can find <a href=\"https://web.archive.org/web/20250501004611/https://design.google/library/expressive-material-design-google-research\">an archived version of the deleted webpage</a> on the Wayback Machine, and <em>9to5Google</em> has published some of the images not saved by the site. As outlined in the post, Google says it developed Material 3 Expressive after conducting 46 rounds of design and research with over 18,000 participants. The design uses color, shape, size, and motion to make a product “more usable.” It will also <a href=\"https://io.google/2025/explore/technical-session-24\">have its own session at Google I/O</a> later this month,</p>\n<img alt=\"\" src=\"https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/material-3-redesign.webp?quality=90&strip=all&crop=0,4.3937099804805,100,91.212580039039\" title=\"\" />\n<p class=\"has-text-align-none\">As part of its research, Google studied things like where participants focused their attention in a design, how they reacted to different looks, and how quickly they understood an interface. The company also evaluated individual elements, like “which progress indicator made the waiting time feel faster” and “how big a button can be for positive improvements in tap time without overwhelming other items.”</p>\n\n<p class=\"has-text-align-none\">Google says its Material 3 Expressive design allowed people to find key elements in the interface up to four times faster when compared to the existing Material 3 design. It also says Material 3 Expressive “seems to level the playing field for users of all ages,” as the design helped people over 45 years old spot interface elements just as fast as younger users.</p>\n<img alt=\"\" src=\"https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/material-3-redesign-your-mix.png?quality=90&strip=all&crop=0,7.5460960619167,100,84.907807876167\" title=\"\" />\n<p class=\"has-text-align-none\">Over the past several days, we’ve seen reports suggesting that Google is planning to roll out <a href=\"https://www.androidauthority.com/android-new-design-changes-leak-3549582/\">changes across Android’s user interface</a>, including redesigned status bar icons (like the <a href=\"https://www.androidpolice.com/android-new-battery-icon-up-close-look/\">one for the battery</a>), a new clock font, and a reworked quick settings menu. Other leaks <a href=\"https://www.androidpolice.com/google-clock-leaked-expressive-redesign-reveals-material-you-evolution/\">have shown changes to the Google Clock app</a> as well.</p>\n\n<p class=\"has-text-align-none\">At this time of writing, Google still hasn’t republished the blog post, and it’s not clear when the company intended to officially announce Material 3 Expressive. <em>The Verge </em>reached out to Google with a request for more information but didn’t immediately hear back.</p>",
+    "source_feed": "https://www.theverge.com/rss/index.xml",
+    "scraped_at_iso": "2025-05-05T22:51:01Z",
+    "selected_image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/google-material-3-expressive.png?quality=90&strip=all&crop=0%2C17.551211355085%2C100%2C64.897577289829&w=1200",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Software",
+        "reasoning_summary": "Promoted from Boring due to mention of 'google'. Original reason: The article discusses a leaked design language update for Android, which is a routine software update without significant impact or novelty in the AI/Tech field.",
+        "primary_topic_keyword": "Android design update"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T22:57:25Z",
+    "topic": "Software",
+    "is_breaking": false,
+    "primary_keyword": "Android design update",
+    "seo_agent_results": {
+        "generated_title_tag": "Google Leaks Android Design Update: Material 3 Expressive",
+        "generated_meta_description": "Google accidentally revealed its Android design update, Material 3 Expressive, promising faster usability and accessibility. Learn more about the leak.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Google Leaks Android Design Update: Material 3 Expressive\",  \n  \"description\": \"Google accidentally revealed its Android design update, Material 3 Expressive, promising faster usability and accessibility. Learn more about the leak.\",  \n  \"keywords\": [\"Android design update\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://www.theverge.com/news/661483/google-leak-material-3-expressive-android-design\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/google-material-3-expressive.png?quality=90&strip=all&crop=0%2C17.551211355085%2C100%2C64.897577289829&w=1200\" },  \n  \"datePublished\": \"2025-05-05T21:58:17Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Google just leaked Android’s new design language  \n\nGoogle unintentionally unveiled its upcoming **Android design update**, Material 3 Expressive, in a now-deleted blog post. The redesign, backed by extensive research involving 18,000 participants and 46 design iterations, aims to improve usability through refined color, shape, and motion elements. According to Google, the new interface helps users locate key elements up to four times faster than the current Material 3 design and enhances accessibility for older users. The update will be showcased at Google I/O later this month.  \n\n### Why It Matters  \n\nThis leak highlights Google’s commitment to refining Android’s user experience with data-driven design choices. The emphasis on speed and accessibility suggests a push toward inclusivity, ensuring the OS remains intuitive for all age groups. Given Android’s massive global user base, even minor UI improvements can significantly impact daily interactions. The upcoming Google I/O session will likely provide deeper insights into how Material 3 Expressive integrates with broader Android ecosystem updates."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Android design update",
+        "Material 3 Expressive",
+        "Google I/O",
+        "Android user experience",
+        "UI improvements",
+        "accessibility in design",
+        "Google design research",
+        "Android ecosystem updates",
+        "data-driven design"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.49,
+    "slug": "google-just-leaked-android’s-new-design-language",
+    "audio_url": null
+}

@@ -1,0 +1,44 @@
+{
+    "id": "9cff812c0aa52d07786dc4a01e6df08bb5fee0e0398db1eb3b80ca49ed4969d2",
+    "title": "Uber and WeRide set their robotaxi sights on 15 more cities",
+    "link": "https://techcrunch.com/2025/05/05/uber-and-weride-set-their-robotaxi-sights-on-15-more-cities/",
+    "published_iso": "2025-05-05T22:00:03Z",
+    "summary": "Uber and Chinese autonomous vehicle technology company WeRide plan to expand a commercial robotaxi partnership and bring the service to another 15 cities over the next five years. The expansion comes five months after the two companies launched a commercial robotaxi service in Abu Dhabi.  The companies said the expansion will include cities in Europe. Under […]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-05T22:50:59Z",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2024/12/Image-1.jpg?resize=1200,700",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Transportation",
+        "reasoning_summary": "The article reports a concrete expansion plan for a commercial robotaxi service by Uber and WeRide, indicating a significant step in autonomous vehicle deployment across multiple cities. This is a verifiable and notable development in the transportation sector.",
+        "primary_topic_keyword": "robotaxi expansion"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-05T22:59:14Z",
+    "topic": "Transportation",
+    "is_breaking": false,
+    "primary_keyword": "robotaxi expansion",
+    "seo_agent_results": {
+        "generated_title_tag": "Uber and WeRide target 15-city robotaxi expansion",
+        "generated_meta_description": "Uber and WeRide plan to expand their robotaxi service to 15 more cities globally, including Europe, over the next five years.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Uber and WeRide target 15-city robotaxi expansion\",  \n  \"description\": \"Uber and WeRide plan to expand their robotaxi service to 15 more cities globally, including Europe, over the next five years.\",  \n  \"keywords\": [\"robotaxi expansion\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/05/uber-and-weride-set-their-robotaxi-sights-on-15-more-cities/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2024/12/Image-1.jpg?resize=1200,700\" },  \n  \"datePublished\": \"2025-05-05T22:00:03Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Uber and WeRide set their robotaxi sights on 15 more cities  \n\nUber and Chinese autonomous vehicle company WeRide are planning a major **robotaxi expansion**, aiming to bring their commercial service to 15 additional cities over the next five years. This follows their successful launch in Abu Dhabi five months ago. The expansion will include European cities, though specific locations remain undisclosed.  \n\n### Why It Matters  \n\nThis move signals growing confidence in autonomous ride-hailing as a scalable business model. By targeting Europe, Uber and WeRide are strategically expanding beyond initial test markets, potentially accelerating regulatory approvals and consumer adoption. The five-year timeline suggests a measured rollout, balancing technological readiness with market demand. If successful, this expansion could pressure competitors to accelerate their own autonomous vehicle deployments."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Uber",
+        "WeRide",
+        "robotaxi expansion",
+        "autonomous vehicles",
+        "ride-hailing",
+        "autonomous ride-hailing",
+        "European cities",
+        "regulatory approvals",
+        "consumer adoption",
+        "autonomous vehicle deployments"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.99,
+    "slug": "uber-and-weride-set-their-robotaxi-sights-on-15-more-cities",
+    "audio_url": null
+}
