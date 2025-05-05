@@ -1,6 +1,52 @@
 {
   "articles": [
     {
+      "id": "dc7e251cf972578b4543a500374386773941f5aee194a9dbca620978a4d1f7a0",
+      "title": "The Dream of the Metaverse Is Dying. Manufacturing Is Keeping It Alive",
+      "link": "articles/the-dream-of-the-metaverse-is-dying-manufacturing-is-keeping-it-alive.html",
+      "published_iso": "2025-05-05T09:30:00Z",
+      "summary_short": "The industrial metaverse is bridging digital and physical worlds, proving more practical than consumer VR fantasies.",
+      "image_url": "https://media.wired.com/photos/6813feb036a7d9babc90b2b8/191:100/w_1280,c_limit/Future-of-Manufacturing-Industrial-Metaverse-Business-2153329566.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Industrial Metaverse",
+        "Manufacturing Technology",
+        "Digital Twins",
+        "VR in Industry",
+        "Enterprise Technology Trends",
+        "Predictive Maintenance",
+        "Logistics Optimization",
+        "Metaverse Applications",
+        "Industrial Automation",
+        "Physical-Digital Integration"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "907ff75dd8d3ea1d90a75b046865d1133411060d0611d931657597a8befce1f3",
+      "title": "Apple plans to split iPhone 18 launch into two phases in 2026",
+      "link": "articles/apple-plans-to-split-iphone-18-launch-into-two-phases-in-2026.html",
+      "published_iso": "2025-05-05T09:13:52Z",
+      "summary_short": "Apple plans a staggered iPhone 18 launch, releasing Pro models first in fall 2026 and standard versions later. Learn the implications.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/04/apple-logo-pedestrian.jpg?resize=1200,798",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "iPhone 18 launch",
+        "Apple product strategy",
+        "staggered product release",
+        "iPhone Pro models",
+        "budget smartphones",
+        "supply chain management",
+        "tech industry trends",
+        "smartphone market segmentation"
+      ],
+      "audio_url": null,
+      "trend_score": 14.0
+    },
+    {
       "id": "c1cba77eae0ce78b2fe8131aa4d3c9ee678db5622a5a86e97765e4cf2d20102e",
       "title": "Anysphere, which makes Cursor, has reportedly raised $900M at $9B valuation",
       "link": "articles/anysphere,-which-makes-cursor,-has-reportedly-raised-$900m-at-$9b-valuation.html",
