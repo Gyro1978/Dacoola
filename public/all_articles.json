@@ -1,6 +1,77 @@
 {
   "articles": [
     {
+      "id": "f94cc1c9584a40bed22f38ca27f644de2586077127ed7e3517d90dbb6552fdb6",
+      "title": "Over 250 CEOs sign open letter supporting K-12 AI and computer science education",
+      "link": "articles/over-250-ceos-sign-open-letter-supporting-k-12-ai-and-computer-science-education.html",
+      "published_iso": "2025-05-05T17:35:21Z",
+      "summary_short": "Over 250 CEOs, including Microsoft and Uber leaders, push for AI and computer science as core K-12 subjects in a new open letter.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/07/GettyImages-1463459171.jpg?resize=1200,800",
+      "topic": "Education",
+      "is_breaking": false,
+      "tags": [
+        "AI Education",
+        "Computer Science Education",
+        "K-12 Curriculum",
+        "Tech Industry Leaders",
+        "Future Workforce Skills",
+        "AI in Schools",
+        "Digital Innovation",
+        "Education Policy",
+        "CEO Advocacy",
+        "STEM Education"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "140dc62d5aeac07ccfffe9403bbd797e69b078e1b2152c498bb54420d0964cd6",
+      "title": "Google is making TV and movies to convince you that tech is not evil",
+      "link": "articles/google-is-making-tv-and-movies-to-convince-you-that-tech-is-not-evil.html",
+      "published_iso": "2025-05-05T16:56:23Z",
+      "summary_short": "Google launches \"100 Zeroes,\" a film and TV project to reshape public perception of tech, mirroring Apple's PR strategy.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/04/GettyImages-2169510461.jpg?resize=1200,800",
+      "topic": "Art & Media",
+      "is_breaking": false,
+      "tags": [
+        "Google PR films",
+        "Big Tech perception",
+        "tech industry media",
+        "100 Zeroes project",
+        "tech company storytelling",
+        "brand loyalty strategies",
+        "tech ethics",
+        "public perception of tech",
+        "Google media initiative",
+        "Apple product placement"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "4c26af5a8cc08393f467bd65a064966cd8d13c1d982cd7e3681768bf204ff451",
+      "title": "Anthropic launches a program to support scientific research",
+      "link": "articles/anthropic-launches-a-program-to-support-scientific-research.html",
+      "published_iso": "2025-05-05T16:54:51Z",
+      "summary_short": "Anthropic launches an AI for Science program, providing $20K in API credits to researchers focused on high-impact biology and life sciences projects.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/Anthropic-Dario-Amodei.jpeg?w=1182",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "Anthropic AI for Science",
+        "Scientific Research Funding",
+        "AI in Biology",
+        "Life Sciences Innovation",
+        "Anthropic API Credits",
+        "Healthcare AI Breakthroughs",
+        "Drug Discovery AI",
+        "Biotechnology Research",
+        "AI in Scientific Progress"
+      ],
+      "audio_url": null,
+      "trend_score": 14.49
+    },
+    {
       "id": "376662b8be3d4ca415f16b1fbb8131647d46d684df416f8d046a87d925b96bdd",
       "title": "Apple appeals decision that forced it to allow links to external payments in apps",
       "link": "articles/apple-appeals-decision-that-forced-it-to-allow-links-to-external-payments-in-app.html",
@@ -22,6 +93,30 @@
       ],
       "audio_url": null,
       "trend_score": 14.5
+    },
+    {
+      "id": "99aa46509a123ba75f900e6f0d2bf89d9b434bd456f6800ada1a2b3f3b0543e7",
+      "title": "Apple Is Moving Away From Its Fall-Only iPhone Launch Schedule, Report Says",
+      "link": "articles/apple-is-moving-away-from-its-fall-only-iphone-launch-schedule,-report-says.html",
+      "published_iso": "2025-05-05T16:40:00Z",
+      "summary_short": "Apple may ditch its fall-only iPhone launch schedule, spotlighting budget and Pro models separately. Learn more about the new iPhone launch schedule.",
+      "image_url": "https://www.cnet.com/a/img/resize/ff2bddf680f4f326d385fbeec10a4e3dc14dc010/hub/2024/09/13/7e6df415-0c03-4f28-a53c-3bddfe367410/iphone-16-plus-pro-pro-max-family-4554-2.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "Apple iPhone launch",
+        "iPhone release schedule",
+        "budget-friendly iPhones",
+        "iPhone Pro models",
+        "Apple product strategy",
+        "smartphone market competition",
+        "Apple launch events",
+        "iPhone differentiation",
+        "consumer tech trends",
+        "Apple marketing strategy"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
     },
     {
       "id": "a07d4d1848d7abc129163d0c3d1fee52333fbf7b78ac5636ebbb357166b428ad",
@@ -95,6 +190,29 @@
       "trend_score": 14.5
     },
     {
+      "id": "be7f2b4bf1d9ad6198e664bb762d3c91379d1cf8e20bdfc2deba177f6f1e1896",
+      "title": "4 Million Social Security Numbers May Have Been Leaked in Employee Benefits Company Breach",
+      "link": "articles/4-million-social-security-numbers-may-have-been-leaked-in-employee-benefits-comp.html",
+      "published_iso": "2025-05-05T16:08:39Z",
+      "summary_short": "A major data breach at VeriSource Services may have leaked 4 million Social Security numbers. Learn how to protect yourself.",
+      "image_url": "https://www.cnet.com/a/img/resize/c05b8421d9a8ced2b9cd29baa08e0a07f353cf38/hub/2025/04/30/499e0e93-f1c3-4a80-acfc-9b47db3f7a82/may-13-copy-of-money-headshots-240430-2025-04-30t133520-583.png?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "Data Breach",
+        "Social Security Numbers",
+        "VeriSource Services",
+        "Identity Theft",
+        "Cybersecurity",
+        "Employee Benefits",
+        "Personal Data Exposure",
+        "Fraud Prevention",
+        "Third-Party Security Risks"
+      ],
+      "audio_url": null,
+      "trend_score": 14.49
+    },
+    {
       "id": "085fcf2adb4f53733c9ecad111c7295e59f33fe982d5543ef2778bb436a96b08",
       "title": "Rork’s founders were almost broke when a viral tweet led to $2.8M and a16z",
       "link": "articles/rork’s-founders-were-almost-broke-when-a-viral-tweet-led-to-$28m-and-a16z.html",
@@ -113,6 +231,29 @@
         "Startup Journey",
         "Business Pivot",
         "Founder Stories"
+      ],
+      "audio_url": null,
+      "trend_score": 14.49
+    },
+    {
+      "id": "0dd5f4a6d18ff39aefd707395e0cc9496211b4b93de016031e4a91187cfe1144",
+      "title": "SpaceX's Rocket Launch Site in Texas Is Now Its Own City",
+      "link": "articles/spacexs-rocket-launch-site-in-texas-is-now-its-own-city.html",
+      "published_iso": "2025-05-05T15:58:39Z",
+      "summary_short": "SpaceX's Texas rocket launch site, key to Starship missions, is now officially its own city. Learn why this matters for space exploration.",
+      "image_url": "https://www.cnet.com/a/img/resize/05b2b69b8a5140c5a6d2e6e57dcf7aad76a6d255/hub/2025/05/05/11ef2583-cd32-4c33-9123-5113a0e25831/gettyimages-2081933573.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "SpaceX",
+        "Starship rocket",
+        "Texas launch site",
+        "private space ventures",
+        "NASA Artemis program",
+        "Mars colonization",
+        "space exploration",
+        "regulatory hurdles",
+        "infrastructure development"
       ],
       "audio_url": null,
       "trend_score": 14.49
