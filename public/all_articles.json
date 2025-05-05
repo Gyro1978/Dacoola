@@ -1,6 +1,123 @@
 {
   "articles": [
     {
+      "id": "376662b8be3d4ca415f16b1fbb8131647d46d684df416f8d046a87d925b96bdd",
+      "title": "Apple appeals decision that forced it to allow links to external payments in apps",
+      "link": "articles/apple-appeals-decision-that-forced-it-to-allow-links-to-external-payments-in-app.html",
+      "published_iso": "2025-05-05T16:44:56Z",
+      "summary_short": "Apple files appeal against court order to allow external App Store payments, escalating its legal battle with Epic Games.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2021/03/apple-app-store-ios-2021.jpg?w=1180",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Apple App Store",
+        "Epic Games lawsuit",
+        "App Store payment policies",
+        "Antitrust regulation",
+        "Big Tech legal battles",
+        "In-app purchase commissions",
+        "Court appeals tech industry",
+        "Mobile app marketplace",
+        "Apple vs Epic"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "a07d4d1848d7abc129163d0c3d1fee52333fbf7b78ac5636ebbb357166b428ad",
+      "title": "The modified Signal app used by Mike Waltz was reportedly hacked",
+      "link": "articles/the-modified-signal-app-used-by-mike-waltz-was-reportedly-hacked.html",
+      "published_iso": "2025-05-05T16:35:13Z",
+      "summary_short": "A modified Signal app used by US officials was hacked, exposing sensitive data. Learn why the Signal app hacked incident matters.",
+      "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/akrales_220309_4977_0305.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "Signal app hack",
+        "TeleMessage breach",
+        "government communication security",
+        "end-to-end encryption",
+        "Mike Waltz",
+        "Customs and Border Protection data leak",
+        "secure messaging apps",
+        "phishing risks",
+        "third-party archiving security",
+        "government-approved apps"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "2f6649218897ff4078334361af2de9d987e4d342aefe45c7382bcbdeb960cc11",
+      "title": "Skype shuts down after 23 years",
+      "link": "articles/skype-shuts-down-after-23-years.html",
+      "published_iso": "2025-05-05T16:23:07Z",
+      "summary_short": "Microsoft is shutting down Skype after 23 years, merging it into Teams amid competition from Zoom and FaceTime.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/03/skype-mwc-2015-logo.jpg?resize=1200,1050",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Skype shutdown",
+        "Microsoft Teams",
+        "video calling platforms",
+        "digital communication",
+        "tech industry trends",
+        "legacy software",
+        "communication tools",
+        "Zoom",
+        "FaceTime",
+        "unified collaboration platforms"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "bdaf6fca77b76bb526c7847f84d196d410008f4f7970a92efa6f450c77f9da1a",
+      "title": "Microsoft announces a Gears of War remaster – and it’s coming to PlayStation, too",
+      "link": "articles/microsoft-announces-a-gears-of-war-remaster-–-and-it’s-coming-to-playstation,-to.html",
+      "published_iso": "2025-05-05T16:17:22Z",
+      "summary_short": "Microsoft reveals Gears of War: Reloaded, a remaster launching August 26th on Xbox, PlayStation, and PC for $39.99.",
+      "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/ss_68098fea17ebcd49973ed0489d62c30a4d9faf52.jpg?quality=90&strip=all&crop=0%2C3.4613147178592%2C100%2C93.077370564282&w=1200",
+      "topic": "Gaming",
+      "is_breaking": false,
+      "tags": [
+        "Gears of War Remaster",
+        "Microsoft Gaming",
+        "PlayStation Games",
+        "Cross-Platform Gaming",
+        "Gears of War Reloaded",
+        "Video Game Remasters",
+        "Xbox Series X/S",
+        "PC Gaming",
+        "Gears of War E-Day"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "085fcf2adb4f53733c9ecad111c7295e59f33fe982d5543ef2778bb436a96b08",
+      "title": "Rork’s founders were almost broke when a viral tweet led to $2.8M and a16z",
+      "link": "articles/rork’s-founders-were-almost-broke-when-a-viral-tweet-led-to-$28m-and-a16z.html",
+      "published_iso": "2025-05-05T16:02:15Z",
+      "summary_short": "Discover how Rork’s founders turned a viral tweet into $2.8M in funding—a true startup funding story of resilience and luck.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/Rork-founders.jpg?resize=1200,954",
+      "topic": "Startups",
+      "is_breaking": false,
+      "tags": [
+        "Startup Funding",
+        "Viral Tweet Success",
+        "Entrepreneurship",
+        "Andreessen Horowitz",
+        "Rork Startup",
+        "Social Media Impact",
+        "Startup Journey",
+        "Business Pivot",
+        "Founder Stories"
+      ],
+      "audio_url": null,
+      "trend_score": 14.49
+    },
+    {
       "id": "f3816ac4ac4b8c12874f791d9abbd529b1d8568e85c226d579aadcc4a4679382",
       "title": "The sporty Beats Powerbeats Pro 2 are on sale for $50 off for the first time",
       "link": "articles/the-sporty-beats-powerbeats-pro-2-are-on-sale-for-$50-off-for-the-first-time.html",
