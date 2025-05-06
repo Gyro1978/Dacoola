@@ -1,6 +1,101 @@
 {
   "articles": [
     {
+      "id": "749eabd8653c6aee55f1d45a6203a47bccb47d4b3686394e8351daac14e1b06c",
+      "title": "Report: OpenAI is buying AI-powered developer platform Windsurf — what happens to its support for rival LLMs?",
+      "link": "articles/report-openai-is-buying-ai-powered-developer-platform-windsurf-—-what-happens-to.html",
+      "published_iso": "2025-05-06T14:37:13Z",
+      "summary_short": "OpenAI's acquisition of Windsurf may reveal insights into rival LLM usage. Learn what this means for AI developers.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_flat_illustration_line_art_minimalist_corporate_memphis_1507b341-aaa4-4ab0-a1d9-f0ab23ff7860-1.png?w=1024?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI acquisition",
+        "Windsurf AI platform",
+        "LLM competition",
+        "AI developer tools",
+        "Meta Llama models",
+        "Anthropic Claude",
+        "AI ecosystem impact",
+        "multi-model workflows",
+        "AI competitive intelligence"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "7e7b6333501d1fb9ef78a66498e2819c480b01835575bc0b23bcb24619dab11a",
+      "title": "Korl launches platform orchestrating AI agents from OpenAI, Gemini and Anthropic to hyper-customize customer messaging",
+      "link": "articles/korl-launches-platform-orchestrating-ai-agents-from-openai,-gemini-and-anthropic.html",
+      "published_iso": "2025-05-06T14:00:00Z",
+      "summary_short": "Korl's AI agent orchestration platform leverages OpenAI, Gemini, and Anthropic for hyper-personalized customer messaging.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/upscalemedia-transformed.webp?w=1024?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "AI agent orchestration",
+        "OpenAI",
+        "Gemini",
+        "Anthropic",
+        "customer messaging",
+        "AI interoperability",
+        "personalized marketing",
+        "AI automation",
+        "multimodal AI",
+        "business workflow optimization"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "bc8dc43c56bab71ebb0fd2f95333533e892b179eedc5eee5ef74f839ff0e3460",
+      "title": "Will Supercapacitors Come to AI's Rescue?",
+      "link": "articles/will-supercapacitors-come-to-ais-rescue.html",
+      "published_iso": "2025-05-06T13:55:37Z",
+      "summary_short": "Supercapacitors in AI data centers could smooth power spikes, easing grid strain. Learn how this tech tackles energy challenges.",
+      "image_url": "https://spectrum.ieee.org/media-library/image.jpg?id=60139304&width=1200&height=600&coordinates=0%2C310%2C0%2C439",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "Supercapacitors",
+        "AI Power Consumption",
+        "Data Center Energy",
+        "Renewable Energy Transition",
+        "Power Grid Stability",
+        "Energy Storage Solutions",
+        "AI Sustainability",
+        "Supercapacitor Technology",
+        "Eco-friendly Computing",
+        "AI Infrastructure"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "3291ca75699c06daec65a8c8163651c500feac9328287f8b8cf1d686483db74b",
+      "title": "Data centers say Trump’s crackdown on renewables bad for business, AI",
+      "link": "articles/data-centers-say-trump’s-crackdown-on-renewables-bad-for-business,-ai.html",
+      "published_iso": "2025-05-06T13:26:37Z",
+      "summary_short": "Trump's crackdown on renewables could hinder data centers and AI development, warns the tech industry. Learn how Trump energy policy impacts tech.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2024/05/GettyImages-520301232-1152x648.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Data centers",
+        "Renewable energy",
+        "Trump energy policy",
+        "AI competitiveness",
+        "Clean energy projects",
+        "Power shortages",
+        "Climate goals",
+        "Economic growth",
+        "AI innovation",
+        "Energy costs"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "3f8d0a0f7b068395e5c2c9d707e192bed4ee3e26309beb162b691d89305fc697",
       "title": "US DoJ wants Google to sell two of its ad products",
       "link": "articles/us-doj-wants-google-to-sell-two-of-its-ad-products.html",
