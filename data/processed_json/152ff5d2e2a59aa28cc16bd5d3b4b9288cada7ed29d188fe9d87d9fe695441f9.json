@@ -1,0 +1,43 @@
+{
+    "id": "152ff5d2e2a59aa28cc16bd5d3b4b9288cada7ed29d188fe9d87d9fe695441f9",
+    "title": "Lightricks just made AI video generation 30x faster — and you won’t need a $10,000 GPU",
+    "link": "https://venturebeat.com/ai/lightricks-just-made-ai-video-generation-30x-faster-and-you-wont-need-a-10000-gpu/",
+    "published_iso": "2025-05-06T17:56:44Z",
+    "summary": "<img alt=\"\" class=\"attachment-single-feed size-single-feed wp-post-image\" height=\"325\" src=\"https://venturebeat.com/wp-content/uploads/2025/05/Screenshot-2025-05-06-at-10.47.38 AM.jpg?w=578\" width=\"578\" /><hr />Lightricks unveils groundbreaking LTXV-13B AI video model that runs 30X faster than competitors on consumer hardware through innovative \"multiscale rendering\" technology.<a href=\"https://venturebeat.com/ai/lightricks-just-made-ai-video-generation-30x-faster-and-you-wont-need-a-10000-gpu/\" target=\"_blank\">Read More</a>",
+    "source_feed": "https://venturebeat.com/category/ai/feed/",
+    "scraped_at_iso": "2025-05-06T18:49:47Z",
+    "selected_image_url": "https://venturebeat.com/wp-content/uploads/2025/05/Screenshot-2025-05-06-at-10.47.38 AM.jpg?w=1024?w=1200&strip=all",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "AI Models",
+        "reasoning_summary": "Lightricks' LTXV-13B AI video model claims a 30x speed improvement on consumer hardware, which is a notable advancement in AI video generation technology.",
+        "primary_topic_keyword": "AI video generation"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-06T18:50:33Z",
+    "topic": "AI Models",
+    "is_breaking": false,
+    "primary_keyword": "AI video generation",
+    "seo_agent_results": {
+        "generated_title_tag": "Lightricks Boosts AI Video Generation 30x Faster",
+        "generated_meta_description": "Lightricks' new LTXV-13B AI video model runs 30x faster on consumer hardware, revolutionizing AI video generation.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Lightricks Boosts AI Video Generation 30x Faster\",  \n  \"description\": \"Lightricks' new LTXV-13B AI video model runs 30x faster on consumer hardware, revolutionizing AI video generation.\",  \n  \"keywords\": [\"AI video generation\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://venturebeat.com/ai/lightricks-just-made-ai-video-generation-30x-faster-and-you-wont-need-a-10000-gpu/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://venturebeat.com/wp-content/uploads/2025/05/Screenshot-2025-05-06-at-10.47.38 AM.jpg?w=1024?w=1200&strip=all\" },  \n  \"datePublished\": \"2025-05-06T17:56:44Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Lightricks just made AI video generation 30x faster — and you won’t need a $10,000 GPU  \n\nLightricks has unveiled its LTXV-13B AI video model, which leverages \"multiscale rendering\" technology to achieve a 30x speed boost compared to competitors—all while running on consumer-grade hardware instead of expensive GPUs. This breakthrough could democratize high-performance AI video generation by eliminating the need for costly hardware.  \n\n### Why It Matters  \n\nThis advancement marks a significant leap in accessibility for AI video generation, traditionally dominated by resource-heavy models requiring high-end GPUs. By optimizing performance for consumer hardware, Lightricks lowers the barrier to entry for creators, potentially accelerating adoption across industries like marketing, entertainment, and education. The efficiency gains could also spur innovation in real-time video applications, making AI-powered content creation more practical for everyday users."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "AI video generation",
+        "Lightricks",
+        "LTXV-13B",
+        "multiscale rendering",
+        "GPU-free AI",
+        "AI democratization",
+        "real-time video applications",
+        "consumer-grade hardware",
+        "AI content creation"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.49,
+    "slug": "lightricks-just-made-ai-video-generation-30x-faster-—-and-you-won’t-need-a-$10,0",
+    "audio_url": null
+}

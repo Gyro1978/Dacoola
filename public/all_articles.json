@@ -1,6 +1,75 @@
 {
   "articles": [
     {
+      "id": "d4fc278d20b1cd46783c97b35f5f4b86fb290e1e1e5a92bae67c8f8064813f8d",
+      "title": "Meet the new king of AI coding: Google’s Gemini 2.5 Pro I/O Edition dethrones Claude 3.7 Sonnet",
+      "link": "articles/meet-the-new-king-of-ai-coding-google’s-gemini-25-pro-io-edition-dethrones-claud.html",
+      "published_iso": "2025-05-06T18:39:50Z",
+      "summary_short": "Google's Gemini 2.5 Pro I/O Edition surpasses Claude 3.7 Sonnet, enabling full web apps from single prompts.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_flat_crisp_line_art_a_primary_colored_robot_wears_a_cro_95a19f57-38e3-4314-add6-0b9b0775c622.png?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Google Gemini 2.5 Pro",
+        "AI coding assistants",
+        "Claude 3.7 Sonnet",
+        "AI-powered coding",
+        "generative AI",
+        "software development",
+        "rapid prototyping",
+        "Google I/O",
+        "AI innovation",
+        "coding efficiency"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "a142aed073da5cedd0f262e4ef0857adc07621624b5a0c13fec24ea9f3affff1",
+      "title": "The latest AI news we announced in April",
+      "link": "articles/the-latest-ai-news-we-announced-in-april.html",
+      "published_iso": "2025-05-06T18:30:00Z",
+      "summary_short": "Discover the latest Google AI updates from April 2025, showcasing advancements and new features. Stay informed on AI progress.",
+      "image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/April_AI_Recap_social.width-1300.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Google AI updates",
+        "AI advancements 2025",
+        "machine learning trends",
+        "AI development",
+        "Google AI roadmap",
+        "AI automation",
+        "tech industry updates",
+        "AI tools for developers"
+      ],
+      "audio_url": null,
+      "trend_score": 14.0
+    },
+    {
+      "id": "152ff5d2e2a59aa28cc16bd5d3b4b9288cada7ed29d188fe9d87d9fe695441f9",
+      "title": "Lightricks just made AI video generation 30x faster — and you won’t need a $10,000 GPU",
+      "link": "articles/lightricks-just-made-ai-video-generation-30x-faster-—-and-you-won’t-need-a-$10,0.html",
+      "published_iso": "2025-05-06T17:56:44Z",
+      "summary_short": "Lightricks' new LTXV-13B AI video model runs 30x faster on consumer hardware, revolutionizing AI video generation.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/Screenshot-2025-05-06-at-10.47.38 AM.jpg?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI video generation",
+        "Lightricks",
+        "LTXV-13B",
+        "multiscale rendering",
+        "GPU-free AI",
+        "AI democratization",
+        "real-time video applications",
+        "consumer-grade hardware",
+        "AI content creation"
+      ],
+      "audio_url": null,
+      "trend_score": 14.49
+    },
+    {
       "id": "ccc89cd556bf7b623ad83e788cb596238c291db062a1521be29831685148192b",
       "title": "FutureHouse previews an AI tool for ‘data-driven’ biology discovery",
       "link": "articles/futurehouse-previews-an-ai-tool-for-‘data-driven’-biology-discovery.html",
