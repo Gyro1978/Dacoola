@@ -7,6 +7,12 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://dacoolaa.netlify.app/articles/hugging-face-releases-a-free-operator-like-agentic-ai-tool.html</loc>
+    <lastmod>2025-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://dacoolaa.netlify.app/articles/use-custom-metrics-to-evaluate-your-generative-ai-application-with-amazon-bedroc.html</loc>
     <lastmod>2025-05-06</lastmod>
     <changefreq>weekly</changefreq>

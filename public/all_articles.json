@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "1306a84232617261ff52a542f3b866d401555d273680f252056fa2a5b98534a9",
+      "title": "Hugging Face releases a free Operator-like agentic AI tool",
+      "link": "articles/hugging-face-releases-a-free-operator-like-agentic-ai-tool.html",
+      "published_iso": "2025-05-06T22:00:52Z",
+      "summary_short": "Hugging Face introduces Open Computer Agent, a free but slow AI agent release similar to OpenAI’s Operator.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/08/11f5fd43-3e13-4313-a003-9d36a81e3fde.png?resize=1200,602",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Hugging Face",
+        "Open Computer Agent",
+        "Agentic AI",
+        "OpenAI Operator",
+        "AI Democratization",
+        "Free AI Tools",
+        "Linux Virtual Machine",
+        "AI Performance Issues",
+        "Cloud-hosted AI"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
       "id": "a01e04eaae8ba1599d49f8dd7b32e1c1891729043a315b08599421083a5b9d65",
       "title": "Use custom metrics to evaluate your generative AI application with Amazon Bedrock",
       "link": "articles/use-custom-metrics-to-evaluate-your-generative-ai-application-with-amazon-bedroc.html",
