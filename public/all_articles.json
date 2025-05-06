@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "43bac910ec39389ca0bb3eb23506d3a499d01db207aed3d663692f5ef1682bec",
+      "title": "NSO Group must pay more than $167 million in damages to WhatsApp for spyware campaign",
+      "link": "articles/nso-group-must-pay-more-than-$167-million-in-damages-to-whatsapp-for-spyware-cam.html",
+      "published_iso": "2025-05-06T21:20:42Z",
+      "summary_short": "NSO Group ordered to pay $167M in WhatsApp spyware damages after a five-year legal battle with Meta.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/01/whatsapp-logo.jpg?resize=1200,800",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "NSO Group",
+        "WhatsApp lawsuit",
+        "Pegasus spyware",
+        "cyberattack damages",
+        "digital privacy",
+        "surveillance scandal",
+        "legal precedent",
+        "Meta legal victory",
+        "spyware accountability"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
       "id": "8a546fa9ea8368aadfb5a7ace354b54330ed1dd63d580a473665c795fe3d80ed",
       "title": "IBM CEO urges the Trump Administration to increase — not cut — federal AI R&D funding",
       "link": "articles/ibm-ceo-urges-the-trump-administration-to-increase-—-not-cut-—-federal-ai-r&d-fu.html",
