@@ -1,6 +1,100 @@
 {
   "articles": [
     {
+      "id": "a2310105a357e52f5d902dc092dfe0ba4a1b66f0dda6fc038d4f18eeb029afc0",
+      "title": "Musk clashes with neighbors in exclusive Austin suburb",
+      "link": "articles/musk-clashes-with-neighbors-in-exclusive-austin-suburb.html",
+      "published_iso": "2025-05-06T03:02:44Z",
+      "summary_short": "Elon Musk faces backlash from West Lake Hills residents over an unauthorized 16-foot fence in a $6M home. Read about the Musk neighbor dispute.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/08/GettyImages-2158237938_c19018.jpg?resize=1200,800",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "Elon Musk",
+        "West Lake Hills",
+        "neighbor dispute",
+        "zoning laws",
+        "Austin suburbs",
+        "celebrity homeowners",
+        "local ordinances",
+        "community relations"
+      ],
+      "audio_url": null,
+      "trend_score": 14.0
+    },
+    {
+      "id": "748a8eb3ba48ece90f98a1d4fec6cb43c8071ce2a5c997de4f4c3b967e085d65",
+      "title": "Meta, Cisco put open-source LLMs at the core of next-gen SOC workflows",
+      "link": "articles/meta,-cisco-put-open-source-llms-at-the-core-of-next-gen-soc-workflows.html",
+      "published_iso": "2025-05-06T00:08:44Z",
+      "summary_short": "Cisco and Meta integrate open-source AI cybersecurity into SOC workflows, enhancing threat defense with scalable LLMs.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/hero-image-open-source.jpg?w=1024?w=1200&strip=all",
+      "topic": "Open Source",
+      "is_breaking": false,
+      "tags": [
+        "Open-source LLMs",
+        "Enterprise cybersecurity",
+        "Security Operations Center",
+        "AI-powered threat detection",
+        "Cisco Foundation-sec-8B",
+        "Meta AI Defenders",
+        "AI-driven cybersecurity",
+        "Democratizing AI security",
+        "Scalable SOC workflows",
+        "Cyberattack response"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "392cd1aa25e2ebef0a5c9921307b7b0446f3beff296f677cbcffe17140327a0e",
+      "title": "Man pleads guilty to using malicious AI software to hack Disney employee",
+      "link": "articles/man-pleads-guilty-to-using-malicious-ai-software-to-hack-disney-employee.html",
+      "published_iso": "2025-05-06T00:05:55Z",
+      "summary_short": "A California man admitted to hacking a Disney employee using malicious AI software disguised as an open-source image generator.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2021/03/getty-judge-gavel-1152x648.jpg",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "AI cybercrime",
+        "malicious AI software",
+        "Disney employee hack",
+        "ComfyUI_LLMVISION",
+        "Ryan Mitchell Kramer",
+        "AI security risks",
+        "GitHub malware",
+        "Discord data theft",
+        "AI tool exploitation",
+        "cybersecurity awareness"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "e94132b267302b892f2584b2b7dde512caa26fdeae93d0ef66faaf154795032a",
+      "title": "Waymo ramps up robotaxi production at new Arizona factory",
+      "link": "articles/waymo-ramps-up-robotaxi-production-at-new-arizona-factory.html",
+      "published_iso": "2025-05-05T23:31:48Z",
+      "summary_short": "Waymo reveals new details about its robotaxi fleet as production ramps up in Arizona. Learn about the latest in autonomous vehicle growth.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/Waymo_MFG_Exit.jpeg?resize=1200,675",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "Waymo",
+        "robotaxi",
+        "autonomous vehicles",
+        "Jaguar I-Pace EV",
+        "Alphabet",
+        "self-driving technology",
+        "ride-hailing services",
+        "Arizona factory",
+        "autonomous fleet",
+        "commercial operations"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "3d8b8918b0f320061564f488804e1cf3bf68bd934cbe2ba29dccb1720d44a02b",
       "title": "OpenAI says non-profit will remain in control after backlash",
       "link": "articles/openai-says-non-profit-will-remain-in-control-after-backlash.html",

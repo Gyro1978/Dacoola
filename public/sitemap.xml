@@ -2,9 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dacoolaa.netlify.app/</loc>
-    <lastmod>2025-05-05</lastmod>
+    <lastmod>2025-05-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/musk-clashes-with-neighbors-in-exclusive-austin-suburb.html</loc>
+    <lastmod>2025-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/meta,-cisco-put-open-source-llms-at-the-core-of-next-gen-soc-workflows.html</loc>
+    <lastmod>2025-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/man-pleads-guilty-to-using-malicious-ai-software-to-hack-disney-employee.html</loc>
+    <lastmod>2025-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/waymo-ramps-up-robotaxi-production-at-new-arizona-factory.html</loc>
+    <lastmod>2025-05-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/openai-says-non-profit-will-remain-in-control-after-backlash.html</loc>
