@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "f0d48b733288bae92f594b3aad288c2bd3ace65f32fff3d7e64192d439974543",
+      "title": "Microsoft's new AI skills are coming to Copilot+ PCs - including some for all Windows 11 users",
+      "link": "articles/microsofts-new-ai-skills-are-coming-to-copilot+-pcs-including-some-for-all-windo.html",
+      "published_iso": "2025-05-06T19:39:37Z",
+      "summary_short": "Microsoft announces new AI skills for Copilot+ PCs and Windows 11 users, enhancing productivity and accessibility.",
+      "image_url": "https://www.zdnet.com/a/img/resize/4ed9cf632e2e0b09c390b07fcd278ffaf292a0e4/2024/05/22/a9473de2-a79c-4772-acea-1cee2cf9009d/img-3311.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Microsoft Copilot+ PCs",
+        "Windows 11 AI features",
+        "AI productivity tools",
+        "Microsoft AI integration",
+        "Copilot+ PC capabilities",
+        "AI in operating systems",
+        "Windows 11 updates",
+        "AI-assisted computing",
+        "Microsoft AI announcements",
+        "AI workflow enhancement"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "d2ae280722aebebb8075652d4871d3c239d64ef2e36c05d375e263e12c33355f",
       "title": "Amazon-owned Zoox issues recall following robotaxi crash",
       "link": "articles/amazon-owned-zoox-issues-recall-following-robotaxi-crash.html",
