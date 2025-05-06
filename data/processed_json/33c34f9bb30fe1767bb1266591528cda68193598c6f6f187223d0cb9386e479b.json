@@ -1,0 +1,44 @@
+{
+    "id": "33c34f9bb30fe1767bb1266591528cda68193598c6f6f187223d0cb9386e479b",
+    "title": "Google debuts an updated Gemini 2.5 Pro AI model ahead of I/O",
+    "link": "https://techcrunch.com/2025/05/06/google-debuts-an-updated-gemini-2-5-pro-ai-model-ahead-of-i-o/",
+    "published_iso": "2025-05-06T15:34:47Z",
+    "summary": "Google on Tuesday announced the launch of Gemini 2.5 Pro Preview (I/O edition), an updated version of its flagship Gemini 2.5 Pro AI model that the company claims tops a number of widely-used benchmarks. Gemini 2.5 Pro Preview (I/O edition) is available via the Gemini API and Google’s Vertex AI and AI Studio platforms, priced […]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-06T15:47:46Z",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2199793091.jpg?w=1024",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "AI Models",
+        "reasoning_summary": "Google, a key company, announced an updated version of its flagship Gemini 2.5 Pro AI model, which meets the CRITICAL OVERRIDE RULE. The announcement is factual and relevant to AI, but does not meet the 'Breaking' criteria as it is a standard product update.",
+        "primary_topic_keyword": "Gemini 2.5 Pro"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-06T15:50:00Z",
+    "topic": "AI Models",
+    "is_breaking": false,
+    "primary_keyword": "Gemini 2.5 Pro",
+    "seo_agent_results": {
+        "generated_title_tag": "Google Unveils Gemini 2.5 Pro AI Model Ahead of I/O",
+        "generated_meta_description": "Google launches Gemini 2.5 Pro Preview (I/O edition), an enhanced AI model claiming top benchmark performance.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Google Unveils Gemini 2.5 Pro AI Model Ahead of I/O\",  \n  \"description\": \"Google launches Gemini 2.5 Pro Preview (I/O edition), an enhanced AI model claiming top benchmark performance.\",  \n  \"keywords\": [\"Gemini 2.5 Pro\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/06/google-debuts-an-updated-gemini-2-5-pro-ai-model-ahead-of-i-o/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2199793091.jpg?w=1024\" },  \n  \"datePublished\": \"2025-05-06T15:34:47Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Google debuts an updated Gemini 2.5 Pro AI model ahead of I/O  \n\nGoogle has introduced the **Gemini 2.5 Pro Preview (I/O edition)**, an upgraded version of its flagship AI model, which the company says outperforms several widely-used benchmarks. The new model is now accessible via the Gemini API, Vertex AI, and AI Studio platforms, though pricing details remain unspecified.  \n\n### Why It Matters  \n\nGoogle’s latest update to **Gemini 2.5 Pro** signals its continued push to lead in the competitive AI landscape, particularly ahead of its I/O developer conference. By emphasizing benchmark dominance, Google aims to attract developers and enterprises looking for cutting-edge AI capabilities. The availability across multiple platforms suggests a strategic move to expand adoption, reinforcing its position against rivals like OpenAI and Anthropic."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Gemini 2.5 Pro",
+        "Google AI",
+        "AI Model Update",
+        "Vertex AI",
+        "AI Studio",
+        "Google I/O",
+        "AI Benchmarking",
+        "AI Developer Tools",
+        "OpenAI Competition",
+        "Anthropic"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 15.0,
+    "slug": "google-debuts-an-updated-gemini-25-pro-ai-model-ahead-of-io",
+    "audio_url": null
+}

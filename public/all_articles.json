@@ -1,6 +1,78 @@
 {
   "articles": [
     {
+      "id": "33c34f9bb30fe1767bb1266591528cda68193598c6f6f187223d0cb9386e479b",
+      "title": "Google debuts an updated Gemini 2.5 Pro AI model ahead of I/O",
+      "link": "articles/google-debuts-an-updated-gemini-25-pro-ai-model-ahead-of-io.html",
+      "published_iso": "2025-05-06T15:34:47Z",
+      "summary_short": "Google launches Gemini 2.5 Pro Preview (I/O edition), an enhanced AI model claiming top benchmark performance.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2199793091.jpg?w=1024",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Gemini 2.5 Pro",
+        "Google AI",
+        "AI Model Update",
+        "Vertex AI",
+        "AI Studio",
+        "Google I/O",
+        "AI Benchmarking",
+        "AI Developer Tools",
+        "OpenAI Competition",
+        "Anthropic"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "4d9491d3cc89ae596bd8bcd848b49d83e22162aacac1b39f01f548017da99c0b",
+      "title": "To Speed up AI, Just Outsource Memory",
+      "link": "articles/to-speed-up-ai,-just-outsource-memory.html",
+      "published_iso": "2025-05-06T15:00:05Z",
+      "summary_short": "Kove's software-defined memory boosts AI speed and cuts power use by 54%, revolutionizing memory efficiency innovation.",
+      "image_url": "https://spectrum.ieee.org/media-library/image.jpg?id=60039579&width=1200&height=600&coordinates=0%2C1239%2C0%2C813",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "memory efficiency innovation",
+        "software-defined memory",
+        "AI performance optimization",
+        "data center energy reduction",
+        "AI training acceleration",
+        "Kove SDM technology",
+        "memory outsourcing",
+        "AI scalability solutions",
+        "server power consumption",
+        "dynamic memory allocation"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "bf37fd76f364d08ef22db7876ffa05328279108a6e654eb52ec79b47c0b78d29",
+      "title": "Google's Gemini 2.5 Pro update makes the AI model even better at coding",
+      "link": "articles/googles-gemini-25-pro-update-makes-the-ai-model-even-better-at-coding.html",
+      "published_iso": "2025-05-06T15:00:00Z",
+      "summary_short": "Google's Gemini 2.5 Pro update improves coding capabilities, released early due to positive user feedback. Learn more about the upgrade.",
+      "image_url": "https://www.zdnet.com/a/img/resize/9125648c4f516f6245682c8101f4b145685f513c/2025/05/06/18e46afa-5529-4376-a941-1a0fff343243/screenshot-2025-05-05-at-11-05-54pm.png?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Gemini 2.5 Pro",
+        "Google AI",
+        "AI Coding",
+        "AI Model Update",
+        "Google I/O",
+        "AI Development Tools",
+        "OpenAI GPT",
+        "AI-Assisted Programming",
+        "Developer Tools",
+        "Tech Industry Competition"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "749eabd8653c6aee55f1d45a6203a47bccb47d4b3686394e8351daac14e1b06c",
       "title": "Report: OpenAI is buying AI-powered developer platform Windsurf — what happens to its support for rival LLMs?",
       "link": "articles/report-openai-is-buying-ai-powered-developer-platform-windsurf-—-what-happens-to.html",
