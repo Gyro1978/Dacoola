@@ -1,6 +1,76 @@
 {
   "articles": [
     {
+      "id": "b048d3c8023357cc3f04f37ee736349cb559277582c0bea533856803bc2e7bfc",
+      "title": "Amazon Kindle’s iOS app adds new ‘Get Book’ button following Apple payments ruling",
+      "link": "articles/amazon-kindle’s-ios-app-adds-new-‘get-book’-button-following-apple-payments-ruli.html",
+      "published_iso": "2025-05-06T17:34:31Z",
+      "summary_short": "Amazon Kindle's iOS app now features a 'Get book' button after Apple's 27% commission ruling. Learn about this Amazon Kindle update.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/GettyImages-865878412.jpg?resize=1200,797",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Amazon Kindle",
+        "iOS app update",
+        "Get Book button",
+        "Apple payments ruling",
+        "in-app purchases",
+        "antitrust regulations",
+        "digital marketplaces",
+        "customer convenience",
+        "app ecosystems"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "3d74088d301ee1bdf38d910939de6c1581ef417f6dbc9ba3558102f1800d3293",
+      "title": "Your Service Teams Just Got a New Coworker — and It’s a 15B-Parameter Super Genius Built by ServiceNow and NVIDIA",
+      "link": "articles/your-service-teams-just-got-a-new-coworker-—-and-it’s-a-15b-parameter-super-geni.html",
+      "published_iso": "2025-05-06T17:00:36Z",
+      "summary_short": "ServiceNow and NVIDIA unveil Apriel Nemotron 15B, a cost-efficient enterprise AI model for real-time workflows in IT, HR, and customer service.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/05/corp-blog-servicenow-nvidia-1280x680-1.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Apriel Nemotron 15B",
+        "Enterprise AI Model",
+        "ServiceNow NVIDIA Collaboration",
+        "AI for Customer Service",
+        "NVIDIA NeMo",
+        "AI Workflow Automation",
+        "IT and HR AI Solutions",
+        "AI Productivity Boost",
+        "Real-time AI Reasoning",
+        "Enterprise AI Deployment"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "17c76a7a2959b47ecbf552bf2dabd282c5da9912183aa33fe3cc1b87aaeadc5d",
+      "title": "ServiceNow and Nvidia's new reasoning AI model raises the bar for enterprise AI agents",
+      "link": "articles/servicenow-and-nvidias-new-reasoning-ai-model-raises-the-bar-for-enterprise-ai-a.html",
+      "published_iso": "2025-05-06T17:00:18Z",
+      "summary_short": "Nvidia and ServiceNow unveil open-source LLM Nemotron 15B, enhancing enterprise AI reasoning capabilities.",
+      "image_url": "https://www.zdnet.com/a/img/resize/59a625b1f2d06ab91770104cc1a613a40ddca920/2025/05/06/18e9d58f-5183-428b-ad28-b74039937cbf/nvidia-service-now.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "ServiceNow",
+        "Nvidia",
+        "Apriel Nemotron 15B",
+        "Open-source LLM",
+        "Enterprise AI",
+        "AI Reasoning",
+        "Business Automation",
+        "AI Adoption",
+        "AI Integration"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
       "id": "0838663ef7986940c47fc57c49fb04099318bd48c24e317e187b7e76055aa855",
       "title": "Uber turns to Chinese companies to snap up robotaxi market share in Europe, Middle East",
       "link": "articles/uber-turns-to-chinese-companies-to-snap-up-robotaxi-market-share-in-europe,-midd.html",
