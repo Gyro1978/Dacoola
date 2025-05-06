@@ -1,6 +1,53 @@
 {
   "articles": [
     {
+      "id": "a01e04eaae8ba1599d49f8dd7b32e1c1891729043a315b08599421083a5b9d65",
+      "title": "Use custom metrics to evaluate your generative AI application with Amazon Bedrock",
+      "link": "articles/use-custom-metrics-to-evaluate-your-generative-ai-application-with-amazon-bedroc.html",
+      "published_iso": "2025-05-06T21:39:21Z",
+      "summary_short": "Learn how Amazon Bedrock's custom metrics enhance AI model evaluation for generative AI applications, ensuring tailored performance assessment.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/05/06/featured-images-ML-18787-1120x630.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Amazon Bedrock",
+        "Generative AI",
+        "Custom Metrics",
+        "Foundation Models",
+        "Retrieval Augmented Generation",
+        "LLM-as-a-judge",
+        "Responsible AI",
+        "AI Evaluation",
+        "Business AI Solutions",
+        "AI Performance Metrics"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "50ed6718b4ae08fb59bf68822a9cdff1e9894ea58aeb5990f43822bdcc498f1e",
+      "title": "AWS report: Generative AI overtakes security in global tech budgets for 2025",
+      "link": "articles/aws-report-generative-ai-overtakes-security-in-global-tech-budgets-for-2025.html",
+      "published_iso": "2025-05-06T21:33:16Z",
+      "summary_short": "A new AWS report shows 45% of IT leaders prioritize generative AI budgets over security in 2025, signaling a major shift in tech investment.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/nuneybits_Vector_art_of_a_server_farm_in_the_cloud_eabe8f44-4654-4483-8a52-3323b5e73242.webp?w=1024?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Generative AI",
+        "Tech Budgets 2025",
+        "Cybersecurity",
+        "AI Talent Shortage",
+        "Business Automation",
+        "AI Implementation",
+        "IT Leadership Trends",
+        "Competitive Advantage AI",
+        "AI-Driven Risks"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
       "id": "43bac910ec39389ca0bb3eb23506d3a499d01db207aed3d663692f5ef1682bec",
       "title": "NSO Group must pay more than $167 million in damages to WhatsApp for spyware campaign",
       "link": "articles/nso-group-must-pay-more-than-$167-million-in-damages-to-whatsapp-for-spyware-cam.html",
