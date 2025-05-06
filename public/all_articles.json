@@ -1,6 +1,75 @@
 {
   "articles": [
     {
+      "id": "8a546fa9ea8368aadfb5a7ace354b54330ed1dd63d580a473665c795fe3d80ed",
+      "title": "IBM CEO urges the Trump Administration to increase — not cut — federal AI R&D funding",
+      "link": "articles/ibm-ceo-urges-the-trump-administration-to-increase-—-not-cut-—-federal-ai-r&d-fu.html",
+      "published_iso": "2025-05-06T20:14:47Z",
+      "summary_short": "IBM CEO Arvind Krishna urges the Trump Administration to boost federal AI R&D funding, emphasizing its critical importance for tech innovation.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/03/Screenshot-2025-03-11-at-4.02.08PM.png?resize=1200,792",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "IBM CEO",
+        "Arvind Krishna",
+        "AI R&D funding",
+        "federal AI investment",
+        "US AI competitiveness",
+        "tech industry advocacy",
+        "government AI policy",
+        "national AI strategy",
+        "AI innovation funding"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "924edff77572bc1782f5e2138960549d9486a24bfd8dd06dbea4c1d78c487121",
+      "title": "Rivian cuts delivery guidance because of Trump’s tariffs and trade wars",
+      "link": "articles/rivian-cuts-delivery-guidance-because-of-trump’s-tariffs-and-trade-wars.html",
+      "published_iso": "2025-05-06T20:06:45Z",
+      "summary_short": "Rivian reduces EV delivery forecasts, citing Trump's tariffs and regulatory changes. Learn how trade wars impact the auto industry.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/04/rivian-snow-ev-chargers.jpg?resize=1200,790",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "Rivian",
+        "EV delivery forecast",
+        "Trump tariffs",
+        "electric vehicles",
+        "trade policies",
+        "automotive industry",
+        "sustainable transportation",
+        "EV market disruption"
+      ],
+      "audio_url": null,
+      "trend_score": 14.0
+    },
+    {
+      "id": "072cf7a47635cdef5386eb81066833171c03216d4449922a1447bff7731e1f64",
+      "title": "Reddit will tighten verification to keep out human-like AI bots",
+      "link": "articles/reddit-will-tighten-verification-to-keep-out-human-like-ai-bots.html",
+      "published_iso": "2025-05-06T19:47:41Z",
+      "summary_short": "Reddit plans stricter verification after AI bots impersonated humans in a large-scale experiment, raising concerns about AI bot impersonation.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/06/GettyImages-1246072387.jpg?resize=1200,800",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Reddit verification",
+        "AI bots",
+        "online impersonation",
+        "AI ethics",
+        "social media trust",
+        "Change My View subreddit",
+        "AI-generated content",
+        "platform security",
+        "human-like AI",
+        "online debate integrity"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "f0d48b733288bae92f594b3aad288c2bd3ace65f32fff3d7e64192d439974543",
       "title": "Microsoft's new AI skills are coming to Copilot+ PCs - including some for all Windows 11 users",
       "link": "articles/microsofts-new-ai-skills-are-coming-to-copilot+-pcs-including-some-for-all-windo.html",
