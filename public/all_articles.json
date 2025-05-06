@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "d2ae280722aebebb8075652d4871d3c239d64ef2e36c05d375e263e12c33355f",
+      "title": "Amazon-owned Zoox issues recall following robotaxi crash",
+      "link": "articles/amazon-owned-zoox-issues-recall-following-robotaxi-crash.html",
+      "published_iso": "2025-05-06T19:06:45Z",
+      "summary_short": "Amazon's Zoox pauses driverless testing and recalls software following a robotaxi crash in Las Vegas. Learn more about the incident.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/01/zoox-ces-2025-ride-22_3473ff.jpg?resize=1200,800",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "Zoox",
+        "Amazon",
+        "autonomous vehicles",
+        "robotaxi crash",
+        "self-driving technology",
+        "vehicle recall",
+        "autonomous vehicle safety",
+        "Las Vegas crash",
+        "federal safety regulators",
+        "driverless testing"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "d4fc278d20b1cd46783c97b35f5f4b86fb290e1e1e5a92bae67c8f8064813f8d",
       "title": "Meet the new king of AI coding: Google’s Gemini 2.5 Pro I/O Edition dethrones Claude 3.7 Sonnet",
       "link": "articles/meet-the-new-king-of-ai-coding-google’s-gemini-25-pro-io-edition-dethrones-claud.html",
