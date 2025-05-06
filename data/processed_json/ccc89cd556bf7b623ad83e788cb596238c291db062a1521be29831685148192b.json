@@ -1,0 +1,44 @@
+{
+    "id": "ccc89cd556bf7b623ad83e788cb596238c291db062a1521be29831685148192b",
+    "title": "FutureHouse previews an AI tool for ‘data-driven’ biology discovery",
+    "link": "https://techcrunch.com/2025/05/06/futurehouse-previews-an-ai-tool-for-data-driven-biology-discovery/",
+    "published_iso": "2025-05-06T17:41:45Z",
+    "summary": "FutureHouse, an Eric Schmidt-backed nonprofit that aims to build an “AI scientist” within the next decade, has released a new tool that it claims can help support “data-driven discovery” in biology. The new tool comes just a week after FutureHouse launched its API and platform. The tool, called Finch, takes in biology data (primarily in the […]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-06T17:48:09Z",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2025/05/66bb703c19a6473deb260e81_Hero-Image-Research-Subpage.jpg?resize=1200,806",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "AI Models",
+        "reasoning_summary": "The article discusses a new AI tool by FutureHouse, backed by Eric Schmidt, aimed at data-driven biology discovery, which qualifies under the CRITICAL OVERRIDE RULE due to Schmidt's involvement.",
+        "primary_topic_keyword": "AI for biology discovery"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-06T17:48:22Z",
+    "topic": "AI Models",
+    "is_breaking": false,
+    "primary_keyword": "AI for biology discovery",
+    "seo_agent_results": {
+        "generated_title_tag": "FutureHouse Unveils AI for Biology Discovery Tool",
+        "generated_meta_description": "FutureHouse debuts Finch, an AI tool for data-driven biology discovery, backed by Eric Schmidt. Explore its potential impact.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"FutureHouse Unveils AI for Biology Discovery Tool\",  \n  \"description\": \"FutureHouse debuts Finch, an AI tool for data-driven biology discovery, backed by Eric Schmidt. Explore its potential impact.\",  \n  \"keywords\": [\"AI for biology discovery\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/06/futurehouse-previews-an-ai-tool-for-data-driven-biology-discovery/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2025/05/66bb703c19a6473deb260e81_Hero-Image-Research-Subpage.jpg?resize=1200,806\" },  \n  \"datePublished\": \"2025-05-06T17:41:45Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## FutureHouse Previews an AI Tool for ‘Data-Driven’ Biology Discovery  \n\nFutureHouse, a nonprofit backed by Eric Schmidt, has introduced Finch, a new AI tool designed to support \"data-driven discovery\" in biology. The release follows the recent launch of FutureHouse’s API and platform, marking a step toward its goal of building an \"AI scientist\" within the next decade. Finch processes biological data to assist researchers, though specific capabilities remain under wraps.  \n\n### Why It Matters  \n\nThe development of AI tools like Finch highlights the growing intersection of artificial intelligence and life sciences. By automating data analysis, such tools could accelerate breakthroughs in drug discovery, genomics, and disease research. FutureHouse’s ambitious vision—backed by influential figures—positions it as a key player in AI-driven scientific innovation. However, the tool’s real-world impact will depend on its accessibility and accuracy in handling complex biological datasets."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "FutureHouse",
+        "Finch AI tool",
+        "data-driven biology",
+        "AI in life sciences",
+        "Eric Schmidt",
+        "AI scientist",
+        "drug discovery",
+        "genomics research",
+        "biological data analysis",
+        "AI-driven scientific innovation"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 15.0,
+    "slug": "futurehouse-previews-an-ai-tool-for-‘data-driven’-biology-discovery",
+    "audio_url": null
+}

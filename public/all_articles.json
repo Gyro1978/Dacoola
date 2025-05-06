@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "ccc89cd556bf7b623ad83e788cb596238c291db062a1521be29831685148192b",
+      "title": "FutureHouse previews an AI tool for ‘data-driven’ biology discovery",
+      "link": "articles/futurehouse-previews-an-ai-tool-for-‘data-driven’-biology-discovery.html",
+      "published_iso": "2025-05-06T17:41:45Z",
+      "summary_short": "FutureHouse debuts Finch, an AI tool for data-driven biology discovery, backed by Eric Schmidt. Explore its potential impact.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/66bb703c19a6473deb260e81_Hero-Image-Research-Subpage.jpg?resize=1200,806",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "FutureHouse",
+        "Finch AI tool",
+        "data-driven biology",
+        "AI in life sciences",
+        "Eric Schmidt",
+        "AI scientist",
+        "drug discovery",
+        "genomics research",
+        "biological data analysis",
+        "AI-driven scientific innovation"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "b048d3c8023357cc3f04f37ee736349cb559277582c0bea533856803bc2e7bfc",
       "title": "Amazon Kindle’s iOS app adds new ‘Get Book’ button following Apple payments ruling",
       "link": "articles/amazon-kindle’s-ios-app-adds-new-‘get-book’-button-following-apple-payments-ruli.html",
