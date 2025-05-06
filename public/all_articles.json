@@ -1,6 +1,76 @@
 {
   "articles": [
     {
+      "id": "0838663ef7986940c47fc57c49fb04099318bd48c24e317e187b7e76055aa855",
+      "title": "Uber turns to Chinese companies to snap up robotaxi market share in Europe, Middle East",
+      "link": "articles/uber-turns-to-chinese-companies-to-snap-up-robotaxi-market-share-in-europe,-midd.html",
+      "published_iso": "2025-05-06T16:47:34Z",
+      "summary_short": "Uber partners with Pony AI to expand robotaxi services in Europe and the Middle East, signaling aggressive global ambitions.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/10/pony-ai-ipo.jpg?resize=1200,799",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "Uber robotaxi",
+        "Pony AI",
+        "autonomous vehicles",
+        "robotaxi market",
+        "Uber partnerships",
+        "autonomous driving technology",
+        "Europe Middle East expansion",
+        "urban mobility",
+        "AV competition"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "61c6b006ccbbc996d468ab11dcaadea71e09b835a48a4890f89b62fe96b356e2",
+      "title": "What OpenAI’s restructuring plan means for its corporate future",
+      "link": "articles/what-openai’s-restructuring-plan-means-for-its-corporate-future.html",
+      "published_iso": "2025-05-06T16:30:08Z",
+      "summary_short": "OpenAI is restructuring its corporate governance, shifting its for-profit arm under new oversight. Learn what this means for its future.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/10/GettyImages-2174797696.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI restructuring",
+        "Corporate governance",
+        "AI regulation",
+        "Nonprofit oversight",
+        "For-profit AI",
+        "Regulatory scrutiny",
+        "AI ethics",
+        "Tech industry trends",
+        "OpenAI future",
+        "AI governance model"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "66c36f0fa707437c4aaa17a982c420e66eb5c12edcb98f45adae483ae7dbabfb",
+      "title": "Google’s new ‘Simplify’ feature for iOS uses AI to make dense text easier to understand",
+      "link": "articles/google’s-new ‘simplify’-feature-for-ios-uses-ai-to-make-dense-text-easier-to-und.html",
+      "published_iso": "2025-05-06T16:00:00Z",
+      "summary_short": "Google's new Simplify feature for iOS uses AI to break down complex text, powered by Gemini. Learn how it works.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/10/GettyImages-1337403704.jpg?resize=1200,800",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Google Simplify feature",
+        "AI text simplification",
+        "iOS app features",
+        "Gemini AI",
+        "accessibility technology",
+        "AI-powered reading tools",
+        "Google Research",
+        "digital content consumption",
+        "technical document simplification"
+      ],
+      "audio_url": null,
+      "trend_score": 14.49
+    },
+    {
       "id": "33c34f9bb30fe1767bb1266591528cda68193598c6f6f187223d0cb9386e479b",
       "title": "Google debuts an updated Gemini 2.5 Pro AI model ahead of I/O",
       "link": "articles/google-debuts-an-updated-gemini-25-pro-ai-model-ahead-of-io.html",
