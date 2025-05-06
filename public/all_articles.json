@@ -1,6 +1,54 @@
 {
   "articles": [
     {
+      "id": "bd8740b1892f4ac4c1a5fd17538acf71a7413168366684606d47b55b7122ed74",
+      "title": "Microsoft on how custom AI offers your business better answers, lower costs, faster innovation",
+      "link": "articles/microsoft-on-how-custom-ai-offers-your-business-better-answers,-lower-costs,-fas.html",
+      "published_iso": "2025-05-06T09:00:17Z",
+      "summary_short": "Discover how Microsoft custom AI can enhance enterprise solutions with tailored models, reducing costs and accelerating innovation.",
+      "image_url": "https://www.zdnet.com/a/img/resize/bc77d308b9b66a7826b72d746300eef83fb8cb5f/2025/05/05/4a0aace0-639b-4b05-995e-f0d38c040577/blueeleavtor-gettyimages-1254933178.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Microsoft custom AI",
+        "AI for business",
+        "custom AI models",
+        "AI cost savings",
+        "AI-driven innovation",
+        "enterprise AI solutions",
+        "AI optimization",
+        "tailored automation",
+        "data analysis tools",
+        "AI decision-making"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "d113f8df058da660fa4d600a9773fdaf45cc7e34de9325a506ed8aca86bb8a81",
+      "title": "Why the humanoid workforce is running late",
+      "link": "articles/why-the-humanoid-workforce-is-running-late.html",
+      "published_iso": "2025-05-06T09:00:00Z",
+      "summary_short": "Experts question the hype around humanoid robotics progress, citing technical and safety challenges slowing real-world adoption.",
+      "image_url": "https://wp.technologyreview.com/wp-content/uploads/2025/05/humanoid.jpeg?resize=1200,600",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "humanoid robots",
+        "robotics challenges",
+        "AI in robotics",
+        "MIT Daniela Rus",
+        "Agility Robotics",
+        "Figure AI",
+        "robot safety",
+        "investor expectations",
+        "mechanical engineering",
+        "technology adoption"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "7c07223421b6ef82f6250d298a09503d930456f3ce8a6e775310cef65d7b27bb",
       "title": "IBM introduces a mainframe for AI: The LinuxONE Emperor 5",
       "link": "articles/ibm-introduces-a-mainframe-for-ai-the-linuxone-emperor-5.html",
