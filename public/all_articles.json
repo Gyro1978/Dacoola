@@ -1,6 +1,78 @@
 {
   "articles": [
     {
+      "id": "6617adb64bc23aeb39e33ce3bbcfc23da9f71309d73d5015c83e9c9d8bb762c5",
+      "title": "Apple Explores Adding AI Search Engines to Safari",
+      "link": "articles/apple-explores-adding-ai-search-engines-to-safari.html",
+      "published_iso": "2025-05-07T16:53:37Z",
+      "summary_short": "Apple considers integrating AI search engines like OpenAI and Perplexity into Safari, signaling a shift from traditional search. Learn more.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/11/GettyImages-1237753209.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "AI search engines",
+        "Apple Safari AI integration",
+        "OpenAI search technology",
+        "Perplexity AI",
+        "Anthropic AI",
+        "AI-powered search engines",
+        "Google search alternatives",
+        "Eddy Cue testimony",
+        "AI in business technology",
+        "Future of search engines"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "bd2f9334e12cc4bfea9e4b0b72cb7df7e435d0328276abfe9be2388d1306fbc6",
+      "title": "AI Evolution Impact: NVIDIA’s Rama Akkiraju on Bridging Business and Technology",
+      "link": "articles/ai-evolution-impact-nvidia’s-rama-akkiraju-on-bridging-business-and-technology.html",
+      "published_iso": "2025-05-07T16:00:10Z",
+      "summary_short": "Explore the AI evolution impact with NVIDIA’s Rama Akkiraju, uncovering how AI platform architects bridge business vision and technical execution.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/05/rama-ai-podcast.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI evolution impact",
+        "NVIDIA AI Podcast",
+        "Rama Akkiraju",
+        "Agentic AI",
+        "AI platform architects",
+        "Enterprise AI infrastructure",
+        "Generative AI",
+        "AI in software development",
+        "Domain-specific AI models",
+        "Autonomous AI systems"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "5305b9037421cc20b9661c8ed5bff859415c04b7d2625a675bb7ee4ca21db329",
+      "title": "Microsoft Embraces Google’s AI Agent Communication Protocol for Cross-Platform Collaboration",
+      "link": "articles/microsoft-embraces-google’s-ai-agent-communication-protocol-for-cross-platform-c.html",
+      "published_iso": "2025-05-07T15:56:59Z",
+      "summary_short": "Microsoft integrates Google’s AI agent communication protocol (A2A) into Azure AI and Copilot Studio, enabling seamless cross-platform collaboration.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/07/microsoft-logo-office.jpg?resize=1200,798",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI agent communication protocol",
+        "Agent2Agent A2A",
+        "Microsoft Azure AI",
+        "Google AI ecosystem",
+        "AI interoperability",
+        "Cross-platform AI collaboration",
+        "AI agent workflows",
+        "Copilot Studio",
+        "AI automation",
+        "AI industry standards"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "058aaaea5035b681868a968469fd5c68c02dd2b05fc691f027d038595f3447ff",
       "title": "How Deutsche Bahn Revolutionizes Rail Operations with Time Series Forecasting AI",
       "link": "articles/how-deutsche-bahn-revolutionizes-rail-operations-with-time-series-forecasting-ai.html",
