@@ -1,4 +1,4 @@
-// public/js/script.js
+// public/js/script.js (1/1)
 
 // --- Global Variables ---
 const synth = window.speechSynthesis; // For Browser TTS
@@ -179,19 +179,16 @@ async function loadSidebarData() {
     const latestContainer = document.getElementById('latest-news-content');
     const mainArticleElement = document.querySelector('.main-article');
 
-    if (!mainArticleElement) { // Only need main article to exist for height calculation
+    if (!mainArticleElement) {
         console.debug("Main article element not found, cannot load dynamic sidebars.");
-        // If containers exist, show a simple message or load default amount
         if (latestContainer) renderArticleCardList(latestContainer, [], "Loading news...");
         if (relatedContainer) renderArticleCardList(relatedContainer, [], "Loading related...");
         return;
     }
-     // Ensure containers exist before trying to use them
     if (!relatedContainer && !latestContainer) {
         console.debug("Sidebar containers for related/latest news not found.");
         return;
     }
-
 
     let currentArticleId = mainArticleElement.getAttribute('data-article-id');
     let currentArticleTopic = mainArticleElement.getAttribute('data-article-topic');
@@ -204,24 +201,23 @@ async function loadSidebarData() {
         if (!Array.isArray(currentArticleTags)) currentArticleTags = [];
     } catch (e) { console.error("Failed to parse tags for sidebar:", e); currentArticleTags = []; }
 
-    let numItemsForSidebar = SIDEBAR_DEFAULT_ITEM_COUNT;
+    let numItemsForSidebarTarget = SIDEBAR_DEFAULT_ITEM_COUNT;
     try {
-        const articleBody = document.getElementById('article-body'); // Use article-body for more accurate content height
+        const articleBody = document.getElementById('article-body');
         if (articleBody) {
             const mainArticleContentHeight = articleBody.offsetHeight;
             if (mainArticleContentHeight > 0 && AVG_SIDEBAR_ITEM_HEIGHT_PX > 0) {
                 const calculatedItems = Math.floor(mainArticleContentHeight / AVG_SIDEBAR_ITEM_HEIGHT_PX);
-                numItemsForSidebar = Math.min(MAX_SIDEBAR_ITEMS, Math.max(SIDEBAR_DEFAULT_ITEM_COUNT, calculatedItems));
-                 // Add a small buffer, e.g., 1-2 more items if space allows, but cap at MAX_SIDEBAR_ITEMS
+                numItemsForSidebarTarget = Math.min(MAX_SIDEBAR_ITEMS, Math.max(SIDEBAR_DEFAULT_ITEM_COUNT, calculatedItems));
                 if (calculatedItems > SIDEBAR_DEFAULT_ITEM_COUNT) {
-                    numItemsForSidebar = Math.min(MAX_SIDEBAR_ITEMS, calculatedItems + 1);
+                    numItemsForSidebarTarget = Math.min(MAX_SIDEBAR_ITEMS, calculatedItems + 1);
                 }
             }
         }
     } catch (e) {
         console.warn("Could not calculate dynamic sidebar height, using default count.", e);
     }
-    console.log(`Sidebar: Will attempt to load up to ${numItemsForSidebar} items based on article height.`);
+    console.log(`Sidebar: Target items based on height: ${numItemsForSidebarTarget}`);
 
     const allArticlesPath = '/all_articles.json';
     try {
@@ -231,12 +227,18 @@ async function loadSidebarData() {
         if (!data?.articles) throw new Error(`Invalid JSON format in sidebar data`);
         const allArticles = data.articles;
 
+        let latestSidebarArticles_candidates = [];
+        let relatedArticles_candidates = [];
+
         if (latestContainer) {
-            const latestSidebarArticles = allArticles.filter(a => a.id !== currentArticleId).slice(0, numItemsForSidebar);
-            renderArticleCardList(latestContainer, latestSidebarArticles, "No recent news.");
+            latestSidebarArticles_candidates = allArticles
+                .filter(a => a.id !== currentArticleId)
+                .slice(0, numItemsForSidebarTarget);
         }
+
         if (relatedContainer) {
-            let relatedArticles = allArticles.filter(a => a.id !== currentArticleId)
+            relatedArticles_candidates = allArticles
+                .filter(a => a.id !== currentArticleId)
                 .map(a => {
                     let score = 0;
                     if (a.topic === currentArticleTopic) score += 500;
@@ -245,9 +247,35 @@ async function loadSidebarData() {
                     if (a.published_iso) { try { score += Math.max(0, 1 - (new Date() - new Date(a.published_iso))/(1000*60*60*24*30)) * 10; } catch {} }
                     return { ...a, score };
                 })
-                .filter(a => a.score >= 10).sort((a, b) => b.score - a.score).slice(0, numItemsForSidebar);
-            renderArticleCardList(relatedContainer, relatedArticles, "No related news.");
+                .filter(a => a.score >= 10)
+                .sort((a, b) => b.score - a.score)
+                .slice(0, numItemsForSidebarTarget);
         }
+
+        let finalItemCount = numItemsForSidebarTarget; // Start with the ideal count
+
+        // Determine the actual number of items to render in *both* sidebars if both are present
+        // Or, use the available count for a single sidebar if only one is present
+        if (latestContainer && relatedContainer) {
+            finalItemCount = Math.min(numItemsForSidebarTarget, latestSidebarArticles_candidates.length, relatedArticles_candidates.length);
+            console.log(`Sidebar: Both containers present. Target: ${numItemsForSidebarTarget}, Latest Cands: ${latestSidebarArticles_candidates.length}, Related Cands: ${relatedArticles_candidates.length}. Final count for both: ${finalItemCount}.`);
+        } else if (latestContainer) {
+            finalItemCount = Math.min(numItemsForSidebarTarget, latestSidebarArticles_candidates.length);
+            console.log(`Sidebar: Only Latest container. Target: ${numItemsForSidebarTarget}, Latest Cands: ${latestSidebarArticles_candidates.length}. Final count: ${finalItemCount}.`);
+        } else if (relatedContainer) {
+            finalItemCount = Math.min(numItemsForSidebarTarget, relatedArticles_candidates.length);
+            console.log(`Sidebar: Only Related container. Target: ${numItemsForSidebarTarget}, Related Cands: ${relatedArticles_candidates.length}. Final count: ${finalItemCount}.`);
+        }
+
+        if (latestContainer) {
+            const latestArticlesToRender = latestSidebarArticles_candidates.slice(0, finalItemCount);
+            renderArticleCardList(latestContainer, latestArticlesToRender, "No recent news.");
+        }
+        if (relatedContainer) {
+            const relatedArticlesToRender = relatedArticles_candidates.slice(0, finalItemCount);
+            renderArticleCardList(relatedContainer, relatedArticlesToRender, "No related news.");
+        }
+
     } catch (err) {
         console.error('Error loading sidebar data:', err);
         if (latestContainer) latestContainer.innerHTML = '<p class="placeholder error">Error loading latest</p>';
