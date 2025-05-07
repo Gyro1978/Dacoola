@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "f53c42ca88952bf5a729ecfd0e0c49c4b7af13736605034ac8309e1cb2ae8079",
+      "title": "Mistral Medium 3: A Cost-Efficient AI Powerhouse for Enterprise and Developers",
+      "link": "articles/mistral-medium-3-a-cost-efficient-ai-powerhouse-for-enterprise-and-developers.html",
+      "published_iso": "2025-05-07T14:00:00Z",
+      "summary_short": "Mistral Medium 3 outperforms rivals like Claude Sonnet 3.7 at a lower cost, ideal for coding, STEM, and enterprise AI tasks.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/05/GettyImages-2147859992-e1713960898378.webp?resize=1200,676",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Mistral Medium 3",
+        "AI Models",
+        "Enterprise AI Solutions",
+        "Cost-Efficient AI",
+        "Mistral AI",
+        "Claude Sonnet 3.7",
+        "Multimodal AI",
+        "Self-Hosted AI",
+        "Le Chat Enterprise",
+        "AI in Financial Services"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "62bbf14d61c78634e6afadef20f1575ad217e61335ec2d29d90772fd25a5cd01",
       "title": "Mark Zuckerberg’s AI Advertising Plans Could Reshape Social Media",
       "link": "articles/mark-zuckerberg’s-ai-advertising-plans-could-reshape-social-media.html",
