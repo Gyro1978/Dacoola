@@ -1,6 +1,78 @@
 {
   "articles": [
     {
+      "id": "62bbf14d61c78634e6afadef20f1575ad217e61335ec2d29d90772fd25a5cd01",
+      "title": "Mark Zuckerberg’s AI Advertising Plans Could Reshape Social Media",
+      "link": "articles/mark-zuckerberg’s-ai-advertising-plans-could-reshape-social-media.html",
+      "published_iso": "2025-05-07T13:00:00Z",
+      "summary_short": "Meta CEO Mark Zuckerberg unveils ambitious AI advertising plans to automate ad creation, raising concerns about user experience and industry disruption.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2204064825.jpg?resize=1200,814",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "AI advertising plans",
+        "Mark Zuckerberg AI vision",
+        "Meta AI advertising",
+        "AI-driven ad automation",
+        "Facebook Instagram ads",
+        "AI-generated content risks",
+        "advertising industry disruption",
+        "small business marketing AI",
+        "AI ethics in advertising",
+        "social media advertising trends"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "0d602dd29335aa6bc118fe6cbe183a95b1040ed72deb1d1a1dbb1783ef258cfc",
+      "title": "Netflix Introduces AI-Powered Search Tool for Smarter Content Discovery",
+      "link": "articles/netflix-introduces-ai-powered-search-tool-for-smarter-content-discovery.html",
+      "published_iso": "2025-05-07T12:16:00Z",
+      "summary_short": "Netflix debuts an AI-powered search tool using ChatGPT for conversational content discovery. Rollout begins this week for iOS users in select regions.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/Netflix-AIsearch.png?resize=1200,676",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI-powered search tool",
+        "Netflix AI search",
+        "OpenAI ChatGPT",
+        "natural language processing",
+        "content discovery",
+        "AI in entertainment",
+        "personalized recommendations",
+        "streaming technology",
+        "AI-driven search",
+        "Netflix beta features"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "df5e21843e996d39ab4e67bc42a5bd18841a38e7dfc8bbc6f209024e817ac06c",
+      "title": "Netflix Unveils Next-Gen TV Experience with AI-Based Recommendations",
+      "link": "articles/netflix-unveils-next-gen-tv-experience-with-ai-based-recommendations.html",
+      "published_iso": "2025-05-07T12:15:00Z",
+      "summary_short": "Netflix introduces AI-based recommendations and GenAI search in its new TV experience, offering a more intuitive and personalized viewing journey.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/netflix.jpg?w=1024?w=1200&strip=all",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "AI-based recommendations",
+        "Netflix TV update",
+        "Generative AI search",
+        "Personalized content discovery",
+        "AI in entertainment",
+        "Netflix recommendation algorithms",
+        "Real-time AI suggestions",
+        "Streaming technology",
+        "OpenAI integration",
+        "TV interface redesign"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "661f4fb809c77d54838a59ef85ceb39bcca01e0408df3f42b45940401cf72655",
       "title": "Amazon’s AI Code Generation Tool \"Kiro\" Aims to Revolutionize Software Development",
       "link": "articles/amazon’s-ai-code-generation-tool-kiro-aims-to-revolutionize-software-development.html",
