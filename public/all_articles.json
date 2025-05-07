@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "63944319f506e7830e87029383fa64e4d87cadbe4ce8dbccc6370e771938e31e",
+      "title": "How a Neuralink Brain Implant and AI Are Transforming Communication",
+      "link": "articles/how-a-neuralink-brain-implant-and-ai-are-transforming-communication.html",
+      "published_iso": "2025-05-07T09:00:00Z",
+      "summary_short": "A Neuralink brain implant patient uses AI chatbots to enhance communication, blending human thought with generative AI for faster responses.",
+      "image_url": "https://wp.technologyreview.com/wp-content/uploads/2025/05/elon-phone2a.jpg?resize=1200,600",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "Neuralink brain implant",
+        "AI communication enhancement",
+        "Brain-computer interfaces",
+        "Elon Musk Neuralink",
+        "ALS communication technology",
+        "AI ethics in healthcare",
+        "Neuralink and AI integration",
+        "Human-AI symbiosis",
+        "Neurotechnology advancements",
+        "Ethical implications of BCIs"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "97e437d0a444c8c50c7175f9b2c36441b4a11ebe66f20527fa87cf68400ac2c7",
       "title": "NSO Group Ordered to Pay $167M in Landmark Pegasus Spyware Ruling",
       "link": "articles/nso-group-ordered-to-pay-$167m-in-landmark-pegasus-spyware-ruling.html",
