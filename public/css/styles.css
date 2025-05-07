@@ -1,4 +1,4 @@
-/* public/css/styles.css */
+/* public/css/styles.css (1/1) */
 
 :root {
     --bg-dark: #1a1a1d;
@@ -295,14 +295,95 @@ img { max-width: 100%; height: auto; display: block; }
 .home-title { width: 100%; padding: 20px; text-align: center; }
 
 /* --- 404 Page Specific Styling --- */
-body.page-404 { display: flex; flex-direction: column; min-height: 100vh; }
-main.error-page-main { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; flex-grow: 1; width: 100%; padding-top: calc(var(--navbar-height) + 40px); padding-bottom: 40px; }
-.error-page-main .error-container { margin-bottom: 60px; width: 90%; max-width: 650px; }
-.error-page-main #latest-news-section { width: 90%; max-width: 1200px; margin-top: 30px; }
+body.page-404 {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* background-color: var(--bg-dark); */ /* Already on body */
+}
+
+main.error-page-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align container to top */
+    flex-grow: 1;
+    width: 100%;
+    padding-top: calc(var(--navbar-height) + 40px); /* Space from navbar */
+    padding-bottom: 40px; /* Space at bottom */
+    text-align: center; /* Center text within this main container */
+}
+
+.error-page-main .error-container {
+    background-color: var(--bg-secondary);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px; /* Control max width of the box */
+    margin-bottom: 50px; /* Space before "Latest News" */
+    border: 1px solid var(--border-color);
+}
+
+.error-page-main .error-container h1 {
+    font-size: 6rem; /* Large "404" */
+    color: var(--accent-blue);
+    margin-bottom: 0px; /* Reduced margin */
+    line-height: 1;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.error-page-main .error-container h2 {
+    font-size: 2rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.error-page-main .error-container p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+.error-page-main .error-container .button-link {
+    display: inline-block;
+    background-color: var(--accent-blue);
+    color: var(--bg-dark);
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05em;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+    box-shadow: 0 4px 10px rgba(0, 174, 255, 0.2);
+}
+
+.error-page-main .error-container .button-link:hover {
+    background-color: var(--accent-blue-darker);
+    transform: translateY(-2px);
+}
+.error-page-main .error-container .button-link:active {
+    transform: translateY(0px);
+}
+
+
+/* Latest News section on 404 page */
+.error-page-main #latest-news-section {
+    width: 90%;
+    max-width: 1200px; /* Max width for the news grid part */
+    margin-top: 30px; /* Adjust as needed */
+}
+.error-page-main #latest-news-section h2 {
+    text-align: left; /* Align this specific H2 to the left if desired */
+}
+
 
 /* --- Snow Animation (for 404 page) --- */
 @keyframes snowfall { 0% { transform: translateY(-10vh); } 100% { transform: translateY(110vh); } }
-.snow { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1; }
+.snow { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1; } /* Keep snow behind content */
 .snow-flake { position: absolute; top: -10vh; background-color: rgba(255, 255, 255, 0.3); border-radius: 50%; animation: snowfall linear infinite; opacity: 0; }
 .snow-flake:nth-child(5n) { width: 2px; height: 2px; animation-duration: 12s; animation-delay: -1s; opacity: 0.4; }
 .snow-flake:nth-child(5n + 1) { width: 3px; height: 3px; animation-duration: 10s; animation-delay: -3s; opacity: 0.5; }

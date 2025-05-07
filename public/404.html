@@ -21,7 +21,7 @@
       gtag('config', 'G-WGJ5MFBC6X');
     </script>
 </head>
-<body class="page-404"> <!-- Added class for potential specific styling -->
+<body class="page-404">
 
     <header id="navbar-placeholder">
         <!-- Navbar loaded by JS -->
@@ -33,21 +33,21 @@
     </div>
 
     <!-- Error Content -->
-    <main class="container page-container error-page-main"> <!-- Reused page-container for consistency -->
+    <main class="error-page-main">
         <div class="error-container">
             <h1>404</h1>
-            <h2>Page Not Found</h2>
-            <p>Sorry, we couldn't find the page you were looking for. It might have been moved, deleted, or perhaps never existed.</p>
-            <a href="/home.html" class="button-link">Go to Homepage</a> <!-- Link to home.html -->
+            <h2>Oops! Page Not Found</h2>
+            <p>It seems like the page you're looking for has taken a detour into the digital unknown. Don't worry, it happens to the best of us!</p>
+            <a href="/home.html" class="button-link">Go to Homepage</a>
         </div>
 
-        <!-- Latest News Section Placeholder (similar to homepage) -->
-        <section id="latest-news-section" class="home-section" style="margin-top: 60px;"> <!-- Added margin -->
+        <!-- Latest News Section Placeholder -->
+        <section id="latest-news-section" class="home-section">
             <div class="section-header">
-                <h2>Latest News</h2>
-                <a href="/latest.html" class="view-all-button">View All →</a> <!-- Link to latest.html -->
+                <h2>Maybe you'll find this interesting?</h2>
+                <a href="/latest.html" class="view-all-button">View All News →</a>
             </div>
-            <div id="page-content-area" class="latest-news-grid"> <!-- Use ID for JS targeting -->
+            <div id="page-content-area" class="latest-news-grid">
                 <p class="placeholder">Loading latest news...</p>
             </div>
         </section>
@@ -56,7 +56,7 @@
     <!-- JavaScript -->
     <script src="/js/script.js"></script> <!-- Use root path for JS -->
     <script>
-        // Snowflakes JS (same as before)
+        // Snowflakes JS
         function createSnowflakes(containerId, count) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -64,13 +64,15 @@
                 const flake = document.createElement('div');
                 flake.className = 'snow-flake';
                 flake.style.left = `${Math.random() * 100}%`;
-                flake.style.animationDelay = `-${Math.random() * 10}s`;
+                flake.style.animationDelay = `-${Math.random() * 10}s`; // Randomize start
+                // Optional: Randomize animation duration slightly for more variety
+                // flake.style.animationDuration = `${Math.random() * 5 + 7}s`; // e.g., 7-12 seconds
                 container.appendChild(flake);
             }
         }
         document.addEventListener('DOMContentLoaded', () => {
-            createSnowflakes('snow-container', 100);
-            // Note: The main script.js will handle loading the navbar and latest news
+            createSnowflakes('snow-container', 100); // Adjust count as needed
+            // script.js will handle loading navbar and latest news via initializePageContent
         });
     </script>
 
