@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "640fd0237323d8d342afd17e8200d25d7ac9619d2ee6516886df46ed45bf6f4b",
+      "title": "Cadence’s NVIDIA Blackwell Supercomputer Revolutionizes AI-Driven Design",
+      "link": "articles/cadence’s-nvidia-blackwell-supercomputer-revolutionizes-ai-driven-design.html",
+      "published_iso": "2025-05-07T17:00:12Z",
+      "summary_short": "Cadence’s Millennium M2000 supercomputer, powered by NVIDIA Blackwell, accelerates AI-driven engineering and scientific simulations by 80x. Learn more.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/05/SHOT_1_SKIN_FRICTION_v5-2.gif",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA Blackwell supercomputer",
+        "Millennium M2000 Supercomputer",
+        "AI-driven design",
+        "GPU-accelerated simulations",
+        "Cadence and NVIDIA collaboration",
+        "computational fluid dynamics",
+        "semiconductor design",
+        "pharmaceutical research",
+        "AI factories",
+        "digital twins"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "6617adb64bc23aeb39e33ce3bbcfc23da9f71309d73d5015c83e9c9d8bb762c5",
       "title": "Apple Explores Adding AI Search Engines to Safari",
       "link": "articles/apple-explores-adding-ai-search-engines-to-safari.html",
