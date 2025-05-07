@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "a80ef90d9f92ac4d9c59f75c8dd452a9142a6e7a5c19cbf6f1e6e3db525cd888",
+      "title": "Fastino’s AI Model Training Innovation Disrupts Industry with $17.5M Funding",
+      "link": "articles/fastino’s-ai-model-training-innovation-disrupts-industry-with-$175m-funding.html",
+      "published_iso": "2025-05-07T21:37:38Z",
+      "summary_short": "Fastino's AI model training innovation uses cheap gaming GPUs, raising $17.5M led by Khosla. Discover how small, task-specific models outperform giants.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/v2-landscape.png?resize=1200,675",
+      "topic": "Startups",
+      "is_breaking": false,
+      "tags": [
+        "AI model training innovation",
+        "Fastino startup",
+        "Khosla Ventures",
+        "enterprise AI solutions",
+        "task-specific AI models",
+        "low-cost GPU training",
+        "AI efficiency trends",
+        "startup funding in AI",
+        "AI model optimization",
+        "real-time AI applications"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "84b4adb67cca3bef676f7c07ed4d0281cce8bd9fba1c88627642c7a67303e00c",
       "title": "Stripe’s New AI Payments Model Revolutionizes Fraud Detection and Efficiency",
       "link": "articles/stripe’s-new-ai-payments-model-revolutionizes-fraud-detection-and-efficiency.html",
