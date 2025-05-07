@@ -7,6 +7,18 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://dacoolaa.netlify.app/articles/whatsapp-security-flaw-group-chats-lack-cryptographic-safeguards.html</loc>
+    <lastmod>2025-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/anthropic’s-claude-web-search-api-aims-to-redefine-ai-powered-information-access.html</loc>
+    <lastmod>2025-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://dacoolaa.netlify.app/articles/fastino’s-ai-model-training-innovation-disrupts-industry-with-$175m-funding.html</loc>
     <lastmod>2025-05-07</lastmod>
     <changefreq>weekly</changefreq>
