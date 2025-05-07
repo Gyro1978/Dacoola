@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "cee11a0a84e149316e1435eb94a9f6d4dd1e5af81130e7edc10e882b43d381c8",
+      "title": "How Starlink Gains Trade Benefits from Trump’s Tariff War",
+      "link": "articles/how-starlink-gains-trade-benefits-from-trump’s-tariff-war.html",
+      "published_iso": "2025-05-07T19:45:09Z",
+      "summary_short": "Leaked memos reveal how Starlink gains trade benefits under Trump’s tariffs, with countries incentivized to adopt SpaceX’s satellite internet.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/musk-getty-inauguration-trump.jpg?resize=1200,897",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Starlink trade benefits",
+        "SpaceX and tariffs",
+        "Elon Musk trade influence",
+        "U.S. satellite dominance",
+        "Trump tariff policies",
+        "Geopolitical tech expansion",
+        "Starlink global adoption",
+        "Trade policy ethics",
+        "China satellite competition",
+        "Lesotho Starlink deal"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "8a637dddd3c6647213cc0dc6d1601c2ae139f587141702e1eb29255dc5eaa81e",
       "title": "Amazon Unveils Vulcan: A Warehouse Robot with Advanced Touch Sensing",
       "link": "articles/amazon-unveils-vulcan-a-warehouse-robot-with-advanced-touch-sensing.html",
