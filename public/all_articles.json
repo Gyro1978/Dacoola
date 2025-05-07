@@ -1,6 +1,78 @@
 {
   "articles": [
     {
+      "id": "058aaaea5035b681868a968469fd5c68c02dd2b05fc691f027d038595f3447ff",
+      "title": "How Deutsche Bahn Revolutionizes Rail Operations with Time Series Forecasting AI",
+      "link": "articles/how-deutsche-bahn-revolutionizes-rail-operations-with-time-series-forecasting-ai.html",
+      "published_iso": "2025-05-07T15:22:11Z",
+      "summary_short": "Discover how Deutsche Bahn leverages time series forecasting AI with Chronos models on Amazon Bedrock for faster, more accurate predictions.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/28/ml-18537-architecture-1260x353.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Time Series Forecasting AI",
+        "Deutsche Bahn AI Transformation",
+        "Chronos-Bolt Model",
+        "AI in Rail Logistics",
+        "Transformer-Based Forecasting",
+        "Zero-Shot Time Series Prediction",
+        "Amazon Bedrock Marketplace",
+        "AI for Predictive Maintenance",
+        "AutoARIMA vs AI",
+        "Future of AI in Transportation"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "558a0d750af22631dbfdeac04bc20f20b5a17fffb24d727ebe4b5938f5525cfe",
+      "title": "Mistral AI Enterprise Models Revolutionize Business AI with Le Chat & Medium 3",
+      "link": "articles/mistral-ai-enterprise-models-revolutionize-business-ai-with-le-chat-&-medium-3.html",
+      "published_iso": "2025-05-07T15:13:39Z",
+      "summary_short": "Mistral AI launches Le Chat Enterprise & Medium 3 model, offering cost-efficient, privacy-focused AI solutions for businesses. Discover the benchmarks & features.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_minimalist_beige_and_orange_angular_giant_robot_mecha_w_9816ffda-3d40-4e8c-b222-07d410659cf0.png?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Mistral AI Enterprise Models",
+        "Le Chat Enterprise",
+        "Mistral Medium 3",
+        "AI Models for Business",
+        "GDPR-Compliant AI",
+        "Enterprise AI Solutions",
+        "Cost-Efficient AI Models",
+        "AI Coding Performance",
+        "Multilingual AI Models",
+        "No-Code AI Automation"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "9c2c108611c6acce7441097cfe015ee2b47cea20de58525bf7955f432ccfd11c",
+      "title": "Amazon Commits $4B to AWS Infrastructure Investment in Chile",
+      "link": "articles/amazon-commits-$4b-to-aws-infrastructure-investment-in-chile.html",
+      "published_iso": "2025-05-07T15:08:43Z",
+      "summary_short": "Amazon announces a $4B AWS infrastructure investment in Chile, boosting cloud services and AI capabilities in Latin America by 2026.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/05/IMG_4752.jpg?resize=1200,797",
+      "topic": "Compute",
+      "is_breaking": false,
+      "tags": [
+        "AWS infrastructure investment",
+        "AWS Chile region",
+        "cloud computing Latin America",
+        "AWS availability zones",
+        "AI and machine learning in cloud",
+        "AWS digital transformation",
+        "AWS Latin America expansion",
+        "cloud infrastructure investment",
+        "AWS data centers Chile",
+        "AWS vs Google Cloud Chile"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "f53c42ca88952bf5a729ecfd0e0c49c4b7af13736605034ac8309e1cb2ae8079",
       "title": "Mistral Medium 3: A Cost-Efficient AI Powerhouse for Enterprise and Developers",
       "link": "articles/mistral-medium-3-a-cost-efficient-ai-powerhouse-for-enterprise-and-developers.html",
