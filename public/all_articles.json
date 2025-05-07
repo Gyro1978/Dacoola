@@ -1,6 +1,78 @@
 {
   "articles": [
     {
+      "id": "97e437d0a444c8c50c7175f9b2c36441b4a11ebe66f20527fa87cf68400ac2c7",
+      "title": "NSO Group Ordered to Pay $167M in Landmark Pegasus Spyware Ruling",
+      "link": "articles/nso-group-ordered-to-pay-$167m-in-landmark-pegasus-spyware-ruling.html",
+      "published_iso": "2025-05-07T08:30:00Z",
+      "summary_short": "NSO Group must pay $167M in the Pegasus spyware ruling for hacking 1,400 WhatsApp users. Learn the implications of this landmark case.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/bf5e/live/dcdf28a0-2b17-11f0-b529-c16ee4c6840a.jpg",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "Pegasus spyware ruling",
+        "NSO Group lawsuit",
+        "WhatsApp hacking case",
+        "Surveillance technology accountability",
+        "Zero-day vulnerabilities",
+        "Meta legal victory",
+        "Spyware human rights abuses",
+        "Pegasus spyware impact",
+        "Cybersecurity legal precedent",
+        "Commercial spyware industry"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "517f1c3715ec1b9eb4a3d1b5b7dbfe2d914d83120db4a2043e88505c747772a9",
+      "title": "Amazon’s Vulcan: The AI-Powered Tactile Robot Transforming Warehouses",
+      "link": "articles/amazon’s-vulcan-the-ai-powered-tactile-robot-transforming-warehouses.html",
+      "published_iso": "2025-05-07T08:00:00Z",
+      "summary_short": "Amazon's new tactile robot, Vulcan, uses touch sensors and AI to revolutionize warehouse operations. Discover how this innovation enhances efficiency.",
+      "image_url": "https://media.wired.com/photos/681a7d0a2d86dd4e461dbaea/191:100/w_1280,c_limit/AI-Lab-Robot-That-Can-Feel-Business.jpg",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "Amazon tactile robot",
+        "Amazon Vulcan",
+        "Tactile Robot",
+        "Warehouse Automation",
+        "AI-Powered Robotics",
+        "Force-Torque Sensors",
+        "Human-Robot Collaboration",
+        "Machine Learning in Robotics",
+        "Amazon Robotics",
+        "Future of Tactile Sensing"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "bceafa249296c7864c030908cbebe4c1fd0429b028cfcbe80587b184d439ced6",
+      "title": "OpenAI Aims to Slash Revenue Share Paid to Microsoft by 2030",
+      "link": "articles/openai-aims-to-slash-revenue-share-paid-to-microsoft-by-2030.html",
+      "published_iso": "2025-05-07T07:47:42Z",
+      "summary_short": "OpenAI plans to reduce its revenue-sharing deal with Microsoft by 2030, cutting payments from 20% to 10%. Learn the implications of this strategic shift.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/07/GettyImages-2161029148.jpg?w=1024",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI revenue deal",
+        "Microsoft OpenAI partnership",
+        "AI business strategy",
+        "Revenue sharing agreements",
+        "Public benefit corporation",
+        "AI financial independence",
+        "Azure AI integration",
+        "OpenAI corporate restructuring",
+        "AI investment trends",
+        "Tech industry negotiations"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "dbec25302711a3062c640a82644c4782261df571945ac21a613e784adeafdf54",
       "title": "WhatsApp Wins $167M in Landmark NSO Lawsuit Over Spyware Hack",
       "link": "articles/whatsapp-wins-$167m-in-landmark-nso-lawsuit-over-spyware-hack.html",
@@ -3642,6 +3714,30 @@
       ],
       "audio_url": null,
       "trend_score": 13.21
+    },
+    {
+      "id": "c450453ae1e117e3ae13b75b3141633b93e442e49ba21f92cb4f80357cb5748d",
+      "title": "Tesla Leadership Rumors: Board Denies CEO Replacement Search",
+      "link": "articles/tesla-leadership-rumors-board-denies-ceo-replacement-search.html",
+      "published_iso": "2025-05-01T11:10:39Z",
+      "summary_short": "Tesla denies reports of contacting headhunters to replace Elon Musk amid leadership rumors. Get the latest updates on Tesla's board stance.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/d1b5/live/25dcddc0-2656-11f0-948d-d3658dc46e25.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Tesla leadership rumors",
+        "Elon Musk CEO controversy",
+        "Tesla board denial",
+        "Wall Street Journal report",
+        "Tesla stock performance",
+        "Elon Musk political backlash",
+        "Tesla investor concerns",
+        "Robyn Denholm statement",
+        "Trump administration impact",
+        "Tesla public image"
+      ],
+      "audio_url": null,
+      "trend_score": 14.02
     },
     {
       "id": "2eaf758b0ac2515473f7d73e1af14823825e9da1376aa88d5147fa684810b1d1",
