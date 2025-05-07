@@ -1,10 +1,10 @@
 // public/js/script.js
 
 // --- Global Variables ---
-const synth = window.speechSynthesis;
-let currentUtterance = null;
-let currentPlayingButton = null;
-let autoSlideInterval = null;
+const synth = window.speechSynthesis; // For Browser TTS
+let currentUtterance = null; // Currently speaking utterance
+let currentPlayingButton = null; // Button associated with current TTS
+let autoSlideInterval = null; // Interval timer for homepage banner
 
 // -- Read values from CSS custom properties or use defaults --
 // Ensure your :root in CSS has these defined if you want to control them from there
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setupSearch();
         initializePageContent(); // This will call loadSidebarData if on article page
         setupBrowserTTSListeners();
-        setupFAQAccordion();
+        setupFAQAccordion(); // Initialize FAQ interactivity
         setInterval(updateTimestamps, 60000);
         updateTimestamps();
     }).catch(error => {
@@ -85,8 +85,8 @@ async function loadHomepageData() {
 
         const allArticles = allData.articles;
         const bannerAndTrendingArticles = allArticles.slice(0, MAX_HOME_PAGE_ARTICLES);
-
-        renderBreakingNews(bannerAndTrendingArticles); // Banner uses MAX_HOME_PAGE_ARTICLES pool
+        
+        renderBreakingNews(bannerAndTrendingArticles);
 
         const bannerArticleLinks = Array.from(
             document.querySelectorAll('#breaking-news-content a.breaking-news-item')
@@ -100,7 +100,7 @@ async function loadHomepageData() {
 
         renderLatestNewsGrid(articlesForGrid);
         renderTopics();
-        renderTrendingNews(bannerAndTrendingArticles.slice(0, TRENDING_NEWS_COUNT)); // Use a specific count for trending
+        renderTrendingNews(bannerAndTrendingArticles.slice(0, TRENDING_NEWS_COUNT));
 
     } catch (error) {
         console.error('Error loading homepage data:', error);
@@ -112,34 +112,25 @@ async function loadHomepageData() {
     }
 }
 
-async function loadGenericPageData() { /* ... same as your provided version ... */
+async function loadGenericPageData() {
     const container = document.getElementById('page-content-area');
     const titleElement = document.getElementById('page-title');
-    if (!container || !titleElement) {
-        console.error("Required elements #page-content-area or #page-title not found for generic page.");
-        return;
-    }
+    if (!container || !titleElement) return;
     container.innerHTML = '<p class="placeholder">Loading...</p>';
-
     const urlParams = new URLSearchParams(window.location.search);
     const pagePath = window.location.pathname;
     const pageType = pagePath.substring(pagePath.lastIndexOf('/') + 1).split('.')[0];
     const query = urlParams.get('q');
     const topicName = urlParams.get('name');
-
-    let pageTitle = "News";
-    let articlesToDisplay = [];
-    let emptyMessage = "No articles found.";
+    let pageTitle = "News", articlesToDisplay = [], emptyMessage = "No articles found.";
     const dataSourcePath = '/all_articles.json';
-    console.log(`Generic Page: type=${pageType}, source=${dataSourcePath}, query=${query}, topic=${topicName}`);
 
     try {
         const response = await fetch(dataSourcePath, { cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP error ${response.status}`);
         const fetchedData = await response.json();
-        if (!fetchedData?.articles) throw new Error(`Invalid JSON in ${dataSourcePath}`);
+        if (!fetchedData?.articles) throw new Error("Invalid JSON.");
         const sourceArticles = fetchedData.articles;
-        console.log(`Fetched ${sourceArticles.length} articles from ${dataSourcePath}`);
 
         if (pageType === 'latest') {
             pageTitle = "All News"; articlesToDisplay = sourceArticles; emptyMessage = "No news available.";
@@ -165,7 +156,7 @@ async function loadGenericPageData() { /* ... same as your provided version ... 
     }
 }
 
-async function loadLatestNewsFor404() { /* ... same as your provided version ... */
+async function loadLatestNewsFor404() {
     const container = document.getElementById('page-content-area');
     if (!container) return;
     container.innerHTML = '<p class="placeholder">Loading latest news...</p>';
@@ -175,7 +166,7 @@ async function loadLatestNewsFor404() { /* ... same as your provided version ...
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const allData = await response.json();
         if (!allData?.articles) throw new Error("Invalid all_articles.json format.");
-        const latestArticles = allData.articles.slice(0, LATEST_NEWS_GRID_COUNT); // Use the constant
+        const latestArticles = allData.articles.slice(0, LATEST_NEWS_GRID_COUNT);
         renderArticleCardList(container, latestArticles, "No recent news available.");
     } catch (error) {
         console.error('Error loading latest news on 404:', error);
@@ -188,10 +179,19 @@ async function loadSidebarData() {
     const latestContainer = document.getElementById('latest-news-content');
     const mainArticleElement = document.querySelector('.main-article');
 
-    if (!mainArticleElement || (!relatedContainer && !latestContainer)) {
-        // console.debug("Not an article page or sidebar containers missing for dynamic load.");
+    if (!mainArticleElement) { // Only need main article to exist for height calculation
+        console.debug("Main article element not found, cannot load dynamic sidebars.");
+        // If containers exist, show a simple message or load default amount
+        if (latestContainer) renderArticleCardList(latestContainer, [], "Loading news...");
+        if (relatedContainer) renderArticleCardList(relatedContainer, [], "Loading related...");
         return;
     }
+     // Ensure containers exist before trying to use them
+    if (!relatedContainer && !latestContainer) {
+        console.debug("Sidebar containers for related/latest news not found.");
+        return;
+    }
+
 
     let currentArticleId = mainArticleElement.getAttribute('data-article-id');
     let currentArticleTopic = mainArticleElement.getAttribute('data-article-topic');
@@ -204,23 +204,24 @@ async function loadSidebarData() {
         if (!Array.isArray(currentArticleTags)) currentArticleTags = [];
     } catch (e) { console.error("Failed to parse tags for sidebar:", e); currentArticleTags = []; }
 
-    // --- Dynamic Sidebar Item Count Logic ---
-    let numItemsForSidebar = SIDEBAR_DEFAULT_ITEM_COUNT; // Default
+    let numItemsForSidebar = SIDEBAR_DEFAULT_ITEM_COUNT;
     try {
-        const articleBody = document.getElementById('article-body');
+        const articleBody = document.getElementById('article-body'); // Use article-body for more accurate content height
         if (articleBody) {
-            const mainArticleHeight = articleBody.offsetHeight; // Get height of the content area
-            if (mainArticleHeight > 0 && AVG_SIDEBAR_ITEM_HEIGHT_PX > 0) {
-                const calculatedItems = Math.floor(mainArticleHeight / AVG_SIDEBAR_ITEM_HEIGHT_PX);
-                 // Ensure it's at least the default and not more than max
+            const mainArticleContentHeight = articleBody.offsetHeight;
+            if (mainArticleContentHeight > 0 && AVG_SIDEBAR_ITEM_HEIGHT_PX > 0) {
+                const calculatedItems = Math.floor(mainArticleContentHeight / AVG_SIDEBAR_ITEM_HEIGHT_PX);
                 numItemsForSidebar = Math.min(MAX_SIDEBAR_ITEMS, Math.max(SIDEBAR_DEFAULT_ITEM_COUNT, calculatedItems));
+                 // Add a small buffer, e.g., 1-2 more items if space allows, but cap at MAX_SIDEBAR_ITEMS
+                if (calculatedItems > SIDEBAR_DEFAULT_ITEM_COUNT) {
+                    numItemsForSidebar = Math.min(MAX_SIDEBAR_ITEMS, calculatedItems + 1);
+                }
             }
         }
     } catch (e) {
         console.warn("Could not calculate dynamic sidebar height, using default count.", e);
     }
     console.log(`Sidebar: Will attempt to load up to ${numItemsForSidebar} items based on article height.`);
-    // --- End Dynamic Sidebar Item Count ---
 
     const allArticlesPath = '/all_articles.json';
     try {
@@ -233,7 +234,6 @@ async function loadSidebarData() {
         if (latestContainer) {
             const latestSidebarArticles = allArticles.filter(a => a.id !== currentArticleId).slice(0, numItemsForSidebar);
             renderArticleCardList(latestContainer, latestSidebarArticles, "No recent news.");
-            console.log(`Rendered latest news sidebar (${latestSidebarArticles.length} articles).`);
         }
         if (relatedContainer) {
             let relatedArticles = allArticles.filter(a => a.id !== currentArticleId)
@@ -247,7 +247,6 @@ async function loadSidebarData() {
                 })
                 .filter(a => a.score >= 10).sort((a, b) => b.score - a.score).slice(0, numItemsForSidebar);
             renderArticleCardList(relatedContainer, relatedArticles, "No related news.");
-            console.log(`Rendered related news sidebar (${relatedArticles.length} articles).`);
         }
     } catch (err) {
         console.error('Error loading sidebar data:', err);
@@ -287,8 +286,8 @@ function renderBreakingNews(articles) {
         const showSlide = (index) => { slides.forEach((slide, i) => slide.classList.toggle('active', i === index)); paginationContainer.querySelectorAll('.slider-dot').forEach((dot, i) => dot.classList.toggle('active', i === index)); currentSlideIndex = index; };
         const nextSlide = () => showSlide((currentSlideIndex + 1) % slides.length);
         slides.forEach((_, index) => { const dot = document.createElement('button'); dot.className = 'slider-dot'; if (index === 0) dot.classList.add('active'); dot.setAttribute('aria-label', `Go to slide ${index + 1}`); dot.addEventListener('click', () => showSlide(index)); paginationContainer.appendChild(dot); }); container.appendChild(paginationContainer);
-        const prevButton = document.createElement('button'); prevButton.className = 'slider-control slider-prev'; prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>'; prevButton.title="Previous"; prevButton.addEventListener('click', (e) => { e.preventDefault(); showSlide((currentSlideIndex - 1 + slides.length) % slides.length); }); container.appendChild(prevButton);
-        const nextButton = document.createElement('button'); nextButton.className = 'slider-control slider-next'; nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>'; nextButton.title="Next"; nextButton.addEventListener('click', (e) => { e.preventDefault(); nextSlide(); }); container.appendChild(nextButton);
+        const prevButton = document.createElement('button'); prevButton.className = 'slider-control slider-prev'; prevButton.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>'; prevButton.title="Previous"; prevButton.setAttribute('aria-label', 'Previous slide'); prevButton.addEventListener('click', (e) => { e.preventDefault(); showSlide((currentSlideIndex - 1 + slides.length) % slides.length); }); container.appendChild(prevButton);
+        const nextButton = document.createElement('button'); nextButton.className = 'slider-control slider-next'; nextButton.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>'; nextButton.title="Next"; nextButton.setAttribute('aria-label', 'Next slide'); nextButton.addEventListener('click', (e) => { e.preventDefault(); nextSlide(); }); container.appendChild(nextButton);
         autoSlideInterval = setInterval(nextSlide, 5000);
         container.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
         container.addEventListener('mouseleave', () => { clearInterval(autoSlideInterval); autoSlideInterval = setInterval(nextSlide, 5000); });
@@ -312,7 +311,7 @@ function renderTrendingNews(articles) {
     const container = document.querySelector('#trending-news-section .trending-news-list'); if (!container) return; container.innerHTML = '';
     if (!articles || articles.length === 0) { container.innerHTML = '<p class="placeholder">No articles.</p>'; return; }
     const sortedByTrend = articles.slice().sort((a, b) => (b.trend_score || 0) - (a.trend_score || 0));
-    const articlesToShow = sortedByTrend.slice(0, TRENDING_NEWS_COUNT); // Use constant
+    const articlesToShow = sortedByTrend.slice(0, TRENDING_NEWS_COUNT);
     if (articlesToShow.length === 0) { container.innerHTML = '<p class="placeholder">No trending news.</p>'; return; }
     const ul = document.createElement('ul'); ul.className = 'trending-news-list-items';
     articlesToShow.forEach(article => {
@@ -339,19 +338,19 @@ function renderArticleCardList(container, articles, emptyMessage) {
 }
 
 // --- Utility & UI Interaction ---
-function timeAgo(isoDateString) { /* ... same ... */
+function timeAgo(isoDateString) {
     if (!isoDateString) return 'Date unknown'; try { const date = new Date(isoDateString); if (isNaN(date)) return 'Invalid date'; const now = new Date(); const seconds = Math.round((now - date) / 1000); if (seconds < 60) return `just now`; const minutes = Math.round(seconds / 60); if (minutes < 60) return `${minutes} min${minutes > 1 ? 's' : ''} ago`; const hours = Math.round(minutes / 60); if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`; const days = Math.round(hours / 24); if (days < 7) return `${days} day${days > 1 ? 's' : ''} ago`; const weeks = Math.round(days / 7); if (weeks < 5) return `${weeks} week${weeks > 1 ? 's' : ''} ago`; const months = Math.round(days / 30.44); if (months < 12) return `${months} month${months > 1 ? 's' : ''} ago`; const years = Math.round(days / 365.25); return `${years} year${years > 1 ? 's' : ''} ago`; } catch (e) { console.error("Date parse error:", isoDateString, e); return 'Date error'; }
 }
-function updateTimestamps() { /* ... same ... */
+function updateTimestamps() {
     document.querySelectorAll('.timestamp').forEach(el => { const isoDate = el.getAttribute('data-iso-date'); if (isoDate) { const formattedTime = timeAgo(isoDate); if (el.textContent !== formattedTime) { el.textContent = formattedTime; try { el.setAttribute('title', new Date(isoDate).toLocaleString()); } catch { el.setAttribute('title', 'Invalid date'); } } } });
 }
-function calculateSearchScore(article, searchTokens) { /* ... same ... */
+function calculateSearchScore(article, searchTokens) {
     let score = 0; const title = article.title?.toLowerCase() || ''; const topic = article.topic?.toLowerCase() || ''; const tags = (article.tags || []).map(t => t.toLowerCase()); const summary = article.summary_short?.toLowerCase() || ''; const text = `${title} ${topic} ${tags.join(' ')} ${summary}`; const textTokens = text.split(/[\s\W]+/).filter(Boolean); const qPhrase = searchTokens.join(' ');
     for (const token of searchTokens) { if (!token) continue; if (title.includes(token)) score += 15; if (topic.includes(token)) score += 8; if (tags.some(tag => tag.includes(token))) score += 5; if (summary.includes(token)) score += 2; }
     if (title.includes(qPhrase)) score += 50; else if (topic.includes(qPhrase)) score += 25; else if (tags.some(tag => tag.includes(qPhrase))) score += 15; else if (summary.includes(qPhrase)) score += 10;
     if (searchTokens.every(token => textTokens.includes(token))) score += 20; return score;
 }
-function setupSearch() { /* ... same ... */
+function setupSearch() {
     const searchInput = document.getElementById('search-input'), searchButton = document.getElementById('search-button'), suggestionsContainer = document.getElementById('search-suggestions'), searchContainer = document.querySelector('.nav-search');
     if (!searchInput || !searchButton || !suggestionsContainer || !searchContainer) { console.warn("Search elements missing."); return; }
     searchContainer.style.position = 'relative'; let debounceTimeout; const debounce = (func, delay) => (...args) => { clearTimeout(debounceTimeout); debounceTimeout = setTimeout(() => func.apply(this, args), delay); };
@@ -369,28 +368,26 @@ function setupSearch() { /* ... same ... */
     document.addEventListener('click', (e) => { if (!searchContainer.contains(e.target)) suggestionsContainer.style.display = 'none'; });
 }
 
-/**
- * Sets up accordion behavior for FAQ items.
- * Makes sure only one FAQ item is open at a time.
- */
 function setupFAQAccordion() {
-    const faqItems = document.querySelectorAll('#article-body details.faq-item');
-    if (faqItems.length === 0) return; // No FAQs on this page
-
-    faqItems.forEach(currentItem => {
-        currentItem.addEventListener('toggle', (event) => {
-            // If the current item is being opened
-            if (currentItem.open) {
-                // Close all other FAQ items
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== currentItem && otherItem.open) {
-                        otherItem.open = false;
+    const faqSections = document.querySelectorAll('#article-body .faq-section'); // Target the wrapper
+    faqSections.forEach(faqSection => {
+        const faqItems = faqSection.querySelectorAll('details.faq-item');
+        if (faqItems.length > 0) {
+            console.log("Setting up FAQ accordion for", faqItems.length, "items.");
+            faqItems.forEach(currentItem => {
+                currentItem.addEventListener('toggle', function(event) {
+                    if (this.open) {
+                        // Close other open FAQ items within the same faq-section
+                        faqItems.forEach(otherItem => {
+                            if (otherItem !== this && otherItem.open) {
+                                otherItem.open = false;
+                            }
+                        });
                     }
                 });
-            }
-        });
+            });
+        }
     });
-    console.log("FAQ accordion behavior set up for", faqItems.length, "items.");
 }
 
 // --- Browser TTS Playback Logic ---
@@ -401,7 +398,7 @@ function setupBrowserTTSListeners() {
     document.body.addEventListener('click', handleTTSDelegatedClick);
     const globalButton = document.getElementById('global-tts-player-button');
     if (globalButton) {
-        globalButton.setAttribute('aria-label', 'Listen to main article content'); // ARIA label
+        globalButton.setAttribute('aria-label', 'Listen to main article content');
         if (currentPlayingButton !== globalButton) resetTTSButtonState(globalButton);
         else if (synth.paused) globalButton.innerHTML = '<i class="fas fa-play" aria-hidden="true"></i>';
     }
@@ -434,8 +431,8 @@ function speakText(text, button) {
     const MAX_TTS_CHARS = 3000; if (text.length > MAX_TTS_CHARS) text = text.substring(0, MAX_TTS_CHARS - 3) + "...";
     currentUtterance = new SpeechSynthesisUtterance(text); currentPlayingButton = button;
     currentUtterance.onstart = () => { if (currentPlayingButton === button) { button.classList.remove('loading'); button.classList.add('playing'); button.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>'; button.setAttribute('aria-label', 'Pause audio narration'); button.disabled = false; }};
-    currentUtterance.onpause = () => { if (currentPlayingButton === button) button.classList.add('paused'); }; // Button already shows play icon due to handleTTSDelegatedClick
-    currentUtterance.onresume = () => { if (currentPlayingButton === button) { button.classList.remove('paused'); button.classList.add('playing'); }}; // Button already shows pause icon
+    currentUtterance.onpause = () => { if (currentPlayingButton === button) button.classList.add('paused'); };
+    currentUtterance.onresume = () => { if (currentPlayingButton === button) { button.classList.remove('paused'); button.classList.add('playing'); }};
     currentUtterance.onend = () => { if (currentPlayingButton === button) resetTTSButtonState(button); currentUtterance = null; currentPlayingButton = null; };
     currentUtterance.onerror = (e) => { console.error('TTS Error:', e); if (e.error && e.error !== 'interrupted' && e.error !== 'canceled') alert(`Speech error: ${e.error}`); resetTTSButtonState(button); if (currentPlayingButton === button) { currentUtterance = null; currentPlayingButton = null; }};
     synth.speak(currentUtterance);
@@ -445,7 +442,6 @@ function resetTTSButtonState(button) {
         button.classList.remove('playing', 'loading', 'paused');
         button.innerHTML = '<i class="fas fa-headphones" aria-hidden="true"></i>';
         button.disabled = false;
-        // Set appropriate default aria-label
         const defaultListenLabel = button.id === 'global-tts-player-button' ? 'Listen to main article content' : 'Listen to article title';
         button.setAttribute('aria-label', defaultListenLabel);
     }

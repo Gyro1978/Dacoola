@@ -32,9 +32,9 @@ YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 
 # --- Configuration ---
 AGENT_MODEL = "deepseek-chat"
-MAX_TOKENS_RESPONSE = 5000 # Increased for potentially very detailed articles
+MAX_TOKENS_RESPONSE = 5000
 TEMPERATURE = 0.7
-API_TIMEOUT_SECONDS = 360 # Increased timeout
+API_TIMEOUT_SECONDS = 360
 
 # --- Agent Prompts ---
 
@@ -50,27 +50,23 @@ You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, powe
     *   **LSI Keywords:** Naturally incorporate semantically related terms and concepts throughout the article.
 
 3.  **Content Generation & Structure:**
-    *   **SEO-Optimized H1 Heading (Article Title for the page):** Craft a compelling, SEO-friendly H1 heading (as `## [Generated H1 Heading]`). This can be different from `{{ARTICLE_TITLE}}` if a better SEO title is possible. It MUST include `{{TARGET_KEYWORD}}`.
+    *   **SEO-Optimized H1 Heading (Article Title for the page):** Craft a compelling, SEO-friendly H1 heading (as `## [Generated H1 Heading]`). This can be different from `{{ARTICLE_TITLE}}` if a better SEO title is possible. It MUST include `{{TARGET_KEYWORD}}`. The H1 should be engaging and accurately reflect the article's core subject.
     *   **Initial Summary (1-2 well-developed paragraphs):** Provide a comprehensive summary based on `{{ARTICLE_CONTENT_FOR_PROCESSING}}`. Ensure factual accuracy. Include `{{TARGET_KEYWORD}}` in the first paragraph.
     *   **In-Depth Analysis Section (Multiple Sub-sections as appropriate):**
-        *   **Main Analysis Title:** Create a contextually relevant `### H3` title (e.g., "### Unpacking the Impact", "### Key Innovations & Implications", "### Future Trajectory").
-        *   **Core Analysis (2-4 paragraphs):** Deeper explanation, context, trends, significance.
-        *   **Optional, Recommended Sub-sections (Use `#### H4` for these. Include if content supports):**
-            *   `#### Deeper Dive: [Specific Aspect]`: Elaborate on a key technical detail, feature, or component.
-            *   `#### Pros & Cons`: If applicable (new product, policy, major shift), provide a balanced view using the specified HTML structure.
-            *   `#### Potential Challenges / Roadblocks`: Discuss potential hurdles or criticisms.
-            *   `#### Future Outlook / What's Next?`: Speculate responsibly on future developments.
-            *   `#### Quick FAQ`: Generate 2-3 relevant questions a reader might have and provide concise answers, especially for complex or novel topics.
+        *   **Main Analysis Title (`### H3`):** Create a single, contextually relevant `### H3` title for the main analysis block (e.g., "### Unpacking the Impact", "### Key Innovations & Implications", "### Future Trajectory").
+        *   **Core Analysis (2-4 paragraphs under the H3):** Deeper explanation, context, trends, significance.
+        *   **Optional, Thematic Sub-sections (`#### H4`):** If the content supports it, create specific `#### H4` sub-sections *without generic prefixes like "Deeper Dive:"*. The H4 title itself should be descriptive (e.g., "#### The Technology Behind X", "#### Market Reactions", "#### Ethical Considerations"). Include 1-2 paragraphs for each.
+        *   **Pros & Cons (`#### Pros & Cons`):** If applicable, use this exact H4 title, followed by the specified HTML structure.
+        *   **FAQ (`#### Frequently Asked Questions`):** If the topic is complex or warrants it, use this exact H4 title. Generate 2-4 relevant questions and answers using the specified HTML structure for interactive accordions.
     *   **Overall Length & Tone:** Aim for **500-800 words**. Maintain an authoritative, insightful, yet accessible journalistic tone.
 
 4.  **Output Format (Strict Adherence Required):**
-    *   **Markdown Only (except for the specified HTML Pros & Cons structure).**
-    *   **Exact Order:** Title Tag, Meta Description, SEO-Optimized H1 Heading (for JSON-LD), Article Body, Source Link, JSON-LD Script.
+    *   **Markdown and Specified HTML:** The Article Body section must be valid Markdown, *except* for the "Pros & Cons" and "FAQ" sections, which MUST use the specified HTML structures.
+    *   **Exact Order:** Title Tag, Meta Description, SEO-Optimized H1 Heading (for JSON-LD), Article Body, Source Link (DO NOT RENDER THIS VISIBLY IN ARTICLE BODY, it is for script processing only), JSON-LD Script.
     *   **Title Tag (for `<title>`):** Format: `Title Tag: [Generated title tag]`. Strictly **≤ 60 characters**. Include `{{TARGET_KEYWORD}}`.
     *   **Meta Description:** Format: `Meta Description: [Generated meta description]`. Strictly **≤ 160 characters**. Include `{{TARGET_KEYWORD}}`.
-    *   **SEO-Optimized H1 Heading (for JSON-LD `headline`):** Format: `SEO H1: [Generated H1 heading for the article page]`. This will be used in the JSON-LD and as the main `##` heading.
-    *   **Article Body:** As defined in section 3. Starts with the `## [SEO H1 from above]`.
-    *   **Source Link:** Format: `Source: [{{ARTICLE_TITLE}}]({{SOURCE_ARTICLE_URL}})`.
+    *   **SEO-Optimized H1 Heading (for JSON-LD `headline`):** Format: `SEO H1: [Generated H1 heading for the article page]`. This will be used in the JSON-LD and as the main `##` heading in the Markdown body.
+    *   **Article Body:** As defined in section 3. Starts with the `## [SEO H1 from above]`. The `Source: [{{ARTICLE_TITLE}}]({{SOURCE_ARTICLE_URL}})` line should be the *very last line of plain text content* before the JSON-LD script, and it should NOT be rendered as a visible link if a "Read Original Source" button is already present elsewhere on the page template. This line is primarily for data extraction.
     *   **JSON-LD Script:** Use the "SEO H1" for the `headline` field.
 
 5.  **Error Handling:** If input is insufficient, output ONLY: `Error: Missing or invalid input field(s).`
@@ -78,13 +74,13 @@ You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, powe
 """
 
 SEO_PROMPT_USER_TEMPLATE = """
-Task: Generate Title Tag, Meta Description, an SEO-Optimized H1 Heading, a comprehensive Article Body (Markdown with summary, detailed analysis section with flexible H3 title and optional H4 sub-sections like Deeper Dive, Pros & Cons, FAQ), and JSON-LD Script Block. Follow ALL directives from the System Prompt.
+Task: Generate Title Tag, Meta Description, an SEO-Optimized H1 Heading, a comprehensive Article Body, and JSON-LD Script Block. Follow ALL directives from the System Prompt precisely.
 
 ARTICLE_TITLE: {article_title}
 ARTICLE_CONTENT_FOR_PROCESSING: {article_content_for_processing}
 SOURCE_ARTICLE_URL: {source_article_url}
 TARGET_KEYWORD: {target_keyword}
-SECONDARY_KEYWORDS_LIST_STR: {secondary_keywords_list_str} # e.g., "AI safety, LLM benchmarks, generative models"
+SECONDARY_KEYWORDS_LIST_STR: {secondary_keywords_list_str}
 ARTICLE_IMAGE_URL: {article_image_url}
 AUTHOR_NAME: {author_name}
 CURRENT_DATE_YYYY_MM_DD: {current_date_iso}
@@ -95,19 +91,19 @@ ALL_GENERATED_KEYWORDS_LIST: {all_generated_keywords_json}
 Required Output Format (Strict):
 Title Tag: [Generated title tag ≤ 60 chars for <title> element, include TARGET_KEYWORD]
 Meta Description: [Generated meta description ≤ 160 chars, include TARGET_KEYWORD]
-SEO H1: [Generated SEO-Optimized H1 heading for the page, include TARGET_KEYWORD. This will be used as the main article title and in JSON-LD headline]
+SEO H1: [Generated SEO-Optimized H1 heading for the page, include TARGET_KEYWORD. This is the main article title.]
 
 ## [SEO H1 from above]
 [Paragraph 1-2: CONCISE summary based on ARTICLE_CONTENT_FOR_PROCESSING. Include TARGET_KEYWORD naturally once here. Also try to include a SECONDARY_KEYWORD if natural.]
 
-### [Contextual H3 Title for Analysis Section, e.g., "Unpacking the Impact", "Key Innovations & Implications"]
+### [Contextual H3 Title for Main Analysis Section, e.g., "Unpacking the Impact", "Core Innovations"]
 [Paragraphs 2-4 (or more): In-depth analysis, context, implications. Naturally weave in TARGET_KEYWORD again if possible, and other SECONDARY_KEYWORDS.]
 
-#### [Optional: Deeper Dive: Specific Aspect]
+#### [Optional: Contextual H4 Title for a Deeper Dive or Specific Aspect, e.g., "The Technology Behind X"]
 [Optional: 1-2 paragraphs on a key technical detail or component if warranted. Incorporate relevant keywords.]
 
 #### [Optional: Pros & Cons]
-[If generating Pros & Cons, use the following HTML structure EXACTLY. Use Markdown for the list items inside `item-list` divs.]
+[If generating Pros & Cons, use this exact H4 title "Pros & Cons" and the HTML structure below. Use Markdown for list items inside `item-list` divs.]
 <div class="pros-cons-container">
   <div class="pros-section">
     <h5 class="section-title">Pros</h5>
@@ -125,18 +121,28 @@ SEO H1: [Generated SEO-Optimized H1 heading for the page, include TARGET_KEYWORD
   </div>
 </div>
 
-#### [Optional: Potential Challenges / Roadblocks]
+#### [Optional: Contextual H4 Title for Challenges, e.g., "Potential Hurdles and Criticisms"]
 [Optional: 1-2 paragraphs discussing hurdles or criticisms.]
 
-#### [Optional: Future Outlook / What's Next?]
+#### [Optional: Contextual H4 Title for Outlook, e.g., "What's Next on the Horizon?"]
 [Optional: 1-2 paragraphs on future developments.]
 
-#### [Optional: Quick FAQ]
-[Optional: 2-3 relevant Questions & Answers. Example: Q: What is the main benefit of this technology? A: The main benefit is...]
-**Q: [Question 1]?**
-A: [Answer 1]
-**Q: [Question 2]?**
-A: [Answer 2]
+#### [Optional: Frequently Asked Questions]
+[If generating FAQs, use this exact H4 title "Frequently Asked Questions" and the HTML structure below for 2-4 Q&As.]
+<div class="faq-section">
+  <details class="faq-item">
+    <summary class="faq-question">Question 1 related to the article?</summary>
+    <div class="faq-answer-content">
+      <p>Concise answer to question 1.</p>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-question">Another relevant question?</summary>
+    <div class="faq-answer-content">
+      <p>Detailed answer to question 2.</p>
+    </div>
+  </details>
+</div>
 
 Source: [{article_title}]({source_article_url})
 
@@ -160,7 +166,7 @@ Source: [{article_title}]({source_article_url})
 </script>
 """
 
-# --- API Call Function ---
+# --- API Call Function (remains the same) ---
 def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE, temperature=TEMPERATURE):
     if not DEEPSEEK_API_KEY:
         logger.error("DEEPSEEK_API_KEY environment variable not set.")
@@ -241,17 +247,37 @@ def parse_seo_agent_response(response_text):
             except json.JSONDecodeError: errors.append("JSON-LD content invalid.")
         else: errors.append("Missing JSON-LD script block.")
 
-        body_match = re.search(
-            r"SEO H1:.*?[\r\n]+(##.*?)(?=[\r\n]+\s*Source:|[\r\n]*\s*<script)",
-            response_text, re.DOTALL | re.IGNORECASE
-        )
-        if body_match:
-             body_content = body_match.group(1).strip()
-             body_content = re.sub(r'\s*Source:\s*\[.*?\]\(.*?\)\s*$', '', body_content, flags=re.MULTILINE).strip()
+        # Extract Article Body (from after SEO H1 line to before Source: or <script)
+        # This regex needs to be robust to handle the new optional HTML sections (Pros/Cons, FAQ)
+        # while still capturing all markdown content.
+        body_start_pattern = r"SEO H1:.*?[\r\n]+" # Start after "SEO H1:" line
+        body_end_pattern = r"([\s\S]*?)(?=[\r\n]+\s*Source:|[\r\n]*\s*<script)" # Capture everything until Source or Script
+        
+        body_full_match = re.search(body_start_pattern + body_end_pattern, response_text, re.DOTALL | re.IGNORECASE)
+
+        if body_full_match:
+             body_content = body_full_match.group(1).strip() # Group 1 is (##.*?) from original + new middle part
+             
+             # Ensure the H2 (SEO H1) is at the very beginning of the extracted body
+             if not body_content.startswith("## "):
+                 # Try a more specific pattern if the first one was too greedy or failed
+                 body_specific_match = re.search(r"SEO H1:.*?[\r\n]+(##\s+[\s\S]*?)(?=[\r\n]+\s*Source:|[\r\n]*\s*<script)", response_text, re.DOTALL | re.IGNORECASE)
+                 if body_specific_match:
+                     body_content = body_specific_match.group(1).strip()
+                 else:
+                     errors.append("Could not reliably find start of Article Body (## H1).")
+                     body_content = "" # Avoid using potentially incorrect slice
+
+             # Clean potential leftover Source line if regex didn't exclude perfectly (should be less needed now)
+             # body_content = re.sub(r'\s*Source:\s*\[.*?\]\(.*?\)\s*$', '', body_content, flags=re.MULTILINE).strip()
              parsed_data['generated_article_body_md'] = body_content
-             if not re.search(r"###\s+.*", body_content): logger.warning("Generated body might be missing the main H3 analysis section.")
+
+             if not re.search(r"###\s+.*", body_content) and "pros-cons-container" not in body_content and "faq-section" not in body_content :
+                 logger.warning("Generated body might be missing main H3 analysis or structured sections.")
              if not body_content: errors.append("Extracted Article Body is empty.")
-        else: errors.append("Could not extract Article Body content.")
+        else:
+             errors.append("Could not extract Article Body content between SEO H1 and Source/Script.")
+
 
         if not parsed_data.get('generated_article_body_md') or not parsed_data.get('generated_seo_h1'):
             final_error_message = f"Critical parsing failure: Missing Article Body or SEO H1. Errors: {'; '.join(errors if errors else ['Unknown parsing issue'])}"

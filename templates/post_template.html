@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- *** CORE SEO & Page Info *** -->
-    <title>{{ PAGE_TITLE }} - Dacoola</title> {# PAGE_TITLE is typically generated_title_tag from agent #}
+    <title>{{ PAGE_TITLE }} - Dacoola</title>
     <meta name="description" content="{{ META_DESCRIPTION }}">
     {% if AUTHOR_NAME %}<meta name="author" content="{{ AUTHOR_NAME }}">{% endif %}
     {% if META_KEYWORDS %}<meta name="keywords" content="{{ META_KEYWORDS }}">{% endif %}
@@ -22,7 +22,7 @@
     <link rel="canonical" href="{{ CANONICAL_URL }}">
 
     <!-- *** OPEN GRAPH *** -->
-    <meta property="og:title" content="{{ PAGE_TITLE }}"> {# Use PAGE_TITLE (generated_title_tag) #}
+    <meta property="og:title" content="{{ PAGE_TITLE }}">
     <meta property="og:description" content="{{ META_DESCRIPTION }}">
     <meta property="og:image" content="{{ IMAGE_URL }}">
     <meta property="og:url" content="{{ CANONICAL_URL }}">
@@ -30,7 +30,7 @@
     <meta property="og:site_name" content="{{ SITE_NAME }}">
     {% if PUBLISH_ISO_FOR_META %}
     <meta property="article:published_time" content="{{ PUBLISH_ISO_FOR_META }}">
-    <meta property="article:modified_time" content="{{ PUBLISH_ISO_FOR_META }}"> {# Initial state, modified = published #}
+    <meta property="article:modified_time" content="{{ PUBLISH_ISO_FOR_META }}">
     {% endif %}
     {% for tag in META_KEYWORDS_LIST %}
     <meta property="article:tag" content="{{ tag }}">
@@ -38,12 +38,12 @@
 
     <!-- *** TWITTER CARD *** -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ PAGE_TITLE }}"> {# Use PAGE_TITLE (generated_title_tag) #}
+    <meta name="twitter:title" content="{{ PAGE_TITLE }}">
     <meta name="twitter:description" content="{{ META_DESCRIPTION }}">
     <meta name="twitter:image" content="{{ IMAGE_URL }}">
 
     <!-- *** Stylesheets & Icons *** -->
-    <link rel="stylesheet" href="../css/styles.css"> <!-- Path relative to public/articles/ -->
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png">
 
@@ -52,28 +52,24 @@
     {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "{{ ARTICLE_SEO_H1 | default(PAGE_TITLE) | escapejs }}", {# Use generated SEO H1, fallback to PAGE_TITLE #}
+      "headline": "{{ ARTICLE_SEO_H1 | default(PAGE_TITLE) | escapejs }}",
       "description": "{{ META_DESCRIPTION | escapejs }}",
       "keywords": {{ META_KEYWORDS_LIST | tojson | safe }},
       "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ CANONICAL_URL | escapejs }}" },
-      "image": [ {# Using an array for images as recommended #}
+      "image": [
         {
           "@type": "ImageObject",
           "url": "{{ IMAGE_URL | escapejs }}"
-          {# "width": 1200, # Optional, if you can pass this from Python #}
-          {# "height": 675  # Optional #}
         }
       ],
       "datePublished": "{{ PUBLISH_ISO_FOR_META }}",
-      "dateModified": "{{ PUBLISH_ISO_FOR_META }}", {# Same as published initially #}
+      "dateModified": "{{ PUBLISH_ISO_FOR_META }}",
       "author": { "@type": "Person", "name": "{{ AUTHOR_NAME | default('AI News Team') | escapejs }}" },
       "publisher": {
         "@type": "Organization",
         "name": "{{ SITE_NAME | escapejs }}",
         "logo": { "@type": "ImageObject", "url": "{{ YOUR_WEBSITE_LOGO_URL | escapejs }}" }
       }
-      {# Consider adding articleBody here if you pass plain text body to template #}
-      {# "articleBody": "{{ PLAIN_TEXT_ARTICLE_BODY | escapejs }}" #}
     }
     </script>
 
@@ -97,71 +93,67 @@
         <!-- Navbar loaded by JS -->
     </header>
 
-    <div class="main-content-grid">
+    <div class="site-content-wrapper">
+        <div class="main-content-grid">
 
-        <aside class="sidebar related-news">
-            <h2>Related News</h2>
-            <div id="related-news-content">
-                <!-- JS will populate this list -->
-            </div>
-        </aside>
+            <aside class="sidebar related-news">
+                <h2>Related News</h2>
+                <div id="related-news-content">
+                    <!-- JS will populate this list -->
+                </div>
+            </aside>
 
-        <article class="main-article"
-            data-article-id="{{ CURRENT_ARTICLE_ID }}"
-            data-article-topic="{{ CURRENT_ARTICLE_TOPIC }}"
-            data-article-tags='{{ CURRENT_ARTICLE_TAGS_JSON | safe }}'
-            data-audio-url="{{ AUDIO_URL or '' }}">
+            <article class="main-article"
+                data-article-id="{{ CURRENT_ARTICLE_ID }}"
+                data-article-topic="{{ CURRENT_ARTICLE_TOPIC }}"
+                data-article-tags='{{ CURRENT_ARTICLE_TAGS_JSON | safe }}'
+                data-audio-url="{{ AUDIO_URL or '' }}">
 
-            <header>
-                {# Use the SEO-Optimized H1 from the agent, or fallback to original ARTICLE_HEADLINE if not available #}
-                <h1 id="article-headline">{{ ARTICLE_SEO_H1 | default(ARTICLE_HEADLINE) }}</h1>
-                <div class="article-meta-container">
-                    <div class="article-meta">
-                        Published on <span id="publish-date">{{PUBLISH_DATE}}</span>
-                        by <span id="author-name">{{AUTHOR_NAME | default('AI News Team')}}</span>
+                <header>
+                    <h1 id="article-headline">{{ ARTICLE_SEO_H1 | default(ARTICLE_HEADLINE) }}</h1>
+                    <div class="article-meta-container">
+                        <div class="article-meta">
+                            Published on <span id="publish-date">{{PUBLISH_DATE}}</span>
+                            by <span id="author-name">{{AUTHOR_NAME | default('AI News Team')}}</span>
+                        </div>
                     </div>
+                </header>
+
+                <figure class="article-image-container">
+                    <img id="article-image" src="{{IMAGE_URL}}" alt="{{IMAGE_ALT_TEXT}}">
+                </figure>
+
+                <section id="article-body">
+                    {{ ARTICLE_BODY_HTML | safe }}
+                    {# Source link button and its container are REMOVED from here as per your request #}
+                </section>
+
+                <footer>
+                    {# Only tags remain in the footer now #}
+                    <div class="tags">
+                        Tags: <span id="article-tags">{{ ARTICLE_TAGS_HTML | safe }}</span>
+                    </div>
+                </footer>
+
+            </article>
+
+            <aside class="sidebar latest-news">
+                <h2>Latest News</h2>
+                <div id="latest-news-content">
+                    <!-- JS will populate this list -->
                 </div>
-            </header>
+            </aside>
 
-            <figure class="article-image-container">
-                <img id="article-image" src="{{IMAGE_URL}}" alt="{{IMAGE_ALT_TEXT}}">
-            </figure>
-
-            <section id="article-body">
-                {{ ARTICLE_BODY_HTML | safe }} <!-- Render generated Markdown HTML -->
-                 <div class="source-link-container">
-                    <a href="{{SOURCE_ARTICLE_URL}}" class="source-button" target="_blank" rel="noopener noreferrer">
-                        Read Original Source <i class="fas fa-external-link-alt fa-xs" aria-hidden="true"></i>
-                    </a>
-                 </div>
-            </section>
-
-            <footer>
-                <div class="tags">
-                    Tags: <span id="article-tags">{{ ARTICLE_TAGS_HTML | safe }}</span>
-                </div>
-            </footer>
-
-        </article>
-
-        <aside class="sidebar latest-news">
-            <h2>Latest News</h2>
-            <div id="latest-news-content">
-                <!-- JS will populate this list -->
-            </div>
-        </aside>
-
-    </div> <!-- End main-content-grid -->
+        </div> <!-- End main-content-grid -->
+    </div> <!-- End site-content-wrapper -->
 
     <!-- GLOBAL FIXED BROWSER TTS PLAYER BUTTON -->
     <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
         <i class="fas fa-headphones" aria-hidden="true"></i>
     </button>
-    {# Hidden audio element is not strictly necessary if only using browser TTS #}
     {# <audio id="global-audio-player" preload="none" style="display:none;"></audio> #}
 
-
-    <script src="../js/script.js"></script> <!-- Path relative to public/articles/ -->
+    <script src="../js/script.js"></script>
 
 </body>
 </html>
