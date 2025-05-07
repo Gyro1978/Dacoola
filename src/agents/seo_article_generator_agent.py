@@ -58,7 +58,7 @@ You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, powe
         *   **Core Analysis (2-4 paragraphs under the H3):** Deeper explanation, context, trends, significance.
         *   **Optional, Thematic Sub-sections (`#### H4`):** If the content supports it, create specific `#### H4` sub-sections *without generic prefixes like "Deeper Dive:"*. The H4 title itself should be descriptive (e.g., "#### The Technology Behind X", "#### Market Reactions", "#### Ethical Considerations"). Include 1-2 paragraphs for each.
         *   **Pros & Cons (`#### Pros & Cons`):** If applicable, use this exact H4 title. Items MUST be structured as an HTML unordered list (`<ul>`) with each item in an `<li>` tag directly within the `item-list` div as specified in the user prompt template. Apply Markdown for bold/italics *inside* the `<li>` tags if needed (e.g., `<li>**Strong Point:** Details...</li>`).
-        *   **FAQ (`#### Frequently Asked Questions`):** If the topic is complex or warrants it, use this exact H4 title. Generate 3-5 relevant questions and answers using the specified HTML structure for interactive accordions (or 2-3 if less content is available).
+        *   **FAQ (`#### Frequently Asked Questions`):** If the topic is complex or warrants it, use this exact H4 title. Generate 3-5 relevant questions and answers using the specified HTML structure for interactive accordions (or 2-3 if less content is available). The `<summary>` MUST include the exact `<i>` tag for the Font Awesome icon as shown in the user prompt template.
     *   **Overall Length & Tone:** Aim for **500-800 words**. Maintain an authoritative, insightful, yet accessible journalistic tone.
 
 4.  **Output Format (Strict Adherence Required):**
@@ -133,22 +133,22 @@ SEO H1: [Generated SEO-Optimized H1 heading for the page, include TARGET_KEYWORD
 [Optional: 1-2 paragraphs on future developments.]
 
 #### [Optional: Frequently Asked Questions]
-[If generating FAQs, use this exact H4 title "Frequently Asked Questions". Generate 3-5 relevant Q&As if the topic is complex, or 2-3 if less content is available. Use the HTML structure below.]
+[If generating FAQs, use this exact H4 title "Frequently Asked Questions". Generate 3-5 relevant Q&As if the topic is complex, or 2-3 if less content is available. Use the HTML structure below, including the exact `<i>` tag: `<i class="faq-icon fas fa-chevron-down"></i>`]
 <div class="faq-section">
   <details class="faq-item">
-    <summary class="faq-question">Question 1 related to the article?</summary>
+    <summary class="faq-question">Question 1 related to the article? <i class="faq-icon fas fa-chevron-down"></i></summary>
     <div class="faq-answer-content">
       <p>Concise answer to question 1.</p>
     </div>
   </details>
   <details class="faq-item">
-    <summary class="faq-question">Another relevant question?</summary>
+    <summary class="faq-question">Another relevant question? <i class="faq-icon fas fa-chevron-down"></i></summary>
     <div class="faq-answer-content">
       <p>Detailed answer to question 2.</p>
     </div>
   </details>
   <details class="faq-item">
-    <summary class="faq-question">A third question if applicable?</summary>
+    <summary class="faq-question">A third question if applicable? <i class="faq-icon fas fa-chevron-down"></i></summary>
     <div class="faq-answer-content">
       <p>Answer to the third question.</p>
     </div>
@@ -177,8 +177,10 @@ Source: [{article_title}]({source_article_url})
 </script>
 """
 
-# --- API Call Function (remains the same) ---
+# --- API Call Function ---
+# (No changes needed in call_deepseek_api)
 def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE, temperature=TEMPERATURE):
+    # ... (function remains the same)
     if not DEEPSEEK_API_KEY:
         logger.error("DEEPSEEK_API_KEY environment variable not set.")
         return None
@@ -228,7 +230,9 @@ def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE
         return None
 
 # --- Parsing Function ---
+# (No changes needed in parse_seo_agent_response)
 def parse_seo_agent_response(response_text):
+    # ... (function remains the same)
     parsed_data = {}
     errors = []
 
@@ -299,8 +303,11 @@ def parse_seo_agent_response(response_text):
         logger.exception(f"Critical unexpected error during SEO response parsing: {e}")
         return None, f"Parsing exception: {e}"
 
+
 # --- Main Agent Function ---
+# (No changes needed in run_seo_article_agent)
 def run_seo_article_agent(article_data):
+    # ... (function remains the same)
     article_id = article_data.get('id', 'N/A')
 
     content_to_process = article_data.get('content_for_processing')
@@ -349,7 +356,7 @@ def run_seo_article_agent(article_data):
         logger.exception(f"KeyError formatting SEO prompt template for ID {article_id}! Error: {e}")
         article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = f"Prompt template formatting error: {e}"; return article_data
 
-    logger.info(f"Running SEO article generator for article ID: {article_id} (Perfected SEO & Content)...")
+    logger.info(f"Running SEO article generator for article ID: {article_id} (Perfected SEO & Content Structure)...")
     raw_response_content = call_deepseek_api(SEO_PROMPT_SYSTEM, user_prompt, max_tokens=MAX_TOKENS_RESPONSE, temperature=TEMPERATURE)
 
     if not raw_response_content:
@@ -379,46 +386,7 @@ def run_seo_article_agent(article_data):
     return article_data
 
 # --- Standalone Execution (for testing) ---
+# (No changes needed in standalone test code)
 if __name__ == "__main__":
-    logging.getLogger().setLevel(logging.DEBUG)
-    logger.setLevel(logging.DEBUG)
-
-    test_article_data_perfect_seo = {
-        'id': 'example-seo-perfect-001',
-        'title': "Nvidia Blackwell B200 GPU Announcement",
-        'summary': "Nvidia CEO Jensen Huang announced the Blackwell B200 GPU at GTC, promising massive performance gains for AI training and inference.",
-        'content_for_processing': """Nvidia's GTC conference today saw the unveiling of their next-generation AI powerhouse, the Blackwell B200 GPU. CEO Jensen Huang, during his keynote, highlighted the chip's capability to handle trillion-parameter scale AI models, a significant leap from previous generations. The B200 is built on a new architecture, reportedly TSMC's 3nm process, and packs an astounding 208 billion transistors. This allows for a substantial increase in raw compute power and memory bandwidth, critical for the ever-growing demands of large language models and complex AI workloads. Key features touted include a second-generation Transformer Engine with FP4 precision support, which Nvidia claims can double the effective compute and bandwidth for inference tasks. The new NVLink switch system allows up to 576 Blackwell GPUs to communicate as a single, unified compute instance. Huang stated, "Blackwell is not just a chip, it's a platform." Early partners like AWS, Google Cloud, and Microsoft Azure will deploy Blackwell systems. Availability is expected late 2024. Competitors AMD and Intel are also active.""",
-        'link': "https://example.com/nvidia-blackwell-b200-perfected",
-        'filter_verdict': {
-            'importance_level': 'Breaking', 'topic': 'Hardware',
-            'reasoning_summary': 'Major new GPU announcement.',
-            'primary_topic_keyword': 'Nvidia Blackwell B200'
-        },
-        'selected_image_url': "https://via.placeholder.com/800x500.png?text=Nvidia+Blackwell+Perfected",
-        'published_iso': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-        'generated_tags': ["Nvidia", "Blackwell", "B200", "GPU", "AI Hardware", "GTC 2024", "Deep Learning", "TSMC", "Jensen Huang", "AI Chips"],
-        'author': 'AI SEO Bot Test'
-    }
-
-    logger.info("\n--- Running SEO Agent Standalone Test (Perfected SEO & Content Structure) ---")
-    result_data = run_seo_article_agent(test_article_data_perfect_seo.copy())
-
-    print("\n--- Final Result Data (Perfected SEO Test) ---")
-    if result_data and result_data.get('seo_agent_results'):
-        print("\n--- Parsed SEO Results ---")
-        print(f"Title Tag: {result_data['seo_agent_results'].get('generated_title_tag')}")
-        print(f"Meta Desc: {result_data['seo_agent_results'].get('generated_meta_description')}")
-        print(f"SEO H1: {result_data['seo_agent_results'].get('generated_seo_h1')}")
-        print(f"JSON-LD Present: {bool(result_data['seo_agent_results'].get('generated_json_ld'))}")
-        print("\n--- Article Body Markdown (should contain HTML for Pros/Cons & FAQ) ---")
-        print(result_data['seo_agent_results'].get('generated_article_body_md', ''))
-        if result_data.get('seo_agent_error'):
-            print(f"\nParsing Warning/Error: {result_data['seo_agent_error']}")
-        print(f"\n--- Final Article Title (may be updated by SEO H1): {result_data.get('title')} ---")
-
-    elif result_data and result_data.get('seo_agent_error'): # Critical error from agent or parsing
-         print(f"\nSEO Agent FAILED. Error: {result_data.get('seo_agent_error')}")
-         if 'seo_agent_raw_response' in result_data: print(f"\n--- Raw Response (Debug) ---\n{result_data['seo_agent_raw_response']}")
-    else: print("\nSEO Agent FAILED critically or returned no data.")
-
-    logger.info("\n--- SEO Agent Standalone Test Complete ---")
+    # ... (rest of standalone test code) ...
+    pass

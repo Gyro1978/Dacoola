@@ -1,4 +1,4 @@
-// public/js/script.js (1/1)
+// public/js/script.js (1/1) - FULL SCRIPT
 
 // --- Global Variables ---
 const synth = window.speechSynthesis; // For Browser TTS
@@ -7,12 +7,13 @@ let currentPlayingButton = null; // Button associated with current TTS
 let autoSlideInterval = null; // Interval timer for homepage banner
 
 // -- Read values from CSS custom properties or use defaults --
+// Ensure your :root in CSS has these defined if you want to control them from there
 const MAX_HOME_PAGE_ARTICLES = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--max-home-page-articles').trim() || '20', 10);
 const LATEST_NEWS_GRID_COUNT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--latest-news-grid-count').trim() || '8', 10);
 const TRENDING_NEWS_COUNT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--trending-news-count').trim() || '4', 10);
 const SIDEBAR_DEFAULT_ITEM_COUNT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar-default-item-count').trim() || '5', 10);
-const AVG_SIDEBAR_ITEM_HEIGHT_PX = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--avg-sidebar-item-height').trim() || '110', 10);
-const MAX_SIDEBAR_ITEMS = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--max-sidebar-items').trim() || '10', 10);
+const AVG_SIDEBAR_ITEM_HEIGHT_PX = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--avg-sidebar-item-height').trim() || '110', 10); // Approx height of a sidebar card
+const MAX_SIDEBAR_ITEMS = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--max-sidebar-items').trim() || '10', 10); // Max items in a sidebar
 
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadNavbar().then(() => {
         console.log("Navbar loaded successfully. Proceeding with page setup.");
         setupSearch();
-        initializePageContent();
+        initializePageContent(); // This will call loadSidebarData if on article page
         setupBrowserTTSListeners();
         setupFAQAccordion(); // Initialize FAQ interactivity
         setInterval(updateTimestamps, 60000);
@@ -32,9 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initializePageContent() {
     const bodyClassList = document.body.classList;
+
     if (document.querySelector('.main-article')) {
         console.log("Article page detected");
-        loadSidebarData();
+        loadSidebarData(); // Dynamic sidebar loading is handled here
     } else if (document.querySelector('.home-container')) {
         console.log("Homepage detected");
         loadHomepageData();
@@ -80,19 +82,26 @@ async function loadHomepageData() {
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const allData = await response.json();
         if (!allData?.articles) throw new Error("Invalid all_articles.json format.");
+
         const allArticles = allData.articles;
         const bannerAndTrendingArticles = allArticles.slice(0, MAX_HOME_PAGE_ARTICLES);
-        renderBreakingNews(bannerAndTrendingArticles);
-        const bannerArticleLinks = Array.from(document.querySelectorAll('#breaking-news-content a.breaking-news-item')).map(a => a.getAttribute('href'));
+
+        renderBreakingNews(bannerAndTrendingArticles); // Call the updated function
+
+        const bannerArticleLinks = Array.from(
+            document.querySelectorAll('#breaking-news-content a.breaking-news-item')
+        ).map(a => a.getAttribute('href'));
         const now = new Date();
         const articlesForGrid = allArticles.filter(a => {
             const isRecentBreaking = a.is_breaking && a.published_iso && (now - new Date(a.published_iso))/(1000*60*60) <= 6;
             const isInBanner = bannerArticleLinks.includes(`/${a.link}`);
             return !isRecentBreaking && !isInBanner;
         }).slice(0, LATEST_NEWS_GRID_COUNT);
+
         renderLatestNewsGrid(articlesForGrid);
         renderTopics();
         renderTrendingNews(bannerAndTrendingArticles.slice(0, TRENDING_NEWS_COUNT));
+
     } catch (error) {
         console.error('Error loading homepage data:', error);
         const sel = s => document.querySelector(s);
@@ -115,12 +124,14 @@ async function loadGenericPageData() {
     const topicName = urlParams.get('name');
     let pageTitle = "News", articlesToDisplay = [], emptyMessage = "No articles found.";
     const dataSourcePath = '/all_articles.json';
+
     try {
         const response = await fetch(dataSourcePath, { cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP error ${response.status}`);
         const fetchedData = await response.json();
         if (!fetchedData?.articles) throw new Error("Invalid JSON.");
         const sourceArticles = fetchedData.articles;
+
         if (pageType === 'latest') {
             pageTitle = "All News"; articlesToDisplay = sourceArticles; emptyMessage = "No news available.";
         } else if (pageType === 'topic' && topicName) {
@@ -167,6 +178,7 @@ async function loadSidebarData() {
     const relatedContainer = document.getElementById('related-news-content');
     const latestContainer = document.getElementById('latest-news-content');
     const mainArticleElement = document.querySelector('.main-article');
+
     if (!mainArticleElement) {
         console.debug("Main article element not found, cannot load dynamic sidebars.");
         if (latestContainer) renderArticleCardList(latestContainer, [], "Loading news...");
@@ -177,6 +189,7 @@ async function loadSidebarData() {
         console.debug("Sidebar containers for related/latest news not found.");
         return;
     }
+
     let currentArticleId = mainArticleElement.getAttribute('data-article-id');
     let currentArticleTopic = mainArticleElement.getAttribute('data-article-topic');
     let currentArticleTags = [];
@@ -187,6 +200,7 @@ async function loadSidebarData() {
         }
         if (!Array.isArray(currentArticleTags)) currentArticleTags = [];
     } catch (e) { console.error("Failed to parse tags for sidebar:", e); currentArticleTags = []; }
+
     let numItemsForSidebarTarget = SIDEBAR_DEFAULT_ITEM_COUNT;
     try {
         const articleBody = document.getElementById('article-body');
@@ -204,6 +218,7 @@ async function loadSidebarData() {
         console.warn("Could not calculate dynamic sidebar height, using default count.", e);
     }
     console.log(`Sidebar: Target items based on height: ${numItemsForSidebarTarget}`);
+
     const allArticlesPath = '/all_articles.json';
     try {
         const response = await fetch(allArticlesPath, { cache: "no-store" });
@@ -211,13 +226,19 @@ async function loadSidebarData() {
         const data = await response.json();
         if (!data?.articles) throw new Error(`Invalid JSON format in sidebar data`);
         const allArticles = data.articles;
+
         let latestSidebarArticles_candidates = [];
         let relatedArticles_candidates = [];
+
         if (latestContainer) {
-            latestSidebarArticles_candidates = allArticles.filter(a => a.id !== currentArticleId).slice(0, numItemsForSidebarTarget);
+            latestSidebarArticles_candidates = allArticles
+                .filter(a => a.id !== currentArticleId)
+                .slice(0, numItemsForSidebarTarget);
         }
+
         if (relatedContainer) {
-            relatedArticles_candidates = allArticles.filter(a => a.id !== currentArticleId)
+            relatedArticles_candidates = allArticles
+                .filter(a => a.id !== currentArticleId)
                 .map(a => {
                     let score = 0;
                     if (a.topic === currentArticleTopic) score += 500;
@@ -226,9 +247,15 @@ async function loadSidebarData() {
                     if (a.published_iso) { try { score += Math.max(0, 1 - (new Date() - new Date(a.published_iso))/(1000*60*60*24*30)) * 10; } catch {} }
                     return { ...a, score };
                 })
-                .filter(a => a.score >= 10).sort((a, b) => b.score - a.score).slice(0, numItemsForSidebarTarget);
+                .filter(a => a.score >= 10)
+                .sort((a, b) => b.score - a.score)
+                .slice(0, numItemsForSidebarTarget);
         }
-        let finalItemCount = numItemsForSidebarTarget;
+
+        let finalItemCount = numItemsForSidebarTarget; // Start with the ideal count
+
+        // Determine the actual number of items to render in *both* sidebars if both are present
+        // Or, use the available count for a single sidebar if only one is present
         if (latestContainer && relatedContainer) {
             finalItemCount = Math.min(numItemsForSidebarTarget, latestSidebarArticles_candidates.length, relatedArticles_candidates.length);
             console.log(`Sidebar: Both containers present. Target: ${numItemsForSidebarTarget}, Latest Cands: ${latestSidebarArticles_candidates.length}, Related Cands: ${relatedArticles_candidates.length}. Final count for both: ${finalItemCount}.`);
@@ -239,6 +266,7 @@ async function loadSidebarData() {
             finalItemCount = Math.min(numItemsForSidebarTarget, relatedArticles_candidates.length);
             console.log(`Sidebar: Only Related container. Target: ${numItemsForSidebarTarget}, Related Cands: ${relatedArticles_candidates.length}. Final count: ${finalItemCount}.`);
         }
+
         if (latestContainer) {
             const latestArticlesToRender = latestSidebarArticles_candidates.slice(0, finalItemCount);
             renderArticleCardList(latestContainer, latestArticlesToRender, "No recent news.");
@@ -247,6 +275,7 @@ async function loadSidebarData() {
             const relatedArticlesToRender = relatedArticles_candidates.slice(0, finalItemCount);
             renderArticleCardList(relatedContainer, relatedArticlesToRender, "No related news.");
         }
+
     } catch (err) {
         console.error('Error loading sidebar data:', err);
         if (latestContainer) latestContainer.innerHTML = '<p class="placeholder error">Error loading latest</p>';
@@ -259,39 +288,179 @@ function renderBreakingNews(articles) {
     const section = document.getElementById('breaking-news-section');
     const container = document.getElementById('breaking-news-content');
     const titleElement = document.getElementById('breaking-news-title');
-    if (!container || !titleElement || !section) return;
-    container.innerHTML = ''; if (autoSlideInterval) clearInterval(autoSlideInterval);
+
+    if (!container || !titleElement || !section) {
+        console.error("Breaking news container, title, or section not found.");
+        if (section) section.style.display = 'none'; // Hide section if container missing
+        return;
+    }
+
+    container.innerHTML = ''; // Clear previous content
+    if (autoSlideInterval) clearInterval(autoSlideInterval); // Clear previous interval
+
     const now = new Date();
     const breakingArticles = articles.filter(a => a.is_breaking && a.published_iso && (now - new Date(a.published_iso))/(1000*60*60) <= 6);
     let slidesData = [], bannerTitle = "Breaking News", labelText = "Breaking", labelClass = "";
     const MAX_BANNER_SLIDES = 5;
-    if (breakingArticles.length > 0) { slidesData = breakingArticles.slice(0, MAX_BANNER_SLIDES); }
-    else {
+
+    if (breakingArticles.length > 0) {
+        slidesData = breakingArticles.slice(0, MAX_BANNER_SLIDES);
+    } else {
         const nonBreaking = articles.filter(a => !a.is_breaking || (a.published_iso && (now - new Date(a.published_iso))/(1000*60*60) > 6))
             .sort((a, b) => (b.trend_score || 0) - (a.trend_score || 0));
-        if (nonBreaking.length > 0) { slidesData = nonBreaking.slice(0, MAX_BANNER_SLIDES); bannerTitle = "Trending Now"; labelText = "Trending"; labelClass = "trending-label"; }
-        else { section.style.display = 'none'; return; }
+        if (nonBreaking.length > 0) {
+            slidesData = nonBreaking.slice(0, MAX_BANNER_SLIDES);
+            bannerTitle = "Trending Now"; labelText = "Trending"; labelClass = "trending-label";
+        } else {
+            section.style.display = 'none'; // Hide section if no slides
+            return;
+        }
     }
-    titleElement.textContent = bannerTitle; section.style.display = 'block';
+
+    titleElement.textContent = bannerTitle;
+    section.style.display = 'block'; // Ensure section is visible
+
+    // Generate slide HTML
     slidesData.forEach((article, index) => {
-        const linkPath = `/${article.link}`; const item = document.createElement('a'); item.href = linkPath;
+        const linkPath = `/${article.link}`;
+        const item = document.createElement('a');
+        item.href = linkPath;
         item.className = `breaking-news-item slider-item ${index === 0 ? 'active' : ''}`;
-        item.innerHTML = `<span class="breaking-label ${labelClass}">${labelText}</span><img src="${article.image_url || 'https://via.placeholder.com/1200x400?text=News'}" alt="${article.title || 'News image'}" loading="lazy"><div class="breaking-news-text"><h3>${article.title || 'Untitled'}</h3><div class="breaking-news-meta"><span class="timestamp" data-iso-date="${article.published_iso || ''}">${timeAgo(article.published_iso)}</span></div></div>`;
+        item.innerHTML = `
+            <span class="breaking-label ${labelClass}">${labelText}</span>
+            <img src="${article.image_url || 'https://via.placeholder.com/1200x400?text=News'}" alt="${article.title || 'News image'}" loading="lazy">
+            <div class="breaking-news-text">
+                <h3>${article.title || 'Untitled'}</h3>
+                <div class="breaking-news-meta">
+                    <span class="timestamp" data-iso-date="${article.published_iso || ''}">${timeAgo(article.published_iso)}</span>
+                </div>
+            </div>`;
         container.appendChild(item);
     });
+
     const slides = container.querySelectorAll('.slider-item');
     if (slides.length > 1) {
-        let currentSlideIndex = 0; const paginationContainer = document.createElement('div'); paginationContainer.className = 'slider-pagination';
-        const showSlide = (index) => { slides.forEach((slide, i) => slide.classList.toggle('active', i === index)); paginationContainer.querySelectorAll('.slider-dot').forEach((dot, i) => dot.classList.toggle('active', i === index)); currentSlideIndex = index; };
+        let currentSlideIndex = 0;
+        const paginationContainer = document.createElement('div');
+        paginationContainer.className = 'slider-pagination';
+
+        // --- Slider Control Functions ---
+        const showSlide = (index) => {
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            paginationContainer.querySelectorAll('.slider-dot').forEach((dot, i) => dot.classList.toggle('active', i === index));
+            currentSlideIndex = index;
+             // Reset interval on manual control/swipe
+            resetAutoSlide();
+        };
+
         const nextSlide = () => showSlide((currentSlideIndex + 1) % slides.length);
-        slides.forEach((_, index) => { const dot = document.createElement('button'); dot.className = 'slider-dot'; if (index === 0) dot.classList.add('active'); dot.setAttribute('aria-label', `Go to slide ${index + 1}`); dot.addEventListener('click', () => showSlide(index)); paginationContainer.appendChild(dot); }); container.appendChild(paginationContainer);
-        const prevButton = document.createElement('button'); prevButton.className = 'slider-control slider-prev'; prevButton.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>'; prevButton.title="Previous"; prevButton.setAttribute('aria-label', 'Previous slide'); prevButton.addEventListener('click', (e) => { e.preventDefault(); showSlide((currentSlideIndex - 1 + slides.length) % slides.length); }); container.appendChild(prevButton);
-        const nextButton = document.createElement('button'); nextButton.className = 'slider-control slider-next'; nextButton.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>'; nextButton.title="Next"; nextButton.setAttribute('aria-label', 'Next slide'); nextButton.addEventListener('click', (e) => { e.preventDefault(); nextSlide(); }); container.appendChild(nextButton);
-        autoSlideInterval = setInterval(nextSlide, 5000);
+        const prevSlide = () => showSlide((currentSlideIndex - 1 + slides.length) % slides.length);
+
+        const resetAutoSlide = () => {
+             clearInterval(autoSlideInterval);
+             autoSlideInterval = setInterval(nextSlide, 6000); // Restart timer (increased delay)
+        }
+
+        // --- Create Dots ---
+        slides.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.className = 'slider-dot';
+            if (index === 0) dot.classList.add('active');
+            dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+            dot.addEventListener('click', () => showSlide(index));
+            paginationContainer.appendChild(dot);
+        });
+        container.appendChild(paginationContainer);
+
+        // --- Create Buttons ---
+        const prevButton = document.createElement('button');
+        prevButton.className = 'slider-control slider-prev';
+        prevButton.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
+        prevButton.title="Previous";
+        prevButton.setAttribute('aria-label', 'Previous slide');
+        prevButton.addEventListener('click', (e) => { e.preventDefault(); prevSlide(); });
+        container.appendChild(prevButton);
+
+        const nextButton = document.createElement('button');
+        nextButton.className = 'slider-control slider-next';
+        nextButton.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
+        nextButton.title="Next";
+        nextButton.setAttribute('aria-label', 'Next slide');
+        nextButton.addEventListener('click', (e) => { e.preventDefault(); nextSlide(); });
+        container.appendChild(nextButton);
+
+        // --- Auto Sliding ---
+        autoSlideInterval = setInterval(nextSlide, 6000); // Slightly longer interval
+        // Pause on hover (desktop)
         container.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-        container.addEventListener('mouseleave', () => { clearInterval(autoSlideInterval); autoSlideInterval = setInterval(nextSlide, 5000); });
+        container.addEventListener('mouseleave', resetAutoSlide); // Use reset function
+
+        // --- Touch/Drag Swipe Functionality ---
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let isDragging = false;
+        const swipeThreshold = 50; // Min pixels to swipe to change slide
+
+        container.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            isDragging = true;
+            clearInterval(autoSlideInterval); // Pause auto slide during touch
+            // Optional: Add a class for visual feedback during drag
+            // container.classList.add('dragging');
+        }, { passive: true }); // Use passive for performance if not preventing default scroll
+
+        container.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            touchEndX = e.changedTouches[0].screenX;
+            // Optional: Move the slide visually during drag (more complex)
+        }, { passive: true });
+
+        container.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            touchEndX = e.changedTouches[0].screenX; // Ensure endX is captured
+            handleSwipe();
+             // Optional: Remove visual feedback class
+            // container.classList.remove('dragging');
+            resetAutoSlide(); // Resume auto slide after interaction
+        });
+
+         // Handle potential cancellation (e.g., moving finger off screen)
+        container.addEventListener('touchcancel', (e) => {
+             if (!isDragging) return;
+             isDragging = false;
+             // container.classList.remove('dragging');
+             resetAutoSlide();
+        });
+
+
+        function handleSwipe() {
+            const deltaX = touchEndX - touchStartX;
+            // console.log(`Swipe detected: deltaX = ${deltaX}`); // Debugging
+
+            if (Math.abs(deltaX) > swipeThreshold) {
+                if (deltaX < 0) { // Swiped left (show next)
+                    // console.log("Swiped Left - Next");
+                    nextSlide();
+                } else { // Swiped right (show previous)
+                    // console.log("Swiped Right - Previous");
+                    prevSlide();
+                }
+            }
+            // Reset coordinates
+            touchStartX = 0;
+            touchEndX = 0;
+        }
+        // --- End Touch/Drag ---
+
+    } else if (slides.length === 1) {
+        // If only one slide, ensure it's active and hide controls/dots (or don't create them)
+        slides[0].classList.add('active');
+    } else {
+        // No slides data - already handled by hiding the section earlier
     }
 }
+
 
 function renderLatestNewsGrid(articlesToRender) {
     const container = document.querySelector('#latest-news-section .latest-news-grid');
@@ -373,8 +542,7 @@ function setupFAQAccordion() {
         const faqItems = faqSection.querySelectorAll('details.faq-item');
         if (faqItems.length > 0) {
             console.log("Setting up FAQ accordion for", faqItems.length, "items (multiple allowed).");
-            // No need to add individual event listeners if we are not closing others
-            // The default <details> behavior allows multiple to be open.
+            // No extra JS needed here, default <details> allows multiple open
         }
     });
 }
