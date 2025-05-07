@@ -10,6 +10,8 @@
     --accent-blue-darker: #0090d1; /* Slightly darker blue */
     --border-color: #444;
     --navbar-height: 65px; /* Slightly taller for bigger logo */
+    --success-green: #28a745;
+    --danger-red: #dc3545;
 
     /* Font */
     --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean sans-serif */
@@ -126,28 +128,28 @@ img {
     color: var(--text-light);
     position: relative;
     padding-bottom: 5px;
-    transition: color 0.3s, background-color 0.1s ease-in-out; /* Added background transition */
+    transition: color 0.3s, background-color 0.1s ease-in-out;
     display: flex;
     align-items: center;
-    padding: 5px 8px; /* Added padding */
-    border-radius: 4px; /* Added radius */
+    padding: 5px 8px;
+    border-radius: 4px;
 }
 .nav-link.icon-link:hover {
-    background-color: var(--bg-tertiary); /* Subtle background on hover */
+    background-color: var(--bg-tertiary);
     color: var(--accent-blue);
 }
-.nav-link.icon-link::after { /* Underline effect */
+.nav-link.icon-link::after {
     content: '';
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -2px; /* Adjusted position */
+    bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--accent-blue);
     transition: width 0.15s ease-in-out;
 }
-.nav-link.icon-link:hover::after { width: 80%; } /* Underline width on hover */
+.nav-link.icon-link:hover::after { width: 80%; }
 .nav-link.donate-icon { color: var(--accent-blue); }
 .nav-link.donate-icon:hover { color: var(--accent-blue-darker); }
 .nav-link.icon-link i { line-height: 1; }
@@ -160,7 +162,7 @@ img {
     top: 100%;
     left: 0;
     width: 100%;
-    max-width: 458px;
+    max-width: 458px; /* Input width + button width approx */
     max-height: 400px;
     overflow-y: auto;
     background-color: var(--bg-secondary);
@@ -169,7 +171,7 @@ img {
     border-radius: 0 0 8px 8px;
     z-index: 999;
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    overflow-x: hidden; /* Hide horizontal overflow */
+    overflow-x: hidden;
 }
 .suggestion-item {
     display: flex; align-items: center; padding: 12px 15px;
@@ -179,11 +181,14 @@ img {
 .suggestion-item:last-child { border-bottom: none; }
 .suggestion-item:hover { background-color: var(--bg-tertiary); }
 .suggestion-image { width: 80px; height: 50px; object-fit: cover; border-radius: 6px; flex-shrink: 0; border: 1px solid var(--border-color); }
-.suggestion-text { display: flex; flex-direction: column; flex-grow: 1; min-width: 0; }
-.suggestion-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; font-size: 0.95em; color: var(--text-light); margin-bottom: 4px; line-height: 1.2; }
+.suggestion-text { display: flex; flex-direction: column; flex-grow: 1; min-width: 0; } /* min-width for ellipsis */
+.suggestion-title {
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    font-weight: 500; font-size: 0.95em; color: var(--text-light);
+    margin-bottom: 4px; line-height: 1.2;
+}
 .suggestion-meta { font-size: 0.8em; color: var(--text-muted); }
 .suggestion-item:hover .suggestion-title { color: var(--accent-blue); }
-/* Hide scrollbar */
 .search-suggestions-dropdown::-webkit-scrollbar { width: 0; background: transparent; }
 .search-suggestions-dropdown { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -191,77 +196,213 @@ img {
 /* --- Main Content Grid (Article Page Layout) --- */
 .main-content-grid {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr; /* Adjust ratios as needed */
     gap: 30px;
     width: 90%;
     max-width: 1400px;
-    margin: 55px auto 30px auto; /* <<< Increased top margin to 40px */
+    margin: 55px auto 30px auto; /* Top margin increased for navbar */
 }
 
 /* --- Main Article Styling (Article Page) --- */
 .main-article {
     background-color: var(--bg-secondary);
-    padding: 30px 30px 15px 30px; /* Reduced bottom padding */
+    padding: 30px 30px 15px 30px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
 }
-/* --- MODIFIED --- Reduce main article title size */
 .main-article header h1#article-headline {
-    font-size: 2rem; /* <<< ADJUSTED */
-    margin-bottom: 0.5em; /* <<< ADJUSTED */
+    font-size: 2rem;
+    margin-bottom: 0.5em;
     color: var(--accent-blue);
     line-height: 1.3;
 }
-.article-meta-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
+.article-meta-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
 .article-meta { font-size: 0.9em; color: var(--text-muted); }
 .article-image-container { margin-bottom: 30px; border-radius: 6px; overflow: hidden; }
+
 #article-body p { margin-bottom: 1.3em; font-size: 1.1em; color: var(--text-light); }
-#article-body h2, #article-body h3 { margin-top: 1.8em; margin-bottom: 0.8em; color: var(--text-light); border-bottom: 1px solid var(--border-color); padding-bottom: 6px; font-weight: 600; }
+#article-body h2,
+#article-body h3 {
+    margin-top: 1.8em; margin-bottom: 0.8em;
+    color: var(--text-light);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 6px; font-weight: 600;
+}
 #article-body h2 { font-size: 1.7em; }
-#article-body h3 { font-size: 1.4em; }
+#article-body h3 { font-size: 1.4em; } /* Main analysis section title */
+
+/* H4 for Deeper Dive, Pros & Cons title, FAQ question group title etc. */
+#article-body h4 {
+    font-size: 1.2em; /* Slightly smaller than H3 */
+    color: var(--accent-blue);
+    margin-top: 1.6em;
+    margin-bottom: 0.7em;
+    padding-bottom: 3px;
+    border-bottom: 1px dashed var(--border-color);
+    font-weight: 600;
+}
+
+/* H5 for titles inside Pros & Cons sections */
+#article-body h5.section-title {
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border-color);
+}
+.pros-section h5.section-title { color: var(--success-green); }
+.cons-section h5.section-title { color: var(--danger-red); }
+
+
 #article-body code { background-color: var(--bg-dark); padding: 3px 6px; border-radius: 4px; font-family: var(--font-code); color: var(--accent-blue); font-size: 0.95em; }
 #article-body pre { background-color: var(--bg-dark); padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 1.2em; border: 1px solid var(--border-color); }
 #article-body pre code { background: none; padding: 0; color: var(--text-light); font-size: 0.9em; }
-#article-body .source-link-container { margin-top: 40px; padding-top: 25px; border-top: 1px solid var(--border-color); text-align: center; }
-#article-body a.source-button { display: inline-block; background-color: var(--accent-blue); color: var(--bg-dark); padding: 12px 25px; border-radius: 5px; font-weight: bold; transition: background-color 0.3s, transform 0.2s; }
+
+#article-body .source-link-container {
+    margin-top: 30px; /* Give some space above the source button */
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    margin-bottom: 20px; /* Space below source button before tags footer */
+}
+#article-body a.source-button {
+    display: inline-block; background-color: var(--accent-blue);
+    color: var(--bg-dark); padding: 12px 25px; border-radius: 5px;
+    font-weight: bold; transition: background-color 0.3s, transform 0.2s;
+}
 #article-body a.source-button:hover { background-color: var(--accent-blue-darker); transform: scale(1.03); }
 #article-body a.source-button i { margin-left: 8px; }
 
-/* --- MODIFIED --- Style the container holding source link and tags */
+
+/* --- Styling for Generated Sections (Pros & Cons, FAQ) --- */
+.pros-cons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 25px 0; /* Margin top/bottom, no auto for left/right to fill article width */
+    padding: 15px;
+    background-color: var(--bg-tertiary);
+    border-radius: 8px;
+    /* border: 1px solid var(--border-color); */ /* Optional border for container */
+}
+
+.pros-section, .cons-section {
+    flex: 1;
+    min-width: 220px; /* Adjust for smaller screens if needed before wrapping */
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.pros-section {
+    background-color: rgba(40, 167, 69, 0.08); /* Very subtle green */
+    border-left: 4px solid var(--success-green);
+}
+
+.cons-section {
+    background-color: rgba(220, 53, 69, 0.08); /* Very subtle red */
+    border-left: 4px solid var(--danger-red);
+}
+
+/* Item lists within pros/cons (Markdown generates <ul><li>...</li></ul>) */
+.pros-cons-container .item-list ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 5px; /* Space below the h5 title */
+}
+
+.pros-cons-container .item-list li {
+    padding-left: 1.8em;
+    position: relative;
+    margin-bottom: 0.6em;
+    line-height: 1.5;
+}
+
+.pros-section .item-list ul li::before {
+    content: '✔';
+    color: var(--success-green);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.cons-section .item-list ul li::before {
+    content: '✘';
+    color: var(--danger-red);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* FAQ Styling */
+/* Assumes LLM generates: <h4>FAQ</h4> <p><strong>Q: Question?</strong></p> <p>A: Answer.</p> */
+#article-body p > strong:first-child { /* Catches "Q:" and "A:" if they are the first strong tag in a P */
+    color: var(--accent-blue);
+    margin-right: 0.5em;
+}
+#article-body p > strong:first-child + br { /* If LLM adds a <br> after Q: */
+    display: none;
+}
+/* More specific if LLM wraps Q&A in divs/classes (preferred) */
+.faq-item {
+    margin-bottom: 1.2em;
+    padding-left: 10px;
+    border-left: 2px solid var(--border-color);
+}
+.faq-question { /* For <p class="faq-question"> or similar */
+    font-weight: bold;
+    color: var(--text-light);
+    margin-bottom: 0.3em;
+}
+.faq-answer { /* For <p class="faq-answer"> */
+    color: var(--text-muted);
+    padding-left: 1em;
+}
+
+
+/* Article Footer (containing tags) */
 .main-article footer {
-    margin-top: 20px; /* Add space above the footer */
-    padding-top: 15px; /* Add space inside the footer */
-    border-top: 1px solid var(--border-color); /* Optional separator line */
-    display: flex; /* <<< ADDED */
-    flex-direction: column; /* <<< ADDED */
-    align-items: flex-start; /* <<< ADDED Align items to the start (left) */
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Tags align left by default */
 }
-
-/* --- MODIFIED --- Add margin below the source link container */
-.source-link-container {
-    margin-bottom: 15px; /* <<< ADJUSTED Add 15px space below the source link */
-    text-align: left; /* Ensure button aligns left if needed */
-}
-
-/* --- MODIFIED --- Add margin below the tags container */
 .tags {
-    margin-top: 0; /* Remove top margin as footer provides it */
-    padding-top: 0; /* Remove top padding */
-    border-top: none; /* Remove top border */
     font-size: 0.9em;
     color: var(--text-muted);
-    text-align: left; /* Align tags left */
-    padding-bottom: 0;
-    margin-bottom: 10px; /* <<< ADDED Keep or adjust bottom margin for tags */
-    line-height: 1.6; /* Improve readability if tags wrap */
+    line-height: 1.7; /* For wrapped tags */
+}
+.tags span#article-tags a, a.tag-link { /* Style for individual tag links */
+    display: inline-block;
+    background-color: var(--bg-tertiary);
+    color: var(--text-light);
+    padding: 5px 12px;
+    border-radius: 16px; /* More pill-shaped */
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border-color);
+    font-weight: 500;
+    font-size: 0.85em;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.tags span#article-tags a:hover, a.tag-link:hover {
+    background-color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: var(--bg-dark);
 }
 
-.tags span#article-tags { margin-left: 0; /* Remove left margin if needed */ } /* Align tags directly left */
-.tags span#article-tags a { display: inline-block; background-color: var(--bg-tertiary); color: var(--text-light); padding: 4px 10px; border-radius: 15px; margin-right: 8px; margin-bottom: 8px; border: 1px solid var(--border-color); font-weight: 500; font-size: 0.9em; transition: background-color 0.3s, border-color 0.3s, color 0.3s; cursor: pointer; }
-.tags span#article-tags a:hover { background-color: var(--accent-blue); border-color: var(--accent-blue); color: var(--bg-dark); }
 
-
-/* --- Sidebar Styling (Article Page) --- */
+/* --- Sidebar Styling --- */
 .sidebar { background-color: transparent; padding: 0; border: none; height: fit-content; }
 .sidebar h2 { font-size: 1.5em; color: var(--text-light); margin-bottom: 20px; border-bottom: 2px solid var(--accent-blue); padding-bottom: 10px; }
 .sidebar #related-news-content,
@@ -270,39 +411,41 @@ img {
 .sidebar li { background: none; border: none; padding: 0; overflow: visible; border-radius: 0;}
 
 
-/* --- HOMEPAGE SPECIFIC & GENERIC PAGE STYLES --- */
+/* --- HOMEPAGE & GENERIC PAGE STYLES --- */
 .home-container, .page-container {
     width: 90%;
     max-width: 1200px;
-    margin: 55px auto 30px auto; /* <<< Increased top margin to 40px */
+    margin: 55px auto 30px auto;
     padding: 0;
 }
 .home-section { margin-bottom: 50px; }
 .home-section h2, #page-title { font-size: 1.8em; color: var(--text-light); margin-bottom: 25px; border-bottom: 2px solid var(--accent-blue); padding-bottom: 10px; font-weight: 600; }
 #page-title { font-size: 2em; padding-bottom: 15px; margin-bottom: 30px; }
 .placeholder { color: var(--text-muted); text-align: center; padding: 20px; font-style: italic; }
-.placeholder.error { color: #ff4d4d; font-weight: bold; }
+.placeholder.error { color: var(--danger-red); font-weight: bold; }
 
 /* Breaking News / Trending Banner */
 .breaking-news-content.slider-container { position: relative; border-radius: 8px; overflow: hidden; min-height: 300px; background-color: var(--bg-secondary); }
-.breaking-news-item { position: relative; display: none; /* Hidden by default */ text-decoration: none; color: inherit; border-radius: 8px; overflow: hidden; width: 100%; }
-.breaking-news-item.active { display: block; /* Show active slide */ }
+.breaking-news-item { position: relative; display: none; text-decoration: none; color: inherit; border-radius: 8px; overflow: hidden; width: 100%; }
+.breaking-news-item.active { display: block; }
 .breaking-news-item img { width: 100%; height: 400px; object-fit: cover; display: block; border-radius: 8px; }
 .breaking-news-item::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 85%; background: linear-gradient(to bottom, rgba(26, 26, 29, 0), rgba(26, 26, 29, 1) 90%); pointer-events: none; border-radius: 0 0 8px 8px; }
-.breaking-news-text { position: absolute; bottom: 40px; /* Raised for dots */ left: 20px; right: 20px; z-index: 3; /* Above fade and dots */ color: var(--text-light); }
-.breaking-news-text h3 { font-size: 1.9em; margin-bottom: 10px; line-height: 1.3; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
+.breaking-news-text { position: absolute; bottom: 40px; left: 20px; right: 20px; z-index: 3; color: var(--text-light); }
+.breaking-news-text h3 {
+    font-size: 1.9em; margin-bottom: 10px; line-height: 1.3; font-weight: 700;
+    display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; text-overflow: ellipsis;
+}
 .breaking-news-meta { font-size: 0.9em; color: var(--text-muted); }
-.breaking-label { position: absolute; top: 10px; left: 10px; background-color: #ff4d4d; color: white; padding: 4px 8px; font-size: 0.75em; font-weight: bold; border-radius: 4px; z-index: 5; /* Above everything */ text-transform: uppercase; letter-spacing: 0.5px; }
+.breaking-label { position: absolute; top: 10px; left: 10px; background-color: #ff4d4d; color: white; padding: 4px 8px; font-size: 0.75em; font-weight: bold; border-radius: 4px; z-index: 5; text-transform: uppercase; letter-spacing: 0.5px; }
 .breaking-label.trending-label { background-color: var(--accent-blue); }
-/* Slider Controls */
 .slider-control { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.4); color: white; border: none; width: 40px; height: 40px; cursor: pointer; z-index: 4; border-radius: 50%; font-size: 1.1em; line-height: 1; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s; opacity: 0; pointer-events: none; }
 .slider-container:hover .slider-control { opacity: 1; pointer-events: auto; }
 .slider-control:hover { background-color: rgba(0, 0, 0, 0.7); }
 .slider-prev { left: 15px; }
 .slider-next { right: 15px; }
-/* Slider Dots */
-.slider-pagination { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 4; /* Above fade/text, below controls if hover */ display: flex; gap: 8px; }
-.slider-dot { width: 10px; height: 10px; background-color: rgba(255, 255, 255, 0.4); border-radius: 50%; cursor: pointer; transition: background-color 0.3s ease; border: none; /* Ensure it looks like a dot */ padding: 0; /* Remove default button padding */ }
+.slider-pagination { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 4; display: flex; gap: 8px; }
+.slider-dot { width: 10px; height: 10px; background-color: rgba(255, 255, 255, 0.4); border-radius: 50%; cursor: pointer; transition: background-color 0.3s ease; border: none; padding: 0; }
 .slider-dot:hover { background-color: rgba(255, 255, 255, 0.7); }
 .slider-dot.active { background-color: var(--accent-blue); }
 
@@ -323,18 +466,11 @@ img {
 .article-card a.article-card-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; flex-grow: 1; }
 .article-card-image img { width: 100%; height: 160px; object-fit: cover; display: block; }
 .article-card-content { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
-/* --- MODIFIED --- Reduce card title size */
 .article-card-content h3 {
-    font-size: 1.1rem; /* <<< ADJUSTED */
-    margin: 0.5em 0 0.25em 0; /* <<< ADJUSTED spacing */
-    line-height: 1.4;
-    font-weight: 600;
-    color: var(--text-light);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 1.1rem; margin: 0.5em 0 0.25em 0; line-height: 1.4;
+    font-weight: 600; color: var(--text-light); display: -webkit-box;
+    -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; text-overflow: ellipsis;
 }
 .article-card-content .article-meta { font-size: 0.8em; color: var(--text-muted); padding-top: 10px; margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
 .article-card-content .article-summary { display: none; }
@@ -346,7 +482,7 @@ img {
 /* Sidebar Card Specific Tweaks */
 .sidebar .article-card.sidebar-card { min-height: unset; height: auto; }
 .sidebar .article-card.sidebar-card .article-card-content { padding: 10px; }
-.sidebar .article-card.sidebar-card h3 { font-size: 1em; -webkit-line-clamp: 2; }
+.sidebar .article-card.sidebar-card h3 { font-size: 1em; -webkit-line-clamp: 2; line-clamp: 2; }
 .sidebar .article-card.sidebar-card .article-meta { padding-top: 5px; font-size: 0.75em; }
 .sidebar .article-card.sidebar-card:last-child { margin-bottom: 0; }
 
@@ -363,7 +499,11 @@ img {
 .trending-news-list .sidebar-item-image { flex-shrink: 0; }
 .trending-news-list .sidebar-item-image img { width: 70px; height: 50px; object-fit: cover; border-radius: 4px; border: none; }
 .trending-news-list .sidebar-item-content { padding: 0; flex-grow: 1; }
-.trending-news-list .sidebar-item-title { font-size: 0.95em; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
+.trending-news-list .sidebar-item-title {
+    font-size: 0.95em; margin-bottom: 4px; display: -webkit-box;
+    -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; text-overflow: ellipsis;
+}
 .trending-news-list .sidebar-item-time { font-size: 0.75em; }
 .trending-news-list .sidebar-item-link:hover .sidebar-item-title { color: var(--accent-blue); }
 
@@ -379,45 +519,42 @@ img {
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 1024px) {
-    .main-content-grid { grid-template-columns: 1fr 3fr; /* Article + 1 Sidebar */ }
+    .main-content-grid { grid-template-columns: 1fr 3fr; }
     .related-news { display: none; }
     .nav-container { width: 95%; }
     .nav-search { flex-grow: 0.3; }
-    /* Adjust main article title for medium screens */
-    .main-article header h1#article-headline { font-size: 1.8rem; } /* MODIFIED */
+    .main-article header h1#article-headline { font-size: 1.8rem; }
 }
 
 @media (max-width: 768px) {
     .main-content-grid { grid-template-columns: 1fr; width: 95%; gap: 25px; }
-    .latest-news { order: 3; } /* Stack latest news below article on mobile */
+    .latest-news { order: 3; }
     .nav-search { display: none; }
     .nav-menu { gap: 20px; }
-    /* Adjust main article title for small screens */
-    .main-article header h1#article-headline { font-size: 1.6rem; } /* MODIFIED */
+    .main-article header h1#article-headline { font-size: 1.6rem; }
     #article-body .source-link-container { text-align: center; }
-    .tags { text-align: center; align-items: center; /* Align center for small screens */} /* MODIFIED */
-    /* Homepage/Generic Page adjustments */
+    .tags { text-align: center; align-items: center; }
     .latest-news-grid, #page-content-area { grid-template-columns: 1fr; }
     .breaking-news-text h3 { font-size: 1.5em; }
     .home-section h2, #page-title { font-size: 1.5em; }
     .breaking-label, .article-card .breaking-label { font-size: 0.65em; padding: 3px 6px; top: 5px; left: 5px; }
     .article-meta-container { justify-content: flex-start; }
     #global-tts-player-button { width: 45px; height: 45px; font-size: 1.1em; bottom: 15px; left: 15px;}
-    .slider-pagination { bottom: 10px; } /* Adjust dots position */
+    .slider-pagination { bottom: 10px; }
     .slider-dot { width: 8px; height: 8px; }
     .slider-control { width: 35px; height: 35px; font-size: 1em; }
-    /* Stack footer elements on small screens */
-    article.main-article > footer { align-items: center; } /* MODIFIED */
-    .source-link-container { text-align: center; } /* MODIFIED */
-    .tags { text-align: center; align-items: center; } /* MODIFIED */
+    article.main-article > footer { align-items: center; }
+    .source-link-container { text-align: center; }
+    .tags { text-align: center; align-items: center; }
+    /* Pros & Cons responsive */
+    .pros-cons-container { flex-direction: column; max-width: 100%; }
 }
 
-/* Add loading/playing state styles for listen/global buttons */
+/* Loading/Playing state styles for listen/global buttons */
 .listen-button.loading i,
 #global-tts-player-button.loading i {
-    animation: spin 1s linear infinite; /* Basic CSS spin */
+    animation: spin 1s linear infinite;
 }
-/* Ensure the Font Awesome class isn't overridden when paused/playing */
 .listen-button .fas,
 #global-tts-player-button .fas {
     font-family: 'Font Awesome 6 Free';
@@ -430,184 +567,45 @@ img {
     100% { transform: rotate(360deg); }
 }
 
-/* Remove Font Awesome icon class overrides - handled by JS now */
-/* .listen-button.playing i::before,
-#global-tts-player-button.playing i::before {
-    content: "\f04c";
-} */
-
 .home-title {
     width: 100%;
     padding: 20px;
+    text-align: center; /* Center the H1 on homepage */
 }
 
-
-        /* Basic Reset & Body Styling */
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            padding: 0; /* Ensure no extra padding */
-            background-color: var(--bg-dark, #1a1a1d); /* Dark background */
-            color: var(--text-light, #f0f0f0); /* Ensure light text */
-            font-family: var(--font-primary, sans-serif); /* Ensure consistent font */
-            line-height: 1.6;
-            display: flex; /* Still use flex for easy centering */
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Ensure it tries to fill height */
-            padding: 20px; /* Add padding around the body for spacing on mobile */
-            position: relative; /* Needed for snow positioning */
-            overflow-x: hidden; /* Prevent horizontal scroll from snow */
-            /* Allow vertical scroll */
-        }
-
-        /* Error Container Styling - Responsive */
-        .error-container {
-            width: 100%; /* Take available width */
-            max-width: 650px;  /* Maximum width on larger screens */
-            text-align: center;
-            padding: 80px 30px; /* Increased Top/Bottom Padding Further */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(44, 47, 51, 0.85);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border-radius: 10px;
-            border: 1px solid var(--border-color, #444);
-            position: relative;
-            z-index: 2;
-            min-height: 300px; /* Minimum height, will grow with content */
-        }
-
-        /* Heading styles */
-        .error-container h1 {
-            font-size: clamp(3em, 12vw, 5em); /* Responsive size */
-            color: var(--accent-blue, #00aeff);
-            margin-bottom: 10px;
-            font-weight: 700;
-            line-height: 1;
-        }
-         .error-container h2 {
-            font-size: clamp(1.2em, 5vw, 1.6em); /* Responsive size */
-            color: var(--text-light, #f0f0f0);
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-        .error-container p {
-            font-size: clamp(0.9em, 3.5vw, 1.1em); /* Responsive size */
-            margin-bottom: 35px;
-            color: var(--text-muted, #a0a0a0);
-            max-width: 90%;
-        }
-
-        /* Button styles */
-        .error-container a.button-link {
-            display: inline-block;
-            background-color: var(--accent-blue, #00aeff);
-            color: var(--bg-dark, #1a1a1d);
-            padding: 12px 30px; /* Default padding */
-            border-radius: 5px;
-            font-weight: 600;
-             font-size: 1em; /* Default font size */
-            text-decoration: none;
-            border: 1px solid var(--accent-blue, #00aeff);
-            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-            white-space: nowrap;
-        }
-        .error-container a.button-link:hover {
-            background-color: var(--accent-blue-darker, #0090d1);
-            border-color: var(--accent-blue-darker, #0090d1);
-            color: var(--bg-dark, #1a1a1d);
-        }
-
-        /* --- Clean Snow Animation --- */
-        @keyframes snowfall {
-            0% { transform: translateY(-10vh); }
-            100% { transform: translateY(110vh); }
-        }
-        .snow {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            pointer-events: none; z-index: 1;
-        }
-        .snow-flake {
-            position: absolute; top: -10vh; background-color: rgba(255, 255, 255, 0.7);
-            border-radius: 50%; animation: snowfall linear infinite; opacity: 0;
-        }
-        /* Snow styling remains the same */
-        .snow-flake:nth-child(5n) { width: 3px; height: 3px; animation-duration: 10s; animation-delay: -1s; opacity: 0.6; }
-        .snow-flake:nth-child(5n + 1) { width: 4px; height: 4px; animation-duration: 9s; animation-delay: -3s; opacity: 0.7; }
-        .snow-flake:nth-child(5n + 2) { width: 5px; height: 5px; animation-duration: 8s; animation-delay: -5s; opacity: 0.8; }
-        .snow-flake:nth-child(5n + 3) { width: 6px; height: 6px; animation-duration: 7s; animation-delay: -7s; opacity: 0.85; }
-        .snow-flake:nth-child(5n + 4) { width: 7px; height: 7px; animation-duration: 6s; animation-delay: -9s; opacity: 0.9; }
-        /* Horizontal distribution applied by JS */
-
-        /* --- Media Query for smaller screens (Phones) --- */
-        @media (max-width: 768px) {
-            body {
-                padding: 15px; /* Slightly less padding */
-                align-items: flex-start; /* Align container to top */
-                min-height: unset; /* Allow natural height */
-                height: 100%; /* Allow scrolling */
-            }
-            .error-container {
-                width: 100%; /* Full width */
-                max-width: none; /* Remove max-width */
-                margin-top: 10vh; /* Push down from top */
-                margin-bottom: 10vh;
-                padding: 50px 20px; /* Adjust padding for mobile */
-                height: auto; /* Let height be determined by content */
-                min-height: unset; /* Remove min-height */
-            }
-             .error-container h1 {
-                 font-size: 3em; /* Slightly smaller on mobile */
-             }
-             .error-container h2 {
-                 font-size: 1.2em;
-             }
-             .error-container p {
-                 font-size: 0.95em;
-             }
-            /* --- Button resizing for mobile --- */
-            .error-container a.button-link {
-                 padding: 10px 20px; /* Smaller padding */
-                 font-size: 0.9em; /* Smaller font size */
-             }
-            /* --- End button resizing --- */
-        }
-
-        /* --- Styling for the 404 Page --- */
+/* --- 404 Page Specific Styling --- */
 body.page-404 {
-    /* Ensure body can center its main child vertically */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
- }
- 
- main.error-page-main {
-    /* Make this main section also use flex to center its content */
+}
+main.error-page-main {
     display: flex;
     flex-direction: column;
-    align-items: center;     /* Center children horizontally */
-    justify-content: center; /* Center children vertically */
-    flex-grow: 1;            /* Allow it to take available vertical space */
-    width: 100%;             /* Take full width for alignment */
-    padding-top: 40px;       /* Add some top padding */
-    padding-bottom: 40px;    /* Add some bottom padding */
- }
- 
- /* Add some space below the 404 box */
- .error-page-main .error-container {
-     margin-bottom: 60px;
- }
- 
- /* Ensure the latest news section takes appropriate width */
- .error-page-main #latest-news-section {
-     width: 90%;
-     max-width: 1200px; /* Or match your .container width */
- }
- /* --- End 404 Page Styling --- */
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+.error-page-main .error-container {
+    margin-bottom: 60px;
+    width: 90%;
+    max-width: 650px;
+}
+.error-page-main #latest-news-section {
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 30px;
+}
+
+/* --- Snow Animation (for 404 page) --- */
+@keyframes snowfall { 0% { transform: translateY(-10vh); } 100% { transform: translateY(110vh); } }
+.snow { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1; }
+.snow-flake { position: absolute; top: -10vh; background-color: rgba(255, 255, 255, 0.3); border-radius: 50%; animation: snowfall linear infinite; opacity: 0; }
+.snow-flake:nth-child(5n) { width: 2px; height: 2px; animation-duration: 12s; animation-delay: -1s; opacity: 0.4; }
+.snow-flake:nth-child(5n + 1) { width: 3px; height: 3px; animation-duration: 10s; animation-delay: -3s; opacity: 0.5; }
+.snow-flake:nth-child(5n + 2) { width: 4px; height: 4px; animation-duration: 8s; animation-delay: -5s; opacity: 0.6; }
+.snow-flake:nth-child(5n + 3) { width: 2px; height: 2px; animation-duration: 9s; animation-delay: -7s; opacity: 0.5; }
+.snow-flake:nth-child(5n + 4) { width: 3px; height: 3px; animation-duration: 7s; animation-delay: -9s; opacity: 0.6; }

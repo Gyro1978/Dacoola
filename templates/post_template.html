@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- *** CORE SEO & Page Info *** -->
-    <title>{{ PAGE_TITLE }} - Dacoola</title>
+    <title>{{ PAGE_TITLE }} - Dacoola</title> {# PAGE_TITLE is typically generated_title_tag from agent #}
     <meta name="description" content="{{ META_DESCRIPTION }}">
     {% if AUTHOR_NAME %}<meta name="author" content="{{ AUTHOR_NAME }}">{% endif %}
     {% if META_KEYWORDS %}<meta name="keywords" content="{{ META_KEYWORDS }}">{% endif %}
@@ -21,7 +21,7 @@
     <link rel="canonical" href="{{ CANONICAL_URL }}">
 
     <!-- *** OPEN GRAPH *** -->
-    <meta property="og:title" content="{{ PAGE_TITLE }}">
+    <meta property="og:title" content="{{ PAGE_TITLE }}"> {# Use PAGE_TITLE (generated_title_tag) #}
     <meta property="og:description" content="{{ META_DESCRIPTION }}">
     <meta property="og:image" content="{{ IMAGE_URL }}">
     <meta property="og:url" content="{{ CANONICAL_URL }}">
@@ -36,14 +36,13 @@
 
     <!-- *** TWITTER CARD *** -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ PAGE_TITLE }}">
+    <meta name="twitter:title" content="{{ PAGE_TITLE }}"> {# Use PAGE_TITLE (generated_title_tag) #}
     <meta name="twitter:description" content="{{ META_DESCRIPTION }}">
     <meta name="twitter:image" content="{{ IMAGE_URL }}">
 
     <!-- *** Stylesheets & Icons *** -->
     <link rel="stylesheet" href="../css/styles.css"> <!-- Path relative to public/articles/ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Favicon: Using local path assuming it exists in public/images/ -->
     <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png">
 
     <!-- *** JSON-LD Structured Data *** -->
@@ -51,12 +50,21 @@
     {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "{{ PAGE_TITLE | escapejs }}",
+      "headline": "{{ ARTICLE_SEO_H1 | default(PAGE_TITLE) | escapejs }}", {# Use generated SEO H1, fallback to PAGE_TITLE #}
       "description": "{{ META_DESCRIPTION | escapejs }}",
       "keywords": {{ META_KEYWORDS_LIST | tojson | safe }},
       "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ CANONICAL_URL | escapejs }}" },
-      "image": { "@type": "ImageObject", "url": "{{ IMAGE_URL | escapejs }}" },
+      "image": [ {# Using an array for images as recommended #}
+        {
+          "@type": "ImageObject",
+          "url": "{{ IMAGE_URL | escapejs }}"
+          {# You could add width and height here if available in template_vars #}
+          {# "width": 1200, #}
+          {# "height": 675 #}
+        }
+      ],
       "datePublished": "{{ PUBLISH_ISO_FOR_META }}",
+      "dateModified": "{{ PUBLISH_ISO_FOR_META }}", {# Assuming published and modified are same initially #}
       "author": { "@type": "Person", "name": "{{ AUTHOR_NAME | default('AI News Team') | escapejs }}" },
       "publisher": {
         "@type": "Organization",
@@ -67,19 +75,19 @@
     </script>
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-WGJ5MFBC6X');
-</script>
+      gtag('config', 'G-WGJ5MFBC6X');
+    </script>
 
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSLDZ2QB"
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSLDZ2QB"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
@@ -89,7 +97,6 @@
 
     <div class="main-content-grid">
 
-        <!-- Left Sidebar: Related News (Filled by JS) -->
         <aside class="sidebar related-news">
             <h2>Related News</h2>
             <div id="related-news-content">
@@ -97,22 +104,20 @@
             </div>
         </aside>
 
-        <!-- Center Column: Main Article -->
         <article class="main-article"
             data-article-id="{{ CURRENT_ARTICLE_ID }}"
             data-article-topic="{{ CURRENT_ARTICLE_TOPIC }}"
             data-article-tags='{{ CURRENT_ARTICLE_TAGS_JSON | safe }}'
-            {# Pass AUDIO_URL to data attribute if needed by JS, even if None #}
             data-audio-url="{{ AUDIO_URL or '' }}">
 
             <header>
-                <h1 id="article-headline">{{ARTICLE_HEADLINE}}</h1>
+                {# Use the SEO-Optimized H1 from the agent, or fallback to ARTICLE_HEADLINE if not available #}
+                <h1 id="article-headline">{{ ARTICLE_SEO_H1 | default(ARTICLE_HEADLINE) }}</h1>
                 <div class="article-meta-container">
                     <div class="article-meta">
                         Published on <span id="publish-date">{{PUBLISH_DATE}}</span>
                         by <span id="author-name">{{AUTHOR_NAME}}</span>
                     </div>
-                    <!-- No page-specific button needed here if using global browser TTS -->
                 </div>
             </header>
 
@@ -121,7 +126,7 @@
             </figure>
 
             <section id="article-body">
-                {{ ARTICLE_BODY_HTML | safe }} <!-- Render generated HTML -->
+                {{ ARTICLE_BODY_HTML | safe }} <!-- Render generated Markdown HTML -->
                  <div class="source-link-container">
                     <a href="{{SOURCE_ARTICLE_URL}}" class="source-button" target="_blank" rel="noopener noreferrer">
                         Read Original Source <i class="fas fa-external-link-alt fa-xs"></i>
@@ -131,13 +136,12 @@
 
             <footer>
                 <div class="tags">
-                    Tags: <span id="article-tags">{{ ARTICLE_TAGS_HTML | safe }}</span> <!-- Render linked tags -->
+                    Tags: <span id="article-tags">{{ ARTICLE_TAGS_HTML | safe }}</span>
                 </div>
             </footer>
 
         </article>
 
-        <!-- Right Sidebar: Latest News (Filled by JS) -->
         <aside class="sidebar latest-news">
             <h2>Latest News</h2>
             <div id="latest-news-content">
@@ -147,18 +151,14 @@
 
     </div> <!-- End main-content-grid -->
 
-    <!-- *** GLOBAL FIXED BROWSER TTS PLAYER BUTTON & ELEMENT *** -->
-    <!-- This button will trigger SpeechSynthesis for the main article content -->
-    <div class="article-card-actions"> <!-- Using this class for styling consistency, maybe rename later -->
-        <button id="global-tts-player-button" title="Listen to article (Browser TTS)">
-            <i class="fas fa-headphones"></i> <!-- Headphones Icon -->
-        </button>
-        <!-- Hidden audio element (still useful if you ever re-add pre-generated audio fallback) -->
-        <audio id="global-audio-player" preload="none"></audio>
-    </div>
+    <!-- GLOBAL FIXED BROWSER TTS PLAYER BUTTON -->
+    <button id="global-tts-player-button" title="Listen to article (Browser TTS)">
+        <i class="fas fa-headphones"></i>
+    </button>
+    <audio id="global-audio-player" preload="none" style="display:none;"></audio>
 
-    <!-- Link JS -->
-    <script src="../js/script.js"></script> <!-- Path relative to public/articles/ -->
+
+    <script src="../js/script.js"></script>
 
 </body>
 </html>

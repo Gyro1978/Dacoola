@@ -1,0 +1,33 @@
+{
+    "people": [
+      "elon musk", "jeff bezos", "tim cook", "sam altman", "satya nadella",
+      "sundar pichai", "mark zuckerberg", "jensen huang", "dario amodei",
+      "demis hassabis", "larry page", "sergey brin", "bill gates",
+      "steve jobs", "masayoshi son", "lisa su", "pat gelsinger", "andy jassy",
+      "mustafa suleyman", "reid hoffman", "peter thiel", "marc andreessen",
+      "vinod khosla", "yann lecun", "geoffrey hinton", "andrew ng",
+      "fei-fei li", "yoshua bengio", "ilya sutskever", "jurgen schmidhuber",
+      "oriol vinyals", "andrej karpathy", "donald trump", "joe biden",
+      "margrethe vestager", "lina khan", "gina raimondo", "xi jinping"
+    ],
+    "companies_products": [
+      "openai", "chatgpt", "gpt-3", "gpt-4", "gpt-5", "gpt-4o", "dall-e", "sora",
+      "google", "alphabet", "deepmind", "gemini", "google ai", "google cloud", "waymo", "bard", "tensorflow", "keras",
+      "meta", "facebook", "instagram", "whatsapp", "llama", "llama 2", "llama 3", "meta ai", "pytorch",
+      "microsoft", "azure", "copilot", "bing",
+      "apple", "siri", "vision pro", "core ml",
+      "amazon", "aws", "alexa", "bedrock", "sagemaker",
+      "nvidia", "h100", "a100", "b100", "b200", "blackwell", "grace hopper", "cuda", "tensorrt",
+      "tesla", "spacex", "starlink", "neuralink", "xai", "grok", "x corp", "twitter",
+      "anthropic", "claude", "claude 2", "claude 3",
+      "mistral ai", "stability ai", "stable diffusion", "sdxl",
+      "cohere", "ai21 labs", "inflection ai", "cerebras",
+      "intel", "gaudi", "xeon", "amd", "instinct", "ryzen", "epyc",
+      "arm", "qualcomm", "tsmc", "samsung electronics", "asml",
+      "oracle cloud", "ibm cloud", "cloudflare",
+      "softbank", "a16z", "sequoia capital", "y combinator", "yc",
+      "hugging face", "databricks", "snowflake", "palantir",
+      "agi", "asi", "sota", "llm", "vlm", "transformer",
+      "sec", "ftc", "doj", "european union", "eu commission", "nist"
+    ]
+  }

@@ -1,7 +1,7 @@
 # src/agents/seo_article_generator_agent.py
 
 import os
-import sys # Added sys for path check below
+import sys
 import requests
 import json
 import logging
@@ -14,12 +14,12 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 SRC_DIR = os.path.dirname(SCRIPT_DIR)
 PROJECT_ROOT = os.path.dirname(SRC_DIR)
 if PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, PROJECT_ROOT) # Add project root for imports if needed
+    sys.path.insert(0, PROJECT_ROOT)
 # --- End Path Setup ---
 
 # --- Setup Logging ---
 logger = logging.getLogger(__name__)
-if not logging.getLogger().hasHandlers(): # Basic config for standalone testing
+if not logging.getLogger().hasHandlers():
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 # --- Load Environment Variables ---
@@ -32,53 +32,59 @@ YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 
 # --- Configuration ---
 AGENT_MODEL = "deepseek-chat"
-MAX_TOKENS_RESPONSE = 4096 # Keep generous for potential analysis
-TEMPERATURE = 0.65 # Slightly higher temp for more insightful "Why it Matters"
-API_TIMEOUT_SECONDS = 240
+MAX_TOKENS_RESPONSE = 5000 # Increased for potentially very detailed articles
+TEMPERATURE = 0.7
+API_TIMEOUT_SECONDS = 360 # Increased timeout
 
 # --- Agent Prompts ---
 
-# --- MODIFIED SYSTEM PROMPT ---
 SEO_PROMPT_SYSTEM = """
-You are an **Expert Tech News Analyst and SEO Content Strategist** powered by DeepSeek. Your mission is to transform concise RSS feed data into an engaging, insightful, factually precise, and SEO-optimized news brief suitable for a tech-savvy audience that values quick understanding and context. Adhere strictly to the following directives:
+You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, powered by DeepSeek. Your mission is to transform the provided article content into a comprehensive, engaging, insightful, factually precise, and maximally SEO-optimized news article. This content is for a tech-savvy audience that values depth, clarity, and discoverability. Adhere strictly to ALL directives.
 
-1.  **Content Generation & Style:**
-    *   **Primary Goal:** Generate a **concise news summary (1-2 paragraphs)** based *only* on the facts in `{{RSS_SUMMARY}}`. Immediately following the summary, add a section titled `### Why It Matters` (or a similar engaging title like `### The Big Picture` or `### What This Means`) containing **1-2 paragraphs** of analysis, context, or potential implications.
-    *   **News Summary Section (Factual Integrity CRITICAL):** Base the initial 1-2 paragraphs **exclusively** on the information present in the `{{RSS_SUMMARY}}`. **DO NOT INVENT DETAILS, QUOTES, NUMBERS, OR SPECULATION** not directly and clearly supported by the summary. Keep it brief and informative.
-    *   **"Why It Matters" Section (Insight & Context):** This is where you add value. Based on the *type* of news presented in the summary (e.g., model release, funding, regulation, security issue), provide brief analysis. Explain the potential impact, connect it to broader trends, or highlight the significance for the reader/industry. **Crucially, ground this analysis in the facts from the summary, but interpret their potential meaning.** Avoid baseless speculation. If the summary is too sparse for meaningful analysis, keep this section very short or state the context is limited.
-    *   **Overall Length & Tone:** Aim for a total body length of roughly **200-350 words**. Maintain a clear, engaging, slightly analytical journalistic tone. Use active voice. Avoid robotic phrasing and excessive hype unless explicitly justified by the summary.
-    *   **Structure:** Begin the Article Body with an `## H2` heading reflecting `{{ARTICLE_TITLE}}`. Follow with the 1-2 paragraph summary. Then, include the `### Why It Matters` (or similar) heading and its 1-2 paragraphs.
+1.  **Content Source:** Base your generation *primarily* on `{{ARTICLE_CONTENT_FOR_PROCESSING}}`. If it's a brief summary, expand on it with your knowledge and analytical skills. If it's full text, synthesize and re-structure it.
 
-2.  **Output Format (Strict Adherence Required):**
-    *   **Markdown Only:** The Article Body section must be valid Markdown.
-    *   **Exact Order:** Output MUST follow this sequence precisely: Title Tag, Meta Description, Article Body (including the "Why It Matters" section), Source Link, JSON-LD Script. No extra text, greetings, or explanations outside this structure.
-    *   **Section 1: Title Tag:** Format: `Title Tag: [Generated title tag]`. Strictly **≤ 60 characters**. Include `{{TARGET_KEYWORD}}` naturally.
-    *   **Section 2: Meta Description:** Format: `Meta Description: [Generated meta description]`. Strictly **≤ 160 characters**. Summarize the core news point and include `{{TARGET_KEYWORD}}` naturally.
-    *   **Section 3: Article Body:** Starts with `## H2` heading. Contains the 1-2 paragraph summary, immediately followed by the `### Why It Matters` section. Integrates `{{TARGET_KEYWORD}}` naturally once within the first main paragraph (the summary part).
-    *   **Section 4: Source Link:** The final line before the script MUST be exactly: `Source: [{{ARTICLE_TITLE}}]({{SOURCE_ARTICLE_URL}})`
+2.  **SEO Optimization - Core Principles:**
+    *   **Primary Keyword (`{{TARGET_KEYWORD}}`):** Must appear naturally in: Title Tag, Meta Description, SEO-Optimized H1 Heading, the first paragraph of the initial summary, and 1-2 more times within the main body content (subheadings or analysis).
+    *   **Secondary Keywords (`{{SECONDARY_KEYWORDS_LIST_STR}}`):** If provided, naturally integrate 1-2 of these into subheadings or the main body text.
+    *   **Readability & User Experience:** Prioritize clear, concise language. Use short sentences and paragraphs where appropriate. Ensure a logical flow.
+    *   **LSI Keywords:** Naturally incorporate semantically related terms and concepts throughout the article.
 
-3.  **Structured Data (JSON-LD):**
-    *   Immediately after the Source Link line, output the *exact* JSON-LD block format described in the User Prompt. Include ALL provided keywords in `"keywords"`. Ensure the full `<script type="application/ld+json">...</script>` block is present.
+3.  **Content Generation & Structure:**
+    *   **SEO-Optimized H1 Heading (Article Title for the page):** Craft a compelling, SEO-friendly H1 heading (as `## [Generated H1 Heading]`). This can be different from `{{ARTICLE_TITLE}}` if a better SEO title is possible. It MUST include `{{TARGET_KEYWORD}}`.
+    *   **Initial Summary (1-2 well-developed paragraphs):** Provide a comprehensive summary based on `{{ARTICLE_CONTENT_FOR_PROCESSING}}`. Ensure factual accuracy. Include `{{TARGET_KEYWORD}}` in the first paragraph.
+    *   **In-Depth Analysis Section (Multiple Sub-sections as appropriate):**
+        *   **Main Analysis Title:** Create a contextually relevant `### H3` title (e.g., "### Unpacking the Impact", "### Key Innovations & Implications", "### Future Trajectory").
+        *   **Core Analysis (2-4 paragraphs):** Deeper explanation, context, trends, significance.
+        *   **Optional, Recommended Sub-sections (Use `#### H4` for these. Include if content supports):**
+            *   `#### Deeper Dive: [Specific Aspect]`: Elaborate on a key technical detail, feature, or component.
+            *   `#### Pros & Cons`: If applicable (new product, policy, major shift), provide a balanced view using the specified HTML structure.
+            *   `#### Potential Challenges / Roadblocks`: Discuss potential hurdles or criticisms.
+            *   `#### Future Outlook / What's Next?`: Speculate responsibly on future developments.
+            *   `#### Quick FAQ`: Generate 2-3 relevant questions a reader might have and provide concise answers, especially for complex or novel topics.
+    *   **Overall Length & Tone:** Aim for **500-800 words**. Maintain an authoritative, insightful, yet accessible journalistic tone.
 
-4.  **Accuracy & Constraints:**
-    *   **No Hallucinations.** Factual summary must adhere strictly to `{{RSS_SUMMARY}}`. Analysis should be logically derived.
-    *   Use `{{TARGET_KEYWORD}}` exactly once in Title Tag, Meta Description, and the *summary* part of the body.
-    *   Strict length limits for Title Tag and Meta Description.
+4.  **Output Format (Strict Adherence Required):**
+    *   **Markdown Only (except for the specified HTML Pros & Cons structure).**
+    *   **Exact Order:** Title Tag, Meta Description, SEO-Optimized H1 Heading (for JSON-LD), Article Body, Source Link, JSON-LD Script.
+    *   **Title Tag (for `<title>`):** Format: `Title Tag: [Generated title tag]`. Strictly **≤ 60 characters**. Include `{{TARGET_KEYWORD}}`.
+    *   **Meta Description:** Format: `Meta Description: [Generated meta description]`. Strictly **≤ 160 characters**. Include `{{TARGET_KEYWORD}}`.
+    *   **SEO-Optimized H1 Heading (for JSON-LD `headline`):** Format: `SEO H1: [Generated H1 heading for the article page]`. This will be used in the JSON-LD and as the main `##` heading.
+    *   **Article Body:** As defined in section 3. Starts with the `## [SEO H1 from above]`.
+    *   **Source Link:** Format: `Source: [{{ARTICLE_TITLE}}]({{SOURCE_ARTICLE_URL}})`.
+    *   **JSON-LD Script:** Use the "SEO H1" for the `headline` field.
 
-5.  **Error Handling:**
-    *   If any required input field is missing or clearly invalid, output ONLY: `Error: Missing or invalid input field(s).`
-
+5.  **Error Handling:** If input is insufficient, output ONLY: `Error: Missing or invalid input field(s).`
 6.  **No Extra Output:** Absolutely NO text before `Title Tag:` or after the closing `</script>` tag.
 """
 
-# --- MODIFIED USER TEMPLATE ---
 SEO_PROMPT_USER_TEMPLATE = """
-Task: Generate Title Tag, Meta Description, Article Body (Markdown including concise summary AND "Why It Matters" analysis), and JSON-LD Script Block based on the input. Follow ALL directives from the System Prompt precisely.
+Task: Generate Title Tag, Meta Description, an SEO-Optimized H1 Heading, a comprehensive Article Body (Markdown with summary, detailed analysis section with flexible H3 title and optional H4 sub-sections like Deeper Dive, Pros & Cons, FAQ), and JSON-LD Script Block. Follow ALL directives from the System Prompt.
 
 ARTICLE_TITLE: {article_title}
-RSS_SUMMARY: {rss_summary}
+ARTICLE_CONTENT_FOR_PROCESSING: {article_content_for_processing}
 SOURCE_ARTICLE_URL: {source_article_url}
 TARGET_KEYWORD: {target_keyword}
+SECONDARY_KEYWORDS_LIST_STR: {secondary_keywords_list_str} # e.g., "AI safety, LLM benchmarks, generative models"
 ARTICLE_IMAGE_URL: {article_image_url}
 AUTHOR_NAME: {author_name}
 CURRENT_DATE_YYYY_MM_DD: {current_date_iso}
@@ -87,14 +93,50 @@ YOUR_WEBSITE_LOGO_URL: {your_website_logo_url}
 ALL_GENERATED_KEYWORDS_LIST: {all_generated_keywords_json}
 
 Required Output Format (Strict):
-Title Tag: [Generated title tag ≤ 60 chars, include TARGET_KEYWORD]
+Title Tag: [Generated title tag ≤ 60 chars for <title> element, include TARGET_KEYWORD]
 Meta Description: [Generated meta description ≤ 160 chars, include TARGET_KEYWORD]
+SEO H1: [Generated SEO-Optimized H1 heading for the page, include TARGET_KEYWORD. This will be used as the main article title and in JSON-LD headline]
 
-## [H2 Heading reflecting ARTICLE_TITLE]
-[Paragraph 1-2: CONCISE summary based ONLY on RSS_SUMMARY. Include TARGET_KEYWORD naturally once here.]
+## [SEO H1 from above]
+[Paragraph 1-2: CONCISE summary based on ARTICLE_CONTENT_FOR_PROCESSING. Include TARGET_KEYWORD naturally once here. Also try to include a SECONDARY_KEYWORD if natural.]
 
-### Why It Matters
-[Paragraph 1-2: Brief analysis, context, implications derived from the summary facts. Explain the significance.]
+### [Contextual H3 Title for Analysis Section, e.g., "Unpacking the Impact", "Key Innovations & Implications"]
+[Paragraphs 2-4 (or more): In-depth analysis, context, implications. Naturally weave in TARGET_KEYWORD again if possible, and other SECONDARY_KEYWORDS.]
+
+#### [Optional: Deeper Dive: Specific Aspect]
+[Optional: 1-2 paragraphs on a key technical detail or component if warranted. Incorporate relevant keywords.]
+
+#### [Optional: Pros & Cons]
+[If generating Pros & Cons, use the following HTML structure EXACTLY. Use Markdown for the list items inside `item-list` divs.]
+<div class="pros-cons-container">
+  <div class="pros-section">
+    <h5 class="section-title">Pros</h5>
+    <div class="item-list">
+      - Pro item 1 (Markdown list item)
+      - Pro item 2
+    </div>
+  </div>
+  <div class="cons-section">
+    <h5 class="section-title">Cons</h5>
+    <div class="item-list">
+      - Con item 1 (Markdown list item)
+      - Con item 2
+    </div>
+  </div>
+</div>
+
+#### [Optional: Potential Challenges / Roadblocks]
+[Optional: 1-2 paragraphs discussing hurdles or criticisms.]
+
+#### [Optional: Future Outlook / What's Next?]
+[Optional: 1-2 paragraphs on future developments.]
+
+#### [Optional: Quick FAQ]
+[Optional: 2-3 relevant Questions & Answers. Example: Q: What is the main benefit of this technology? A: The main benefit is...]
+**Q: [Question 1]?**
+A: [Answer 1]
+**Q: [Question 2]?**
+A: [Answer 2]
 
 Source: [{article_title}]({source_article_url})
 
@@ -102,7 +144,7 @@ Source: [{article_title}]({source_article_url})
 {{
   "@context": "https://schema.org",
   "@type": "NewsArticle",
-  "headline": "[Generated title tag from above]",
+  "headline": "[SEO H1 from above]",
   "description": "[Generated meta description from above]",
   "keywords": {all_generated_keywords_json},
   "mainEntityOfPage": {{ "@type": "WebPage", "@id": "{source_article_url}" }},
@@ -120,7 +162,6 @@ Source: [{article_title}]({source_article_url})
 
 # --- API Call Function ---
 def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE, temperature=TEMPERATURE):
-    """Calls the DeepSeek API and returns the content string."""
     if not DEEPSEEK_API_KEY:
         logger.error("DEEPSEEK_API_KEY environment variable not set.")
         return None
@@ -171,12 +212,8 @@ def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE
 
 # --- Parsing Function ---
 def parse_seo_agent_response(response_text):
-    """
-    Parses the structured Markdown response from the SEO agent.
-    Returns a dictionary with parsed components and an error message string (or None if no error).
-    """
     parsed_data = {}
-    errors = [] # Collect non-critical errors
+    errors = []
 
     if not response_text or response_text.strip().startswith("Error:"):
         error_message = f"SEO Agent returned error or empty response: {response_text or 'Empty response'}"
@@ -184,76 +221,48 @@ def parse_seo_agent_response(response_text):
         return None, error_message
 
     try:
-        # Extract Title Tag
         title_match = re.search(r"^\s*Title Tag:\s*(.*)", response_text, re.MULTILINE | re.IGNORECASE)
-        if title_match:
-            parsed_data['generated_title_tag'] = title_match.group(1).strip()
-            if len(parsed_data['generated_title_tag']) > 70:
-                 logger.warning(f"Generated title tag > 60 chars: '{parsed_data['generated_title_tag']}'")
+        if title_match: parsed_data['generated_title_tag'] = title_match.group(1).strip()
         else: errors.append("Missing 'Title Tag:' line.")
 
-        # Extract Meta Description
         meta_match = re.search(r"^\s*Meta Description:\s*(.*)", response_text, re.MULTILINE | re.IGNORECASE)
-        if meta_match:
-            parsed_data['generated_meta_description'] = meta_match.group(1).strip()
-            if len(parsed_data['generated_meta_description']) > 170:
-                 logger.warning(f"Generated meta description > 160 chars: '{parsed_data['generated_meta_description']}'")
+        if meta_match: parsed_data['generated_meta_description'] = meta_match.group(1).strip()
         else: errors.append("Missing 'Meta Description:' line.")
 
-        # Extract JSON-LD Script Block
-        script_match = re.search(
-            r'<script\s+type\s*=\s*["\']application/ld\+json["\']\s*>\s*(\{.*?\})\s*<\/script>',
-            response_text, re.DOTALL | re.IGNORECASE
-        )
+        seo_h1_match = re.search(r"^\s*SEO H1:\s*(.*)", response_text, re.MULTILINE | re.IGNORECASE)
+        if seo_h1_match: parsed_data['generated_seo_h1'] = seo_h1_match.group(1).strip()
+        else: errors.append("Missing 'SEO H1:' line.")
+        
+        script_match = re.search(r'<script\s+type\s*=\s*["\']application/ld\+json["\']\s*>\s*(\{.*?\})\s*<\/script>', response_text, re.DOTALL | re.IGNORECASE)
         if script_match:
             json_content_str = script_match.group(1).strip()
             parsed_data['generated_json_ld'] = script_match.group(0).strip()
-            try:
-                json.loads(json_content_str)
-            except json.JSONDecodeError as json_e:
-                logger.warning(f"Could not validate JSON-LD: {json_e}. Content: {json_content_str[:200]}...")
-                errors.append("JSON-LD content invalid.")
-        else:
-            errors.append("Missing JSON-LD script block.")
+            try: json.loads(json_content_str)
+            except json.JSONDecodeError: errors.append("JSON-LD content invalid.")
+        else: errors.append("Missing JSON-LD script block.")
 
-        # Extract Article Body (now expects ## H2 ... ### Why ... Source:)
         body_match = re.search(
-            # Look for content between Meta Desc line and the Source line or Script tag
-            # Ensure it captures the ## H2 heading at the start
-            r"Meta Description:.*?[\r\n]+(##.*?)(?=[\r\n]+\s*Source:|[\r\n]*\s*<script)",
+            r"SEO H1:.*?[\r\n]+(##.*?)(?=[\r\n]+\s*Source:|[\r\n]*\s*<script)",
             response_text, re.DOTALL | re.IGNORECASE
         )
         if body_match:
              body_content = body_match.group(1).strip()
-             # Clean potential leftover Source line if regex didn't exclude perfectly
              body_content = re.sub(r'\s*Source:\s*\[.*?\]\(.*?\)\s*$', '', body_content, flags=re.MULTILINE).strip()
              parsed_data['generated_article_body_md'] = body_content
-             # Check if the 'Why It Matters' section seems to be present
-             if "### Why It Matters" not in body_content and \
-                "### The Big Picture" not in body_content and \
-                "### What This Means" not in body_content:
-                 logger.warning("Generated body might be missing 'Why It Matters' section.")
-                 # errors.append("Missing 'Why It Matters' section.") # Optional: Treat as error
+             if not re.search(r"###\s+.*", body_content): logger.warning("Generated body might be missing the main H3 analysis section.")
              if not body_content: errors.append("Extracted Article Body is empty.")
-             else: logger.debug(f"Extracted article body length: {len(body_content)} chars.")
-        else:
-             errors.append("Could not extract Article Body content.")
+        else: errors.append("Could not extract Article Body content.")
 
-        # --- Final Result Determination ---
-        if 'generated_article_body_md' not in parsed_data or not parsed_data['generated_article_body_md']:
-            final_error_message = f"Critical parsing failure: Missing Article Body. Errors: {'; '.join(errors)}"
+        if not parsed_data.get('generated_article_body_md') or not parsed_data.get('generated_seo_h1'):
+            final_error_message = f"Critical parsing failure: Missing Article Body or SEO H1. Errors: {'; '.join(errors if errors else ['Unknown parsing issue'])}"
             logger.error(final_error_message)
             return None, final_error_message
 
-        if errors:
-            error_summary = "; ".join(errors)
-            logger.warning(f"SEO Parsing completed with non-critical errors: {error_summary}")
-            parsed_data.setdefault('generated_title_tag', '')
-            parsed_data.setdefault('generated_meta_description', '')
-            parsed_data.setdefault('generated_json_ld', '')
-            return parsed_data, error_summary
-        else:
-            return parsed_data, None
+        parsed_data.setdefault('generated_title_tag', parsed_data.get('generated_seo_h1', 'Error Title'))
+        parsed_data.setdefault('generated_meta_description', 'Error Generating Description')
+        parsed_data.setdefault('generated_json_ld', '<script type="application/ld+json">{}</script>')
+
+        return parsed_data, ("; ".join(errors) if errors else None)
 
     except Exception as e:
         logger.exception(f"Critical unexpected error during SEO response parsing: {e}")
@@ -261,39 +270,44 @@ def parse_seo_agent_response(response_text):
 
 # --- Main Agent Function ---
 def run_seo_article_agent(article_data):
-    """Generates SEO title, description, article body (MD), and JSON-LD script."""
     article_id = article_data.get('id', 'N/A')
 
-    # --- Input Data Preparation ---
+    content_to_process = article_data.get('content_for_processing')
+    if not content_to_process:
+        error_msg = f"Missing 'content_for_processing' for SEO agent (ID: {article_id})."
+        logger.error(error_msg); article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg; return article_data
+
     primary_keyword = article_data.get('filter_verdict', {}).get('primary_topic_keyword')
+    if not primary_keyword:
+        error_msg = f"Missing primary_topic_keyword from filter_verdict for ID: {article_id}."
+        logger.error(error_msg); article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg; return article_data
+        
     generated_tags = article_data.get('generated_tags', [])
+    secondary_keywords = [tag for tag in generated_tags if tag.lower() != primary_keyword.lower()][:3]
+    secondary_keywords_list_str = ", ".join(secondary_keywords)
+
     all_keywords = ([primary_keyword] if primary_keyword else []) + generated_tags
     all_keywords = [str(k).strip() for k in all_keywords if k and str(k).strip()]
-    all_generated_keywords_json = json.dumps(all_keywords)
-
-    required_keys = ['title', 'summary', 'link', 'filter_verdict', 'selected_image_url', 'published_iso']
-    missing_keys = [k for k in required_keys if article_data.get(k) is None]
-    if missing_keys:
-        error_msg = f"Missing required data for SEO agent (ID: {article_id}). Needs: {missing_keys}"
-        logger.error(error_msg); article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg; return article_data
-    if not primary_keyword:
-        logger.error(f"Missing primary_topic_keyword from filter_verdict for ID: {article_id}.")
-        article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = "Missing primary keyword"; return article_data
+    all_generated_keywords_json = json.dumps(list(set(all_keywords)))
 
     input_data_for_prompt = {
-        "article_title": article_data['title'], "rss_summary": article_data['summary'],
-        "source_article_url": article_data['link'], "target_keyword": primary_keyword,
+        "article_title": article_data['title'],
+        "article_content_for_processing": content_to_process,
+        "source_article_url": article_data['link'],
+        "target_keyword": primary_keyword,
+        "secondary_keywords_list_str": secondary_keywords_list_str,
         "article_image_url": article_data['selected_image_url'],
         "author_name": article_data.get('author', 'AI News Team'),
         "current_date_iso": article_data.get('published_iso') or datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-        "your_website_name": YOUR_WEBSITE_NAME, "your_website_logo_url": YOUR_WEBSITE_LOGO_URL,
+        "your_website_name": YOUR_WEBSITE_NAME,
+        "your_website_logo_url": YOUR_WEBSITE_LOGO_URL,
         "all_generated_keywords_json": all_generated_keywords_json
     }
-
-    critical_inputs = ['article_title', 'rss_summary', 'source_article_url', 'target_keyword', 'article_image_url', 'current_date_iso', 'all_generated_keywords_json', 'your_website_name']
-    if any(input_data_for_prompt.get(k) is None for k in critical_inputs):
-        missing = [k for k in critical_inputs if input_data_for_prompt.get(k) is None]
-        error_msg = f"Cannot run SEO agent for ID {article_id}, critical derived input data is None: {missing}"
+    
+    critical_prompt_inputs = ['article_title', 'article_content_for_processing', 'source_article_url', 'target_keyword', 'article_image_url', 'current_date_iso', 'all_generated_keywords_json', 'your_website_name']
+    if any(input_data_for_prompt.get(k) is None for k in critical_prompt_inputs):
+        missing_data = [k for k in critical_prompt_inputs if input_data_for_prompt.get(k) is None]
+        error_msg = f"Cannot run SEO agent for ID {article_id}, critical data for prompt is None: {missing_data}"
         logger.error(error_msg); article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg; return article_data
 
     try:
@@ -302,27 +316,30 @@ def run_seo_article_agent(article_data):
         logger.exception(f"KeyError formatting SEO prompt template for ID {article_id}! Error: {e}")
         article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = f"Prompt template formatting error: {e}"; return article_data
 
-    logger.info(f"Running SEO article generator for article ID: {article_id} (with 'Why It Matters')...")
+    logger.info(f"Running SEO article generator for article ID: {article_id} (Perfected SEO & Content)...")
     raw_response_content = call_deepseek_api(SEO_PROMPT_SYSTEM, user_prompt, max_tokens=MAX_TOKENS_RESPONSE, temperature=TEMPERATURE)
 
     if not raw_response_content:
-        logger.error(f"SEO agent failed to get a response from the API for ID: {article_id}.")
-        article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = "API call failed or returned empty"; return article_data
+        error_msg = "API call failed or returned empty content for SEO generation."
+        logger.error(f"{error_msg} (ID: {article_id}).")
+        article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg; return article_data
 
     logger.debug(f"Raw SEO Agent Response for ID {article_id}:\n---\n{raw_response_content}\n---")
-
     parsed_results, error_msg = parse_seo_agent_response(raw_response_content)
 
     article_data['seo_agent_results'] = parsed_results
     article_data['seo_agent_error'] = error_msg
 
     if parsed_results is None:
-        logger.error(f"Failed to parse SEO agent response for ID {article_id}: {error_msg}")
+        logger.error(f"Failed to parse SEO agent response for ID {article_id}: {error_msg or 'Unknown parsing error'}")
         article_data['seo_agent_raw_response'] = raw_response_content
     elif error_msg:
         logger.warning(f"SEO agent parsing completed with non-critical errors for ID {article_id}: {error_msg}")
     else:
         logger.info(f"Successfully generated and parsed SEO content for ID: {article_id}.")
+        if parsed_results.get('generated_seo_h1') and parsed_results['generated_seo_h1'] != article_data['title']:
+            logger.info(f"Updating article title for ID {article_id} with generated SEO H1: '{parsed_results['generated_seo_h1']}'")
+            article_data['title'] = parsed_results['generated_seo_h1']
 
     return article_data
 
@@ -331,42 +348,42 @@ if __name__ == "__main__":
     logging.getLogger().setLevel(logging.DEBUG)
     logger.setLevel(logging.DEBUG)
 
-    test_article_data = {
-        'id': 'example-seo-why-matters-456',
-        'title': "Apple and Anthropic Reportedly Partner to Build an AI Coding Platform",
-        'summary': "Tech giants Apple and AI startup Anthropic are reportedly collaborating on a new platform aimed at assisting programmers. The project, details of which remain scarce, is said to leverage generative AI to streamline software development workflows, potentially integrating into Apple's existing developer tools like Xcode. Neither company has officially commented.",
-        'link': "https://example.com/apple-anthropic-ai-coder",
+    test_article_data_perfect_seo = {
+        'id': 'example-seo-perfect-001',
+        'title': "Nvidia Blackwell B200 GPU Announcement",
+        'summary': "Nvidia CEO Jensen Huang announced the Blackwell B200 GPU at GTC, promising massive performance gains for AI training and inference.",
+        'content_for_processing': """Nvidia's GTC conference today saw the unveiling of their next-generation AI powerhouse, the Blackwell B200 GPU. CEO Jensen Huang, during his keynote, highlighted the chip's capability to handle trillion-parameter scale AI models, a significant leap from previous generations. The B200 is built on a new architecture, reportedly TSMC's 3nm process, and packs an astounding 208 billion transistors. This allows for a substantial increase in raw compute power and memory bandwidth, critical for the ever-growing demands of large language models and complex AI workloads. Key features touted include a second-generation Transformer Engine with FP4 precision support, which Nvidia claims can double the effective compute and bandwidth for inference tasks. The new NVLink switch system allows up to 576 Blackwell GPUs to communicate as a single, unified compute instance. Huang stated, "Blackwell is not just a chip, it's a platform." Early partners like AWS, Google Cloud, and Microsoft Azure will deploy Blackwell systems. Availability is expected late 2024. Competitors AMD and Intel are also active.""",
+        'link': "https://example.com/nvidia-blackwell-b200-perfected",
         'filter_verdict': {
-            'importance_level': 'Interesting', 'topic': 'Software',
-            'reasoning_summary': 'Partnership between major players on significant AI application.',
-            'primary_topic_keyword': 'Apple Anthropic AI coding'
+            'importance_level': 'Breaking', 'topic': 'Hardware',
+            'reasoning_summary': 'Major new GPU announcement.',
+            'primary_topic_keyword': 'Nvidia Blackwell B200'
         },
-        'selected_image_url': "https://via.placeholder.com/800x500.png?text=Apple+Anthropic+AI",
+        'selected_image_url': "https://via.placeholder.com/800x500.png?text=Nvidia+Blackwell+Perfected",
         'published_iso': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-        'generated_tags': ["Apple", "Anthropic", "AI Coding", "Generative AI", "Software Development", "Developer Tools", "Xcode", "AI Partnership"],
-        'author': 'Standalone Test'
+        'generated_tags': ["Nvidia", "Blackwell", "B200", "GPU", "AI Hardware", "GTC 2024", "Deep Learning", "TSMC", "Jensen Huang", "AI Chips"],
+        'author': 'AI SEO Bot'
     }
 
-    logger.info("\n--- Running SEO Agent Standalone Test (with 'Why It Matters') ---")
-    result_data = run_seo_article_agent(test_article_data.copy())
+    logger.info("\n--- Running SEO Agent Standalone Test (Perfected SEO) ---")
+    result_data = run_seo_article_agent(test_article_data_perfect_seo.copy())
 
-    print("\n--- Final Result Data ---")
+    print("\n--- Final Result Data (Perfected SEO Test) ---")
     if result_data and result_data.get('seo_agent_results'):
         print("\n--- Parsed SEO Results ---")
         print(f"Title Tag: {result_data['seo_agent_results'].get('generated_title_tag')}")
         print(f"Meta Desc: {result_data['seo_agent_results'].get('generated_meta_description')}")
+        print(f"SEO H1: {result_data['seo_agent_results'].get('generated_seo_h1')}")
         print(f"JSON-LD Present: {bool(result_data['seo_agent_results'].get('generated_json_ld'))}")
         print("\n--- Article Body Markdown ---")
         print(result_data['seo_agent_results'].get('generated_article_body_md', ''))
         if result_data.get('seo_agent_error'):
             print(f"\nParsing Warning/Error: {result_data['seo_agent_error']}")
+        print(f"\n--- Final Article Title (may be updated by SEO H1): {result_data.get('title')} ---")
 
     elif result_data and result_data.get('seo_agent_error'):
          print(f"\nSEO Agent FAILED. Error: {result_data.get('seo_agent_error')}")
-         if 'seo_agent_raw_response' in result_data:
-              print("\n--- Raw Response (Debug) ---")
-              print(result_data['seo_agent_raw_response'])
-    else:
-         print("\nSEO Agent FAILED critically or returned no data.")
+         if 'seo_agent_raw_response' in result_data: print(f"\n--- Raw Response (Debug) ---\n{result_data['seo_agent_raw_response']}")
+    else: print("\nSEO Agent FAILED critically or returned no data.")
 
     logger.info("\n--- SEO Agent Standalone Test Complete ---")

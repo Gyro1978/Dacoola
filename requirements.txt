@@ -8,3 +8,4 @@ Pillow
 google-search-results
 sentence-transformers
 tweepy
+trafilatura
