@@ -1,6 +1,77 @@
 {
   "articles": [
     {
+      "id": "ca6ce1f71ff7f9fbccff45607289dbaa524387ff6175586b672a5b5e8c0c6bc6",
+      "title": "Tesla ‘Robotaxi’ trademark refused for being too generic",
+      "link": "articles/tesla-‘robotaxi’-trademark-refused-for-being-too-generic.html",
+      "published_iso": "2025-05-07T20:29:26Z",
+      "summary_short": "Tesla's \"Robotaxi\" trademark application was refused by the USPTO for being too generic. Learn why and what it means for Tesla's autonomous ride-hailing plans.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/10/cybercab.png?resize=1200,556",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "Tesla Robotaxi trademark",
+        "USPTO trademark rejection",
+        "autonomous ride-hailing service",
+        "Tesla Cybercab",
+        "autonomous vehicle industry",
+        "trademark legal issues",
+        "electric vehicle transportation",
+        "future of autonomous taxis",
+        "Tesla branding strategy"
+      ],
+      "audio_url": null,
+      "trend_score": 14.5
+    },
+    {
+      "id": "3e738d5e3e9e140ea862bdda6cd1230a5389065f5e121d227cef46def4f3f457",
+      "title": "Anthropic Launches Claude AI Web Search API for Real-Time Data Retrieval",
+      "link": "articles/anthropic-launches-claude-ai-web-search-api-for-real-time-data-retrieval.html",
+      "published_iso": "2025-05-07T20:28:34Z",
+      "summary_short": "Anthropic introduces Claude AI web search API, enabling real-time data retrieval for AI-powered applications. Enhance your projects with up-to-date info.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/06/YouTube-Thumb-Text-2-3.png?resize=1200,675",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Claude AI web search",
+        "Anthropic AI models",
+        "Real-time data retrieval",
+        "AI-powered coding assistant",
+        "Enterprise AI solutions",
+        "Dynamic AI research",
+        "AI search API",
+        "Technical troubleshooting AI",
+        "AI in finance and healthcare",
+        "Customizable AI search"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "3e9c58f9d636060cb1f5c36efc4266b7b7200796db328d311a573442ff1e8476",
+      "title": "OpenAI and FDA Collaborate on AI in Drug Evaluation to Modernize Approvals",
+      "link": "articles/openai-and-fda-collaborate-on-ai-in-drug-evaluation-to-modernize-approvals.html",
+      "published_iso": "2025-05-07T19:59:59Z",
+      "summary_short": "OpenAI and the FDA are exploring AI in drug evaluation to accelerate approvals. Learn how AI could transform regulatory processes.",
+      "image_url": "https://media.wired.com/photos/681ba1b6c38af307cb440ad9/191:100/w_1280,c_limit/openai-fda-biz-2210029399.jpg",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "AI in drug evaluation",
+        "FDA and OpenAI collaboration",
+        "cderGPT",
+        "AI in healthcare",
+        "drug approval modernization",
+        "AI for precision medicine",
+        "regulatory AI challenges",
+        "ChatGPT Gov",
+        "AI in clinical trials",
+        "FDA AI officer"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "cee11a0a84e149316e1435eb94a9f6d4dd1e5af81130e7edc10e882b43d381c8",
       "title": "How Starlink Gains Trade Benefits from Trump’s Tariff War",
       "link": "articles/how-starlink-gains-trade-benefits-from-trump’s-tariff-war.html",
