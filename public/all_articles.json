@@ -1,6 +1,102 @@
 {
   "articles": [
     {
+      "id": "8a637dddd3c6647213cc0dc6d1601c2ae139f587141702e1eb29255dc5eaa81e",
+      "title": "Amazon Unveils Vulcan: A Warehouse Robot with Advanced Touch Sensing",
+      "link": "articles/amazon-unveils-vulcan-a-warehouse-robot-with-advanced-touch-sensing.html",
+      "published_iso": "2025-05-07T18:33:26Z",
+      "summary_short": "Amazon's new warehouse robot, Vulcan, uses force sensors to \"feel\" items, improving efficiency in fulfillment centers. Learn more about this innovation.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/download-1.jpeg?resize=1200,675",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "Amazon warehouse robot",
+        "Vulcan robot",
+        "warehouse automation",
+        "robotics in logistics",
+        "AI-driven robotics",
+        "force sensing technology",
+        "Amazon robotics innovation",
+        "tactile feedback in robots",
+        "warehouse efficiency",
+        "job displacement in automation"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "f0ccc8a83c29ae996e580c46437a449bc67fabf0207b48580b33f69521f4c861",
+      "title": "Meta vs TikTok: Court Filing Exposes Facebook’s Declining Influence",
+      "link": "articles/meta-vs-tiktok-court-filing-exposes-facebook’s-declining-influence.html",
+      "published_iso": "2025-05-07T18:24:11Z",
+      "summary_short": "Internal Meta documents show executives admitting TikTok's dominance in the Meta vs TikTok battle, impacting Facebook's market position.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2022/03/GettyImages-1238243411.jpeg?w=1024",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Meta vs TikTok",
+        "Facebook Decline",
+        "TikTok Dominance",
+        "Social Media Competition",
+        "Mark Zuckerberg",
+        "Instagram Reels",
+        "FTC Antitrust Lawsuit",
+        "Algorithmic Content Discovery",
+        "Short-Form Video Trends",
+        "YouTube vs TikTok"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "44d37e03617ac5527e9743a18ac078e001bb39d04dd68b821adf7f3d7eadd9f8",
+      "title": "Broadcom’s VMware License Controversy: Cease-and-Desist Letters Sent to Perpetual Users",
+      "link": "articles/broadcom’s-vmware-license-controversy-cease-and-desist-letters-sent-to-perpetual.html",
+      "published_iso": "2025-05-07T18:08:58Z",
+      "summary_short": "Broadcom escalates the VMware license controversy by sending cease-and-desist letters to perpetual license holders with expired support contracts.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/05/GettyImages-1335564212-1152x648.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "VMware License Controversy",
+        "Broadcom VMware Acquisition",
+        "VMware Perpetual Licenses",
+        "Cease-and-Desist Letters",
+        "VMware Subscription Models",
+        "Broadcom Legal Tactics",
+        "VMware Alternatives",
+        "Proxmox vs VMware",
+        "Nutanix Migration",
+        "Devirtualization Challenges"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "90480963823f1e83353184c6e0531e7d0e642469cf30ea8b76f42dd60ae6bc30",
+      "title": "OpenAI Seeks Government Partnerships to Boost Global AI Infrastructure",
+      "link": "articles/openai-seeks-government-partnerships-to-boost-global-ai-infrastructure.html",
+      "published_iso": "2025-05-07T17:58:05Z",
+      "summary_short": "OpenAI launches \"OpenAI for Countries\" to collaborate with governments on AI infrastructure, aiming to counter Chinese AI dominance.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/11/openAI-pattern-04.jpg?resize=1200,675",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI government partnerships",
+        "AI infrastructure expansion",
+        "OpenAI for Countries",
+        "Project Stargate",
+        "democratic AI",
+        "AI localization",
+        "government AI collaboration",
+        "Western AI solutions",
+        "AI geopolitical competition",
+        "AI accessibility"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "640fd0237323d8d342afd17e8200d25d7ac9619d2ee6516886df46ed45bf6f4b",
       "title": "Cadence’s NVIDIA Blackwell Supercomputer Revolutionizes AI-Driven Design",
       "link": "articles/cadence’s-nvidia-blackwell-supercomputer-revolutionizes-ai-driven-design.html",
