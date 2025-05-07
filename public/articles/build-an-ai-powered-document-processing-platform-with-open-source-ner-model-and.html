@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-WSLDZ2QB');</script>
     <!-- End Google Tag Manager -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -29,6 +30,7 @@
     <meta property="og:site_name" content="Dacoola">
     
     <meta property="article:published_time" content="2025-04-23T16:06:35Z">
+    <meta property="article:modified_time" content="2025-04-23T16:06:35Z"> 
     
     
     <meta property="article:tag" content="AI document processing">
@@ -78,7 +80,6 @@
           "url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/document-processing-sagemaker-1120x630.jpg"
           
           
-          
         }
       ],
       "datePublished": "2025-04-23T16:06:35Z",
@@ -89,16 +90,17 @@
         "name": "Dacoola",
         "logo": { "@type": "ImageObject", "url": "https://dacoolaa.netlify.app" }
       }
+      
+      
     }
     </script>
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-WGJ5MFBC6X');
     </script>
 
@@ -150,7 +152,7 @@
 <p>The solution’s modular design includes specialized Amazon S3 buckets for different processing stages—such as extracts, summaries, and author information—ensuring organized data management. AWS Step Functions orchestrate the workflow, coordinating Lambda functions for tasks like extractive summarization (using TextRank) and author extraction (via BERT NER). This approach reduces LLM workload by 33% and token input by 75-90%, optimizing both performance and cost.</p> <!-- Render generated Markdown HTML -->
                  <div class="source-link-container">
                     <a href="https://aws.amazon.com/blogs/machine-learning/build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-llm-on-amazon-sagemaker/" class="source-button" target="_blank" rel="noopener noreferrer">
-                        Read Original Source <i class="fas fa-external-link-alt fa-xs"></i>
+                        Read Original Source <i class="fas fa-external-link-alt fa-xs" aria-hidden="true"></i>
                     </a>
                  </div>
             </section>
@@ -173,13 +175,14 @@
     </div> <!-- End main-content-grid -->
 
     <!-- GLOBAL FIXED BROWSER TTS PLAYER BUTTON -->
-    <button id="global-tts-player-button" title="Listen to article (Browser TTS)">
-        <i class="fas fa-headphones"></i>
+    <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
+        <i class="fas fa-headphones" aria-hidden="true"></i>
     </button>
-    <audio id="global-audio-player" preload="none" style="display:none;"></audio>
+    
+    
 
 
-    <script src="../js/script.js"></script>
+    <script src="../js/script.js"></script> <!-- Path relative to public/articles/ -->
 
 </body>
 </html>
