@@ -1,4 +1,4 @@
-# src/agents/seo_article_generator_agent.py
+# src/agents/seo_article_generator_agent.py (1/1)
 
 import os
 import sys
@@ -48,6 +48,7 @@ You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, powe
     *   **Secondary Keywords (`{{SECONDARY_KEYWORDS_LIST_STR}}`):** If provided, naturally integrate 1-2 of these into subheadings or the main body text.
     *   **Readability & User Experience:** Prioritize clear, concise language. Use short sentences and paragraphs where appropriate. Ensure a logical flow.
     *   **LSI Keywords:** Naturally incorporate semantically related terms and concepts throughout the article.
+    *   **Punctuation:** Use standard hyphens (`-`) for punctuation where an em-dash (`—`) might typically be used (e.g., for parenthetical phrases or ranges). Avoid em-dashes in the final output.
 
 3.  **Content Generation & Structure:**
     *   **SEO-Optimized H1 Heading (Article Title for the page):** Craft a compelling, SEO-friendly H1 heading (as `## [Generated H1 Heading]`). This can be different from `{{ARTICLE_TITLE}}` if a better SEO title is possible. It MUST include `{{TARGET_KEYWORD}}`. The H1 should be engaging and accurately reflect the article's core subject.
@@ -56,8 +57,8 @@ You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, powe
         *   **Main Analysis Title (`### H3`):** Create a single, contextually relevant `### H3` title for the main analysis block (e.g., "### Unpacking the Impact", "### Key Innovations & Implications", "### Future Trajectory").
         *   **Core Analysis (2-4 paragraphs under the H3):** Deeper explanation, context, trends, significance.
         *   **Optional, Thematic Sub-sections (`#### H4`):** If the content supports it, create specific `#### H4` sub-sections *without generic prefixes like "Deeper Dive:"*. The H4 title itself should be descriptive (e.g., "#### The Technology Behind X", "#### Market Reactions", "#### Ethical Considerations"). Include 1-2 paragraphs for each.
-        *   **Pros & Cons (`#### Pros & Cons`):** If applicable, use this exact H4 title, followed by the specified HTML structure.
-        *   **FAQ (`#### Frequently Asked Questions`):** If the topic is complex or warrants it, use this exact H4 title. Generate 2-4 relevant questions and answers using the specified HTML structure for interactive accordions.
+        *   **Pros & Cons (`#### Pros & Cons`):** If applicable, use this exact H4 title. Items MUST be structured as an HTML unordered list (`<ul>`) with each item in an `<li>` tag directly within the `item-list` div as specified in the user prompt template. Apply Markdown for bold/italics *inside* the `<li>` tags if needed (e.g., `<li>**Strong Point:** Details...</li>`).
+        *   **FAQ (`#### Frequently Asked Questions`):** If the topic is complex or warrants it, use this exact H4 title. Generate 3-5 relevant questions and answers using the specified HTML structure for interactive accordions (or 2-3 if less content is available).
     *   **Overall Length & Tone:** Aim for **500-800 words**. Maintain an authoritative, insightful, yet accessible journalistic tone.
 
 4.  **Output Format (Strict Adherence Required):**
@@ -103,20 +104,24 @@ SEO H1: [Generated SEO-Optimized H1 heading for the page, include TARGET_KEYWORD
 [Optional: 1-2 paragraphs on a key technical detail or component if warranted. Incorporate relevant keywords.]
 
 #### [Optional: Pros & Cons]
-[If generating Pros & Cons, use this exact H4 title "Pros & Cons" and the HTML structure below. Use Markdown for list items inside `item-list` divs.]
+[If generating Pros & Cons, use this exact H4 title "Pros & Cons" and the HTML structure below. Items must be HTML list items (`<li>`). Use Markdown for bold/italics *inside* `<li>` tags if needed.]
 <div class="pros-cons-container">
   <div class="pros-section">
     <h5 class="section-title">Pros</h5>
     <div class="item-list">
-      - Pro item 1 (Markdown list item)
-      - Pro item 2
+      <ul>
+        <li>**Pro Item 1:** Detailed explanation of the first advantage.</li>
+        <li>Pro Item 2: Another benefit.</li>
+      </ul>
     </div>
   </div>
   <div class="cons-section">
     <h5 class="section-title">Cons</h5>
     <div class="item-list">
-      - Con item 1 (Markdown list item)
-      - Con item 2
+      <ul>
+        <li>**Con Item 1:** Description of a drawback.</li>
+        <li>Con Item 2: Further limitation.</li>
+      </ul>
     </div>
   </div>
 </div>
@@ -128,7 +133,7 @@ SEO H1: [Generated SEO-Optimized H1 heading for the page, include TARGET_KEYWORD
 [Optional: 1-2 paragraphs on future developments.]
 
 #### [Optional: Frequently Asked Questions]
-[If generating FAQs, use this exact H4 title "Frequently Asked Questions" and the HTML structure below for 2-4 Q&As.]
+[If generating FAQs, use this exact H4 title "Frequently Asked Questions". Generate 3-5 relevant Q&As if the topic is complex, or 2-3 if less content is available. Use the HTML structure below.]
 <div class="faq-section">
   <details class="faq-item">
     <summary class="faq-question">Question 1 related to the article?</summary>
@@ -140,6 +145,12 @@ SEO H1: [Generated SEO-Optimized H1 heading for the page, include TARGET_KEYWORD
     <summary class="faq-question">Another relevant question?</summary>
     <div class="faq-answer-content">
       <p>Detailed answer to question 2.</p>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-question">A third question if applicable?</summary>
+    <div class="faq-answer-content">
+      <p>Answer to the third question.</p>
     </div>
   </details>
 </div>
@@ -242,34 +253,27 @@ def parse_seo_agent_response(response_text):
         script_match = re.search(r'<script\s+type\s*=\s*["\']application/ld\+json["\']\s*>\s*(\{.*?\})\s*<\/script>', response_text, re.DOTALL | re.IGNORECASE)
         if script_match:
             json_content_str = script_match.group(1).strip()
-            parsed_data['generated_json_ld'] = script_match.group(0).strip()
-            try: json.loads(json_content_str)
+            parsed_data['generated_json_ld'] = script_match.group(0).strip() # Save the whole script tag
+            try: json.loads(json_content_str) # Validate JSON content
             except json.JSONDecodeError: errors.append("JSON-LD content invalid.")
         else: errors.append("Missing JSON-LD script block.")
 
-        # Extract Article Body (from after SEO H1 line to before Source: or <script)
-        # This regex needs to be robust to handle the new optional HTML sections (Pros/Cons, FAQ)
-        # while still capturing all markdown content.
-        body_start_pattern = r"SEO H1:.*?[\r\n]+" # Start after "SEO H1:" line
-        body_end_pattern = r"([\s\S]*?)(?=[\r\n]+\s*Source:|[\r\n]*\s*<script)" # Capture everything until Source or Script
+        body_start_pattern = r"SEO H1:.*?[\r\n]+" 
+        body_end_pattern = r"([\s\S]*?)(?=[\r\n]+\s*Source:|[\r\n]*\s*<script)"
         
         body_full_match = re.search(body_start_pattern + body_end_pattern, response_text, re.DOTALL | re.IGNORECASE)
 
         if body_full_match:
-             body_content = body_full_match.group(1).strip() # Group 1 is (##.*?) from original + new middle part
+             body_content = body_full_match.group(1).strip()
              
-             # Ensure the H2 (SEO H1) is at the very beginning of the extracted body
              if not body_content.startswith("## "):
-                 # Try a more specific pattern if the first one was too greedy or failed
                  body_specific_match = re.search(r"SEO H1:.*?[\r\n]+(##\s+[\s\S]*?)(?=[\r\n]+\s*Source:|[\r\n]*\s*<script)", response_text, re.DOTALL | re.IGNORECASE)
                  if body_specific_match:
                      body_content = body_specific_match.group(1).strip()
                  else:
                      errors.append("Could not reliably find start of Article Body (## H1).")
-                     body_content = "" # Avoid using potentially incorrect slice
+                     body_content = ""
 
-             # Clean potential leftover Source line if regex didn't exclude perfectly (should be less needed now)
-             # body_content = re.sub(r'\s*Source:\s*\[.*?\]\(.*?\)\s*$', '', body_content, flags=re.MULTILINE).strip()
              parsed_data['generated_article_body_md'] = body_content
 
              if not re.search(r"###\s+.*", body_content) and "pros-cons-container" not in body_content and "faq-section" not in body_content :
@@ -284,6 +288,7 @@ def parse_seo_agent_response(response_text):
             logger.error(final_error_message)
             return None, final_error_message
 
+        # Provide fallbacks if parsing fails for non-critical parts
         parsed_data.setdefault('generated_title_tag', parsed_data.get('generated_seo_h1', 'Error Title'))
         parsed_data.setdefault('generated_meta_description', 'Error Generating Description')
         parsed_data.setdefault('generated_json_ld', '<script type="application/ld+json">{}</script>')
@@ -309,12 +314,13 @@ def run_seo_article_agent(article_data):
         logger.error(error_msg); article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg; return article_data
         
     generated_tags = article_data.get('generated_tags', [])
-    secondary_keywords = [tag for tag in generated_tags if tag.lower() != primary_keyword.lower()][:3]
+    secondary_keywords = [tag for tag in generated_tags if tag.lower() != primary_keyword.lower()][:3] # Top 3 different tags
     secondary_keywords_list_str = ", ".join(secondary_keywords)
 
+    # Ensure all keywords are strings for JSON dump
     all_keywords = ([primary_keyword] if primary_keyword else []) + generated_tags
-    all_keywords = [str(k).strip() for k in all_keywords if k and str(k).strip()]
-    all_generated_keywords_json = json.dumps(list(set(all_keywords)))
+    all_keywords = [str(k).strip() for k in all_keywords if k and str(k).strip()] # Clean and ensure string
+    all_generated_keywords_json = json.dumps(list(set(all_keywords))) # Unique keywords
 
     input_data_for_prompt = {
         "article_title": article_data['title'],
@@ -330,6 +336,7 @@ def run_seo_article_agent(article_data):
         "all_generated_keywords_json": all_generated_keywords_json
     }
     
+    # Check for None in critical prompt inputs
     critical_prompt_inputs = ['article_title', 'article_content_for_processing', 'source_article_url', 'target_keyword', 'article_image_url', 'current_date_iso', 'all_generated_keywords_json', 'your_website_name']
     if any(input_data_for_prompt.get(k) is None for k in critical_prompt_inputs):
         missing_data = [k for k in critical_prompt_inputs if input_data_for_prompt.get(k) is None]
@@ -354,15 +361,17 @@ def run_seo_article_agent(article_data):
     parsed_results, error_msg = parse_seo_agent_response(raw_response_content)
 
     article_data['seo_agent_results'] = parsed_results
-    article_data['seo_agent_error'] = error_msg
+    article_data['seo_agent_error'] = error_msg # This can be None if parsing was successful
 
-    if parsed_results is None:
+    if parsed_results is None: # This means critical parsing failure
         logger.error(f"Failed to parse SEO agent response for ID {article_id}: {error_msg or 'Unknown parsing error'}")
+        # Store raw response for debugging if parsing totally fails
         article_data['seo_agent_raw_response'] = raw_response_content
-    elif error_msg:
+    elif error_msg: # Non-critical parsing errors (e.g., missing optional field but body/h1 okay)
         logger.warning(f"SEO agent parsing completed with non-critical errors for ID {article_id}: {error_msg}")
-    else:
+    else: # Fully successful
         logger.info(f"Successfully generated and parsed SEO content for ID: {article_id}.")
+        # Update article title with SEO H1 if it's different and successfully generated
         if parsed_results.get('generated_seo_h1') and parsed_results['generated_seo_h1'] != article_data['title']:
             logger.info(f"Updating article title for ID {article_id} with generated SEO H1: '{parsed_results['generated_seo_h1']}'")
             article_data['title'] = parsed_results['generated_seo_h1']
@@ -388,10 +397,10 @@ if __name__ == "__main__":
         'selected_image_url': "https://via.placeholder.com/800x500.png?text=Nvidia+Blackwell+Perfected",
         'published_iso': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
         'generated_tags': ["Nvidia", "Blackwell", "B200", "GPU", "AI Hardware", "GTC 2024", "Deep Learning", "TSMC", "Jensen Huang", "AI Chips"],
-        'author': 'AI SEO Bot'
+        'author': 'AI SEO Bot Test'
     }
 
-    logger.info("\n--- Running SEO Agent Standalone Test (Perfected SEO) ---")
+    logger.info("\n--- Running SEO Agent Standalone Test (Perfected SEO & Content Structure) ---")
     result_data = run_seo_article_agent(test_article_data_perfect_seo.copy())
 
     print("\n--- Final Result Data (Perfected SEO Test) ---")
@@ -401,13 +410,13 @@ if __name__ == "__main__":
         print(f"Meta Desc: {result_data['seo_agent_results'].get('generated_meta_description')}")
         print(f"SEO H1: {result_data['seo_agent_results'].get('generated_seo_h1')}")
         print(f"JSON-LD Present: {bool(result_data['seo_agent_results'].get('generated_json_ld'))}")
-        print("\n--- Article Body Markdown ---")
+        print("\n--- Article Body Markdown (should contain HTML for Pros/Cons & FAQ) ---")
         print(result_data['seo_agent_results'].get('generated_article_body_md', ''))
         if result_data.get('seo_agent_error'):
             print(f"\nParsing Warning/Error: {result_data['seo_agent_error']}")
         print(f"\n--- Final Article Title (may be updated by SEO H1): {result_data.get('title')} ---")
 
-    elif result_data and result_data.get('seo_agent_error'):
+    elif result_data and result_data.get('seo_agent_error'): # Critical error from agent or parsing
          print(f"\nSEO Agent FAILED. Error: {result_data.get('seo_agent_error')}")
          if 'seo_agent_raw_response' in result_data: print(f"\n--- Raw Response (Debug) ---\n{result_data['seo_agent_raw_response']}")
     else: print("\nSEO Agent FAILED critically or returned no data.")

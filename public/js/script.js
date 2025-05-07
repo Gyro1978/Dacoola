@@ -7,13 +7,12 @@ let currentPlayingButton = null; // Button associated with current TTS
 let autoSlideInterval = null; // Interval timer for homepage banner
 
 // -- Read values from CSS custom properties or use defaults --
-// Ensure your :root in CSS has these defined if you want to control them from there
 const MAX_HOME_PAGE_ARTICLES = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--max-home-page-articles').trim() || '20', 10);
 const LATEST_NEWS_GRID_COUNT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--latest-news-grid-count').trim() || '8', 10);
 const TRENDING_NEWS_COUNT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--trending-news-count').trim() || '4', 10);
 const SIDEBAR_DEFAULT_ITEM_COUNT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar-default-item-count').trim() || '5', 10);
-const AVG_SIDEBAR_ITEM_HEIGHT_PX = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--avg-sidebar-item-height').trim() || '110', 10); // Approx height of a sidebar card
-const MAX_SIDEBAR_ITEMS = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--max-sidebar-items').trim() || '10', 10); // Max items in a sidebar
+const AVG_SIDEBAR_ITEM_HEIGHT_PX = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--avg-sidebar-item-height').trim() || '110', 10);
+const MAX_SIDEBAR_ITEMS = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--max-sidebar-items').trim() || '10', 10);
 
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadNavbar().then(() => {
         console.log("Navbar loaded successfully. Proceeding with page setup.");
         setupSearch();
-        initializePageContent(); // This will call loadSidebarData if on article page
+        initializePageContent();
         setupBrowserTTSListeners();
         setupFAQAccordion(); // Initialize FAQ interactivity
         setInterval(updateTimestamps, 60000);
@@ -33,10 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initializePageContent() {
     const bodyClassList = document.body.classList;
-
     if (document.querySelector('.main-article')) {
         console.log("Article page detected");
-        loadSidebarData(); // Dynamic sidebar loading is handled here
+        loadSidebarData();
     } else if (document.querySelector('.home-container')) {
         console.log("Homepage detected");
         loadHomepageData();
@@ -82,26 +80,19 @@ async function loadHomepageData() {
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const allData = await response.json();
         if (!allData?.articles) throw new Error("Invalid all_articles.json format.");
-
         const allArticles = allData.articles;
         const bannerAndTrendingArticles = allArticles.slice(0, MAX_HOME_PAGE_ARTICLES);
-        
         renderBreakingNews(bannerAndTrendingArticles);
-
-        const bannerArticleLinks = Array.from(
-            document.querySelectorAll('#breaking-news-content a.breaking-news-item')
-        ).map(a => a.getAttribute('href'));
+        const bannerArticleLinks = Array.from(document.querySelectorAll('#breaking-news-content a.breaking-news-item')).map(a => a.getAttribute('href'));
         const now = new Date();
         const articlesForGrid = allArticles.filter(a => {
             const isRecentBreaking = a.is_breaking && a.published_iso && (now - new Date(a.published_iso))/(1000*60*60) <= 6;
             const isInBanner = bannerArticleLinks.includes(`/${a.link}`);
             return !isRecentBreaking && !isInBanner;
         }).slice(0, LATEST_NEWS_GRID_COUNT);
-
         renderLatestNewsGrid(articlesForGrid);
         renderTopics();
         renderTrendingNews(bannerAndTrendingArticles.slice(0, TRENDING_NEWS_COUNT));
-
     } catch (error) {
         console.error('Error loading homepage data:', error);
         const sel = s => document.querySelector(s);
@@ -124,14 +115,12 @@ async function loadGenericPageData() {
     const topicName = urlParams.get('name');
     let pageTitle = "News", articlesToDisplay = [], emptyMessage = "No articles found.";
     const dataSourcePath = '/all_articles.json';
-
     try {
         const response = await fetch(dataSourcePath, { cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP error ${response.status}`);
         const fetchedData = await response.json();
         if (!fetchedData?.articles) throw new Error("Invalid JSON.");
         const sourceArticles = fetchedData.articles;
-
         if (pageType === 'latest') {
             pageTitle = "All News"; articlesToDisplay = sourceArticles; emptyMessage = "No news available.";
         } else if (pageType === 'topic' && topicName) {
@@ -178,7 +167,6 @@ async function loadSidebarData() {
     const relatedContainer = document.getElementById('related-news-content');
     const latestContainer = document.getElementById('latest-news-content');
     const mainArticleElement = document.querySelector('.main-article');
-
     if (!mainArticleElement) {
         console.debug("Main article element not found, cannot load dynamic sidebars.");
         if (latestContainer) renderArticleCardList(latestContainer, [], "Loading news...");
@@ -189,7 +177,6 @@ async function loadSidebarData() {
         console.debug("Sidebar containers for related/latest news not found.");
         return;
     }
-
     let currentArticleId = mainArticleElement.getAttribute('data-article-id');
     let currentArticleTopic = mainArticleElement.getAttribute('data-article-topic');
     let currentArticleTags = [];
@@ -200,7 +187,6 @@ async function loadSidebarData() {
         }
         if (!Array.isArray(currentArticleTags)) currentArticleTags = [];
     } catch (e) { console.error("Failed to parse tags for sidebar:", e); currentArticleTags = []; }
-
     let numItemsForSidebarTarget = SIDEBAR_DEFAULT_ITEM_COUNT;
     try {
         const articleBody = document.getElementById('article-body');
@@ -218,7 +204,6 @@ async function loadSidebarData() {
         console.warn("Could not calculate dynamic sidebar height, using default count.", e);
     }
     console.log(`Sidebar: Target items based on height: ${numItemsForSidebarTarget}`);
-
     const allArticlesPath = '/all_articles.json';
     try {
         const response = await fetch(allArticlesPath, { cache: "no-store" });
@@ -226,19 +211,13 @@ async function loadSidebarData() {
         const data = await response.json();
         if (!data?.articles) throw new Error(`Invalid JSON format in sidebar data`);
         const allArticles = data.articles;
-
         let latestSidebarArticles_candidates = [];
         let relatedArticles_candidates = [];
-
         if (latestContainer) {
-            latestSidebarArticles_candidates = allArticles
-                .filter(a => a.id !== currentArticleId)
-                .slice(0, numItemsForSidebarTarget);
+            latestSidebarArticles_candidates = allArticles.filter(a => a.id !== currentArticleId).slice(0, numItemsForSidebarTarget);
         }
-
         if (relatedContainer) {
-            relatedArticles_candidates = allArticles
-                .filter(a => a.id !== currentArticleId)
+            relatedArticles_candidates = allArticles.filter(a => a.id !== currentArticleId)
                 .map(a => {
                     let score = 0;
                     if (a.topic === currentArticleTopic) score += 500;
@@ -247,15 +226,9 @@ async function loadSidebarData() {
                     if (a.published_iso) { try { score += Math.max(0, 1 - (new Date() - new Date(a.published_iso))/(1000*60*60*24*30)) * 10; } catch {} }
                     return { ...a, score };
                 })
-                .filter(a => a.score >= 10)
-                .sort((a, b) => b.score - a.score)
-                .slice(0, numItemsForSidebarTarget);
+                .filter(a => a.score >= 10).sort((a, b) => b.score - a.score).slice(0, numItemsForSidebarTarget);
         }
-
-        let finalItemCount = numItemsForSidebarTarget; // Start with the ideal count
-
-        // Determine the actual number of items to render in *both* sidebars if both are present
-        // Or, use the available count for a single sidebar if only one is present
+        let finalItemCount = numItemsForSidebarTarget;
         if (latestContainer && relatedContainer) {
             finalItemCount = Math.min(numItemsForSidebarTarget, latestSidebarArticles_candidates.length, relatedArticles_candidates.length);
             console.log(`Sidebar: Both containers present. Target: ${numItemsForSidebarTarget}, Latest Cands: ${latestSidebarArticles_candidates.length}, Related Cands: ${relatedArticles_candidates.length}. Final count for both: ${finalItemCount}.`);
@@ -266,7 +239,6 @@ async function loadSidebarData() {
             finalItemCount = Math.min(numItemsForSidebarTarget, relatedArticles_candidates.length);
             console.log(`Sidebar: Only Related container. Target: ${numItemsForSidebarTarget}, Related Cands: ${relatedArticles_candidates.length}. Final count: ${finalItemCount}.`);
         }
-
         if (latestContainer) {
             const latestArticlesToRender = latestSidebarArticles_candidates.slice(0, finalItemCount);
             renderArticleCardList(latestContainer, latestArticlesToRender, "No recent news.");
@@ -275,7 +247,6 @@ async function loadSidebarData() {
             const relatedArticlesToRender = relatedArticles_candidates.slice(0, finalItemCount);
             renderArticleCardList(relatedContainer, relatedArticlesToRender, "No related news.");
         }
-
     } catch (err) {
         console.error('Error loading sidebar data:', err);
         if (latestContainer) latestContainer.innerHTML = '<p class="placeholder error">Error loading latest</p>';
@@ -397,26 +368,17 @@ function setupSearch() {
 }
 
 function setupFAQAccordion() {
-    const faqSections = document.querySelectorAll('#article-body .faq-section'); // Target the wrapper
+    const faqSections = document.querySelectorAll('#article-body .faq-section');
     faqSections.forEach(faqSection => {
         const faqItems = faqSection.querySelectorAll('details.faq-item');
         if (faqItems.length > 0) {
-            console.log("Setting up FAQ accordion for", faqItems.length, "items.");
-            faqItems.forEach(currentItem => {
-                currentItem.addEventListener('toggle', function(event) {
-                    if (this.open) {
-                        // Close other open FAQ items within the same faq-section
-                        faqItems.forEach(otherItem => {
-                            if (otherItem !== this && otherItem.open) {
-                                otherItem.open = false;
-                            }
-                        });
-                    }
-                });
-            });
+            console.log("Setting up FAQ accordion for", faqItems.length, "items (multiple allowed).");
+            // No need to add individual event listeners if we are not closing others
+            // The default <details> behavior allows multiple to be open.
         }
     });
 }
+
 
 // --- Browser TTS Playback Logic ---
 function setupBrowserTTSListeners() {

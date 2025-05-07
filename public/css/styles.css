@@ -98,19 +98,28 @@ img { max-width: 100%; height: auto; display: block; }
 .search-suggestions-dropdown { -ms-overflow-style: none; scrollbar-width: none; }
 
 /* --- Main Content Grid (Article Page Layout) --- */
-.main-content-grid { display: grid; grid-template-columns: 1fr 3fr 1fr; gap: 30px; width: 90%; max-width: 1400px; margin: 55px auto 30px auto; }
+.main-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr; /* Standard 3-column layout */
+    gap: 30px;
+    width: 90%;
+    max-width: 1400px;
+    margin: 55px auto 30px auto;
+    align-items: start; /* Align items to the start of the grid cell (vertically) */
+}
 
 /* --- Main Article Styling (Article Page) --- */
 .main-article {
     background-color: var(--bg-secondary); padding: 30px; border-radius: 8px;
     border: 1px solid var(--border-color); display: flex; flex-direction: column;
-    min-height: 50vh; /* Adjust as needed */
+    /* min-height: 50vh; */ /* REMOVED to allow article to size to its content */
+    height: fit-content; /* Explicitly set to fit its content */
 }
 .main-article header h1#article-headline { font-size: 2.2rem; margin-bottom: 0.6em; color: var(--accent-blue); line-height: 1.25; }
 .article-meta-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
 .article-meta { font-size: 0.9em; color: var(--text-muted); }
 .article-image-container { margin-bottom: 30px; border-radius: 6px; overflow: hidden; }
-#article-body { flex-grow: 1; }
+#article-body { flex-grow: 1; } /* This helps if main-article is flex, but not critical for height:fit-content */
 #article-body p { margin-bottom: 1.4em; font-size: 1.1em; color: var(--text-light); }
 #article-body ul, #article-body ol { margin-bottom: 1.4em; padding-left: 25px; }
 #article-body li { margin-bottom: 0.5em; }
@@ -139,29 +148,47 @@ img { max-width: 100%; height: auto; display: block; }
 #article-body .faq-section { margin: 30px 0; padding-top: 20px; border-top: 1px solid var(--border-color); }
 #article-body details.faq-item { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 12px; transition: background-color 0.2s; }
 #article-body details.faq-item:hover { background-color: var(--bg-tertiary); }
-#article-body details.faq-item summary.faq-question { font-weight: 600; color: var(--text-light); padding: 12px 15px; cursor: pointer; position: relative; list-style: none; display: flex; align-items: center; }
-#article-body details.faq-item summary.faq-question::-webkit-details-marker { display: none; }
-#article-body details.faq-item summary.faq-question::before { content: '►'; color: var(--accent-blue); margin-right: 12px; font-size: 0.9em; transition: transform 0.2s ease-in-out; line-height: 1; }
-#article-body details.faq-item[open] > summary.faq-question::before { transform: rotate(90deg); }
-#article-body .faq-answer-content { padding: 5px 15px 15px 37px; color: var(--text-muted); margin-top: 8px; background-color: var(--bg-secondary); border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; }
+#article-body details.faq-item summary.faq-question {
+    font-weight: 600; color: var(--text-light); padding: 12px 15px;
+    cursor: pointer; position: relative; list-style: none; /* Remove default marker */
+    display: flex; align-items: center; justify-content: space-between; /* Align icon to the right */
+}
+#article-body details.faq-item summary.faq-question::-webkit-details-marker { display: none; } /* Safari/Chrome */
+#article-body details.faq-item summary.faq-question::after { /* New Icon using ::after */
+    content: '\\f078'; /* Font Awesome chevron-down unicode */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: var(--accent-blue);
+    margin-left: 12px; /* Space from text */
+    font-size: 0.9em;
+    transition: transform 0.2s ease-in-out;
+    line-height: 1;
+}
+#article-body details.faq-item[open] > summary.faq-question::after { /* Rotate icon when open */
+    transform: rotate(180deg);
+}
+#article-body .faq-answer-content { padding: 5px 15px 15px 15px; /* Adjusted padding */ color: var(--text-muted); margin-top: 8px; background-color: var(--bg-secondary); border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; }
 #article-body .faq-answer-content p:last-child { margin-bottom: 0; }
+
 
 /* Article Footer: Tags Only */
 .main-article footer {
-    margin-top: auto; /* Pushes footer to the bottom */
-    padding-top: 25px;
+    margin-top: auto; padding-top: 25px;
     border-top: 1px solid var(--border-color);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center the tags div */
+    width: 100%; display: flex; flex-direction: column; align-items: center;
 }
-.tags { font-size: 0.9em; color: var(--text-muted); line-height: 1.7; text-align: center; width: 100%; margin-top: 0; /* Reset margin if it was for button */ }
+.tags { font-size: 0.9em; color: var(--text-muted); line-height: 1.7; text-align: center; width: 100%; margin-top: 0; }
 .tags span#article-tags a, a.tag-link { display: inline-block; background-color: var(--bg-tertiary); color: var(--text-light); padding: 5px 12px; border-radius: 16px; margin-right: 8px; margin-bottom: 8px; border: 1px solid var(--border-color); font-weight: 500; font-size: 0.85em; transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
 .tags span#article-tags a:hover, a.tag-link:hover { background-color: var(--accent-blue); border-color: var(--accent-blue); color: var(--bg-dark); }
 
 /* --- Sidebar Styling --- */
-.sidebar { background-color: transparent; padding: 0; border: none; height: fit-content; }
+.sidebar {
+    background-color: transparent; padding: 0; border: none;
+    height: fit-content; /* Allow sidebar to shrink if content is less */
+    /* For longer sidebars than article, you might want scrolling */
+    /* max-height: calc(100vh - var(--navbar-height) - 60px); */ /* Example max height */
+    /* overflow-y: auto; */ /* Add scroll if content exceeds max-height */
+}
 .sidebar h2 { font-size: 1.5em; color: var(--text-light); margin-bottom: 20px; border-bottom: 2px solid var(--accent-blue); padding-bottom: 10px; }
 .sidebar #related-news-content, .sidebar #latest-news-content { display: flex; flex-direction: column; gap: 15px; padding: 0; margin: 0; }
 .sidebar ul { list-style: none; padding: 0; }
@@ -256,16 +283,17 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 1024px) {
-    .main-content-grid { grid-template-columns: 1fr 3fr; }
-    .sidebar.related-news { display: none; }
+    .main-content-grid { grid-template-columns: 1fr 3fr; } /* 2-column layout */
+    .sidebar.related-news { display: none; } /* Hide first sidebar */
     .nav-container { width: 95%; }
     .nav-search { flex-grow: 0.3; }
     .main-article header h1#article-headline { font-size: 2rem; }
 }
 
 @media (max-width: 768px) {
-    .main-content-grid { grid-template-columns: 1fr; width: 95%; gap: 25px; }
-    .sidebar.latest-news { order: 3; }
+    .main-content-grid { grid-template-columns: 1fr; width: 95%; gap: 25px; } /* Single column */
+    .sidebar.latest-news { order: 3; /* Move latest news sidebar below article */ }
+    .sidebar.related-news { display: none; } /* Ensure it's hidden */
     .nav-search { display: none; }
     .nav-menu { gap: 20px; }
     .main-article header h1#article-headline { font-size: 1.8rem; }
@@ -287,8 +315,9 @@ img { max-width: 100%; height: auto; display: block; }
 /* Loading/Playing state styles for listen/global buttons */
 .listen-button.loading i,
 #global-tts-player-button.loading i { animation: spin 1s linear infinite; }
-.listen-button .fas,
+.listen-button .fas, /* Ensure Font Awesome is targeted */
 #global-tts-player-button .fas { font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+
 
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
@@ -296,94 +325,49 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- 404 Page Specific Styling --- */
 body.page-404 {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    /* background-color: var(--bg-dark); */ /* Already on body */
+    display: flex; flex-direction: column; min-height: 100vh;
 }
-
 main.error-page-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Align container to top */
-    flex-grow: 1;
-    width: 100%;
-    padding-top: calc(var(--navbar-height) + 40px); /* Space from navbar */
-    padding-bottom: 40px; /* Space at bottom */
-    text-align: center; /* Center text within this main container */
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: flex-start; flex-grow: 1; width: 100%;
+    padding-top: calc(var(--navbar-height) + 40px); padding-bottom: 40px;
+    text-align: center;
 }
-
 .error-page-main .error-container {
-    background-color: var(--bg-secondary);
-    padding: 40px 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 600px; /* Control max width of the box */
-    margin-bottom: 50px; /* Space before "Latest News" */
+    background-color: var(--bg-secondary); padding: 40px 30px;
+    border-radius: 12px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    width: 90%; max-width: 600px; margin-bottom: 50px;
     border: 1px solid var(--border-color);
 }
-
 .error-page-main .error-container h1 {
-    font-size: 6rem; /* Large "404" */
-    color: var(--accent-blue);
-    margin-bottom: 0px; /* Reduced margin */
-    line-height: 1;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-size: 6rem; color: var(--accent-blue); margin-bottom: 0px;
+    line-height: 1; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
-
 .error-page-main .error-container h2 {
-    font-size: 2rem;
-    color: var(--text-light);
-    margin-bottom: 20px;
-    font-weight: 600;
+    font-size: 2rem; color: var(--text-light); margin-bottom: 20px; font-weight: 600;
 }
-
 .error-page-main .error-container p {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    margin-bottom: 30px;
-    line-height: 1.7;
+    font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.7;
 }
-
 .error-page-main .error-container .button-link {
-    display: inline-block;
-    background-color: var(--accent-blue);
-    color: var(--bg-dark);
-    padding: 12px 28px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.05em;
+    display: inline-block; background-color: var(--accent-blue); color: var(--bg-dark);
+    padding: 12px 28px; border-radius: 6px; text-decoration: none;
+    font-weight: 600; font-size: 1.05em;
     transition: background-color 0.2s ease-in-out, transform 0.1s ease;
     box-shadow: 0 4px 10px rgba(0, 174, 255, 0.2);
 }
-
 .error-page-main .error-container .button-link:hover {
-    background-color: var(--accent-blue-darker);
-    transform: translateY(-2px);
+    background-color: var(--accent-blue-darker); transform: translateY(-2px);
 }
-.error-page-main .error-container .button-link:active {
-    transform: translateY(0px);
-}
-
-
-/* Latest News section on 404 page */
+.error-page-main .error-container .button-link:active { transform: translateY(0px); }
 .error-page-main #latest-news-section {
-    width: 90%;
-    max-width: 1200px; /* Max width for the news grid part */
-    margin-top: 30px; /* Adjust as needed */
+    width: 90%; max-width: 1200px; margin-top: 30px;
 }
-.error-page-main #latest-news-section h2 {
-    text-align: left; /* Align this specific H2 to the left if desired */
-}
-
+.error-page-main #latest-news-section h2 { text-align: left; }
 
 /* --- Snow Animation (for 404 page) --- */
 @keyframes snowfall { 0% { transform: translateY(-10vh); } 100% { transform: translateY(110vh); } }
-.snow { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1; } /* Keep snow behind content */
+.snow { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1; }
 .snow-flake { position: absolute; top: -10vh; background-color: rgba(255, 255, 255, 0.3); border-radius: 50%; animation: snowfall linear infinite; opacity: 0; }
 .snow-flake:nth-child(5n) { width: 2px; height: 2px; animation-duration: 12s; animation-delay: -1s; opacity: 0.4; }
 .snow-flake:nth-child(5n + 1) { width: 3px; height: 3px; animation-duration: 10s; animation-delay: -3s; opacity: 0.5; }
