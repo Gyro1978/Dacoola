@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "dbec25302711a3062c640a82644c4782261df571945ac21a613e784adeafdf54",
+      "title": "WhatsApp Wins $167M in Landmark NSO Lawsuit Over Spyware Hack",
+      "link": "articles/whatsapp-wins-$167m-in-landmark-nso-lawsuit-over-spyware-hack.html",
+      "published_iso": "2025-05-07T00:26:14Z",
+      "summary_short": "WhatsApp wins $167M in punitive damages against NSO Group for exploiting a vulnerability to hack users. Read about the landmark WhatsApp NSO lawsuit.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2023/05/getty-digital-gavel-1152x648.jpg",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "WhatsApp NSO lawsuit",
+        "Pegasus spyware",
+        "NSO Group legal case",
+        "WhatsApp security breach",
+        "zero-click exploit",
+        "encrypted messaging security",
+        "surveillance accountability",
+        "privacy lawsuit",
+        "cybersecurity legal precedent",
+        "Meta privacy victory"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "1306a84232617261ff52a542f3b866d401555d273680f252056fa2a5b98534a9",
       "title": "Hugging Face releases a free Operator-like agentic AI tool",
       "link": "articles/hugging-face-releases-a-free-operator-like-agentic-ai-tool.html",
