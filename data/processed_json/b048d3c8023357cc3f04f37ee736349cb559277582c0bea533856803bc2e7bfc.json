@@ -1,0 +1,43 @@
+{
+    "id": "b048d3c8023357cc3f04f37ee736349cb559277582c0bea533856803bc2e7bfc",
+    "title": "Amazon Kindle’s iOS app adds new ‘Get Book’ button following Apple payments ruling",
+    "link": "https://techcrunch.com/2025/05/06/amazon-kindles-ios-app-adds-new-get-book-button-following-apple-payments-ruling/",
+    "published_iso": "2025-05-06T17:34:31Z",
+    "summary": "Thanks to a recent ruling that ordered Apple to stop charging a 27% commission on purchases through iPhone apps, Amazon’s Kindle iOS app now has a “Get book” button that makes it easier to buy titles. “We regularly make improvements to our apps to help ensure we are providing customers the most convenient experience possible,” Amazon […]",
+    "source_feed": "https://techcrunch.com/feed/",
+    "scraped_at_iso": "2025-05-06T17:37:51Z",
+    "selected_image_url": "https://techcrunch.com/wp-content/uploads/2025/05/GettyImages-865878412.jpg?resize=1200,797",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Business",
+        "reasoning_summary": "Article involves Amazon, a key company, and discusses a change in its Kindle iOS app following a ruling affecting Apple's payment policies, which is a factual and relevant business update.",
+        "primary_topic_keyword": "Amazon Kindle update"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-06T17:39:38Z",
+    "topic": "Business",
+    "is_breaking": false,
+    "primary_keyword": "Amazon Kindle update",
+    "seo_agent_results": {
+        "generated_title_tag": "Amazon Kindle update adds 'Get Book' button post-Apple ruling",
+        "generated_meta_description": "Amazon Kindle's iOS app now features a 'Get book' button after Apple's 27% commission ruling. Learn about this Amazon Kindle update.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Amazon Kindle update adds 'Get Book' button post-Apple ruling\",  \n  \"description\": \"Amazon Kindle's iOS app now features a 'Get book' button after Apple's 27% commission ruling. Learn about this Amazon Kindle update.\",  \n  \"keywords\": [\"Amazon Kindle update\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://techcrunch.com/2025/05/06/amazon-kindles-ios-app-adds-new-get-book-button-following-apple-payments-ruling/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://techcrunch.com/wp-content/uploads/2025/05/GettyImages-865878412.jpg?resize=1200,797\" },  \n  \"datePublished\": \"2025-05-06T17:34:31Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## Amazon Kindle’s iOS app adds new ‘Get Book’ button following Apple payments ruling  \n\nAmazon’s Kindle iOS app has introduced a new “Get book” button, making it easier for users to purchase titles directly. This change follows a recent ruling that barred Apple from charging a 27% commission on in-app purchases. Amazon stated that the update is part of its ongoing efforts to improve customer convenience.  \n\n### Why It Matters  \nThis move highlights the broader impact of regulatory decisions on app ecosystems. By bypassing Apple’s fees, Amazon can offer a smoother purchasing experience while potentially lowering costs for consumers. It also signals a shift in how major platforms may adapt to antitrust rulings, reshaping digital marketplaces."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Amazon Kindle",
+        "iOS app update",
+        "Get Book button",
+        "Apple payments ruling",
+        "in-app purchases",
+        "antitrust regulations",
+        "digital marketplaces",
+        "customer convenience",
+        "app ecosystems"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.5,
+    "slug": "amazon-kindle’s-ios-app-adds-new-‘get-book’-button-following-apple-payments-ruli",
+    "audio_url": null
+}

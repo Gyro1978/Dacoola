@@ -1,0 +1,43 @@
+{
+    "id": "50ed6718b4ae08fb59bf68822a9cdff1e9894ea58aeb5990f43822bdcc498f1e",
+    "title": "AWS report: Generative AI overtakes security in global tech budgets for 2025",
+    "link": "https://venturebeat.com/ai/aws-report-generative-ai-overtakes-security-in-global-tech-budgets-for-2025/",
+    "published_iso": "2025-05-06T21:33:16Z",
+    "summary": "<img alt=\"Credit: VentureBeat made with Midjourney\" class=\"attachment-single-feed size-single-feed wp-post-image\" height=\"324\" src=\"https://venturebeat.com/wp-content/uploads/2025/05/nuneybits_Vector_art_of_a_server_farm_in_the_cloud_eabe8f44-4654-4483-8a52-3323b5e73242.webp?w=578\" width=\"578\" /><hr />New AWS report reveals 45% of global IT leaders now prioritize generative AI over cybersecurity in 2025 tech budgets as companies race to hire AI talent and implement AI strategies despite persistent skills shortages.<a href=\"https://venturebeat.com/ai/aws-report-generative-ai-overtakes-security-in-global-tech-budgets-for-2025/\" target=\"_blank\">Read More</a>",
+    "source_feed": "https://venturebeat.com/category/ai/feed/",
+    "scraped_at_iso": "2025-05-06T21:46:51Z",
+    "selected_image_url": "https://venturebeat.com/wp-content/uploads/2025/05/nuneybits_Vector_art_of_a_server_farm_in_the_cloud_eabe8f44-4654-4483-8a52-3323b5e73242.webp?w=1024?w=1200&strip=all",
+    "filter_verdict": {
+        "importance_level": "Interesting",
+        "topic": "Business",
+        "reasoning_summary": "The article reports on a significant shift in global tech budgets towards generative AI, as revealed by an AWS report, indicating a major trend in business priorities.",
+        "primary_topic_keyword": "Generative AI budgets"
+    },
+    "filter_error": null,
+    "filtered_at_iso": "2025-05-06T21:47:48Z",
+    "topic": "Business",
+    "is_breaking": false,
+    "primary_keyword": "Generative AI budgets",
+    "seo_agent_results": {
+        "generated_title_tag": "Generative AI Budgets Surpass Cybersecurity in 2025 Tech Spend",
+        "generated_meta_description": "A new AWS report shows 45% of IT leaders prioritize generative AI budgets over security in 2025, signaling a major shift in tech investment.",
+        "generated_json_ld": "<script type=\"application/ld+json\">  \n{  \n  \"@context\": \"https://schema.org\",  \n  \"@type\": \"NewsArticle\",  \n  \"headline\": \"Generative AI Budgets Surpass Cybersecurity in 2025 Tech Spend\",  \n  \"description\": \"A new AWS report shows 45% of IT leaders prioritize generative AI budgets over security in 2025, signaling a major shift in tech investment.\",  \n  \"keywords\": [\"Generative AI budgets\"],  \n  \"mainEntityOfPage\": { \"@type\": \"WebPage\", \"@id\": \"https://venturebeat.com/ai/aws-report-generative-ai-overtakes-security-in-global-tech-budgets-for-2025/\" },  \n  \"image\": { \"@type\": \"ImageObject\", \"url\": \"https://venturebeat.com/wp-content/uploads/2025/05/nuneybits_Vector_art_of_a_server_farm_in_the_cloud_eabe8f44-4654-4483-8a52-3323b5e73242.webp?w=1024?w=1200&strip=all\" },  \n  \"datePublished\": \"2025-05-06T21:33:16Z\",  \n  \"author\": { \"@type\": \"Person\", \"name\": \"AI News Team\" },  \n  \"publisher\": {  \n    \"@type\": \"Organization\",  \n    \"name\": \"Dacoola\",  \n    \"logo\": { \"@type\": \"ImageObject\", \"url\": \"https://dacoolaa.netlify.app\" }  \n  }  \n}  \n</script>",
+        "generated_article_body_md": "## AWS Report: Generative AI Overtakes Security in Global Tech Budgets for 2025  \n\nA new AWS report reveals that 45% of global IT leaders now prioritize **generative AI budgets** over cybersecurity in their 2025 spending plans. Companies are aggressively hiring AI talent and implementing AI strategies, despite ongoing skills shortages in the field.  \n\n### Why It Matters  \nThis shift highlights the growing dominance of generative AI as a business imperative, even surpassing traditionally critical areas like cybersecurity. The rush to adopt AI suggests organizations see immediate competitive advantages in automation, content generation, and data analysis. However, the persistent talent gap could slow implementation, creating a divide between companies that secure skilled teams early and those left scrambling. The long-term risks of deprioritizing cybersecurity also raise concerns about potential vulnerabilities in an AI-driven landscape."
+    },
+    "seo_agent_error": null,
+    "generated_tags": [
+        "Generative AI",
+        "Tech Budgets 2025",
+        "Cybersecurity",
+        "AI Talent Shortage",
+        "Business Automation",
+        "AI Implementation",
+        "IT Leadership Trends",
+        "Competitive Advantage AI",
+        "AI-Driven Risks"
+    ],
+    "tags_agent_error": null,
+    "trend_score": 14.5,
+    "slug": "aws-report-generative-ai-overtakes-security-in-global-tech-budgets-for-2025",
+    "audio_url": null
+}
