@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "661f4fb809c77d54838a59ef85ceb39bcca01e0408df3f42b45940401cf72655",
+      "title": "Amazon’s AI Code Generation Tool \"Kiro\" Aims to Revolutionize Software Development",
+      "link": "articles/amazon’s-ai-code-generation-tool-kiro-aims-to-revolutionize-software-development.html",
+      "published_iso": "2025-05-07T10:01:53Z",
+      "summary_short": "Amazon is developing \"Kiro,\" an AI-powered code generation tool with real-time coding, optimization, and multimodal capabilities. Learn more about this game-changer.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/05/GettyImages-1808364693.jpg?w=1200",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "AI Code Generation",
+        "Amazon Kiro",
+        "AWS AI Tools",
+        "Software Development Automation",
+        "AI Coding Assistants",
+        "Multimodal AI",
+        "Technical Design Automation",
+        "AI in Software Engineering",
+        "Real-Time Code Generation",
+        "Third-Party AI Integration"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "63944319f506e7830e87029383fa64e4d87cadbe4ce8dbccc6370e771938e31e",
       "title": "How a Neuralink Brain Implant and AI Are Transforming Communication",
       "link": "articles/how-a-neuralink-brain-implant-and-ai-are-transforming-communication.html",
@@ -3764,6 +3788,30 @@
       "trend_score": 14.02
     },
     {
+      "id": "aa6b861472eff1123b5501e3d884c55cfc8a48a3c6bac2be2dfe804731f06cfe",
+      "title": "Tesla Leadership Denial: Board Stands Firm Behind Elon Musk",
+      "link": "articles/tesla-leadership-denial-board-stands-firm-behind-elon-musk.html",
+      "published_iso": "2025-05-01T11:10:39Z",
+      "summary_short": "Tesla denies reports of CEO search, reaffirming Elon Musk's leadership amid controversy. Read the latest on Tesla leadership denial.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/d1b5/live/25dcddc0-2656-11f0-948d-d3658dc46e25.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Tesla Leadership Denial",
+        "Elon Musk CEO Controversy",
+        "Tesla Board Support",
+        "Wall Street Journal Report",
+        "Trump Administration Advisory Role",
+        "Tesla Stock Performance",
+        "Investor Skepticism",
+        "Corporate Leadership Challenges",
+        "Business Leadership Ethics",
+        "Tesla Customer Backlash"
+      ],
+      "audio_url": null,
+      "trend_score": 14.0
+    },
+    {
       "id": "2eaf758b0ac2515473f7d73e1af14823825e9da1376aa88d5147fa684810b1d1",
       "title": "RAG can make AI models riskier and less reliable, new research shows",
       "link": "articles/rag-can-make-ai-models-riskier-and-less-reliable-new-research-shows.html",
@@ -5202,6 +5250,78 @@
       ],
       "audio_url": null,
       "trend_score": 12.75
+    },
+    {
+      "id": "b1b242775205a61f6c3a3e60688d6109097587b3fb84849b451d7e097b97166e",
+      "title": "WhatsApp defends 'optional' AI tool that cannot be turned off",
+      "link": "articles/whatsapp-defends-optional-ai-tool-that-cannot-be-turned-off.html",
+      "published_iso": "2025-04-23T14:26:00Z",
+      "summary_short": "WhatsApp defends its AI tool as \"optional\" despite users being unable to disable it. Learn about privacy concerns, backlash, and Meta's response.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/821f/live/010a6e10-1f79-11f0-bdfc-33d5f1a51c32.jpg",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "WhatsApp AI Tool",
+        "Meta AI",
+        "AI Privacy Concerns",
+        "Llama 4 Language Model",
+        "WhatsApp Features",
+        "AI Ethics",
+        "Data Privacy",
+        "Meta Controversy",
+        "AI Chatbot",
+        "End-to-End Encryption"
+      ],
+      "audio_url": null,
+      "trend_score": 12.69
+    },
+    {
+      "id": "1cb6e2d992997321398fb581bc9266974824dd108e4b1dcc467df291d97a1cc7",
+      "title": "OpenAI Eyes Google Chrome Acquisition Amid Antitrust Battle",
+      "link": "articles/openai-eyes-google-chrome-acquisition-amid-antitrust-battle.html",
+      "published_iso": "2025-04-23T09:54:45Z",
+      "summary_short": "OpenAI expresses interest in acquiring Google Chrome amid antitrust trial. Explore the implications of this potential OpenAI acquisition interest.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/beda/live/405041a0-201c-11f0-93d4-c157523ad7ce.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI acquisition interest",
+        "Google Chrome acquisition",
+        "AI-driven search",
+        "Antitrust trial",
+        "ChatGPT vs Google search",
+        "Microsoft Bing partnership",
+        "AI browser integration",
+        "Regulatory challenges in tech",
+        "Digital market dominance",
+        "Future of AI search"
+      ],
+      "audio_url": null,
+      "trend_score": 12.66
+    },
+    {
+      "id": "619ad355355988e986f7b95fd5df2ea11dfad198043eb224325926dbacc100a8",
+      "title": "Elon Musk Announces Major Role Change, Shifts Focus from Doge to Tesla",
+      "link": "articles/elon-musk-announces-major-role-change,-shifts-focus-from-doge-to-tesla.html",
+      "published_iso": "2025-04-23T09:16:40Z",
+      "summary_short": "Elon Musk announces a significant Musk role change, reducing his Doge involvement to refocus on Tesla after steep profit declines.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/54dd/live/0534ad00-200c-11f0-8c2e-77498b1ce297.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Musk role change",
+        "Elon Musk Tesla focus",
+        "Tesla profit decline",
+        "US-China tariffs impact",
+        "Tesla stock performance",
+        "Trump administration business",
+        "Doge government efficiency",
+        "Investor confidence Tesla",
+        "Political risks business",
+        "Supply chain disruptions"
+      ],
+      "audio_url": null,
+      "trend_score": 12.66
     },
     {
       "id": "84885ddaa246a57537d177617b8328e47e79297c163ebbf408802dc52f8c8dd2",
