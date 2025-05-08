@@ -1,6 +1,66 @@
 {
   "articles": [
     {
+      "id": "6b539b84f92f5fd1e3e2d09a87d7a8a75732eb0a10939d358ee0077443468751",
+      "title": "AI in Scientific Research: Google's Latest Breakthroughs and Applications",
+      "link": "articles/ai-in-scientific-research-googles-latest-breakthroughs-and-applications.html",
+      "published_iso": "2025-05-08T17:30:00Z",
+      "summary_short": "Explore how Google leverages AI in scientific research to accelerate biomedical, neuroscience, geospatial, and quantum computing breakthroughs.",
+      "image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/ScientificDiscovery_SS_1920x1080.width-1300.png",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "AI in scientific research trends 2025",
+        "how does AI in scientific research work",
+        "AI in scientific research impact",
+        "AI in scientific research",
+        "latest news on AI in scientific research",
+        "AI in scientific research future applications"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
+      "id": "de430733932d6d7790e53eea58c731863c61a0df3c8cb75c64b0c9e358ffec04",
+      "title": "Google Gemini iPad App Launches - Why It's a Big Deal",
+      "link": "articles/google-gemini-ipad-app-launches-why-its-a-big-deal.html",
+      "published_iso": "2025-05-08T17:01:09Z",
+      "summary_short": "Google finally releases a dedicated Gemini iPad app, unlocking full AI capabilities and multitasking features for tablet users. Learn why it's a game-changer.",
+      "image_url": "https://www.zdnet.com/a/img/resize/a17254b964ebc1f5567b781c7e25f563c809be43/2025/05/08/d06b71bd-0637-43a6-bd6a-7c237f14fb34/googles-gemini-ai-is-now-an-ipad-app-heres-why-youll-want-it.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Google Gemini iPad app future applications",
+        "Google Gemini iPad app",
+        "Google Gemini iPad app impact",
+        "Google Gemini iPad app trends 2025",
+        "how does Google Gemini iPad app work",
+        "latest news on Google Gemini iPad app"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
+      "id": "8bcc9aabf170123bd652a661707e6bb4f4d2cdef9f2b395c462936aaca4377a8",
+      "title": "Google Deploys AI Chrome Defenses to Shield Users from Scams",
+      "link": "articles/google-deploys-ai-chrome-defenses-to-shield-users-from-scams.html",
+      "published_iso": "2025-05-08T17:00:00Z",
+      "summary_short": "Google introduces new AI Chrome defenses powered by Gemini Nano to protect users from scams, phishing, and malicious notifications. Learn how it works.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2021/05/GettyImages-1211180803.jpg?resize=1200,800",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "AI Chrome defenses future applications",
+        "latest news on AI Chrome defenses",
+        "AI Chrome defenses impact",
+        "AI Chrome defenses",
+        "how does AI Chrome defenses work",
+        "AI Chrome defenses trends 2025"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
       "id": "63152bea536d60369a5ae934f260138f9f705ee10d38d135e569316f3d98ffcd",
       "title": "Starlink India Approval Clears Path for Satellite Broadband Launch",
       "link": "articles/starlink-india-approval-clears-path-for-satellite-broadband-launch.html",
