@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "ccc2ff8aa3f73a9c4fccf78cc4e80853b0a39eb17b6bf550af2ab8641f4dbea0",
+      "title": "Apple Legal Battle Intensifies as Company Fights Judge's Contempt Order",
+      "link": "articles/apple-legal-battle-intensifies-as-company-fights-judges-contempt-order.html",
+      "published_iso": "2025-05-08T07:49:45Z",
+      "summary_short": "Apple challenges a US judge's contempt order in its ongoing legal battle over App Store policies, calling the ruling \"extraordinary.\"",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/3489/live/be259e60-2ba5-11f0-b26b-ab62c890638b.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Apple legal battle",
+        "Epic Games lawsuit",
+        "App Store antitrust",
+        "Judge Yvonne Gonzalez Rogers",
+        "Apple contempt order",
+        "Tech industry legal disputes",
+        "Apple vs Epic Games",
+        "App Store payment policies",
+        "Antitrust litigation in tech",
+        "Tim Cook legal controversy"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "c44db82695e103727dd9293a85c49de3dcc3b558ff4da0272af709ee66ae7917",
       "title": "OpenAI Executive Transition: Instacart CEO Fidji Simo Joins as Applications Head",
       "link": "articles/openai-executive-transition-instacart-ceo-fidji-simo-joins-as-applications-head.html",
@@ -71,6 +95,30 @@
       ],
       "audio_url": null,
       "trend_score": 14.99
+    },
+    {
+      "id": "4a9396b8a418fe72aa92ab9bc101a5a4596a7a023f9c4d56a94b892a4f4521d0",
+      "title": "AI in Legal Sentencing: Arizona Case Tests Boundaries",
+      "link": "articles/ai-in-legal-sentencing-arizona-case-tests-boundaries.html",
+      "published_iso": "2025-05-07T22:27:48Z",
+      "summary_short": "An Arizona court used AI to recreate a victim's statement in a road rage sentencing, sparking debate about AI in legal sentencing.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/fc68/live/3ebe7160-2b7d-11f0-8f57-b7237f6a66e6.jpg",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "AI in Legal Sentencing",
+        "Artificial Intelligence in Court",
+        "Victim Impact Statement AI",
+        "Ethics of AI in Law",
+        "Arizona AI Court Case",
+        "Posthumous AI Testimony",
+        "Legal Technology Innovations",
+        "AI and Judicial Precedent",
+        "Digital Voice in Court",
+        "AI Ethics in Society"
+      ],
+      "audio_url": null,
+      "trend_score": 14.93
     },
     {
       "id": "56ee6e7279a951cdf61e8b7b796158ab9baa202d3bc2828ba84f7f7f1d385b49",

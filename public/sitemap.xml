@@ -7,6 +7,12 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://dacoolaa.netlify.app/articles/apple-legal-battle-intensifies-as-company-fights-judges-contempt-order.html</loc>
+    <lastmod>2025-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://dacoolaa.netlify.app/articles/openai-executive-transition-instacart-ceo-fidji-simo-joins-as-applications-head.html</loc>
     <lastmod>2025-05-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -21,6 +27,12 @@
   <url>
     <loc>https://dacoolaa.netlify.app/articles/singapore’s-ai-safety-collaboration-bridges-us-china-divide.html</loc>
     <lastmod>2025-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/ai-in-legal-sentencing-arizona-case-tests-boundaries.html</loc>
+    <lastmod>2025-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
