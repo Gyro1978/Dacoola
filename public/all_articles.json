@@ -1,6 +1,46 @@
 {
   "articles": [
     {
+      "id": "b4c5ca8ea180fee6314c1ffe535afd0d6a694c89626a34f2fbfc5bc59a6ade22",
+      "title": "Microsoft Interoperability Strategy Takes Shape with Nadella’s A2A and MCP Endorsement",
+      "link": "articles/microsoft-interoperability-strategy-takes-shape-with-nadella’s-a2a-and-mcp-endor.html",
+      "published_iso": "2025-05-08T20:47:59Z",
+      "summary_short": "Microsoft CEO Satya Nadella endorses A2A and MCP open protocols, accelerating the company's interoperability strategy for agentic AI collaboration.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/Satya_smiling-print-1024x683-1.jpg?w=1024?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "latest news on Microsoft interoperability strategy",
+        "Microsoft interoperability strategy",
+        "Microsoft interoperability strategy trends 2025",
+        "Microsoft interoperability strategy future applications",
+        "Microsoft interoperability strategy impact",
+        "how does Microsoft interoperability strategy work"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
+      "id": "f3606da8dcae266a875668e31c5b1a576c8cec72cf93405cadf0b3be1c2cb45c",
+      "title": "Apple App Store Revenue Surpasses $10 Billion in US for 2024",
+      "link": "articles/apple-app-store-revenue-surpasses-$10-billion-in-us-for-2024.html",
+      "published_iso": "2025-05-08T20:47:15Z",
+      "summary_short": "Apple App Store revenue reached over $10 billion in US commissions last year, with global earnings exceeding $27 billion, according to Appfigures.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/Apple-logo-Getty.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Apple App Store revenue impact",
+        "Apple App Store revenue",
+        "latest news on Apple App Store revenue",
+        "Apple App Store revenue trends 2025",
+        "how does Apple App Store revenue work",
+        "Apple App Store revenue future applications"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
       "id": "a648e87c99d75016e75d0084ff0550dace3422d515dc2a35f5789f7a808cd194",
       "title": "ChatGPT GitHub Integration Adds Codebase Analysis to Deep Research",
       "link": "articles/chatgpt-github-integration-adds-codebase-analysis-to-deep-research.html",
