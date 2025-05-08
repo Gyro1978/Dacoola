@@ -1,6 +1,26 @@
 {
   "articles": [
     {
+      "id": "6dc7e9e1876d6579b385a6ac2976657990ce665a61180925925c0bd163f765b9",
+      "title": "Elon Musk VC Lawsuit: Investor Alleges Wrongful Termination and Fraud",
+      "link": "articles/elon-musk-vc-lawsuit-investor-alleges-wrongful-termination-and-fraud.html",
+      "published_iso": "2025-05-08T23:10:53Z",
+      "summary_short": "A long-time Elon Musk VC investor is suing Brookfield Asset Management, alleging wrongful termination and fraud in the latest Elon Musk VC lawsuit.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/11/gavel-messy-legal.jpg?resize=1200,675",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Elon Musk VC lawsuit",
+        "latest news on Elon Musk VC lawsuit",
+        "Elon Musk VC lawsuit impact",
+        "how does Elon Musk VC lawsuit work",
+        "Elon Musk VC lawsuit trends 2025",
+        "Elon Musk VC lawsuit future applications"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
       "id": "10473c46d5b2111d1c84608eea6ad778b9307e3d3337e460768407a1fbe47df9",
       "title": "Microsoft bans DeepSeek app citing data security and propaganda risks",
       "link": "articles/microsoft-bans-deepseek-app-citing-data-security-and-propaganda-risks.html",
