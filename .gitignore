@@ -1,2 +1,15 @@
+# Secrets and environment files
 .env
-data/twitter_daily_limit.json
+client_secrets.json
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Other common ignores (add as needed)
+.vscode/
+*.log
+/data/scraped_articles/
+/data/processed_json/
+/data/twitter_daily_limit.json
+# Add other specific files/dirs you don't want tracked

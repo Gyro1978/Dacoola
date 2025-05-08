@@ -1,3 +1,5 @@
+# requirements.txt (1/1)
+
 requests
 python-dotenv
 feedparser
@@ -5,7 +7,8 @@ Jinja2
 Markdown
 beautifulsoup4
 Pillow
-google-search-results
-sentence-transformers
-tweepy
-trafilatura
+google-search-results # SerpApi client
+sentence-transformers # For CLIP in image_scraper
+tweepy # For Twitter posting
+trafilatura # Optional, for news_scraper full text
+google-ads # For Keyword Planner API access
