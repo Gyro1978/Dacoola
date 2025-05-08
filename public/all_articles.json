@@ -1,6 +1,126 @@
 {
   "articles": [
     {
+      "id": "965a234f6803895c78feb0f30bcdf19ac6d47da772b37c6a1e5c22fbe43a1714",
+      "title": "Apple Seeks Delay on Court Ruling Barring App Payment Commissions",
+      "link": "articles/apple-seeks-delay-on-court-ruling-barring-app-payment-commissions.html",
+      "published_iso": "2025-05-08T10:02:39Z",
+      "summary_short": "Apple seeks to delay a court ruling that bars it from taking commissions on external app payments, citing significant revenue losses.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/01/app-store-2024-v3.jpg?resize=1200,675",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Apple App Payments",
+        "Epic Games Lawsuit",
+        "App Store Commissions",
+        "Antitrust Legal Battle",
+        "External Payment Systems",
+        "Apple vs Developers",
+        "App Store Revenue",
+        "Mobile App Business",
+        "Tech Industry Regulations",
+        "Court Ruling Impact"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "f12d6bf038cc2dd4cf27c4dfbc03b02844ab448e6f53e0cc505e80adf3d1b699",
+      "title": "AI Benchmark Evaluation: The Growing Crisis in Measuring AI Progress",
+      "link": "articles/ai-benchmark-evaluation-the-growing-crisis-in-measuring-ai-progress.html",
+      "published_iso": "2025-05-08T09:00:00Z",
+      "summary_short": "Explore the challenges in AI benchmark evaluation and why current methods may fail to measure true AI capabilities effectively.",
+      "image_url": "https://wp.technologyreview.com/wp-content/uploads/2025/05/250321_LLMmetricsSA2.jpg?resize=1200,600",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "AI Benchmark Evaluation",
+        "SWE-Bench",
+        "FrontierMath",
+        "Chatbot Arena",
+        "AI Model Performance",
+        "Benchmark Validity",
+        "AI Research",
+        "John Yang",
+        "BetterBench",
+        "Social Science in AI"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "ccc2ff8aa3f73a9c4fccf78cc4e80853b0a39eb17b6bf550af2ab8641f4dbea0",
+      "title": "Apple Legal Battle Intensifies as Company Fights Judge's Contempt Order",
+      "link": "articles/apple-legal-battle-intensifies-as-company-fights-judges-contempt-order.html",
+      "published_iso": "2025-05-08T07:49:45Z",
+      "summary_short": "Apple challenges a US judge's contempt order in its ongoing legal battle over App Store policies, calling the ruling \"extraordinary.\"",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/3489/live/be259e60-2ba5-11f0-b26b-ab62c890638b.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Apple legal battle",
+        "Epic Games lawsuit",
+        "App Store antitrust",
+        "Judge Yvonne Gonzalez Rogers",
+        "Apple contempt order",
+        "Tech industry legal disputes",
+        "Apple vs Epic Games",
+        "App Store payment policies",
+        "Antitrust litigation in tech",
+        "Tim Cook legal controversy"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
+      "id": "c44db82695e103727dd9293a85c49de3dcc3b558ff4da0272af709ee66ae7917",
+      "title": "OpenAI Executive Transition: Instacart CEO Fidji Simo Joins as Applications Head",
+      "link": "articles/openai-executive-transition-instacart-ceo-fidji-simo-joins-as-applications-head.html",
+      "published_iso": "2025-05-08T06:30:56Z",
+      "summary_short": "Instacart CEO Fidji Simo transitions to OpenAI as Applications CEO, reporting to Sam Altman. Learn about this key OpenAI executive transition.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2021/07/Fidji-Simo-For-Newswire.jpg?resize=1200,675",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI executive transition",
+        "Fidji Simo",
+        "Instacart CEO",
+        "AI business leadership",
+        "OpenAI Applications division",
+        "Sam Altman",
+        "AI commercialization",
+        "Tech executive moves",
+        "Corporate restructuring",
+        "AI product management"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "117af7211e066ab13cdf6f31c8c78f82950a981afa666abc44afc7d4d8977344",
+      "title": "Nvidia Endorses Trump’s Plan to Rescind AI Chip Restrictions",
+      "link": "articles/nvidia-endorses-trump’s-plan-to-rescind-ai-chip-restrictions.html",
+      "published_iso": "2025-05-08T06:20:00Z",
+      "summary_short": "Nvidia supports Trump's proposal to rescind AI chip restrictions, citing economic benefits and global competitiveness. Learn more about the policy shift.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/01/nvidia-link-system.jpg?w=1024?w=1200&strip=all",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "chip restrictions",
+        "AI chip sales",
+        "Nvidia",
+        "semiconductor export controls",
+        "Trump administration policy",
+        "Biden-era restrictions",
+        "AI hardware trade",
+        "US tech leadership",
+        "geopolitical tech risks",
+        "Middle East chip demand"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "fe97627f6d893f8add2916148425b5514113b3abef72432656b6b7d668d2aa05",
       "title": "Singapore’s AI Safety Collaboration Bridges US-China Divide",
       "link": "articles/singapore’s-ai-safety-collaboration-bridges-us-china-divide.html",
@@ -23,6 +143,30 @@
       ],
       "audio_url": null,
       "trend_score": 14.99
+    },
+    {
+      "id": "4a9396b8a418fe72aa92ab9bc101a5a4596a7a023f9c4d56a94b892a4f4521d0",
+      "title": "AI in Legal Sentencing: Arizona Case Tests Boundaries",
+      "link": "articles/ai-in-legal-sentencing-arizona-case-tests-boundaries.html",
+      "published_iso": "2025-05-07T22:27:48Z",
+      "summary_short": "An Arizona court used AI to recreate a victim's statement in a road rage sentencing, sparking debate about AI in legal sentencing.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/fc68/live/3ebe7160-2b7d-11f0-8f57-b7237f6a66e6.jpg",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "AI in Legal Sentencing",
+        "Artificial Intelligence in Court",
+        "Victim Impact Statement AI",
+        "Ethics of AI in Law",
+        "Arizona AI Court Case",
+        "Posthumous AI Testimony",
+        "Legal Technology Innovations",
+        "AI and Judicial Precedent",
+        "Digital Voice in Court",
+        "AI Ethics in Society"
+      ],
+      "audio_url": null,
+      "trend_score": 14.93
     },
     {
       "id": "56ee6e7279a951cdf61e8b7b796158ab9baa202d3bc2828ba84f7f7f1d385b49",
