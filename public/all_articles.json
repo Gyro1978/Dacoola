@@ -1,6 +1,26 @@
 {
   "articles": [
     {
+      "id": "4200a7ca8c17f473feb3c24b75291527bc0f83f7355e3a497092b7647288c8f9",
+      "title": "Aurora Advances Driverless Truck Expansion with Night Driving and New Routes",
+      "link": "articles/aurora-advances-driverless-truck-expansion-with-night-driving-and-new-routes.html",
+      "published_iso": "2025-05-08T21:25:19Z",
+      "summary_short": "Aurora Innovation announces driverless truck expansion with new routes and night operations, aiming for full autonomy by 2025. Learn the latest updates.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/Aurora-Launch-1.jpg?resize=1200,675",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "driverless truck expansion",
+        "driverless truck expansion impact",
+        "latest news on driverless truck expansion",
+        "driverless truck expansion trends 2025",
+        "driverless truck expansion future applications",
+        "how does driverless truck expansion work"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
       "id": "b4c5ca8ea180fee6314c1ffe535afd0d6a694c89626a34f2fbfc5bc59a6ade22",
       "title": "Microsoft Interoperability Strategy Takes Shape with Nadella’s A2A and MCP Endorsement",
       "link": "articles/microsoft-interoperability-strategy-takes-shape-with-nadella’s-a2a-and-mcp-endor.html",
