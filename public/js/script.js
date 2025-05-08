@@ -7,7 +7,6 @@ let currentPlayingButton = null; // Button associated with current TTS
 let autoSlideInterval = null; // Interval timer for homepage banner
 
 // -- Read values from CSS custom properties or use defaults --
-// Ensure your :root in CSS has these defined if you want to control them from there
 const MAX_HOME_PAGE_ARTICLES = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--max-home-page-articles').trim() || '20', 10);
 const LATEST_NEWS_GRID_COUNT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--latest-news-grid-count').trim() || '8', 10);
 const TRENDING_NEWS_COUNT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--trending-news-count').trim() || '4', 10);
@@ -20,10 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM Loaded. Initializing...");
     loadNavbar().then(() => {
         console.log("Navbar loaded successfully. Proceeding with page setup.");
-        setupSearch();
+        // Setup search AFTER navbar is loaded, including mobile toggle
+        setupSearch(); // Sets up desktop search functionality
+        setupMobileSearchToggle(); // Add listener for mobile search icon
         initializePageContent(); // This will call loadSidebarData if on article page
         setupBrowserTTSListeners();
         setupFAQAccordion(); // Initialize FAQ interactivity
+        // processArticleBodyFormatting(); // Moved inside initializePageContent for article pages
         setInterval(updateTimestamps, 60000);
         updateTimestamps();
     }).catch(error => {
@@ -31,12 +33,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+// --- Article Body Formatting ---
+function processArticleBodyFormatting() {
+    const articleBody = document.getElementById('article-body');
+    if (articleBody) {
+        console.log("Processing article body formatting...");
+        let content = articleBody.innerHTML;
+
+        // Replace Markdown-style bold (**text**) with <strong> tags
+        // Use a non-greedy match (.+?) to handle multiple instances correctly
+        content = content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+        // Replace em dashes (—) with hyphens (-)
+        content = content.replace(/—/g, '-');
+
+        articleBody.innerHTML = content;
+        console.log("Article body formatting applied.");
+    } else {
+         // Only log if specifically debugging formatting issues
+        // console.debug("No #article-body found on this page for formatting.");
+    }
+}
+
+
 function initializePageContent() {
     const bodyClassList = document.body.classList;
 
     if (document.querySelector('.main-article')) {
         console.log("Article page detected");
         loadSidebarData(); // Dynamic sidebar loading is handled here
+        processArticleBodyFormatting(); // Apply formatting specifically on article pages after load
     } else if (document.querySelector('.home-container')) {
         console.log("Homepage detected");
         loadHomepageData();
@@ -67,6 +94,8 @@ async function loadNavbar() {
         if (!navbarHtml || navbarHtml.trim().length < 20) throw new Error("Fetched navbar HTML is empty/invalid");
         navbarPlaceholder.innerHTML = navbarHtml;
         console.log("Navbar HTML successfully fetched and injected.");
+        // Return true or the element reference if needed downstream
+        return navbarPlaceholder; // Indicate success
     } catch (error) {
         console.error('Error details during navbar loading:', error);
         navbarPlaceholder.innerHTML = '<p style="color: red; text-align: center; padding: 10px;">Error loading navigation.</p>';
@@ -254,8 +283,6 @@ async function loadSidebarData() {
 
         let finalItemCount = numItemsForSidebarTarget; // Start with the ideal count
 
-        // Determine the actual number of items to render in *both* sidebars if both are present
-        // Or, use the available count for a single sidebar if only one is present
         if (latestContainer && relatedContainer) {
             finalItemCount = Math.min(numItemsForSidebarTarget, latestSidebarArticles_candidates.length, relatedArticles_candidates.length);
             console.log(`Sidebar: Both containers present. Target: ${numItemsForSidebarTarget}, Latest Cands: ${latestSidebarArticles_candidates.length}, Related Cands: ${relatedArticles_candidates.length}. Final count for both: ${finalItemCount}.`);
@@ -395,70 +422,66 @@ function renderBreakingNews(articles) {
         container.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
         container.addEventListener('mouseleave', resetAutoSlide); // Use reset function
 
-        // --- Touch/Drag Swipe Functionality ---
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let isDragging = false;
-        const swipeThreshold = 50; // Min pixels to swipe to change slide
+        // --- Combined Swipe Logic ---
+        let startX = 0;
+        let endX = 0;
+        let isPointerDragging = false; // Flag for both touch and mouse
+        const swipeThreshold = 50; // Min pixels to swipe
 
-        container.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-            isDragging = true;
-            clearInterval(autoSlideInterval); // Pause auto slide during touch
-            // Optional: Add a class for visual feedback during drag
-            // container.classList.add('dragging');
-        }, { passive: true }); // Use passive for performance if not preventing default scroll
+        // Use Pointer Events for unified touch/mouse handling
+        container.addEventListener('pointerdown', (e) => {
+            // Only activate drag for primary pointer (touch/left mouse) and if not clicking on a control
+            if (!e.isPrimary || e.target.closest('.slider-control, .slider-dot')) return;
 
-        container.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            touchEndX = e.changedTouches[0].screenX;
-            // Optional: Move the slide visually during drag (more complex)
-        }, { passive: true });
-
-        container.addEventListener('touchend', (e) => {
-            if (!isDragging) return;
-            isDragging = false;
-            touchEndX = e.changedTouches[0].screenX; // Ensure endX is captured
-            handleSwipe();
-             // Optional: Remove visual feedback class
-            // container.classList.remove('dragging');
-            resetAutoSlide(); // Resume auto slide after interaction
+            startX = e.screenX;
+            isPointerDragging = true;
+            container.setPointerCapture(e.pointerId); // Capture pointer movements
+            container.style.cursor = 'grabbing'; // Change cursor
+            clearInterval(autoSlideInterval); // Pause auto slide
+            e.preventDefault(); // Prevent text selection/image drag/default touch actions
         });
 
-         // Handle potential cancellation (e.g., moving finger off screen)
-        container.addEventListener('touchcancel', (e) => {
-             if (!isDragging) return;
-             isDragging = false;
-             // container.classList.remove('dragging');
+        container.addEventListener('pointermove', (e) => {
+            if (!isPointerDragging || !e.isPrimary) return;
+            endX = e.screenX;
+            // Optional: visual feedback during drag (e.g., move slide slightly)
+        });
+
+        container.addEventListener('pointerup', (e) => {
+            if (!isPointerDragging || !e.isPrimary) return;
+            isPointerDragging = false;
+            container.releasePointerCapture(e.pointerId); // Release pointer
+            container.style.cursor = 'grab'; // Reset cursor
+            endX = e.screenX; // Ensure final position captured
+            handleSwipe(startX, endX, swipeThreshold);
+            resetAutoSlide(); // Resume auto slide
+        });
+
+         // Handle pointer cancellation (e.g., moving off screen)
+        container.addEventListener('pointercancel', (e) => {
+             if (!isPointerDragging || !e.isPrimary) return;
+             isPointerDragging = false;
+             container.releasePointerCapture(e.pointerId);
+             container.style.cursor = 'grab';
              resetAutoSlide();
         });
 
+        // Set initial cursor for desktop
+         if (!('ontouchstart' in window)) { // Basic check if not a touch device
+            container.style.cursor = 'grab';
+         }
 
-        function handleSwipe() {
-            const deltaX = touchEndX - touchStartX;
-            // console.log(`Swipe detected: deltaX = ${deltaX}`); // Debugging
-
-            if (Math.abs(deltaX) > swipeThreshold) {
-                if (deltaX < 0) { // Swiped left (show next)
-                    // console.log("Swiped Left - Next");
-                    nextSlide();
-                } else { // Swiped right (show previous)
-                    // console.log("Swiped Right - Previous");
-                    prevSlide();
-                }
+        function handleSwipe(sX, eX, threshold) {
+            const deltaX = eX - sX;
+            if (Math.abs(deltaX) > threshold) {
+                if (deltaX < 0) { nextSlide(); } // Swiped left
+                else { prevSlide(); } // Swiped right
             }
-            // Reset coordinates
-            touchStartX = 0;
-            touchEndX = 0;
+            startX = endX = 0; // Reset coordinates
         }
-        // --- End Touch/Drag ---
+        // --- End Combined Swipe Logic ---
 
-    } else if (slides.length === 1) {
-        // If only one slide, ensure it's active and hide controls/dots (or don't create them)
-        slides[0].classList.add('active');
-    } else {
-        // No slides data - already handled by hiding the section earlier
-    }
+    } else if (slides.length === 1) { slides[0].classList.add('active'); }
 }
 
 
@@ -518,23 +541,124 @@ function calculateSearchScore(article, searchTokens) {
     if (title.includes(qPhrase)) score += 50; else if (topic.includes(qPhrase)) score += 25; else if (tags.some(tag => tag.includes(qPhrase))) score += 15; else if (summary.includes(qPhrase)) score += 10;
     if (searchTokens.every(token => textTokens.includes(token))) score += 20; return score;
 }
+
+// --- Modified Search Setup ---
 function setupSearch() {
-    const searchInput = document.getElementById('search-input'), searchButton = document.getElementById('search-button'), suggestionsContainer = document.getElementById('search-suggestions'), searchContainer = document.querySelector('.nav-search');
-    if (!searchInput || !searchButton || !suggestionsContainer || !searchContainer) { console.warn("Search elements missing."); return; }
-    searchContainer.style.position = 'relative'; let debounceTimeout; const debounce = (func, delay) => (...args) => { clearTimeout(debounceTimeout); debounceTimeout = setTimeout(() => func.apply(this, args), delay); };
+    // Select elements after navbar is loaded
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const suggestionsContainer = document.getElementById('search-suggestions');
+    const searchContainer = document.querySelector('.nav-search'); // Standard desktop search container
+
+    if (!searchInput || !searchButton || !suggestionsContainer || !searchContainer) {
+        console.warn("Standard desktop search elements missing.");
+        // Mobile toggle setup happens separately in setupMobileSearchToggle
+        return;
+    }
+
+    searchContainer.style.position = 'relative';
+    let debounceTimeout;
+    const debounce = (func, delay) => (...args) => {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+    };
+
     const showSuggestions = async (forceShow = false) => {
-        const query = searchInput.value.trim().toLowerCase(); suggestionsContainer.innerHTML = ''; suggestionsContainer.style.display = 'none'; if (!forceShow && query.length < 1) return;
-        try { const resp = await fetch('/all_articles.json', {cache: "no-store"}); if (!resp.ok) throw new Error("Fetch fail"); const data = await resp.json(); if (!data?.articles) return; let matches = [];
-            if (query.length > 0) { const tokens = query.split(/[\s\W]+/).filter(Boolean); matches = data.articles.map(a=>({...a, score: calculateSearchScore(a,tokens)})).filter(a=>a.score > 0).sort((a,b)=>b.score-a.score).slice(0,5); }
-            else if (forceShow) { matches = data.articles.slice(0,5); }
-            if (matches.length > 0) { matches.forEach(a => { const link = document.createElement('a'); link.href = `/${a.link}`; link.className = 'suggestion-item'; link.innerHTML = `<img src="${a.image_url || 'https://via.placeholder.com/80x50?text=N/A'}" class="suggestion-image" alt="" loading="lazy"><div class="suggestion-text"><span class="suggestion-title">${a.title}</span><span class="suggestion-meta timestamp" data-iso-date="${a.published_iso||''}">${timeAgo(a.published_iso)}</span></div>`; suggestionsContainer.appendChild(link); }); suggestionsContainer.style.display = 'block'; updateTimestamps(); }
+        const query = searchInput.value.trim().toLowerCase();
+        suggestionsContainer.innerHTML = '';
+        suggestionsContainer.style.display = 'none';
+        if (!forceShow && query.length < 1) return;
+        try {
+            const resp = await fetch('/all_articles.json', { cache: "no-store" });
+            if (!resp.ok) throw new Error("Fetch fail");
+            const data = await resp.json();
+            if (!data?.articles) return;
+            let matches = [];
+            if (query.length > 0) {
+                const tokens = query.split(/[\s\W]+/).filter(Boolean);
+                matches = data.articles.map(a => ({ ...a, score: calculateSearchScore(a, tokens) }))
+                                      .filter(a => a.score > 0)
+                                      .sort((a, b) => b.score - a.score)
+                                      .slice(0, 5);
+            } else if (forceShow) {
+                matches = data.articles.slice(0, 5);
+            }
+            if (matches.length > 0) {
+                matches.forEach(a => {
+                    const link = document.createElement('a');
+                    link.href = `/${a.link}`;
+                    link.className = 'suggestion-item';
+                    link.innerHTML = `<img src="${a.image_url || 'https://via.placeholder.com/80x50?text=N/A'}" class="suggestion-image" alt="" loading="lazy"><div class="suggestion-text"><span class="suggestion-title">${a.title}</span><span class="suggestion-meta timestamp" data-iso-date="${a.published_iso || ''}">${timeAgo(a.published_iso)}</span></div>`;
+                    suggestionsContainer.appendChild(link);
+                });
+                suggestionsContainer.style.display = 'block';
+                updateTimestamps();
+            }
         } catch (err) { console.error("Suggest err:", err); }
     };
-    const redirectSearch = () => { const q = searchInput.value.trim(); if (q) window.location.href = `/search.html?q=${encodeURIComponent(q)}`; else searchInput.focus(); };
-    searchButton.addEventListener('click', redirectSearch); searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); redirectSearch(); } });
-    searchInput.addEventListener('input', debounce(showSuggestions, 300)); searchInput.addEventListener('focus', () => showSuggestions(true));
-    document.addEventListener('click', (e) => { if (!searchContainer.contains(e.target)) suggestionsContainer.style.display = 'none'; });
+
+    const redirectSearch = () => {
+        const q = searchInput.value.trim();
+        if (q) window.location.href = `/search.html?q=${encodeURIComponent(q)}`;
+        else searchInput.focus();
+    };
+
+    searchButton.addEventListener('click', redirectSearch);
+    searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); redirectSearch(); } });
+    searchInput.addEventListener('input', debounce(showSuggestions, 300));
+    searchInput.addEventListener('focus', () => showSuggestions(true));
+
+    // Close suggestions when clicking outside (excluding mobile toggle)
+    document.addEventListener('click', (e) => {
+        if (!searchContainer.contains(e.target) && !e.target.closest('#mobile-search-toggle')) {
+            suggestionsContainer.style.display = 'none';
+        }
+    });
 }
+
+// --- Mobile Search Toggle Setup ---
+function setupMobileSearchToggle() {
+    const toggleButton = document.getElementById('mobile-search-toggle');
+    const navbar = document.querySelector('.navbar');
+    const searchContainer = document.querySelector('.nav-search');
+    const navMenu = document.querySelector('.nav-menu'); // Select the menu items container
+
+    if (!toggleButton || !navbar || !searchContainer || !navMenu) {
+         console.warn("Mobile search toggle elements not found (toggle button, navbar, search container, or nav menu).");
+         return;
+    }
+
+    console.log("Setting up mobile search toggle listener.");
+    toggleButton.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent click from bubbling up to document listener
+        navbar.classList.toggle('search-active'); // Toggle class on navbar to control visibility
+        searchContainer.classList.toggle('mobile-active'); // Show/hide search bar
+
+        // Optional: Focus the input when shown
+        if (searchContainer.classList.contains('mobile-active')) {
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) searchInput.focus();
+        } else {
+            // Hide suggestions if closing search
+            const suggestions = document.getElementById('search-suggestions');
+            if (suggestions) suggestions.style.display = 'none';
+        }
+    });
+
+     // Close mobile search if clicking outside the revealed search bar OR its toggle button
+     document.addEventListener('click', (e) => {
+         if (navbar.classList.contains('search-active') &&
+             !searchContainer.contains(e.target) &&
+             !toggleButton.contains(e.target)) { // Check if click IS NOT the toggle itself
+             console.log("Closing mobile search due to outside click.");
+             navbar.classList.remove('search-active');
+             searchContainer.classList.remove('mobile-active');
+             const suggestions = document.getElementById('search-suggestions');
+             if (suggestions) suggestions.style.display = 'none'; // Also hide suggestions
+         }
+     });
+}
+
 
 function setupFAQAccordion() {
     const faqSections = document.querySelectorAll('#article-body .faq-section');
@@ -569,8 +693,19 @@ function handleTTSDelegatedClick(event) {
     if (!button || !synth) return;
     event.preventDefault(); event.stopPropagation();
     let textToSpeak = ''; const isGlobalButton = button.id === 'global-tts-player-button';
-    if (isGlobalButton) { const articleBody = document.getElementById('article-body'); textToSpeak = articleBody ? (articleBody.innerText || articleBody.textContent).trim() : ''; if(!textToSpeak){ const headline = document.getElementById('article-headline'); textToSpeak = headline ? (headline.innerText || headline.textContent).trim() : '';}}
-    else { const card = button.closest('.article-card'); const titleElement = card?.querySelector('h3'); textToSpeak = titleElement ? (titleElement.innerText || titleElement.textContent).trim() : ''; }
+    if (isGlobalButton) {
+        const articleBody = document.getElementById('article-body');
+        textToSpeak = articleBody ? (articleBody.innerText || articleBody.textContent).trim() : '';
+        if(!textToSpeak){
+            const headline = document.getElementById('article-headline');
+            textToSpeak = headline ? (headline.innerText || headline.textContent).trim() : '';
+        }
+    }
+    else {
+        const card = button.closest('.article-card');
+        const titleElement = card?.querySelector('h3');
+        textToSpeak = titleElement ? (titleElement.innerText || titleElement.textContent).trim() : '';
+    }
 
     if (currentPlayingButton === button && currentUtterance) {
         if (synth.paused) { console.log("RESUME TTS."); button.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>'; button.setAttribute('aria-label', 'Pause audio narration'); button.classList.remove('paused'); synth.resume(); }
@@ -598,7 +733,9 @@ function speakText(text, button) {
 function resetTTSButtonState(button) {
     if (button) {
         button.classList.remove('playing', 'loading', 'paused');
-        button.innerHTML = '<i class="fas fa-headphones" aria-hidden="true"></i>';
+        // Use the correct icon based on button type
+        const iconClass = button.id === 'global-tts-player-button' ? 'fa-headphones' : 'fa-headphones'; // Or specific icon for cards if needed
+        button.innerHTML = `<i class="fas ${iconClass}" aria-hidden="true"></i>`;
         button.disabled = false;
         const defaultListenLabel = button.id === 'global-tts-player-button' ? 'Listen to main article content' : 'Listen to article title';
         button.setAttribute('aria-label', defaultListenLabel);
