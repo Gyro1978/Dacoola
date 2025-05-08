@@ -1,6 +1,86 @@
 {
   "articles": [
     {
+      "id": "49f634b34df8a772fef5b4b8bd6d9be64e448517f7de9b5c0956d6ab8d0b0e7a",
+      "title": "AI Human-Like Reasoning: How Machines Are Learning to Think",
+      "link": "articles/ai-human-like-reasoning-how-machines-are-learning-to-think.html",
+      "published_iso": "2025-05-08T15:30:04Z",
+      "summary_short": "Discover how AI human-like reasoning is transforming technology, from chain-of-thought techniques to cognitive strategies. Learn the latest developments and challenges.",
+      "image_url": "https://spectrum.ieee.org/media-library/image.jpg?id=60146417&width=1200&height=600&coordinates=0%2C346%2C0%2C71",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI human-like reasoning",
+        "AI human-like reasoning impact",
+        "latest news on AI human-like reasoning",
+        "how does AI human-like reasoning work",
+        "AI human-like reasoning trends 2025",
+        "AI human-like reasoning future applications"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
+      "id": "ab28d4c0d1398f0b5c59e15e3c89870bf8be99e1bbb85f0b3d7f6efe26c2996a",
+      "title": "OpenAI Leadership Change: Instacart’s Fidji Simo Named CEO of Applications",
+      "link": "articles/openai-leadership-change-instacart’s-fidji-simo-named-ceo-of-applications.html",
+      "published_iso": "2025-05-08T15:25:24Z",
+      "summary_short": "OpenAI announces a major leadership change with Instacart CEO Fidji Simo stepping in as CEO of Applications, signaling a shift toward product-focused growth.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_httpss.mj_.runtlTnPxtQCV0_woman_opens_a_door_leading_to__e604197a-033b-4816-8673-03508edea2d4.png?w=1024?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "latest news on OpenAI leadership change",
+        "how does OpenAI leadership change work",
+        "OpenAI leadership change future applications",
+        "OpenAI leadership change",
+        "OpenAI leadership change trends 2025",
+        "OpenAI leadership change impact"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
+      "id": "10be4f77da44f8bb793c9db7dd154b85664f812566925f157105ac98f7db5d88",
+      "title": "AI Model Comparison: ChatGPT Outperforms Gemini, Perplexity, and Grok in Deep Research",
+      "link": "articles/ai-model-comparison-chatgpt-outperforms-gemini,-perplexity,-and-grok-in-deep-res.html",
+      "published_iso": "2025-05-08T15:22:28Z",
+      "summary_short": "Discover how ChatGPT, Gemini, Perplexity, and Grok stack up in our AI model comparison for deep research capabilities. Find out which performs best.",
+      "image_url": "https://www.zdnet.com/a/img/resize/daa1df49be4ed61172d0e4252ff22f48640a5dfe/2025/05/08/26d23bbe-60d9-4f3d-b389-7c0afe1f2f55/gettyimages-2204830588.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "how does AI model comparison work",
+        "AI model comparison future applications",
+        "AI model comparison",
+        "AI model comparison trends 2025",
+        "AI model comparison impact",
+        "latest news on AI model comparison"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
+      "id": "08a22e281b9522e905538617e0d5a4518ba6c0c86c34a4d6b0a9265523bf7755",
+      "title": "Google AI Tool in Sheets: A Game-Changer for Business Professionals",
+      "link": "articles/google-ai-tool-in-sheets-a-game-changer-for-business-professionals.html",
+      "published_iso": "2025-05-08T15:07:37Z",
+      "summary_short": "Discover how Google's AI tool in Sheets is transforming workflows for business professionals with seamless data analysis and automation.",
+      "image_url": "https://www.zdnet.com/a/img/resize/640a04d85048eabb38efa59ce6093b1843dfe608/2025/05/08/72d6f5dd-86a3-486e-93ea-4926b4c85199/gettyimages-933517600.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "latest news on Google AI tool",
+        "Google AI tool impact",
+        "Google AI tool",
+        "Google AI tool trends 2025",
+        "Google AI tool future applications",
+        "how does Google AI tool work"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
       "id": "a78a4ae9191fed089f5ec5f860a73418cfb4a18d18d9e79ca230c9d20fe083a5",
       "title": "OpenAI Expands Data Residency Program to Asia",
       "link": "articles/openai-expands-data-residency-program-to-asia.html",
