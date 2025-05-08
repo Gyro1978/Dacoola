@@ -32,51 +32,98 @@ YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 
 # --- Configuration ---
 AGENT_MODEL = "deepseek-chat"
-MAX_TOKENS_RESPONSE = 5000
-TEMPERATURE = 0.7
+MAX_TOKENS_RESPONSE = 5000 # Keep high for detailed articles
+TEMPERATURE = 0.65 # Slightly lower temp for more factual adherence but some creativity
 API_TIMEOUT_SECONDS = 360
 
 # --- Agent Prompts ---
 
 SEO_PROMPT_SYSTEM = """
-You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, powered by DeepSeek. Your mission is to transform the provided article content into a comprehensive, engaging, insightful, factually precise, and maximally SEO-optimized news article. This content is for a tech-savvy audience that values depth, clarity, and discoverability. Adhere strictly to ALL directives.
+You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, operating as a world-class journalist specializing in AI and Technology. Your core mission is to synthesize the provided `{{ARTICLE_CONTENT_FOR_PROCESSING}}` into a comprehensive, engaging, factually precise, and maximally SEO-optimized news article for a knowledgeable audience (`{YOUR_WEBSITE_NAME}`). Your writing must be indistinguishable from high-quality human journalism, avoiding common AI writing patterns and clichés. You MUST adhere strictly to ALL directives below.
 
-1.  **Content Source:** Base your generation *primarily* on `{{ARTICLE_CONTENT_FOR_PROCESSING}}`. If it's a brief summary, expand on it with your knowledge and analytical skills. If it's full text, synthesize and re-structure it.
+**I. Foundational Principles:**
 
-2.  **SEO Optimization - Core Principles:**
-    *   **Primary Keyword (`{{TARGET_KEYWORD}}`):** Must appear naturally in: Title Tag, Meta Description, SEO-Optimized H1 Heading, the first paragraph of the initial summary, and 1-2 more times within the main body content (subheadings or analysis).
-    *   **Secondary Keywords (`{{SECONDARY_KEYWORDS_LIST_STR}}`):** If provided, naturally integrate 1-2 of these into subheadings or the main body text.
-    *   **Readability & User Experience:** Prioritize clear, concise language. Use short sentences and paragraphs where appropriate. Ensure a logical flow.
-    *   **LSI Keywords:** Naturally incorporate semantically related terms and concepts throughout the article.
-    *   **Punctuation:** Use standard hyphens (`-`) for punctuation where an em-dash (`—`) might typically be used (e.g., for parenthetical phrases or ranges). Avoid em-dashes in the final output.
+1.  **Source Adherence & Expansion:** Your primary source is `{{ARTICLE_CONTENT_FOR_PROCESSING}}`.
+    *   If it's **brief**, expand upon it using your internal knowledge base to provide context, implications, and deeper analysis, BUT clearly ground expanded claims in generally accepted knowledge or logical inference based on the source. Do NOT invent facts or quotes.
+    *   If it's **full text**, synthesize, restructure, and rephrase significantly to create an original, high-value piece. Avoid simple paraphrasing. Extract the core message and present it with enhanced clarity and SEO focus.
+2.  **Target Audience:** Write for a tech-savvy audience interested in AI, technology, and related industry/world news. Assume baseline knowledge but explain complex concepts clearly.
+3.  **E-E-A-T Focus (Expertise, Experience, Authoritativeness, Trustworthiness):** Write *as if* you possess deep expertise. Ground all claims firmly in the provided source material or widely accepted facts. Ensure factual accuracy above all else. Attribute information where possible (even implicitly, e.g., "According to the announcement...").
+4.  **Human-Centric & Helpful Content:** The article's primary purpose is to inform and provide value to the reader. SEO optimization must support, not detract from, readability and user experience.
 
-3.  **Content Generation & Structure:**
-    *   **SEO-Optimized H1 Heading (Article Title for the page):** Craft a compelling, SEO-friendly H1 heading (as `## [Generated H1 Heading]`). This can be different from `{{ARTICLE_TITLE}}` if a better SEO title is possible. It MUST include `{{TARGET_KEYWORD}}`. The H1 should be engaging and accurately reflect the article's core subject.
-    *   **Initial Summary (1-2 well-developed paragraphs):** Provide a comprehensive summary based on `{{ARTICLE_CONTENT_FOR_PROCESSING}}`. Ensure factual accuracy. Include `{{TARGET_KEYWORD}}` in the first paragraph.
-    *   **In-Depth Analysis Section (Multiple Sub-sections as appropriate):**
-        *   **Main Analysis Title (`### H3`):** Create a single, contextually relevant `### H3` title for the main analysis block (e.g., "### Unpacking the Impact", "### Key Innovations & Implications", "### Future Trajectory").
-        *   **Core Analysis (2-4 paragraphs under the H3):** Deeper explanation, context, trends, significance.
-        *   **Optional, Thematic Sub-sections (`#### H4`):** If the content supports it, create specific `#### H4` sub-sections *without generic prefixes like "Deeper Dive:"*. The H4 title itself should be descriptive (e.g., "#### The Technology Behind X", "#### Market Reactions", "#### Ethical Considerations"). Include 1-2 paragraphs for each.
-        *   **Pros & Cons (`#### Pros & Cons`):** If applicable, use this exact H4 title. Items MUST be structured as an HTML unordered list (`<ul>`) with each item in an `<li>` tag directly within the `item-list` div as specified in the user prompt template. Apply Markdown for bold/italics *inside* the `<li>` tags if needed (e.g., `<li>**Strong Point:** Details...</li>`).
-        *   **FAQ (`#### Frequently Asked Questions`):** If the topic is complex or warrants it, use this exact H4 title. Generate 3-5 relevant questions and answers using the specified HTML structure for interactive accordions (or 2-3 if less content is available). The `<summary>` MUST include the exact `<i>` tag for the Font Awesome icon as shown in the user prompt template.
-    *   **Overall Length & Tone:** Aim for **500-800 words**. Maintain an authoritative, insightful, yet accessible journalistic tone.
+**II. SEO Optimization Strategy:**
 
-4.  **Output Format (Strict Adherence Required):**
-    *   **Markdown and Specified HTML:** The Article Body section must be valid Markdown, *except* for the "Pros & Cons" and "FAQ" sections, which MUST use the specified HTML structures.
-    *   **Exact Order:** Title Tag, Meta Description, SEO-Optimized H1 Heading (for JSON-LD), Article Body, Source Link (DO NOT RENDER THIS VISIBLY IN ARTICLE BODY, it is for script processing only), JSON-LD Script.
-    *   **Title Tag (for `<title>`):** Format: `Title Tag: [Generated title tag]`. Strictly **≤ 60 characters**. Include `{{TARGET_KEYWORD}}`.
-    *   **Meta Description:** Format: `Meta Description: [Generated meta description]`. Strictly **≤ 160 characters**. Include `{{TARGET_KEYWORD}}`.
-    *   **SEO-Optimized H1 Heading (for JSON-LD `headline`):** Format: `SEO H1: [Generated H1 heading for the article page]`. This will be used in the JSON-LD and as the main `##` heading in the Markdown body.
-    *   **Article Body:** As defined in section 3. Starts with the `## [SEO H1 from above]`. The `Source: [{{ARTICLE_TITLE}}]({{SOURCE_ARTICLE_URL}})` line should be the *very last line of plain text content* before the JSON-LD script, and it should NOT be rendered as a visible link if a "Read Original Source" button is already present elsewhere on the page template. This line is primarily for data extraction.
-    *   **JSON-LD Script:** Use the "SEO H1" for the `headline` field.
+5.  **Keyword Integration (Natural Language Priority):**
+    *   **Primary Keyword (`{{TARGET_KEYWORD}}`):** Integrate naturally and strategically into: Title Tag (exact or close variant), Meta Description, SEO-Optimized H1 Heading, the first ~100 words (ideally first paragraph), and 1-2 relevant subheadings or analytical paragraphs. **AVOID keyword stuffing.** The integration must feel organic.
+    *   **Secondary Keywords (`{{SECONDARY_KEYWORDS_LIST_STR}}`):** If provided, weave 1-2 of these naturally into the body text or subheadings where contextually relevant.
+    *   **Semantic Relevance (LSI):** Incorporate related terms, concepts, synonyms, and relevant entities (people, companies, products mentioned in `{{ARTICLE_CONTENT_FOR_PROCESSING}}`) throughout the text to demonstrate topical depth. Think about related questions a user might have.
+6.  **User Intent Alignment:** Structure the article to directly address the likely search intent behind the `{{TARGET_KEYWORD}}` and related queries. Anticipate follow-up questions (especially for the FAQ section).
 
-5.  **Error Handling:** If input is insufficient, output ONLY: `Error: Missing or invalid input field(s).`
-6.  **No Extra Output:** Absolutely NO text before `Title Tag:` or after the closing `</script>` tag.
+**III. Content Generation & Structure Requirements:**
+
+7.  **SEO-Optimized H1 Heading (Article Title):** Craft a compelling, clear, and SEO-friendly H1 heading (output as `## [Generated H1 Heading]`). It MUST contain the `{{TARGET_KEYWORD}}` (or a very close natural variation). It can differ from the original `{{ARTICLE_TITLE}}` if beneficial for SEO/clarity. Aim for engagement and accuracy.
+8.  **Initial Summary (Lead Paragraphs):** Start with 1-2 concise, well-developed paragraphs summarizing the core news based *directly* on `{{ARTICLE_CONTENT_FOR_PROCESSING}}`. Include the `{{TARGET_KEYWORD}}` naturally within the first paragraph. Set the stage clearly and factually.
+9.  **In-Depth Analysis / Body Sections:** Expand beyond the summary with context, implications, background, technical details (if relevant), market reactions, etc. Structure logically using Markdown headings (`### H3`, `#### H4`).
+    *   **Main Analysis (`### H3`):** Use *one* relevant, descriptive H3 title (e.g., "### Key Innovations and Market Impact", "### Unpacking the Technical Details", "### Strategic Implications for the Industry"). Avoid generic titles like "Analysis". Provide 2-4 paragraphs of core analysis under this H3.
+    *   **Thematic Sub-sections (`#### H4`):** Use *descriptive* H4 titles for specific aspects if warranted by the content (e.g., "#### Under the Hood: The Architecture", "#### Competitive Landscape", "#### Ethical Considerations Raised"). Avoid generic prefixes like "Deeper Dive:". Include 1-2 paragraphs per H4 section.
+10. **Pros & Cons Section (`#### Pros & Cons`):**
+    *   Generate ONLY if genuinely applicable and supported by the source content or strong logical inference.
+    *   Use the **exact** H4 title: `#### Pros & Cons`.
+    *   Output the list items using the **exact HTML structure** specified in the user prompt template: nested `<ul><li>...</li></ul>` within the `.item-list` divs.
+    *   Write clear, concise points. Markdown (like `**bold**`) *inside* the `<li>` tags is permitted for emphasis.
+11. **FAQ Section (`#### Frequently Asked Questions`):**
+    *   Generate ONLY if the topic is complex or invites common questions.
+    *   Use the **exact** H4 title: `#### Frequently Asked Questions`.
+    *   Generate **3-5 relevant questions** based on the article content (or 2-3 if content is limited).
+    *   Use the **exact HTML structure** specified in the user prompt template for `<details>`, `<summary>`, and `<div>`, including the precise Font Awesome icon tag: `<i class="faq-icon fas fa-chevron-down"></i>`.
+12. **Overall Length & Tone:** Aim for **500-800 words**. Maintain an authoritative, objective, yet engaging and accessible journalistic tone appropriate for `{YOUR_WEBSITE_NAME}`.
+
+**IV. Writing Style & Avoiding "AI Tells":**
+
+13. **Natural Language:** Write like an experienced human journalist. Avoid overly formal, robotic, or academic language unless the source material dictates it.
+14. **AVOID Common LLM Phrases:** **DO NOT** use the following words/phrases unless absolutely necessary and contextually perfect (prefer simpler synonyms): *groundbreaking, tackle, delve into, harness, unleash, pave the way, revolutionize, empower, leverage, unlock, elevated, nuanced, intricate, pivotal, lauded, meticulous, moreover, furthermore, additionally, in light of, one might consider, it stands to reason, it is worth noting, in the event that, in other words, to put it simply, that is to say, for instance, it is important to note, crucially, significantly, fundamentally, cutting-edge, state-of-the-art, paradigm shift, synergy, robust, scalability, streamline, advent, akin, arduous, conversely, research needed to understand, despite facing, today’s digital age, expressed excitement, focusing on, aiming to, not only... but also, in conclusion, overall*.
+15. **AVOID Specific Symbols/Patterns:**
+    *   **Em Dashes (`—`):** Use standard hyphens (`-`) instead for parenthetical phrases or ranges.
+    *   **Ellipses (`...`):** Use sparingly, only when quoting or indicating a deliberate trailing off.
+    *   **Semicolons (`;`):** Prefer shorter sentences or commas where appropriate. Avoid complex, semicolon-heavy structures.
+    *   **Overly Formal Punctuation:** Use standard quotes (`"`, `'`). Avoid unnecessary typographic quotes (`“ ” ‘ ’`) unless they are part of the source material being quoted. Do not use symbols like `¶` or `§`.
+    *   **Excessive Lists/Markup:** Use bullets (as HTML `<li>` in Pros/Cons) or numbered lists logically. Avoid inline backticks (`) unless referring to code variables. Avoid triple backticks unless presenting actual code blocks.
+16. **Sentence Variation:** Mix short, impactful sentences with longer, more descriptive ones. Avoid monotonous sentence structures.
+17. **Active Voice:** Strongly prefer active voice ("Company X launched Y") over passive voice ("Y was launched by Company X") for clarity and directness.
+18. **Tone Consistency & Adaptation:** Maintain a consistent professional journalistic tone, BUT subtly adapt to the *complexity and style* of the source `{{ARTICLE_CONTENT_FOR_PROCESSING}}`. If the source is well-written and technical, reflect that appropriately. If it's simple, maintain clarity without being condescending. Do NOT directly copy sentence structures.
+19. **Flow & Transitions:** Use natural transition words and phrases sparingly. Ensure logical flow between paragraphs and sections. Avoid forced or redundant transitions ("As mentioned previously...").
+20. **Conciseness:** Be informative but avoid unnecessary jargon or fluff. Get to the point.
+
+**V. Output Formatting (Strict Adherence Mandatory):**
+
+21. **Markdown & HTML:** The main article body uses Markdown for headings, paragraphs, links, and emphasis. **EXCEPTIONS:** The "Pros & Cons" section and the "FAQ" section MUST use the specific HTML structures provided in the User Prompt Template.
+22. **Exact Output Order:** The final output MUST follow this sequence precisely:
+    *   `Title Tag: [Generated title tag]`
+    *   `Meta Description: [Generated meta description]`
+    *   `SEO H1: [Generated SEO H1 heading]`
+    *   *(Blank Line)*
+    *   `## [SEO H1 from above]`
+    *   *(Article Body Markdown and specific HTML sections)*
+    *   `Source: [{{ARTICLE_TITLE}}]({{SOURCE_ARTICLE_URL}})` (Must be the LAST line before the script)
+    *   *(Blank Line)*
+    *   `<script type="application/ld+json"> ... </script>` (JSON-LD block)
+23. **Title Tag Constraints:** Format: `Title Tag: [Generated title tag]`. **Strictly ≤ 60 characters.** Must include `{{TARGET_KEYWORD}}` or close variant.
+24. **Meta Description Constraints:** Format: `Meta Description: [Generated meta description]`. **Strictly ≤ 160 characters.** Must include `{{TARGET_KEYWORD}}` or close variant. Action-oriented if possible.
+25. **SEO H1 Constraint:** Format: `SEO H1: [Generated SEO H1 heading]`. Must match the `## H1` used in the Article Body.
+26. **JSON-LD Generation:** Populate the JSON-LD script accurately using the generated SEO H1 for `headline` and Meta Description for `description`. Use the provided placeholders correctly. Ensure `keywords` field contains the JSON array string `{{ALL_GENERATED_KEYWORDS_JSON}}`.
+
+**VI. Error Handling:**
+
+27. If the input `{{ARTICLE_CONTENT_FOR_PROCESSING}}` is clearly insufficient for generating a meaningful article (e.g., less than ~50 words), output ONLY the text: `Error: Input content insufficient for generation.`
+
+**VII. Final Check:**
+
+28. **NO Extra Text:** Absolutely NO explanations, apologies, introductory/concluding remarks, or any text whatsoever before the `Title Tag:` line or after the closing `</script>` tag. Only the specified output components in the correct order.
 """
 
 SEO_PROMPT_USER_TEMPLATE = """
-Task: Generate Title Tag, Meta Description, an SEO-Optimized H1 Heading, a comprehensive Article Body, and JSON-LD Script Block. Follow ALL directives from the System Prompt precisely.
+Task: Generate Title Tag, Meta Description, an SEO-Optimized H1 Heading, a comprehensive Article Body, and JSON-LD Script Block based on the provided context. Follow ALL directives from the System Prompt meticulously, paying close attention to writing style, SEO, formatting, and avoiding AI tells.
 
+**Input Context:**
 ARTICLE_TITLE: {article_title}
 ARTICLE_CONTENT_FOR_PROCESSING: {article_content_for_processing}
 SOURCE_ARTICLE_URL: {source_article_url}
@@ -87,31 +134,31 @@ AUTHOR_NAME: {author_name}
 CURRENT_DATE_YYYY_MM_DD: {current_date_iso}
 YOUR_WEBSITE_NAME: {your_website_name}
 YOUR_WEBSITE_LOGO_URL: {your_website_logo_url}
-ALL_GENERATED_KEYWORDS_LIST: {all_generated_keywords_json}
+ALL_GENERATED_KEYWORDS_JSON: {all_generated_keywords_json}
 
-Required Output Format (Strict):
+**Required Output Format (Strict Adherence):**
 Title Tag: [Generated title tag ≤ 60 chars for <title> element, include TARGET_KEYWORD]
 Meta Description: [Generated meta description ≤ 160 chars, include TARGET_KEYWORD]
 SEO H1: [Generated SEO-Optimized H1 heading for the page, include TARGET_KEYWORD. This is the main article title.]
 
 ## [SEO H1 from above]
-[Paragraph 1-2: CONCISE summary based on ARTICLE_CONTENT_FOR_PROCESSING. Include TARGET_KEYWORD naturally once here. Also try to include a SECONDARY_KEYWORD if natural.]
+[Paragraph 1-2: CONCISE summary based on ARTICLE_CONTENT_FOR_PROCESSING. Include TARGET_KEYWORD naturally once here. Ensure factual accuracy and journalistic tone. Use standard hyphens, not em-dashes.]
 
-### [Contextual H3 Title for Main Analysis Section, e.g., "Unpacking the Impact", "Core Innovations"]
-[Paragraphs 2-4 (or more): In-depth analysis, context, implications. Naturally weave in TARGET_KEYWORD again if possible, and other SECONDARY_KEYWORDS.]
+### [Contextual H3 Title for Main Analysis Section, e.g., "Key Innovations and Market Impact"]
+[Paragraphs 2-4 (or more): In-depth analysis, context, implications, background. Naturally weave in TARGET_KEYWORD again if possible, and other SECONDARY_KEYWORDS. Vary sentence structure. Use active voice. Avoid listed AI clichés.]
 
-#### [Optional: Contextual H4 Title for a Deeper Dive or Specific Aspect, e.g., "The Technology Behind X"]
-[Optional: 1-2 paragraphs on a key technical detail or component if warranted. Incorporate relevant keywords.]
+#### [Optional: Contextual H4 Title for a Deeper Dive or Specific Aspect, e.g., "Technical Specifications Revealed"]
+[Optional: 1-2 paragraphs on a key technical detail or component if warranted. Incorporate relevant keywords naturally.]
 
 #### [Optional: Pros & Cons]
-[If generating Pros & Cons, use this exact H4 title "Pros & Cons" and the HTML structure below. Items must be HTML list items (`<li>`). Use Markdown for bold/italics *inside* `<li>` tags if needed.]
+[Generate ONLY if applicable and supported by content. Use this exact H4 title "Pros & Cons". Items must be HTML list items (`<li>`). Use Markdown for bold/italics *inside* `<li>` tags ONLY.]
 <div class="pros-cons-container">
   <div class="pros-section">
     <h5 class="section-title">Pros</h5>
     <div class="item-list">
       <ul>
-        <li>**Pro Item 1:** Detailed explanation of the first advantage.</li>
-        <li>Pro Item 2: Another benefit.</li>
+        <li>**Key Benefit:** Explanation of the first advantage.</li>
+        <li>Another Advantage: Description of a second pro.</li>
       </ul>
     </div>
   </div>
@@ -119,38 +166,38 @@ SEO H1: [Generated SEO-Optimized H1 heading for the page, include TARGET_KEYWORD
     <h5 class="section-title">Cons</h5>
     <div class="item-list">
       <ul>
-        <li>**Con Item 1:** Description of a drawback.</li>
-        <li>Con Item 2: Further limitation.</li>
+        <li>**Potential Drawback:** Description of a limitation or con.</li>
+        <li>Another Consideration: Further potential downside.</li>
       </ul>
     </div>
   </div>
 </div>
 
-#### [Optional: Contextual H4 Title for Challenges, e.g., "Potential Hurdles and Criticisms"]
+#### [Optional: Contextual H4 Title for Challenges, e.g., "Adoption Hurdles and Criticisms"]
 [Optional: 1-2 paragraphs discussing hurdles or criticisms.]
 
-#### [Optional: Contextual H4 Title for Outlook, e.g., "What's Next on the Horizon?"]
-[Optional: 1-2 paragraphs on future developments.]
+#### [Optional: Contextual H4 Title for Outlook, e.g., "Future Roadmap and Expectations"]
+[Optional: 1-2 paragraphs on future developments or outlook.]
 
 #### [Optional: Frequently Asked Questions]
-[If generating FAQs, use this exact H4 title "Frequently Asked Questions". Generate 3-5 relevant Q&As if the topic is complex, or 2-3 if less content is available. Use the HTML structure below, including the exact `<i>` tag: `<i class="faq-icon fas fa-chevron-down"></i>`]
+[Generate ONLY if topic warrants it. Use this exact H4 title "Frequently Asked Questions". Generate 3-5 relevant Q&As (or 2-3 if less content available). Use the HTML structure below, including the **exact** `<i>` tag: `<i class="faq-icon fas fa-chevron-down"></i>`]
 <div class="faq-section">
   <details class="faq-item">
-    <summary class="faq-question">Question 1 related to the article? <i class="faq-icon fas fa-chevron-down"></i></summary>
+    <summary class="faq-question">First relevant question about the core topic? <i class="faq-icon fas fa-chevron-down"></i></summary>
     <div class="faq-answer-content">
-      <p>Concise answer to question 1.</p>
+      <p>Clear and concise answer to question 1, based on the article.</p>
     </div>
   </details>
   <details class="faq-item">
-    <summary class="faq-question">Another relevant question? <i class="faq-icon fas fa-chevron-down"></i></summary>
+    <summary class="faq-question">Second relevant question addressing a key detail? <i class="faq-icon fas fa-chevron-down"></i></summary>
     <div class="faq-answer-content">
       <p>Detailed answer to question 2.</p>
     </div>
   </details>
   <details class="faq-item">
-    <summary class="faq-question">A third question if applicable? <i class="faq-icon fas fa-chevron-down"></i></summary>
+    <summary class="faq-question">Third relevant question about implications or context? <i class="faq-icon fas fa-chevron-down"></i></summary>
     <div class="faq-answer-content">
-      <p>Answer to the third question.</p>
+      <p>Insightful answer to question 3.</p>
     </div>
   </details>
 </div>
@@ -167,6 +214,7 @@ Source: [{article_title}]({source_article_url})
   "mainEntityOfPage": {{ "@type": "WebPage", "@id": "{source_article_url}" }},
   "image": {{ "@type": "ImageObject", "url": "{article_image_url}" }},
   "datePublished": "{current_date_iso}",
+  "dateModified": "{current_date_iso}", // Use same as published for simplicity now
   "author": {{ "@type": "Person", "name": "{author_name}" }},
   "publisher": {{
     "@type": "Organization",
@@ -178,9 +226,7 @@ Source: [{article_title}]({source_article_url})
 """
 
 # --- API Call Function ---
-# (No changes needed in call_deepseek_api)
 def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE, temperature=TEMPERATURE):
-    # ... (function remains the same)
     if not DEEPSEEK_API_KEY:
         logger.error("DEEPSEEK_API_KEY environment variable not set.")
         return None
@@ -209,7 +255,18 @@ def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE
 
         if result.get("choices") and len(result["choices"]) > 0:
             message_content = result["choices"][0].get("message", {}).get("content")
-            return message_content.strip() if message_content else None
+            # Basic cleanup: Remove potential markdown code block fences if API adds them
+            if message_content:
+                content_stripped = message_content.strip()
+                if content_stripped.startswith("```") and content_stripped.endswith("```"):
+                     # Find first newline after opening ```
+                     first_newline = content_stripped.find('\n')
+                     if first_newline != -1:
+                         content_stripped = content_stripped[first_newline+1:-3].strip()
+                     else: # Handle case where there's no newline, just ```content```
+                         content_stripped = content_stripped[3:-3].strip()
+                return content_stripped
+            return None # Return None if message_content is empty initially
         else:
             logger.error(f"API response missing 'choices' or choices empty: {result}")
             return None
@@ -229,10 +286,9 @@ def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE
         logger.exception(f"Unexpected error during API call: {e}")
         return None
 
+
 # --- Parsing Function ---
-# (No changes needed in parse_seo_agent_response)
 def parse_seo_agent_response(response_text):
-    # ... (function remains the same)
     parsed_data = {}
     errors = []
 
@@ -242,6 +298,7 @@ def parse_seo_agent_response(response_text):
         return None, error_message
 
     try:
+        # Use re.IGNORECASE for all matches
         title_match = re.search(r"^\s*Title Tag:\s*(.*)", response_text, re.MULTILINE | re.IGNORECASE)
         if title_match: parsed_data['generated_title_tag'] = title_match.group(1).strip()
         else: errors.append("Missing 'Title Tag:' line.")
@@ -253,7 +310,7 @@ def parse_seo_agent_response(response_text):
         seo_h1_match = re.search(r"^\s*SEO H1:\s*(.*)", response_text, re.MULTILINE | re.IGNORECASE)
         if seo_h1_match: parsed_data['generated_seo_h1'] = seo_h1_match.group(1).strip()
         else: errors.append("Missing 'SEO H1:' line.")
-        
+
         script_match = re.search(r'<script\s+type\s*=\s*["\']application/ld\+json["\']\s*>\s*(\{.*?\})\s*<\/script>', response_text, re.DOTALL | re.IGNORECASE)
         if script_match:
             json_content_str = script_match.group(1).strip()
@@ -262,34 +319,38 @@ def parse_seo_agent_response(response_text):
             except json.JSONDecodeError: errors.append("JSON-LD content invalid.")
         else: errors.append("Missing JSON-LD script block.")
 
-        body_start_pattern = r"SEO H1:.*?[\r\n]+" 
-        body_end_pattern = r"([\s\S]*?)(?=[\r\n]+\s*Source:|[\r\n]*\s*<script)"
-        
-        body_full_match = re.search(body_start_pattern + body_end_pattern, response_text, re.DOTALL | re.IGNORECASE)
+        # Extract Article Body (more robustly)
+        body_content = None
+        # Try to find content between SEO H1 line and the Source: line
+        body_match_to_source = re.search(r"^\s*SEO H1:.*?[\r\n]+([\s\S]*?)[\r\n]+\s*Source:", response_text, re.MULTILINE | re.DOTALL | re.IGNORECASE)
+        if body_match_to_source:
+            body_content = body_match_to_source.group(1).strip()
+        else:
+            # Fallback: Try to find content between SEO H1 line and the <script> tag
+            body_match_to_script = re.search(r"^\s*SEO H1:.*?[\r\n]+([\s\S]*?)[\r\n]*\s*<script", response_text, re.MULTILINE | re.DOTALL | re.IGNORECASE)
+            if body_match_to_script:
+                body_content = body_match_to_script.group(1).strip()
 
-        if body_full_match:
-             body_content = body_full_match.group(1).strip()
-             
-             if not body_content.startswith("## "):
-                 body_specific_match = re.search(r"SEO H1:.*?[\r\n]+(##\s+[\s\S]*?)(?=[\r\n]+\s*Source:|[\r\n]*\s*<script)", response_text, re.DOTALL | re.IGNORECASE)
-                 if body_specific_match:
-                     body_content = body_specific_match.group(1).strip()
-                 else:
-                     errors.append("Could not reliably find start of Article Body (## H1).")
-                     body_content = ""
-
-             parsed_data['generated_article_body_md'] = body_content
-
-             if not re.search(r"###\s+.*", body_content) and "pros-cons-container" not in body_content and "faq-section" not in body_content :
-                 logger.warning("Generated body might be missing main H3 analysis or structured sections.")
-             if not body_content: errors.append("Extracted Article Body is empty.")
+        if body_content:
+            # Ensure it starts with the expected H1 markdown
+            if body_content.startswith("## "):
+                parsed_data['generated_article_body_md'] = body_content
+                # Optional check for presence of expected sections
+                if not re.search(r"###\s+.*", body_content) and "pros-cons-container" not in body_content and "faq-section" not in body_content :
+                     logger.debug("Generated body might be missing main H3 analysis or structured HTML sections.") # Debug level
+            else:
+                errors.append("Extracted Article Body does not start with '## '. Check raw response.")
+                parsed_data['generated_article_body_md'] = "" # Set empty if malformed
         else:
              errors.append("Could not extract Article Body content between SEO H1 and Source/Script.")
+             parsed_data['generated_article_body_md'] = "" # Set empty if not found
 
-
+        # --- Final Validation ---
         if not parsed_data.get('generated_article_body_md') or not parsed_data.get('generated_seo_h1'):
             final_error_message = f"Critical parsing failure: Missing Article Body or SEO H1. Errors: {'; '.join(errors if errors else ['Unknown parsing issue'])}"
             logger.error(final_error_message)
+            # Log more context on critical failure
+            logger.debug(f"Failed parsing response:\n---\n{response_text[:1000]}...\n---")
             return None, final_error_message
 
         # Provide fallbacks if parsing fails for non-critical parts
@@ -305,9 +366,7 @@ def parse_seo_agent_response(response_text):
 
 
 # --- Main Agent Function ---
-# (No changes needed in run_seo_article_agent)
 def run_seo_article_agent(article_data):
-    # ... (function remains the same)
     article_id = article_data.get('id', 'N/A')
 
     content_to_process = article_data.get('content_for_processing')
@@ -319,7 +378,7 @@ def run_seo_article_agent(article_data):
     if not primary_keyword:
         error_msg = f"Missing primary_topic_keyword from filter_verdict for ID: {article_id}."
         logger.error(error_msg); article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg; return article_data
-        
+
     generated_tags = article_data.get('generated_tags', [])
     secondary_keywords = [tag for tag in generated_tags if tag.lower() != primary_keyword.lower()][:3] # Top 3 different tags
     secondary_keywords_list_str = ", ".join(secondary_keywords)
@@ -342,7 +401,7 @@ def run_seo_article_agent(article_data):
         "your_website_logo_url": YOUR_WEBSITE_LOGO_URL,
         "all_generated_keywords_json": all_generated_keywords_json
     }
-    
+
     # Check for None in critical prompt inputs
     critical_prompt_inputs = ['article_title', 'article_content_for_processing', 'source_article_url', 'target_keyword', 'article_image_url', 'current_date_iso', 'all_generated_keywords_json', 'your_website_name']
     if any(input_data_for_prompt.get(k) is None for k in critical_prompt_inputs):
@@ -356,7 +415,7 @@ def run_seo_article_agent(article_data):
         logger.exception(f"KeyError formatting SEO prompt template for ID {article_id}! Error: {e}")
         article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = f"Prompt template formatting error: {e}"; return article_data
 
-    logger.info(f"Running SEO article generator for article ID: {article_id} (Perfected SEO & Content Structure)...")
+    logger.info(f"Running SEO article generator for article ID: {article_id} (Enhanced Humanization & SEO)...")
     raw_response_content = call_deepseek_api(SEO_PROMPT_SYSTEM, user_prompt, max_tokens=MAX_TOKENS_RESPONSE, temperature=TEMPERATURE)
 
     if not raw_response_content:
@@ -364,7 +423,7 @@ def run_seo_article_agent(article_data):
         logger.error(f"{error_msg} (ID: {article_id}).")
         article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg; return article_data
 
-    logger.debug(f"Raw SEO Agent Response for ID {article_id}:\n---\n{raw_response_content}\n---")
+    logger.debug(f"Raw SEO Agent Response for ID {article_id}:\n---\n{raw_response_content[:1500]}...\n---") # Log more for debugging
     parsed_results, error_msg = parse_seo_agent_response(raw_response_content)
 
     article_data['seo_agent_results'] = parsed_results
@@ -374,7 +433,7 @@ def run_seo_article_agent(article_data):
         logger.error(f"Failed to parse SEO agent response for ID {article_id}: {error_msg or 'Unknown parsing error'}")
         # Store raw response for debugging if parsing totally fails
         article_data['seo_agent_raw_response'] = raw_response_content
-    elif error_msg: # Non-critical parsing errors (e.g., missing optional field but body/h1 okay)
+    elif error_msg: # Non-critical parsing errors
         logger.warning(f"SEO agent parsing completed with non-critical errors for ID {article_id}: {error_msg}")
     else: # Fully successful
         logger.info(f"Successfully generated and parsed SEO content for ID: {article_id}.")
@@ -386,7 +445,52 @@ def run_seo_article_agent(article_data):
     return article_data
 
 # --- Standalone Execution (for testing) ---
-# (No changes needed in standalone test code)
 if __name__ == "__main__":
-    # ... (rest of standalone test code) ...
-    pass
+    logging.getLogger().setLevel(logging.DEBUG)
+    logger.setLevel(logging.DEBUG)
+
+    test_article_data_humanized_seo = {
+        'id': 'example-seo-humanized-002',
+        'title': "Singapore AI Safety Initiative", # Original shorter title
+        'summary': "Singapore announces AI safety plan bringing US and China researchers together.", # Simpler summary
+        'content_for_processing': """
+Singapore has launched a significant initiative focused on global AI safety, successfully gathering researchers from the United States, China, and Europe. This effort aims to tackle the potential risks associated with advanced artificial intelligence. Announced alongside the ICLR conference, the "Singapore Consensus on Global AI Safety Research Priorities" identifies three main areas for joint research: understanding frontier AI risks, creating safer AI models, and establishing methods to control advanced AI systems. This collaboration is notable given the competitive backdrop of US-China relations in the AI field.
+
+Max Tegmark, an MIT scientist involved, noted Singapore's unique position as a neutral facilitator. "They know they won’t build AGI themselves—they will have it done to them—so it’s in their interest to get the major players talking," he commented. The meeting included experts from major AI labs like OpenAI and Google DeepMind, alongside academics from Tsinghua University and representatives from international AI safety institutes.
+
+The consensus marks a step towards unified global standards amid concerns about unchecked AI development leading to unforeseen consequences, such as deceptive AI or loss of control. Tegmark recently published work questioning the effectiveness of using weaker AI to control stronger AI, suggesting current safety paradigms might need rethinking. This contrasts with some political voices, like JD Vance, who advocate for minimal AI restrictions to maintain a competitive edge.
+""", # More detailed input content
+        'link': "https://example.com/singapore-ai-safety-consensus",
+        'filter_verdict': {
+            'importance_level': 'Interesting', 'topic': 'Regulation',
+            'reasoning_summary': 'Significant international collaboration on AI safety facilitated by Singapore.',
+            'primary_topic_keyword': 'AI Safety Collaboration' # More specific keyword
+        },
+        'selected_image_url': "https://via.placeholder.com/800x500.png?text=Singapore+AI+Safety",
+        'published_iso': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+        'generated_tags': ["AI Safety", "Singapore Consensus", "International Collaboration", "US-China AI", "AI Regulation", "AI Ethics", "Frontier AI", "AI Control Problem", "Max Tegmark", "Geopolitics of AI"],
+        'author': 'Global Tech Reporter' # Different author
+    }
+
+    logger.info("\n--- Running SEO Agent Standalone Test (Enhanced Humanization & SEO) ---")
+    result_data = run_seo_article_agent(test_article_data_humanized_seo.copy())
+
+    print("\n--- Final Result Data (Enhanced Humanization Test) ---")
+    if result_data and result_data.get('seo_agent_results'):
+        print("\n--- Parsed SEO Results ---")
+        print(f"Title Tag: {result_data['seo_agent_results'].get('generated_title_tag')}")
+        print(f"Meta Desc: {result_data['seo_agent_results'].get('generated_meta_description')}")
+        print(f"SEO H1: {result_data['seo_agent_results'].get('generated_seo_h1')}")
+        print(f"JSON-LD Present: {bool(result_data['seo_agent_results'].get('generated_json_ld'))}")
+        print("\n--- Article Body Markdown (Check for natural language, structure, HTML for Pros/Cons & FAQ) ---")
+        print(result_data['seo_agent_results'].get('generated_article_body_md', ''))
+        if result_data.get('seo_agent_error'):
+            print(f"\nParsing Warning/Error: {result_data['seo_agent_error']}")
+        print(f"\n--- Final Article Title (may be updated by SEO H1): {result_data.get('title')} ---")
+
+    elif result_data and result_data.get('seo_agent_error'): # Critical error from agent or parsing
+         print(f"\nSEO Agent FAILED. Error: {result_data.get('seo_agent_error')}")
+         if 'seo_agent_raw_response' in result_data: print(f"\n--- Raw Response (Debug) ---\n{result_data['seo_agent_raw_response']}")
+    else: print("\nSEO Agent FAILED critically or returned no data.")
+
+    logger.info("\n--- SEO Agent Standalone Test Complete ---")
