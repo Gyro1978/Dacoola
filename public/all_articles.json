@@ -1,6 +1,26 @@
 {
   "articles": [
     {
+      "id": "a648e87c99d75016e75d0084ff0550dace3422d515dc2a35f5789f7a808cd194",
+      "title": "ChatGPT GitHub Integration Adds Codebase Analysis to Deep Research",
+      "link": "articles/chatgpt-github-integration-adds-codebase-analysis-to-deep-research.html",
+      "published_iso": "2025-05-08T20:27:05Z",
+      "summary_short": "OpenAI's ChatGPT GitHub integration lets developers query codebases directly. Learn how this beta feature enhances AI-powered research for coding tasks.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2195918462.jpg?w=1024",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "ChatGPT GitHub integration",
+        "ChatGPT GitHub integration trends 2025",
+        "ChatGPT GitHub integration future applications",
+        "how does ChatGPT GitHub integration work",
+        "ChatGPT GitHub integration impact",
+        "latest news on ChatGPT GitHub integration"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
       "id": "2c8d7b3e13c112edaa043544cbf8071c7423657100fa9710023e2c53e65043a9",
       "title": "Alibaba’s ZeroSearch Achieves 88% AI Training Cost Reduction",
       "link": "articles/alibaba’s-zerosearch-achieves-88-ai-training-cost-reduction.html",
@@ -39,6 +59,26 @@
       ],
       "audio_url": null,
       "trend_score": 13.0
+    },
+    {
+      "id": "648a9a24d166409ae97785fb6aa73f2f8d81b77b8e18888f12fd4b2405e997cb",
+      "title": "OpenAI Executive Hire: Fidji Simo Appointed CEO of Applications",
+      "link": "articles/openai-executive-hire-fidji-simo-appointed-ceo-of-applications.html",
+      "published_iso": "2025-05-08T18:45:20Z",
+      "summary_short": "OpenAI announces Fidji Simo as its new CEO of Applications, marking a key executive hire to oversee business and operational teams.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/05/simo_2-1152x648.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI executive hire trends 2025",
+        "how does OpenAI executive hire work",
+        "latest news on OpenAI executive hire",
+        "OpenAI executive hire impact",
+        "OpenAI executive hire future applications",
+        "OpenAI executive hire"
+      ],
+      "audio_url": null,
+      "trend_score": 12.99
     },
     {
       "id": "0130e30d16a39e08daf3416112605d8825422208254f79bcf7d759db071717a5",
