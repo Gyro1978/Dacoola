@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "f12d6bf038cc2dd4cf27c4dfbc03b02844ab448e6f53e0cc505e80adf3d1b699",
+      "title": "AI Benchmark Evaluation: The Growing Crisis in Measuring AI Progress",
+      "link": "articles/ai-benchmark-evaluation-the-growing-crisis-in-measuring-ai-progress.html",
+      "published_iso": "2025-05-08T09:00:00Z",
+      "summary_short": "Explore the challenges in AI benchmark evaluation and why current methods may fail to measure true AI capabilities effectively.",
+      "image_url": "https://wp.technologyreview.com/wp-content/uploads/2025/05/250321_LLMmetricsSA2.jpg?resize=1200,600",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "AI Benchmark Evaluation",
+        "SWE-Bench",
+        "FrontierMath",
+        "Chatbot Arena",
+        "AI Model Performance",
+        "Benchmark Validity",
+        "AI Research",
+        "John Yang",
+        "BetterBench",
+        "Social Science in AI"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "ccc2ff8aa3f73a9c4fccf78cc4e80853b0a39eb17b6bf550af2ab8641f4dbea0",
       "title": "Apple Legal Battle Intensifies as Company Fights Judge's Contempt Order",
       "link": "articles/apple-legal-battle-intensifies-as-company-fights-judges-contempt-order.html",
