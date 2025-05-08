@@ -1,6 +1,46 @@
 {
   "articles": [
     {
+      "id": "2c8d7b3e13c112edaa043544cbf8071c7423657100fa9710023e2c53e65043a9",
+      "title": "Alibaba’s ZeroSearch Achieves 88% AI Training Cost Reduction",
+      "link": "articles/alibaba’s-zerosearch-achieves-88-ai-training-cost-reduction.html",
+      "published_iso": "2025-05-08T19:15:29Z",
+      "summary_short": "Alibaba's ZeroSearch slashes AI training cost reduction by 88%, enabling LLMs to simulate search without expensive APIs. Learn how this breakthrough works.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/nuneybits_Vector_art_of_web_search_b324c6ac-bcd1-4106-8ed1-dd4969cc9e5b.webp?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "latest news on AI training cost reduction",
+        "AI training cost reduction impact",
+        "how does AI training cost reduction work",
+        "AI training cost reduction trends 2025",
+        "AI training cost reduction",
+        "AI training cost reduction future applications"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
+      "id": "37adc11c065a97d4a2854459f7338ceea2aaa17132bf82a62147ee45cdc43b18",
+      "title": "Mem0's LLM Memory Enhancement Boosts AI Agent Reliability",
+      "link": "articles/mem0s-llm-memory-enhancement-boosts-ai-agent-reliability.html",
+      "published_iso": "2025-05-08T19:13:30Z",
+      "summary_short": "Mem0's new memory architectures enhance LLM memory for long conversations, improving AI agent reliability and efficiency. Learn how it works.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/robot-recalling-past-conversations.webp?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "LLM memory enhancement future applications",
+        "latest news on LLM memory enhancement",
+        "LLM memory enhancement",
+        "LLM memory enhancement impact",
+        "how does LLM memory enhancement work",
+        "LLM memory enhancement trends 2025"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
       "id": "0130e30d16a39e08daf3416112605d8825422208254f79bcf7d759db071717a5",
       "title": "Meta AI Research Leadership Shifts as Ex-Google DeepMind Director Takes Over",
       "link": "articles/meta-ai-research-leadership-shifts-as-ex-google-deepmind-director-takes-over.html",
