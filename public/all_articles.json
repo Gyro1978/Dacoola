@@ -1,6 +1,46 @@
 {
   "articles": [
     {
+      "id": "63152bea536d60369a5ae934f260138f9f705ee10d38d135e569316f3d98ffcd",
+      "title": "Starlink India Approval Clears Path for Satellite Broadband Launch",
+      "link": "articles/starlink-india-approval-clears-path-for-satellite-broadband-launch.html",
+      "published_iso": "2025-05-08T16:28:34Z",
+      "summary_short": "Starlink secures India approval, paving the way for satellite broadband in a market of 1.4 billion. Learn about the timeline, regulations, and competition.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2022/08/GettyImages-1240408203.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Starlink India approval impact",
+        "Starlink India approval trends 2025",
+        "latest news on Starlink India approval",
+        "Starlink India approval future applications",
+        "how does Starlink India approval work",
+        "Starlink India approval"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
+      "id": "0915009a0ad376e51d5b1cca7650ec112ed049b62e252a9c6ca27d81b7f11a6c",
+      "title": "AI Wildfire Prevention: How Startups Are Fighting Fires with Tech",
+      "link": "articles/ai-wildfire-prevention-how-startups-are-fighting-fires-with-tech.html",
+      "published_iso": "2025-05-08T16:00:53Z",
+      "summary_short": "AI wildfire prevention is transforming firefighting with early detection and controlled burns. Learn how startups like Pano AI and Green Grid are making an impact.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/05/1620px-Homes_destroyed_in_the_Palisades_fire_54272193113.jpg",
+      "topic": "Environment",
+      "is_breaking": false,
+      "tags": [
+        "AI wildfire prevention trends 2025",
+        "how does AI wildfire prevention work",
+        "AI wildfire prevention impact",
+        "latest news on AI wildfire prevention",
+        "AI wildfire prevention",
+        "AI wildfire prevention future applications"
+      ],
+      "audio_url": null,
+      "trend_score": 12.99
+    },
+    {
       "id": "49f634b34df8a772fef5b4b8bd6d9be64e448517f7de9b5c0956d6ab8d0b0e7a",
       "title": "AI Human-Like Reasoning: How Machines Are Learning to Think",
       "link": "articles/ai-human-like-reasoning-how-machines-are-learning-to-think.html",
