@@ -1,6 +1,46 @@
 {
   "articles": [
     {
+      "id": "a78a4ae9191fed089f5ec5f860a73418cfb4a18d18d9e79ca230c9d20fe083a5",
+      "title": "OpenAI Expands Data Residency Program to Asia",
+      "link": "articles/openai-expands-data-residency-program-to-asia.html",
+      "published_iso": "2025-05-08T14:34:37Z",
+      "summary_short": "OpenAI launches a data residency program in Asia, enabling ChatGPT Enterprise and API users in Japan, India, Singapore, and South Korea to meet local data sovereignty rules.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/04/GettyImages-2206295463.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI data residency",
+        "OpenAI data residency trends 2025",
+        "how does OpenAI data residency work",
+        "OpenAI data residency impact",
+        "latest news on OpenAI data residency",
+        "OpenAI data residency future applications"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
+      "id": "8b6f824eea7262c4e7d600ab8a8e59c4dcb620a99ff0ebfa6e66d7663d9b0266",
+      "title": "Bill Gates Directs Gates Foundation to Spend Entire $200 Billion by 2045",
+      "link": "articles/bill-gates-directs-gates-foundation-to-spend-entire-$200-billion-by-2045.html",
+      "published_iso": "2025-05-08T14:22:46Z",
+      "summary_short": "Bill Gates directs the Gates Foundation to spend its $200 billion endowment by 2045, marking a major shift in philanthropic strategy.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2022/06/52149453535_5cfc2ec394_k.jpg?resize=1200,800",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "how does Gates Foundation spending work",
+        "Gates Foundation spending",
+        "latest news on Gates Foundation spending",
+        "Gates Foundation spending future applications",
+        "Gates Foundation spending impact",
+        "Gates Foundation spending trends 2025"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
       "id": "f521684e545771b8b18751a8e6ccad52a76776b8ab3b1c2c947031a0bb3a08a4",
       "title": "Microsoft's Free AI Skills Training: A Limited-Time Opportunity",
       "link": "articles/microsofts-free-ai-skills-training-a-limited-time-opportunity.html",
