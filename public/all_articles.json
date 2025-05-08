@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": "fe97627f6d893f8add2916148425b5514113b3abef72432656b6b7d668d2aa05",
+      "title": "Singapore’s AI Safety Collaboration Bridges US-China Divide",
+      "link": "articles/singapore’s-ai-safety-collaboration-bridges-us-china-divide.html",
+      "published_iso": "2025-05-08T00:00:00Z",
+      "summary_short": "Singapore's new blueprint for AI safety collaboration unites US, China, and Europe to mitigate risks and foster international cooperation.",
+      "image_url": "https://media.wired.com/photos/681beb0c8360b4ea2ea70b79/191:100/w_1280,c_limit/business_ai_safety_singapore_us_china.jpg",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "AI Safety Collaboration",
+        "Singapore Consensus",
+        "Global AI Safety Standards",
+        "US-China AI Cooperation",
+        "AI Regulation",
+        "Frontier AI Risks",
+        "Max Tegmark",
+        "AGI Safety",
+        "AI Diplomatic Neutrality",
+        "Existential AI Threats"
+      ],
+      "audio_url": null,
+      "trend_score": 14.99
+    },
+    {
       "id": "56ee6e7279a951cdf61e8b7b796158ab9baa202d3bc2828ba84f7f7f1d385b49",
       "title": "WhatsApp Security Flaw: Group Chats Lack Cryptographic Safeguards",
       "link": "articles/whatsapp-security-flaw-group-chats-lack-cryptographic-safeguards.html",
