@@ -1,6 +1,126 @@
 {
   "articles": [
     {
+      "id": "f521684e545771b8b18751a8e6ccad52a76776b8ab3b1c2c947031a0bb3a08a4",
+      "title": "Microsoft's Free AI Skills Training: A Limited-Time Opportunity",
+      "link": "articles/microsofts-free-ai-skills-training-a-limited-time-opportunity.html",
+      "published_iso": "2025-05-08T13:34:00Z",
+      "summary_short": "Microsoft's AI Skills Fest offers free AI skills training until May 28. Explore courses, hackathons, and certification discounts.",
+      "image_url": "https://www.zdnet.com/a/img/resize/44e4042de5d1c5a44967a1711f074599034e2da9/2025/05/08/c5885c6c-c9be-4e2d-bb9a-b9d39ee7a2b9/gettyimages-1402827482.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Education",
+      "is_breaking": false,
+      "tags": [
+        "AI skills training impact",
+        "how does AI skills training work",
+        "AI skills training future applications",
+        "latest news on AI skills training",
+        "AI skills training",
+        "AI skills training trends 2025"
+      ],
+      "audio_url": null,
+      "trend_score": 12.99
+    },
+    {
+      "id": "f870bbc2b885c577fa772e9c748c15b0644ff9f2dbc73dca546b04a3060fda95",
+      "title": "LM Studio Delivers Major LLM GPU Performance Gains With NVIDIA RTX",
+      "link": "articles/lm-studio-delivers-major-llm-gpu-performance-gains-with-nvidia-rtx.html",
+      "published_iso": "2025-05-08T13:00:34Z",
+      "summary_short": "LM Studio 0.3.15 enhances LLM GPU performance on NVIDIA RTX systems via CUDA 12.8, offering faster local AI inference and developer tools.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/05/lm-studio-nv-blog-1280x680-1.jpg",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "latest news on LLM GPU performance",
+        "LLM GPU performance future applications",
+        "how does LLM GPU performance work",
+        "LLM GPU performance trends 2025",
+        "LLM GPU performance impact",
+        "LLM GPU performance"
+      ],
+      "audio_url": null,
+      "trend_score": 12.99
+    },
+    {
+      "id": "09aff4233e6c9335232fd35de7838e1653fbf0e249c660d48cb399d54f417a13",
+      "title": "Amazon Launches AI Tool to Streamline Product Listings",
+      "link": "articles/amazon-launches-ai-tool-to-streamline-product-listings.html",
+      "published_iso": "2025-05-08T13:00:00Z",
+      "summary_short": "Amazon's new AI tool helps sellers improve product listings with automated suggestions. Learn how the Amazon AI tool works and its impact.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/07/wicked-monday-jxhM5Ni46zw-unsplash.jpg?resize=1200,800",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Amazon AI tool trends 2025",
+        "Amazon AI tool future applications",
+        "how does Amazon AI tool work",
+        "Amazon AI tool",
+        "latest news on Amazon AI tool",
+        "Amazon AI tool impact"
+      ],
+      "audio_url": null,
+      "trend_score": 12.99
+    },
+    {
+      "id": "576056b2b3f2bdd34b7c3910b7bec81733593b504062d4bd71f2999557d7fb61",
+      "title": "OpenAI Corporate Structure Transitions to Public Benefit Corporation",
+      "link": "articles/openai-corporate-structure-transitions-to-public-benefit-corporation.html",
+      "published_iso": "2025-05-08T12:39:02Z",
+      "summary_short": "OpenAI is changing its corporate structure to a Public Benefit Corporation. Learn what this means for AI development and governance.",
+      "image_url": "https://www.zdnet.com/a/img/resize/a465ff3fe38a0a05257884754111bcad9910d6c2/2025/05/08/1c0cec95-c659-4bbe-a15c-2dde2a53c9aa/gettyimages-2153474303.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI corporate structure impact",
+        "latest news on OpenAI corporate structure",
+        "OpenAI corporate structure",
+        "how does OpenAI corporate structure work",
+        "OpenAI corporate structure trends 2025",
+        "OpenAI corporate structure future applications"
+      ],
+      "audio_url": null,
+      "trend_score": 12.99
+    },
+    {
+      "id": "90bc6e27f0e5a393b03c4047ae510b6bab08722f71f5b9e7c3a1f7eeaa75e5a8",
+      "title": "Study Finds Short Answers Increase AI Chatbot Hallucinations",
+      "link": "articles/study-finds-short-answers-increase-ai-chatbot-hallucinations.html",
+      "published_iso": "2025-05-08T12:05:00Z",
+      "summary_short": "New research reveals that asking AI chatbots for concise responses can lead to more hallucinations, impacting factual accuracy. Learn the latest news on AI chatbot hallucinations.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/01/GettyImages-1548038240.jpg?resize=1200,814",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "latest news on AI chatbot hallucinations",
+        "AI chatbot hallucinations impact",
+        "AI chatbot hallucinations trends 2025",
+        "AI chatbot hallucinations future applications",
+        "how does AI chatbot hallucinations work",
+        "AI chatbot hallucinations"
+      ],
+      "audio_url": null,
+      "trend_score": 12.98
+    },
+    {
+      "id": "cb6ebed3fdb4ed324f0ad1d745b665686266198f3dc34abd1c9f299611146c7b",
+      "title": "AI Safety Risks Escalate with Multimodal Models, Study Finds",
+      "link": "articles/ai-safety-risks-escalate-with-multimodal-models,-study-finds.html",
+      "published_iso": "2025-05-08T12:00:00Z",
+      "summary_short": "New research reveals AI safety risks in multimodal models, showing increased vulnerability to generating harmful content like CSEM and weapons info.",
+      "image_url": "https://www.zdnet.com/a/img/resize/011c3e163bd9324980c524bdf5bf1dd5d23c94ee/2025/05/08/98728743-6605-4e34-b167-e563a3206be6/gettyimages-1324801352.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "AI safety risks impact",
+        "AI safety risks",
+        "AI safety risks future applications",
+        "AI safety risks trends 2025",
+        "latest news on AI safety risks",
+        "how does AI safety risks work"
+      ],
+      "audio_url": null,
+      "trend_score": 12.98
+    },
+    {
       "id": "965a234f6803895c78feb0f30bcdf19ac6d47da772b37c6a1e5c22fbe43a1714",
       "title": "Apple Seeks Delay on Court Ruling Barring App Payment Commissions",
       "link": "articles/apple-seeks-delay-on-court-ruling-barring-app-payment-commissions.html",
