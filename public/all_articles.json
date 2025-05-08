@@ -1,6 +1,66 @@
 {
   "articles": [
     {
+      "id": "0130e30d16a39e08daf3416112605d8825422208254f79bcf7d759db071717a5",
+      "title": "Meta AI Research Leadership Shifts as Ex-Google DeepMind Director Takes Over",
+      "link": "articles/meta-ai-research-leadership-shifts-as-ex-google-deepmind-director-takes-over.html",
+      "published_iso": "2025-05-08T18:39:58Z",
+      "summary_short": "Meta appoints Robert Fergus, former Google DeepMind director, to lead its AI research lab, signaling a shift in Meta AI research leadership.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2021/11/facebook-meta-twist.jpg?resize=1200,675",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "latest news on Meta AI research leadership",
+        "Meta AI research leadership",
+        "Meta AI research leadership future applications",
+        "Meta AI research leadership impact",
+        "Meta AI research leadership trends 2025",
+        "how does Meta AI research leadership work"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
+      "id": "13901cb613ae806c225b72811c4a0557f2315a5ce783b780777a0dddad10ce54",
+      "title": "Google's Gemini API Update Introduces Cost-Saving Implicit Caching",
+      "link": "articles/googles-gemini-api-update-introduces-cost-saving-implicit-caching.html",
+      "published_iso": "2025-05-08T18:20:47Z",
+      "summary_short": "Google's Gemini API update brings automatic implicit caching, promising 75% savings on repetitive AI model requests. Learn how it works.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2169339854.jpg?resize=1200,857",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "how does Gemini API update work",
+        "Gemini API update",
+        "Gemini API update trends 2025",
+        "Gemini API update future applications",
+        "latest news on Gemini API update",
+        "Gemini API update impact"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
+      "id": "9cf3439fceb81608e8ae09db6226ec3eccf552700336b50618231ed6a7b24e7b",
+      "title": "Meta Begins Testing Threads Video Ads in Latest Platform Update",
+      "link": "articles/meta-begins-testing-threads-video-ads-in-latest-platform-update.html",
+      "published_iso": "2025-05-08T18:15:00Z",
+      "summary_short": "Meta announces Threads video ads testing, expanding advertising options on the platform. Learn about the latest updates and trends for 2025.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/12/instagram-threads-GettyImages-2159215889.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Threads video ads impact",
+        "Threads video ads trends 2025",
+        "latest news on Threads video ads",
+        "Threads video ads future applications",
+        "how does Threads video ads work",
+        "Threads video ads"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
       "id": "6b539b84f92f5fd1e3e2d09a87d7a8a75732eb0a10939d358ee0077443468751",
       "title": "AI in Scientific Research: Google's Latest Breakthroughs and Applications",
       "link": "articles/ai-in-scientific-research-googles-latest-breakthroughs-and-applications.html",
