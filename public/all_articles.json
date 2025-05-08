@@ -1,6 +1,26 @@
 {
   "articles": [
     {
+      "id": "10473c46d5b2111d1c84608eea6ad778b9307e3d3337e460768407a1fbe47df9",
+      "title": "Microsoft bans DeepSeek app citing data security and propaganda risks",
+      "link": "articles/microsoft-bans-deepseek-app-citing-data-security-and-propaganda-risks.html",
+      "published_iso": "2025-05-08T21:35:33Z",
+      "summary_short": "Microsoft has banned employee use of DeepSeek due to data security and propaganda risks, as confirmed by president Brad Smith. Learn more about the Microsoft bans DeepSeek policy.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2017/02/gettyimages-626737690.jpg?resize=1200,675",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Microsoft bans DeepSeek future applications",
+        "how does Microsoft bans DeepSeek work",
+        "Microsoft bans DeepSeek impact",
+        "Microsoft bans DeepSeek",
+        "latest news on Microsoft bans DeepSeek",
+        "Microsoft bans DeepSeek trends 2025"
+      ],
+      "audio_url": null,
+      "trend_score": 13.0
+    },
+    {
       "id": "4200a7ca8c17f473feb3c24b75291527bc0f83f7355e3a497092b7647288c8f9",
       "title": "Aurora Advances Driverless Truck Expansion with Night Driving and New Routes",
       "link": "articles/aurora-advances-driverless-truck-expansion-with-night-driving-and-new-routes.html",
@@ -79,6 +99,26 @@
       ],
       "audio_url": null,
       "trend_score": 13.0
+    },
+    {
+      "id": "90d21065a6cfde738b3272d26a05c5e0fac360179fcf051e4d28485607e1b6c3",
+      "title": "AI Use Negatively Impacts Professional Reputation, Study Shows",
+      "link": "articles/ai-use-negatively-impacts-professional-reputation,-study-shows.html",
+      "published_iso": "2025-05-08T20:23:21Z",
+      "summary_short": "New research reveals AI use can harm your professional reputation, with colleagues viewing AI-assisted workers as less competent and motivated.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/05/lazy_workers-1-1152x648.jpg",
+      "topic": "Society",
+      "is_breaking": false,
+      "tags": [
+        "AI professional reputation",
+        "AI professional reputation trends 2025",
+        "AI professional reputation impact",
+        "how does AI professional reputation work",
+        "AI professional reputation future applications",
+        "latest news on AI professional reputation"
+      ],
+      "audio_url": null,
+      "trend_score": 12.99
     },
     {
       "id": "2c8d7b3e13c112edaa043544cbf8071c7423657100fa9710023e2c53e65043a9",
