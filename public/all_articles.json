@@ -1,6 +1,54 @@
 {
   "articles": [
     {
+      "id": "c44db82695e103727dd9293a85c49de3dcc3b558ff4da0272af709ee66ae7917",
+      "title": "OpenAI Executive Transition: Instacart CEO Fidji Simo Joins as Applications Head",
+      "link": "articles/openai-executive-transition-instacart-ceo-fidji-simo-joins-as-applications-head.html",
+      "published_iso": "2025-05-08T06:30:56Z",
+      "summary_short": "Instacart CEO Fidji Simo transitions to OpenAI as Applications CEO, reporting to Sam Altman. Learn about this key OpenAI executive transition.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2021/07/Fidji-Simo-For-Newswire.jpg?resize=1200,675",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI executive transition",
+        "Fidji Simo",
+        "Instacart CEO",
+        "AI business leadership",
+        "OpenAI Applications division",
+        "Sam Altman",
+        "AI commercialization",
+        "Tech executive moves",
+        "Corporate restructuring",
+        "AI product management"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
+      "id": "117af7211e066ab13cdf6f31c8c78f82950a981afa666abc44afc7d4d8977344",
+      "title": "Nvidia Endorses Trump’s Plan to Rescind AI Chip Restrictions",
+      "link": "articles/nvidia-endorses-trump’s-plan-to-rescind-ai-chip-restrictions.html",
+      "published_iso": "2025-05-08T06:20:00Z",
+      "summary_short": "Nvidia supports Trump's proposal to rescind AI chip restrictions, citing economic benefits and global competitiveness. Learn more about the policy shift.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/01/nvidia-link-system.jpg?w=1024?w=1200&strip=all",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "chip restrictions",
+        "AI chip sales",
+        "Nvidia",
+        "semiconductor export controls",
+        "Trump administration policy",
+        "Biden-era restrictions",
+        "AI hardware trade",
+        "US tech leadership",
+        "geopolitical tech risks",
+        "Middle East chip demand"
+      ],
+      "audio_url": null,
+      "trend_score": 15.0
+    },
+    {
       "id": "fe97627f6d893f8add2916148425b5514113b3abef72432656b6b7d668d2aa05",
       "title": "Singapore’s AI Safety Collaboration Bridges US-China Divide",
       "link": "articles/singapore’s-ai-safety-collaboration-bridges-us-china-divide.html",
