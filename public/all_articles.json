@@ -1,6 +1,21 @@
 {
   "articles": [
     {
+      "id": "f05948bc5ba3e391b203ebd884d4938084c549d243ece8d829276a3a29b61a17",
+      "title": "Department of Labor Ends Scale AI Investigation",
+      "link": "articles/department-of-labor-ends-scale-ai-investigation.html",
+      "published_iso": "2025-05-09T19:03:06Z",
+      "summary_short": "The Department of Labor has ended its Scale AI investigation into Fair Labor Standards Act compliance. Learn why the probe was dropped.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/06/GettyImages-1540566330.jpg?w=1024",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Scale AI investigation"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
       "id": "18e9a8d4b0c507bbb3bb14b62f3cf12e2ea3addbc2a5e47d87cd201abc70f28b",
       "title": "Tesla Denied \"Robotaxi\" Trademark as USPTO Deems Term Too Generic",
       "link": "articles/tesla-denied-robotaxi-trademark-as-uspto-deems-term-too-generic.html",
