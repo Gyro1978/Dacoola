@@ -1,6 +1,96 @@
 {
   "articles": [
     {
+      "id": "18e9a8d4b0c507bbb3bb14b62f3cf12e2ea3addbc2a5e47d87cd201abc70f28b",
+      "title": "Tesla Denied \"Robotaxi\" Trademark as USPTO Deems Term Too Generic",
+      "link": "articles/tesla-denied-robotaxi-trademark-as-uspto-deems-term-too-generic.html",
+      "published_iso": "2025-05-09T17:35:00Z",
+      "summary_short": "Tesla's \"Robotaxi\" trademark application was denied by the U.S. Patent Office. Learn why and what it means for Tesla's autonomous vehicle plans.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/10/cybercab-gullwing.jpg?resize=900,1200",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "Tesla Robotaxi trademark"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
+      "id": "322c75d7a4ece3dffc3db8afa49c7888ee7f63f659c18f411a1ebf7d1d63cea5",
+      "title": "Epic Games and Spotify Test Apple’s New App Store Policy",
+      "link": "articles/epic-games-and-spotify-test-apple’s-new-app-store-policy.html",
+      "published_iso": "2025-05-09T17:34:06Z",
+      "summary_short": "Epic Games and Spotify are testing Apple’s updated App Store policy, challenging previous restrictions on in-app purchases and direct payments.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2022/07/app-store-ios-2022-b.jpg?resize=1200,675",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "App Store policy test"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
+      "id": "d0d3cdc3bb983028b6b9498aa29451ab321ce1a90d259c82cc1e41ec887c4554",
+      "title": "FBI and Dutch Police Shut Down Botnet of Hacked Routers",
+      "link": "articles/fbi-and-dutch-police-shut-down-botnet-of-hacked-routers.html",
+      "published_iso": "2025-05-09T17:19:03Z",
+      "summary_short": "The FBI and Dutch police seized and shut down a botnet of hacked routers, indicting four individuals behind the operation. Learn more about the botnet shutdown.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/operation-moonlander-fbi-seizure-notice.png?w=1200",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "botnet shutdown"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
+      "id": "3feeac619bd0b963fa7e91d046cf7e6c9e8ca5854e09a9fc49c6c71b8cf3df60",
+      "title": "SoundCloud Alters AI Training Policies to Include User Content",
+      "link": "articles/soundcloud-alters-ai-training-policies-to-include-user-content.html",
+      "published_iso": "2025-05-09T17:16:08Z",
+      "summary_short": "SoundCloud quietly revised its terms to allow AI training on user-uploaded audio, sparking debate over opt-in consent and creator rights.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/05/Black-SoundCloud-Logo-Horizontal-1-1.jpg?w=1080",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI training policies"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
+      "id": "da5b45bd513e4dbb431f84391232115c59589db4804d0e1babf5cef0cb865a48",
+      "title": "DeepSeek AI Chatbot: The Viral App Shaking Up the AI Industry",
+      "link": "articles/deepseek-ai-chatbot-the-viral-app-shaking-up-the-ai-industry.html",
+      "published_iso": "2025-05-09T17:11:55Z",
+      "summary_short": "Learn about DeepSeek AI chatbot, its rapid rise, technical strengths, and global impact in this detailed analysis.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/01/deepseek-2.jpg?resize=1200,800",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "DeepSeek AI chatbot"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
+      "id": "0c4f0f3c662b601b4e21bf71bfb26c44942209d6086d0c505d306ef8c79e251a",
+      "title": "OpenAI Acquires Windsurf in $3 Billion AI Coding Push",
+      "link": "articles/openai-acquires-windsurf-in-$3-billion-ai-coding-push.html",
+      "published_iso": "2025-05-09T17:00:35Z",
+      "summary_short": "OpenAI acquires Windsurf for $3B, aiming to strengthen its position in AI-assisted coding and compete with Google and Anthropic.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/ChatGPT-Image-May-9-2025-07_50_41-AM.png?w=1024?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI acquires Windsurf"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
       "id": "0d56d8647b1592de6148bce4ad52e63b02928fbfbf052e768a87ca299c2300d3",
       "title": "AI Marketing Intelligence: Revolutionizing Campaigns with Amazon Bedrock",
       "link": "articles/ai-marketing-intelligence-revolutionizing-campaigns-with-amazon-bedrock.html",
