@@ -1,6 +1,22 @@
 {
   "articles": [
     {
+      "id": "f3f1f25ec9f7c49c93f4ceed09356efd53c74628019cdf6aba73cb218b33ac0a",
+      "title": "Lego-building AI Generates Physically Stable Models from Text",
+      "link": "articles/lego-building-ai-generates-physically-stable-models-from-text.html",
+      "published_iso": "2025-05-09T21:29:02Z",
+      "summary_short": "Carnegie Mellon researchers developed a Lego-building AI that generates physically stable designs from text descriptions. Learn how LegoGPT works.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/05/lego_header_3-1152x648.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Lego-building AI",
+        "Lego-building"
+      ],
+      "audio_url": null,
+      "trend_score": 10.99
+    },
+    {
       "id": "067aceff2b267fa2b6b655fbb2027462cd9a1b12ffcae475b74a6760e5976405",
       "title": "The Best AI Image Generators of 2025: Gemini, ChatGPT, Midjourney, and More",
       "link": "articles/the-best-ai-image-generators-of-2025-gemini,-chatgpt,-midjourney,-and-more.html",
