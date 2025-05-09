@@ -1,4 +1,4 @@
-# src/main.py (1/1) - FULL SCRIPT with Corrected Social Posting Logic
+# src/main.py (1/1) - FULL SCRIPT with Reinstated Twitter Tracking
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -38,7 +38,6 @@ try:
     from src.agents.filter_news_agent import run_filter_agent
     from src.agents.keyword_research_agent import run_keyword_research_agent
     from src.agents.seo_article_generator_agent import run_seo_article_agent
-    # --- CORRECTED: Only import combined social poster ---
     from src.social.social_media_poster import initialize_social_clients, run_social_media_poster
 except ImportError as e:
      print(f"FATAL IMPORT ERROR in main.py (agents/scrapers/social): {e}")
@@ -53,6 +52,7 @@ YOUR_WEBSITE_NAME = os.getenv('YOUR_WEBSITE_NAME', 'Dacoola')
 YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 raw_base_url = os.getenv('YOUR_SITE_BASE_URL', ''); YOUR_SITE_BASE_URL = (raw_base_url.rstrip('/') + '/') if raw_base_url else ''
 MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None)
+DAILY_TWEET_LIMIT = int(os.getenv('DAILY_TWEET_LIMIT', '3')) # Default to 3 if not set
 
 # --- Setup Logging ---
 log_file_path = os.path.join(PROJECT_ROOT_FOR_PATH, 'dacola.log')
@@ -76,7 +76,8 @@ OUTPUT_HTML_DIR = os.path.join(PUBLIC_DIR, 'articles')
 TEMPLATE_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'templates')
 ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
 ARTICLE_MAX_AGE_DAYS = 30
-# DAILY_TWEET_LIMIT and TWITTER_TRACKER_FILE are removed as this logic should be within social_media_poster.py or more general
+TWITTER_DAILY_LIMIT_FILE = os.path.join(DATA_DIR_MAIN, 'twitter_daily_limit.json')
+
 
 # --- Jinja2 Setup ---
 try:
@@ -120,7 +121,7 @@ def format_tags_html(tags_list):
         tag_links = []
         base = YOUR_SITE_BASE_URL if YOUR_SITE_BASE_URL else "/"
         for tag in tags_list:
-            safe_tag = requests.utils.quote(str(tag))
+            safe_tag = requests.utils.quote(str(tag)) # type: ignore
             tag_url = urljoin(base, f"topic.html?name={safe_tag}")
             tag_links.append(f'<a href="{tag_url}" class="tag-link">{tag}</a>')
         return ", ".join(tag_links)
@@ -137,9 +138,33 @@ def get_sort_key(article_dict):
         return dt
     except Exception: return fallback_date
 
-# _read_tweet_tracker and _write_tweet_tracker are removed as this logic should be platform-specific within social_media_poster.py if needed
+def _read_tweet_tracker():
+    """Reads the Twitter daily limit tracker file."""
+    today_date_str = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    try:
+        if os.path.exists(TWITTER_DAILY_LIMIT_FILE):
+            with open(TWITTER_DAILY_LIMIT_FILE, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            if data.get('date') == today_date_str:
+                return data['date'], data.get('count', 0)
+        # If file doesn't exist, or date is old, return today's date and 0 count
+        return today_date_str, 0
+    except Exception as e:
+        logger.error(f"Error reading Twitter tracker {TWITTER_DAILY_LIMIT_FILE}: {e}. Resetting count.")
+        return today_date_str, 0
 
-def send_make_webhook(webhook_url, data): # Still here for Instagram or other uses
+def _write_tweet_tracker(date_str, count):
+    """Writes to the Twitter daily limit tracker file."""
+    try:
+        os.makedirs(os.path.dirname(TWITTER_DAILY_LIMIT_FILE), exist_ok=True)
+        with open(TWITTER_DAILY_LIMIT_FILE, 'w', encoding='utf-8') as f:
+            json.dump({'date': date_str, 'count': count}, f, indent=2)
+        logger.info(f"Twitter tracker updated: Date {date_str}, Count {count}")
+    except Exception as e:
+        logger.error(f"Error writing Twitter tracker {TWITTER_DAILY_LIMIT_FILE}: {e}")
+
+
+def send_make_webhook(webhook_url, data):
     if not webhook_url: logger.warning("Make webhook URL missing."); return False
     if not data: logger.warning("No data for Make webhook."); return False
     payload = {"articles": data} if isinstance(data, list) else data
@@ -288,10 +313,9 @@ def process_single_article(json_filepath, existing_articles_data, processed_in_t
         site_data_entry = {"id": article_id, "title": article_data.get('title'), "link": article_relative_path, "published_iso": template_vars['PUBLISH_ISO_FOR_META'],
                            "summary_short": template_vars['META_DESCRIPTION'], "image_url": article_data.get('selected_image_url'), "topic": article_data.get('topic', 'News'),
                            "is_breaking": article_data.get('is_breaking', False), "tags": article_data['generated_tags'], "audio_url": None, "trend_score": article_data.get('trend_score', 0)}
-        article_data['audio_url'] = None
+        article_data['audio_url'] = None # Ensure this is set before saving processed_data
         update_all_articles_json(site_data_entry)
 
-        # --- Data for combined social media poster ---
         social_post_payload = {"id": article_id, "title": article_data.get('title'), "article_url": canonical_url,
                                "image_url": article_data.get('selected_image_url'), "topic": article_data.get('topic'),
                                "tags": article_data['generated_tags'], "summary_short": site_data_entry.get('summary_short', '')}
@@ -313,7 +337,7 @@ if __name__ == "__main__":
     logger.info(f"--- === Dacoola AI News Orchestrator Starting Run ({datetime.now(timezone.utc).isoformat()}) === ---")
     ensure_directories()
 
-    social_media_clients = initialize_social_clients() # Initialize social clients once
+    social_media_clients = initialize_social_clients()
 
     glob_pattern = os.path.join(PROCESSED_JSON_DIR, '*.json')
     completed_article_ids = set(os.path.basename(f).replace('.json', '') for f in glob.glob(glob_pattern))
@@ -324,7 +348,6 @@ if __name__ == "__main__":
     logger.info(f"Total initial processed IDs passed to scraper: {len(initial_processed_ids_for_scraper)}")
 
     # --- HTML Regeneration Step ---
-    # ... (HTML Regeneration logic - no changes needed to this block itself) ...
     logger.info("--- Stage 1: Checking for Missing HTML from Processed Data ---")
     processed_json_files_for_regen = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
     regenerated_count = 0
@@ -362,7 +385,6 @@ if __name__ == "__main__":
             except Exception as regen_e: logger.exception(f"Error during HTML regen for {os.path.basename(proc_filepath)}: {regen_e}")
     logger.info(f"--- HTML Regeneration Complete. Regenerated {regenerated_count} files. ---")
 
-
     # --- Scraper and Processing Cycle ---
     logger.info("--- Stage 2: Running News Scraper ---")
     new_articles_found_count = 0
@@ -376,9 +398,9 @@ if __name__ == "__main__":
     json_files_to_process = sorted(glob.glob(os.path.join(SCRAPED_ARTICLES_DIR, '*.json')), key=os.path.getmtime, reverse=True)
     logger.info(f"Found {len(json_files_to_process)} scraped articles to process.")
 
-    all_social_post_data_this_run = []
     processed_in_this_run_context = []
     processed_successfully_count = 0; failed_or_skipped_count = 0
+    make_webhook_payloads_this_run = []
 
     # Load Twitter daily count at the beginning of the processing cycle
     today_date_str_for_run = datetime.now(timezone.utc).strftime('%Y-%m-%d')
@@ -387,6 +409,8 @@ if __name__ == "__main__":
         logger.info(f"New day ({today_date_str_for_run}) for Twitter. Resetting count.")
         twitter_posted_today_count = 0
         _write_tweet_tracker(today_date_str_for_run, 0) # Write immediately to save the date
+    logger.info(f"Twitter posts today before this run: {twitter_posted_today_count} (Limit: {DAILY_TWEET_LIMIT})")
+
 
     for filepath in json_files_to_process:
         potential_id = os.path.basename(filepath).replace('.json', '')
@@ -398,49 +422,44 @@ if __name__ == "__main__":
             processed_successfully_count += 1
             if "summary" in processing_result: processed_in_this_run_context.append(processing_result["summary"])
 
-            # --- Social Posting Logic Moved Here for Each Successful Article ---
             if "social_post_data" in processing_result:
                 social_data = processing_result["social_post_data"]
-                platforms_to_post_to = ["bluesky", "reddit"] # Default platforms
+                platforms_to_post_to = ["bluesky", "reddit"] # Default platforms that don't have specific daily limits managed in main.py
 
-                # Check Twitter limit specifically for this article before adding it
-                if social_media_clients.get("twitter_clients"): # Only if Twitter client is initialized
+                # Twitter-specific logic
+                if social_media_clients.get("twitter_client"): # Check if Twitter client is even initialized
                     if twitter_posted_today_count < DAILY_TWEET_LIMIT:
                         platforms_to_post_to.append("twitter")
-                        # The actual increment and write happens *inside* social_media_poster now
+                        logger.info(f"Article {social_data.get('id')} WILL be attempted on Twitter. (Count: {twitter_posted_today_count}/{DAILY_TWEET_LIMIT})")
                     else:
-                        logger.info(f"Daily Twitter limit reached. Twitter will be skipped for article ID: {social_data.get('id')}")
-
+                        logger.info(f"Daily Twitter limit ({DAILY_TWEET_LIMIT}) reached. Twitter will be SKIPPED for article ID: {social_data.get('id')}")
+                
+                # Call the generic social poster with the determined platforms
+                # The poster itself should handle if a client for a platform in the list is not available/initialized.
                 run_social_media_poster(social_data, social_media_clients, platforms_to_post=tuple(platforms_to_post_to))
-                # Update twitter_posted_today_count if a tweet was actually attempted/made
-                # This relies on social_media_poster returning success for twitter
-                # For simplicity here, if "twitter" was in platforms_to_post_to and limit wasn't hit, we assume an attempt.
-                # A more robust way would be for run_social_media_poster to return which platforms it successfully posted to.
-                if "twitter" in platforms_to_post_to and twitter_posted_today_count < DAILY_TWEET_LIMIT:
-                     # Re-read tracker in case social_media_poster updated it
-                    _, twitter_posted_today_count = _read_tweet_tracker()
 
+                # If Twitter was part of the platforms *attempted* (i.e., limit was not hit before this article)
+                # then increment our main.py counter and save it.
+                if "twitter" in platforms_to_post_to and social_media_clients.get("twitter_client"):
+                    twitter_posted_today_count += 1
+                    _write_tweet_tracker(today_date_str_for_run, twitter_posted_today_count)
+                    logger.info(f"Twitter count incremented to {twitter_posted_today_count} for article {social_data.get('id')}")
+
+                if MAKE_WEBHOOK_URL: # For other platforms like Instagram via Make.com
+                    make_webhook_payloads_this_run.append(social_data)
 
             if "summary" in processing_result and isinstance(processing_result["summary"], dict): existing_articles_data.append(processing_result["summary"])
         else: failed_or_skipped_count += 1
-        time.sleep(5) # Small delay between processing each full article
+        time.sleep(5)
 
     logger.info(f"Processing cycle complete. Success: {processed_successfully_count}, Failed/Skipped/Duplicate: {failed_or_skipped_count}")
 
-    # --- Make.com Webhook for other platforms (e.g., Instagram) ---
-    # This logic can remain if you still use Make.com for specific platforms not handled by social_media_poster.py
-    # If social_media_poster.py now handles *everything* Make.com did, you can remove this.
-    if MAKE_WEBHOOK_URL and all_social_post_data_this_run: # Make sure this list is still populated if needed
-        logger.info(f"--- Sending to Make.com Webhook (if applicable) ---")
-        # Re-evaluate what data `all_social_post_data_this_run` should contain if it's just for Make.
-        # For now, it contains data for all posts, which might be okay for Make.
-        if send_make_webhook(MAKE_WEBHOOK_URL, all_social_post_data_this_run):
+    if MAKE_WEBHOOK_URL and make_webhook_payloads_this_run:
+        logger.info(f"--- Sending {len(make_webhook_payloads_this_run)} items to Make.com Webhook ---")
+        if send_make_webhook(MAKE_WEBHOOK_URL, make_webhook_payloads_this_run):
             logger.info("Batched Make.com webhook sent successfully.")
-        else:
-            logger.error("Batched Make.com webhook failed.")
+        else: logger.error("Batched Make.com webhook failed.")
 
-
-    # --- Sitemap Generation ---
     logger.info("--- Stage 4: Generating Sitemap ---")
     if not YOUR_SITE_BASE_URL: logger.error("Sitemap generation SKIPPED: YOUR_SITE_BASE_URL not set.")
     else:
