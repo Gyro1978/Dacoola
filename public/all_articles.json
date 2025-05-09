@@ -1,6 +1,21 @@
 {
   "articles": [
     {
+      "id": "60e5935b548b8940c582866b6740a84afb8b8156e79f77b46e4ef9f3b75a1008",
+      "title": "Google I/O 2025: Gemini Updates and Android 16 Take Center Stage",
+      "link": "articles/google-io-2025-gemini-updates-and-android-16-take-center-stage.html",
+      "published_iso": "2025-05-09T20:35:15Z",
+      "summary_short": "Google I/O 2025 will showcase major Google Gemini updates, new AI models, and Android 16 features. Here's what to expect.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/05/google-io-generic.jpg?resize=1200,800",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Google Gemini updates"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
       "id": "f05948bc5ba3e391b203ebd884d4938084c549d243ece8d829276a3a29b61a17",
       "title": "Department of Labor Ends Scale AI Investigation",
       "link": "articles/department-of-labor-ends-scale-ai-investigation.html",
