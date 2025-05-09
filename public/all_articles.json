@@ -1,6 +1,21 @@
 {
   "articles": [
     {
+      "id": "af62edd97899fe2bc9c478e2e27623fad4f42e115f6417c3341716df2731752a",
+      "title": "New AI Translation System Enables Multi-Speaker Real-Time Translation",
+      "link": "articles/new-ai-translation-system-enables-multi-speaker-real-time-translation.html",
+      "published_iso": "2025-05-09T09:00:00Z",
+      "summary_short": "A breakthrough AI translation system enables real-time, multi-speaker translation through headphones, overcoming language barriers in group settings.",
+      "image_url": "https://wp.technologyreview.com/wp-content/uploads/2025/05/headphones-translate.jpg?resize=1200,600",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI translation system"
+      ],
+      "audio_url": null,
+      "trend_score": 10.49
+    },
+    {
       "id": "5a95b7515009bff2933581576de92ac7ac5563a57552f5d049c9b65c2e636eb1",
       "title": "AI Regulation Discussion Highlights Need for Global Cooperation",
       "link": "articles/ai-regulation-discussion-highlights-need-for-global-cooperation.html",
