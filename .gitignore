@@ -12,4 +12,4 @@ __pycache__/
 /data/scraped_articles/
 /data/processed_json/
 /data/twitter_daily_limit.json
-# Add other specific files/dirs you don't want tracked
+google-ads.yaml
