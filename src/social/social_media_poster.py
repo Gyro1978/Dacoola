@@ -261,68 +261,99 @@ def initialize_social_clients():
 def run_social_media_poster(article_details, social_clients, platforms_to_post=None):
     title = article_details.get('title')
     article_url = article_details.get('article_url')
-    image_url = article_details.get('image_url') # Currently used by Reddit for thumbnail hint, Bluesky for card
-    summary_short = article_details.get('summary_short') # Used by Bluesky for card
+    image_url = article_details.get('image_url') 
+    summary_short = article_details.get('summary_short') 
 
     if not title or not article_url:
         logger.error("Missing title or article_url. Cannot post to social media.")
-        return
+        return False # Return a boolean indicating failure
 
     attempt_all = platforms_to_post is None
-    posted_to_twitter_successfully = False # Flag for main.py if it needs to know
+    overall_success = True # Assume success unless a post fails
 
     # Post to Bluesky
     if attempt_all or "bluesky" in platforms_to_post:
         if social_clients.get("bluesky_sessions"):
+            bsky_posted_once = False
             for bsky_session in social_clients["bluesky_sessions"]:
-                post_to_bluesky(bsky_session, title, article_url, summary_short, image_url)
-                time.sleep(5) # Delay between different Bluesky accounts
-        else: logger.info("Bluesky posting requested/default but no sessions configured or library missing.")
+                if post_to_bluesky(bsky_session, title, article_url, summary_short, image_url):
+                    bsky_posted_once = True
+                else: # If any Bluesky post fails, mark overall as not fully successful for this platform
+                    overall_success = False 
+                time.sleep(5) 
+            if not bsky_posted_once and social_clients["bluesky_sessions"]: # if no session succeeded
+                 logger.error("Failed to post to any configured Bluesky account.")
+                 overall_success = False
+        else: 
+            logger.info("Bluesky posting requested/default but no sessions configured or library missing.")
+            if attempt_all or "bluesky" in platforms_to_post: overall_success = False
+
 
     # Post to Reddit
     if attempt_all or "reddit" in platforms_to_post:
         if social_clients.get("reddit_instance"):
-            post_to_reddit(social_clients["reddit_instance"], title, article_url, image_url)
-        else: logger.info("Reddit posting requested/default but no instance configured or library missing.")
+            if not post_to_reddit(social_clients["reddit_instance"], title, article_url, image_url):
+                overall_success = False # Mark as failure if Reddit post fails
+        else: 
+            logger.info("Reddit posting requested/default but no instance configured or library missing.")
+            if attempt_all or "reddit" in platforms_to_post: overall_success = False
 
     # Post to Twitter
     if attempt_all or "twitter" in platforms_to_post:
         twitter_client = social_clients.get("twitter_client")
         if twitter_client:
-            if post_to_twitter(twitter_client, title, article_url):
-                posted_to_twitter_successfully = True # Mark as success for potential external tracking
+            if not post_to_twitter(twitter_client, title, article_url):
+                overall_success = False # Mark as failure if Twitter post fails
         else:
             logger.info("Twitter posting requested/default but no client configured or library/credentials missing.")
+            if attempt_all or "twitter" in platforms_to_post: overall_success = False
     
-    # Could return a dict of successes if main.py needs to know which platforms succeeded, e.g.
-    # return {"twitter_posted": posted_to_twitter_successfully, ...}
+    return overall_success
 
 
 # --- Standalone Execution (for testing) ---
 if __name__ == "__main__":
-    logger.info("--- Running Social Media Poster Standalone Test (Fully Functional Twitter) ---")
+    logger.info("--- Running Social Media Poster Standalone Test ---")
+    # Ensure logging is verbose for standalone test
+    logger.parent.setLevel(logging.INFO) # Set root logger to INFO if not already
+    logger.setLevel(logging.DEBUG)       # Set this script's logger to DEBUG
+
     test_article = {
-        "id": "test-social-post-003",
-        "title": f"Functional Twitter Test Post via Python ({time.strftime('%Y-%m-%d %H:%M:%S')})",
-        "article_url": "https://dacoolaa.netlify.app/home.html", # Use a real, short URL
-        "image_url": "https://i.imgur.com/A5Wdp6f.png",
-        "topic": "Live Testing",
-        "tags": ["tweepy", "python", "socialmedia", "live"],
-        "summary_short": "This is a live test post to Twitter using Tweepy v2 OAuth 1.0a."
+        "id": "test-social-post-004",
+        "title": f"Social Poster Standalone Test ({time.strftime('%Y-%m-%d %H:%M')})",
+        "article_url": "https://dacoolaa.netlify.app/home.html", 
+        "image_url": "https://i.imgur.com/A5Wdp6f.png", # Example image
+        "topic": "Testing",
+        "tags": ["python", "socialmedia", "dacoola", "test"],
+        "summary_short": "This is a standalone test of the social media posting script."
     }
+    
+    print("Initializing social media clients...")
     clients = initialize_social_clients()
 
-    # Test only Twitter if client is available
-    if clients.get("twitter_client"):
-        logger.info("\n--- Test: Posting only to Twitter (Live Attempt) ---")
-        run_social_media_poster(test_article, clients, platforms_to_post=("twitter",))
+    # Check which clients were initialized
+    if not clients.get("bluesky_sessions") and not clients.get("reddit_instance") and not clients.get("twitter_client"):
+        print("\nNo social media clients were initialized. Check .env credentials and library installations.")
+        print("Make sure atprototools, praw, and tweepy are installed if you want to test those platforms.")
+        print("Skipping posting tests.")
     else:
-        logger.warning("\nTwitter client not initialized. Skipping Twitter-only test.")
+        print(f"\nBluesky sessions initialized: {len(clients.get('bluesky_sessions', []))}")
+        print(f"Reddit instance initialized: {'Yes' if clients.get('reddit_instance') else 'No'}")
+        print(f"Twitter client initialized: {'Yes' if clients.get('twitter_client') else 'No'}")
 
-    # Example of posting to all (if you want to test other platforms too)
-    # logger.info("\n--- Test: Posting to all available platforms ---")
-    # test_article["title"] = f"Functional All Platforms Test ({time.strftime('%Y-%m-%d %H:%M:%S')})"
-    # run_social_media_poster(test_article, clients)
-
+        print("\n--- Attempting to post to ALL configured platforms ---")
+        # platforms_to_try = ("bluesky", "reddit", "twitter") # To test all
+        platforms_to_try = ("twitter",) # Example: test only Twitter
+        # platforms_to_try = ("bluesky",) # Example: test only Bluesky
+        # platforms_to_try = ("reddit",)  # Example: test only Reddit
+        
+        success = run_social_media_poster(test_article, clients, platforms_to_post=platforms_to_try)
+        
+        if success:
+            print("\nSocial media posting function completed. Some posts may have succeeded.")
+            print("Check individual platform logs above for details on each.")
+        else:
+            print("\nSocial media posting function reported at least one failure or no platforms attempted.")
+            print("Check logs above for specific errors.")
 
     logger.info("--- Social Media Poster Standalone Test Complete ---")
