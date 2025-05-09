@@ -1,6 +1,36 @@
 {
   "articles": [
     {
+      "id": "4d04d67cc8a72cf98620dcc963d77e6a8a65e897eaed75269eeeb4ce594d45bc",
+      "title": "Apple Chip Development Focuses on Smart Glasses and Mac Upgrades",
+      "link": "articles/apple-chip-development-focuses-on-smart-glasses-and-mac-upgrades.html",
+      "published_iso": "2025-05-09T13:20:40Z",
+      "summary_short": "Apple is reportedly developing new chips for smart glasses and Macs, aiming to compete with Meta. Learn about Apple chip development plans.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/Apple-logo-Getty.jpg?resize=1200,800",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "Apple chip development"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
+      "id": "9580cbdb6b0928ec4ba27574c60a92ded28ba330a32cec90899cf3ac8fc43bf9",
+      "title": "Florida Encryption Backdoors Bill Fails After Legislative Push",
+      "link": "articles/florida-encryption-backdoors-bill-fails-after-legislative-push.html",
+      "published_iso": "2025-05-09T13:15:55Z",
+      "summary_short": "A Florida bill requiring encryption backdoors for social media accounts was withdrawn, failing to become law. Learn why security experts opposed it.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2021/02/miami-softbank.jpg?resize=1200,675",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "encryption backdoors bill"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
       "id": "af62edd97899fe2bc9c478e2e27623fad4f42e115f6417c3341716df2731752a",
       "title": "New AI Translation System Enables Multi-Speaker Real-Time Translation",
       "link": "articles/new-ai-translation-system-enables-multi-speaker-real-time-translation.html",
