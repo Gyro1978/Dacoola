@@ -1,6 +1,51 @@
 {
   "articles": [
     {
+      "id": "067aceff2b267fa2b6b655fbb2027462cd9a1b12ffcae475b74a6760e5976405",
+      "title": "The Best AI Image Generators of 2025: Gemini, ChatGPT, Midjourney, and More",
+      "link": "articles/the-best-ai-image-generators-of-2025-gemini,-chatgpt,-midjourney,-and-more.html",
+      "published_iso": "2025-05-09T21:29:00Z",
+      "summary_short": "Discover the best AI image generators of 2025, including Gemini, ChatGPT, and Midjourney. Compare features, pricing, and performance.",
+      "image_url": "https://www.zdnet.com/a/img/resize/a6fa15ddb7fe6b2b6de0c02c27c8d5097354b10b/2025/05/09/d7268b2e-f786-4f3b-ae3e-bf53fbc7b031/gemini-generated-image-m17q6om17q6om17q.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI image generators"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
+      "id": "73352b35a306935a297a9eeacafc020b8ae167efa34b8c1cd590c7d5f1a0e6a6",
+      "title": "US Investment Review Scrutinizes Benchmark's $75M Bet on Chinese AI Startup",
+      "link": "articles/us-investment-review-scrutinizes-benchmarks-$75m-bet-on-chinese-ai-startup.html",
+      "published_iso": "2025-05-09T21:24:16Z",
+      "summary_short": "The US Treasury Department is reviewing Benchmark's $75M investment in Chinese AI startup Manus under 2023 restrictions. Learn about the US investment review.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/12/treasury-logo-department-breach.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "US investment review"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
+      "id": "21d256d1f35b40c7b6383fd870512e8cf94e4456a5eafe549938a92c2069e88c",
+      "title": "How Gen AI Attack Chains Exploit Telemetry Lag in Cybersecurity",
+      "link": "articles/how-gen-ai-attack-chains-exploit-telemetry-lag-in-cybersecurity.html",
+      "published_iso": "2025-05-09T20:56:28Z",
+      "summary_short": "Learn how gen AI attack chains exploit telemetry lag, targeting vulnerabilities in SOC defenses during off-hours. Stay ahead of evolving threats.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/What-your-tools-miss-at-213-AM-How-gen-AI-attack-chains-exploit-telemetry-lag.jpg?w=950?w=1200&strip=all",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "gen AI attack chains"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
       "id": "60e5935b548b8940c582866b6740a84afb8b8156e79f77b46e4ef9f3b75a1008",
       "title": "Google I/O 2025: Gemini Updates and Android 16 Take Center Stage",
       "link": "articles/google-io-2025-gemini-updates-and-android-16-take-center-stage.html",
