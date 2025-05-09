@@ -1,4 +1,4 @@
-# src/main.py (1/1) - FULL SCRIPT with Keyword Research & Corrected Tag Handling
+# src/main.py (1/1) - FULL SCRIPT with Integrated Social Media Poster
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -36,10 +36,9 @@ try:
     )
     from src.scrapers.image_scraper import find_best_image, scrape_source_for_image
     from src.agents.filter_news_agent import run_filter_agent
-    from src.agents.keyword_research_agent import run_keyword_research_agent # NEW
+    from src.agents.keyword_research_agent import run_keyword_research_agent
     from src.agents.seo_article_generator_agent import run_seo_article_agent
-    from src.social.twitter_poster import post_tweet_with_image
-    # --- Import for new social poster ---
+    # --- NEW: Import combined social poster ---
     from src.social.social_media_poster import initialize_social_clients, run_social_media_poster
 except ImportError as e:
      print(f"FATAL IMPORT ERROR in main.py (agents/scrapers/social): {e}")
@@ -53,8 +52,7 @@ AUTHOR_NAME_DEFAULT = os.getenv('AUTHOR_NAME', 'AI News Team')
 YOUR_WEBSITE_NAME = os.getenv('YOUR_WEBSITE_NAME', 'Dacoola')
 YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 raw_base_url = os.getenv('YOUR_SITE_BASE_URL', ''); YOUR_SITE_BASE_URL = (raw_base_url.rstrip('/') + '/') if raw_base_url else ''
-# MAKE_WEBHOOK_URL is no longer primary, but keep if still used for some platforms
-MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None)
+MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None) # Still keep for Insta or other Make.com uses
 
 # --- Setup Logging ---
 log_file_path = os.path.join(PROJECT_ROOT_FOR_PATH, 'dacola.log')
@@ -67,7 +65,7 @@ logger = logging.getLogger('main_orchestrator')
 if not YOUR_SITE_BASE_URL: logger.warning("YOUR_SITE_BASE_URL not set.")
 else: logger.info(f"Using site base URL: {YOUR_SITE_BASE_URL}")
 if not YOUR_WEBSITE_LOGO_URL: logger.warning("YOUR_WEBSITE_LOGO_URL not set.")
-# if not MAKE_WEBHOOK_URL: logger.warning("MAKE_INSTAGRAM_WEBHOOK_URL not set (Make.com webhook posting will be skipped).")
+
 
 # --- Configuration ---
 DATA_DIR_MAIN = os.path.join(PROJECT_ROOT_FOR_PATH, 'data')
@@ -77,14 +75,14 @@ PUBLIC_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'public')
 OUTPUT_HTML_DIR = os.path.join(PUBLIC_DIR, 'articles')
 TEMPLATE_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'templates')
 ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
-DAILY_TWEET_LIMIT = 3
+DAILY_TWEET_LIMIT = int(os.getenv('DAILY_TWEET_LIMIT', 3)) # Use env var, default to 3
 TWITTER_TRACKER_FILE = os.path.join(DATA_DIR_MAIN, 'twitter_daily_limit.json')
 ARTICLE_MAX_AGE_DAYS = 30
 
 # --- Jinja2 Setup ---
 try:
     from jinja2 import Environment, FileSystemLoader
-    def escapejs_filter(value): # Ensure this is defined before use
+    def escapejs_filter(value):
         if value is None: return ''; value = str(value); value = value.replace('\\', '\\\\').replace('"', '\\"').replace('/', '\\/')
         value = value.replace('<', '\\u003c').replace('>', '\\u003e'); value = value.replace('\b', '\\b').replace('\f', '\\f').replace('\n', '\\n')
         value = value.replace('\r', '\\r').replace('\t', '\\t'); return value
@@ -138,9 +136,9 @@ def get_sort_key(article_dict):
         dt = datetime.fromisoformat(date_str)
         if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None: return dt.replace(tzinfo=timezone.utc)
         return dt
-    except Exception: return fallback_date # Simplified error handling
+    except Exception: return fallback_date
 
-def _read_tweet_tracker():
+def _read_tweet_tracker(): # This function will manage Twitter specific daily limit
     try:
         if os.path.exists(TWITTER_TRACKER_FILE):
             with open(TWITTER_TRACKER_FILE, 'r', encoding='utf-8') as f: data = json.load(f)
@@ -150,12 +148,12 @@ def _read_tweet_tracker():
         return None, 0
     except Exception: return None, 0
 
-def _write_tweet_tracker(date_str, count):
+def _write_tweet_tracker(date_str, count): # This function will manage Twitter specific daily limit
     try:
         os.makedirs(os.path.dirname(TWITTER_TRACKER_FILE), exist_ok=True)
         with open(TWITTER_TRACKER_FILE, 'w', encoding='utf-8') as f: json.dump({'date': date_str, 'count': count}, f)
-        logger.info(f"Updated tweet tracker: Date={date_str}, Count={count}")
-    except Exception as e: logger.error(f"Error writing tweet tracker: {e}")
+        logger.info(f"Updated Twitter tracker: Date={date_str}, Count={count}")
+    except Exception as e: logger.error(f"Error writing Twitter tracker: {e}")
 
 # send_make_webhook is kept for now if you still use it for some platforms like Instagram
 def send_make_webhook(webhook_url, data):
@@ -240,7 +238,7 @@ def process_single_article(json_filepath, existing_articles_data, processed_in_t
         else: logger.warning(f"Article {article_id} missing publish date. Proceeding.")
 
         logger.info(f"Finding image for article ID: {article_id}...")
-        selected_image_url = scrape_source_for_image(article_data.get('link')) or find_best_image(article_data.get('title', 'AI News'))
+        selected_image_url = scrape_source_for_image(article_data.get('link')) or find_best_image(article_data.get('title', 'AI Technology News'))
         if not selected_image_url: logger.error(f"FATAL: No image for {article_id}. Skipping."); remove_scraped_file(json_filepath); return None
         article_data['selected_image_url'] = selected_image_url
 
@@ -252,7 +250,6 @@ def process_single_article(json_filepath, existing_articles_data, processed_in_t
         logger.info(f"Article {article_id} passed Title+Image duplicate check.")
 
         # --- Agent Pipeline ---
-        # 1. Filter
         article_data = run_filter_agent(article_data)
         if not article_data or article_data.get('filter_verdict') is None: logger.error(f"Filter Agent failed {article_id}. Skip."); remove_scraped_file(json_filepath); return None
         filter_verdict = article_data['filter_verdict']; importance = filter_verdict.get('importance_level')
@@ -262,18 +259,15 @@ def process_single_article(json_filepath, existing_articles_data, processed_in_t
         article_data['primary_keyword'] = filter_verdict.get('primary_topic_keyword', article_data.get('title',''))
         logger.info(f"Article {article_id} classified {importance} (Topic: {article_data['topic']}).")
 
-        # 2. Keyword Research
         article_data = run_keyword_research_agent(article_data)
         if article_data.get('keyword_agent_error'): logger.warning(f"Keyword Research issue for {article_id}: {article_data['keyword_agent_error']}")
         researched_keywords = article_data.setdefault('researched_keywords', [])
         if not researched_keywords: researched_keywords.append(article_data['primary_keyword']); article_data['researched_keywords'] = list(set(researched_keywords))
-        article_data['generated_tags'] = list(set(researched_keywords)) # Use researched for final tags
+        article_data['generated_tags'] = list(set(researched_keywords))
         logger.info(f"Using {len(article_data['generated_tags'])} keywords as tags for {article_id}.")
 
-        # 3. SEO Article Generation
-        article_data['_temp_keywords_for_seo_prompt'] = json.dumps(article_data['generated_tags']) # Use final tags for SEO prompt
-        article_data = run_seo_article_agent(article_data)
-        article_data.pop('_temp_keywords_for_seo_prompt', None)
+        # Pass the 'generated_tags' (which now come from keyword_research_agent) to seo_article_generator
+        article_data = run_seo_article_agent(article_data) # SEO agent uses article_data['generated_tags'] for its SECONDARY_KEYWORDS and ALL_GENERATED_KEYWORDS_JSON
         seo_results = article_data.get('seo_agent_results')
         if not seo_results or not seo_results.get('generated_article_body_md'): logger.error(f"SEO Agent failed {article_id}. Skip."); remove_scraped_file(json_filepath); return None
         if article_data.get('seo_agent_error'): logger.warning(f"SEO Agent non-critical errors for {article_id}: {article_data['seo_agent_error']}")
@@ -314,30 +308,22 @@ def process_single_article(json_filepath, existing_articles_data, processed_in_t
         }
         if not render_post_page(template_vars, article_data['slug']): logger.error(f"Failed HTML render for {article_id}. Skip."); return None
 
-        # Update JSON and Socials
         site_data_entry = {"id": article_id, "title": article_data.get('title'), "link": article_relative_path, "published_iso": template_vars['PUBLISH_ISO_FOR_META'],
                            "summary_short": template_vars['META_DESCRIPTION'], "image_url": article_data.get('selected_image_url'), "topic": article_data.get('topic', 'News'),
                            "is_breaking": article_data.get('is_breaking', False), "tags": article_data['generated_tags'], "audio_url": None, "trend_score": article_data.get('trend_score', 0)}
-        article_data['audio_url'] = None # Final set
+        article_data['audio_url'] = None
         update_all_articles_json(site_data_entry)
 
-        # Twitter Posting
-        today_str = datetime.now(timezone.utc).strftime('%Y-%m-%d'); tracker_date, count_today = _read_tweet_tracker()
-        if tracker_date != today_str: count_today = 0; _write_tweet_tracker(today_str, count_today)
-        if count_today < DAILY_TWEET_LIMIT:
-            if post_tweet_with_image(article_data.get('title'), canonical_url, article_data.get('selected_image_url')):
-                _write_tweet_tracker(today_str, count_today + 1)
-        else: logger.info(f"Daily Twitter limit reached. Skip for {article_id}.")
-
-        webhook_data_for_socials = {"id": article_id, "title": article_data.get('title'), "article_url": canonical_url,
-                                   "image_url": article_data.get('selected_image_url'), "topic": article_data.get('topic'),
-                                   "tags": article_data['generated_tags'], "summary_short": site_data_entry.get('summary_short', '')}
+        # --- Data for social media poster (includes Twitter implicitly) ---
+        social_post_payload = {"id": article_id, "title": article_data.get('title'), "article_url": canonical_url,
+                               "image_url": article_data.get('selected_image_url'), "topic": article_data.get('topic'),
+                               "tags": article_data['generated_tags'], "summary_short": site_data_entry.get('summary_short', '')}
 
         if save_processed_data(processed_file_path, article_data):
              remove_scraped_file(json_filepath)
              logger.info(f"--- Successfully processed article: {article_id} ---")
              return {"summary": {"id": article_id, "title": article_data.get("title"), "image_url": article_data.get("selected_image_url")},
-                     "social_post_data": webhook_data_for_socials } # Changed key
+                     "social_post_data": social_post_payload } # Return data for the combined social poster
         else: logger.error(f"Failed save final JSON for {article_id}."); return None
     except Exception as process_e:
          logger.exception(f"CRITICAL failure processing {article_id} ({article_filename}): {process_e}")
@@ -350,8 +336,8 @@ if __name__ == "__main__":
     logger.info(f"--- === Dacoola AI News Orchestrator Starting Run ({datetime.now(timezone.utc).isoformat()}) === ---")
     ensure_directories()
 
-    # --- Initialize Social Media Clients ONCE ---
-    social_media_clients = initialize_social_clients() # NEW
+    # --- Initialize Social Media Clients ONCE at the start of the run ---
+    social_media_clients = initialize_social_clients()
 
     glob_pattern = os.path.join(PROCESSED_JSON_DIR, '*.json')
     completed_article_ids = set(os.path.basename(f).replace('.json', '') for f in glob.glob(glob_pattern))
@@ -363,7 +349,6 @@ if __name__ == "__main__":
 
     # --- HTML Regeneration Step ---
     logger.info("--- Stage 1: Checking for Missing HTML from Processed Data ---")
-    # ... (HTML Regeneration logic remains the same) ...
     processed_json_files_for_regen = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
     regenerated_count = 0
     if processed_json_files_for_regen:
@@ -371,42 +356,34 @@ if __name__ == "__main__":
         for proc_filepath in processed_json_files_for_regen:
             try:
                 article_data = load_article_data(proc_filepath)
-                if not article_data or not isinstance(article_data, dict): logger.warning(f"Skipping invalid processed JSON during regen: {os.path.basename(proc_filepath)}"); continue
+                if not article_data or not isinstance(article_data, dict): logger.warning(f"Skipping invalid JSON regen: {os.path.basename(proc_filepath)}"); continue
                 article_id = article_data.get('id'); slug = article_data.get('slug')
-                if not article_id or not slug: logger.warning(f"Skipping processed JSON missing id or slug during regen: {os.path.basename(proc_filepath)}"); continue
+                if not article_id or not slug: logger.warning(f"Skipping JSON missing id/slug regen: {os.path.basename(proc_filepath)}"); continue
                 expected_html_path = os.path.join(OUTPUT_HTML_DIR, f"{slug}.html")
                 if not os.path.exists(expected_html_path):
-                    logger.info(f"HTML missing for {article_id} ({slug}.html). Regenerating...")
+                    logger.info(f"HTML missing for {article_id}. Regenerating...")
                     seo_results = article_data.get('seo_agent_results', {})
                     body_md = seo_results.get('generated_article_body_md', '')
-                    body_html = f"<p><i>Content generation error.</i></p><pre>{body_md}</pre>"
-                    try: body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables', 'nl2br'])
-                    except Exception as md_err: logger.error(f"Markdown failed during regen {article_id}: {md_err}")
-                    tags_list = article_data.get('generated_tags', [])
+                    body_html = markdown.markdown(body_md, extensions=['fenced_code', 'tables', 'nl2br'])
+                    tags_list = article_data.get('generated_tags', []) # Should be researched_keywords
                     tags_html = format_tags_html(tags_list)
-                    publish_date_iso_for_meta = article_data.get('published_iso', datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'))
-                    publish_date_formatted = "Date Unknown"; publish_dt_obj = get_sort_key(article_data)
-                    if publish_dt_obj != datetime(1970,1,1,tzinfo=timezone.utc): publish_date_formatted = publish_dt_obj.strftime('%B %d, %Y')
-                    page_title = seo_results.get('generated_title_tag', article_data.get('title', 'AI News'))
-                    meta_description = seo_results.get('generated_meta_description', article_data.get('summary', '')[:160])
-                    article_relative_path = f"articles/{slug}.html"
-                    canonical_url = urljoin(YOUR_SITE_BASE_URL.rstrip('/') + '/', article_relative_path.lstrip('/')) if YOUR_SITE_BASE_URL else f"/{article_relative_path.lstrip('/')}"
+                    publish_dt_obj = get_sort_key(article_data)
                     template_vars = {
-                        'PAGE_TITLE': page_title, 'META_DESCRIPTION': meta_description, 'AUTHOR_NAME': article_data.get('author', AUTHOR_NAME_DEFAULT),
-                        'META_KEYWORDS': ", ".join(tags_list), 'CANONICAL_URL': canonical_url, 'SITE_NAME': YOUR_WEBSITE_NAME, 'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
-                        'IMAGE_URL': article_data.get('selected_image_url', ''), 'IMAGE_ALT_TEXT': page_title, 'META_KEYWORDS_LIST': tags_list,
-                        'PUBLISH_ISO_FOR_META': publish_date_iso_for_meta, 'JSON_LD_SCRIPT_BLOCK': seo_results.get('generated_json_ld', ''),
-                        'ARTICLE_HEADLINE': article_data.get('title', 'Article'), 'PUBLISH_DATE': publish_date_formatted, 'ARTICLE_BODY_HTML': body_html,
-                        'ARTICLE_TAGS_HTML': tags_html, 'SOURCE_ARTICLE_URL': article_data.get('link', '#'), 'ARTICLE_TITLE': article_data.get('title'),
-                        'id': article_id, 'CURRENT_ARTICLE_ID': article_id, 'CURRENT_ARTICLE_TOPIC': article_data.get('topic', ''),
-                        'CURRENT_ARTICLE_TAGS_JSON': json.dumps(tags_list), 'AUDIO_URL': article_data.get('audio_url')
+                        'PAGE_TITLE': seo_results.get('generated_title_tag', article_data.get('title')), 'META_DESCRIPTION': seo_results.get('generated_meta_description', ''),
+                        'AUTHOR_NAME': article_data.get('author', AUTHOR_NAME_DEFAULT), 'META_KEYWORDS': ", ".join(tags_list),
+                        'CANONICAL_URL': urljoin(YOUR_SITE_BASE_URL.rstrip('/') + '/', f"articles/{slug}.html".lstrip('/')), 'SITE_NAME': YOUR_WEBSITE_NAME, 'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
+                        'IMAGE_URL': article_data.get('selected_image_url', ''), 'IMAGE_ALT_TEXT': article_data.get('title'),
+                        'META_KEYWORDS_LIST': tags_list, 'PUBLISH_ISO_FOR_META': article_data.get('published_iso', datetime.now(timezone.utc).isoformat()),
+                        'JSON_LD_SCRIPT_BLOCK': seo_results.get('generated_json_ld', ''), 'ARTICLE_HEADLINE': article_data.get('title'),
+                        'PUBLISH_DATE': publish_dt_obj.strftime('%B %d, %Y') if publish_dt_obj != datetime(1970,1,1,tzinfo=timezone.utc) else "Date Unknown",
+                        'ARTICLE_BODY_HTML': body_html, 'ARTICLE_TAGS_HTML': tags_html, 'SOURCE_ARTICLE_URL': article_data.get('link', '#'),
+                        'ARTICLE_TITLE': article_data.get('title'), 'id': article_id, 'CURRENT_ARTICLE_ID': article_id,
+                        'CURRENT_ARTICLE_TOPIC': article_data.get('topic', ''), 'CURRENT_ARTICLE_TAGS_JSON': json.dumps(tags_list),
+                        'AUDIO_URL': article_data.get('audio_url')
                     }
                     if render_post_page(template_vars, slug): regenerated_count += 1
-                    else: logger.error(f"Failed to regenerate HTML for {article_id}.")
-            except Exception as regen_e: logger.exception(f"Error during HTML regeneration for {os.path.basename(proc_filepath)}: {regen_e}")
-    else: logger.info("No processed JSON files to check for regeneration.")
-    logger.info(f"--- HTML Regeneration Check Complete. Regenerated {regenerated_count} files. ---")
-
+            except Exception as regen_e: logger.exception(f"Error during HTML regen for {os.path.basename(proc_filepath)}: {regen_e}")
+    logger.info(f"--- HTML Regeneration Complete. Regenerated {regenerated_count} files. ---")
 
     # --- Scraper and Processing Cycle ---
     logger.info("--- Stage 2: Running News Scraper ---")
@@ -419,13 +396,11 @@ if __name__ == "__main__":
     existing_articles_data = load_all_articles_data()
     logger.info(f"Loaded {len(existing_articles_data)} articles for context.")
     json_files_to_process = sorted(glob.glob(os.path.join(SCRAPED_ARTICLES_DIR, '*.json')), key=os.path.getmtime, reverse=True)
-    logger.info(f"Found {len(json_files_to_process)} scraped articles to process (sorted newest first).")
+    logger.info(f"Found {len(json_files_to_process)} scraped articles to process.")
 
-    # --- Batching for Social Media Poster ---
     all_social_post_data_this_run = []
-
+    processed_in_this_run_context = []
     processed_successfully_count = 0; failed_or_skipped_count = 0
-    processed_in_this_run_context = [] # For duplicate checks within the same run
 
     for filepath in json_files_to_process:
         potential_id = os.path.basename(filepath).replace('.json', '')
@@ -433,33 +408,48 @@ if __name__ == "__main__":
             logger.debug(f"Skipping raw {potential_id}, processed JSON exists."); remove_scraped_file(filepath); failed_or_skipped_count += 1; continue
 
         processing_result = process_single_article(filepath, existing_articles_data, processed_in_this_run_context)
-
         if processing_result and isinstance(processing_result, dict):
             processed_successfully_count += 1
             if "summary" in processing_result: processed_in_this_run_context.append(processing_result["summary"])
-            if "social_post_data" in processing_result: all_social_post_data_this_run.append(processing_result["social_post_data"]) # Collect for batch
-            # Update existing_articles_data in memory for subsequent duplicate checks in this run
+            if "social_post_data" in processing_result: all_social_post_data_this_run.append(processing_result["social_post_data"])
             if "summary" in processing_result and isinstance(processing_result["summary"], dict): existing_articles_data.append(processing_result["summary"])
-
         else: failed_or_skipped_count += 1
 
     logger.info(f"Processing cycle complete. Success: {processed_successfully_count}, Failed/Skipped/Duplicate: {failed_or_skipped_count}")
 
-    # --- Send to new Social Media Poster (Batch or individual) ---
+    # --- Post to Social Media ---
     if all_social_post_data_this_run:
-        logger.info(f"--- Stage 3.5: Posting to Social Media ({len(all_social_post_data_this_run)} articles) ---")
-        # Decide if you want to post one by one or batch (if poster supports batching for some platforms)
-        for social_data in all_social_post_data_this_run:
-            run_social_media_poster(social_data, social_media_clients) # Pass initialized clients
-            time.sleep(10) # Add a delay between posting different articles to avoid rapid fire
-    else:
-        logger.info("No successful articles processed in this run to post to social media.")
+        logger.info(f"--- Stage 3.5: Posting {len(all_social_post_data_this_run)} articles to Social Media ---")
+        # Twitter specific logic needs to be handled within run_social_media_poster
+        # or by passing a specific flag/platform list.
+        # For now, let's assume run_social_media_poster internally checks for Twitter credentials
+        # and the main.py Twitter daily limit logic is applied *before* calling it for Twitter.
 
-    # --- Make.com Webhook (if still used for some things like Instagram) ---
-    if MAKE_WEBHOOK_URL and all_social_post_data_this_run: # Or use a different trigger for Make
-        logger.info(f"--- Sending to Make.com Webhook for remaining platforms ({len(all_social_post_data_this_run)} potential articles) ---")
-        # You might want to filter/transform all_social_post_data_this_run if Make expects a different format
-        if send_make_webhook(MAKE_WEBHOOK_URL, all_social_post_data_this_run): # Example: sending all
+        twitter_posted_today_count = _read_tweet_tracker()[1] # Get current count for the day
+        today_date_str = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+        if _read_tweet_tracker()[0] != today_date_str: # Reset if new day
+            twitter_posted_today_count = 0
+            _write_tweet_tracker(today_date_str, 0)
+
+        for social_data in all_social_post_data_this_run:
+            platforms_to_post_to = ["bluesky", "reddit"] # Default platforms
+            # Check Twitter limit specifically for this article
+            if twitter_posted_today_count < DAILY_TWEET_LIMIT:
+                platforms_to_post_to.append("twitter")
+                twitter_posted_today_count += 1 # Tentatively increment
+                _write_tweet_tracker(today_date_str, twitter_posted_today_count) # Update tracker immediately
+            else:
+                logger.info(f"Daily Twitter limit reached. Skipping Twitter for article ID: {social_data.get('id')}")
+
+            run_social_media_poster(social_data, social_media_clients, platforms_to_post=tuple(platforms_to_post_to))
+            time.sleep(10) # Delay between processing each article for social media
+    else:
+        logger.info("No new articles processed to post to social media.")
+
+    # --- Make.com Webhook for other platforms (e.g., Instagram) ---
+    if MAKE_WEBHOOK_URL and all_social_post_data_this_run:
+        logger.info(f"--- Sending to Make.com Webhook for remaining platforms ---")
+        if send_make_webhook(MAKE_WEBHOOK_URL, all_social_post_data_this_run):
             logger.info("Batched Make.com webhook sent successfully.")
         else:
             logger.error("Batched Make.com webhook failed.")
@@ -467,7 +457,7 @@ if __name__ == "__main__":
 
     # --- Sitemap Generation ---
     logger.info("--- Stage 4: Generating Sitemap ---")
-    if not YOUR_SITE_BASE_URL: logger.error("Sitemap generation SKIPPED: YOUR_SITE_BASE_URL is not set.")
+    if not YOUR_SITE_BASE_URL: logger.error("Sitemap generation SKIPPED: YOUR_SITE_BASE_URL not set.")
     else:
         try: run_sitemap_generator(); logger.info("Sitemap generation completed successfully.")
         except Exception as sitemap_e: logger.exception(f"Sitemap generation failed: {sitemap_e}")
