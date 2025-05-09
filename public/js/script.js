@@ -1,4 +1,4 @@
-// public/js/script.js (1/1) - FULL SCRIPT with highly refined slider click/drag and infinite loop
+// public/js/script.js (1/1) - FULL SCRIPT with advanced slider logic and pagination
 
 // --- Global Variables ---
 const synth = window.speechSynthesis; 
@@ -243,7 +243,8 @@ function renderBreakingNews(articles) {
 
     sliderTrack.innerHTML = ''; 
     if (autoSlideInterval) clearInterval(autoSlideInterval);
-    
+    sliderTrack.style.transform = 'translateX(0px)'; // Start with pixel-based for drag calc
+
     const now = new Date();
     const breakingArticles = articles.filter(a => a.is_breaking && a.published_iso && (now - new Date(a.published_iso))/(1000*60*60) <= 6);
     let slidesData = [], bannerTitle = "Breaking News", labelText = "Breaking", labelClass = "";
@@ -260,19 +261,7 @@ function renderBreakingNews(articles) {
     titleElement.textContent = bannerTitle;
     section.style.display = 'block'; 
 
-    if (slidesData.length === 0) { 
-        sliderTrack.innerHTML = '<p class="placeholder">No banner news available.</p>';
-        return;
-    }
-    
-    let effectiveSlidesData = [...slidesData];
-    const needsCloning = slidesData.length > 1;
-    if (needsCloning) {
-        effectiveSlidesData.unshift(slidesData[slidesData.length - 1]); 
-        effectiveSlidesData.push(slidesData[0]); 
-    }
-
-    effectiveSlidesData.forEach(article => {
+    slidesData.forEach(article => {
         const linkPath = `/${article.link}`; 
         const item = document.createElement('a'); 
         item.href = linkPath;
@@ -285,84 +274,53 @@ function renderBreakingNews(articles) {
         sliderTrack.appendChild(item);
     });
 
+    const slides = sliderTrack.querySelectorAll('.slider-item');
     sliderContainer.querySelectorAll('.slider-control, .slider-pagination').forEach(el => el.remove());
 
-    if (slidesData.length > 0) {
-        let currentLogicalIndex = 0; 
-        let currentDisplayIndex = needsCloning ? 1 : 0; 
-        const totalOriginalSlides = slidesData.length;
-        let slideWidth = sliderContainer.offsetWidth; 
+    if (slides.length > 1) {
+        let currentSlideIndex = 0;
+        const totalSlides = slides.length;
+        let slideWidth = sliderContainer.offsetWidth; // Get initial width
 
-        const paginationContainer = document.createElement('div');
+        const paginationContainer = document.createElement('div'); // Create pagination container
         paginationContainer.className = 'slider-pagination';
 
         const updateSlidePosition = (animate = true) => {
-            slideWidth = sliderContainer.offsetWidth; 
-            const offset = -currentDisplayIndex * slideWidth;
+            slideWidth = sliderContainer.offsetWidth; // Recalculate on update, important for resize
+            const offset = -currentSlideIndex * slideWidth;
             sliderTrack.style.transition = animate ? 'transform 0.4s ease-in-out' : 'none';
             sliderTrack.style.transform = `translateX(${offset}px)`;
             
-            if (totalOriginalSlides > 1) {
-                paginationContainer.querySelectorAll('.slider-dot').forEach((dot, i) => {
-                    dot.classList.toggle('active', i === currentLogicalIndex);
-                });
-            }
-        };
-        
-        const handleTransitionEnd = () => {
-            sliderTrack.removeEventListener('transitionend', handleTransitionEnd);
-            if (currentDisplayIndex === 0 && needsCloning) { 
-                currentDisplayIndex = totalOriginalSlides; 
-                currentLogicalIndex = totalOriginalSlides -1;
-                updateSlidePosition(false); 
-            } else if (currentDisplayIndex === (effectiveSlidesData.length -1) && needsCloning) { // Check against effectiveSlidesData length for last clone
-                currentDisplayIndex = 1; 
-                currentLogicalIndex = 0;
-                updateSlidePosition(false);
-            }
+            // Update dots
+            paginationContainer.querySelectorAll('.slider-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlideIndex);
+            });
         };
 
-        const changeSlide = (direction) => {
-            currentLogicalIndex = (currentLogicalIndex + direction + totalOriginalSlides) % totalOriginalSlides;
-            if (needsCloning) {
-                currentDisplayIndex += direction;
-                 sliderTrack.addEventListener('transitionend', handleTransitionEnd);
-            } else {
-                currentDisplayIndex = currentLogicalIndex;
-            }
-            updateSlidePosition(true);
-            resetAutoSlide();
-        };
-        
-        const nextSlide = () => changeSlide(1);
-        const prevSlide = () => changeSlide(-1);
+        const nextSlide = () => { currentSlideIndex = (currentSlideIndex + 1) % totalSlides; updateSlidePosition(); resetAutoSlide(); };
+        const prevSlide = () => { currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides; updateSlidePosition(); resetAutoSlide(); };
+        const goToSlide = (index) => { currentSlideIndex = index; updateSlidePosition(); resetAutoSlide(); };
+        const resetAutoSlide = () => { clearInterval(autoSlideInterval); autoSlideInterval = setInterval(nextSlide, 7000); };
 
-        const goToSlide = (originalIndex) => { 
-            currentLogicalIndex = originalIndex;
-            currentDisplayIndex = needsCloning ? originalIndex + 1 : originalIndex;
-            updateSlidePosition(true); 
-            resetAutoSlide(); 
-            if (needsCloning) sliderTrack.addEventListener('transitionend', handleTransitionEnd);
-        };
-        const resetAutoSlide = () => { clearInterval(autoSlideInterval); if(totalOriginalSlides > 1) autoSlideInterval = setInterval(nextSlide, 7000); };
-
-        if (totalOriginalSlides > 1) {
-            for (let i = 0; i < totalOriginalSlides; i++) {
-                const dot = document.createElement('button'); dot.className = 'slider-dot';
-                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-                dot.addEventListener('click', (e) => { e.stopPropagation(); goToSlide(i); });
-                paginationContainer.appendChild(dot);
-            }
-            sliderContainer.appendChild(paginationContainer);
-
-            const prevButton = document.createElement('button'); prevButton.className = 'slider-control slider-prev'; prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>'; prevButton.title="Previous";
-            prevButton.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); prevSlide(); });
-            sliderContainer.appendChild(prevButton);
-
-            const nextButton = document.createElement('button'); nextButton.className = 'slider-control slider-next'; nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>'; nextButton.title="Next";
-            nextButton.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); nextSlide(); });
-            sliderContainer.appendChild(nextButton);
+        // Create and append dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'slider-dot';
+            if (i === 0) dot.classList.add('active');
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            dot.addEventListener('click', () => goToSlide(i));
+            paginationContainer.appendChild(dot);
         }
+        sliderContainer.appendChild(paginationContainer); // Append dots to main container
+
+
+        const prevButton = document.createElement('button'); prevButton.className = 'slider-control slider-prev'; prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>'; prevButton.title="Previous";
+        prevButton.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); prevSlide(); });
+        sliderContainer.appendChild(prevButton);
+
+        const nextButton = document.createElement('button'); nextButton.className = 'slider-control slider-next'; nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>'; nextButton.title="Next";
+        nextButton.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); nextSlide(); });
+        sliderContainer.appendChild(nextButton);
         
         autoSlideInterval = setInterval(nextSlide, 7000);
         sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
@@ -372,25 +330,18 @@ function renderBreakingNews(articles) {
         let currentTrackPixelOffset = 0; 
         let pointerIsDown = false;
         let downTimestamp = 0;
-        let hasDraggedSignificantly = false; 
-        const DRAG_START_THRESHOLD = 5; // Minimal movement to initiate drag state
-        const SWIPE_ACTION_THRESHOLD_PIXELS = 50; 
-        const CLICK_TIME_THRESHOLD_MS = 250; // Reduced time for a more responsive click
+        const dragThreshold = 50; 
+        const clickTimeThreshold = 250; 
 
         sliderContainer.addEventListener('pointerdown', (e) => {
-            if (e.button !== 0) return; // Only primary button (left-click or touch)
             if (e.target.closest('.slider-control, .slider-pagination')) return;
-            
             pointerDownX = e.clientX;
             downTimestamp = e.timeStamp;
-            hasDraggedSignificantly = false;
             pointerIsDown = true;
-            
             sliderContainer.classList.add('dragging');
             sliderTrack.style.transition = 'none'; 
-            slideWidth = sliderContainer.offsetWidth; 
-            currentTrackPixelOffset = -currentDisplayIndex * slideWidth; 
-            
+            // Calculate current offset in pixels relative to the first slide's natural position
+            currentTrackPixelOffset = -currentSlideIndex * slideWidth;
             clearInterval(autoSlideInterval);
             e.preventDefault(); 
         }, { passive: false });
@@ -398,63 +349,47 @@ function renderBreakingNews(articles) {
         sliderContainer.addEventListener('pointermove', (e) => {
             if (!pointerIsDown) return;
             const dragDeltaX = e.clientX - pointerDownX;
-            if (!hasDraggedSignificantly && Math.abs(dragDeltaX) > DRAG_START_THRESHOLD) { 
-                hasDraggedSignificantly = true;
-            }
             sliderTrack.style.transform = `translateX(${currentTrackPixelOffset + dragDeltaX}px)`;
         });
 
         const handlePointerRelease = (e) => {
             if (!pointerIsDown) return;
-            
-            const wasDraggingClassApplied = sliderContainer.classList.contains('dragging');
+            pointerIsDown = false;
             sliderContainer.classList.remove('dragging');
-            pointerIsDown = false; // Reset flag immediately
             
             const dragDeltaX = e.clientX - pointerDownX;
             const timeElapsed = e.timeStamp - downTimestamp;
-            
-            if (e.target.closest('.slider-control, .slider-pagination')) {
-                 resetAutoSlide(); 
-                 return;
-            }
+            let targetSlideElement = e.target.closest('a.slider-item');
 
-            // Strict Click Condition: No significant drag, short time, primary button, AND target is the slide link
-            if (!hasDraggedSignificantly && timeElapsed < CLICK_TIME_THRESHOLD_MS && e.button === 0) {
-                const targetSlideElement = e.target.closest('a.slider-item');
+            if (Math.abs(dragDeltaX) < dragThreshold && timeElapsed < clickTimeThreshold) { 
                 if (targetSlideElement && targetSlideElement.href) {
-                    // Check if the click was not on a control button (already done, but good to be sure)
-                    if (!e.target.closest('.slider-control')) {
-                        window.location.href = targetSlideElement.href;
-                        // No resetAutoSlide() here as we are navigating away.
-                        return; 
-                    }
+                    window.location.href = targetSlideElement.href;
+                    return; 
                 }
-                // If not a direct link click, or conditions not fully met, treat as snap back
+                updateSlidePosition(true); // Snap back if not a link click
+            } else if (Math.abs(dragDeltaX) >= dragThreshold) {
+                if (dragDeltaX < 0) { 
+                    currentSlideIndex = Math.min(currentSlideIndex + 1, totalSlides - 1);
+                } else { 
+                    currentSlideIndex = Math.max(currentSlideIndex - 1, 0);
+                }
                 updateSlidePosition(true);
-            } else if (Math.abs(dragDeltaX) >= SWIPE_ACTION_THRESHOLD_PIXELS) { 
-                if (dragDeltaX < 0) { changeSlide(1); } 
-                else { changeSlide(-1); } 
             } else { 
-                updateSlidePosition(true); // Snap back if not enough drag for swipe and not a click
+                updateSlidePosition(true);
             }
             resetAutoSlide();
         };
 
         sliderContainer.addEventListener('pointerup', handlePointerRelease);
-        // For robustness, handle cases where pointer leaves the element while still pressed
         sliderContainer.addEventListener('pointerleave', (e) => { if(pointerIsDown) handlePointerRelease(e);});
         sliderContainer.addEventListener('pointercancel', (e) => { if(pointerIsDown) handlePointerRelease(e);});
         
         window.addEventListener('resize', () => {
-            updateSlidePosition(false); 
+            updateSlidePosition(false); // Recalculate and reposition on resize without animation
         });
         updateSlidePosition(false); 
-    } else if (slidesData.length === 1) {
-        sliderTrack.style.transform = 'translateX(0px)';
     }
 }
-
 
 function renderLatestNewsGrid(articlesToRender) {
     const container = document.querySelector('#latest-news-section .latest-news-grid');
