@@ -1,6 +1,21 @@
 {
   "articles": [
     {
+      "id": "3b0a57ab445aa193052362f675ff54007ef659fd7faa56755889944be581aa47",
+      "title": "X Timeline Issue Leaves Users Without Updates",
+      "link": "articles/x-timeline-issue-leaves-users-without-updates.html",
+      "published_iso": "2025-05-09T13:58:09Z",
+      "summary_short": "Users report an X timeline issue preventing updates and notifications. Learn about the server-side bug affecting mobile and web platforms.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/11/X-and-Threads-GettyImages-1763609384.jpeg?resize=1200,832",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "X timeline issue"
+      ],
+      "audio_url": null,
+      "trend_score": 10.49
+    },
+    {
       "id": "4d04d67cc8a72cf98620dcc963d77e6a8a65e897eaed75269eeeb4ce594d45bc",
       "title": "Apple Chip Development Focuses on Smart Glasses and Mac Upgrades",
       "link": "articles/apple-chip-development-focuses-on-smart-glasses-and-mac-upgrades.html",
