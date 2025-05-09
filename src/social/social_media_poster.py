@@ -1,5 +1,3 @@
-# src/social/social_media_poster.py (1/1) - Fully Functional
-
 import os
 import sys
 import logging
@@ -8,8 +6,7 @@ from dotenv import load_dotenv
 
 # --- For Bluesky ---
 try:
-    from atprototools import Session
-    from atprototools.exceptions import AtException
+    from atprototools import Session, AtException # Changed import for AtException
 except ImportError:
     Session = None
     AtException = None
@@ -88,8 +85,8 @@ def _bsky_create_link_facet(text, link_url):
     return facets
 
 def post_to_bluesky(session, title, article_url, summary_short=None, image_url=None):
-    if not Session or not session:
-        logger.error("Bluesky session not initialized or library not found.")
+    if not Session or not session or not AtException: # Added AtException check here
+        logger.error("Bluesky session not initialized, library not found, or AtException not available.")
         return False
 
     post_text = f"{title}\n\nRead more: {article_url}"
@@ -120,7 +117,7 @@ def post_to_bluesky(session, title, article_url, summary_short=None, image_url=N
             session.postBloot(text=post_text, facets=facets if facets else None)
         logger.info(f"Successfully posted to Bluesky handle: {session.handle}")
         return True
-    except AtException as e:
+    except AtException as e: # Catching the (now hopefully correctly imported) AtException
         logger.error(f"Bluesky API error for {session.handle}: {e}")
     except Exception as e:
         logger.exception(f"Unexpected error posting to Bluesky for {session.handle}: {e}")
@@ -192,7 +189,7 @@ def post_to_twitter(twitter_client, title, article_url):
         logger.error(f"Tweepy API error posting to Twitter: {e}")
         # You could check e.api_codes or e.api_messages for more details
         # e.g., if 403 and "duplicate content" is in message, it's a duplicate tweet
-        if e.api_codes and 187 in e.api_codes: # Status is a duplicate
+        if hasattr(e, 'api_codes') and e.api_codes and 187 in e.api_codes: # Status is a duplicate
             logger.warning("Twitter reported this as a duplicate tweet.")
             return False # Or True if you consider duplicate as "handled"
     except Exception as e:
@@ -205,7 +202,7 @@ def initialize_social_clients():
     clients = {"bluesky_sessions": [], "reddit_instance": None, "twitter_client": None}
 
     # Bluesky
-    if Session and BLUESKY_ACCOUNTS:
+    if Session and AtException and BLUESKY_ACCOUNTS: # Added AtException check
         for acc in BLUESKY_ACCOUNTS:
             try:
                 logger.info(f"Attempting Bluesky login for {acc['handle']}...")
@@ -214,7 +211,8 @@ def initialize_social_clients():
                 clients["bluesky_sessions"].append(bsky_session)
             except AtException as e: logger.error(f"Bluesky login failed for {acc['handle']}: {e}")
             except Exception as e: logger.exception(f"Unexpected error during Bluesky login for {acc['handle']}: {e}")
-    elif not Session: logger.warning("Bluesky (atprototools) library not installed. Skipping Bluesky.")
+    elif not Session or not AtException: # Added AtException check
+        logger.warning("Bluesky (atprototools) library or AtException not available. Skipping Bluesky.")
 
     # Reddit
     if praw and all([REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD]):
