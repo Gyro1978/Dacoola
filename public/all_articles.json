@@ -1,6 +1,51 @@
 {
   "articles": [
     {
+      "id": "0d56d8647b1592de6148bce4ad52e63b02928fbfbf052e768a87ca299c2300d3",
+      "title": "AI Marketing Intelligence: Revolutionizing Campaigns with Amazon Bedrock",
+      "link": "articles/ai-marketing-intelligence-revolutionizing-campaigns-with-amazon-bedrock.html",
+      "published_iso": "2025-05-09T16:36:40Z",
+      "summary_short": "Discover how Amazon Bedrock's AI marketing intelligence enhances content creation, sentiment analysis, and campaign performance.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/05/01/ML-16708-Image1.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI marketing intelligence"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
+      "id": "69bb6ebf605953d9d1254ca40cd6cb8ed87c28c9c50329438b05cc4d8c169823",
+      "title": "Google AI Course Sets World Record with 280,000 Signups",
+      "link": "articles/google-ai-course-sets-world-record-with-280,000-signups.html",
+      "published_iso": "2025-05-09T16:00:00Z",
+      "summary_short": "Google and Kaggle's GenAI Intensive course set a world record with 280,000 signups. Learn what the Google AI course covered and how to access it now.",
+      "image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Kaggle_SS.width-1300.png",
+      "topic": "Education",
+      "is_breaking": false,
+      "tags": [
+        "Google AI course"
+      ],
+      "audio_url": null,
+      "trend_score": 10.49
+    },
+    {
+      "id": "a6329f4dba0fe2adee3e7d054153eb9b46bceee4b19520e326bbe5652b5e34e7",
+      "title": "Microsoft Build Conference 2025: How to Watch Live",
+      "link": "articles/microsoft-build-conference-2025-how-to-watch-live.html",
+      "published_iso": "2025-05-09T15:51:50Z",
+      "summary_short": "Learn how to watch the Microsoft Build conference 2025 live, including keynote details and expected AI announcements. Stream starts May 19.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2019/10/GettyImages-482028705-1.jpg?resize=1200,818",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Microsoft Build conference"
+      ],
+      "audio_url": null,
+      "trend_score": 10.49
+    },
+    {
       "id": "992e975ce3baed966d42d0835a03d848e745e99a33c9f8862e800ea70ce5c1fb",
       "title": "Google Signs Deal for 1.8 GW of Advanced Nuclear Power",
       "link": "articles/google-signs-deal-for-18-gw-of-advanced-nuclear-power.html",
