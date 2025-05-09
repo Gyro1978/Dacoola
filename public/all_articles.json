@@ -1,6 +1,21 @@
 {
   "articles": [
     {
+      "id": "992e975ce3baed966d42d0835a03d848e745e99a33c9f8862e800ea70ce5c1fb",
+      "title": "Google Signs Deal for 1.8 GW of Advanced Nuclear Power",
+      "link": "articles/google-signs-deal-for-18-gw-of-advanced-nuclear-power.html",
+      "published_iso": "2025-05-09T15:31:04Z",
+      "summary_short": "Google signs a deal with Elementl Power to develop 1.8 GW of advanced nuclear power for its AI-driven data center expansion.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/10/GettyImages-531153042.jpeg?resize=1200,800",
+      "topic": "Environment",
+      "is_breaking": false,
+      "tags": [
+        "Google nuclear power deal"
+      ],
+      "audio_url": null,
+      "trend_score": 10.5
+    },
+    {
       "id": "3b0a57ab445aa193052362f675ff54007ef659fd7faa56755889944be581aa47",
       "title": "X Timeline Issue Leaves Users Without Updates",
       "link": "articles/x-timeline-issue-leaves-users-without-updates.html",
