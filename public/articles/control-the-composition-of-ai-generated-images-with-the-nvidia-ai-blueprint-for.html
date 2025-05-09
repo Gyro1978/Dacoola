@@ -1,4 +1,4 @@
-<!-- templates/post_template.html (1/1) -->
+<!-- templates/post_template.html (1/1) - COMPLETE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,16 +60,16 @@
     <meta name="twitter:image" content="https://blogs.nvidia.com/wp-content/uploads/2025/04/ai-3d-blueprint-nv-blog-1280x680-1.jpg">
 
     <!-- *** Stylesheets & Icons *** -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Relative path from articles/ to public/css/ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> <!-- Adjust path relative to public root -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> 
 
     <!-- *** JSON-LD Structured Data *** -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "NVIDIA AI Blueprint Enhances AI Image Generation Control",
+      "headline": "Control the Composition of AI-Generated Images With the NVIDIA AI Blueprint for 3D-Guided Generative AI",
       "description": "NVIDIA&#39;s new AI Blueprint offers precise AI image generation control using 3D-guided workflows, simplifying advanced generative AI for creators.",
       "keywords": ["NVIDIA AI Blueprint", "3D-guided generative AI", "AI image generation control", "ComfyUI", "FLUX.1-dev model", "TensorRT acceleration", "Blender integration", "AI-assisted content creation", "GeForce RTX GPUs"],
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://dacoolaa.netlify.app/articles/control-the-composition-of-ai-generated-images-with-the-nvidia-ai-blueprint-for-.html" },
@@ -116,7 +116,8 @@
             <aside class="sidebar related-news">
                 <h2>Related News</h2>
                 <div id="related-news-content">
-                    <!-- JS will populate this list -->
+                    <!-- JS will populate this list with article cards -->
+                    <p class="placeholder">Loading related news...</p>
                 </div>
             </aside>
 
@@ -132,13 +133,21 @@
                         <div class="article-meta">
                             Published on <span id="publish-date">April 30, 2025</span>
                             by <span id="author-name">AI News Team</span>
+                            
+                            <span class="article-source-inline">
+                                  |   <a href="https://blogs.nvidia.com/blog/rtx-ai-garage-3d-guided-generative-ai-blueprint/" target="_blank" rel="noopener noreferrer" class="article-source-inline-link" title="View original source article">View Original Source</a>
+                            </span>
+                            
                         </div>
+                        <!-- Any other meta items can go here, e.g., reading time if you calculate it -->
                     </div>
                 </header>
 
+                
                 <figure class="article-image-container">
                     <img id="article-image" src="https://blogs.nvidia.com/wp-content/uploads/2025/04/ai-3d-blueprint-nv-blog-1280x680-1.jpg" alt="Control the Composition of AI-Generated Images With the NVIDIA AI Blueprint for 3D-Guided Generative AI">
                 </figure>
+                
 
                 <section id="article-body">
                     <h2>Control the Composition of AI-Generated Images With the NVIDIA AI Blueprint for 3D-Guided Generative AI</h2>
@@ -146,22 +155,23 @@
 <p>The blueprint leverages <strong>ComfyUI</strong>, a tool that chains generative AI models, along with NVIDIA’s <strong>FLUX.1-dev</strong> model, optimized for GeForce RTX GPUs. By utilizing <strong>TensorRT acceleration</strong> and FP4/FP8 quantization, the system delivers faster inference speeds and reduced VRAM usage. This setup is particularly beneficial for AI artists and developers, offering a preconfigured environment with detailed documentation, sample assets, and plug-ins for seamless Blender integration.  </p>
 <h3>Significance</h3>
 <p>NVIDIA’s blueprint simplifies advanced generative AI workflows, making high-precision <strong>AI image generation control</strong> accessible to a broader audience. By combining 3D scene manipulation with real-time AI processing, it empowers creators to iterate quickly while maintaining artistic intent—a significant step forward for AI-assisted content creation.</p>
-                    
                 </section>
 
+                
                 <footer>
-                    
                     <div class="tags">
                         Tags: <span id="article-tags"><a href="https://dacoolaa.netlify.app/topic.html?name=NVIDIA%20AI%20Blueprint" class="tag-link">NVIDIA AI Blueprint</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=3D-guided%20generative%20AI" class="tag-link">3D-guided generative AI</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=AI%20image%20generation%20control" class="tag-link">AI image generation control</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=ComfyUI" class="tag-link">ComfyUI</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=FLUX.1-dev%20model" class="tag-link">FLUX.1-dev model</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=TensorRT%20acceleration" class="tag-link">TensorRT acceleration</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Blender%20integration" class="tag-link">Blender integration</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=AI-assisted%20content%20creation" class="tag-link">AI-assisted content creation</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=GeForce%20RTX%20GPUs" class="tag-link">GeForce RTX GPUs</a></span>
                     </div>
                 </footer>
+                
 
             </article>
 
             <aside class="sidebar latest-news">
                 <h2>Latest News</h2>
                 <div id="latest-news-content">
-                    <!-- JS will populate this list -->
+                    <!-- JS will populate this list with article cards -->
+                    <p class="placeholder">Loading latest news...</p>
                 </div>
             </aside>
 
@@ -169,12 +179,10 @@
     </div> <!-- End site-content-wrapper -->
 
     <!-- GLOBAL FIXED BROWSER TTS PLAYER BUTTON -->
-    <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
-        <i class="fas fa-headphones" aria-hidden="true"></i>
-    </button>
+    
     
 
-    <script src="../js/script.js"></script>
+    <script src="../js/script.js"></script> <!-- Relative path from articles/ to public/js/ -->
 
 </body>
 </html>

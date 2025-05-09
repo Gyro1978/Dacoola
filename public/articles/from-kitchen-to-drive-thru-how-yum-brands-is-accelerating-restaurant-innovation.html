@@ -1,4 +1,4 @@
-<!-- templates/post_template.html (1/1) -->
+<!-- templates/post_template.html (1/1) - COMPLETE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,16 +62,16 @@
     <meta name="twitter:image" content="https://blogs.nvidia.com/wp-content/uploads/2025/04/yum-podcast-blog-1280x680-1.jpg">
 
     <!-- *** Stylesheets & Icons *** -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Relative path from articles/ to public/css/ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> <!-- Adjust path relative to public root -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> 
 
     <!-- *** JSON-LD Structured Data *** -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "How AI in Restaurants Is Transforming Yum! Brands&#39; Operations",
+      "headline": "From Kitchen to Drive-Thru: How Yum! Brands Is Accelerating Restaurant Innovation With AI",
       "description": "Yum! Brands partners with NVIDIA to deploy AI in 500 restaurants, optimizing kitchen efficiency and drive-thru accuracy. Learn how AI in restaurants is reshaping QSRs.",
       "keywords": ["AI in restaurants", "Yum! Brands", "NVIDIA AI collaboration", "restaurant innovation", "computer vision in QSR", "AI for inventory management", "voice AI in drive-thru", "Byte by Yum!", "quick-service restaurant technology", "AI-driven customer experience"],
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://dacoolaa.netlify.app/articles/from-kitchen-to-drive-thru-how-yum-brands-is-accelerating-restaurant-innovation-.html" },
@@ -118,7 +118,8 @@
             <aside class="sidebar related-news">
                 <h2>Related News</h2>
                 <div id="related-news-content">
-                    <!-- JS will populate this list -->
+                    <!-- JS will populate this list with article cards -->
+                    <p class="placeholder">Loading related news...</p>
                 </div>
             </aside>
 
@@ -134,35 +135,44 @@
                         <div class="article-meta">
                             Published on <span id="publish-date">April 30, 2025</span>
                             by <span id="author-name">AI News Team</span>
+                            
+                            <span class="article-source-inline">
+                                  |   <a href="https://blogs.nvidia.com/blog/yum-brands-ai-podcast/" target="_blank" rel="noopener noreferrer" class="article-source-inline-link" title="View original source article">View Original Source</a>
+                            </span>
+                            
                         </div>
+                        <!-- Any other meta items can go here, e.g., reading time if you calculate it -->
                     </div>
                 </header>
 
+                
                 <figure class="article-image-container">
                     <img id="article-image" src="https://blogs.nvidia.com/wp-content/uploads/2025/04/yum-podcast-blog-1280x680-1.jpg" alt="From Kitchen to Drive-Thru: How Yum! Brands Is Accelerating Restaurant Innovation With AI">
                 </figure>
+                
 
                 <section id="article-body">
                     <h2>From Kitchen to Drive-Thru: How Yum! Brands Is Accelerating Restaurant Innovation With AI</h2>
 <p>The quick-service restaurant (QSR) industry is undergoing a major transformation with the adoption of <strong>AI in restaurants</strong>. Yum! Brands, the parent company of KFC, Taco Bell, Pizza Hut, and Habit Burger &amp; Grill, has partnered with NVIDIA to integrate AI solutions across 500 locations this year. This collaboration, announced at NVIDIA’s GTC conference, aims to enhance everything from kitchen operations to customer interactions using machine learning and computer vision.  </p>
 <p>One key application of AI is optimizing sales forecasting and inventory management, reducing food waste and stockouts. Joe Park, Yum! Brands’ Chief Digital and Technology Officer, explained how AI helps prioritize pizza orders in real time, ensuring freshness and efficiency. The company’s proprietary platform, Byte by Yum!, consolidates multiple AI-driven tools to simplify operations for restaurant managers.  </p>
 <p>Beyond the kitchen, Yum! Brands is testing computer vision to analyze drive-thru traffic and improve staffing decisions. Voice AI is also being deployed to enhance order accuracy, particularly for complex menu items like Taco Bell’s Baja Blast or chalupa. According to Park, AI not only speeds up service but also makes employees’ jobs easier by automating repetitive tasks. With over 61,000 global locations, Yum! Brands is leveraging AI to maintain efficiency at scale while improving the customer experience.</p>
-                    
                 </section>
 
+                
                 <footer>
-                    
                     <div class="tags">
                         Tags: <span id="article-tags"><a href="https://dacoolaa.netlify.app/topic.html?name=AI%20in%20restaurants" class="tag-link">AI in restaurants</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Yum%21%20Brands" class="tag-link">Yum! Brands</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=NVIDIA%20AI%20collaboration" class="tag-link">NVIDIA AI collaboration</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=restaurant%20innovation" class="tag-link">restaurant innovation</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=computer%20vision%20in%20QSR" class="tag-link">computer vision in QSR</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=AI%20for%20inventory%20management" class="tag-link">AI for inventory management</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=voice%20AI%20in%20drive-thru" class="tag-link">voice AI in drive-thru</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Byte%20by%20Yum%21" class="tag-link">Byte by Yum!</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=quick-service%20restaurant%20technology" class="tag-link">quick-service restaurant technology</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=AI-driven%20customer%20experience" class="tag-link">AI-driven customer experience</a></span>
                     </div>
                 </footer>
+                
 
             </article>
 
             <aside class="sidebar latest-news">
                 <h2>Latest News</h2>
                 <div id="latest-news-content">
-                    <!-- JS will populate this list -->
+                    <!-- JS will populate this list with article cards -->
+                    <p class="placeholder">Loading latest news...</p>
                 </div>
             </aside>
 
@@ -170,12 +180,10 @@
     </div> <!-- End site-content-wrapper -->
 
     <!-- GLOBAL FIXED BROWSER TTS PLAYER BUTTON -->
-    <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
-        <i class="fas fa-headphones" aria-hidden="true"></i>
-    </button>
+    
     
 
-    <script src="../js/script.js"></script>
+    <script src="../js/script.js"></script> <!-- Relative path from articles/ to public/js/ -->
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-<!-- templates/post_template.html (1/1) -->
+<!-- templates/post_template.html (1/1) - COMPLETE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,16 +60,16 @@
     <meta name="twitter:image" content="https://techcrunch.com/wp-content/uploads/2025/03/EthanThornton5.jpg?resize=1200,931">
 
     <!-- *** Stylesheets & Icons *** -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Relative path from articles/ to public/css/ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> <!-- Adjust path relative to public root -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> 
 
     <!-- *** JSON-LD Structured Data *** -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Defense tech funding: Mach Industries raises $100M at $470M valuation",
+      "headline": "Rising star defense tech startup Mach Industries is raising $100 million, sources say",
       "description": "Defense tech startup Mach Industries, led by 21-year-old Ethan Thornton, is securing $100M in funding co-led by Khosla and Bedrock Capital.",
       "keywords": ["Mach Industries", "defense tech startup", "venture capital funding", "Ethan Thornton", "Khosla Ventures", "Bedrock Capital", "defense sector investment", "next-generation defense technologies", "startup valuation"],
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://dacoolaa.netlify.app/articles/rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-.html" },
@@ -116,7 +116,8 @@
             <aside class="sidebar related-news">
                 <h2>Related News</h2>
                 <div id="related-news-content">
-                    <!-- JS will populate this list -->
+                    <!-- JS will populate this list with article cards -->
+                    <p class="placeholder">Loading related news...</p>
                 </div>
             </aside>
 
@@ -132,35 +133,44 @@
                         <div class="article-meta">
                             Published on <span id="publish-date">May 01, 2025</span>
                             by <span id="author-name">AI News Team</span>
+                            
+                            <span class="article-source-inline">
+                                  |   <a href="https://techcrunch.com/2025/05/01/rising-star-defense-tech-startup-mach-industries-is-raising-100-million-sources-say/" target="_blank" rel="noopener noreferrer" class="article-source-inline-link" title="View original source article">View Original Source</a>
+                            </span>
+                            
                         </div>
+                        <!-- Any other meta items can go here, e.g., reading time if you calculate it -->
                     </div>
                 </header>
 
+                
                 <figure class="article-image-container">
                     <img id="article-image" src="https://techcrunch.com/wp-content/uploads/2025/03/EthanThornton5.jpg?resize=1200,931" alt="Rising star defense tech startup Mach Industries is raising $100 million, sources say">
                 </figure>
+                
 
                 <section id="article-body">
                     <h2>Rising star defense tech startup Mach Industries is raising $100 million, sources say</h2>
 <p>Mach Industries, a defense tech startup founded by 21-year-old Ethan Thornton, is nearing the close of a $100 million funding round, according to sources familiar with the deal. The financing is co-led by new investor Khosla Ventures and existing backer Bedrock Capital, signaling strong confidence in the company’s trajectory. This latest defense tech funding round will reportedly value Mach Industries at approximately $470 million.  </p>
 <p>The startup, which has quickly gained attention in the defense sector, has not yet disclosed specific details about how the new capital will be utilized. However, the involvement of high-profile investors like Khosla suggests growing interest in next-generation defense technologies. Bedrock Capital’s continued participation also highlights sustained belief in Mach Industries’ potential.  </p>
 <p>While the company remains tight-lipped about its product roadmap, the substantial funding round underscores its rapid ascent in the competitive defense tech landscape. With a young founder at the helm and backing from influential venture firms, Mach Industries is positioning itself as a key player in the evolving defense innovation space.</p>
-                    
                 </section>
 
+                
                 <footer>
-                    
                     <div class="tags">
                         Tags: <span id="article-tags"><a href="https://dacoolaa.netlify.app/topic.html?name=Mach%20Industries" class="tag-link">Mach Industries</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=defense%20tech%20startup" class="tag-link">defense tech startup</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=venture%20capital%20funding" class="tag-link">venture capital funding</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Ethan%20Thornton" class="tag-link">Ethan Thornton</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Khosla%20Ventures" class="tag-link">Khosla Ventures</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Bedrock%20Capital" class="tag-link">Bedrock Capital</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=defense%20sector%20investment" class="tag-link">defense sector investment</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=next-generation%20defense%20technologies" class="tag-link">next-generation defense technologies</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=startup%20valuation" class="tag-link">startup valuation</a></span>
                     </div>
                 </footer>
+                
 
             </article>
 
             <aside class="sidebar latest-news">
                 <h2>Latest News</h2>
                 <div id="latest-news-content">
-                    <!-- JS will populate this list -->
+                    <!-- JS will populate this list with article cards -->
+                    <p class="placeholder">Loading latest news...</p>
                 </div>
             </aside>
 
@@ -168,12 +178,10 @@
     </div> <!-- End site-content-wrapper -->
 
     <!-- GLOBAL FIXED BROWSER TTS PLAYER BUTTON -->
-    <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
-        <i class="fas fa-headphones" aria-hidden="true"></i>
-    </button>
+    
     
 
-    <script src="../js/script.js"></script>
+    <script src="../js/script.js"></script> <!-- Relative path from articles/ to public/js/ -->
 
 </body>
 </html>

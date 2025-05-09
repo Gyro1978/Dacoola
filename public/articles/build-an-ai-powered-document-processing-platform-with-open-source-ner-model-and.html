@@ -1,4 +1,4 @@
-<!-- templates/post_template.html (1/1) -->
+<!-- templates/post_template.html (1/1) - COMPLETE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,16 +62,16 @@
     <meta name="twitter:image" content="https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/document-processing-sagemaker-1120x630.jpg">
 
     <!-- *** Stylesheets & Icons *** -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Relative path from articles/ to public/css/ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> <!-- Adjust path relative to public root -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> 
 
     <!-- *** JSON-LD Structured Data *** -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "AI Document Processing with Open Source NER &amp; LLM on SageMaker",
+      "headline": "Build an AI-powered document processing platform with open source NER model and LLM on Amazon SageMaker",
       "description": "Learn how to build an AI document processing platform using open-source NER models and LLMs on Amazon SageMaker for efficient archival data management.",
       "keywords": ["AI document processing", "Amazon SageMaker", "Named Entity Recognition", "Large Language Models", "Mixtral-8x7B", "BERT NER model", "AWS Step Functions", "metadata enrichment", "serverless architecture", "digital transformation"],
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://dacoolaa.netlify.app/articles/build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-.html" },
@@ -118,7 +118,8 @@
             <aside class="sidebar related-news">
                 <h2>Related News</h2>
                 <div id="related-news-content">
-                    <!-- JS will populate this list -->
+                    <!-- JS will populate this list with article cards -->
+                    <p class="placeholder">Loading related news...</p>
                 </div>
             </aside>
 
@@ -134,35 +135,44 @@
                         <div class="article-meta">
                             Published on <span id="publish-date">April 23, 2025</span>
                             by <span id="author-name">AI News Team</span>
+                            
+                            <span class="article-source-inline">
+                                  |   <a href="https://aws.amazon.com/blogs/machine-learning/build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-llm-on-amazon-sagemaker/" target="_blank" rel="noopener noreferrer" class="article-source-inline-link" title="View original source article">View Original Source</a>
+                            </span>
+                            
                         </div>
+                        <!-- Any other meta items can go here, e.g., reading time if you calculate it -->
                     </div>
                 </header>
 
+                
                 <figure class="article-image-container">
                     <img id="article-image" src="https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/document-processing-sagemaker-1120x630.jpg" alt="Build an AI-powered document processing platform with open source NER model and LLM on Amazon SageMaker">
                 </figure>
+                
 
                 <section id="article-body">
                     <h2>Build an AI-powered document processing platform with open source NER model and LLM on Amazon SageMaker</h2>
 <p>Archival data in research institutions and national laboratories often remains underutilized due to limited metadata and inconsistent labeling, making traditional keyword-based searches inefficient. To address this, a U.S. National Laboratory has developed an <strong>AI document processing</strong> platform on Amazon SageMaker, integrating named entity recognition (NER) and large language models (LLMs) like Mixtral-8x7B. This solution automates metadata enrichment, document classification, and summarization, significantly improving the accessibility of historical records.  </p>
 <p>The platform employs a serverless, cost-optimized architecture that dynamically provisions SageMaker endpoints for efficient resource use. A BERT-based NER model extracts structured metadata, while Mixtral-8x7B handles abstractive summarization and title generation. By processing documents in batches and automatically cleaning up resources, the system enhances metadata accuracy and search functionality, supporting digital transformation efforts in research and policy development.  </p>
 <p>The solution’s modular design includes specialized Amazon S3 buckets for different processing stages—such as extracts, summaries, and author information—ensuring organized data management. AWS Step Functions orchestrate the workflow, coordinating Lambda functions for tasks like extractive summarization (using TextRank) and author extraction (via BERT NER). This approach reduces LLM workload by 33% and token input by 75-90%, optimizing both performance and cost.</p>
-                    
                 </section>
 
+                
                 <footer>
-                    
                     <div class="tags">
                         Tags: <span id="article-tags"><a href="https://dacoolaa.netlify.app/topic.html?name=AI%20document%20processing" class="tag-link">AI document processing</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Amazon%20SageMaker" class="tag-link">Amazon SageMaker</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Named%20Entity%20Recognition" class="tag-link">Named Entity Recognition</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Large%20Language%20Models" class="tag-link">Large Language Models</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Mixtral-8x7B" class="tag-link">Mixtral-8x7B</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=BERT%20NER%20model" class="tag-link">BERT NER model</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=AWS%20Step%20Functions" class="tag-link">AWS Step Functions</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=metadata%20enrichment" class="tag-link">metadata enrichment</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=serverless%20architecture" class="tag-link">serverless architecture</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=digital%20transformation" class="tag-link">digital transformation</a></span>
                     </div>
                 </footer>
+                
 
             </article>
 
             <aside class="sidebar latest-news">
                 <h2>Latest News</h2>
                 <div id="latest-news-content">
-                    <!-- JS will populate this list -->
+                    <!-- JS will populate this list with article cards -->
+                    <p class="placeholder">Loading latest news...</p>
                 </div>
             </aside>
 
@@ -170,12 +180,10 @@
     </div> <!-- End site-content-wrapper -->
 
     <!-- GLOBAL FIXED BROWSER TTS PLAYER BUTTON -->
-    <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
-        <i class="fas fa-headphones" aria-hidden="true"></i>
-    </button>
+    
     
 
-    <script src="../js/script.js"></script>
+    <script src="../js/script.js"></script> <!-- Relative path from articles/ to public/js/ -->
 
 </body>
 </html>
