@@ -1,13 +1,13 @@
-<!-- public/navbar.html (1/1) - FULL SCRIPT with Mobile Toggle -->
+<!-- public/navbar.html (1/1) - FULL SCRIPT with Mobile Toggle and home-icon class -->
 <nav class="navbar">
     <div class="nav-container">
         <!-- Logo -->
-        <a href="/home.html">
+        <a href="/home.html"> <!-- Link to home.html -->
             <img src="https://i.postimg.cc/C145pD86/Dacoola-text-logo.png" alt="Dacoola_logo" class="nav-logo">
         </a>
 
-        <!-- Standard Search (Hidden on small screens by CSS) -->
-        <div class="nav-search">
+        <!-- Standard Search (Hidden on small screens by CSS unless .mobile-active) -->
+        <div class="nav-search"> <!-- This div gets .mobile-active toggled -->
             <input type="search" placeholder="Search news..." id="search-input" autocomplete="off">
             <button type="button" id="search-button" title="Search">
                 <i class="fas fa-search"></i>
@@ -16,7 +16,7 @@
          </div>
 
          <!-- Right side container for menu and mobile search toggle -->
-         <div class="nav-right-section"> <!-- NEW WRAPPER -->
+         <div class="nav-right-section"> 
              <!-- Standard Menu -->
              <ul class="nav-menu">
                  <li class="nav-item">
@@ -25,18 +25,18 @@
                      </a>
                  </li>
                  <li class="nav-item">
-                     <a href="/home.html" class="nav-link icon-link home-icon" title="Home">
+                     <a href="/home.html" class="nav-link icon-link home-icon" title="Home"> <!-- Added home-icon class -->
                          <i class="fas fa-home"></i>
                      </a>
                  </li>
                  <!-- Add other icon links here if needed -->
              </ul>
 
-             <!-- Mobile Search Toggle Button (Hidden on large screens by CSS) -->
+             <!-- Mobile Search Toggle Button (Shown on small screens by CSS) -->
              <button id="mobile-search-toggle" aria-label="Toggle search bar">
                  <i class="fas fa-search"></i>
              </button>
-        </div> <!-- END NEW WRAPPER -->
+        </div> 
 
     </div>
 </nav>

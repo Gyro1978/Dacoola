@@ -1,4 +1,4 @@
-<!-- templates/post_template.html (1/1) -->
+<!-- templates/post_template.html (1/1) - COMPLETE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,16 +44,16 @@
     <meta name="twitter:image" content="{{ IMAGE_URL }}">
 
     <!-- *** Stylesheets & Icons *** -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Relative path from articles/ to public/css/ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> <!-- Adjust path relative to public root -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> 
 
     <!-- *** JSON-LD Structured Data *** -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "{{ ARTICLE_SEO_H1 | default(PAGE_TITLE) | escapejs }}",
+      "headline": "{{ ARTICLE_SEO_H1 | default(ARTICLE_HEADLINE) | escapejs }}",
       "description": "{{ META_DESCRIPTION | escapejs }}",
       "keywords": {{ META_KEYWORDS_LIST | tojson | safe }},
       "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ CANONICAL_URL | escapejs }}" },
@@ -100,48 +100,58 @@
             <aside class="sidebar related-news">
                 <h2>Related News</h2>
                 <div id="related-news-content">
-                    <!-- JS will populate this list -->
+                    <!-- JS will populate this list with article cards -->
+                    <p class="placeholder">Loading related news...</p>
                 </div>
             </aside>
 
             <article class="main-article"
                 data-article-id="{{ CURRENT_ARTICLE_ID }}"
                 data-article-topic="{{ CURRENT_ARTICLE_TOPIC }}"
-                data-article-tags='{{ CURRENT_ARTICLE_TAGS_JSON | safe }}'
+                data-article-tags='{{ CURRENT_ARTICLE_TAGS_JSON | default("[]") | safe }}'
                 data-audio-url="{{ AUDIO_URL or '' }}">
 
                 <header>
                     <h1 id="article-headline">{{ ARTICLE_SEO_H1 | default(ARTICLE_HEADLINE) }}</h1>
                     <div class="article-meta-container">
                         <div class="article-meta">
-                            Published on <span id="publish-date">{{PUBLISH_DATE}}</span>
-                            by <span id="author-name">{{AUTHOR_NAME | default('AI News Team')}}</span>
+                            Published on <span id="publish-date">{{ PUBLISH_DATE }}</span>
+                            by <span id="author-name">{{ AUTHOR_NAME | default('AI News Team') }}</span>
+                            {% if SOURCE_ARTICLE_URL and SOURCE_ARTICLE_URL != '#' %}
+                            <span class="article-source-inline">
+                                  |   <a href="{{ SOURCE_ARTICLE_URL }}" target="_blank" rel="noopener noreferrer" class="article-source-inline-link" title="View original source article">View Original Source</a>
+                            </span>
+                            {% endif %}
                         </div>
+                        <!-- Any other meta items can go here, e.g., reading time if you calculate it -->
                     </div>
                 </header>
 
+                {% if IMAGE_URL %}
                 <figure class="article-image-container">
-                    <img id="article-image" src="{{IMAGE_URL}}" alt="{{IMAGE_ALT_TEXT}}">
+                    <img id="article-image" src="{{ IMAGE_URL }}" alt="{{ IMAGE_ALT_TEXT | default(ARTICLE_HEADLINE) }}">
                 </figure>
+                {% endif %}
 
                 <section id="article-body">
                     {{ ARTICLE_BODY_HTML | safe }}
-                    {# Source link button and its container are REMOVED from here as per your request #}
                 </section>
 
+                {% if ARTICLE_TAGS_HTML %}
                 <footer>
-                    {# Only tags remain in the footer now #}
                     <div class="tags">
                         Tags: <span id="article-tags">{{ ARTICLE_TAGS_HTML | safe }}</span>
                     </div>
                 </footer>
+                {% endif %}
 
             </article>
 
             <aside class="sidebar latest-news">
                 <h2>Latest News</h2>
                 <div id="latest-news-content">
-                    <!-- JS will populate this list -->
+                    <!-- JS will populate this list with article cards -->
+                    <p class="placeholder">Loading latest news...</p>
                 </div>
             </aside>
 
@@ -149,12 +159,14 @@
     </div> <!-- End site-content-wrapper -->
 
     <!-- GLOBAL FIXED BROWSER TTS PLAYER BUTTON -->
+    {% if synth_available_check_in_js_or_always_show %} {# Logic to show this button might depend on JS detection or always be present #}
     <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
         <i class="fas fa-headphones" aria-hidden="true"></i>
     </button>
+    {% endif %}
     {# <audio id="global-audio-player" preload="none" style="display:none;"></audio> #}
 
-    <script src="../js/script.js"></script>
+    <script src="../js/script.js"></script> <!-- Relative path from articles/ to public/js/ -->
 
 </body>
 </html>

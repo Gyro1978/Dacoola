@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -12,43 +12,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- *** CORE SEO & Page Info *** -->
-    <!-- Make Title more specific / branded -->
     <title>Dacoola - AI & Tech News, Analysis, and Updates</title>
-    <!-- Slightly more engaging description -->
     <meta name="description" content="Stay updated with the latest breaking AI & tech news, analysis, and trends in Artificial Intelligence from Dacoola. Discover insights on models, hardware, and more.">
-    <!-- Optional: Add specific keywords for the homepage -->
     <meta name="keywords" content="AI news, artificial intelligence, tech news, machine learning, deep learning, tech trends, AI startups, technology updates">
 
-    <!-- *** CANONICAL URL (Very Important) *** -->
-    <!-- REPLACE with your actual domain and path to home -->
-    <link rel="canonical" href="https://www.yourdacoolasite.com/home.html">
-    <!-- OR if home.html is served at the root: <link rel="canonical" href="https://www.yourdacoolasite.com/"> -->
+    <!-- *** CANONICAL URL *** -->
+    <link rel="canonical" href="https://dacoolaa.netlify.app/home.html"> 
+    <!-- This was your most recent canonical in home.html, adjust if needed -->
 
     <!-- *** OPEN GRAPH (Facebook, LinkedIn, etc.) *** -->
-    <!-- REPLACE og:title, og:description, og:image, og:url, og:site_name with your actual info -->
     <meta property="og:title" content="Dacoola - AI & Tech News, Analysis, and Updates">
     <meta property="og:description" content="Stay updated with the latest breaking AI & tech news, analysis, and trends in Artificial Intelligence from Dacoola. Discover insights on models, hardware, and more.">
-    <meta property="og:image" content="https://i.imgur.com/A5Wdp6f.png"> <!-- Your main site logo or a featured image -->
-    <meta property="og:url" content="https://www.yourdacoolasite.com/home.html"> <!-- Use the canonical URL -->
-    <meta property="og:type" content="website"> <!-- Homepage is 'website' type -->
+    <meta property="og:image" content="https://i.imgur.com/A5Wdp6f.png"> 
+    <meta property="og:url" content="https://dacoolaa.netlify.app/home.html"> 
+    <meta property="og:type" content="website"> 
     <meta property="og:site_name" content="Dacoola">
 
     <!-- *** TWITTER CARD (X) *** -->
-    <!-- REPLACE with your actual info -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dacoola - AI & Tech News, Analysis, and Updates">
     <meta name="twitter:description" content="Stay updated with the latest breaking AI & tech news, analysis, and trends in Artificial Intelligence from Dacoola. Discover insights on models, hardware, and more.">
-    <meta name="twitter:image" content="https://i.imgur.com/A5Wdp6f.png"> <!-- Your main site logo or featured image -->
+    <meta name="twitter:image" content="https://i.imgur.com/A5Wdp6f.png"> 
     <!-- Optional: <meta name="twitter:site" content="@YourTwitterHandle"> -->
 
 
     <!-- *** Stylesheets & Icons *** -->
-    <link rel="stylesheet" href="css/styles.css"> <!-- Path relative to public/ -->
+    <link rel="stylesheet" href="css/styles.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" href="images/dacoola_image_logo.png"> <!-- Adjust path relative to public root -->
+    <link rel="icon" type="image/png" href="images/dacoola_image_logo.png"> 
     <meta name="google-adsense-account" content="ca-pub-8839663991354998">
     <meta name="google-site-verification" content="anumA09X-jkdohnde5NgKF_oSn-KYlNPhGT_QTdeNvA" />
-    <link rel="canonical" href="https://dacoolaa.netlify.app/">
+    <!-- Removed duplicate canonical link -->
 
     <!-- *** JSON-LD Structured Data for Website *** -->
     <script type="application/ld+json">
@@ -70,7 +64,7 @@
             "name": "Dacoola",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://ibb.co/tpKjc98q" // Assuming this is your intended logo URL from .env
+              "url": "https://ibb.co/tpKjc98q" 
             }
           }
         }
@@ -89,7 +83,7 @@
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSLDZ2QB"
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSLDZ2QB"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
@@ -104,7 +98,11 @@
         <section id="breaking-news-section" class="home-section">
             <h2 id="breaking-news-title">Breaking News</h2>
             <div id="breaking-news-content" class="breaking-news-content slider-container">
-                <p class="placeholder">Loading banner news...</p>
+                <div class="slider-track">
+                    <!-- JS populates slides (breaking-news-item) here -->
+                    <p class="placeholder">Loading banner news...</p> 
+                </div>
+                <!-- JS will append controls (prev/next buttons) and pagination (dots) here as direct children of slider-container -->
             </div>
         </section>
 
@@ -116,7 +114,7 @@
         <section id="latest-news-section" class="home-section">
             <div class="section-header">
                 <h2>Latest News</h2>
-                <a href="latest.html" class="view-all-button">View All →</a> <!-- Corrected relative link -->
+                <a href="latest.html" class="view-all-button">View All →</a> 
             </div>
             <div class="latest-news-grid">
                 <p class="placeholder">Loading latest news...</p>
@@ -127,7 +125,6 @@
         <section id="topics-section" class="home-section">
             <h2>Topics</h2>
             <div class="topics-list">
-                <!-- JS populates this -->
                 <p class="placeholder">Loading topics...</p>
             </div>
         </section>
@@ -138,7 +135,8 @@
                 <h2>Trending Articles</h2>
                 <!-- No View All Button -->
             </div>
-            <div class="trending-news-list">
+            <div class="trending-news-list"> 
+                <!-- JS populates this with a UL an LIs -->
                 <p class="placeholder">Loading trending news...</p>
             </div>
         </section>
