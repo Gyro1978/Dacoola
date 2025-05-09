@@ -1439,6 +1439,21 @@
       "trend_score": 14.99
     },
     {
+      "id": "086c3d703db356f45e246c767e334be9e9961b9296f42e40c821b07f6e034284",
+      "title": "NSO Group Ordered to Pay $167M in Landmark Pegasus Spyware Ruling",
+      "link": "articles/nso-group-ordered-to-pay-$167m-in-landmark-pegasus-spyware-ruling.html",
+      "published_iso": "2025-05-07T10:26:35Z",
+      "summary_short": "NSO Group faces a $167M Pegasus spyware ruling for hacking 1,400 WhatsApp users. Learn about the legal implications and broader impact.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/a826/live/a9efc0b0-2b2d-11f0-a926-032a6ac0e498.jpg",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "Pegasus spyware ruling"
+      ],
+      "audio_url": null,
+      "trend_score": 10.16
+    },
+    {
       "id": "661f4fb809c77d54838a59ef85ceb39bcca01e0408df3f42b45940401cf72655",
       "title": "Amazon’s AI Code Generation Tool \"Kiro\" Aims to Revolutionize Software Development",
       "link": "articles/amazon’s-ai-code-generation-tool-kiro-aims-to-revolutionize-software-development.html",
