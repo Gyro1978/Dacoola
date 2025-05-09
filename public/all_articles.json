@@ -1,6 +1,66 @@
 {
   "articles": [
     {
+      "id": "5a95b7515009bff2933581576de92ac7ac5563a57552f5d049c9b65c2e636eb1",
+      "title": "AI Regulation Discussion Highlights Need for Global Cooperation",
+      "link": "articles/ai-regulation-discussion-highlights-need-for-global-cooperation.html",
+      "published_iso": "2025-05-09T01:02:24Z",
+      "summary_short": "Key insights from the AI regulation discussion as tech leaders advocate for infrastructure and global cooperation to maintain U.S. competitiveness.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2024/11/DALL·E-2024-11-26-15.37.14-An-image-symbolizing-AI-regulation-and-the-current-chaotic-state-of-oversight.-The-scene-includes-visual-elements-representing-artificial-intelligence.webp?w=1024?w=1200&strip=all",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "AI regulation discussion",
+        "latest news on AI regulation discussion",
+        "how does AI regulation discussion work",
+        "AI regulation discussion future applications",
+        "AI regulation discussion trends 2025",
+        "AI regulation discussion impact"
+      ],
+      "audio_url": null,
+      "trend_score": 12.98
+    },
+    {
+      "id": "c6aa2fd2d3d0c6ed86dd99694cc3918e21f622efedc9fe499f0278e19af84563",
+      "title": "OpenAI o4-mini fine-tuning enables enterprise customization with reinforcement learning",
+      "link": "articles/openai-o4-mini-fine-tuning-enables-enterprise-customization-with-reinforcement-l.html",
+      "published_iso": "2025-05-09T00:07:32Z",
+      "summary_short": "OpenAI now offers reinforcement fine-tuning for its o4-mini reasoning model, enabling enterprises to create custom versions tailored to their needs.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_sleek_robots_in_uniforms_adjust_dials_on_a_vintage_swit_0554196c-8d1b-40c5-bc71-3324d595cbfe.png?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI o4-mini fine-tuning future applications",
+        "how does OpenAI o4-mini fine-tuning work",
+        "OpenAI o4-mini fine-tuning",
+        "OpenAI o4-mini fine-tuning impact",
+        "OpenAI o4-mini fine-tuning trends 2025",
+        "latest news on OpenAI o4-mini fine-tuning"
+      ],
+      "audio_url": null,
+      "trend_score": 12.98
+    },
+    {
+      "id": "f926abef90d824723c2eabf28d982c3689738ebbebd0f77b5a047ebb578f3571",
+      "title": "AI in Healthcare: Ottawa Hospital Reduces Burnout by 70% with Voice Capture",
+      "link": "articles/ai-in-healthcare-ottawa-hospital-reduces-burnout-by-70-with-voice-capture.html",
+      "published_iso": "2025-05-08T23:57:06Z",
+      "summary_short": "The Ottawa Hospital uses AI in healthcare to reduce physician burnout by 70% and achieve 97% patient satisfaction with Microsoft's DAX Copilot.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/Ottawa.jpeg?w=1024?w=1200&strip=all",
+      "topic": "Health",
+      "is_breaking": false,
+      "tags": [
+        "AI in healthcare future applications",
+        "AI in healthcare impact",
+        "AI in healthcare trends 2025",
+        "how does AI in healthcare work",
+        "AI in healthcare",
+        "latest news on AI in healthcare"
+      ],
+      "audio_url": null,
+      "trend_score": 12.98
+    },
+    {
       "id": "6dc7e9e1876d6579b385a6ac2976657990ce665a61180925925c0bd163f765b9",
       "title": "Elon Musk VC Lawsuit: Investor Alleges Wrongful Termination and Fraud",
       "link": "articles/elon-musk-vc-lawsuit-investor-alleges-wrongful-termination-and-fraud.html",

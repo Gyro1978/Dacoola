@@ -2,9 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dacoolaa.netlify.app/</loc>
-    <lastmod>2025-05-08</lastmod>
+    <lastmod>2025-05-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/ai-regulation-discussion-highlights-need-for-global-cooperation.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/openai-o4-mini-fine-tuning-enables-enterprise-customization-with-reinforcement-l.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/ai-in-healthcare-ottawa-hospital-reduces-burnout-by-70-with-voice-capture.html</loc>
+    <lastmod>2025-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/elon-musk-vc-lawsuit-investor-alleges-wrongful-termination-and-fraud.html</loc>
