@@ -42,7 +42,7 @@ ALLOWED_TOPICS = [
     "Generative AI Applications", "AI in Creative Industries", "AI for Climate & Sustainability", 
     "AI in Education & Workforce", "Cybersecurity & AI", "AI in Autonomous Systems", 
     "Quantum Computing for AI", "AGI/ASI Research & Safety", "Specialized AI Applications", 
-    "Other Emerging AI Trends" # More generic catch-all
+    "Other Emerging AI Trends" 
 ]
 IMPORTANT_ENTITIES_FILE = os.path.join(PROJECT_ROOT, 'data', 'important_entities.json')
 
@@ -83,7 +83,7 @@ Perform a critical analysis of the following news article content:
 Title: {article_title}
 Summary (may be truncated if very long): {article_summary}
 
-**ALLOWED TOPICS (Select the SINGLE most precise fit):**
+**ALLOWED TOPICS (Select the SINGLE most precise fit from this EXACT list):**
 {allowed_topics_list_str}
 
 **CRITICAL OVERRIDE ENTITIES (Significant news involving these entities is at least 'Interesting'):**
@@ -96,7 +96,7 @@ Summary (may be truncated if very long): {article_summary}
 *   **"Breaking" (Score 9-10/10 Significance):**
     *   **Definition:** Reserved EXCLUSIVELY for verified, urgent, high-impact, and broadly consequential factual events demanding immediate, widespread attention within the global AI/Tech sphere. Must represent a *paradigm shift, major disruption, or foundational breakthrough.* Avoid using subjective hype in your reasoning.
     *   **Strict Examples (Illustrative, not exhaustive):**
-        *   Confirmation of a new SOTA AI model release that *demonstrably and substantially* surpasses existing benchmarks across multiple key tasks (e.g., a true GPT-5 level jump with evidence in summary).
+        *   Confirmation of a new SOTA AI model release that *demonstrably and substantially* surpasses existing benchmarks across multiple key tasks.
         *   Discovery and verified exploitation of a critical, widespread AI system vulnerability with immediate large-scale security implications.
         *   Landmark, globally impactful AI legislation/treaty enacted with clear, immediate, and widespread consequences for the AI industry.
         *   A confirmed major acquisition or merger between Tier-1 AI companies that fundamentally reshapes the competitive landscape.
@@ -125,7 +125,7 @@ Summary (may be truncated if very long): {article_summary}
 4.  **Novelty Assessment:** Is this genuinely new information?
 5.  **Impact Assessment:** What is the potential scope and magnitude of this news?
 6.  **Final Importance Level:** Based on all above, assign "Breaking", "Interesting", or "Boring".
-7.  **Topic Selection:** If not "Boring", choose the single most precise topic from the ALLOWED TOPICS.
+7.  **Topic Selection:** If not "Boring", choose the single most precise topic from the ALLOWED TOPICS. If no topic is a strong fit, you must still choose the closest available option.
 8.  **Primary Topic Keyword Extraction:** Extract a concise (3-7 words) semantic phrase reflecting the core news event. Avoid hype words like "groundbreaking" unless directly and prominently quoted as such from a credible source within the summary for an exceptional event.
 
 **JSON OUTPUT (Strictly Adhere to this format, no other text):**
@@ -142,26 +142,16 @@ Summary (may be truncated if very long): {article_summary}
 }}
 """
 
-# (API Call Function and rest of the script remains the same as your last provided version)
-# ... call_deepseek_api_filter, run_filter_agent, and __main__ block ...
-
-# --- API Call Function ---
 def call_deepseek_api_filter(system_prompt, user_prompt):
     if not DEEPSEEK_API_KEY:
         logger.error("DEEPSEEK_API_KEY missing for filter agent.")
         return None
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
-        "Accept": "application/json"
-    }
+    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Accept": "application/json"}
     payload = {
         "model": AGENT_MODEL,
         "messages": [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
-        "max_tokens": MAX_TOKENS_RESPONSE,
-        "temperature": TEMPERATURE,
-        "response_format": JSON_MODE_FOR_DEEPSEEK, 
-        "stream": False
+        "max_tokens": MAX_TOKENS_RESPONSE, "temperature": TEMPERATURE,
+        "response_format": JSON_MODE_FOR_DEEPSEEK, "stream": False
     }
     try:
         logger.debug(f"Sending ADVANCED filter request (model: {AGENT_MODEL}).")
@@ -174,25 +164,18 @@ def call_deepseek_api_filter(system_prompt, user_prompt):
                 parsed_content = json.loads(content_str)
                 required_top_keys = ["importance_level", "topic", "reasoning_summary", "primary_topic_keyword"]
                 if not all(key in parsed_content for key in required_top_keys):
-                    logger.error(f"DeepSeek JSON output missing required top-level keys: {content_str}")
-                    return None
+                    logger.error(f"DeepSeek JSON output missing required top-level keys: {content_str}"); return None
                 if not isinstance(parsed_content.get("reasoning_summary"), dict):
-                    logger.error(f"DeepSeek JSON 'reasoning_summary' is not a dict: {content_str}")
-                    return None 
+                    logger.error(f"DeepSeek JSON 'reasoning_summary' is not a dict: {content_str}"); return None 
                 return parsed_content 
             except json.JSONDecodeError as jde:
-                logger.error(f"Failed to parse JSON from DeepSeek (even in JSON mode): {jde}. Response: {content_str}")
-                return None
-        logger.error(f"DeepSeek API response malformed (filter): {result}")
-        return None
-    except Exception as e:
-        logger.exception(f"DeepSeek API call failed (filter): {e}")
-        return None
+                logger.error(f"Failed to parse JSON from DeepSeek: {jde}. Response: {content_str}"); return None
+        logger.error(f"DeepSeek API response malformed (filter): {result}"); return None
+    except Exception as e: logger.exception(f"DeepSeek API call failed (filter): {e}"); return None
 
-# --- Main Agent Function ---
 def run_filter_agent(article_data):
     if not isinstance(article_data, dict) or not article_data.get('title') or not article_data.get('summary'):
-        logger.error("Invalid article_data for ADVANCED filter agent.")
+        logger.error("Invalid article_data for ADVANCED filter agent.");
         if isinstance(article_data, dict): article_data['filter_error'] = "Invalid input format";
         return article_data
 
@@ -203,80 +186,75 @@ def run_filter_agent(article_data):
     max_summary_for_prompt = 2000 
     prompt_summary = article_summary_full
     if len(article_summary_full) > max_summary_for_prompt:
-        logger.warning(f"Truncating summary for filter prompt (> {max_summary_for_prompt} chars) for ID: {article_id}")
         prompt_summary = article_summary_full[:max_summary_for_prompt] + "..."
 
     allowed_topics_str = "\n".join([f"- {topic}" for topic in ALLOWED_TOPICS])
-    
     key_individuals_examples_str = ", ".join(IMPORTANT_PEOPLE_LIST[:10]) + (", etc." if len(IMPORTANT_PEOPLE_LIST) > 10 else "")
     key_companies_products_examples_str = ", ".join(IMPORTANT_COMPANIES_PRODUCTS_LIST[:15]) + (", etc." if len(IMPORTANT_COMPANIES_PRODUCTS_LIST) > 15 else "")
 
     try:
         user_prompt = FILTER_PROMPT_USER_TEMPLATE_ADVANCED.format(
-            article_title=article_title,
-            article_summary=prompt_summary,
+            article_title=article_title, article_summary=prompt_summary,
             allowed_topics_list_str=allowed_topics_str,
             key_individuals_examples_str=key_individuals_examples_str,
             key_companies_products_examples_str=key_companies_products_examples_str
         )
     except KeyError as e:
-        logger.exception(f"KeyError formatting ADVANCED filter prompt template (ID: {article_id}): {e}")
-        article_data['filter_verdict'] = None
-        article_data['filter_error'] = f"Prompt template formatting error: {e}"
-        return article_data
+        logger.exception(f"KeyError formatting ADVANCED filter prompt (ID: {article_id}): {e}")
+        article_data['filter_verdict'] = None; article_data['filter_error'] = f"Prompt format error: {e}"; return article_data
 
-    logger.info(f"Running ADVANCED filter agent for article ID: {article_id} Title: {article_title[:70]}...")
-    
+    logger.info(f"Running ADVANCED filter agent for ID: {article_id} Title: {article_title[:70]}...")
     filter_verdict_dict = call_deepseek_api_filter(FILTER_PROMPT_SYSTEM_ADVANCED, user_prompt)
 
     if not filter_verdict_dict:
-        logger.error(f"ADVANCED Filter agent API call or JSON parsing failed for article ID: {article_id}.")
-        article_data['filter_verdict'] = None
-        article_data['filter_error'] = "API call/JSON parse failed"
-        return article_data
+        logger.error(f"ADVANCED Filter agent API/JSON failed for ID: {article_id}.")
+        article_data['filter_verdict'] = None; article_data['filter_error'] = "API call/JSON parse failed"; return article_data
 
     try:
         required_keys = ["importance_level", "topic", "reasoning_summary", "primary_topic_keyword"]
-        if not all(k in filter_verdict_dict for k in required_keys):
-            raise ValueError("Missing required keys in filter verdict JSON from API")
-        
-        reasoning_summary_obj = filter_verdict_dict.get("reasoning_summary")
-        if not isinstance(reasoning_summary_obj, dict) or not all(k in reasoning_summary_obj for k in ["override_entity_check", "factuality_novelty", "impact_assessment", "final_justification"]):
-             raise ValueError("Reasoning summary object is malformed or missing keys.")
+        if not all(k in filter_verdict_dict for k in required_keys): raise ValueError("Missing required keys")
+        r_summary = filter_verdict_dict.get("reasoning_summary")
+        if not isinstance(r_summary, dict) or not all(k in r_summary for k in ["override_entity_check", "factuality_novelty", "impact_assessment", "final_justification"]):
+             raise ValueError("Reasoning summary malformed")
 
-        valid_levels = ["Breaking", "Interesting", "Boring"]
-        if filter_verdict_dict['importance_level'] not in valid_levels:
-            logger.warning(f"Invalid importance_level '{filter_verdict_dict['importance_level']}' from LLM. Forcing to 'Boring'. ID: {article_id}")
+        if filter_verdict_dict['importance_level'] not in ["Breaking", "Interesting", "Boring"]:
+            logger.warning(f"Invalid importance_level '{filter_verdict_dict['importance_level']}'. Forcing Boring. ID: {article_id}")
             filter_verdict_dict['importance_level'] = "Boring"
         
         if filter_verdict_dict['topic'] not in ALLOWED_TOPICS:
-            logger.warning(f"Invalid topic '{filter_verdict_dict['topic']}' from LLM. Forcing to 'Other Emerging AI Trends'. ID: {article_id}")
-            filter_verdict_dict['topic'] = "Other Emerging AI Trends"
+            # Try to find a close match or default safely
+            original_topic = filter_verdict_dict['topic']
+            closest_topic = ALLOWED_TOPICS[-1] # Default to last topic in list
+            if ALLOWED_TOPICS: # Ensure list is not empty
+                # Simple partial match check (can be improved with fuzzy matching if needed)
+                for allowed_topic in ALLOWED_TOPICS:
+                    if isinstance(original_topic, str) and original_topic.lower() in allowed_topic.lower() or \
+                       (isinstance(allowed_topic, str) and allowed_topic.lower() in original_topic.lower()):
+                        closest_topic = allowed_topic
+                        break
+            logger.warning(f"Invalid topic '{original_topic}' from LLM. Best match/defaulting to '{closest_topic}'. ID: {article_id}")
+            filter_verdict_dict['topic'] = closest_topic
         
         if not filter_verdict_dict.get('primary_topic_keyword') or len(filter_verdict_dict['primary_topic_keyword'].split()) > 7:
-            logger.warning(f"Primary topic keyword missing or too long: '{filter_verdict_dict.get('primary_topic_keyword','None')}'. ID: {article_id}. Attempting to generate a fallback.")
-            filter_verdict_dict['primary_topic_keyword'] = ' '.join(article_title.split()[:5]) 
+            logger.warning(f"Primary topic keyword missing or too long: '{filter_verdict_dict.get('primary_topic_keyword','None')}'. ID: {article_id}. Defaulting from title.")
+            filter_verdict_dict['primary_topic_keyword'] = ' '.join(article_title.split()[:5]).strip()
+            if not filter_verdict_dict['primary_topic_keyword']: # If title was also empty
+                filter_verdict_dict['primary_topic_keyword'] = "Key Update"
 
-        logger.info(f"ADVANCED Filter verdict for ID {article_id}: Level='{filter_verdict_dict['importance_level']}', Topic='{filter_verdict_dict['topic']}', Keyword='{filter_verdict_dict['primary_topic_keyword']}'")
-        logger.debug(f"Reasoning for {article_id}: {json.dumps(filter_verdict_dict['reasoning_summary'])}")
 
+        logger.info(f"ADVANCED Filter: ID {article_id}, Level='{filter_verdict_dict['importance_level']}', Topic='{filter_verdict_dict['topic']}', Keyword='{filter_verdict_dict['primary_topic_keyword']}'")
+        logger.debug(f"Reasoning {article_id}: {json.dumps(filter_verdict_dict['reasoning_summary'])}")
         article_data['filter_verdict'] = filter_verdict_dict 
         article_data['filter_error'] = None
         article_data['filtered_at_iso'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
         return article_data
-
     except ValueError as ve: 
-        logger.error(f"Validation error on filter verdict for ID {article_id}: {ve}. Response: {filter_verdict_dict}")
-        article_data['filter_verdict'] = None
-        article_data['filter_error'] = f"Verdict validation failed: {ve}"
-        return article_data
+        logger.error(f"Validation error filter verdict ID {article_id}: {ve}. Resp: {filter_verdict_dict}")
+        article_data['filter_verdict'] = None; article_data['filter_error'] = f"Verdict validation: {ve}"; return article_data
     except Exception as e:
-        logger.exception(f"Unexpected error processing filter response for ID {article_id}: {e}")
-        article_data['filter_verdict'] = None
-        article_data['filter_error'] = "Unexpected processing error post-API call"
-        return article_data
+        logger.exception(f"Unexpected error processing filter response ID {article_id}: {e}")
+        article_data['filter_verdict'] = None; article_data['filter_error'] = "Unexpected processing error"; return article_data
 
-# --- Example Usage (for standalone testing) ---
 if __name__ == "__main__":
     logging.getLogger().setLevel(logging.DEBUG) 
     logger.setLevel(logging.DEBUG) 
@@ -284,21 +262,21 @@ if __name__ == "__main__":
     test_article_truly_breaking = {
         'id': 'test-breaking-001',
         'title': "OpenAI Confirms GPT-5 Achieves Near-Human Performance on All Major Reasoning Benchmarks, Cites Verifiable Public Data",
-        'summary': "OpenAI today officially announced that its upcoming GPT-5 model has demonstrated performance nearly indistinguishable from human experts across a comprehensive suite of reasoning benchmarks, including complex mathematics, advanced coding, and nuanced ethical dilemmas. The company released a detailed technical paper with verifiable benchmark scores and methodologies, citing specific datasets like MATH, HumanEval, and MMLU where GPT-5 shows >95th percentile human-level results. This marks a pivotal moment in AI development, potentially accelerating AGI timelines. The announcement included plans for staged deployment with rigorous safety protocols.",
+        'summary': "OpenAI today officially announced that its upcoming GPT-5 model has demonstrated performance nearly indistinguishable from human experts across a comprehensive suite of reasoning benchmarks... This marks a pivotal moment...",
         'content_for_processing': "OpenAI today officially announced that its upcoming GPT-5 model has demonstrated performance nearly indistinguishable from human experts across a comprehensive suite of reasoning benchmarks, including complex mathematics, advanced coding, and nuanced ethical dilemmas. The company released a detailed technical paper with verifiable benchmark scores and methodologies, citing specific datasets like MATH, HumanEval, and MMLU where GPT-5 shows >95th percentile human-level results. This marks a pivotal moment in AI development, potentially accelerating AGI timelines. The announcement included plans for staged deployment with rigorous safety protocols. The implications for various industries are immense, from automated scientific discovery to highly personalized education."
     }
 
     test_article_interesting_key_entity = {
         'id': 'test-interesting-override-002',
         'title': "Elon Musk Announces Tesla Will Open Source Full Self-Driving (FSD) v13 Codebase by End of Year",
-        'summary': "In a surprise tweet, Elon Musk declared that Tesla intends to open source the entire codebase for its Full Self-Driving (FSD) version 13 by December 2025. Musk stated this move is to accelerate autonomous vehicle safety and development globally. The decision follows increased scrutiny of FSD's capabilities and is seen as a major strategic shift for the company. Specific licensing details were not provided.",
+        'summary': "In a surprise tweet, Elon Musk declared that Tesla intends to open source the entire codebase for its Full Self-Driving (FSD) version 13 by December 2025...",
         'content_for_processing': "In a surprise tweet, Elon Musk declared that Tesla intends to open source the entire codebase for its Full Self-Driving (FSD) version 13 by December 2025. Musk stated this move is to accelerate autonomous vehicle safety and development globally. The decision follows increased scrutiny of FSD's capabilities and is seen as a major strategic shift for the company. Specific licensing details were not provided. This could impact competitors and the wider AV software landscape."
     }
     
-    test_article_boring_update = {
+    test_article_boring_update = { # Corrected variable name
         'id': 'test-boring-update-003',
         'title': "Popular Photo Editing App 'PixelMagic' Releases Version 5.2 with New UI Color Themes and Minor Bug Fixes",
-        'summary': "PixelMagic, a widely used mobile photo editing application, today rolled out version 5.2. The update primarily features a refreshed set of user interface color themes and addresses several minor bugs reported by users in the previous version. Performance remains largely unchanged.",
+        'summary': "PixelMagic, a widely used mobile photo editing application, today rolled out version 5.2. The update primarily features a refreshed set of user interface color themes...",
         'content_for_processing': "PixelMagic, a widely used mobile photo editing application, today rolled out version 5.2. The update primarily features a refreshed set of user interface color themes and addresses several minor bugs reported by users in the previous version. Performance remains largely unchanged. Users can download the update from the App Store and Google Play."
     }
 
@@ -313,7 +291,8 @@ if __name__ == "__main__":
     print("Result (Interesting Override):", json.dumps(result_interesting_override.get('filter_verdict'), indent=2))
     
     logger.info("\nTesting BORING article (minor update, no key entity)...")
-    result_boring = run_filter_agent(test_article_bqoring_update.copy())
+    # CORRECTED THE TYPO HERE
+    result_boring = run_filter_agent(test_article_boring_update.copy()) 
     print("Result (Boring Update):", json.dumps(result_boring.get('filter_verdict'), indent=2))
 
     logger.info("\n--- ADVANCED Filter Agent Standalone Test Complete ---")
