@@ -26,7 +26,7 @@ load_dotenv(dotenv_path=dotenv_path)
 
 # Google Ads API Config
 ENABLE_LIVE_ADS_API = True # Keep True, but handle failures gracefully
-DEFAULT_GOOGLE_ADS_YAML_PATH = os.path.join(PROJECT_ROOT, 'google-ads.yaml')
+DEFAULT_GOOGLE_ADS_YAML_PATH = os.path.join(os.path.dirname(PROJECT_ROOT), 'google-ads.yaml')
 GOOGLE_ADS_CONFIG_PATH = os.getenv('GOOGLE_ADS_CONFIGURATION_FILE_PATH', DEFAULT_GOOGLE_ADS_YAML_PATH)
 
 # DeepSeek API Config (for keyword brainstorming fallback/enhancement)

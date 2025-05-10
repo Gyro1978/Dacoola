@@ -6,22 +6,22 @@ import re
 import time
 from datetime import datetime, timezone
 from urllib.parse import urljoin, urlparse
-import hashlib # For generating a unique ID if not otherwise available
-import requests # For direct requests, title fetching, and DeepSeek API
+import hashlib
+import requests # <<<< ADDED IMPORT
 
 # --- !! Path Setup - Must be at the very top !! ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(SCRIPT_DIR) # This assumes manual_article_submitter.py is in src/
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR) 
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 # --- End Path Setup ---
 
 # --- Import necessary functions ---
 try:
-    from scrapers.news_scraper import get_full_article_content # For fetching content
+    from scrapers.news_scraper import get_full_article_content 
     from scrapers.image_scraper import find_best_image, scrape_source_for_image
-    from agents.keyword_research_agent import run_keyword_research_agent # Assumes advanced version
-    from agents.seo_article_generator_agent import run_seo_article_agent # Assumes advanced version
+    from agents.keyword_research_agent import run_keyword_research_agent 
+    from agents.seo_article_generator_agent import run_seo_article_agent 
     from social.social_media_poster import initialize_social_clients, run_social_media_poster
     
     try:
@@ -82,58 +82,90 @@ try:
     logger.info(f"Jinja2 environment loaded for ADVANCED manual submitter from {TEMPLATE_DIR}")
 except Exception as e: logger.exception("CRITICAL: Failed Jinja2 init for ADVANCED manual submitter."); sys.exit(1)
 
-# --- Helper function to generate article ID (This was missing) ---
 def generate_manual_article_id(url, title):
-    """Generates a unique ID for a manually submitted article."""
-    identifier_base = f"{url}::{title}::manual_submission" # Added suffix for clarity
+    identifier_base = f"{url}::{title}::manual_submission" 
     return hashlib.sha256(identifier_base.encode('utf-8')).hexdigest()
-# --- End Helper function ---
 
-def _call_deepseek_helper(prompt_text, purpose="helper task"):
+def _call_deepseek_helper(prompt_text, purpose="helper task", expect_json=False): # Added expect_json flag
     if not DEEPSEEK_API_KEY_MANUAL:
         logger.error(f"DeepSeek API key missing for {purpose}.")
         return None
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_API_KEY_MANUAL}"}
-    payload = {"model": DEEPSEEK_HELPER_MODEL, "messages": [{"role": "user", "content": prompt_text}], "max_tokens": 300, "temperature": 0.3}
-    logger.info(f"Calling DeepSeek for {purpose}...")
+    payload = {
+        "model": DEEPSEEK_HELPER_MODEL, 
+        "messages": [{"role": "user", "content": prompt_text}], 
+        "max_tokens": 300, 
+        "temperature": 0.3
+    }
+    if expect_json: # Add response_format if JSON is expected
+        payload["response_format"] = {"type": "json_object"}
+
+    logger.info(f"Calling DeepSeek for {purpose} (expect_json: {expect_json})...")
     try:
         response = requests.post(DEEPSEEK_API_URL_MANUAL, headers=headers, json=payload, timeout=60)
         response.raise_for_status()
         result = response.json()
         if result.get("choices") and result["choices"][0].get("message"):
-            return result["choices"][0]["message"].get("content","").strip()
+            content_str = result["choices"][0]["message"].get("content","").strip()
+            # Attempt to strip markdown fences if present, especially if not using json_object mode or it fails
+            if content_str.startswith("```json"):
+                content_str = content_str[7:].strip()
+                if content_str.endswith("```"):
+                    content_str = content_str[:-3].strip()
+            elif content_str.startswith("```"):
+                content_str = content_str[3:].strip()
+                if content_str.endswith("```"):
+                    content_str = content_str[:-3].strip()
+            return content_str # Return string, parsing happens in calling function
         logger.error(f"DeepSeek API response malformed for {purpose}: {result}")
         return None
     except Exception as e: logger.exception(f"DeepSeek API call for {purpose} failed: {e}"); return None
 
 def derive_topic_and_keyword(title, text_snippet):
-    from agents.filter_news_agent import ALLOWED_TOPICS # Get current topics
+    from agents.filter_news_agent import ALLOWED_TOPICS 
     allowed_topics_str = ", ".join(ALLOWED_TOPICS)
     prompt = f"""
-    Given the article title: "{title}"
-    And a snippet of its content: "{text_snippet[:1000]}..."
+    Analyze the following article title and content snippet:
+    Title: "{title}"
+    Snippet: "{text_snippet[:1000]}..."
 
-    1. Determine the single most relevant topic from this list: {allowed_topics_str}.
-    2. Extract a concise (3-5 words) primary keyword phrase that captures the main subject.
+    Your task is to:
+    1. Identify the single MOST relevant topic from the provided list: {allowed_topics_str}.
+    2. Formulate a concise (3-5 words) primary keyword phrase that encapsulates the core subject matter.
 
-    Respond in JSON format: {{"derived_topic": "Selected Topic", "derived_primary_keyword": "Keyword Phrase"}}
-    Ensure the topic is exactly from the provided list.
+    Please provide your response strictly in the following JSON format:
+    {{
+      "derived_topic": "Your Selected Topic From List",
+      "derived_primary_keyword": "Your Concise Keyword Phrase"
+    }}
     """
     logger.info("Deriving topic and primary keyword using DeepSeek...")
-    response_str = _call_deepseek_helper(prompt, "topic/keyword derivation")
+    # Pass expect_json=True to _call_deepseek_helper
+    response_str = _call_deepseek_helper(prompt, "topic/keyword derivation", expect_json=True)
     if response_str:
         try:
-            data = json.loads(response_str)
+            # The response_str should already be clean JSON if json_object mode worked.
+            data = json.loads(response_str) 
             derived_topic = data.get("derived_topic")
             derived_keyword = data.get("derived_primary_keyword")
-            if derived_topic in ALLOWED_TOPICS and derived_keyword:
+            if derived_topic in ALLOWED_TOPICS and derived_keyword and isinstance(derived_keyword, str) and derived_keyword.strip():
                 logger.info(f"Derived Topic: {derived_topic}, Derived Keyword: {derived_keyword}")
-                return derived_topic, derived_keyword
+                return derived_topic, derived_keyword.strip()
             else:
-                logger.warning(f"LLM derivation failed validation. Topic: {derived_topic}, Keyword: {derived_keyword}")
-        except json.JSONDecodeError:
-            logger.error(f"Failed to parse JSON from topic/keyword derivation: {response_str}")
-    return "General Tech", ' '.join(title.split()[:4]) # Fallback
+                logger.warning(f"LLM derivation failed validation or returned unexpected types. Topic: {derived_topic} (type: {type(derived_topic)}), Keyword: {derived_keyword} (type: {type(derived_keyword)})")
+        except json.JSONDecodeError as e:
+            logger.error(f"Failed to parse JSON from topic/keyword derivation: {response_str}. Error: {e}")
+        except TypeError as e: # Catch if data.get() is on a non-dict, e.g. if LLM returns a list by mistake
+            logger.error(f"LLM returned unexpected data type for topic/keyword derivation: {response_str}. Error: {e}")
+
+
+    logger.warning("Falling back to default topic/keyword due to derivation issues.")
+    # Fallback logic
+    fallback_topic = "General Tech"
+    fallback_keyword = ' '.join(title.split()[:4]).strip() if title else "Tech Article"
+    if not fallback_keyword: fallback_keyword = "Tech Article"
+    return fallback_topic, fallback_keyword
+
 
 def fetch_research_snippets(query, num_snippets=2):
     logger.info(f"Simulating research for '{query}'. In a real setup, would fetch {num_snippets} snippets.")
@@ -142,12 +174,9 @@ def fetch_research_snippets(query, num_snippets=2):
 
 def process_advanced_manual_submission(article_url):
     logger.info(f"--- ADVANCED Manual Processing for URL: {article_url} ---")
-    # Ensure directories is callable or defined if not imported from main
     if 'ensure_directories' in globals(): ensure_directories()
     else: logger.warning("ensure_directories function not available.")
 
-
-    # 1. Fetch Primary Content
     logger.info(f"Fetching primary content for: {article_url}...")
     primary_content = get_full_article_content(article_url)
     if not primary_content:
@@ -156,21 +185,35 @@ def process_advanced_manual_submission(article_url):
 
     page_title = "Manually Submitted Advanced Article"
     try:
-        soup = BeautifulSoup(primary_content, 'html.parser') 
-        if soup.title and soup.title.string: page_title = soup.title.string.strip()
-        elif soup.find('h1'): page_title = soup.find('h1').get_text(strip=True)
-        if not page_title and len(primary_content) > 50 : 
-             page_title = primary_content.splitlines()[0].strip()
-
+        # Try parsing fetched HTML content first for title
+        temp_soup_primary = BeautifulSoup(primary_content, 'html.parser')
+        if temp_soup_primary.title and temp_soup_primary.title.string:
+            page_title = temp_soup_primary.title.string.strip()
+        elif temp_soup_primary.find('h1'):
+            page_title = temp_soup_primary.find('h1').get_text(strip=True)
+        
+        # If still default, try fetching URL again just for fresh headers/title tag via requests
+        if page_title == "Manually Submitted Advanced Article":
+            logger.debug(f"Primary content parsing didn't yield title. Attempting direct request for title for {article_url}")
+            response_title_fetch = requests.get(article_url, timeout=15, headers={'User-Agent': 'Mozilla/5.0 DacoolaTitleFetcher/1.0'})
+            response_title_fetch.raise_for_status()
+            soup_title = BeautifulSoup(response_title_fetch.content, 'html.parser')
+            if soup_title.title and soup_title.title.string:
+                page_title = soup_title.title.string.strip()
+            elif soup_title.find('h1'): # Fallback to H1 from fresh request
+                page_title = soup_title.find('h1').get_text(strip=True)
+        
+        if not page_title or page_title == "Manually Submitted Advanced Article": # Final fallback if still not found
+             if len(primary_content) > 50: page_title = primary_content.splitlines()[0].strip()[:150] # Use first line
+        
         if "|" in page_title: page_title = page_title.split("|")[0].strip()
         if " - " in page_title: page_title = page_title.split(" - ")[0].strip()
         page_title = page_title[:150] 
         logger.info(f"Extracted/Derived page title: {page_title}")
-    except Exception as e: logger.warning(f"Could not extract refined title: {e}. Using default.")
+    except Exception as e: logger.warning(f"Could not extract refined title for {article_url}: {e}. Using default or first line.")
 
-    # --- Use the generate_manual_article_id function ---
+
     article_id = generate_manual_article_id(article_url, page_title)
-    # --- End Use ---
     processed_file_path = os.path.join(PROCESSED_JSON_DIR, f"{article_id}.json")
     if os.path.exists(processed_file_path):
         logger.warning(f"Article {article_id} (URL: {article_url}) already processed. Overwrite? (y/n)")
@@ -225,6 +268,7 @@ def process_advanced_manual_submission(article_url):
     final_title = article_data.get('title', page_title) 
     article_data['slug'] = (re.sub(r'[^\w\s-]', '', final_title).strip().lower().replace(' ', '-')[:70] or f"manual-{article_id}")
     article_data['slug'] = re.sub(r'-+', '-', article_data['slug']).strip('-')
+
 
     article_relative_path = f"articles/{article_data['slug']}.html"
     canonical_url = urljoin(YOUR_SITE_BASE_URL, article_relative_path) if YOUR_SITE_BASE_URL != "/" else f"/{article_relative_path}"
@@ -291,17 +335,13 @@ if __name__ == "__main__":
 
         if process_advanced_manual_submission(article_url_input):
             logger.info(f"ADVANCED processing complete for: {article_url_input}")
+            
             # Check if main's sitemap components are available before trying to use them
-            if 'run_sitemap_generator' in globals() and 'YOUR_SITE_BASE_URL' in globals() and YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != "/":
-                try:
-                    from generate_sitemap import generate_sitemap 
-                    logger.info("Attempting sitemap regeneration...")
-                    generate_sitemap() # Assumes generate_sitemap is defined and imported
-                    logger.info("Sitemap regeneration complete.")
-                except NameError: # If generate_sitemap was not successfully imported from main
-                    logger.error("Sitemap regeneration skipped: generate_sitemap function not available.")
-                except Exception as sm_e: logger.error(f"Sitemap regen error: {sm_e}")
-            else: logger.info("Skipping sitemap regen (YOUR_SITE_BASE_URL not set or sitemap function not available).")
+            # For sitemap generation, it's better to rely on the main scheduled task
+            # or a separate dedicated script for sitemap generation to avoid partial sitemaps
+            # if this manual script is run intermittently.
+            logger.info("Manual submission complete. Sitemap will be updated by the next scheduled run or manual sitemap generation.")
+
         else:
             logger.error(f"ADVANCED processing failed for: {article_url_input}")
 
