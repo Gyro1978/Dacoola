@@ -1111,7 +1111,11 @@ def cross_reference_information(article_data: Dict[str, Any], source_data_list: 
     source_contents = []
     for i, source in enumerate(source_data_list):
         if source.get('success') and source.get('content_text'):
-            source_contents.append(f"Source {i+1} ({source.get('domain', 'unknown')}):\n{source.get('title', '')}\n{source.get('content_text', '')[:1500]}...")
+            # Create source content string without f-string for the content_text part
+            source_header = f"Source {i+1} ({source.get('domain', 'unknown')}):"
+            source_title = source.get('title', '')
+            source_content = source.get('content_text', '')[:1500] + "..."
+            source_contents.append(f"{source_header}\n{source_title}\n{source_content}")
     
     if not source_contents:
         logger.warning("No valid source content for cross-referencing")
