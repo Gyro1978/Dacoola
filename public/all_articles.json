@@ -1,6 +1,35 @@
 {
   "articles": [
     {
+      "id": "c1f4c558be7e41f5f2abd8403cf828171f486074f0a3c31c97f272c894cda242",
+      "title": "WhatsApp Spyware Lawsuit Outcome: $167M Verdict and Critical Takeaways",
+      "link": "articles/whatsapp-spyware-lawsuit-outcome-$167m-verdict-and-critical-takeaways.html",
+      "published_iso": "2025-05-10T11:00:50Z",
+      "summary_short": "Discover the WhatsApp spyware lawsuit outcome, including the $167M verdict against NSO Group, zero-click attacks, and legal precedents in cybersecurity.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2018/12/whatsapp-toxic.jpg?resize=1200,675",
+      "topic": "Cybersecurity & AI",
+      "is_breaking": false,
+      "tags": [
+        "privacy rights tech",
+        "end-to-end encryption flaws",
+        "encrypted messaging vulnerabilities",
+        "spyware legal battles",
+        "NSO Group Pegasus spyware",
+        "mobile device spyware",
+        "government hacking tools",
+        "human rights surveillance",
+        "WhatsApp security breach",
+        "cybersecurity legal precedents",
+        "international cyber espionage",
+        "cyber surveillance lawsuit",
+        "Facebook NSO lawsuit",
+        "WhatsApp spyware lawsuit outcome",
+        "WhatsApp update security"
+      ],
+      "audio_url": null,
+      "trend_score": 17.5
+    },
+    {
       "id": "8c2ce2887c51f81884610812887c5efa8e48d34353ee0294e1efa9ef86e1aacc",
       "title": "Tsinghua University’s Self-learning AI 'Absolute Zero' Achieves Breakthrough in Autonomous LLM Training",
       "link": "articles/tsinghua-universitys-self-learning-ai-absolute-zero-achieves-breakthro.html",
