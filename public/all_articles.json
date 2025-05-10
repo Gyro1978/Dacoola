@@ -1,6 +1,35 @@
 {
   "articles": [
     {
+      "id": "8c2ce2887c51f81884610812887c5efa8e48d34353ee0294e1efa9ef86e1aacc",
+      "title": "Tsinghua University’s Self-learning AI 'Absolute Zero' Achieves Breakthrough in Autonomous LLM Training",
+      "link": "articles/tsinghua-universitys-self-learning-ai-absolute-zero-achieves-breakthro.html",
+      "published_iso": "2025-05-10T02:11:55Z",
+      "summary_short": "Tsinghua University's Self-learning AI, 'Absolute Zero,' trains LLMs autonomously with zero external data, revolutionizing AI reasoning capabilities.",
+      "image_url": "https://www.psychologicalscience.org/redesign/wp-content/uploads/2024/11/v37-DEC-AIFeature-Featured-1600x1000.jpg",
+      "topic": "Groundbreaking AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Zero-shot learning in AI",
+        "Autonomous machine learning",
+        "Reinforcement Learning with Verifiable Rewards",
+        "Tsinghua University AI research",
+        "Absolute Zero AI project",
+        "Self-learning AI models",
+        "AI that learns from scratch",
+        "Self-learning AI",
+        "Advanced AI reasoning techniques",
+        "LLM training without external data",
+        "AI reasoning capabilities",
+        "AI self-improvement algorithms",
+        "Innovations in AI training methods",
+        "Machine learning without data",
+        "Unsupervised learning for LLMs"
+      ],
+      "audio_url": null,
+      "trend_score": 10.0
+    },
+    {
       "id": "3dd78e3285c2687e549d1c0adb2106518d48c0956e7ddce99b2c3ae008acefab",
       "title": "Elton John and Dua Lipa Lead Call for AI Protection in Creative Industries",
       "link": "articles/elton-john-and-dua-lipa-lead-call-for-ai-protection-in-creative-industries.html",
