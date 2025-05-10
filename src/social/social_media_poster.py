@@ -6,12 +6,12 @@ from dotenv import load_dotenv
 
 # --- For Bluesky ---
 try:
-    from atprototools import Session, AtException
+    # This is the structurally correct import based on the library's __init__.py
+    from atprototools import Session, AtException 
 except ImportError:
     Session = None
     AtException = None
-    # This warning will appear if the import fails at the Python level
-    logging.warning("atprototools library FAILED TO IMPORT. Bluesky posting will be disabled. Ensure it's in requirements.txt and installs correctly.")
+    logging.warning("atprototools library components (Session/AtException) FAILED TO IMPORT. Bluesky posting will be disabled. Ensure it's in requirements.txt and installs correctly.")
 
 # --- For Twitter ---
 try:
@@ -72,34 +72,28 @@ def _bsky_create_link_facet(text, link_url):
     return facets
 
 def post_to_bluesky(session, title, article_url, summary_short=None, image_url=None):
-    if not Session or not session or not AtException:
+    if not Session or not session or not AtException: 
         logger.error("Bluesky client (Session or AtException) not available. Cannot post to Bluesky.")
         return False
 
     post_text = f"{title}\n\nRead more: {article_url}"
-    if len(post_text) > 300: # Bluesky character limit
-        available_len = 300 - (len("\n\nRead more: ") + len(article_url) + 3) # +3 for "..."
-        if available_len < 20 : # Not enough space for a meaningful title
+    if len(post_text) > 300: 
+        available_len = 300 - (len("\n\nRead more: ") + len(article_url) + 3) 
+        if available_len < 20 : 
             post_text = f"Article: {article_url}"[:300]
         else:
             post_text = f"{title[:available_len]}...\n\nRead more: {article_url}"
 
     embed_data = None
-    if article_url: # Always try to create an external embed card
+    if article_url: 
         embed_data = {
             "$type": "app.bsky.embed.external",
             "external": {
                 "uri": article_url,
                 "title": title,
-                "description": summary_short or title, # Use summary_short if available
+                "description": summary_short or title, 
             }
         }
-        # Placeholder for image if you implement image uploading to Bluesky first
-        # if image_url:
-        #     # This requires uploading image blob first and getting CID
-        #     # embed_data["external"]["thumb"] = { "$type": "blob", "ref": {"$link": "YOUR_IMAGE_BLOB_CID"}, "mimeType": "image/jpeg", "size": 12345}
-        #     pass
-
     facets = _bsky_create_link_facet(post_text, article_url)
 
     try:
@@ -110,7 +104,7 @@ def post_to_bluesky(session, title, article_url, summary_short=None, image_url=N
             session.postBloot(text=post_text, facets=facets if facets else None)
         logger.info(f"Successfully posted to Bluesky handle: {session.handle}")
         return True
-    except AtException as e:
+    except AtException as e: 
         logger.error(f"Bluesky API error for {session.handle}: {e}")
     except Exception as e:
         logger.exception(f"Unexpected error posting to Bluesky for {session.handle}: {e}")
@@ -143,7 +137,7 @@ def post_to_twitter(twitter_client, title, article_url):
             return True
         else:
             error_message = "Unknown error during Twitter post."
-            if response.errors: # tweepy.Response.errors
+            if response.errors: 
                 error_message = "; ".join([e.get("message", str(e)) for e in response.errors])
             logger.error(f"Twitter post failed. API Response: {error_message}. Full response: {response}")
             return False
@@ -155,21 +149,18 @@ def post_to_twitter(twitter_client, title, article_url):
     except Exception as e:
         logger.exception(f"Unexpected error posting to Twitter: {e}")
         return False
-    # return False # Should not be reached if try/except is exhaustive
 
 
 def initialize_social_clients():
     clients = {"bluesky_sessions": [], "twitter_client": None}
     logger.info("Initializing social media clients...")
 
-    # Bluesky
-    if Session and AtException: # Check if classes were successfully imported
+    if Session and AtException: 
         if BLUESKY_ACCOUNTS:
             for acc_idx, acc in enumerate(BLUESKY_ACCOUNTS):
                 try:
                     logger.info(f"Attempting Bluesky login for {acc['handle']} (Account {acc_idx+1})...")
                     bsky_session = Session(handle=acc['handle'], password=acc['password'])
-                    # You might want to add a quick test call here, like get_profile, if login doesn't raise exception on failure
                     logger.info(f"Bluesky login successful for {bsky_session.handle}")
                     clients["bluesky_sessions"].append(bsky_session)
                 except AtException as e: logger.error(f"Bluesky login failed for {acc['handle']}: {e}")
@@ -179,8 +170,7 @@ def initialize_social_clients():
     else:
         logger.warning("Bluesky (atprototools) library components (Session/AtException) not available. Skipping Bluesky client initialization.")
 
-    # Twitter
-    if tweepy: # Check if library was imported
+    if tweepy: 
         if all([TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET]):
             try:
                 logger.info("Attempting Twitter API v2 client initialization (OAuth 1.0a)...")
@@ -194,24 +184,19 @@ def initialize_social_clients():
                    clients["twitter_client"] = client
                 else:
                    error_message = "Unknown error"
-                   if user_info_response.errors:
-                       error_message = "; ".join([e.get("message", str(e)) for e in user_info_response.errors])
+                   if user_info_response.errors: error_message = "; ".join([e.get("message", str(e)) for e in user_info_response.errors])
                    logger.error(f"Twitter client initialization check (get_me) failed: {error_message}")
-            except tweepy.TweepyException as e:
-                logger.error(f"Tweepy API error during Twitter client initialization: {e}")
-            except Exception as e:
-                logger.exception(f"Unexpected error during Twitter client initialization: {e}")
+            except tweepy.TweepyException as e: logger.error(f"Tweepy API error during Twitter client initialization: {e}")
+            except Exception as e: logger.exception(f"Unexpected error during Twitter client initialization: {e}")
         else:
             logger.warning("Twitter API credentials (OAuth 1.0a for v2) missing in .env. Skipping Twitter client initialization.")
     else:
         logger.warning("Twitter (Tweepy) library not available. Skipping Twitter client initialization.")
-
     return clients
 
 def run_social_media_poster(article_details, social_clients, platforms_to_post=None):
     title = article_details.get('title')
     article_url = article_details.get('article_url')
-    # image_url = article_details.get('image_url') # For Bluesky card image (requires blob upload)
     summary_short = article_details.get('summary_short') 
 
     if not title or not article_url:
@@ -221,18 +206,16 @@ def run_social_media_poster(article_details, social_clients, platforms_to_post=N
     attempt_all = platforms_to_post is None
     any_post_succeeded = False
 
-    # Post to Bluesky
     if attempt_all or "bluesky" in platforms_to_post:
         if social_clients.get("bluesky_sessions"):
             logger.info(f"Attempting Bluesky posts for: {title[:50]}...")
             for bsky_session in social_clients["bluesky_sessions"]:
-                if post_to_bluesky(bsky_session, title, article_url, summary_short): # image_url removed for now
+                if post_to_bluesky(bsky_session, title, article_url, summary_short): 
                     any_post_succeeded = True
-                time.sleep(3) # Small delay between posts to different accounts
+                time.sleep(3) 
         else: 
             logger.info("Bluesky posting skipped: No initialized sessions or library issue.")
 
-    # Post to Twitter
     if attempt_all or "twitter" in platforms_to_post:
         twitter_client = social_clients.get("twitter_client")
         if twitter_client:
@@ -244,16 +227,12 @@ def run_social_media_poster(article_details, social_clients, platforms_to_post=N
     
     return any_post_succeeded
 
-
-# --- Standalone Execution (for testing) ---
 if __name__ == "__main__":
-    # Ensure logging is verbose for standalone test
-    if not logger.handlers: # Re-check handlers specifically for the module logger
+    if not logger.handlers: 
         logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', handlers=[logging.StreamHandler(sys.stdout)], force=True)
     logger.setLevel(logging.DEBUG)
     
     logger.info("--- Running Social Media Poster Standalone Test (Twitter & Bluesky, Reddit Removed) ---")
-    
     test_article = {
         "id": "test-social-post-005",
         "title": f"Social Poster Standalone Test ({time.strftime('%Y-%m-%d %H:%M:%S')}) - Twitter & Bluesky",
@@ -261,7 +240,6 @@ if __name__ == "__main__":
         "image_url": "https://i.imgur.com/A5Wdp6f.png", 
         "summary_short": "Testing social media posting for Twitter and Bluesky via the standalone script execution."
     }
-    
     print("Initializing social media clients...")
     logger.debug("Attempting to initialize clients for standalone test...")
     clients = initialize_social_clients()
@@ -271,22 +249,16 @@ if __name__ == "__main__":
     else:
         print(f"\nBluesky sessions initialized: {len(clients.get('bluesky_sessions', []))}")
         print(f"Twitter client initialized: {'Yes' if clients.get('twitter_client') else 'No'}")
-
         platforms_to_test = []
-        if clients.get("bluesky_sessions"):
-            platforms_to_test.append("bluesky")
-        if clients.get("twitter_client"):
-            platforms_to_test.append("twitter")
+        if clients.get("bluesky_sessions"): platforms_to_test.append("bluesky")
+        if clients.get("twitter_client"): platforms_to_test.append("twitter")
         
         if platforms_to_test:
             print(f"\n--- Attempting to post to: {', '.join(platforms_to_test)} ---")
             success = run_social_media_poster(test_article, clients, platforms_to_post=tuple(platforms_to_test))
-            if success:
-                print("\nSocial media posting function completed. At least one post may have succeeded.")
-            else:
-                print("\nSocial media posting function reported all attempts failed or no platforms were viable.")
+            if success: print("\nSocial media posting function completed. At least one post may have succeeded.")
+            else: print("\nSocial media posting function reported all attempts failed or no platforms were viable.")
             print("Check logs above for specific details on each platform.")
         else:
             print("\nNo social media platforms could be tested due to client initialization issues.")
-
     logger.info("--- Social Media Poster Standalone Test Complete ---")
