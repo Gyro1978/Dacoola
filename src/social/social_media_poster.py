@@ -6,25 +6,19 @@ from dotenv import load_dotenv
 
 # --- For Bluesky ---
 try:
-    from atprototools import Session, AtException # Changed import for AtException
+    from atprototools import Session, AtException
 except ImportError:
     Session = None
     AtException = None
-    logging.warning("atprototools library not found. Bluesky posting will be disabled. Run: pip install atprototools")
-
-# --- For Reddit ---
-try:
-    import praw
-except ImportError:
-    praw = None
-    logging.warning("praw library not found. Reddit posting will be disabled. Run: pip install praw")
+    # This warning will appear if the import fails at the Python level
+    logging.warning("atprototools library FAILED TO IMPORT. Bluesky posting will be disabled. Ensure it's in requirements.txt and installs correctly.")
 
 # --- For Twitter ---
 try:
     import tweepy
 except ImportError:
     tweepy = None
-    logging.warning("tweepy library not found. Twitter posting will be disabled. Run: pip install 'tweepy>=4.0.0'")
+    logging.warning("tweepy library FAILED TO IMPORT. Twitter posting will be disabled. Ensure it's in requirements.txt and installs correctly.")
 
 
 # --- Path Setup & Logging ---
@@ -54,22 +48,15 @@ for i in range(1, 4):
     password = os.getenv(f'BLUESKY_APP_PASSWORD_{i}')
     if handle and password:
         BLUESKY_ACCOUNTS.append({'handle': handle, 'password': password})
+    elif os.getenv(f'BLUESKY_HANDLE_{i}') or os.getenv(f'BLUESKY_APP_PASSWORD_{i}'):
+        logger.warning(f"Bluesky Handle or Password missing for account index {i}. It will be skipped.")
 
-# Reddit Credentials
-REDDIT_CLIENT_ID = os.getenv('REDDIT_CLIENT_ID')
-REDDIT_CLIENT_SECRET = os.getenv('REDDIT_CLIENT_SECRET')
-REDDIT_USERNAME = os.getenv('REDDIT_USERNAME')
-REDDIT_PASSWORD = os.getenv('REDDIT_PASSWORD')
-REDDIT_USER_AGENT = os.getenv('REDDIT_USER_AGENT', f"DacoolaPostBot/0.1 by u/{REDDIT_USERNAME or 'your_reddit_username'}")
-SUBREDDIT_LIST_STR = os.getenv('REDDIT_SUBREDDITS', "testingground4bots,Dacoola")
-TARGET_SUBREDDITS = [s.strip() for s in SUBREDDIT_LIST_STR.split(',') if s.strip()]
 
 # Twitter Credentials
 TWITTER_API_KEY = os.getenv('TWITTER_API_KEY')
 TWITTER_API_SECRET = os.getenv('TWITTER_API_SECRET')
 TWITTER_ACCESS_TOKEN = os.getenv('TWITTER_ACCESS_TOKEN')
 TWITTER_ACCESS_SECRET = os.getenv('TWITTER_ACCESS_TOKEN_SECRET')
-# TWITTER_BEARER_TOKEN = os.getenv('TWITTER_BEARER_TOKEN') # Not used for OAuth 1.0a posting
 
 
 def _bsky_create_link_facet(text, link_url):
@@ -85,93 +72,68 @@ def _bsky_create_link_facet(text, link_url):
     return facets
 
 def post_to_bluesky(session, title, article_url, summary_short=None, image_url=None):
-    if not Session or not session or not AtException: # Added AtException check here
-        logger.error("Bluesky session not initialized, library not found, or AtException not available.")
+    if not Session or not session or not AtException:
+        logger.error("Bluesky client (Session or AtException) not available. Cannot post to Bluesky.")
         return False
 
     post_text = f"{title}\n\nRead more: {article_url}"
-    if len(post_text) > 300:
-        available_len = 300 - (len("\n\nRead more: ") + len(article_url) + 3)
-        if available_len < 20:
+    if len(post_text) > 300: # Bluesky character limit
+        available_len = 300 - (len("\n\nRead more: ") + len(article_url) + 3) # +3 for "..."
+        if available_len < 20 : # Not enough space for a meaningful title
             post_text = f"Article: {article_url}"[:300]
         else:
             post_text = f"{title[:available_len]}...\n\nRead more: {article_url}"
 
     embed_data = None
-    if article_url:
+    if article_url: # Always try to create an external embed card
         embed_data = {
             "$type": "app.bsky.embed.external",
             "external": {
                 "uri": article_url,
                 "title": title,
-                "description": summary_short or title,
+                "description": summary_short or title, # Use summary_short if available
             }
         }
+        # Placeholder for image if you implement image uploading to Bluesky first
+        # if image_url:
+        #     # This requires uploading image blob first and getting CID
+        #     # embed_data["external"]["thumb"] = { "$type": "blob", "ref": {"$link": "YOUR_IMAGE_BLOB_CID"}, "mimeType": "image/jpeg", "size": 12345}
+        #     pass
+
     facets = _bsky_create_link_facet(post_text, article_url)
 
     try:
-        logger.info(f"Attempting to post to Bluesky ({session.handle}): {post_text[:50]}...")
+        logger.info(f"Attempting to post to Bluesky ({session.handle}): {post_text[:60]}...")
         if embed_data:
             session.postBloot(text=post_text, facets=facets if facets else None, embed=embed_data)
         else:
             session.postBloot(text=post_text, facets=facets if facets else None)
         logger.info(f"Successfully posted to Bluesky handle: {session.handle}")
         return True
-    except AtException as e: # Catching the (now hopefully correctly imported) AtException
+    except AtException as e:
         logger.error(f"Bluesky API error for {session.handle}: {e}")
     except Exception as e:
         logger.exception(f"Unexpected error posting to Bluesky for {session.handle}: {e}")
     return False
 
 
-def post_to_reddit(reddit_instance, title, article_url, image_url=None):
-    if not praw or not reddit_instance:
-        logger.error("Reddit (PRAW) not initialized or library not found.")
-        return False
-    if not TARGET_SUBREDDITS:
-        logger.warning("No target subreddits configured for Reddit. Skipping.")
-        return False
-
-    success_count = 0
-    for subreddit_name in TARGET_SUBREDDITS:
-        try:
-            subreddit = reddit_instance.subreddit(subreddit_name)
-            logger.info(f"Attempting to post to r/{subreddit_name}: '{title}' URL: {article_url}")
-            submission = subreddit.submit(title=title, url=article_url, nsfw=False, spoiler=False)
-            logger.info(f"Successfully posted to r/{subreddit_name}. Post ID: {submission.id}")
-            success_count += 1
-            time.sleep(2)
-        except praw.exceptions.APIException as e:
-            logger.error(f"Reddit API Exception for r/{subreddit_name}: {e}")
-            if "RATELIMIT" in str(e).upper():
-                logger.warning("Reddit rate limit hit.")
-        except praw.exceptions.PRAWException as e:
-            logger.error(f"PRAW Exception for r/{subreddit_name}: {e}")
-        except Exception as e:
-            logger.exception(f"Unexpected error posting to r/{subreddit_name}: {e}")
-    return success_count > 0
-
 def post_to_twitter(twitter_client, title, article_url):
-    """Posts a tweet using the provided Tweepy v2 client."""
     if not tweepy or not twitter_client:
-        logger.error("Twitter (Tweepy) client not initialized or library not found. Cannot post.")
+        logger.error("Twitter (Tweepy) client not available. Cannot post to Twitter.")
         return False
 
-    # Twitter's URL shortener (t.co) counts any URL as 23 characters.
-    # Max tweet length is 280.
     tco_url_length = 23
-    space_for_title = 280 - tco_url_length - 1 # -1 for the space between title and URL
+    space_for_title = 280 - tco_url_length - 1 
 
-    tweet_text = f"{title} {article_url}" # Initial attempt
+    tweet_text = f"{title} {article_url}" 
 
     if len(title) > space_for_title:
-        title = title[:space_for_title - 3] + "..." # Truncate title with ellipsis
+        title = title[:space_for_title - 3] + "..." 
         tweet_text = f"{title} {article_url}"
-
-    # Final check, though unlikely to be needed if title truncation is correct
-    if len(tweet_text) > 280: # Should not happen with t.co, but as a safeguard
-         logger.warning(f"Tweet text still too long after attempted truncation ({len(tweet_text)} chars). Final attempt to shorten.")
-         tweet_text = tweet_text[:279] # Hard truncate if somehow still over
+    
+    if len(tweet_text) > 280:
+         logger.warning(f"Tweet text still too long ({len(tweet_text)} chars). Final truncate.")
+         tweet_text = tweet_text[:279]
 
     try:
         logger.info(f"Attempting to post to Twitter: {tweet_text}")
@@ -180,180 +142,151 @@ def post_to_twitter(twitter_client, title, article_url):
             logger.info(f"Successfully posted to Twitter. Tweet ID: {response.data['id']}")
             return True
         else:
-            error_message = "Unknown error"
-            if response.errors:
+            error_message = "Unknown error during Twitter post."
+            if response.errors: # tweepy.Response.errors
                 error_message = "; ".join([e.get("message", str(e)) for e in response.errors])
-            logger.error(f"Twitter post failed. Response: {error_message}")
+            logger.error(f"Twitter post failed. API Response: {error_message}. Full response: {response}")
             return False
-    except tweepy.TweepyException as e: # Catch specific Tweepy exceptions
+    except tweepy.TweepyException as e: 
         logger.error(f"Tweepy API error posting to Twitter: {e}")
-        # You could check e.api_codes or e.api_messages for more details
-        # e.g., if 403 and "duplicate content" is in message, it's a duplicate tweet
-        if hasattr(e, 'api_codes') and e.api_codes and 187 in e.api_codes: # Status is a duplicate
+        if hasattr(e, 'api_codes') and e.api_codes and 187 in e.api_codes: 
             logger.warning("Twitter reported this as a duplicate tweet.")
-            return False # Or True if you consider duplicate as "handled"
+        return False 
     except Exception as e:
         logger.exception(f"Unexpected error posting to Twitter: {e}")
         return False
-    return False
+    # return False # Should not be reached if try/except is exhaustive
 
 
 def initialize_social_clients():
-    clients = {"bluesky_sessions": [], "reddit_instance": None, "twitter_client": None}
+    clients = {"bluesky_sessions": [], "twitter_client": None}
+    logger.info("Initializing social media clients...")
 
     # Bluesky
-    if Session and AtException and BLUESKY_ACCOUNTS: # Added AtException check
-        for acc in BLUESKY_ACCOUNTS:
-            try:
-                logger.info(f"Attempting Bluesky login for {acc['handle']}...")
-                bsky_session = Session(handle=acc['handle'], password=acc['password'])
-                logger.info(f"Bluesky login successful for {bsky_session.handle}")
-                clients["bluesky_sessions"].append(bsky_session)
-            except AtException as e: logger.error(f"Bluesky login failed for {acc['handle']}: {e}")
-            except Exception as e: logger.exception(f"Unexpected error during Bluesky login for {acc['handle']}: {e}")
-    elif not Session or not AtException: # Added AtException check
-        logger.warning("Bluesky (atprototools) library or AtException not available. Skipping Bluesky.")
-
-    # Reddit
-    if praw and all([REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD]):
-        try:
-            logger.info(f"Attempting Reddit login for u/{REDDIT_USERNAME}...")
-            clients["reddit_instance"] = praw.Reddit(
-                client_id=REDDIT_CLIENT_ID, client_secret=REDDIT_CLIENT_SECRET,
-                username=REDDIT_USERNAME, password=REDDIT_PASSWORD, user_agent=REDDIT_USER_AGENT
-            )
-            logger.info(f"Reddit PRAW instance initialized for u/{clients['reddit_instance'].user.me()}.")
-        except Exception as e:
-            logger.exception(f"Reddit PRAW initialization failed: {e}")
-            clients["reddit_instance"] = None
-    elif not praw: logger.warning("Reddit (PRAW) library not installed. Skipping Reddit.")
-    else: logger.warning("Reddit credentials missing. Skipping Reddit.")
+    if Session and AtException: # Check if classes were successfully imported
+        if BLUESKY_ACCOUNTS:
+            for acc_idx, acc in enumerate(BLUESKY_ACCOUNTS):
+                try:
+                    logger.info(f"Attempting Bluesky login for {acc['handle']} (Account {acc_idx+1})...")
+                    bsky_session = Session(handle=acc['handle'], password=acc['password'])
+                    # You might want to add a quick test call here, like get_profile, if login doesn't raise exception on failure
+                    logger.info(f"Bluesky login successful for {bsky_session.handle}")
+                    clients["bluesky_sessions"].append(bsky_session)
+                except AtException as e: logger.error(f"Bluesky login failed for {acc['handle']}: {e}")
+                except Exception as e: logger.exception(f"Unexpected error during Bluesky login for {acc['handle']}: {e}")
+        else:
+            logger.warning("No Bluesky accounts configured in .env (BLUESKY_HANDLE_n, BLUESKY_APP_PASSWORD_n).")
+    else:
+        logger.warning("Bluesky (atprototools) library components (Session/AtException) not available. Skipping Bluesky client initialization.")
 
     # Twitter
-    if tweepy and all([TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET]):
-        try:
-            logger.info("Attempting Twitter API v2 client initialization (OAuth 1.0a)...")
-            client = tweepy.Client(
-                consumer_key=TWITTER_API_KEY, consumer_secret=TWITTER_API_SECRET,
-                access_token=TWITTER_ACCESS_TOKEN, access_token_secret=TWITTER_ACCESS_SECRET
-            )
-            # Test the client by getting authenticated user's info
-            user_info_response = client.get_me()
-            if user_info_response.data:
-               logger.info(f"Twitter client initialized successfully for @{user_info_response.data.username}")
-               clients["twitter_client"] = client
-            else:
-               error_message = "Unknown error"
-               if user_info_response.errors:
-                   error_message = "; ".join([e.get("message", str(e)) for e in user_info_response.errors])
-               logger.error(f"Twitter client initialization check (get_me) failed: {error_message}")
-        except tweepy.TweepyException as e:
-            logger.error(f"Tweepy API error during Twitter client initialization: {e}")
-        except Exception as e:
-            logger.exception(f"Unexpected error during Twitter client initialization: {e}")
-    elif not tweepy:
-        logger.warning("Twitter (Tweepy) library not installed. Skipping Twitter client initialization.")
+    if tweepy: # Check if library was imported
+        if all([TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET]):
+            try:
+                logger.info("Attempting Twitter API v2 client initialization (OAuth 1.0a)...")
+                client = tweepy.Client(
+                    consumer_key=TWITTER_API_KEY, consumer_secret=TWITTER_API_SECRET,
+                    access_token=TWITTER_ACCESS_TOKEN, access_token_secret=TWITTER_ACCESS_SECRET
+                )
+                user_info_response = client.get_me()
+                if user_info_response.data:
+                   logger.info(f"Twitter client initialized successfully for @{user_info_response.data.username}")
+                   clients["twitter_client"] = client
+                else:
+                   error_message = "Unknown error"
+                   if user_info_response.errors:
+                       error_message = "; ".join([e.get("message", str(e)) for e in user_info_response.errors])
+                   logger.error(f"Twitter client initialization check (get_me) failed: {error_message}")
+            except tweepy.TweepyException as e:
+                logger.error(f"Tweepy API error during Twitter client initialization: {e}")
+            except Exception as e:
+                logger.exception(f"Unexpected error during Twitter client initialization: {e}")
+        else:
+            logger.warning("Twitter API credentials (OAuth 1.0a for v2) missing in .env. Skipping Twitter client initialization.")
     else:
-        logger.warning("Twitter API credentials (OAuth 1.0a) missing. Skipping Twitter client initialization.")
+        logger.warning("Twitter (Tweepy) library not available. Skipping Twitter client initialization.")
 
     return clients
 
 def run_social_media_poster(article_details, social_clients, platforms_to_post=None):
     title = article_details.get('title')
     article_url = article_details.get('article_url')
-    image_url = article_details.get('image_url') 
+    # image_url = article_details.get('image_url') # For Bluesky card image (requires blob upload)
     summary_short = article_details.get('summary_short') 
 
     if not title or not article_url:
-        logger.error("Missing title or article_url. Cannot post to social media.")
-        return False # Return a boolean indicating failure
+        logger.error("Missing title or article_url for social post. Aborting.")
+        return False 
 
     attempt_all = platforms_to_post is None
-    overall_success = True # Assume success unless a post fails
+    any_post_succeeded = False
 
     # Post to Bluesky
     if attempt_all or "bluesky" in platforms_to_post:
         if social_clients.get("bluesky_sessions"):
-            bsky_posted_once = False
+            logger.info(f"Attempting Bluesky posts for: {title[:50]}...")
             for bsky_session in social_clients["bluesky_sessions"]:
-                if post_to_bluesky(bsky_session, title, article_url, summary_short, image_url):
-                    bsky_posted_once = True
-                else: # If any Bluesky post fails, mark overall as not fully successful for this platform
-                    overall_success = False 
-                time.sleep(5) 
-            if not bsky_posted_once and social_clients["bluesky_sessions"]: # if no session succeeded
-                 logger.error("Failed to post to any configured Bluesky account.")
-                 overall_success = False
+                if post_to_bluesky(bsky_session, title, article_url, summary_short): # image_url removed for now
+                    any_post_succeeded = True
+                time.sleep(3) # Small delay between posts to different accounts
         else: 
-            logger.info("Bluesky posting requested/default but no sessions configured or library missing.")
-            if attempt_all or "bluesky" in platforms_to_post: overall_success = False
-
-
-    # Post to Reddit
-    if attempt_all or "reddit" in platforms_to_post:
-        if social_clients.get("reddit_instance"):
-            if not post_to_reddit(social_clients["reddit_instance"], title, article_url, image_url):
-                overall_success = False # Mark as failure if Reddit post fails
-        else: 
-            logger.info("Reddit posting requested/default but no instance configured or library missing.")
-            if attempt_all or "reddit" in platforms_to_post: overall_success = False
+            logger.info("Bluesky posting skipped: No initialized sessions or library issue.")
 
     # Post to Twitter
     if attempt_all or "twitter" in platforms_to_post:
         twitter_client = social_clients.get("twitter_client")
         if twitter_client:
-            if not post_to_twitter(twitter_client, title, article_url):
-                overall_success = False # Mark as failure if Twitter post fails
+            logger.info(f"Attempting Twitter post for: {title[:50]}...")
+            if post_to_twitter(twitter_client, title, article_url):
+                any_post_succeeded = True
         else:
-            logger.info("Twitter posting requested/default but no client configured or library/credentials missing.")
-            if attempt_all or "twitter" in platforms_to_post: overall_success = False
+            logger.info("Twitter posting skipped: Client not initialized or library issue.")
     
-    return overall_success
+    return any_post_succeeded
 
 
 # --- Standalone Execution (for testing) ---
 if __name__ == "__main__":
-    logger.info("--- Running Social Media Poster Standalone Test ---")
     # Ensure logging is verbose for standalone test
-    logger.parent.setLevel(logging.INFO) # Set root logger to INFO if not already
-    logger.setLevel(logging.DEBUG)       # Set this script's logger to DEBUG
-
+    if not logger.handlers: # Re-check handlers specifically for the module logger
+        logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', handlers=[logging.StreamHandler(sys.stdout)], force=True)
+    logger.setLevel(logging.DEBUG)
+    
+    logger.info("--- Running Social Media Poster Standalone Test (Twitter & Bluesky, Reddit Removed) ---")
+    
     test_article = {
-        "id": "test-social-post-004",
-        "title": f"Social Poster Standalone Test ({time.strftime('%Y-%m-%d %H:%M')})",
+        "id": "test-social-post-005",
+        "title": f"Social Poster Standalone Test ({time.strftime('%Y-%m-%d %H:%M:%S')}) - Twitter & Bluesky",
         "article_url": "https://dacoolaa.netlify.app/home.html", 
-        "image_url": "https://i.imgur.com/A5Wdp6f.png", # Example image
-        "topic": "Testing",
-        "tags": ["python", "socialmedia", "dacoola", "test"],
-        "summary_short": "This is a standalone test of the social media posting script."
+        "image_url": "https://i.imgur.com/A5Wdp6f.png", 
+        "summary_short": "Testing social media posting for Twitter and Bluesky via the standalone script execution."
     }
     
     print("Initializing social media clients...")
+    logger.debug("Attempting to initialize clients for standalone test...")
     clients = initialize_social_clients()
 
-    # Check which clients were initialized
-    if not clients.get("bluesky_sessions") and not clients.get("reddit_instance") and not clients.get("twitter_client"):
-        print("\nNo social media clients were initialized. Check .env credentials and library installations.")
-        print("Make sure atprototools, praw, and tweepy are installed if you want to test those platforms.")
-        print("Skipping posting tests.")
+    if not clients.get("bluesky_sessions") and not clients.get("twitter_client"):
+        print("\nNo Bluesky or Twitter clients were initialized. Check .env credentials and library installations.")
     else:
         print(f"\nBluesky sessions initialized: {len(clients.get('bluesky_sessions', []))}")
-        print(f"Reddit instance initialized: {'Yes' if clients.get('reddit_instance') else 'No'}")
         print(f"Twitter client initialized: {'Yes' if clients.get('twitter_client') else 'No'}")
 
-        print("\n--- Attempting to post to ALL configured platforms ---")
-        # platforms_to_try = ("bluesky", "reddit", "twitter") # To test all
-        platforms_to_try = ("twitter",) # Example: test only Twitter
-        # platforms_to_try = ("bluesky",) # Example: test only Bluesky
-        # platforms_to_try = ("reddit",)  # Example: test only Reddit
+        platforms_to_test = []
+        if clients.get("bluesky_sessions"):
+            platforms_to_test.append("bluesky")
+        if clients.get("twitter_client"):
+            platforms_to_test.append("twitter")
         
-        success = run_social_media_poster(test_article, clients, platforms_to_post=platforms_to_try)
-        
-        if success:
-            print("\nSocial media posting function completed. Some posts may have succeeded.")
-            print("Check individual platform logs above for details on each.")
+        if platforms_to_test:
+            print(f"\n--- Attempting to post to: {', '.join(platforms_to_test)} ---")
+            success = run_social_media_poster(test_article, clients, platforms_to_post=tuple(platforms_to_test))
+            if success:
+                print("\nSocial media posting function completed. At least one post may have succeeded.")
+            else:
+                print("\nSocial media posting function reported all attempts failed or no platforms were viable.")
+            print("Check logs above for specific details on each platform.")
         else:
-            print("\nSocial media posting function reported at least one failure or no platforms attempted.")
-            print("Check logs above for specific errors.")
+            print("\nNo social media platforms could be tested due to client initialization issues.")
 
     logger.info("--- Social Media Poster Standalone Test Complete ---")
