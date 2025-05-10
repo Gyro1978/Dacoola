@@ -1,6 +1,41 @@
 {
   "articles": [
     {
+      "id": "3dd78e3285c2687e549d1c0adb2106518d48c0956e7ddce99b2c3ae008acefab",
+      "title": "Elton John and Dua Lipa Lead Call for AI Protection in Creative Industries",
+      "link": "articles/elton-john-and-dua-lipa-lead-call-for-ai-protection-in-creative-industries.html",
+      "published_iso": "2025-05-10T00:27:24Z",
+      "summary_short": "Elton John, Dua Lipa, and 400+ artists demand stronger copyright laws to protect the creative industries from AI exploitation. Learn more.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/4b8f/live/17721bd0-2d16-11f0-b26b-ab62c890638b.jpg",
+      "topic": "Ethics",
+      "is_breaking": false,
+      "tags": [
+        "Creative",
+        "Industries",
+        "AI and creative industries"
+      ],
+      "audio_url": null,
+      "trend_score": 11.5
+    },
+    {
+      "id": "bb263e713e912de26b3e92e7287ce88191d47be8cac993129718d5f018159487",
+      "title": "LLM Customization Research Reveals Best Practices for Fine-Tuning and In-Context Learning",
+      "link": "articles/llm-customization-research-reveals-best-practices-for-fine-tuning-and-in-context.html",
+      "published_iso": "2025-05-10T00:23:09Z",
+      "summary_short": "New research compares fine-tuning and in-context learning for LLM customization, revealing key insights for enterprise applications.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2024/09/cfr0z3n_a_robot_in_a_collared_polo_sits_at_a_desk_dutifully_sta_1a510b62-1550-4ca9-839a-dfd64d6c304c-1.png?w=1024?w=1200&strip=all",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "Llm",
+        "LLM customization research",
+        "Customization",
+        "Research"
+      ],
+      "audio_url": null,
+      "trend_score": 12.0
+    },
+    {
       "id": "f3f1f25ec9f7c49c93f4ceed09356efd53c74628019cdf6aba73cb218b33ac0a",
       "title": "Lego-building AI Generates Physically Stable Models from Text",
       "link": "articles/lego-building-ai-generates-physically-stable-models-from-text.html",
