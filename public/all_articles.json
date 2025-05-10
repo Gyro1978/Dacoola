@@ -1,6 +1,35 @@
 {
   "articles": [
     {
+      "id": "8f07c77d1390099a6254d66803c9df30ac1ae537eba17b4bfc3564a2508125ed",
+      "title": "AI Smart Glasses Development: Ray-Ban Meta’s Impact on Biking",
+      "link": "articles/ai-smart-glasses-development-ray-ban-meta’s-impact-on-biking.html",
+      "published_iso": "2025-05-10T15:00:00Z",
+      "summary_short": "Discover how Ray-Ban Meta smart glasses enhance biking experiences with AI smart glasses development, blending convenience and innovation for outdoor activities.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/09/Meta-Ray-Ban-Stories-10.jpg?w=1200",
+      "topic": "AI Hardware & Semiconductors",
+      "is_breaking": false,
+      "tags": [
+        "wearable tech for bikers",
+        "smart glasses for outdoor activities",
+        "AI-powered eyewear features",
+        "Ray-Ban Meta smart glasses",
+        "smart eyewear technology",
+        "AI smart glasses development",
+        "augmented reality biking glasses",
+        "AI glasses for cycling",
+        "waterproof smart glasses for sports",
+        "cycling gadgets with AI",
+        "hands-free navigation glasses",
+        "best AI glasses 2023",
+        "smart glasses battery life",
+        "biking with smart glasses",
+        "Meta glasses review"
+      ],
+      "audio_url": null,
+      "trend_score": 17.5
+    },
+    {
       "id": "8fdf4d74e4a0fdebe0d5c50ac6903c725f18874674c97b69f49e7ecbfcaff51d",
       "title": "U.S. Semiconductor Market Policies: A Defining Year in 2025",
       "link": "articles/us-semiconductor-market-policies-a-defining-year-in-2025.html",
