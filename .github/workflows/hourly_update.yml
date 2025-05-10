@@ -36,9 +36,9 @@ jobs:
 
       - name: Test Critical Imports
         run: |
-          echo "Attempting to import atprototools components..."
-          # Testing the import from the submodule as indicated by previous runtime errors
-          python -c "from atprototools import Session; from atprototools.exceptions import AtException; print('atprototools Session and AtException (from .exceptions) imported successfully')"
+          echo "Attempting to import atproto components..."
+          # Testing the import from the official atproto package
+          python -c "from atproto import Client, models; print('atproto Client and models imported successfully')"
           echo "Attempting to import tweepy..."
           python -c "import tweepy; print('tweepy imported successfully')"
           # Add other critical import tests here if needed

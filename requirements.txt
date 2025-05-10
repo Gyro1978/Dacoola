@@ -1,4 +1,3 @@
-# requirements.txt (1/1) - Assuming no direct Tweepy usage anymore
 requests
 python-dotenv
 feedparser
@@ -11,5 +10,5 @@ sentence-transformers
 tweepy
 trafilatura
 google-ads
-atprototools
+atproto
 praw
