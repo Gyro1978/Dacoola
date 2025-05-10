@@ -1130,6 +1130,15 @@ def cross_reference_information(article_data: Dict[str, Any], source_data_list: 
     Focus on the most important and relevant information only.
     """
     
+    # Create the JSON format template as a regular string (not an f-string)
+    json_template = '''
+    {"additional_facts": [{"fact": "specific fact", "source": "source number", "confidence": 0.0-1.0}],
+    "different_perspectives": [{"perspective": "description", "source": "source number", "confidence": 0.0-1.0}],
+    "contradictions": [{"claim": "original claim", "contradiction": "contradicting info", "source": "source number", "confidence": 0.0-1.0}],
+    "supporting_evidence": [{"claim": "claim being supported", "evidence": "supporting evidence", "source": "source number", "confidence": 0.0-1.0}],
+    "recent_developments": [{"development": "new information", "source": "source number", "confidence": 0.0-1.0}]}
+    '''
+    
     user_prompt = f"""
     Main Article Title: {article_title}
     
@@ -1140,11 +1149,7 @@ def cross_reference_information(article_data: Dict[str, Any], source_data_list: 
     {"\n\n".join(source_contents)}
     
     Please analyze these sources and provide a comprehensive cross-reference analysis in the following JSON format:
-    {{"additional_facts": [{{"fact": "specific fact", "source": "source number", "confidence": 0.0-1.0}}],
-    "different_perspectives": [{{"perspective": "description", "source": "source number", "confidence": 0.0-1.0}}],
-    "contradictions": [{{"claim": "original claim", "contradiction": "contradicting info", "source": "source number", "confidence": 0.0-1.0}}],
-    "supporting_evidence": [{{"claim": "claim being supported", "evidence": "supporting evidence", "source": "source number", "confidence": 0.0-1.0}}],
-    "recent_developments": [{{"development": "new information", "source": "source number", "confidence": 0.0-1.0}}]}}
+    {json_template}
     
     Only include high-confidence (0.7+) information that genuinely adds value. Quality over quantity.
     """
