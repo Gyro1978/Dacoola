@@ -6,12 +6,20 @@ from dotenv import load_dotenv
 
 # --- For Bluesky ---
 try:
-    # This is the structurally correct import based on the library's __init__.py
-    from atprototools import Session, AtException 
+    from atproto import Client, models
+    ATPROTO_AVAILABLE = True
+    AtException = models.ErrorResponse  # Use the official error type
 except ImportError:
-    Session = None
-    AtException = None
-    logging.warning("atprototools library components (Session/AtException) FAILED TO IMPORT. Bluesky posting will be disabled. Ensure it's in requirements.txt and installs correctly.")
+    ATPROTO_AVAILABLE = False
+    AtException = Exception  # Fallback type
+    Client = None
+    logging.warning("atproto package not available. Bluesky posting will be disabled.")
+    logging.warning("Install it with: pip install atproto")
+except Exception as e:
+    ATPROTO_AVAILABLE = False
+    AtException = Exception  # Fallback type
+    Client = None
+    logging.error(f"Error importing atproto components: {e}. Bluesky posting will be disabled.")
 
 # --- For Twitter ---
 try:
@@ -72,8 +80,8 @@ def _bsky_create_link_facet(text, link_url):
     return facets
 
 def post_to_bluesky(session, title, article_url, summary_short=None, image_url=None):
-    if not Session or not session or not AtException: 
-        logger.error("Bluesky client (Session or AtException) not available. Cannot post to Bluesky.")
+    if not Client or not session or not AtException: 
+        logger.error("Bluesky client (Client or AtException) not available. Cannot post to Bluesky.")
         return False
 
     post_text = f"{title}\n\nRead more: {article_url}"
@@ -155,12 +163,12 @@ def initialize_social_clients():
     clients = {"bluesky_sessions": [], "twitter_client": None}
     logger.info("Initializing social media clients...")
 
-    if Session and AtException: 
+    if Client and AtException: 
         if BLUESKY_ACCOUNTS:
             for acc_idx, acc in enumerate(BLUESKY_ACCOUNTS):
                 try:
                     logger.info(f"Attempting Bluesky login for {acc['handle']} (Account {acc_idx+1})...")
-                    bsky_session = Session(handle=acc['handle'], password=acc['password'])
+                    bsky_session = Client(handle=acc['handle'], password=acc['password'])
                     logger.info(f"Bluesky login successful for {bsky_session.handle}")
                     clients["bluesky_sessions"].append(bsky_session)
                 except AtException as e: logger.error(f"Bluesky login failed for {acc['handle']}: {e}")
@@ -168,7 +176,7 @@ def initialize_social_clients():
         else:
             logger.warning("No Bluesky accounts configured in .env (BLUESKY_HANDLE_n, BLUESKY_APP_PASSWORD_n).")
     else:
-        logger.warning("Bluesky (atprototools) library components (Session/AtException) not available. Skipping Bluesky client initialization.")
+        logger.warning("Bluesky (atproto) library components (Client/AtException) not available. Skipping Bluesky client initialization.")
 
     if tweepy: 
         if all([TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET]):
