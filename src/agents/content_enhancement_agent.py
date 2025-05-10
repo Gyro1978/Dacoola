@@ -1,12 +1,3 @@
-"""
-Advanced Content Enhancement Agent for Dacoola
-
-This agent is responsible for:
-1. Finding and extracting multiple relevant images from source and other sources using AI vision
-2. Identifying and embedding relevant videos (e.g., AI model demos)
-3. Cross-referencing information from multiple sources for more comprehensive articles
-"""
-
 import os
 import sys
 import json
