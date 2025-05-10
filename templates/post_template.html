@@ -58,10 +58,19 @@
       "keywords": {{ META_KEYWORDS_LIST | tojson | safe }},
       "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ CANONICAL_URL | escapejs }}" },
       "image": [
+        {% if article_data and article_data.images and article_data.images|length > 0 %}
+        {% for image in article_data.images %}
+        {
+          "@type": "ImageObject",
+          "url": "{{ image.url | escapejs }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+        {% else %}
         {
           "@type": "ImageObject",
           "url": "{{ IMAGE_URL | escapejs }}"
         }
+        {% endif %}
       ],
       "datePublished": "{{ PUBLISH_ISO_FOR_META }}",
       "dateModified": "{{ PUBLISH_ISO_FOR_META }}",
@@ -70,7 +79,34 @@
         "@type": "Organization",
         "name": "{{ SITE_NAME | escapejs }}",
         "logo": { "@type": "ImageObject", "url": "{{ YOUR_WEBSITE_LOGO_URL | escapejs }}" }
-      }
+      },
+      {% if article_data and article_data.videos and article_data.videos|length > 0 %}
+      "video": [
+        {% for video in article_data.videos %}
+        {
+          "@type": "VideoObject",
+          "name": "{{ video.title | escapejs }}",
+          "description": "{{ video.description | escapejs }}",
+          "thumbnailUrl": "{{ video.thumbnail_url | escapejs }}",
+          "uploadDate": "{{ video.published_at | escapejs }}",
+          "contentUrl": "{{ video.watch_url | escapejs }}",
+          "embedUrl": "{{ video.embed_url | escapejs }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% endif %}
+      {% if article_data and article_data.cross_reference_sources and article_data.cross_reference_sources|length > 0 %}
+      "citation": [
+        {% for source in article_data.cross_reference_sources %}
+        {
+          "@type": "CreativeWork",
+          "name": "{{ source.title or source.domain | escapejs }}",
+          "url": "{{ source.url | escapejs }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% endif %}
+      "isAccessibleForFree": "True"
     }
     </script>
 
@@ -128,14 +164,104 @@
                 </header>
 
                 {% if IMAGE_URL %}
-                <figure class="article-image-container">
+                <figure class="article-image-container main-image">
                     <img id="article-image" src="{{ IMAGE_URL }}" alt="{{ IMAGE_ALT_TEXT | default(ARTICLE_HEADLINE) }}">
                 </figure>
+                {% endif %}
+                
+                <!-- Additional Images Section (from content enhancement) -->
+                {% if article_data and article_data.images and article_data.images|length > 1 %}
+                <div class="additional-images-container">
+                    <h3>Additional Images</h3>
+                    <div class="image-gallery">
+                        {% for image in article_data.images[1:] %}
+                        <figure class="gallery-image">
+                            <img src="{{ image.url }}" alt="{{ image.alt_text or ARTICLE_HEADLINE }}" 
+                                 {% if image.width and image.height %}width="{{ image.width }}" height="{{ image.height }}"{% endif %}>
+                            {% if image.caption %}
+                            <figcaption>{{ image.caption }}</figcaption>
+                            {% endif %}
+                        </figure>
+                        {% endfor %}
+                    </div>
+                </div>
                 {% endif %}
 
                 <section id="article-body">
                     {{ ARTICLE_BODY_HTML | safe }}
                 </section>
+                
+                <!-- Video Embedding Section (from content enhancement) -->
+                {% if article_data and article_data.videos and article_data.videos|length > 0 %}
+                <section id="related-videos">
+                    <h3>Related Videos</h3>
+                    <div class="video-container">
+                        {% for video in article_data.videos %}
+                        <div class="embedded-video">
+                            <iframe width="560" height="315" src="{{ video.embed_url }}" 
+                                    title="{{ video.title }}" frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="video-info">
+                                <h4>{{ video.title }}</h4>
+                                <p class="video-channel">{{ video.channel_title }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+                
+                <!-- Cross-References Section (from content enhancement) -->
+                {% if article_data and article_data.cross_references and article_data.cross_references.success %}
+                <section id="cross-references">
+                    <h3>Additional Information</h3>
+                    
+                    {% if article_data.cross_references.additional_facts and article_data.cross_references.additional_facts|length > 0 %}
+                    <div class="cross-ref-section">
+                        <h4>Additional Facts</h4>
+                        <ul class="cross-ref-list">
+                            {% for fact in article_data.cross_references.additional_facts %}
+                            <li>{{ fact.fact }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    
+                    {% if article_data.cross_references.different_perspectives and article_data.cross_references.different_perspectives|length > 0 %}
+                    <div class="cross-ref-section">
+                        <h4>Different Perspectives</h4>
+                        <ul class="cross-ref-list">
+                            {% for perspective in article_data.cross_references.different_perspectives %}
+                            <li>{{ perspective.perspective }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    
+                    {% if article_data.cross_references.recent_developments and article_data.cross_references.recent_developments|length > 0 %}
+                    <div class="cross-ref-section">
+                        <h4>Recent Developments</h4>
+                        <ul class="cross-ref-list">
+                            {% for development in article_data.cross_references.recent_developments %}
+                            <li>{{ development.development }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    
+                    {% if article_data.cross_reference_sources and article_data.cross_reference_sources|length > 0 %}
+                    <div class="cross-ref-sources">
+                        <h4>Sources</h4>
+                        <ul class="source-list">
+                            {% for source in article_data.cross_reference_sources %}
+                            <li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.title or source.domain }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </section>
+                {% endif %}
 
                 {% if ARTICLE_TAGS_HTML %}
                 <footer>

@@ -150,6 +150,42 @@ img { max-width: 100%; height: auto; display: block; }
 #article-body h5.section-title { font-size: 1.1em; margin-top: 0; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px solid var(--border-color); }
 .pros-section > h5.section-title { color: var(--success-green); }
 .cons-section > h5.section-title { color: var(--danger-red); }
+
+/* --- Content Enhancement Features --- */
+
+/* Additional Images Gallery */
+.additional-images-container { margin: 25px 0; }
+.additional-images-container h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--text-light); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+.image-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+.gallery-image { margin: 0; border-radius: 6px; overflow: hidden; border: 1px solid var(--border-color); background-color: var(--bg-tertiary); }
+.gallery-image img { width: 100%; height: 180px; object-fit: cover; transition: transform 0.3s ease; }
+.gallery-image:hover img { transform: scale(1.05); }
+.gallery-image figcaption { padding: 8px 10px; font-size: 0.85em; color: var(--text-muted); text-align: center; background-color: var(--bg-tertiary); }
+
+/* Video Embedding */
+#related-videos { margin: 30px 0; }
+#related-videos h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--text-light); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+.video-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.embedded-video { background-color: var(--bg-tertiary); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); }
+.embedded-video iframe { width: 100%; border-radius: 8px 8px 0 0; aspect-ratio: 16/9; }
+.video-info { padding: 12px 15px; }
+.video-info h4 { margin: 0 0 5px 0; font-size: 1rem; color: var(--text-light); line-height: 1.4; }
+.video-channel { font-size: 0.85em; color: var(--text-muted); margin: 0; }
+
+/* Cross-References */
+#cross-references { margin: 30px 0; padding: 20px; background-color: var(--bg-tertiary); border-radius: 8px; border: 1px solid var(--border-color); }
+#cross-references h3 { font-size: 1.4rem; margin-bottom: 20px; color: var(--text-light); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+.cross-ref-section { margin-bottom: 20px; }
+.cross-ref-section h4 { font-size: 1.1rem; margin-bottom: 10px; color: var(--accent-blue); }
+.cross-ref-list { list-style-type: none; padding-left: 0; }
+.cross-ref-list li { position: relative; padding-left: 20px; margin-bottom: 10px; line-height: 1.5; }
+.cross-ref-list li::before { content: '\2022'; color: var(--accent-blue); position: absolute; left: 0; top: 0; font-weight: bold; font-size: 1.2em; }
+.cross-ref-sources { margin-top: 25px; padding-top: 15px; border-top: 1px dashed var(--border-color); }
+.cross-ref-sources h4 { font-size: 1rem; margin-bottom: 10px; color: var(--text-muted); }
+.source-list { list-style-type: none; padding-left: 0; }
+.source-list li { margin-bottom: 8px; font-size: 0.9em; }
+.source-list li a { color: var(--text-muted); text-decoration: underline; }
+.source-list li a:hover { color: var(--accent-blue); }
 #article-body code { background-color: var(--bg-dark); padding: 2px 5px; border-radius: 4px; font-family: var(--font-code); color: var(--accent-blue); font-size: 0.9em; }
 #article-body pre { background-color: var(--bg-dark); padding: 12px; border-radius: 5px; overflow-x: auto; margin-bottom: 1.1em; border: 1px solid var(--border-color); }
 #article-body pre code { background: none; padding: 0; color: var(--text-light); font-size: 0.85em; }
@@ -363,7 +399,12 @@ img { max-width: 100%; height: auto; display: block; }
     html { font-size: 15px; }
     .nav-container { justify-content: space-between; align-items: center; }
     .nav-search:not(.mobile-active) { display: none; }
-    #mobile-search-toggle { display: flex; align-items: center; } 
+    #mobile-search-toggle { display: flex; align-items: center; }
+    
+    /* Content Enhancement Responsive Styles */
+    .image-gallery { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .video-container { grid-template-columns: 1fr; }
+    #cross-references { padding: 15px; } 
     .navbar.search-active .nav-logo, .navbar.search-active .nav-right-section { display: none; }
     .nav-search.mobile-active { display: flex; position: absolute; left: 15px; right: 15px; top: 50%; transform: translateY(-50%); max-width: none; width: auto; z-index: 1001; margin: 0; height: calc(var(--navbar-height) - 20px); }
     .nav-search.mobile-active input[type="search"] { flex-grow: 1; height: 100%; }
@@ -402,6 +443,16 @@ img { max-width: 100%; height: auto; display: block; }
     .nav-logo { max-width: 120px; height: auto; }
     .nav-search.mobile-active { height: calc(var(--navbar-height) - 25px); } 
     .nav-search.mobile-active input[type="search"], .nav-search.mobile-active button { font-size: 0.8rem; }
+    
+    /* Content Enhancement Responsive Styles */
+    .image-gallery { grid-template-columns: 1fr; }
+    .gallery-image img { height: auto; max-height: 250px; }
+    .embedded-video iframe { height: auto; }
+    #cross-references { padding: 12px; }
+    .cross-ref-list li { padding-left: 15px; }
+    .cross-ref-list li::before { font-size: 1em; }
+    .cross-ref-section h4 { font-size: 1rem; }
+    .additional-images-container h3, #related-videos h3, #cross-references h3 { font-size: 1.2rem; }
 }
 
 /* Ultra-small screens (200-320px width) */
@@ -411,6 +462,14 @@ img { max-width: 100%; height: auto; display: block; }
     .nav-logo { height: 28px; } 
     .nav-right-section { gap: 8px; }
     #mobile-search-toggle { font-size: 1.2em; padding: 4px; }
+    
+    /* Content Enhancement Responsive Styles */
+    .gallery-image img { max-height: 200px; }
+    .embedded-video { margin-bottom: 15px; }
+    .video-info { padding: 8px 10px; }
+    .video-info h4 { font-size: 0.9rem; }
+    .cross-ref-list li { margin-bottom: 8px; }
+    .additional-images-container h3, #related-videos h3, #cross-references h3 { font-size: 1.1rem; padding-bottom: 5px; margin-bottom: 10px; }
 
     /* Ensure search bar is fully contained and centered when active */
     .nav-search.mobile-active { 

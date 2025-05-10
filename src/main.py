@@ -38,6 +38,7 @@ try:
     from src.agents.filter_news_agent import run_filter_agent
     from src.agents.keyword_research_agent import run_keyword_research_agent
     from src.agents.seo_article_generator_agent import run_seo_article_agent
+    from src.agents.content_enhancement_agent import run_content_enhancement_agent
     from src.social.social_media_poster import initialize_social_clients, run_social_media_poster
 except ImportError as e:
      print(f"FATAL IMPORT ERROR in main.py (agents/scrapers/social): {e}")
@@ -176,19 +177,37 @@ def send_make_webhook(webhook_url, data):
         return True
     except Exception as e: logger.error(f"Failed send to Make webhook for {log_id_info}: {e}"); return False
 
-def render_post_page(template_variables, slug_base):
+def render_post_page(template_variables, slug_base, article_data=None):
     try:
+        # Include enhanced content data if available
+        if article_data:
+            # Add the entire article_data object to template variables
+            template_variables['article_data'] = article_data
+            
+            # Ensure enhanced content features are properly passed to the template
+            if 'images' not in template_variables and 'images' in article_data:
+                template_variables['images'] = article_data['images']
+                
+            if 'videos' not in template_variables and 'videos' in article_data:
+                template_variables['videos'] = article_data['videos']
+                
+            if 'cross_references' not in template_variables and 'cross_references' in article_data:
+                template_variables['cross_references'] = article_data['cross_references']
+                
+            if 'cross_reference_sources' not in template_variables and 'cross_reference_sources' in article_data:
+                template_variables['cross_reference_sources'] = article_data['cross_reference_sources']
+        
         template = env.get_template('post_template.html')
-        html_content = template.render(template_variables)
-        safe_filename = slug_base if slug_base else template_variables.get('id', 'untitled')
-        safe_filename = re.sub(r'[<>:"/\\|?*%\.]+', '', safe_filename).strip().lower().replace(' ', '-')
-        safe_filename = re.sub(r'-+', '-', safe_filename).strip('-')[:80] or template_variables.get('id', 'untitled_fallback')
-        output_path = os.path.join(OUTPUT_HTML_DIR, f"{safe_filename}.html")
+        rendered_html = template.render(**template_variables)
+        output_path = os.path.join(OUTPUT_HTML_DIR, f"{slug_base}.html")
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        with open(output_path, 'w', encoding='utf-8') as f: f.write(html_content)
-        logger.info(f"Rendered HTML: {os.path.basename(output_path)}")
-        return output_path
-    except Exception as e: logger.exception(f"CRITICAL: Failed render HTML {template_variables.get('id','N/A')}: {e}"); return None
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(rendered_html)
+        logger.info(f"Rendered HTML for {slug_base}.html")
+        return True
+    except Exception as e:
+        logger.exception(f"CRITICAL: Failed render HTML {template_variables.get('id','N/A')}: {e}")
+        return False
 
 def load_all_articles_data():
     if not os.path.exists(ALL_ARTICLES_FILE): return []
@@ -277,6 +296,34 @@ def process_single_article(json_filepath, existing_articles_data, processed_in_t
         if not seo_results or not seo_results.get('generated_article_body_md'): logger.error(f"SEO Agent failed {article_id}. Skip."); remove_scraped_file(json_filepath); return None
         if article_data.get('seo_agent_error'): logger.warning(f"SEO Agent non-critical errors for {article_id}: {article_data['seo_agent_error']}")
 
+        # --- Advanced Content Enhancement ---
+        logger.info(f"Running advanced content enhancement for article ID: {article_id}...")
+        try:
+            # Add source URL and content to article data for content enhancement
+            article_data['source_url'] = article_data.get('link', '')
+            article_data['content'] = seo_results.get('generated_article_body_md', '')
+
+            # Run the content enhancement agent
+            enhanced_article_data = run_content_enhancement_agent(article_data)
+
+            # Update article data with enhanced content
+            if enhanced_article_data:
+                article_data = enhanced_article_data
+
+                # Log enhancement summary
+                enhancements_summary = article_data.get('enhancements_summary', {})
+                logger.info(f"Content enhancement results for {article_id}: {enhancements_summary}")
+
+                # Update the image URL if multiple images were found
+                if article_data.get('images') and len(article_data['images']) > 0:
+                    article_data['selected_image_url'] = article_data['images'][0]['url']
+                    logger.info(f"Updated main image for {article_id} from content enhancement")
+            else:
+                logger.warning(f"Content enhancement returned no data for {article_id}. Using original content.")
+        except Exception as e:
+            logger.warning(f"Content enhancement error for {article_id}: {e}. Continuing with original content.")
+            # Continue with original content if enhancement fails
+
         trend_score = 0.0; tags_count = len(article_data['generated_tags'])
         if importance == "Interesting": trend_score += 5.0
         elif importance == "Breaking": trend_score += 10.0
@@ -308,7 +355,7 @@ def process_single_article(json_filepath, existing_articles_data, processed_in_t
             'CURRENT_ARTICLE_TOPIC': article_data.get('topic', ''), 'CURRENT_ARTICLE_TAGS_JSON': json.dumps(article_data['generated_tags']),
             'AUDIO_URL': None
         }
-        if not render_post_page(template_vars, article_data['slug']): logger.error(f"Failed HTML render for {article_id}. Skip."); return None
+        if not render_post_page(template_vars, article_data['slug'], article_data): logger.error(f"Failed HTML render for {article_id}. Skip."); return None
 
         site_data_entry = {"id": article_id, "title": article_data.get('title'), "link": article_relative_path, "published_iso": template_vars['PUBLISH_ISO_FOR_META'],
                            "summary_short": template_vars['META_DESCRIPTION'], "image_url": article_data.get('selected_image_url'), "topic": article_data.get('topic', 'News'),
@@ -381,7 +428,7 @@ if __name__ == "__main__":
                         'CURRENT_ARTICLE_TOPIC': article_data.get('topic', ''), 'CURRENT_ARTICLE_TAGS_JSON': json.dumps(tags_list),
                         'AUDIO_URL': article_data.get('audio_url')
                     }
-                    if render_post_page(template_vars, slug): regenerated_count += 1
+                    if render_post_page(template_vars, slug, article_data): regenerated_count += 1
             except Exception as regen_e: logger.exception(f"Error during HTML regen for {os.path.basename(proc_filepath)}: {regen_e}")
     logger.info(f"--- HTML Regeneration Complete. Regenerated {regenerated_count} files. ---")
 
