@@ -1,6 +1,35 @@
 {
   "articles": [
     {
+      "id": "8fdf4d74e4a0fdebe0d5c50ac6903c725f18874674c97b69f49e7ecbfcaff51d",
+      "title": "U.S. Semiconductor Market Policies: A Defining Year in 2025",
+      "link": "articles/us-semiconductor-market-policies-a-defining-year-in-2025.html",
+      "published_iso": "2025-05-10T14:00:00Z",
+      "summary_short": "Explore how U.S. semiconductor market policies evolved in 2025, from export controls to manufacturing shifts, shaping global tech competition.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/GettyImages-1366897838.jpg?resize=1200,800",
+      "topic": "AI Policy & Geopolitics",
+      "is_breaking": false,
+      "tags": [
+        "semiconductor industry regulations",
+        "semiconductor R&D investments",
+        "U.S. chip manufacturing growth",
+        "5G and semiconductors",
+        "semiconductor export controls",
+        "chip shortage solutions",
+        "tech trade wars 2025",
+        "U.S. vs China semiconductors",
+        "next-gen semiconductor materials",
+        "semiconductor sustainability initiatives",
+        "U.S. semiconductor market policies",
+        "AI chip competition",
+        "semiconductor tariffs 2025",
+        "quantum computing chips",
+        "semiconductor supply chain 2025"
+      ],
+      "audio_url": null,
+      "trend_score": 17.5
+    },
+    {
       "id": "c1f4c558be7e41f5f2abd8403cf828171f486074f0a3c31c97f272c894cda242",
       "title": "WhatsApp Spyware Lawsuit Outcome: $167M Verdict and Critical Takeaways",
       "link": "articles/whatsapp-spyware-lawsuit-outcome-$167m-verdict-and-critical-takeaways.html",
