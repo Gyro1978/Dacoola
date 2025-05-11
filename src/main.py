@@ -1,4 +1,4 @@
-# src/main.py (Corrected AttributeError in Stage 3.5 for social queuing)
+# src/main.py (Limit social posting queue to last 24 hours)
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -58,8 +58,12 @@ YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 raw_base_url = os.getenv('YOUR_SITE_BASE_URL', ''); YOUR_SITE_BASE_URL = (raw_base_url.rstrip('/') + '/') if raw_base_url else ''
 MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None)
 DAILY_TWEET_LIMIT = int(os.getenv('DAILY_TWEET_LIMIT', '3'))
+# How old an article from processed_json can be to be considered for social media posting
+MAX_AGE_FOR_SOCIAL_POST_HOURS = 24 
+
 
 # --- Setup Logging ---
+# ... (logging setup remains the same) ...
 log_file_path = os.path.join(PROJECT_ROOT_FOR_PATH, 'dacola.log')
 try:
     os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
@@ -67,7 +71,6 @@ try:
 except OSError as e: print(f"Log setup warning: {e}. Log console only."); log_handlers = [logging.StreamHandler(sys.stdout)]
 logging.basicConfig( level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', handlers=log_handlers, force=True )
 logger = logging.getLogger('main_orchestrator')
-
 if not YOUR_SITE_BASE_URL or YOUR_SITE_BASE_URL == '/': 
     logger.error("CRITICAL: YOUR_SITE_BASE_URL is not set or is invalid ('/'). Canonical URLs and sitemap will be incorrect.")
 else:
@@ -76,6 +79,7 @@ if not YOUR_WEBSITE_LOGO_URL: logger.warning("YOUR_WEBSITE_LOGO_URL not set.")
 
 
 # --- Configuration ---
+# ... (other config remains the same) ...
 DATA_DIR_MAIN = os.path.join(PROJECT_ROOT_FOR_PATH, 'data')
 SCRAPED_ARTICLES_DIR = os.path.join(DATA_DIR_MAIN, 'scraped_articles')
 PROCESSED_JSON_DIR = os.path.join(DATA_DIR_MAIN, 'processed_json') 
@@ -86,7 +90,9 @@ ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
 ARTICLE_MAX_AGE_DAYS = 30 
 TWITTER_DAILY_LIMIT_FILE = os.path.join(DATA_DIR_MAIN, 'twitter_daily_limit.json')
 
+
 # --- Jinja2 Setup ---
+# ... (Jinja2 setup remains the same) ...
 try:
     from jinja2 import Environment, FileSystemLoader, select_autoescape
     def escapejs_filter(value):
@@ -102,6 +108,7 @@ except ImportError: logger.critical("Jinja2 library not found. Exiting."); sys.e
 except Exception as e: logger.exception(f"CRITICAL: Failed Jinja2 init. Exiting: {e}"); sys.exit(1)
 
 # --- Helper Functions ---
+# ... (ensure_directories, load_article_data, save_processed_data, remove_scraped_file, format_tags_html, get_sort_key, _read_tweet_tracker, _write_tweet_tracker, send_make_webhook, render_post_page, load_all_articles_data_from_json, update_all_articles_json_file remain the same)
 def ensure_directories():
     dirs_to_create = [ DATA_DIR_MAIN, SCRAPED_ARTICLES_DIR, PROCESSED_JSON_DIR, PUBLIC_DIR, OUTPUT_HTML_DIR, TEMPLATE_DIR ]
     try:
@@ -213,8 +220,10 @@ def update_all_articles_json_file(new_article_summary_info):
         logger.info(f"Updated {os.path.basename(ALL_ARTICLES_FILE)} ({len(updated_articles_list)} articles).")
     except Exception as e: logger.error(f"Failed save updated {os.path.basename(ALL_ARTICLES_FILE)}: {e}")
 
+
 # --- Main Processing Function for Scraped Articles ---
 def process_single_scraped_article(raw_json_filepath, existing_articles_summary_data, processed_ids_this_run_set):
+    # ... (This function remains the same as your last correct version)
     article_filename = os.path.basename(raw_json_filepath)
     logger.info(f"--- Processing article file: {article_filename} ---")
     article_data_content = load_article_data(raw_json_filepath)
@@ -335,14 +344,14 @@ if __name__ == "__main__":
     logger.info(f"Total initial IDs (from scraper history or already fully processed) passed to scraper: {len(initial_ids_for_scraper_run)}")
 
     logger.info("--- Stage 1: Checking for Missing HTML from Processed Data (Scraped & Gyro) ---")
-    all_processed_json_files = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json')) # Get list once for this stage
+    all_processed_json_files = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json')) # Get list once
     html_regenerated_count = 0
     if all_processed_json_files:
         logger.info(f"Found {len(all_processed_json_files)} processed JSON files to check for HTML regeneration.")
-        for proc_json_filepath in all_processed_json_files: # Use the list obtained
+        for proc_json_filepath in all_processed_json_files:
             try:
                 article_data_content = load_article_data(proc_json_filepath)
-                if not article_data_content: # Handles None from load_article_data
+                if not article_data_content: 
                     logger.warning(f"Skipping HTML regen for invalid/unreadable JSON: {os.path.basename(proc_json_filepath)}"); continue
                 
                 article_unique_id = article_data_content.get('id'); article_slug_str = article_data_content.get('slug')
@@ -351,11 +360,10 @@ if __name__ == "__main__":
                 expected_html_file_path = os.path.join(OUTPUT_HTML_DIR, f"{article_slug_str}.html")
                 if not os.path.exists(expected_html_file_path):
                     logger.info(f"HTML missing for article ID {article_unique_id} (slug: {article_slug_str}). Regenerating...")
-                    seo_agent_results_data = article_data_content.get('seo_agent_results', {}); # Default to empty dict
-                    # CRITICAL FIX for AttributeError: Check if seo_agent_results_data is a dict before .get()
-                    if not isinstance(seo_agent_results_data, dict):
-                        logger.error(f"Article {article_unique_id} 'seo_agent_results' is not a dictionary. Using empty for regen. Data: {seo_agent_results_data}")
-                        seo_agent_results_data = {} # Ensure it's a dict for safe .get() calls
+                    seo_agent_results_data = article_data_content.get('seo_agent_results', {}); 
+                    if not isinstance(seo_agent_results_data, dict): # Robust check
+                        logger.error(f"Article {article_unique_id} 'seo_agent_results' is not a dictionary (is {type(seo_agent_results_data)}). Using empty for regen.")
+                        seo_agent_results_data = {} 
 
                     article_body_md_content = seo_agent_results_data.get('generated_article_body_md', '')
                     article_body_html_output = markdown.markdown(article_body_md_content, extensions=['fenced_code', 'tables', 'nl2br'])
@@ -413,8 +421,14 @@ if __name__ == "__main__":
     already_posted_social_ids = set(social_post_history_data.get('posted_articles', []))
     
     unposted_existing_processed_added_to_queue = 0
-    # Use the same list of all_processed_json_files from HTML regen stage to avoid re-globbing
-    for processed_json_file_path_check in all_processed_json_files: 
+    now_for_age_check = datetime.now(timezone.utc)
+    cutoff_time_for_social = now_for_age_check - timedelta(hours=MAX_AGE_FOR_SOCIAL_POST_HOURS)
+
+    # Re-fetch the list of all processed JSON files to ensure it's current
+    all_processed_json_files_for_social_check = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
+    logger.info(f"Checking {len(all_processed_json_files_for_social_check)} total processed files for social media queue.")
+
+    for processed_json_file_path_check in all_processed_json_files_for_social_check: 
         article_id_from_filename = os.path.basename(processed_json_file_path_check).replace('.json', '')
         
         if any(payload.get('id') == article_id_from_filename for payload in social_media_payloads_for_posting_queue):
@@ -422,13 +436,30 @@ if __name__ == "__main__":
             continue 
 
         if article_id_from_filename not in already_posted_social_ids:
-            logger.info(f"Article ID {article_id_from_filename} (from processed_json) not in social history. Adding to queue.")
             processed_article_full_data = load_article_data(processed_json_file_path_check)
             
-            if not processed_article_full_data: # Check if loading failed
-                logger.warning(f"Could not load data for processed file: {processed_json_file_path_check} during social queueing. Skipping.")
+            if not processed_article_full_data:
+                logger.warning(f"Could not load data from {processed_json_file_path_check} for social queue. Skipping.")
                 continue
 
+            # Check article age before adding to social queue
+            published_iso_for_social = processed_article_full_data.get('published_iso')
+            if not published_iso_for_social:
+                logger.warning(f"Processed article {article_id_from_filename} missing 'published_iso'. Cannot check age for social posting. Skipping.")
+                continue
+            
+            try:
+                article_publish_dt = get_sort_key(processed_article_full_data) # Use existing robust date parser
+                if article_publish_dt < cutoff_time_for_social:
+                    logger.debug(f"Processed article {article_id_from_filename} (published: {article_publish_dt}) is older than {MAX_AGE_FOR_SOCIAL_POST_HOURS} hours. Skipping social post.")
+                    # Mark as posted to avoid re-checking old articles constantly, even if not actually posted
+                    mark_article_as_posted_in_history(article_id_from_filename)
+                    continue
+            except Exception as date_e:
+                logger.warning(f"Error parsing date for {article_id_from_filename} for social age check: {date_e}. Skipping.")
+                continue
+            
+            logger.info(f"Article ID {article_id_from_filename} (from processed_json) not in social history and recent enough. Adding to queue.")
             article_title_for_social = processed_article_full_data.get('title', 'Untitled')
             article_slug_for_social = processed_article_full_data.get('slug')
             if not article_slug_for_social:
@@ -437,14 +468,12 @@ if __name__ == "__main__":
             relative_link_for_social = f"articles/{article_slug_for_social}.html"
             canonical_url_for_social = urljoin(YOUR_SITE_BASE_URL, relative_link_for_social.lstrip('/')) if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else f"/{relative_link_for_social.lstrip('/')}"
             
-            seo_results_data_for_social = processed_article_full_data.get('seo_agent_results', {}) # Default to {}
+            seo_results_data_for_social = processed_article_full_data.get('seo_agent_results', {})
             summary_short_for_social = ''
-            # Ensure seo_results_data_for_social is a dict before calling .get()
             if isinstance(seo_results_data_for_social, dict):
                 summary_short_for_social = seo_results_data_for_social.get('generated_meta_description', '')
-            else: # If it's not a dict (e.g. None or something else)
+            else: 
                  logger.warning(f"Article {article_id_from_filename} 'seo_agent_results' is not a dict (is {type(seo_results_data_for_social)}). Meta description for social will be empty.")
-
 
             payload = {
                 "id": article_id_from_filename, "title": article_title_for_social,
@@ -458,7 +487,7 @@ if __name__ == "__main__":
             logger.debug(f"Article {article_id_from_filename} already in social post history. Skipping for queue.")
             
     if unposted_existing_processed_added_to_queue > 0:
-        logger.info(f"Added {unposted_existing_processed_added_to_queue} previously unposted items from processed_json to social media queue.")
+        logger.info(f"Added {unposted_existing_processed_added_to_queue} recent, unposted items from processed_json to social media queue.")
 
     current_run_date_str = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     twitter_limit_file_date, twitter_posts_made_today = _read_tweet_tracker()
@@ -470,39 +499,47 @@ if __name__ == "__main__":
     if social_media_payloads_for_posting_queue:
         logger.info(f"--- Stage 4: Attempting to post {len(social_media_payloads_for_posting_queue)} total articles to Social Media ---")
         final_make_webhook_payloads = []
+        # Sort payloads by published_iso date, newest first, to prioritize recent content for posting
+        social_media_payloads_for_posting_queue.sort(key=lambda p: get_sort_key(load_article_data(os.path.join(PROCESSED_JSON_DIR, f"{p.get('id')}.json")) or {}), reverse=True)
+
+
         for social_payload_item in social_media_payloads_for_posting_queue:
             article_id_for_social_post = social_payload_item.get('id')
-            current_social_history = load_social_post_history(); 
+            # Re-check history just before posting, as it might have been updated by a concurrent process (less likely here)
+            current_social_history = load_social_post_history()
             if article_id_for_social_post in current_social_history.get('posted_articles', []):
-                logger.info(f"Article {article_id_for_social_post} already marked in social history. Skipping actual post.")
+                logger.info(f"Article {article_id_for_social_post} was already marked in social history just before posting its turn. Skipping.")
                 continue
 
             logger.info(f"Preparing to post article ID: {article_id_for_social_post} ('{social_payload_item.get('title', '')[:40]}...')")
             platforms_to_attempt_post = ["bluesky", "reddit"]
+            
             if social_media_clients_glob.get("twitter_client"):
                 if twitter_posts_made_today < DAILY_TWEET_LIMIT:
                     platforms_to_attempt_post.append("twitter")
                     logger.info(f"Article {article_id_for_social_post} WILL be attempted on Twitter. (Daily count: {twitter_posts_made_today}/{DAILY_TWEET_LIMIT})")
-                else: logger.info(f"Daily Twitter limit ({DAILY_TWEET_LIMIT}) reached. Twitter SKIPPED for {article_id_for_social_post}")
+                else: 
+                    logger.info(f"Daily Twitter limit ({DAILY_TWEET_LIMIT}) reached. Twitter SKIPPED for {article_id_for_social_post}")
             
-            any_platform_posted_successfully = run_social_media_poster(social_payload_item, social_media_clients_glob, platforms_to_post=tuple(platforms_to_attempt_post))
+            # run_social_media_poster is expected to call mark_article_as_posted_in_history internally
+            run_social_media_poster(social_payload_item, social_media_clients_glob, platforms_to_post=tuple(platforms_to_attempt_post))
             
-            # The run_social_media_poster now calls mark_article_as_posted_in_history internally
-            # So we only need to update the Twitter daily count if Twitter was attempted.
             if "twitter" in platforms_to_attempt_post and social_media_clients_glob.get("twitter_client"):
                 twitter_posts_made_today += 1 
                 _write_tweet_tracker(current_run_date_str, twitter_posts_made_today)
                 logger.info(f"Twitter daily post count for {current_run_date_str} updated to: {twitter_posts_made_today} after attempt for {article_id_for_social_post}.")
             
             if MAKE_WEBHOOK_URL: final_make_webhook_payloads.append(social_payload_item)
-            time.sleep(10) 
+            
+            if len(social_media_payloads_for_posting_queue) > 1: # Only sleep if there are more articles to post
+                time.sleep(10) # Delay between posting different articles
 
         if MAKE_WEBHOOK_URL and final_make_webhook_payloads:
-            logger.info(f"--- Sending {len(final_make_webhook_payloads)} items (scraped & Gyro) to Make.com Webhook ---")
+            logger.info(f"--- Sending {len(final_make_webhook_payloads)} items to Make.com Webhook ---")
             if send_make_webhook(MAKE_WEBHOOK_URL, final_make_webhook_payloads): logger.info("Batched Make.com webhook sent successfully.")
             else: logger.error("Batched Make.com webhook failed.")
     else:
-        logger.info("No new articles queued for social media posting in this run.")
+        logger.info("No new or unposted recent articles queued for social media posting in this run.")
 
     logger.info("--- Stage 5: Generating Sitemap ---")
     if not YOUR_SITE_BASE_URL or YOUR_SITE_BASE_URL == '/': logger.error("Sitemap generation SKIPPED: YOUR_SITE_BASE_URL not set or invalid.");
