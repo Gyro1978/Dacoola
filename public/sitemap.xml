@@ -7,15 +7,12 @@
     <priority>1.0</priority>
   </url>
   <url>
-<<<<<<< HEAD
     <loc>https://dacoolaa.netlify.app/articles/greece-tech-economy-the-mediterraneans-rising-innovation-powerhouse.html</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-=======
->>>>>>> c69618c6084efb1c8818676c23f6d9a84d0a10bf
     <loc>https://dacoolaa.netlify.app/articles/pope-leo-xiv-on-ai-vaticans-new-vision-for-humanitys-future.html</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -28,15 +25,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-<<<<<<< HEAD
-=======
-    <loc>https://dacoolaa.netlify.app/articles/page-layout-issue-identified-in-absolute-zero-ai-research-paper.html</loc>
-    <lastmod>2025-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
->>>>>>> c69618c6084efb1c8818676c23f6d9a84d0a10bf
     <loc>https://dacoolaa.netlify.app/articles/ai-model-standards-how-mcp-is-reshaping-the-future-of-ai.html</loc>
     <lastmod>2025-05-10</lastmod>
     <changefreq>weekly</changefreq>
