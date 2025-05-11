@@ -1,9 +1,0 @@
-{
-    "id": "a51dd2dc3794da378c72ec4bcd72ffb8a89d3d8c7ad476b6858da82b101a55f6",
-    "title": "Meta previews an API for its Llama AI models",
-    "link": "https://techcrunch.com/2025/04/29/meta-previews-an-api-for-its-llama-ai-models/",
-    "published_iso": "2025-04-29T17:15:00",
-    "summary": "At its inaugural LlamaCon AI developer conference on Tuesday, Meta announced an API for its Llama series of AI models: the Llama API. Available in limited preview, the Llama API lets developers explore and experiment with products powered by different Llama models, per Meta. Paired with Meta&#8217;s SDKs, it allows developers to build Llama-driven services, [&#8230;]",
-    "source_feed": "https://techcrunch.com/feed/",
-    "scraped_at_iso": "2025-04-30T01:25:51.675114"
-}

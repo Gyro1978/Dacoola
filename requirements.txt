@@ -12,5 +12,5 @@ sentence-transformers # For CLIP in image_scraper
 # tweepy # REMOVED if twitter_poster.py is gone and not used elsewhere
 trafilatura # Optional, for news_scraper full text
 google-ads # For Keyword Planner API access
-atprototools # For Bluesky
+atproto # For Bluesky
 praw # For Reddit

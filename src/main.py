@@ -1,4 +1,4 @@
-# src/main.py (Corrected AttributeError in Stage 3.5)
+# src/main.py (Corrected AttributeError in Stage 3.5 for social queuing)
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -215,7 +215,6 @@ def update_all_articles_json_file(new_article_summary_info):
 
 # --- Main Processing Function for Scraped Articles ---
 def process_single_scraped_article(raw_json_filepath, existing_articles_summary_data, processed_ids_this_run_set):
-    # ... (This function remains the same as the last correct version you provided)
     article_filename = os.path.basename(raw_json_filepath)
     logger.info(f"--- Processing article file: {article_filename} ---")
     article_data_content = load_article_data(raw_json_filepath)
@@ -336,20 +335,29 @@ if __name__ == "__main__":
     logger.info(f"Total initial IDs (from scraper history or already fully processed) passed to scraper: {len(initial_ids_for_scraper_run)}")
 
     logger.info("--- Stage 1: Checking for Missing HTML from Processed Data (Scraped & Gyro) ---")
-    all_processed_json_files = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
+    all_processed_json_files = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json')) # Get list once for this stage
     html_regenerated_count = 0
     if all_processed_json_files:
         logger.info(f"Found {len(all_processed_json_files)} processed JSON files to check for HTML regeneration.")
-        for proc_json_filepath in all_processed_json_files:
+        for proc_json_filepath in all_processed_json_files: # Use the list obtained
             try:
                 article_data_content = load_article_data(proc_json_filepath)
-                if not article_data_content or not isinstance(article_data_content, dict): logger.warning(f"Skipping invalid JSON for HTML regen: {os.path.basename(proc_json_filepath)}"); continue
+                if not article_data_content: # Handles None from load_article_data
+                    logger.warning(f"Skipping HTML regen for invalid/unreadable JSON: {os.path.basename(proc_json_filepath)}"); continue
+                
                 article_unique_id = article_data_content.get('id'); article_slug_str = article_data_content.get('slug')
                 if not article_unique_id or not article_slug_str: logger.warning(f"Skipping JSON missing id/slug for HTML regen: {os.path.basename(proc_json_filepath)}"); continue
+                
                 expected_html_file_path = os.path.join(OUTPUT_HTML_DIR, f"{article_slug_str}.html")
                 if not os.path.exists(expected_html_file_path):
                     logger.info(f"HTML missing for article ID {article_unique_id} (slug: {article_slug_str}). Regenerating...")
-                    seo_agent_results_data = article_data_content.get('seo_agent_results', {}); article_body_md_content = seo_agent_results_data.get('generated_article_body_md', '')
+                    seo_agent_results_data = article_data_content.get('seo_agent_results', {}); # Default to empty dict
+                    # CRITICAL FIX for AttributeError: Check if seo_agent_results_data is a dict before .get()
+                    if not isinstance(seo_agent_results_data, dict):
+                        logger.error(f"Article {article_unique_id} 'seo_agent_results' is not a dictionary. Using empty for regen. Data: {seo_agent_results_data}")
+                        seo_agent_results_data = {} # Ensure it's a dict for safe .get() calls
+
+                    article_body_md_content = seo_agent_results_data.get('generated_article_body_md', '')
                     article_body_html_output = markdown.markdown(article_body_md_content, extensions=['fenced_code', 'tables', 'nl2br'])
                     current_tags_list = article_data_content.get('generated_tags', []); article_tags_html_output = format_tags_html(current_tags_list)
                     article_publish_datetime_obj = get_sort_key(article_data_content); relative_article_path_str_regen = f"articles/{article_slug_str}.html"
@@ -393,7 +401,7 @@ if __name__ == "__main__":
             successfully_processed_scraped_count += 1
             if "summary" in single_article_processing_result:
                 processed_articles_in_current_run_summaries.append(single_article_processing_result["summary"])
-                all_articles_summary_data_for_run.append(single_article_processing_result["summary"]) # Add to overall list for this run's context
+                all_articles_summary_data_for_run.append(single_article_processing_result["summary"])
             if "social_post_data" in single_article_processing_result:
                 social_media_payloads_for_posting_queue.append(single_article_processing_result["social_post_data"])
         else:
@@ -405,22 +413,20 @@ if __name__ == "__main__":
     already_posted_social_ids = set(social_post_history_data.get('posted_articles', []))
     
     unposted_existing_processed_added_to_queue = 0
-    # Check all files in PROCESSED_JSON_DIR (includes GyroPicks and successfully processed scraped articles)
-    for processed_json_file_path_check in all_processed_json_files: # Re-iterate using the list from HTML regen stage
+    # Use the same list of all_processed_json_files from HTML regen stage to avoid re-globbing
+    for processed_json_file_path_check in all_processed_json_files: 
         article_id_from_filename = os.path.basename(processed_json_file_path_check).replace('.json', '')
         
-        # Check if already queued from this run's scraping phase
         if any(payload.get('id') == article_id_from_filename for payload in social_media_payloads_for_posting_queue):
             logger.debug(f"Article {article_id_from_filename} was from recent scrape; already in social queue.")
-            continue # Already in queue from scraped processing
+            continue 
 
         if article_id_from_filename not in already_posted_social_ids:
             logger.info(f"Article ID {article_id_from_filename} (from processed_json) not in social history. Adding to queue.")
             processed_article_full_data = load_article_data(processed_json_file_path_check)
             
-            # CRITICAL FIX: Ensure processed_article_full_data is not None before trying to access its keys
-            if not processed_article_full_data or not isinstance(processed_article_full_data, dict):
-                logger.warning(f"Could not load or invalid data in processed file: {processed_json_file_path_check} during social queueing. Skipping.")
+            if not processed_article_full_data: # Check if loading failed
+                logger.warning(f"Could not load data for processed file: {processed_json_file_path_check} during social queueing. Skipping.")
                 continue
 
             article_title_for_social = processed_article_full_data.get('title', 'Untitled')
@@ -431,13 +437,13 @@ if __name__ == "__main__":
             relative_link_for_social = f"articles/{article_slug_for_social}.html"
             canonical_url_for_social = urljoin(YOUR_SITE_BASE_URL, relative_link_for_social.lstrip('/')) if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else f"/{relative_link_for_social.lstrip('/')}"
             
-            # Safely access seo_agent_results and generated_meta_description
-            seo_results_data_for_social = processed_article_full_data.get('seo_agent_results')
+            seo_results_data_for_social = processed_article_full_data.get('seo_agent_results', {}) # Default to {}
             summary_short_for_social = ''
+            # Ensure seo_results_data_for_social is a dict before calling .get()
             if isinstance(seo_results_data_for_social, dict):
                 summary_short_for_social = seo_results_data_for_social.get('generated_meta_description', '')
-            elif seo_results_data_for_social is None: # If seo_agent_results key doesn't exist or is None
-                 logger.warning(f"Article {article_id_from_filename} has no 'seo_agent_results'. Summary for social will be empty.")
+            else: # If it's not a dict (e.g. None or something else)
+                 logger.warning(f"Article {article_id_from_filename} 'seo_agent_results' is not a dict (is {type(seo_results_data_for_social)}). Meta description for social will be empty.")
 
 
             payload = {
@@ -466,9 +472,10 @@ if __name__ == "__main__":
         final_make_webhook_payloads = []
         for social_payload_item in social_media_payloads_for_posting_queue:
             article_id_for_social_post = social_payload_item.get('id')
-            current_social_history = load_social_post_history(); # Load fresh for each check
+            current_social_history = load_social_post_history(); 
             if article_id_for_social_post in current_social_history.get('posted_articles', []):
-                logger.info(f"Article {article_id_for_social_post} already marked in social history just before posting. Skipping."); continue
+                logger.info(f"Article {article_id_for_social_post} already marked in social history. Skipping actual post.")
+                continue
 
             logger.info(f"Preparing to post article ID: {article_id_for_social_post} ('{social_payload_item.get('title', '')[:40]}...')")
             platforms_to_attempt_post = ["bluesky", "reddit"]
@@ -478,14 +485,15 @@ if __name__ == "__main__":
                     logger.info(f"Article {article_id_for_social_post} WILL be attempted on Twitter. (Daily count: {twitter_posts_made_today}/{DAILY_TWEET_LIMIT})")
                 else: logger.info(f"Daily Twitter limit ({DAILY_TWEET_LIMIT}) reached. Twitter SKIPPED for {article_id_for_social_post}")
             
-            # run_social_media_poster now returns a boolean indicating if at least one platform was successful (e.g. twitter)
-            # And it internally calls mark_article_as_posted_in_history
             any_platform_posted_successfully = run_social_media_poster(social_payload_item, social_media_clients_glob, platforms_to_post=tuple(platforms_to_attempt_post))
             
+            # The run_social_media_poster now calls mark_article_as_posted_in_history internally
+            # So we only need to update the Twitter daily count if Twitter was attempted.
             if "twitter" in platforms_to_attempt_post and social_media_clients_glob.get("twitter_client"):
                 twitter_posts_made_today += 1 
                 _write_tweet_tracker(current_run_date_str, twitter_posts_made_today)
                 logger.info(f"Twitter daily post count for {current_run_date_str} updated to: {twitter_posts_made_today} after attempt for {article_id_for_social_post}.")
+            
             if MAKE_WEBHOOK_URL: final_make_webhook_payloads.append(social_payload_item)
             time.sleep(10) 
 
