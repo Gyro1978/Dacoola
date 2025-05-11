@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "d1caed3cff3e5a13ec930f30dfb0bedfc99976f038712b53cbff5328e0df349f",
+      "title": "Microsoft and OpenAI Partnership Undergoes Critical Renegotiation",
+      "link": "articles/microsoft-and-openai-partnership-undergoes-critical-renegotiation.html",
+      "published_iso": "2025-05-11T15:16:05Z",
+      "summary_short": "Microsoft and OpenAI are in tense negotiations over equity and technology access, reshaping their $13 billion partnership. Learn the latest details.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/11/GettyImages-1778706504.jpg?resize=1200,783",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI Microsoft equity negotiation",
+        "Stargate infrastructure project OpenAI",
+        "OpenAI nonprofit board control",
+        "Microsoft investment in OpenAI",
+        "Financial Times OpenAI Microsoft report",
+        "Microsoft OpenAI partnership renegotiation",
+        "OpenAI for-profit public benefit corporation",
+        "Microsoft OpenAI partnership",
+        "OpenAI Microsoft competitive relationship",
+        "Microsoft OpenAI technology access",
+        "OpenAI enterprise business growth",
+        "OpenAI corporate restructuring"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "gyro-20250511130002-aeac4922",
       "title": "Greece Tech Economy: The Mediterranean’s Rising Innovation Powerhouse",
       "link": "articles/greece-tech-economy-the-mediterraneans-rising-innovation-powerhouse.html",
