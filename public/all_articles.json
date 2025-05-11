@@ -4883,30 +4883,6 @@
       "trend_score": 13.98
     },
     {
-      "id": "18377dcb4eff1e247d5458c013ace5e45a41c2742b31643947b67634eb67104f",
-      "title": "Ready for AI-enhanced credit cards? Here's Visa's vision of automated shopping",
-      "link": "articles/ready-for-ai-enhanced-credit-cards-heres-visas-vision-of-automated-shopping.html",
-      "published_iso": "2025-05-02T09:45:00Z",
-      "summary_short": "Visa's latest announcement hints at AI-enhanced credit cards that could automate shopping by finding and ordering products for you.",
-      "image_url": "https://www.zdnet.com/a/img/resize/c2a618e7e893c5d7640f446d99f03b6bae9c7941/2025/05/02/2e8d949e-2f03-415c-ba47-71d7256419e4/gettyimages-2070604007.jpg?auto=webp&fit=crop&height=675&width=1200",
-      "topic": "Business",
-      "is_breaking": false,
-      "tags": [
-        "AI-enhanced credit cards",
-        "Visa AI vision",
-        "automated shopping",
-        "AI in financial services",
-        "e-commerce convenience",
-        "AI security concerns",
-        "privacy in AI payments",
-        "AI agent shopping",
-        "financial technology trends",
-        "decision fatigue reduction"
-      ],
-      "audio_url": null,
-      "trend_score": 13.93
-    },
-    {
       "id": "1a5c311487ea6903494a02f4595fe8af6677deb6e05d48445e0447cbf2eb7c22",
       "title": "Inside the Battle Over OpenAI’s Corporate Restructuring",
       "link": "articles/inside-the-battle-over-openais-corporate-restructuring.html",
@@ -5162,30 +5138,6 @@
         "open scientific innovation"
       ],
       "trend_score": 15.0
-    },
-    {
-      "id": "e57e9a7ac9187c7316319e59a970f5b4ccd37339ae790c336574696a52cc9c11",
-      "title": "Hidden costs in AI deployment: Why Claude models may be 20-30% more expensive than GPT in enterprise settings",
-      "link": "articles/hidden-costs-in-ai-deployment-why-claude-models-may-be-20-30-more-expensive-than.html",
-      "published_iso": "2025-05-01T20:14:04Z",
-      "summary_short": "Claude AI models may cost 20-30% more than GPT in enterprise settings due to tokenization differences, impacting AI deployment costs.",
-      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/ChatGPT-Image-May-1-2025-11_45_21-AM.png?w=1024?w=1200&strip=all",
-      "topic": "Business",
-      "is_breaking": false,
-      "tags": [
-        "AI deployment costs",
-        "Claude models",
-        "GPT models",
-        "tokenization impact",
-        "enterprise AI pricing",
-        "API pricing models",
-        "AI model comparison",
-        "hidden AI expenses",
-        "tokenizer efficiency",
-        "AI cost optimization"
-      ],
-      "audio_url": null,
-      "trend_score": 13.56
     },
     {
       "id": "b5be234482b4ba55e5c8cf12354060270e378e3b8533ba861d756cd9f3be7043",
@@ -6302,30 +6254,6 @@
       "trend_score": 11.2
     },
     {
-      "id": "96d26635a64d56338cba3538adc07983f5a1d1e273adb93c81f5ca8cde9dc440",
-      "title": "Meta unleashes Llama API running 18x faster than OpenAI: Cerebras partnership delivers 2,600 tokens per second",
-      "link": "articles/meta-unleashes-llama-api-running-18x-faster-than-openai-cerebras-partnership-del.html",
-      "published_iso": "2025-04-29T20:02:04Z",
-      "summary_short": "Meta's new Llama API, powered by Cerebras, delivers AI inference speeds 18x faster than OpenAI, reaching 2,600 tokens per second.",
-      "image_url": "https://venturebeat.com/wp-content/uploads/2025/04/nuneybits_Vector_art_of_a_computer_chip_in_the_colors_of_Goolge_71db7087-b8f7-4ae3-ae07-4b36bdee2086.webp?w=1024?w=1200&strip=all",
-      "topic": "AI Models",
-      "is_breaking": false,
-      "tags": [
-        "Meta Llama API",
-        "AI inference speed",
-        "Cerebras partnership",
-        "OpenAI competition",
-        "AI infrastructure",
-        "tokens per second",
-        "AI performance optimization",
-        "GPU alternatives",
-        "AI market trends",
-        "large-scale AI deployment"
-      ],
-      "audio_url": null,
-      "trend_score": 12.12
-    },
-    {
       "id": "771de2c58074761438ac399b5c1c83c176ac0801fb37407bc4ada03364835dfa",
       "title": "Meta’s first dedicated AI app is here with Llama 4 — but it’s more consumer than productivity or business oriented",
       "link": "articles/metas-first-dedicated-ai-app-is-here-with-llama-4-but-its-more-consumer-than-pro.html",
@@ -6556,30 +6484,6 @@
       "trend_score": 12.09
     },
     {
-      "id": "e015af8a3d4bc7adc4279c27de5b94f53c6e275c54846228b7fb6f9a75587874",
-      "title": "Beyond A2A and MCP: How LOKA’s Universal Agent Identity Layer changes the game",
-      "link": "articles/beyond-a2a-and-mcp-how-lokas-universal-agent-identity-layer-changes-the-game.html",
-      "published_iso": "2025-04-28T20:35:56Z",
-      "summary_short": "Carnegie Mellon researchers propose LOKA, a universal AI agent identity standard, enabling clearer agent intentions and interactions.",
-      "image_url": "https://venturebeat.com/wp-content/uploads/2024/10/Talker-reasoner-agent.jpg?w=1024?w=1200&strip=all",
-      "topic": "AI Models",
-      "is_breaking": false,
-      "tags": [
-        "LOKA protocol",
-        "AI agent identity standard",
-        "universal identity layer",
-        "multi-agent systems",
-        "AI interoperability",
-        "AI trust",
-        "AI accountability",
-        "Carnegie Mellon University",
-        "AI security risks",
-        "AI agent communication"
-      ],
-      "audio_url": null,
-      "trend_score": 11.42
-    },
-    {
       "id": "e4b328eb3dbdfbc4151f33cb2046d780402fe78915206869e457f22509a3f2ce",
       "title": "30 seconds vs. 3: The d1 reasoning framework that’s slashing AI response times",
       "link": "articles/30-seconds-vs-3-the-d1-reasoning-framework-thats-slashing-ai-response-times.html",
@@ -6767,30 +6671,6 @@
       ],
       "audio_url": null,
       "trend_score": 9.5
-    },
-    {
-      "id": "d9e28828662276cc15c85c7983ccfff2f6bc2344e9beb6b846e42f7b380625e2",
-      "title": "ARX Robotics rides defence tech wave with €31M for battlefield robots",
-      "link": "articles/arx-robotics-rides-defence-tech-wave-with-31m-for-battlefield-robots.html",
-      "published_iso": "2025-04-28T08:52:26Z",
-      "summary_short": "German startup ARX Robotics raises €31M for autonomous battlefield robots, backed by NATO’s Innovation Fund. Learn more about defense robotics funding.",
-      "image_url": "https://img-cdn.tnwcdn.com/image/tnw-blurple?filter_last=1&fit=1280%2C640&url=https%3A%2F%2Fcdn0.tnwcdn.com%2Fwp-content%2Fblogs.dir%2F1%2Ffiles%2F2025%2F04%2FARX_Founders-startup-defence.jpg&signature=03590f4bd976ed95ccaafff134586fac",
-      "topic": "Robotics",
-      "is_breaking": false,
-      "tags": [
-        "ARX Robotics",
-        "defense tech",
-        "battlefield robots",
-        "autonomous vehicles",
-        "NATO Innovation Fund",
-        "Mithras OS",
-        "military robotics",
-        "AI in defense",
-        "defense modernization",
-        "autonomous driving"
-      ],
-      "audio_url": null,
-      "trend_score": 10.97
     },
     {
       "id": "bf1e6e6bf6737a2cc308a61ae5a8038e34fd3495a56249f85f9901626b81b79f",
@@ -7416,53 +7296,6 @@
         "AI for species identification"
       ],
       "trend_score": 10.0
-    },
-    {
-      "id": "114be36ab2e121dec66e6e5a2e9ca36f7deaf2bd5a4534eac5fbe7efff988047",
-      "title": "Next-generation architectures bridge gap between neural and symbolic representations with neural symbols",
-      "link": "articles/next-generation-architectures-bridge-gap-between-neural-and-symbolic-representat.html",
-      "published_iso": "2019-12-12T17:00:46Z",
-      "summary_short": "Microsoft Research advances neurosymbolic AI research with neural symbols, improving math and programming problem-solving accuracy.",
-      "image_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2019/12/MSResearch_20191204_NeurIPS_Neurosymbolic-AI_1400x788.png",
-      "topic": "Research",
-      "is_breaking": false,
-      "tags": [
-        "Neurosymbolic AI",
-        "Tensor Product Representations",
-        "Microsoft Research",
-        "AI Interpretability",
-        "TP-Transformer",
-        "TP-N2F",
-        "Math Problem Solving AI",
-        "Programming AI",
-        "Explainable AI",
-        "AI Benchmark Performance"
-      ],
-      "audio_url": null,
-      "trend_score": 10.0
-    },
-    {
-      "id": "7b9c794995ed7a4ece7a1a4c41998c49c23ee51b9156f1c4974bf5d18a3f8437",
-      "title": "Project Petridish: Efficient forward neural architecture search",
-      "link": "articles/project-petridish-efficient-forward-neural-architecture-search.html",
-      "published_iso": "2019-12-09T16:16:44Z",
-      "summary_short": "Microsoft introduces Petridish, an efficient neural architecture search method, reducing trial and error in AI model development.",
-      "image_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2019/12/MSR_NeurIPS_EfficientForward_1400x788.png",
-      "topic": "Research",
-      "is_breaking": false,
-      "tags": [
-        "Neural Architecture Search",
-        "Microsoft Research",
-        "Petridish Algorithm",
-        "AI Model Optimization",
-        "Forward Search",
-        "Machine Learning Efficiency",
-        "AI Deployment",
-        "Pareto Frontier",
-        "Deep Learning"
-      ],
-      "audio_url": null,
-      "trend_score": 9.5
     },
     {
       "id": "b4824683ada96d7d9569647d5eb96d9932606709c2305775a481957a05d92689",
