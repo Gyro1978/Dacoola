@@ -1,6 +1,261 @@
 {
   "articles": [
     {
+      "id": "9a31df43711358e1719ce2cb9520968f184debadeadc96ca433d83d81f111848",
+      "title": "AI Model Standards: How MCP is Reshaping the Future of AI",
+      "link": "articles/ai-model-standards-how-mcp-is-reshaping-the-future-of-ai.html",
+      "published_iso": "2025-05-10T19:05:00Z",
+      "summary_short": "Discover how AI model standards like MCP are transforming AI integration, reducing fragmentation, and accelerating innovation. Learn why open protocols matter.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/upscalemedia-transformed.jpeg?w=1024?w=1200&strip=all",
+      "topic": "Open Source",
+      "is_breaking": false,
+      "tags": [
+        "AI model standards"
+      ],
+      "audio_url": null,
+      "trend_score": 10.41
+    },
+    {
+      "id": "9efea8ec5a8ee681ad26cfcffb239f82c0e6c8a5cb85a0b0eae00ef7f83fead2",
+      "title": "OpenAI CEO Transition: Instacart’s Fidji Simo Takes Key Leadership Role",
+      "link": "articles/openai-ceo-transition-instacart’s-fidji-simo-takes-key-leadership-role.html",
+      "published_iso": "2025-05-10T17:07:00Z",
+      "summary_short": "Instacart CEO Fidji Simo transitions to OpenAI as CEO for Applications, signaling strategic shifts. Learn about the implications of this OpenAI CEO transition.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2021/08/GettyImages-173504445-1.jpg?resize=1200,880",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI CEO transition"
+      ],
+      "audio_url": null,
+      "trend_score": 10.4
+    },
+    {
+      "id": "8fabe191a77a5d0c410229abcf02aa0cfbc2fcd5b7b91b859fb3d2416a5bfa5b",
+      "title": "Google to pay Texas $1.4 billion in privacy settlement",
+      "link": "articles/google-to-pay-texas-$14-billion-in-privacy-settlement.html",
+      "published_iso": "2025-05-10T16:30:32Z",
+      "summary_short": "Google agrees to pay Texas $1.4 billion in a landmark Google privacy settlement over alleged unauthorized tracking of user data.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/04/GettyImages-2169510461.jpg?resize=1200,800",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Google privacy settlement"
+      ],
+      "audio_url": null,
+      "trend_score": 10.4
+    },
+    {
+      "id": "b357559a370a9c3c2095cd03117d60c4c33e68255bebab2095bc5b1f889201bf",
+      "title": "OpenAI Enterprise Adoption Grows Rapidly While Competitors Struggle",
+      "link": "articles/openai-enterprise-adoption-grows-rapidly-while-competitors-struggle.html",
+      "published_iso": "2025-05-10T16:00:00Z",
+      "summary_short": "OpenAI's enterprise adoption surges to 32.4% of U.S. businesses, outpacing competitors like Anthropic and Google, according to Ramp's AI Index data.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2195918462.jpg?w=1024",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI enterprise adoption"
+      ],
+      "audio_url": null,
+      "trend_score": 10.4
+    },
+    {
+      "id": "c1f4c558be7e41f5f2abd8403cf828171f486074f0a3c31c97f272c894cda242",
+      "title": "WhatsApp Spyware Lawsuit: 5 Major Takeaways from the $167M Verdict",
+      "link": "articles/whatsapp-spyware-lawsuit-5-major-takeaways-from-the-$167m-verdict.html",
+      "published_iso": "2025-05-10T11:00:50Z",
+      "summary_short": "WhatsApp wins $167M in its spyware lawsuit against NSO Group, revealing zero-click attacks, FBI tests, and government misuse of Pegasus.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2018/12/whatsapp-toxic.jpg?resize=1200,675",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "WhatsApp spyware lawsuit"
+      ],
+      "audio_url": null,
+      "trend_score": 10.36
+    },
+    {
+      "id": "3dd78e3285c2687e549d1c0adb2106518d48c0956e7ddce99b2c3ae008acefab",
+      "title": "Elton John and Dua Lipa Lead Call for AI Protections in Creative Industries",
+      "link": "articles/elton-john-and-dua-lipa-lead-call-for-ai-protections-in-creative-industries.html",
+      "published_iso": "2025-05-10T00:27:24Z",
+      "summary_short": "Elton John, Dua Lipa, and 400+ artists demand stronger copyright laws to protect creative industries from AI exploitation. Learn the details.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/4b8f/live/17721bd0-2d16-11f0-b26b-ab62c890638b.jpg",
+      "topic": "Ethics",
+      "is_breaking": false,
+      "tags": [
+        "AI and creative industries"
+      ],
+      "audio_url": null,
+      "trend_score": 10.28
+    },
+    {
+      "id": "bb263e713e912de26b3e92e7287ce88191d47be8cac993129718d5f018159487",
+      "title": "LLM Customization Research Compares Fine-Tuning and In-Context Learning",
+      "link": "articles/llm-customization-research-compares-fine-tuning-and-in-context-learning.html",
+      "published_iso": "2025-05-10T00:23:09Z",
+      "summary_short": "New LLM customization research reveals key differences between fine-tuning and in-context learning, with implications for enterprise AI applications.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2024/09/cfr0z3n_a_robot_in_a_collared_polo_sits_at_a_desk_dutifully_sta_1a510b62-1550-4ca9-839a-dfd64d6c304c-1.png?w=1024?w=1200&strip=all",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "LLM customization research"
+      ],
+      "audio_url": null,
+      "trend_score": 10.28
+    },
+    {
+      "id": "f3f1f25ec9f7c49c93f4ceed09356efd53c74628019cdf6aba73cb218b33ac0a",
+      "title": "Lego-building AI Generates Physically Stable Models from Text Prompts",
+      "link": "articles/lego-building-ai-generates-physically-stable-models-from-text-prompts.html",
+      "published_iso": "2025-05-09T21:29:02Z",
+      "summary_short": "Carnegie Mellon researchers developed a Lego-building AI that generates physically stable structures from text descriptions, bridging digital and real-world construction.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/05/lego_header_3-1152x648.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Lego-building AI"
+      ],
+      "audio_url": null,
+      "trend_score": 10.26
+    },
+    {
+      "id": "067aceff2b267fa2b6b655fbb2027462cd9a1b12ffcae475b74a6760e5976405",
+      "title": "The Best AI Image Generators of 2025: Gemini, ChatGPT, Midjourney, and More",
+      "link": "articles/the-best-ai-image-generators-of-2025-gemini,-chatgpt,-midjourney,-and-more.html",
+      "published_iso": "2025-05-09T21:29:00Z",
+      "summary_short": "Discover the best AI image generators of 2025, including Gemini, ChatGPT, Midjourney, and more. Compare features, pricing, and performance.",
+      "image_url": "https://www.zdnet.com/a/img/resize/a6fa15ddb7fe6b2b6de0c02c27c8d5097354b10b/2025/05/09/d7268b2e-f786-4f3b-ae3e-bf53fbc7b031/gemini-generated-image-m17q6om17q6om17q.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI image generators"
+      ],
+      "audio_url": null,
+      "trend_score": 10.26
+    },
+    {
+      "id": "73352b35a306935a297a9eeacafc020b8ae167efa34b8c1cd590c7d5f1a0e6a6",
+      "title": "US Investment Review Scrutinizes Benchmark's $75M Bet on Chinese AI Startup",
+      "link": "articles/us-investment-review-scrutinizes-benchmarks-$75m-bet-on-chinese-ai-startup.html",
+      "published_iso": "2025-05-09T21:24:16Z",
+      "summary_short": "The US Treasury Department is reviewing Benchmark's $75M investment in Chinese AI startup Manus under 2023 restrictions. Learn about the US investment review.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/12/treasury-logo-department-breach.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "US investment review"
+      ],
+      "audio_url": null,
+      "trend_score": 10.27
+    },
+    {
+      "id": "21d256d1f35b40c7b6383fd870512e8cf94e4456a5eafe549938a92c2069e88c",
+      "title": "How Gen AI Attack Chains Exploit Telemetry Lag in Cybersecurity",
+      "link": "articles/how-gen-ai-attack-chains-exploit-telemetry-lag-in-cybersecurity.html",
+      "published_iso": "2025-05-09T20:56:28Z",
+      "summary_short": "Learn how gen AI attack chains exploit telemetry lag and why SOC teams struggle to respond in time. Key insights on AI-driven threats.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/What-your-tools-miss-at-213-AM-How-gen-AI-attack-chains-exploit-telemetry-lag.jpg?w=950?w=1200&strip=all",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "gen AI attack chains"
+      ],
+      "audio_url": null,
+      "trend_score": 10.26
+    },
+    {
+      "id": "60e5935b548b8940c582866b6740a84afb8b8156e79f77b46e4ef9f3b75a1008",
+      "title": "Google Gemini Updates to Take Center Stage at I/O 2025",
+      "link": "articles/google-gemini-updates-to-take-center-stage-at-io-2025.html",
+      "published_iso": "2025-05-09T20:35:15Z",
+      "summary_short": "Google I/O 2025 will showcase major Google Gemini updates, including Gemini Ultra enhancements and new subscription tiers. Learn more.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/05/google-io-generic.jpg?resize=1200,800",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Google Gemini updates"
+      ],
+      "audio_url": null,
+      "trend_score": 10.26
+    },
+    {
+      "id": "f05948bc5ba3e391b203ebd884d4938084c549d243ece8d829276a3a29b61a17",
+      "title": "Scale AI Investigation Dropped by Department of Labor",
+      "link": "articles/scale-ai-investigation-dropped-by-department-of-labor.html",
+      "published_iso": "2025-05-09T19:03:06Z",
+      "summary_short": "The U.S. Department of Labor has ended its investigation into Scale AI's compliance with labor laws, raising questions about worker classification.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/06/GettyImages-1540566330.jpg?w=1024",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Scale AI investigation dropped"
+      ],
+      "audio_url": null,
+      "trend_score": 10.25
+    },
+    {
+      "id": "18e9a8d4b0c507bbb3bb14b62f3cf12e2ea3addbc2a5e47d87cd201abc70f28b",
+      "title": "Tesla Robotaxi Trademark Denied by U.S. Patent Office",
+      "link": "articles/tesla-robotaxi-trademark-denied-by-us-patent-office.html",
+      "published_iso": "2025-05-09T17:35:00Z",
+      "summary_short": "Tesla's \"Robotaxi\" trademark application was denied by the U.S. Patent Office, citing generic terminology. Learn the impact on Tesla's autonomous vehicle plans.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/10/cybercab-gullwing.jpg?resize=900,1200",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "Tesla Robotaxi trademark"
+      ],
+      "audio_url": null,
+      "trend_score": 10.24
+    },
+    {
+      "id": "0c4f0f3c662b601b4e21bf71bfb26c44942209d6086d0c505d306ef8c79e251a",
+      "title": "OpenAI’s $3B Windsurf Acquisition: A Strategic Play for AI Coding Dominance",
+      "link": "articles/openai’s-$3b-windsurf-acquisition-a-strategic-play-for-ai-coding-dominance.html",
+      "published_iso": "2025-05-09T17:00:35Z",
+      "summary_short": "OpenAI's $3B Windsurf acquisition aims to counter Google and Anthropic in the AI coding race. Learn why this deal matters for enterprise AI.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/ChatGPT-Image-May-9-2025-07_50_41-AM.png?w=1024?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI acquisition Windsurf"
+      ],
+      "audio_url": null,
+      "trend_score": 10.23
+    },
+    {
+      "id": "0d56d8647b1592de6148bce4ad52e63b02928fbfbf052e768a87ca299c2300d3",
+      "title": "AI Marketing Intelligence Revolutionizes Campaign Strategy with Amazon Bedrock",
+      "link": "articles/ai-marketing-intelligence-revolutionizes-campaign-strategy-with-amazon-bedrock.html",
+      "published_iso": "2025-05-09T16:36:40Z",
+      "summary_short": "Discover how AI marketing intelligence powered by Amazon Bedrock enhances content creation, sentiment analysis, and campaign performance.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/05/01/ML-16708-Image1.png",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI marketing intelligence"
+      ],
+      "audio_url": null,
+      "trend_score": 10.23
+    },
+    {
+      "id": "69bb6ebf605953d9d1254ca40cd6cb8ed87c28c9c50329438b05cc4d8c169823",
+      "title": "Google AI Course Sets Record with 280,000 Signups",
+      "link": "articles/google-ai-course-sets-record-with-280,000-signups.html",
+      "published_iso": "2025-05-09T16:00:00Z",
+      "summary_short": "Google and Kaggle's GenAI Intensive course set a world record with 280,000 signups. Learn what made this Google AI course a success.",
+      "image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Kaggle_SS.width-1300.png",
+      "topic": "Education",
+      "is_breaking": false,
+      "tags": [
+        "Google AI course"
+      ],
+      "audio_url": null,
+      "trend_score": 10.23
+    },
+    {
       "id": "af62edd97899fe2bc9c478e2e27623fad4f42e115f6417c3341716df2731752a",
       "title": "New AI Translation System Enables Multi-Speaker Real-Time Translation",
       "link": "articles/new-ai-translation-system-enables-multi-speaker-real-time-translation.html",
@@ -1437,6 +1692,21 @@
       ],
       "audio_url": null,
       "trend_score": 14.99
+    },
+    {
+      "id": "086c3d703db356f45e246c767e334be9e9961b9296f42e40c821b07f6e034284",
+      "title": "Pegasus Spyware Ruling Orders NSO to Pay $167M for WhatsApp Hack",
+      "link": "articles/pegasus-spyware-ruling-orders-nso-to-pay-$167m-for-whatsapp-hack.html",
+      "published_iso": "2025-05-07T10:26:35Z",
+      "summary_short": "NSO Group faces a $167M penalty in the Pegasus spyware ruling for hacking 1,400 WhatsApp users. Learn about the landmark legal decision.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/a826/live/a9efc0b0-2b2d-11f0-a926-032a6ac0e498.jpg",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "Pegasus spyware ruling"
+      ],
+      "audio_url": null,
+      "trend_score": 9.85
     },
     {
       "id": "661f4fb809c77d54838a59ef85ceb39bcca01e0408df3f42b45940401cf72655",

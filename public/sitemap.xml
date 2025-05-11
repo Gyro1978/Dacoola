@@ -2,9 +2,111 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dacoolaa.netlify.app/</loc>
-    <lastmod>2025-05-09</lastmod>
+    <lastmod>2025-05-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/ai-model-standards-how-mcp-is-reshaping-the-future-of-ai.html</loc>
+    <lastmod>2025-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/openai-ceo-transition-instacart’s-fidji-simo-takes-key-leadership-role.html</loc>
+    <lastmod>2025-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/google-to-pay-texas-$14-billion-in-privacy-settlement.html</loc>
+    <lastmod>2025-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/openai-enterprise-adoption-grows-rapidly-while-competitors-struggle.html</loc>
+    <lastmod>2025-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/whatsapp-spyware-lawsuit-5-major-takeaways-from-the-$167m-verdict.html</loc>
+    <lastmod>2025-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/elton-john-and-dua-lipa-lead-call-for-ai-protections-in-creative-industries.html</loc>
+    <lastmod>2025-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/llm-customization-research-compares-fine-tuning-and-in-context-learning.html</loc>
+    <lastmod>2025-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/lego-building-ai-generates-physically-stable-models-from-text-prompts.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/the-best-ai-image-generators-of-2025-gemini,-chatgpt,-midjourney,-and-more.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/us-investment-review-scrutinizes-benchmarks-$75m-bet-on-chinese-ai-startup.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/how-gen-ai-attack-chains-exploit-telemetry-lag-in-cybersecurity.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/google-gemini-updates-to-take-center-stage-at-io-2025.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/scale-ai-investigation-dropped-by-department-of-labor.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/tesla-robotaxi-trademark-denied-by-us-patent-office.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/openai’s-$3b-windsurf-acquisition-a-strategic-play-for-ai-coding-dominance.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/ai-marketing-intelligence-revolutionizes-campaign-strategy-with-amazon-bedrock.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/google-ai-course-sets-record-with-280,000-signups.html</loc>
+    <lastmod>2025-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/new-ai-translation-system-enables-multi-speaker-real-time-translation.html</loc>
@@ -398,6 +500,12 @@
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/netflix-unveils-next-gen-tv-experience-with-ai-based-recommendations.html</loc>
+    <lastmod>2025-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/pegasus-spyware-ruling-orders-nso-to-pay-$167m-for-whatsapp-hack.html</loc>
     <lastmod>2025-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
