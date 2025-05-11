@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": "gyro-20250511130002-aeac4922",
+      "title": "Greece Tech Economy: The Mediterranean’s Rising Innovation Powerhouse",
+      "link": "articles/greece-tech-economy-the-mediterraneans-rising-innovation-powerhouse.html",
+      "published_iso": "2025-05-11T13:00:02Z",
+      "summary_short": "Greece is transforming into a tech economy powerhouse, with AI, startups, and policy shifts driving growth. Discover how Prime Minister Mitsotakis is leading this revival.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/Screenshot-2025-05-11-at-12.36.57PM.png?resize=1200,688",
+      "topic": "Other",
+      "is_breaking": false,
+      "is_trending_pick": false,
+      "tags": [
+        "Greece tech economy",
+        "Greece tech economy growth",
+        "Greece innovation nation",
+        "Athens tech startup scene",
+        "Greek Prime Minister Kyriakos Mitsotakis tech vision",
+        "Greece economic transformation tech sector",
+        "Greece startup ecosystem 2023",
+        "tech economy in Greece analysis",
+        "Greece venture capital trends",
+        "Greece tech policy shifts",
+        "entrepreneurship in Greece tech industry",
+        "Greece tech sector investment opportunities"
+      ],
+      "audio_url": null,
+      "trend_score": 8.6
+    },
+    {
       "id": "gyro-20250511114210-0fc7810c",
       "title": "Pope Leo XIV on AI: Vatican’s New Vision for Humanity’s Future",
       "link": "articles/pope-leo-xiv-on-ai-vaticans-new-vision-for-humanitys-future.html",
@@ -31,22 +58,6 @@
       "is_trending_pick": true,
       "tags": [
         "Zero-data AI model"
-      ],
-      "audio_url": null,
-      "trend_score": 12.3
-    },
-    {
-      "id": "gyro-20250511110604-a9223e48",
-      "title": "Page Layout Issue Identified in Absolute Zero AI Research Paper",
-      "link": "articles/page-layout-issue-identified-in-absolute-zero-ai-research-paper.html",
-      "published_iso": "2025-05-11T11:06:04Z",
-      "summary_short": "Researchers highlight a page layout issue in the Absolute Zero AI study, focusing on self-learning AI with zero human data. Learn more about the findings.",
-      "image_url": "https://cdn.prod.website-files.com/65a65d597624a0885ef7e135/680a3c8da8932ec4f17626ec_1-What-Is-Self-Learning-Artificial-Intelligence-AI.webp",
-      "topic": "Other",
-      "is_breaking": false,
-      "is_trending_pick": true,
-      "tags": [
-        "Page layout issue"
       ],
       "audio_url": null,
       "trend_score": 12.3

@@ -114,52 +114,86 @@ def load_post_history():
 
 def save_post_history(history):
     try:
+        os.makedirs(os.path.dirname(HISTORY_FILE), exist_ok=True) # Ensure data directory exists
         with open(HISTORY_FILE, 'w', encoding='utf-8') as f:
             json.dump(history, f, indent=2)
     except Exception as e:
         logger.error(f"Error saving post history: {e}")
 
+def mark_article_as_posted_in_history(article_id):
+    """Explicitly marks an article ID as posted in the history file."""
+    if not article_id:
+        logger.warning("Cannot mark article as posted: No article ID provided.")
+        return
+    try:
+        history = load_post_history()
+        if 'posted_articles' not in history or not isinstance(history['posted_articles'], list):
+            history['posted_articles'] = []
+            
+        if article_id not in history['posted_articles']:
+            history['posted_articles'].append(article_id)
+            save_post_history(history)
+            logger.info(f"Article ID {article_id} marked as posted in social media history.")
+        else:
+            logger.debug(f"Article ID {article_id} was already in social media post history.")
+    except Exception as e:
+        logger.error(f"Error marking article {article_id} as posted in history: {e}")
+
+
 def load_all_articles():
+    if not os.path.exists(ALL_ARTICLES_FILE):
+        logger.warning(f"{ALL_ARTICLES_FILE} not found. Cannot load articles for random selection.")
+        return []
     try:
         with open(ALL_ARTICLES_FILE, 'r', encoding='utf-8') as f:
             data = json.load(f)
-            return data.get('articles', [])
+            # Expects {"articles": []} structure
+            if isinstance(data, dict) and "articles" in data and isinstance(data["articles"], list):
+                return data.get('articles', [])
+            elif isinstance(data, list): # Handle old list-only format for a bit
+                logger.warning(f"Old list format detected for {ALL_ARTICLES_FILE}. Consider migrating to {{'articles': []}} structure.")
+                return data
+            else:
+                logger.error(f"Invalid format in {ALL_ARTICLES_FILE}. Expected {{'articles': []}} or a list.")
+                return []
     except Exception as e:
-        logger.error(f"Error loading articles: {e}")
+        logger.error(f"Error loading articles from {ALL_ARTICLES_FILE}: {e}")
         return []
 
 def get_random_unposted_article():
     history = load_post_history()
-    posted_ids = set(history['posted_articles'])
+    posted_ids = set(history.get('posted_articles',[])) # Use .get for safety
     all_articles = load_all_articles()
     
     available_articles = [
         article for article in all_articles 
-        if article['id'] not in posted_ids
+        if isinstance(article, dict) and article.get('id') and article['id'] not in posted_ids
     ]
     
     if not available_articles:
-        logger.warning("No unposted articles available!")
+        logger.warning("No unposted articles available for random selection!")
         return None
         
     chosen_article = random.choice(available_articles)
     
-    history['posted_articles'].append(chosen_article['id'])
-    save_post_history(history)
+    # IMPORTANT: Do NOT mark as posted here.
+    # The calling function (e.g., main.py or this script's __main__) should mark it
+    # after a successful posting *attempt*.
+    # mark_article_as_posted_in_history(chosen_article['id']) 
     
     return {
         'id': chosen_article['id'],
-        'title': chosen_article['title'],
-        'article_url': f"https://dacoolaa.netlify.app/{chosen_article['link']}",
-        'image_url': chosen_article['image_url'],
+        'title': chosen_article.get('title', 'Untitled Article'),
+        'article_url': f"https://dacoolaa.netlify.app/{chosen_article.get('link', '')}",
+        'image_url': chosen_article.get('image_url'),
         'summary_short': chosen_article.get('summary_short'),
         'topic': chosen_article.get('topic', 'Technology'),
         'tags': chosen_article.get('tags', [])
     }
 
 def _generate_bluesky_facets_atproto(text_content, link_url_to_facet):
-    if not BskyClient or not bsky_models: 
-        logger.warning("atproto SDK components for facets not available.")
+    if not BskyClient or not bsky_models or not bsky_models.AppBskyRichtextFacet: 
+        logger.warning("atproto SDK components for facets not available (BskyClient, bsky_models, or RichtextFacet).")
         return None
 
     facets = []
@@ -174,13 +208,12 @@ def _generate_bluesky_facets_atproto(text_content, link_url_to_facet):
 
         if start_index != -1:
             end_index = start_index + len(link_bytes)
-            # Use the re-exported models from atproto.models
             facet_link = bsky_models.AppBskyRichtextFacet.Link(uri=link_url_to_facet)
-            facet = bsky_models.AppBskyRichtextFacet.Main(
+            facet_main = bsky_models.AppBskyRichtextFacet.Main( # Corrected variable name
                 index=bsky_models.AppBskyRichtextFacet.ByteSlice(byteStart=start_index, byteEnd=end_index),
                 features=[facet_link] 
             )
-            facets.append(facet)
+            facets.append(facet_main) # Append the Main facet object
         else:
             logger.warning(f"Could not find URL '{link_url_to_facet}' in text for facet: '{text_content}'")
     except Exception as e:
@@ -192,14 +225,14 @@ def post_to_bluesky(client_instance, title, article_url, summary_short=None, ima
     if not BskyClient or not client_instance:
         logger.error("Bluesky client not initialized or library not found.")
         return False
-    if not bsky_models: # Check for the re-exported models
+    if not bsky_models or not bsky_models.AppBskyEmbedExternal: # Check for necessary models
         logger.error("Bluesky models for embed not available from atproto SDK.")
         return False
 
     post_text_content = f"{title}\n\nRead more: {article_url}"
-    if len(post_text_content) > 300:
-        available_len = 300 - (len("\n\nRead more: ") + len(article_url) + 3)
-        if available_len < 20: 
+    if len(post_text_content) > 300: # Bluesky character limit for text part
+        available_len = 300 - (len("\n\nRead more: ") + len(article_url) + 3) # +3 for "..."
+        if available_len < 20: # Not enough space for a meaningful title
             post_text_content = f"Article: {article_url}"[:300]
         else:
             post_text_content = f"{title[:available_len]}...\n\nRead more: {article_url}"
@@ -216,11 +249,11 @@ def post_to_bluesky(client_instance, title, article_url, summary_short=None, ima
             img_response.raise_for_status()
             image_bytes = img_response.content
             
-            if len(image_bytes) > 1000000:
+            if len(image_bytes) > 1000000: # Bluesky blob size limit (1MB)
                 logger.warning(f"Image {image_url} is too large ({len(image_bytes)} bytes) for Bluesky. Skipping thumb.")
             else:
                 logger.debug(f"Uploading image blob to Bluesky (size: {len(image_bytes)})...")
-                upload_response = client_instance.upload_blob(image_bytes)
+                upload_response = client_instance.upload_blob(image_bytes) # This is correct with atproto SDK
                 if upload_response and upload_response.blob: 
                     uploaded_thumb_blob = upload_response.blob 
                     logger.info("Successfully uploaded image blob for Bluesky card.")
@@ -231,30 +264,31 @@ def post_to_bluesky(client_instance, title, article_url, summary_short=None, ima
         except Exception as e:
             logger.error(f"Error processing image for Bluesky card ({image_url}): {e}")
 
-    title_str = str(title if title is not None else "") # Defined here
+    title_str = str(title if title is not None else "Article") 
     card_title_str = title_str 
-    card_description_str = str(summary_short if summary_short is not None else title_str) # Use title_str here
+    card_description_str = str(summary_short if summary_short is not None else title_str) 
 
     if len(card_title_str) > 200: card_title_str = card_title_str[:197] + "..."
     if len(card_description_str) > 600: card_description_str = card_description_str[:597] + "..."
     
-    external_data = bsky_models.AppBskyEmbedExternal.External( # Use bsky_models
+    # Use the bsky_models for creating the external embed
+    external_data = bsky_models.AppBskyEmbedExternal.External(
         uri=article_url,
         title=card_title_str,
         description=card_description_str
     )
     if uploaded_thumb_blob:
-        external_data.thumb = uploaded_thumb_blob
+        external_data.thumb = uploaded_thumb_blob # This should be the blob object itself
 
-    embed_to_post = bsky_models.AppBskyEmbedExternal.Main(external=external_data) # Use bsky_models
+    embed_to_post = bsky_models.AppBskyEmbedExternal.Main(external=external_data)
         
     try:
         logger.info(f"Attempting to post to Bluesky: '{post_text_content[:50]}...' with embed.")
         response = client_instance.send_post(
             text=post_text_content, 
-            embed=embed_to_post if embed_to_post else None, 
-            langs=['en'], 
-            facets=facets if facets else None
+            embed=embed_to_post if embed_to_post else None, # Pass the embed object
+            langs=['en'], # Optional: specify language(s)
+            facets=facets if facets else None # Pass facets if any
         )
         if response and response.uri:
             logger.info(f"Successfully posted to Bluesky. URI: {response.uri}")
@@ -298,10 +332,10 @@ def post_to_reddit(reddit_instance, title, article_url, image_url=None):
             logger.info(f"Successfully posted to r/{subreddit_name}. Post ID: {submission.id}")
             success_count += 1
             if success_count < len(TARGET_SUBREDDITS_WITH_FLAIRS):
-                time.sleep(5)
-        except NotFound:
+                time.sleep(5) # Be respectful of API limits
+        except NotFound: # prawcore.exceptions.NotFound
             logger.error(f"Subreddit r/{subreddit_name} not found or not accessible. Skipping.")
-        except Forbidden as e: 
+        except Forbidden as e: # prawcore.exceptions.Forbidden
              logger.error(f"Reddit Forbidden error for r/{subreddit_name}: {e}. You might be banned or the subreddit has posting restrictions.")
         except praw.exceptions.APIException as e:
             logger.error(f"Reddit API Exception for r/{subreddit_name}: {e}")
@@ -310,12 +344,15 @@ def post_to_reddit(reddit_instance, title, article_url, image_url=None):
                 logger.info(f"You need to find the Flair ID for r/{subreddit_name} and add it to your .env like 'subreddit_name:FLAIR_ID'.")
                 logger.info(f"Trying to list available flairs for r/{subreddit_name}:")
                 try:
-                    flairs = list(subreddit.flair.link_templates)
+                    flairs = list(subreddit.flair.link_templates) # Fetch flairs
                     if flairs:
-                        for flair_entry in flairs:
-                            is_modifiable_by_user = flair_entry.get('user_can_flair', False) # Check this key for user editability
-                            can_richtext = flair_entry.get('richtext_enabled', False)
-                            logger.info(f"  - Text: '{flair_entry.get('text', 'N/A')}', ID: '{flair_entry.get('id', 'N/A')}' (User can set: {is_modifiable_by_user}, Richtext: {can_richtext})")
+                        for flair_entry in flairs: # flair_entry is a dict
+                            # Safely access keys, providing defaults if missing
+                            flair_text = flair_entry.get('text', 'N/A')
+                            flair_id_val = flair_entry.get('id', 'N/A')
+                            # 'user_can_flair' might be more relevant than 'mod_only' for some contexts
+                            is_user_assignable = flair_entry.get('user_can_flair', flair_entry.get('richtext_enabled', False)) # Fallback for modifiable
+                            logger.info(f"  - Text: '{flair_text}', ID: '{flair_id_val}' (User Assignable: {is_user_assignable})")
                     else:
                         logger.info(f"    No flairs seem to be available or configurable for r/{subreddit_name} via API.")
                 except Exception as flair_e:
@@ -323,12 +360,12 @@ def post_to_reddit(reddit_instance, title, article_url, image_url=None):
             elif "RATELIMIT" in str(e).upper():
                 logger.warning(f"Reddit rate limit hit for r/{subreddit_name}. Consider increasing sleep time or reducing post frequency.")
                 time.sleep(60) 
-            elif "SUBREDDIT_NOEXIST" in str(e).upper():
+            elif "SUBREDDIT_NOEXIST" in str(e).upper(): # This check might be redundant if NotFound is caught
                 logger.error(f"Subreddit r/{subreddit_name} likely does not exist.")
 
-        except praw.exceptions.PRAWException as e: 
+        except praw.exceptions.PRAWException as e: # Other PRAW specific errors
             logger.error(f"PRAW Exception for r/{subreddit_name}: {e}")
-        except Exception as e: 
+        except Exception as e: # Catch other general errors
             logger.exception(f"Unexpected error posting to r/{subreddit_name}: {e}")
     return success_count > 0
 
@@ -365,8 +402,8 @@ def post_to_twitter(twitter_client, article_details):
             logger.info(f"Successfully posted to Twitter. Tweet ID: {response.data['id']}")
             return True
         else:
-            error_message_twitter = "Unknown error" # Renamed to avoid conflict
-            if hasattr(response, 'errors') and response.errors:
+            error_message_twitter = "Unknown error" 
+            if hasattr(response, 'errors') and response.errors: # Check if 'errors' exists and is not None
                 error_message_twitter = "; ".join([e.get("message", str(e)) for e in response.errors])
             logger.error(f"Twitter post failed. Response: {error_message_twitter}")
             return False
@@ -385,29 +422,29 @@ def post_to_twitter(twitter_client, article_details):
 def initialize_social_clients():
     clients = {"bluesky_clients": [], "reddit_instance": None, "twitter_client": None} 
 
-    if BskyClient and BLUESKY_CLIENTS:
+    if BskyClient and BLUESKY_CLIENTS: # Check if BskyClient (from atproto) was imported
         for acc_idx, acc_details in enumerate(BLUESKY_CLIENTS):
             handle = acc_details['handle']
             password = acc_details['password']
             try:
                 logger.info(f"Attempting Bluesky login for account {acc_idx + 1} ({handle})...")
-                client_instance = BskyClient() 
-                login_response = client_instance.login(handle, password)
+                client_instance = BskyClient() # Create a new client instance from atproto
+                login_response = client_instance.login(handle, password) # Login method
                 
+                # Check if login was successful by inspecting client_instance.me (populated by login)
                 if client_instance.me and client_instance.me.did:
                      logger.info(f"Bluesky login successful for {handle} (DID: {client_instance.me.did})")
                      acc_details['client_instance'] = client_instance 
                      clients["bluesky_clients"].append(client_instance) 
                 else:
-                    # If login_response itself has details, log them
-                    login_error_details = str(login_response) if login_response else "No specific error details from login response."
-                    logger.error(f"Bluesky login check (me.did not found) failed for {handle}. Login response: {login_error_details}")
-            except BskyAPIError as e: 
+                    login_error_details = str(login_response) if login_response else "Login response was None or did not contain expected data."
+                    logger.error(f"Bluesky login check (me.did not found after login) failed for {handle}. Login response: {login_error_details}")
+            except BskyAPIError as e: # More specific error if atproto SDK has one, else general
                  logger.error(f"Bluesky API login failed for {handle}: {e}")
             except Exception as e: 
                 logger.error(f"General error during Bluesky login for {handle}: {e}")
-    elif not BskyClient:
-        logger.warning("Bluesky (atproto SDK) not installed or imported. Skipping Bluesky.")
+    elif not BskyClient: # This means 'from atproto import Client' failed
+        logger.warning("Bluesky (atproto SDK) not installed or not imported correctly. Skipping Bluesky client initialization.")
 
 
     if praw and all([REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD]):
@@ -416,14 +453,14 @@ def initialize_social_clients():
             clients["reddit_instance"] = praw.Reddit(
                 client_id=REDDIT_CLIENT_ID, client_secret=REDDIT_CLIENT_SECRET,
                 username=REDDIT_USERNAME, password=REDDIT_PASSWORD, user_agent=REDDIT_USER_AGENT,
-                check_for_async=False
+                check_for_async=False # Explicitly set if not using async features
             )
-            auth_user = clients["reddit_instance"].user.me()
+            auth_user = clients["reddit_instance"].user.me() # Test authentication
             if auth_user:
                 logger.info(f"Reddit PRAW instance initialized for u/{auth_user.name}.")
             else: 
                 logger.error("Reddit authentication check failed (user.me() returned None).")
-                clients["reddit_instance"] = None
+                clients["reddit_instance"] = None # Ensure it's None if auth fails
         except Exception as e:
             logger.exception(f"Reddit PRAW initialization failed: {e}")
             clients["reddit_instance"] = None
@@ -438,21 +475,21 @@ def initialize_social_clients():
             client = tweepy.Client(
                 consumer_key=TWITTER_API_KEY, consumer_secret=TWITTER_API_SECRET,
                 access_token=TWITTER_ACCESS_TOKEN, access_token_secret=TWITTER_ACCESS_SECRET,
-                wait_on_rate_limit=False 
+                wait_on_rate_limit=False # Handle rate limits manually if needed
             )
-            user_info_response = client.get_me() 
-            if user_info_response.data: 
+            user_info_response = client.get_me() # This is tweepy.Response object
+            if user_info_response.data: # The actual user data is in .data
                 logger.info(f"Twitter client initialized successfully for @{user_info_response.data.username}")
                 clients["twitter_client"] = client
             else:
-                error_msg_twitter_init = "Unknown error" # Corrected variable name
-                if hasattr(user_info_response, 'errors') and user_info_response.errors:
+                error_msg_twitter_init = "Unknown error during Twitter client get_me" 
+                if hasattr(user_info_response, 'errors') and user_info_response.errors: # Check for errors list
                     error_msg_twitter_init = "; ".join([e.get("message", str(e)) for e in user_info_response.errors])
                 logger.error(f"Twitter client initialization check (get_me) failed: {error_msg_twitter_init}")
-        except tweepy.TweepyException as e:
+        except tweepy.TweepyException as e: # Catch specific Tweepy errors
             logger.error(f"Tweepy API error during Twitter client initialization: {e}")
-            if e.response and e.response.status_code == 429:
-                 logger.error("Twitter API rate limit (429 Too Many Requests) hit during client initialization. Subsequent posts this run may fail.")
+            if e.response and e.response.status_code == 429: # Check response attribute for status code
+                 logger.error("Twitter API rate limit (429 Too Many Requests) hit during client initialization.")
         except Exception as e:
             logger.exception(f"Unexpected error during Twitter client initialization: {e}")
     elif not tweepy:
@@ -463,67 +500,82 @@ def initialize_social_clients():
     return clients
 
 def run_social_media_poster(article_details, social_clients, platforms_to_post=None):
+    article_id_to_post = article_details.get('id') # Get ID for history marking
     title = article_details.get('title')
     article_url = article_details.get('article_url')
     image_url = article_details.get('image_url') 
     summary_short = article_details.get('summary_short') 
 
-    if not title or not article_url:
-        logger.error("Missing title or article_url. Cannot post to social media.")
-        return
+    if not article_id_to_post or not title or not article_url: # Check article_id too
+        logger.error("Missing article_id, title, or article_url. Cannot post to social media.")
+        return False # Indicate failure
 
     attempt_all = platforms_to_post is None
-    posted_to_twitter_successfully = False 
+    any_post_successful_flag = False # Track if any post attempt was successful for history
 
+    # Post to Bluesky
     if attempt_all or "bluesky" in platforms_to_post:
         if social_clients.get("bluesky_clients"): 
             for bsky_client_index, bsky_client_inst in enumerate(social_clients["bluesky_clients"]):
                 if bsky_client_inst: 
                     logger.info(f"Posting to Bluesky account {bsky_client_index + 1}...")
-                    post_to_bluesky(bsky_client_inst, title, article_url, summary_short, image_url)
+                    if post_to_bluesky(bsky_client_inst, title, article_url, summary_short, image_url):
+                        any_post_successful_flag = True
                     if bsky_client_index < len(social_clients["bluesky_clients"]) - 1: 
-                        time.sleep(10) 
+                        time.sleep(10) # Increased delay
                 else:
                     logger.warning(f"Skipping Bluesky account {bsky_client_index + 1} due to uninitialized client.")
         else: 
             logger.info("Bluesky posting requested/default but no clients configured, library missing, or all logins failed.")
 
-
+    # Post to Reddit
     if attempt_all or "reddit" in platforms_to_post:
         if social_clients.get("reddit_instance"):
-            post_to_reddit(social_clients["reddit_instance"], title, article_url, image_url)
+            if post_to_reddit(social_clients["reddit_instance"], title, article_url, image_url):
+                any_post_successful_flag = True
         else: logger.info("Reddit posting requested/default but no instance configured or library missing.")
 
+    # Post to Twitter
     if attempt_all or "twitter" in platforms_to_post:
         twitter_client = social_clients.get("twitter_client")
         if twitter_client:
-            if post_to_twitter(twitter_client, article_details):
-                posted_to_twitter_successfully = True 
+            if post_to_twitter(twitter_client, article_details): # post_to_twitter returns True on success
+                any_post_successful_flag = True
         else:
             logger.info("Twitter posting requested/default but no client configured or library/credentials missing.")
+    
+    # Mark as posted in history if any attempt was made for this article_id
+    # This prevents retrying indefinitely even if all platforms fail for some reason for this article.
+    # If a specific platform fails, its own error is logged.
+    if article_id_to_post:
+        mark_article_as_posted_in_history(article_id_to_post)
             
-    return posted_to_twitter_successfully
+    return any_post_successful_flag # Return overall success on at least one platform.
     
 if __name__ == "__main__":
     logger.info("--- Running Social Media Poster Standalone Test ---")
     
     clients = initialize_social_clients()
     
-    article = get_random_unposted_article()
-    if not article:
+    article_to_post = get_random_unposted_article() # Renamed for clarity
+    if not article_to_post:
         logger.error("No unposted articles available. Exiting.")
-        if not any(clients.values()): 
-            logger.warning("No social media clients were successfully initialized AND no articles. Exiting.")
-        sys.exit(1)
+        # Check if clients dict is empty before trying to access keys for logging
+        if not (clients.get("bluesky_clients") or clients.get("reddit_instance") or clients.get("twitter_client")):
+            logger.warning("No social media clients were successfully initialized AND no articles to post. Exiting.")
+        sys.exit(1) # Exit if no article
         
-    logger.info(f"Selected article to post: '{article['title']}'")
-    logger.info(f"Article URL: {article['article_url']}")
-    logger.info(f"Image URL: {article['image_url']}")
-    logger.info(f"Summary: {article['summary_short']}")
+    logger.info(f"Selected article to post: '{article_to_post['title']}'")
+    logger.info(f"Article URL: {article_to_post['article_url']}")
+    logger.info(f"Image URL: {article_to_post['image_url']}")
+    logger.info(f"Summary: {article_to_post['summary_short']}")
     
     if not (clients.get("bluesky_clients") or clients.get("reddit_instance") or clients.get("twitter_client")):
-        logger.warning("No social media clients were successfully initialized. Cannot post.")
+        logger.warning("No social media clients were successfully initialized. Cannot post selected article.")
     else:
-        run_social_media_poster(article, clients)
+        # When running standalone, get_random_unposted_article already marks it.
+        # However, if main.py calls run_social_media_poster, it will rely on the internal marking.
+        # For standalone, it's okay that it's marked by get_random_unposted_article.
+        run_social_media_poster(article_to_post, clients)
     
     logger.info("--- Social Media Poster Standalone Test Complete ---")
