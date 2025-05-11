@@ -1,21 +1,6 @@
 {
   "articles": [
     {
-      "id": "gyro-20250511104247-a9223e48",
-      "title": "Page Layout Error in AI Research Papers: Understanding and Solutions",
-      "link": "articles/page-layout-error-in-ai-research-papers-understanding-and-solutions.html",
-      "published_iso": "2025-05-11T10:42:47Z",
-      "summary_short": "Learn about the page layout error in AI research papers, its causes, and how to resolve it effectively. Essential for researchers and publishers.",
-      "image_url": "https://cdn.prod.website-files.com/65a65d597624a0885ef7e135/680a3c8da8932ec4f17626ec_1-What-Is-Self-Learning-Artificial-Intelligence-AI.webp",
-      "topic": "Other",
-      "is_breaking": false,
-      "tags": [
-        "Page layout error"
-      ],
-      "audio_url": null,
-      "trend_score": 5.5
-    },
-    {
       "id": "9a31df43711358e1719ce2cb9520968f184debadeadc96ca433d83d81f111848",
       "title": "AI Model Standards: How MCP is Reshaping the Future of AI",
       "link": "articles/ai-model-standards-how-mcp-is-reshaping-the-future-of-ai.html",
