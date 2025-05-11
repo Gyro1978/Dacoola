@@ -1,6 +1,126 @@
 {
   "articles": [
     {
+      "id": "9efea8ec5a8ee681ad26cfcffb239f82c0e6c8a5cb85a0b0eae00ef7f83fead2",
+      "title": "OpenAI CEO Transition: Instacart’s Fidji Simo Takes Key Leadership Role",
+      "link": "articles/openai-ceo-transition-instacart’s-fidji-simo-takes-key-leadership-role.html",
+      "published_iso": "2025-05-10T17:07:00Z",
+      "summary_short": "Instacart CEO Fidji Simo transitions to OpenAI as CEO for Applications, signaling strategic shifts. Learn about the implications of this OpenAI CEO transition.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2021/08/GettyImages-173504445-1.jpg?resize=1200,880",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI CEO transition"
+      ],
+      "audio_url": null,
+      "trend_score": 10.4
+    },
+    {
+      "id": "8fabe191a77a5d0c410229abcf02aa0cfbc2fcd5b7b91b859fb3d2416a5bfa5b",
+      "title": "Google to pay Texas $1.4 billion in privacy settlement",
+      "link": "articles/google-to-pay-texas-$14-billion-in-privacy-settlement.html",
+      "published_iso": "2025-05-10T16:30:32Z",
+      "summary_short": "Google agrees to pay Texas $1.4 billion in a landmark Google privacy settlement over alleged unauthorized tracking of user data.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/04/GettyImages-2169510461.jpg?resize=1200,800",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Google privacy settlement"
+      ],
+      "audio_url": null,
+      "trend_score": 10.4
+    },
+    {
+      "id": "b357559a370a9c3c2095cd03117d60c4c33e68255bebab2095bc5b1f889201bf",
+      "title": "OpenAI Enterprise Adoption Grows Rapidly While Competitors Struggle",
+      "link": "articles/openai-enterprise-adoption-grows-rapidly-while-competitors-struggle.html",
+      "published_iso": "2025-05-10T16:00:00Z",
+      "summary_short": "OpenAI's enterprise adoption surges to 32.4% of U.S. businesses, outpacing competitors like Anthropic and Google, according to Ramp's AI Index data.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2195918462.jpg?w=1024",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI enterprise adoption"
+      ],
+      "audio_url": null,
+      "trend_score": 10.4
+    },
+    {
+      "id": "c1f4c558be7e41f5f2abd8403cf828171f486074f0a3c31c97f272c894cda242",
+      "title": "WhatsApp Spyware Lawsuit: 5 Major Takeaways from the $167M Verdict",
+      "link": "articles/whatsapp-spyware-lawsuit-5-major-takeaways-from-the-$167m-verdict.html",
+      "published_iso": "2025-05-10T11:00:50Z",
+      "summary_short": "WhatsApp wins $167M in its spyware lawsuit against NSO Group, revealing zero-click attacks, FBI tests, and government misuse of Pegasus.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2018/12/whatsapp-toxic.jpg?resize=1200,675",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "WhatsApp spyware lawsuit"
+      ],
+      "audio_url": null,
+      "trend_score": 10.36
+    },
+    {
+      "id": "73352b35a306935a297a9eeacafc020b8ae167efa34b8c1cd590c7d5f1a0e6a6",
+      "title": "US Investment Review Scrutinizes Benchmark's $75M Bet on Chinese AI Startup",
+      "link": "articles/us-investment-review-scrutinizes-benchmarks-$75m-bet-on-chinese-ai-startup.html",
+      "published_iso": "2025-05-09T21:24:16Z",
+      "summary_short": "The US Treasury Department is reviewing Benchmark's $75M investment in Chinese AI startup Manus under 2023 restrictions. Learn about the US investment review.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/12/treasury-logo-department-breach.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "US investment review"
+      ],
+      "audio_url": null,
+      "trend_score": 10.27
+    },
+    {
+      "id": "60e5935b548b8940c582866b6740a84afb8b8156e79f77b46e4ef9f3b75a1008",
+      "title": "Google Gemini Updates to Take Center Stage at I/O 2025",
+      "link": "articles/google-gemini-updates-to-take-center-stage-at-io-2025.html",
+      "published_iso": "2025-05-09T20:35:15Z",
+      "summary_short": "Google I/O 2025 will showcase major Google Gemini updates, including Gemini Ultra enhancements and new subscription tiers. Learn more.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/05/google-io-generic.jpg?resize=1200,800",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Google Gemini updates"
+      ],
+      "audio_url": null,
+      "trend_score": 10.26
+    },
+    {
+      "id": "f05948bc5ba3e391b203ebd884d4938084c549d243ece8d829276a3a29b61a17",
+      "title": "Scale AI Investigation Dropped by Department of Labor",
+      "link": "articles/scale-ai-investigation-dropped-by-department-of-labor.html",
+      "published_iso": "2025-05-09T19:03:06Z",
+      "summary_short": "The U.S. Department of Labor has ended its investigation into Scale AI's compliance with labor laws, raising questions about worker classification.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/06/GettyImages-1540566330.jpg?w=1024",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Scale AI investigation dropped"
+      ],
+      "audio_url": null,
+      "trend_score": 10.25
+    },
+    {
+      "id": "18e9a8d4b0c507bbb3bb14b62f3cf12e2ea3addbc2a5e47d87cd201abc70f28b",
+      "title": "Tesla Robotaxi Trademark Denied by U.S. Patent Office",
+      "link": "articles/tesla-robotaxi-trademark-denied-by-us-patent-office.html",
+      "published_iso": "2025-05-09T17:35:00Z",
+      "summary_short": "Tesla's \"Robotaxi\" trademark application was denied by the U.S. Patent Office, citing generic terminology. Learn the impact on Tesla's autonomous vehicle plans.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/10/cybercab-gullwing.jpg?resize=900,1200",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "Tesla Robotaxi trademark"
+      ],
+      "audio_url": null,
+      "trend_score": 10.24
+    },
+    {
       "id": "af62edd97899fe2bc9c478e2e27623fad4f42e115f6417c3341716df2731752a",
       "title": "New AI Translation System Enables Multi-Speaker Real-Time Translation",
       "link": "articles/new-ai-translation-system-enables-multi-speaker-real-time-translation.html",
