@@ -1,6 +1,58 @@
 {
   "articles": [
     {
+      "id": "220eaa4f5981d1cf0aaa650c0869faf96989664279cbfb77cd346174a70df1fa",
+      "title": "Microsoft Build Event 2025: AI Innovations, Keynote Details, and How to Watch",
+      "link": "articles/microsoft-build-event-2025-ai-innovations,-keynote-details,-and-how-to-watch.html",
+      "published_iso": "2025-05-12T19:45:00Z",
+      "summary_short": "The Microsoft Build event 2025 kicks off May 19 with AI innovations, keynote details, and livestream info. Don't miss the latest updates.",
+      "image_url": "https://www.zdnet.com/a/img/resize/e2b859d6bebae7ed220c4b0835a82978566ca2e8/2024/03/07/61f6c2bd-467c-4160-b2b1-b6addc8d2660/img-9732.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Microsoft Build livestream",
+        "Microsoft Build keynote",
+        "how to watch Microsoft Build",
+        "Microsoft Build Seattle event",
+        "Microsoft AI announcements",
+        "Microsoft Build 2025",
+        "Microsoft Build announcements",
+        "Microsoft Build event schedule",
+        "Satya Nadella Microsoft Build",
+        "Microsoft Build developer conference",
+        "Microsoft Build event",
+        "Microsoft Build vs Google I/O"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
+      "id": "b6a91487706d2bfa8b4b791977fb1af1de8f8eb83c4d93b39e1e21094ed84b78",
+      "title": "Tesla Robotaxi Investigation: NHTSA Demands Answers on FSD Safety",
+      "link": "articles/tesla-robotaxi-investigation-nhtsa-demands-answers-on-fsd-safety.html",
+      "published_iso": "2025-05-12T19:34:40Z",
+      "summary_short": "Federal regulators scrutinize Tesla's robotaxi plans amid safety concerns over Full Self-Driving software in low-visibility conditions. Read the latest.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/11/GettyImages-1513214947.jpg?resize=1200,801",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "Tesla robotaxi investigation",
+        "Tesla Full Self-Driving crashes",
+        "NHTSA Tesla investigation",
+        "Tesla autonomous driving safety",
+        "Tesla FSD low-visibility conditions",
+        "National Highway Traffic Safety Administration Tesla",
+        "Full Self-Driving Supervised software",
+        "Tesla FSD software evaluation",
+        "FSD Supervised ride-hailing",
+        "Federal regulators Tesla robotaxi",
+        "Tesla robotaxi service launch",
+        "Tesla ride-hailing service Austin"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "528d4940e68589e33f532a16dee3972d25b8322c9cd22e5b15811486325d3084",
       "title": "Google I/O 2025: AI Takes Center Stage With Gemini, Project Astra, and Android Updates",
       "link": "articles/google-io-2025-ai-takes-center-stage-with-gemini,-project-astra,-and-android-upd.html",
