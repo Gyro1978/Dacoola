@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "f8a55d76d9e1482c61d22049e6b58340822008be5920165c2614415db8816699",
+      "title": "Veritone Track: The AI Tracking Tool Helping Police Skirt Facial Recognition Bans",
+      "link": "articles/veritone-track-the-ai-tracking-tool-helping-police-skirt-facial-recognition-bans.html",
+      "published_iso": "2025-05-12T09:00:00Z",
+      "summary_short": "Veritone's AI tracking tool, Track, enables law enforcement to bypass facial recognition bans using body size, clothing, and other attributes. Learn how it works.",
+      "image_url": "https://wp.technologyreview.com/wp-content/uploads/2025/05/Veritone-Track-product-demo2-crop.png?resize=1200,600",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "body size gender tracking AI",
+        "Veritone CEO Ryan Steelberg interview",
+        "AI surveillance without facial recognition",
+        "facial recognition bans workaround",
+        "Department of Justice AI tracking",
+        "AI tracking tool police",
+        "police use AI for surveillance",
+        "Veritone Track AI model",
+        "AI tracking tool",
+        "AI tools for criminal investigations",
+        "controversial AI tracking methods",
+        "how police skirt facial recognition laws"
+      ],
+      "audio_url": null,
+      "trend_score": 15.99
+    },
+    {
       "id": "d1caed3cff3e5a13ec930f30dfb0bedfc99976f038712b53cbff5328e0df349f",
       "title": "Microsoft and OpenAI Partnership Undergoes Critical Renegotiation",
       "link": "articles/microsoft-and-openai-partnership-undergoes-critical-renegotiation.html",
@@ -206,6 +232,32 @@
       ],
       "audio_url": null,
       "trend_score": 15.81
+    },
+    {
+      "id": "f70e3d2f19e400a9ab332f55c82477d90fae10ec498949e6e200cc559f81d9ba",
+      "title": "Supercomputers in Climate Research: Tackling Global Challenges",
+      "link": "articles/supercomputers-in-climate-research-tackling-global-challenges.html",
+      "published_iso": "2025-05-10T01:00:00Z",
+      "summary_short": "Discover how supercomputers are revolutionizing climate research and tackling global challenges. Learn about their impact on solving big problems.",
+      "image_url": "https://ichef.bbci.co.uk/images/ic/1200x675/p0l98prp.jpg",
+      "topic": "Compute",
+      "is_breaking": false,
+      "tags": [
+        "game developer conference highlights",
+        "future of nuclear fusion",
+        "climate research with supercomputers",
+        "gaming AI innovation",
+        "nuclear fusion clean energy",
+        "supercomputers in tech now",
+        "electric flight developments",
+        "supercomputers climate research",
+        "tech now supercomputers",
+        "supercomputers solving big problems",
+        "clean air travel technology",
+        "AI in gaming innovation"
+      ],
+      "audio_url": null,
+      "trend_score": 15.61
     },
     {
       "id": "3dd78e3285c2687e549d1c0adb2106518d48c0956e7ddce99b2c3ae008acefab",
