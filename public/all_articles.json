@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "c440eb90a4dd22f08d49b10b6a21232fa0424b5671618b5d8872454009f35092",
+      "title": "Google's Gemma AI Models Surpass 150 Million Downloads, Fueling Open AI Race",
+      "link": "articles/googles-gemma-ai-models-surpass-150-million-downloads,-fueling-open-ai-race.html",
+      "published_iso": "2025-05-12T14:31:37Z",
+      "summary_short": "Google's Gemma AI models hit 150M downloads, with 70K variants on Hugging Face. Discover how it compares to Meta's Llama and its commercial use risks.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2196352264.jpg?w=1024",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Gemma AI commercial use risks",
+        "Omar Sanseviero Google DeepMind Gemma",
+        "Gemma AI downloads",
+        "Gemma AI drug discovery applications",
+        "Google Gemma vs Meta Llama",
+        "Gemma AI Hugging Face variants",
+        "Gemma AI 150 million downloads",
+        "Gemma AI language support",
+        "Gemma AI licensing terms controversy",
+        "Google Gemma AI models download milestone",
+        "open AI models comparison",
+        "multimodal AI models Gemma"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "e09341acc2a1bf0d7fd18f47d9ebb8ace321aea5a63513739188904bbdab0913",
       "title": "AI Trustworthiness Consensus: 100 Scientists Unveil Global Safety Guidelines",
       "link": "articles/ai-trustworthiness-consensus-100-scientists-unveil-global-safety-guidelines.html",
