@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "0498cc8f219f24dff791ae657a1a2747752740ece5ca705fe77f3736f1e8d051",
+      "title": "OpenAI Stargate Delays: Tariffs and Investor Caution Stall $500M AI Project",
+      "link": "articles/openai-stargate-delays-tariffs-and-investor-caution-stall-$500m-ai-project.html",
+      "published_iso": "2025-05-12T15:05:20Z",
+      "summary_short": "OpenAI's ambitious Stargate data center project faces delays due to tariff-related economic uncertainty and investor caution. Learn more about the challenges.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/04/GettyImages-2206295463.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "tariffs impact on data centers",
+        "OpenAI Stargate project delays",
+        "Stargate data center tariff issues",
+        "OpenAI AI infrastructure investment",
+        "Bloomberg OpenAI Stargate report",
+        "data center construction overcapacity",
+        "OpenAI Stargate delays",
+        "Stargate project funding challenges",
+        "AI data center build costs",
+        "AI services market volatility",
+        "OpenAI and SoftBank partnership",
+        "OpenAI Stargate investment risks"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "c440eb90a4dd22f08d49b10b6a21232fa0424b5671618b5d8872454009f35092",
       "title": "Google's Gemma AI Models Surpass 150 Million Downloads, Fueling Open AI Race",
       "link": "articles/googles-gemma-ai-models-surpass-150-million-downloads,-fueling-open-ai-race.html",
