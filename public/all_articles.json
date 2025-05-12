@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "59547c683ad7a246063aaa76f8516b1896145eaafdba4e9f5b3eb4a0cfb3452b",
+      "title": "Apple iPhone Price Hike: New Models Set for Cost Increase This Fall",
+      "link": "articles/apple-iphone-price-hike-new-models-set-for-cost-increase-this-fall.html",
+      "published_iso": "2025-05-12T11:08:58Z",
+      "summary_short": "Apple plans an iPhone price hike for upcoming models, citing new features and tariffs. Learn how U.S.-China trade policies may impact costs.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/Apple-iphone-16-2.jpg?resize=1200,791",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Apple glass iPhone 2027",
+        "ultra-thin iPhone release",
+        "Apple iPhone price increase",
+        "upcoming iPhone price hike",
+        "iPhone price hike",
+        "Apple tariff exemptions tech industry",
+        "iPhone manufacturing shift to India",
+        "iPhone design changes 2027",
+        "iPhone tariff impact",
+        "Apple new iPhone features 2023",
+        "U.S.-China trade war iPhone prices",
+        "iPhone price hike reasons"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "f8a55d76d9e1482c61d22049e6b58340822008be5920165c2614415db8816699",
       "title": "Veritone Track: The AI Tracking Tool Helping Police Skirt Facial Recognition Bans",
       "link": "articles/veritone-track-the-ai-tracking-tool-helping-police-skirt-facial-recognition-bans.html",
