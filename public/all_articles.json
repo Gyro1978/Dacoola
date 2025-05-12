@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "8a1aa8c8924d26a891cc0b296bd66e0023ca77afcd7930254661de741d50fa5a",
+      "title": "Sakana AI Unveils Continuous Thought Machines: A New AI Research Architecture",
+      "link": "articles/sakana-ai-unveils-continuous-thought-machines-a-new-ai-research-architecture.html",
+      "published_iso": "2025-05-12T23:08:55Z",
+      "summary_short": "Sakana AI introduces Continuous Thought Machines, a groundbreaking AI research architecture designed to mimic human reasoning with dynamic, adaptive computation.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_stark_crisp_neat_pop_art_colorful_flat_illustration_pol_570ae7e2-ddaf-4775-b7da-c0dd0257c8d0.png?w=1024?w=1200&strip=all",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "Github repository AI architecture",
+        "Sakana AI Continuous Thought Machines",
+        "complex cognitive tasks AI",
+        "Sakana AI startup Tokyo",
+        "Continuous Thought Machines vs Transformers",
+        "AI research architecture",
+        "AI language models flexibility",
+        "AI model architecture CTM",
+        "Llion Jones David Ha AI",
+        "AI reasoning like human brains",
+        "arXiv paper Sakana AI",
+        "dynamic reasoning AI models"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "b36579ff4c1348f46b2bc6f62b89bdb233f0fc9bd85432fcea4c21616e22c954",
       "title": "AI Reasoning Models May Hit Performance Limits Within a Year, Study Finds",
       "link": "articles/ai-reasoning-models-may-hit-performance-limits-within-a-year,-study-finds.html",
