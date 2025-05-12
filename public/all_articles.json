@@ -1,6 +1,58 @@
 {
   "articles": [
     {
+      "id": "1b965f1989d9e953cdf3b8905ef70aa59bec499b7a4cdd42b0065ac81e08187b",
+      "title": "Sam Altman Lifestyle: OpenAI CEO's Olive Oil Misuse Sparks Social Media Buzz",
+      "link": "articles/sam-altman-lifestyle-openai-ceos-olive-oil-misuse-sparks-social-media-buzz.html",
+      "published_iso": "2025-05-12T16:30:22Z",
+      "summary_short": "OpenAI CEO Sam Altman's lifestyle choice of misusing premium Graza olive oil sparks humor and debate. Discover the details behind his culinary blunder.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2198379368.jpg?resize=1200,800",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "Graza olive oil",
+        "Financial Times Sam Altman",
+        "Sam Altman olive oil",
+        "OpenAI CEO cooking",
+        "Lunch with the FT Sam Altman",
+        "millennial cooking trends",
+        "Silicon Valley startup culture",
+        "expensive olive oil",
+        "sizzle vs drizzle olive oil",
+        "Sam Altman lifestyle",
+        "cooking with olive oil",
+        "olive oil misuse"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
+      "id": "5137d8cdbe156af63d0a76ccbcd9ff66e029f4d02b5cf3db74336e6c96c19f3b",
+      "title": "Starlink Trial on ScotRail Trains: Elon Musk’s Satellite Wi-Fi Test",
+      "link": "articles/starlink-trial-on-scotrail-trains-elon-musk’s-satellite-wi-fi-test.html",
+      "published_iso": "2025-05-12T15:45:44Z",
+      "summary_short": "ScotRail launches a six-month Starlink trial to provide satellite-based wi-fi on trains in northern Scotland, potentially expanding to rural routes.",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/452c/live/3fba7ef0-2f3e-11f0-8670-3ddf06f84a81.jpg",
+      "topic": "Other",
+      "is_breaking": false,
+      "tags": [
+        "Starlink satellite wi-fi trains",
+        "ScotRail rural train internet upgrade",
+        "Clarus Networks Starlink partnership",
+        "train passenger wi-fi Scotland",
+        "ScotRail class 158 wi-fi upgrade",
+        "low Earth orbit satellite train internet",
+        "Starlink technology in public transport",
+        "Starlink trial",
+        "ScotRail Starlink internet trial",
+        "satellite internet for rural train routes",
+        "Starlink trial on UK trains",
+        "Elon Musk Starlink ScotRail trial"
+      ],
+      "audio_url": null,
+      "trend_score": 15.99
+    },
+    {
       "id": "0498cc8f219f24dff791ae657a1a2747752740ece5ca705fe77f3736f1e8d051",
       "title": "OpenAI Stargate Delays: Tariffs and Investor Caution Stall $500M AI Project",
       "link": "articles/openai-stargate-delays-tariffs-and-investor-caution-stall-$500m-ai-project.html",
