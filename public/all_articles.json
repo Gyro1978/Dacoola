@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "a4cb031d679fdc74d57d19af34748e090e4f2ff8818e0ec2c4e3a5ec6f4b3b2f",
+      "title": "OpenAI PDF Export Transforms ChatGPT Deep Research Into Professional Business Tool",
+      "link": "articles/openai-pdf-export-transforms-chatgpt-deep-research-into-professional-business-to.html",
+      "published_iso": "2025-05-12T20:43:51Z",
+      "summary_short": "OpenAI launches PDF export for ChatGPT's Deep Research, enabling formatted reports with citations-a game-changer for enterprise users.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/nuneybits_Vector_art_of_a_PDF_file_icon_in_pastels_3540832e-2fed-4b22-aee4-d8dd9c16a157.webp?w=996?w=1200&strip=all",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "OpenAI PDF export",
+        "AI research assistant PDF",
+        "ChatGPT business problem solution",
+        "OpenAI Plus Team Pro subscription",
+        "OpenAI Enterprise Education access",
+        "AI research reports with citations",
+        "OpenAI strategic shift enterprise",
+        "OpenAI enterprise features",
+        "Deep Research PDF export",
+        "download ChatGPT reports as PDF",
+        "OpenAI PDF export feature",
+        "ChatGPT PDF download"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "62f44ef06b730f1311d187778dade237abfe39f950d8da8b4798ca1ace1f42d3",
       "title": "Microsoft Build 2025: AI-Powered Copilot Upgrades and Azure Innovations Ahead",
       "link": "articles/microsoft-build-2025-ai-powered-copilot-upgrades-and-azure-innovations-ahead.html",
