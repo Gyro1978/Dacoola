@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "b36579ff4c1348f46b2bc6f62b89bdb233f0fc9bd85432fcea4c21616e22c954",
+      "title": "AI Reasoning Models May Hit Performance Limits Within a Year, Study Finds",
+      "link": "articles/ai-reasoning-models-may-hit-performance-limits-within-a-year,-study-finds.html",
+      "published_iso": "2025-05-12T22:36:11Z",
+      "summary_short": "Epoch AI analysis predicts a slowdown in AI reasoning models' performance gains, citing computing limits and high research costs. Learn more.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/01/GettyImages-1333209932.jpg?resize=1200,600",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "AI model training techniques",
+        "math and programming AI benchmarks",
+        "future of AI reasoning models",
+        "OpenAI o3 model",
+        "OpenAI reinforcement learning strategy",
+        "Dan Roberts OpenAI",
+        "AI benchmarks improvement",
+        "AI reasoning models performance",
+        "Epoch AI analysis",
+        "reinforcement learning in AI",
+        "computing power for AI training",
+        "AI reasoning models"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "a4cb031d679fdc74d57d19af34748e090e4f2ff8818e0ec2c4e3a5ec6f4b3b2f",
       "title": "OpenAI PDF Export Transforms ChatGPT Deep Research Into Professional Business Tool",
       "link": "articles/openai-pdf-export-transforms-chatgpt-deep-research-into-professional-business-to.html",
