@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "62f44ef06b730f1311d187778dade237abfe39f950d8da8b4798ca1ace1f42d3",
+      "title": "Microsoft Build 2025: AI-Powered Copilot Upgrades and Azure Innovations Ahead",
+      "link": "articles/microsoft-build-2025-ai-powered-copilot-upgrades-and-azure-innovations-ahead.html",
+      "published_iso": "2025-05-12T20:36:02Z",
+      "summary_short": "Discover what to expect at Microsoft Build 2025, from Copilot AI enhancements to Azure upgrades and potential new AI models. Stream keynotes May 19-22.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2201260651.jpg?w=1024",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Microsoft Teams Copilot integration",
+        "Copilot+ AI-powered PCs",
+        "Windows Volumetric Apps Meta Quest",
+        "Microsoft software price increases 2025",
+        "Microsoft Build 2025",
+        "Microsoft Build developer conference",
+        "Azure upgrades Microsoft Build",
+        "alternative AI models for Copilot",
+        "Microsoft Build 2025 announcements",
+        "AI integrations Microsoft Build",
+        "Copilot AI features 2025",
+        "Copilot generative AI updates"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "220eaa4f5981d1cf0aaa650c0869faf96989664279cbfb77cd346174a70df1fa",
       "title": "Microsoft Build Event 2025: AI Innovations, Keynote Details, and How to Watch",
       "link": "articles/microsoft-build-event-2025-ai-innovations,-keynote-details,-and-how-to-watch.html",
