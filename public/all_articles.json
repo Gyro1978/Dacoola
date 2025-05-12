@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "e09341acc2a1bf0d7fd18f47d9ebb8ace321aea5a63513739188904bbdab0913",
+      "title": "AI Trustworthiness Consensus: 100 Scientists Unveil Global Safety Guidelines",
+      "link": "articles/ai-trustworthiness-consensus-100-scientists-unveil-global-safety-guidelines.html",
+      "published_iso": "2025-05-12T13:44:16Z",
+      "summary_short": "Over 100 leading AI scientists propose the Singapore Consensus, a roadmap for trustworthy, reliable, and secure AI development. Learn the key priorities.",
+      "image_url": "https://www.zdnet.com/a/img/resize/e16fcffa624e151a6b206e6721b8b9d160f7aa85/2025/05/09/4ea371d3-6d92-4d9b-a4b2-5b2a6e286a0e/sunroad5gettyimages-1304158425.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Research",
+      "is_breaking": false,
+      "tags": [
+        "AI scientists guidelines",
+        "AI research priorities",
+        "Singapore Consensus on Global AI Safety",
+        "Stuart Russell human-centered AI",
+        "generative AI disclosures",
+        "AI model transparency",
+        "AI safety research Singapore",
+        "trustworthy reliable secure AI",
+        "AI trustworthiness consensus",
+        "Max Tegmark AI research",
+        "International Conference on Learning Representations",
+        "Yoshua Bengio AI safety"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "59547c683ad7a246063aaa76f8516b1896145eaafdba4e9f5b3eb4a0cfb3452b",
       "title": "Apple iPhone Price Hike: New Models Set for Cost Increase This Fall",
       "link": "articles/apple-iphone-price-hike-new-models-set-for-cost-increase-this-fall.html",
