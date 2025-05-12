@@ -1,6 +1,58 @@
 {
   "articles": [
     {
+      "id": "3361b492d510e2bf0799075786584125e055e2eff6451323ed6bf956212ec8c6",
+      "title": "iPhone 13 Satellite Features Now Available With iOS 18.5 Update",
+      "link": "articles/iphone-13-satellite-features-now-available-with-ios-185-update.html",
+      "published_iso": "2025-05-12T18:47:05Z",
+      "summary_short": "Apple expands emergency satellite features to iPhone 13 via iOS 18.5, enabling critical SOS and messaging without cellular service. Learn how it works.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2022/11/PXL_20221115_013803530.jpg?resize=1200,800",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "how to use iPhone satellite features",
+        "iOS 18.5 update",
+        "T-Mobile Starlink iPhone satellite",
+        "iPhone satellite feature settings",
+        "Apple TV app subscription update",
+        "emergency satellite capabilities iPhone",
+        "iPhone satellite feature saves lives",
+        "Screen Time parental control update",
+        "iPhone 13 satellite features",
+        "iPhone satellite emergency services",
+        "iPhone 13 iOS 18.5 satellite",
+        "iPhone satellite features"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
+      "id": "18d64319829a0e29f1d538634ba144fa2f8548e260c45b02523b59bde99925c4",
+      "title": "OpenVision: UCSC’s Open-Source Vision Encoder Challenges OpenAI and Google",
+      "link": "articles/openvision-ucsc’s-open-source-vision-encoder-challenges-openai-and-google.html",
+      "published_iso": "2025-05-12T18:19:20Z",
+      "summary_short": "UCSC's OpenVision offers a fully open-source vision encoder alternative to OpenAI's CLIP and Google's SigLIP, with 26 models under Apache 2.0 license.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/cfr0z3n_stark_crisp_neat_pop_art_yellow_dominant_image_of_a_hum_0c2088ff-9ca4-4b34-8c66-7c8fdb496e14.png?w=1024?w=1200&strip=all",
+      "topic": "Open Source",
+      "is_breaking": false,
+      "tags": [
+        "OpenVision open source vision encoder",
+        "OpenVision vs OpenAI CLIP",
+        "Apache 2.0 license AI tools",
+        "OpenVision vs Google SigLIP",
+        "large language models with vision",
+        "commercial AI vision applications",
+        "UCSC OpenVision release",
+        "open-source vision encoder",
+        "vision encoder AI model",
+        "AI image processing models",
+        "OpenVision parameters and models",
+        "Cihang Xie UCSC OpenVision"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "1380dfd136cdb55cb08f37e49e3f350686113829ae903c1f89a007e12c7ac0eb",
       "title": "Amazon Q Business: Revolutionizing IT Support With AI-Powered Assistance",
       "link": "articles/amazon-q-business-revolutionizing-it-support-with-ai-powered-assistance.html",
