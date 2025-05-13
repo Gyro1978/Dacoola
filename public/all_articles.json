@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "f7fb5b88db88f2e3385b1da09df3d0bbe7da7b80400515996d91b3f3d4bb8ed0",
+      "title": "NVIDIA Sweeps COMPUTEX 2025 With Record Best Choice Awards Haul",
+      "link": "articles/nvidia-sweeps-computex-2025-with-record-best-choice-awards-haul.html",
+      "published_iso": "2025-05-13T04:00:59Z",
+      "summary_short": "NVIDIA swept COMPUTEX 2025's Best Choice Awards, winning honors for RTX 5090, GB200 NVL72, Cosmos, and Quantum-X InfiniBand innovations.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/05/bca2025.jpg",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "NVIDIA GeForce RTX 5090 GPU award",
+        "NVIDIA Cosmos world foundation model",
+        "NVIDIA GB200 NVL72 Golden Award",
+        "COMPUTEX 2024 awards NVIDIA",
+        "NVIDIA Quantum-X Photonics InfiniBand switch",
+        "NVIDIA networking innovation award",
+        "best gaming GPU 2024 NVIDIA",
+        "NVIDIA COMPUTEX Best Choice Awards",
+        "NVIDIA data center solutions award",
+        "Jensen Huang COMPUTEX keynote",
+        "NVIDIA COMPUTEX awards",
+        "NVIDIA DGX Spark award"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "8a1aa8c8924d26a891cc0b296bd66e0023ca77afcd7930254661de741d50fa5a",
       "title": "Sakana AI Unveils Continuous Thought Machines: A New AI Research Architecture",
       "link": "articles/sakana-ai-unveils-continuous-thought-machines-a-new-ai-research-architecture.html",
