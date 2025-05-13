@@ -1,6 +1,58 @@
 {
   "articles": [
     {
+      "id": "0e59d2f2d648ea2719d9d3cd8e99003c3eb3b6d8c7f54ccf92dc416bc231011a",
+      "title": "Microsoft Layoffs 2025: 3% Workforce Cut to Affect Over 6,500 Employees",
+      "link": "articles/microsoft-layoffs-2025-3-workforce-cut-to-affect-over-6,500-employees.html",
+      "published_iso": "2025-05-13T16:48:43Z",
+      "summary_short": "Microsoft plans to lay off 3% of its workforce, affecting over 6,500 employees. Learn about the latest Microsoft layoffs and their broader implications.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/02/GettyImages-1930518491.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Microsoft job cuts",
+        "Microsoft layoffs 2024",
+        "Microsoft layoffs impact",
+        "Microsoft workforce reduction",
+        "Microsoft financial performance 2024",
+        "Microsoft organizational changes",
+        "Big Tech layoffs",
+        "Tech industry layoffs",
+        "Microsoft layoffs",
+        "Microsoft layoffs news",
+        "Microsoft layoffs details",
+        "Microsoft employee layoffs"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
+      "id": "0c08609077f7496151b706ce5862ee4070467234640c313a6e52d9f6bab87af1",
+      "title": "ChatGPT Evolution: How OpenAI’s AI Chatbot Redefined the Tech Landscape",
+      "link": "articles/chatgpt-evolution-how-openai’s-ai-chatbot-redefined-the-tech-landscape.html",
+      "published_iso": "2025-05-13T16:43:51Z",
+      "summary_short": "Explore the ChatGPT evolution, from its explosive growth to cutting-edge features like GPT-4o voice capabilities and Apple Intelligence integration.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2023/03/GettyImages-1462188043-e1686340799615.jpg?w=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Ilya Sutskever OpenAI exit",
+        "OpenAI text-to-video Sora",
+        "Apple Intelligence partnership",
+        "OpenAI Washington relationship",
+        "Mira Murati CTO departure",
+        "Elon Musk OpenAI injunction",
+        "DeepSeek AI competition",
+        "OpenAI AI chatbot",
+        "GPT-4o voice capabilities",
+        "OpenAI copyright infringement lawsuits",
+        "ChatGPT product updates timeline",
+        "ChatGPT evolution"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "d54b885376b509f4d26658fb34411b6e59e09628105c5cd797bcd69e6beb4385",
       "title": "Trump Administration Rescinds Biden’s AI Diffusion Rules Days Before Enforcement",
       "link": "articles/trump-administration-rescinds-biden’s-ai-diffusion-rules-days-before-enforcement.html",
@@ -1734,6 +1786,32 @@
       ],
       "audio_url": null,
       "trend_score": 12.99
+    },
+    {
+      "id": "26fc9580eafb43097f6fc18c3df3c6cdc9c28d2f05c3e3cc6704ac024406a768",
+      "title": "Apple Legal Battle Intensifies Over Judge's \"Extraordinary\" Contempt Order",
+      "link": "articles/apple-legal-battle-intensifies-over-judges-extraordinary-contempt-order.html",
+      "published_iso": "2025-05-08T15:45:10Z",
+      "summary_short": "Apple challenges a US judge's contempt order in its ongoing legal battle over App Store payment rules, calling the ruling \"extraordinary.\"",
+      "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/3489/live/be259e60-2ba5-11f0-b26b-ab62c890638b.jpg",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "App Store payment options",
+        "Apple App Store lawsuit",
+        "Apple legal battle",
+        "Fortnite-maker Epic Games lawsuit",
+        "Epic Games vs Apple",
+        "Apple intellectual property rights",
+        "California competition rules Apple",
+        "Apple anti-competitive conduct",
+        "US judge contempt order Apple",
+        "Apple appeals court ruling",
+        "Apple antitrust case",
+        "Judge Yvonne Gonzalez Rogers Apple"
+      ],
+      "audio_url": null,
+      "trend_score": 15.16
     },
     {
       "id": "49f634b34df8a772fef5b4b8bd6d9be64e448517f7de9b5c0956d6ab8d0b0e7a",
