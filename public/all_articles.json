@@ -1,6 +1,58 @@
 {
   "articles": [
     {
+      "id": "ef4b68b50f7638f934073fe069eac914b7eb58717251210a99fb99612b393fdd",
+      "title": "Reasoning AI Agents Revolutionize High-Stakes Decision Making",
+      "link": "articles/reasoning-ai-agents-revolutionize-high-stakes-decision-making.html",
+      "published_iso": "2025-05-13T15:00:08Z",
+      "summary_short": "Discover how reasoning AI agents powered by LLMs are transforming industries with critical thinking and complex problem-solving capabilities.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/05/ai-on-reasoning-agents-1280x680-1.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "chain-of-thought AI prompting",
+        "AI digital teammates",
+        "reasoning agents in healthcare",
+        "tokens usage in AI models",
+        "compute efficiency in AI reasoning",
+        "high-stakes decision making AI",
+        "critical thinking AI",
+        "large language models LLMs",
+        "AI in financial services decision making",
+        "AI agents in decision making",
+        "Reasoning AI agents",
+        "complex tasks AI solutions"
+      ],
+      "audio_url": null,
+      "trend_score": 15.99
+    },
+    {
+      "id": "187c674e6e13f972a31867f5a1fba46ee81674dc7405470f4d55e8e3faadafc2",
+      "title": "GOP's 10-Year AI Regulation Ban Quietly Added to Budget Bill",
+      "link": "articles/gops-10-year-ai-regulation-ban-quietly-added-to-budget-bill.html",
+      "published_iso": "2025-05-13T14:58:26Z",
+      "summary_short": "House Republicans inserted a 10-year AI regulation ban into the Budget Reconciliation bill, blocking state and local AI laws. Learn the implications.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2022/04/digital-lines-us-flag.jpeg",
+      "topic": "Regulation",
+      "is_breaking": true,
+      "tags": [
+        "GOP AI regulation ban",
+        "10-year AI regulation moratorium",
+        "Brett Guthrie AI regulation amendment",
+        "AI regulation ban",
+        "state and local AI regulation ban",
+        "automated decision systems regulation halt",
+        "New York AI bias audits ban",
+        "federal preemption of AI laws",
+        "Budget Reconciliation bill AI provision",
+        "California AI disclosure law impact",
+        "AI developers California requirements 2026",
+        "House Republicans AI regulation block"
+      ],
+      "audio_url": null,
+      "trend_score": 20.99
+    },
+    {
       "id": "ef8acbe07dd93bcb6755808e4cad68690d7d2c941263388626983f8105c4823f",
       "title": "Apple Unveils 2025 Accessibility Suite: Brain Implant Support, Braille Tools & More",
       "link": "articles/apple-unveils-2025-accessibility-suite-brain-implant-support,-braille-tools-&-mo.html",
