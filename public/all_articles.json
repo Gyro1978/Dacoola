@@ -1,6 +1,58 @@
 {
   "articles": [
     {
+      "id": "d54b885376b509f4d26658fb34411b6e59e09628105c5cd797bcd69e6beb4385",
+      "title": "Trump Administration Rescinds Biden’s AI Diffusion Rules Days Before Enforcement",
+      "link": "articles/trump-administration-rescinds-biden’s-ai-diffusion-rules-days-before-enforcement.html",
+      "published_iso": "2025-05-13T15:52:08Z",
+      "summary_short": "The Trump administration officially rescinded Biden’s AI diffusion rules, lifting chip export limits and replacing them with a new strategy.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/05/GettyImages-2026266993.jpg?resize=1200,686",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "Biden AI chip export limits canceled",
+        "US Department of Commerce AI rules update",
+        "AI regulation rescinded",
+        "Tiered country AI export rules",
+        "US AI export controls to China",
+        "Trump admin rescinds Biden AI diffusion rules",
+        "AI regulation rescinded by DOC",
+        "AI model training restrictions in China",
+        "Artificial Intelligence Diffusion Rule rescinded",
+        "Huawei Ascend AI chips export ban",
+        "AI chip export restrictions lifted",
+        "Biden-era AI regulation replaced"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
+      "id": "6574d893cdb900cc862c14cf0d0f5db8adf275c44e415a7daa3af2c1d0e57b96",
+      "title": "Audible Accelerates AI-Narrated Audiobook Expansion With Amazon’s Voice Tech",
+      "link": "articles/audible-accelerates-ai-narrated-audiobook-expansion-with-amazon’s-voice-tech.html",
+      "published_iso": "2025-05-13T15:46:46Z",
+      "summary_short": "Audible is scaling its AI-narrated audiobook catalog using Amazon's synthetic voices and translation tools, competing with Spotify and Apple.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2019/12/GettyImages-1179901012.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Amazon audiobook service expansion",
+        "Amazon AI capabilities for publishers",
+        "AI-generated voices for audiobooks",
+        "convert print books to audiobooks",
+        "virtual voice audiobook production",
+        "AI voice narration for books",
+        "AI-narrated audiobooks",
+        "e-books to AI audiobooks",
+        "Audible AI translation beta",
+        "text-to-speech translation services",
+        "Audible vs Apple Spotify audiobooks",
+        "Audible AI-narrated audiobooks"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "ef4b68b50f7638f934073fe069eac914b7eb58717251210a99fb99612b393fdd",
       "title": "Reasoning AI Agents Revolutionize High-Stakes Decision Making",
       "link": "articles/reasoning-ai-agents-revolutionize-high-stakes-decision-making.html",
