@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "88a837fff82283fbcb456bd609445ee15d74feeaea2d77d17caf0d1e78a15ec3",
+      "title": "Google's Advanced Protection Mode: A Game-Changer in Android Security",
+      "link": "articles/googles-advanced-protection-mode-a-game-changer-in-android-security.html",
+      "published_iso": "2025-05-13T20:31:11Z",
+      "summary_short": "Google unveils Advanced Protection mode in Android 16, a critical security update to combat mercenary malware and zero-day exploits for high-risk users.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2023/03/infected-phone-1000x648.jpg",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "protect Android from malware",
+        "mercenary malware protection",
+        "secure Android calls and messages",
+        "zero-day vulnerabilities Android",
+        "enhanced security for at-risk Android users",
+        "how to enable Advanced Protection on Android",
+        "NSO Group spyware",
+        "Android 16 security features",
+        "Android security update",
+        "Google security blog updates",
+        "Google Advanced Protection mode",
+        "Android device hacking prevention"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "c8388b9e60353525422cd71cb2712b87b81e10b158acfba6dc1450ab2b9b88c6",
       "title": "ChatGPT PDF Feature: Deep Research Tool Now Exports Detailed Reports",
       "link": "articles/chatgpt-pdf-feature-deep-research-tool-now-exports-detailed-reports.html",
