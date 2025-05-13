@@ -1,4 +1,4 @@
-# requirements.txt (1/1) - Assuming no direct Tweepy usage anymore
+# requirements.txt (1/1) - Corrected
 
 requests
 python-dotenv
@@ -9,8 +9,9 @@ beautifulsoup4
 Pillow
 google-search-results # SerpApi client
 sentence-transformers # For CLIP in image_scraper
-# tweepy # REMOVED if twitter_poster.py is gone and not used elsewhere
+tweepy # UNCOMMENTED
 trafilatura # Optional, for news_scraper full text
 google-ads # For Keyword Planner API access
 atproto # For Bluesky
 praw # For Reddit
+pyperclip
