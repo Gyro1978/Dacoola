@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "c8388b9e60353525422cd71cb2712b87b81e10b158acfba6dc1450ab2b9b88c6",
+      "title": "ChatGPT PDF Feature: Deep Research Tool Now Exports Detailed Reports",
+      "link": "articles/chatgpt-pdf-feature-deep-research-tool-now-exports-detailed-reports.html",
+      "published_iso": "2025-05-13T20:17:41Z",
+      "summary_short": "OpenAI's ChatGPT Deep Research tool now lets users download comprehensive reports as PDFs, streamlining research sharing for professionals and students.",
+      "image_url": "https://www.zdnet.com/a/img/resize/c9ba0d8a1f49ce930f6f8811de33c50964b4737a/2025/02/03/fbf59da1-f694-433a-91ab-01df1bbf749b/deep-research-composer.png?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "how to download ChatGPT research as PDF",
+        "ChatGPT Deep Research for professionals",
+        "ChatGPT Plus PDF feature",
+        "AI research tool PDF export",
+        "ChatGPT Deep Research vs Gemini",
+        "using ChatGPT for academic research PDF",
+        "ChatGPT Team and Pro PDF feature",
+        "how to share ChatGPT research findings",
+        "ChatGPT Deep Research tool",
+        "best AI for research PDF output",
+        "ChatGPT PDF feature",
+        "OpenAI Deep Research PDF output"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "82a4644d1ae0d79dd5502bd0266574334fbb0b39e62dd05c2d3b3357e3cbf224",
       "title": "AI Market Share Shakeup: OpenAI & Google Rise as Anthropic Falls in 2025",
       "link": "articles/ai-market-share-shakeup-openai-&-google-rise-as-anthropic-falls-in-2025.html",
