@@ -1,4 +1,4 @@
-# src/main.py (Corrected Age Check for Social Posting)
+# src/main.py (Full Script with Pre-Write JSON Validation)
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -58,7 +58,7 @@ YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 raw_base_url = os.getenv('YOUR_SITE_BASE_URL', ''); YOUR_SITE_BASE_URL = (raw_base_url.rstrip('/') + '/') if raw_base_url else ''
 MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None)
 DAILY_TWEET_LIMIT = int(os.getenv('DAILY_TWEET_LIMIT', '3'))
-MAX_AGE_FOR_SOCIAL_POST_HOURS = 24 # This is now correctly used
+MAX_AGE_FOR_SOCIAL_POST_HOURS = 24
 
 
 # --- Setup Logging ---
@@ -84,7 +84,7 @@ PUBLIC_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'public')
 OUTPUT_HTML_DIR = os.path.join(PUBLIC_DIR, 'articles')
 TEMPLATE_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'templates')
 ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
-ARTICLE_MAX_AGE_DAYS = 30 # For processing scraped articles, NOT for social media
+ARTICLE_MAX_AGE_DAYS = 30
 TWITTER_DAILY_LIMIT_FILE = os.path.join(DATA_DIR_MAIN, 'twitter_daily_limit.json')
 
 
@@ -103,7 +103,7 @@ try:
 except ImportError: logger.critical("Jinja2 library not found. Exiting."); sys.exit(1)
 except Exception as e: logger.exception(f"CRITICAL: Failed Jinja2 init. Exiting: {e}"); sys.exit(1)
 
-# --- Helper Functions (Assumed to be correct from previous state) ---
+# --- Helper Functions ---
 def ensure_directories():
     dirs_to_create = [ DATA_DIR_MAIN, SCRAPED_ARTICLES_DIR, PROCESSED_JSON_DIR, PUBLIC_DIR, OUTPUT_HTML_DIR, TEMPLATE_DIR ]
     try:
@@ -205,15 +205,47 @@ def load_all_articles_data_from_json():
 def update_all_articles_json_file(new_article_summary_info):
     current_articles_list_data = load_all_articles_data_from_json()
     article_unique_id = new_article_summary_info.get('id')
-    if not article_unique_id: logger.error("Update all_articles: new info missing 'id'."); return
-    articles_dict = {art.get('id'): art for art in current_articles_list_data if isinstance(art, dict) and art.get('id')}
+    if not article_unique_id:
+        logger.error("Update all_articles: new info missing 'id'.")
+        return
+
+    articles_dict = {
+        art.get('id'): art
+        for art in current_articles_list_data
+        if isinstance(art, dict) and art.get('id')
+    }
     articles_dict[article_unique_id] = new_article_summary_info
-    updated_articles_list = sorted(list(articles_dict.values()), key=get_sort_key, reverse=True)
-    final_data_to_save_to_json = {"articles": updated_articles_list}
+
+    updated_articles_list = sorted(
+        list(articles_dict.values()), key=get_sort_key, reverse=True
+    )
+    final_data_to_save_to_json_obj = {"articles": updated_articles_list}
+
     try:
-        with open(ALL_ARTICLES_FILE, 'w', encoding='utf-8') as f: json.dump(final_data_to_save_to_json, f, indent=2, ensure_ascii=False)
+        # Attempt to serialize to string first
+        json_string_to_write = json.dumps(final_data_to_save_to_json_obj, indent=2, ensure_ascii=False)
+
+        # --- ADDED VALIDATION STEP ---
+        try:
+            json.loads(json_string_to_write) # Validate this string can be parsed back
+            logger.debug(f"JSON content for {ALL_ARTICLES_FILE} validated successfully before writing.")
+        except json.JSONDecodeError as jde:
+            logger.error(f"CRITICAL: Generated content for {ALL_ARTICLES_FILE} is NOT VALID JSON before writing: {jde}")
+            logger.error(f"Problematic data (first 500 chars of generated string): {json_string_to_write[:500]}")
+            # Optionally, you might want to prevent writing the bad file or take other recovery actions here
+            return # Stop before writing corrupted data
+        # --- END ADDED VALIDATION STEP ---
+
+        with open(ALL_ARTICLES_FILE, 'w', encoding='utf-8') as f:
+            f.write(json_string_to_write) # Write the pre-validated string
         logger.info(f"Updated {os.path.basename(ALL_ARTICLES_FILE)} ({len(updated_articles_list)} articles).")
-    except Exception as e: logger.error(f"Failed save updated {os.path.basename(ALL_ARTICLES_FILE)}: {e}")
+
+    except TypeError as te:
+        logger.error(f"CRITICAL: TypeError during JSON serialization for {ALL_ARTICLES_FILE}: {te}.")
+        # Consider logging the structure carefully if this happens
+        # logger.error(f"Problematic object structure (summary): {final_data_to_save_to_json_obj}")
+    except Exception as e:
+        logger.error(f"Failed to save updated {os.path.basename(ALL_ARTICLES_FILE)}: {e}")
 
 
 # --- Main Processing Function for Scraped Articles ---
