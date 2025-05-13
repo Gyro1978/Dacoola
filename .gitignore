@@ -13,3 +13,4 @@ __pycache__/
 /data/processed_json/
 /data/twitter_daily_limit.json
 google-ads.yaml
+generated_ai_prompt.txt
