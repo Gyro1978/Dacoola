@@ -1,6 +1,58 @@
 {
   "articles": [
     {
+      "id": "c0815a7d837f5ec902a365923fe790d8293c938643a2439d93bc38a9a4ed56ce",
+      "title": "NVIDIA and Partners Unveil Cutting-Edge AI-Powered Robotics at Automate 2025",
+      "link": "articles/nvidia-and-partners-unveil-cutting-edge-ai-powered-robotics-at-automate-2025.html",
+      "published_iso": "2025-05-13T13:45:00Z",
+      "summary_short": "Discover how NVIDIA and industry leaders are revolutionizing manufacturing with AI-powered robotics at Automate 2025, showcasing next-gen automation solutions.",
+      "image_url": "https://blogs.nvidia.com/wp-content/uploads/2025/05/isaac-robotics-corp-blog-automate-2025-1600x900-1.png",
+      "topic": "Robotics",
+      "is_breaking": false,
+      "tags": [
+        "Vention manufacturing automation",
+        "KUKA AI robots",
+        "NVIDIA robotics solutions",
+        "Universal Robots cobot",
+        "NVIDIA Omniverse for robotics",
+        "Isaac platform robotics",
+        "Standard Bots automation",
+        "Automate 2025 robotics showcase",
+        "Deepu Talla robotics keynote",
+        "AI-powered robotics",
+        "industrial automation with AI",
+        "AI-powered robotics in manufacturing"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
+      "id": "02150b6a525daeee9cf2f5096c71a9cd81ed7f4c1de4266e6f391e2d1c37b287",
+      "title": "Vectara Guardian Agents Slash AI Hallucinations Below 1% With Automated Correction",
+      "link": "articles/vectara-guardian-agents-slash-ai-hallucinations-below-1-with-automated-correctio.html",
+      "published_iso": "2025-05-13T13:00:00Z",
+      "summary_short": "Vectara's guardian agents reduce AI hallucinations to under 1% with automated correction, transforming enterprise AI adoption. Learn how it works.",
+      "image_url": "https://venturebeat.com/wp-content/uploads/2025/05/generic-corporate-user-ai-smk.jpg?w=1024?w=1200&strip=all",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "solving AI hallucination challenge",
+        "Vectara Hallucination Corrector",
+        "guardian agents AI",
+        "AI hallucinations detection",
+        "AI hallucinations prevention",
+        "AI hallucination reduction",
+        "agentic AI approach",
+        "AI workflow corrective measures",
+        "Vectara grounded retrieval",
+        "enterprise AI deployment risks",
+        "reduce AI hallucinations below 1%",
+        "Retrieval Augmented Generation RAG"
+      ],
+      "audio_url": null,
+      "trend_score": 15.99
+    },
+    {
       "id": "b3b4d234a6c9a4b48839ba63b4127b04c420b1284d5e6cddb947a5f5ba4c5e97",
       "title": "Police AI Tool Circumvents Facial Recognition Bans With New Surveillance Methods",
       "link": "articles/police-ai-tool-circumvents-facial-recognition-bans-with-new-surveillance-methods.html",
