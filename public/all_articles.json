@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "ef8acbe07dd93bcb6755808e4cad68690d7d2c941263388626983f8105c4823f",
+      "title": "Apple Unveils 2025 Accessibility Suite: Brain Implant Support, Braille Tools & More",
+      "link": "articles/apple-unveils-2025-accessibility-suite-brain-implant-support,-braille-tools-&-mo.html",
+      "published_iso": "2025-05-13T13:54:01Z",
+      "summary_short": "Apple unveils groundbreaking accessibility features for 2025, including brain implant compatibility, Braille Access, and enhanced App Store nutrition labels.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/Apple-logo-Getty.jpg?resize=1200,800",
+      "topic": "Hardware",
+      "is_breaking": false,
+      "tags": [
+        "Live Listen Background Sounds updates",
+        "Apple TV accessibility app Assistive Access",
+        "Apple Synchron partnership disabled users",
+        "Apple Personal Voice Vehicle Motion Cues",
+        "Apple Vision Pro braille note taker",
+        "Apple accessibility features",
+        "new Apple accessibility tools",
+        "Accessibility Reader Apple devices",
+        "Accessibility Nutrition Labels App Store",
+        "Braille Access tool iPhone",
+        "shareable Apple accessibility settings",
+        "Apple accessibility features 2023"
+      ],
+      "audio_url": null,
+      "trend_score": 15.99
+    },
+    {
       "id": "c0815a7d837f5ec902a365923fe790d8293c938643a2439d93bc38a9a4ed56ce",
       "title": "NVIDIA and Partners Unveil Cutting-Edge AI-Powered Robotics at Automate 2025",
       "link": "articles/nvidia-and-partners-unveil-cutting-edge-ai-powered-robotics-at-automate-2025.html",
@@ -25,6 +51,32 @@
       ],
       "audio_url": null,
       "trend_score": 16.0
+    },
+    {
+      "id": "90cf17bb0a26ddc1e605cd4109b84d5716c33a3b5ab151d0f81ca2d22c8f12bd",
+      "title": "AI Security Exploit: False Memories Hack Targets Cryptocurrency Bots",
+      "link": "articles/ai-security-exploit-false-memories-hack-targets-cryptocurrency-bots.html",
+      "published_iso": "2025-05-13T13:00:17Z",
+      "summary_short": "A new AI security exploit manipulates chatbots into redirecting cryptocurrency payments by planting false memories. Learn about the ElizaOS vulnerability.",
+      "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2025/05/chatbot-1152x648.jpg",
+      "topic": "Security",
+      "is_breaking": false,
+      "tags": [
+        "autonomous agents blockchain security",
+        "AI security exploit cryptocurrency",
+        "blockchain AI agent security",
+        "ElizaOS framework vulnerability",
+        "decentralized autonomous organizations DAOs risk",
+        "false memories AI chatbots attack",
+        "ElizaOS open source framework attack",
+        "large language models blockchain exploit",
+        "AI chatbot cryptocurrency theft",
+        "AI security exploit",
+        "Ai16z framework renamed ElizaOS",
+        "AI-powered bots cryptocurrency fraud"
+      ],
+      "audio_url": null,
+      "trend_score": 15.99
     },
     {
       "id": "02150b6a525daeee9cf2f5096c71a9cd81ed7f4c1de4266e6f391e2d1c37b287",
