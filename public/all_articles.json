@@ -1,6 +1,59 @@
 {
   "articles": [
     {
+      "id": "59547c683ad7a246063aaa76f8516b1896145eaafdba4e9f5b3eb4a0cfb3452b",
+      "title": "Apple Reportedly Plans iPhone Price Hike Amid New Features & Tariff Pressures",
+      "link": "articles/apple-reportedly-plans-iphone-price-hike-amid-new-features-&-tariff-pressures.html",
+      "published_iso": "2025-05-12T11:08:58Z",
+      "summary_short": "Apple reportedly plans an iPhone price hike for upcoming models, citing new features and U.S. tariffs. Learn how this impacts consumers and Apple's supply chain.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/Apple-iphone-16-2.jpg?resize=1200,791",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "ultra-thin iPhone release",
+        "Apple glass iPhone 2027",
+        "iPhone price hike",
+        "iPhone tariff impact",
+        "upcoming iPhone price hike",
+        "Apple supply chain India",
+        "iPhone without cutouts",
+        "iPhone design changes 2023",
+        "U.S.-China trade war iPhone prices",
+        "iPhone manufacturing tariffs",
+        "Apple iPhone price increase",
+        "Apple new iPhone features 2023"
+      ],
+      "audio_url": null,
+      "trend_score": 15.9
+    },
+    {
+      "id": "gyro-20250512011518-b59ee73a",
+      "title": "Perplexity AI Voice Assistant Emerges as Strong Contender Amid Siri Performance Issues",
+      "link": "articles/perplexity-ai-voice-assistant-emerges-as-strong-contender-amid-siri-performance-.html",
+      "published_iso": "2025-05-12T01:15:18Z",
+      "summary_short": "Frustrated with Siri performance issues? Perplexity AI's Voice Assistant offers a smarter alternative with seamless web integration and conversational AI.",
+      "image_url": "https://images.indianexpress.com/2025/04/perplexity-voice-assistant.jpg",
+      "topic": "Software",
+      "is_breaking": false,
+      "is_trending_pick": true,
+      "tags": [
+        "Siri performance issues",
+        "Apple Intelligence delay",
+        "Perplexity AI Voice Assistant",
+        "Perplexity Voice Assistant features",
+        "how to use Perplexity Voice Assistant",
+        "Perplexity Voice Assistant iOS",
+        "Siri vs Perplexity AI",
+        "Perplexity Voice Mode settings",
+        "Perplexity app download",
+        "AI voice assistant comparison",
+        "Perplexity Voice Assistant background mode",
+        "Perplexity Voice Assistant voice change"
+      ],
+      "audio_url": null,
+      "trend_score": 15.6
+    },
+    {
       "id": "gyro-20250511130002-aeac4922",
       "title": "Greece Tech Economy: The Mediterranean’s Rising Innovation Powerhouse",
       "link": "articles/greece-tech-economy-the-mediterraneans-rising-innovation-powerhouse.html",

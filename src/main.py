@@ -1,4 +1,4 @@
-# src/main.py (Limit social posting queue to last 24 hours)
+# src/main.py (Corrected Age Check for Social Posting)
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -14,8 +14,8 @@ import json
 import logging
 import glob
 import re
-import requests 
-import html 
+import requests
+import html
 from dotenv import load_dotenv
 from datetime import datetime, timezone, timedelta
 from urllib.parse import urljoin
@@ -31,18 +31,18 @@ except ImportError as e:
 # --- Import Agent and Scraper Functions ---
 try:
     from src.scrapers.news_scraper import (
-        scrape_news, load_processed_ids as load_scraper_processed_ids, 
+        scrape_news, load_processed_ids as load_scraper_processed_ids,
         save_processed_id as save_scraper_processed_id, get_article_id,
         NEWS_FEED_URLS
     )
     from src.scrapers.image_scraper import find_best_image, scrape_source_for_image
     from src.agents.filter_news_agent import run_filter_agent
-    from src.agents.keyword_research_agent import run_keyword_research_agent 
+    from src.agents.keyword_research_agent import run_keyword_research_agent
     from src.agents.seo_article_generator_agent import run_seo_article_agent
     from src.social.social_media_poster import (
         initialize_social_clients, run_social_media_poster,
-        load_post_history as load_social_post_history, 
-        mark_article_as_posted_in_history 
+        load_post_history as load_social_post_history,
+        mark_article_as_posted_in_history
     )
 except ImportError as e:
      print(f"FATAL IMPORT ERROR in main.py (agents/scrapers/social): {e}")
@@ -58,12 +58,10 @@ YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 raw_base_url = os.getenv('YOUR_SITE_BASE_URL', ''); YOUR_SITE_BASE_URL = (raw_base_url.rstrip('/') + '/') if raw_base_url else ''
 MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None)
 DAILY_TWEET_LIMIT = int(os.getenv('DAILY_TWEET_LIMIT', '3'))
-# How old an article from processed_json can be to be considered for social media posting
-MAX_AGE_FOR_SOCIAL_POST_HOURS = 24 
+MAX_AGE_FOR_SOCIAL_POST_HOURS = 24 # This is now correctly used
 
 
 # --- Setup Logging ---
-# ... (logging setup remains the same) ...
 log_file_path = os.path.join(PROJECT_ROOT_FOR_PATH, 'dacola.log')
 try:
     os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
@@ -71,7 +69,7 @@ try:
 except OSError as e: print(f"Log setup warning: {e}. Log console only."); log_handlers = [logging.StreamHandler(sys.stdout)]
 logging.basicConfig( level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', handlers=log_handlers, force=True )
 logger = logging.getLogger('main_orchestrator')
-if not YOUR_SITE_BASE_URL or YOUR_SITE_BASE_URL == '/': 
+if not YOUR_SITE_BASE_URL or YOUR_SITE_BASE_URL == '/':
     logger.error("CRITICAL: YOUR_SITE_BASE_URL is not set or is invalid ('/'). Canonical URLs and sitemap will be incorrect.")
 else:
     logger.info(f"Using site base URL: {YOUR_SITE_BASE_URL}")
@@ -79,20 +77,18 @@ if not YOUR_WEBSITE_LOGO_URL: logger.warning("YOUR_WEBSITE_LOGO_URL not set.")
 
 
 # --- Configuration ---
-# ... (other config remains the same) ...
 DATA_DIR_MAIN = os.path.join(PROJECT_ROOT_FOR_PATH, 'data')
 SCRAPED_ARTICLES_DIR = os.path.join(DATA_DIR_MAIN, 'scraped_articles')
-PROCESSED_JSON_DIR = os.path.join(DATA_DIR_MAIN, 'processed_json') 
+PROCESSED_JSON_DIR = os.path.join(DATA_DIR_MAIN, 'processed_json')
 PUBLIC_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'public')
 OUTPUT_HTML_DIR = os.path.join(PUBLIC_DIR, 'articles')
 TEMPLATE_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'templates')
 ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
-ARTICLE_MAX_AGE_DAYS = 30 
+ARTICLE_MAX_AGE_DAYS = 30 # For processing scraped articles, NOT for social media
 TWITTER_DAILY_LIMIT_FILE = os.path.join(DATA_DIR_MAIN, 'twitter_daily_limit.json')
 
 
 # --- Jinja2 Setup ---
-# ... (Jinja2 setup remains the same) ...
 try:
     from jinja2 import Environment, FileSystemLoader, select_autoescape
     def escapejs_filter(value):
@@ -107,8 +103,7 @@ try:
 except ImportError: logger.critical("Jinja2 library not found. Exiting."); sys.exit(1)
 except Exception as e: logger.exception(f"CRITICAL: Failed Jinja2 init. Exiting: {e}"); sys.exit(1)
 
-# --- Helper Functions ---
-# ... (ensure_directories, load_article_data, save_processed_data, remove_scraped_file, format_tags_html, get_sort_key, _read_tweet_tracker, _write_tweet_tracker, send_make_webhook, render_post_page, load_all_articles_data_from_json, update_all_articles_json_file remain the same)
+# --- Helper Functions (Assumed to be correct from previous state) ---
 def ensure_directories():
     dirs_to_create = [ DATA_DIR_MAIN, SCRAPED_ARTICLES_DIR, PROCESSED_JSON_DIR, PUBLIC_DIR, OUTPUT_HTML_DIR, TEMPLATE_DIR ]
     try:
@@ -223,7 +218,6 @@ def update_all_articles_json_file(new_article_summary_info):
 
 # --- Main Processing Function for Scraped Articles ---
 def process_single_scraped_article(raw_json_filepath, existing_articles_summary_data, processed_ids_this_run_set):
-    # ... (This function remains the same as your last correct version)
     article_filename = os.path.basename(raw_json_filepath)
     logger.info(f"--- Processing article file: {article_filename} ---")
     article_data_content = load_article_data(raw_json_filepath)
@@ -239,21 +233,21 @@ def process_single_scraped_article(raw_json_filepath, existing_articles_summary_
              logger.info(f"Article ID {article_unique_id} already fully processed (JSON exists). Skipping raw file."); remove_scraped_file(raw_json_filepath); return None
 
         publish_date_iso_str = article_data_content.get('published_iso')
-        if publish_date_iso_str: 
+        if publish_date_iso_str:
             publish_datetime_obj = get_sort_key(article_data_content)
             if publish_datetime_obj < (datetime.now(timezone.utc) - timedelta(days=ARTICLE_MAX_AGE_DAYS)):
                 logger.info(f"Scraped article {article_unique_id} too old ({publish_datetime_obj.date()}). Skipping."); remove_scraped_file(raw_json_filepath); return None
         else: logger.warning(f"Scraped article {article_unique_id} missing publish date. Proceeding with caution.")
 
         logger.info(f"Finding image for article ID: {article_unique_id} ('{article_data_content.get('title', '')[:30]}...')")
-        image_url = scrape_source_for_image(article_data_content.get('link')) or find_best_image(article_data_content.get('title', 'AI Technology News'), article_data_content.get('link'))
+        image_url = scrape_source_for_image(article_data_content.get('link')) or find_best_image(article_data_content.get('title', 'AI Technology News'), article_url_for_scrape=article_data_content.get('link'))
         if not image_url: logger.error(f"FATAL: No suitable image found for {article_unique_id}. Skipping."); remove_scraped_file(raw_json_filepath); return None
         article_data_content['selected_image_url'] = image_url
 
         current_title_lower_case = article_data_content.get('title', '').strip().lower()
         if not current_title_lower_case: logger.error(f"Article {article_unique_id} has empty title. Skipping."); remove_scraped_file(raw_json_filepath); return None
-        
-        combined_check_list = list(existing_articles_summary_data) + list(processed_ids_this_run_set) 
+
+        combined_check_list = list(existing_articles_summary_data) + list(processed_ids_this_run_set)
         for existing_article_summary in combined_check_list:
             if isinstance(existing_article_summary, dict) and existing_article_summary.get('title','').strip().lower() == current_title_lower_case and existing_article_summary.get('image_url') == image_url:
                 logger.warning(f"Article {article_unique_id} appears DUPLICATE (Title & Image) of {existing_article_summary.get('id', 'N/A')}. Skipping."); remove_scraped_file(raw_json_filepath); return None
@@ -271,15 +265,19 @@ def process_single_scraped_article(raw_json_filepath, existing_articles_summary_
         if article_data_content.get('keyword_agent_error'): logger.warning(f"Keyword Research issue for {article_unique_id}: {article_data_content['keyword_agent_error']}")
         current_researched_keywords = article_data_content.setdefault('researched_keywords', []);
         if not current_researched_keywords and article_data_content.get('primary_keyword'): current_researched_keywords.append(article_data_content['primary_keyword'])
-        article_data_content['generated_tags'] = list(set(kw for kw in current_researched_keywords if kw and len(kw.strip()) > 1))[:15]
-        if not article_data_content['generated_tags'] and article_data_content.get('primary_keyword'): article_data_content['generated_tags'] = [article_data_content['primary_keyword']]
+        final_tags = set(kw.strip() for kw in current_researched_keywords if kw and kw.strip())
+        if article_data_content.get('primary_keyword'): final_tags.add(article_data_content['primary_keyword'].strip())
+        article_data_content['generated_tags'] = list(final_tags)[:15]
         logger.info(f"Using {len(article_data_content['generated_tags'])} keywords as tags for {article_unique_id}.")
 
         article_data_content = run_seo_article_agent(article_data_content)
         seo_agent_results_data = article_data_content.get('seo_agent_results')
         if not seo_agent_results_data or not seo_agent_results_data.get('generated_article_body_md'): logger.error(f"SEO Agent failed for {article_unique_id}. Skip."); remove_scraped_file(raw_json_filepath); return None
         if article_data_content.get('seo_agent_error'): logger.warning(f"SEO Agent non-critical errors for {article_unique_id}: {article_data_content['seo_agent_error']}")
-        
+        if seo_agent_results_data.get('generated_seo_h1') and seo_agent_results_data['generated_seo_h1'] != article_data_content['title']:
+             article_data_content['title'] = seo_agent_results_data['generated_seo_h1']
+
+
         num_tags = len(article_data_content.get('generated_tags', [])); calculated_trend_score = 0.0
         if importance_level == "Interesting": calculated_trend_score += 5.0
         elif importance_level == "Breaking": calculated_trend_score += 10.0
@@ -344,26 +342,26 @@ if __name__ == "__main__":
     logger.info(f"Total initial IDs (from scraper history or already fully processed) passed to scraper: {len(initial_ids_for_scraper_run)}")
 
     logger.info("--- Stage 1: Checking for Missing HTML from Processed Data (Scraped & Gyro) ---")
-    all_processed_json_files = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json')) # Get list once
+    all_processed_json_files = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
     html_regenerated_count = 0
     if all_processed_json_files:
         logger.info(f"Found {len(all_processed_json_files)} processed JSON files to check for HTML regeneration.")
         for proc_json_filepath in all_processed_json_files:
             try:
                 article_data_content = load_article_data(proc_json_filepath)
-                if not article_data_content: 
+                if not article_data_content:
                     logger.warning(f"Skipping HTML regen for invalid/unreadable JSON: {os.path.basename(proc_json_filepath)}"); continue
-                
+
                 article_unique_id = article_data_content.get('id'); article_slug_str = article_data_content.get('slug')
                 if not article_unique_id or not article_slug_str: logger.warning(f"Skipping JSON missing id/slug for HTML regen: {os.path.basename(proc_json_filepath)}"); continue
-                
+
                 expected_html_file_path = os.path.join(OUTPUT_HTML_DIR, f"{article_slug_str}.html")
                 if not os.path.exists(expected_html_file_path):
                     logger.info(f"HTML missing for article ID {article_unique_id} (slug: {article_slug_str}). Regenerating...")
-                    seo_agent_results_data = article_data_content.get('seo_agent_results', {}); 
-                    if not isinstance(seo_agent_results_data, dict): # Robust check
+                    seo_agent_results_data = article_data_content.get('seo_agent_results', {});
+                    if not isinstance(seo_agent_results_data, dict):
                         logger.error(f"Article {article_unique_id} 'seo_agent_results' is not a dictionary (is {type(seo_agent_results_data)}). Using empty for regen.")
-                        seo_agent_results_data = {} 
+                        seo_agent_results_data = {}
 
                     article_body_md_content = seo_agent_results_data.get('generated_article_body_md', '')
                     article_body_html_output = markdown.markdown(article_body_md_content, extensions=['fenced_code', 'tables', 'nl2br'])
@@ -409,83 +407,85 @@ if __name__ == "__main__":
             successfully_processed_scraped_count += 1
             if "summary" in single_article_processing_result:
                 processed_articles_in_current_run_summaries.append(single_article_processing_result["summary"])
-                all_articles_summary_data_for_run.append(single_article_processing_result["summary"])
+                all_articles_summary_data_for_run.append(single_article_processing_result["summary"]) # Keep main list updated
             if "social_post_data" in single_article_processing_result:
                 social_media_payloads_for_posting_queue.append(single_article_processing_result["social_post_data"])
+                fully_processed_article_ids_set.add(single_article_processing_result["social_post_data"].get("id")) # Add to set to avoid reprocessing
         else:
             failed_or_skipped_scraped_count += 1
     logger.info(f"Scraped articles processing cycle complete. Success: {successfully_processed_scraped_count}, Failed/Skipped: {failed_or_skipped_scraped_count}")
 
-    logger.info("--- Stage 3.5: Queuing Unposted Processed Articles (Scraped & Gyro) for Social Media ---")
+    logger.info(f"--- Stage 3.5: Queuing Unposted Processed Articles (Last {MAX_AGE_FOR_SOCIAL_POST_HOURS}h) for Social Media ---")
     social_post_history_data = load_social_post_history()
     already_posted_social_ids = set(social_post_history_data.get('posted_articles', []))
-    
+
     unposted_existing_processed_added_to_queue = 0
     now_for_age_check = datetime.now(timezone.utc)
-    cutoff_time_for_social = now_for_age_check - timedelta(hours=MAX_AGE_FOR_SOCIAL_POST_HOURS)
+    cutoff_time_for_social = now_for_age_check - timedelta(hours=MAX_AGE_FOR_SOCIAL_POST_HOURS) # CORRECTED CUTOFF TIME
 
-    # Re-fetch the list of all processed JSON files to ensure it's current
     all_processed_json_files_for_social_check = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
     logger.info(f"Checking {len(all_processed_json_files_for_social_check)} total processed files for social media queue.")
 
-    for processed_json_file_path_check in all_processed_json_files_for_social_check: 
+    ids_already_in_current_scrape_queue = {p.get('id') for p in social_media_payloads_for_posting_queue if p.get('id')}
+
+    for processed_json_file_path_check in all_processed_json_files_for_social_check:
         article_id_from_filename = os.path.basename(processed_json_file_path_check).replace('.json', '')
-        
-        if any(payload.get('id') == article_id_from_filename for payload in social_media_payloads_for_posting_queue):
+
+        if article_id_from_filename in ids_already_in_current_scrape_queue:
             logger.debug(f"Article {article_id_from_filename} was from recent scrape; already in social queue.")
-            continue 
-
-        if article_id_from_filename not in already_posted_social_ids:
-            processed_article_full_data = load_article_data(processed_json_file_path_check)
-            
-            if not processed_article_full_data:
-                logger.warning(f"Could not load data from {processed_json_file_path_check} for social queue. Skipping.")
-                continue
-
-            # Check article age before adding to social queue
-            published_iso_for_social = processed_article_full_data.get('published_iso')
-            if not published_iso_for_social:
-                logger.warning(f"Processed article {article_id_from_filename} missing 'published_iso'. Cannot check age for social posting. Skipping.")
-                continue
-            
-            try:
-                article_publish_dt = get_sort_key(processed_article_full_data) # Use existing robust date parser
-                if article_publish_dt < cutoff_time_for_social:
-                    logger.debug(f"Processed article {article_id_from_filename} (published: {article_publish_dt}) is older than {MAX_AGE_FOR_SOCIAL_POST_HOURS} hours. Skipping social post.")
-                    # Mark as posted to avoid re-checking old articles constantly, even if not actually posted
-                    mark_article_as_posted_in_history(article_id_from_filename)
-                    continue
-            except Exception as date_e:
-                logger.warning(f"Error parsing date for {article_id_from_filename} for social age check: {date_e}. Skipping.")
-                continue
-            
-            logger.info(f"Article ID {article_id_from_filename} (from processed_json) not in social history and recent enough. Adding to queue.")
-            article_title_for_social = processed_article_full_data.get('title', 'Untitled')
-            article_slug_for_social = processed_article_full_data.get('slug')
-            if not article_slug_for_social:
-                logger.warning(f"Processed article {article_id_from_filename} missing slug. Cannot form URL for social. Skipping."); continue
-            
-            relative_link_for_social = f"articles/{article_slug_for_social}.html"
-            canonical_url_for_social = urljoin(YOUR_SITE_BASE_URL, relative_link_for_social.lstrip('/')) if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else f"/{relative_link_for_social.lstrip('/')}"
-            
-            seo_results_data_for_social = processed_article_full_data.get('seo_agent_results', {})
-            summary_short_for_social = ''
-            if isinstance(seo_results_data_for_social, dict):
-                summary_short_for_social = seo_results_data_for_social.get('generated_meta_description', '')
-            else: 
-                 logger.warning(f"Article {article_id_from_filename} 'seo_agent_results' is not a dict (is {type(seo_results_data_for_social)}). Meta description for social will be empty.")
-
-            payload = {
-                "id": article_id_from_filename, "title": article_title_for_social,
-                "article_url": canonical_url_for_social, "image_url": processed_article_full_data.get('selected_image_url'),
-                "topic": processed_article_full_data.get('topic'), "tags": processed_article_full_data.get('generated_tags', []),
-                "summary_short": summary_short_for_social
-            }
-            social_media_payloads_for_posting_queue.append(payload)
-            unposted_existing_processed_added_to_queue += 1
-        else:
+            continue
+        if article_id_from_filename in already_posted_social_ids:
             logger.debug(f"Article {article_id_from_filename} already in social post history. Skipping for queue.")
-            
+            continue
+
+        processed_article_full_data = load_article_data(processed_json_file_path_check)
+        if not processed_article_full_data:
+            logger.warning(f"Could not load data from {processed_json_file_path_check} for social queue. Skipping.")
+            continue
+
+        published_iso_for_social = processed_article_full_data.get('published_iso')
+        if not published_iso_for_social:
+            logger.warning(f"Processed article {article_id_from_filename} missing 'published_iso'. Cannot check age for social posting. Skipping.")
+            continue
+
+        try:
+            article_publish_dt = get_sort_key(processed_article_full_data)
+            # ************************************************************************* #
+            # *** THIS IS THE CORRECTED AGE CHECK USING MAX_AGE_FOR_SOCIAL_POST_HOURS *** #
+            # ************************************************************************* #
+            if article_publish_dt < cutoff_time_for_social:
+                logger.debug(f"Processed article {article_id_from_filename} (published: {article_publish_dt.date()}) is older than {MAX_AGE_FOR_SOCIAL_POST_HOURS} hours (cutoff: {cutoff_time_for_social.strftime('%Y-%m-%d %H:%M:%S %Z')}). Skipping social post.")
+                mark_article_as_posted_in_history(article_id_from_filename) # Mark old ones to avoid re-checking
+                continue
+        except Exception as date_e:
+            logger.warning(f"Error parsing date for {article_id_from_filename} for social age check: {date_e}. Skipping.")
+            continue
+
+        logger.info(f"Article ID {article_id_from_filename} (from processed_json) not in social history and IS recent enough. Adding to queue.")
+        article_title_for_social = processed_article_full_data.get('title', 'Untitled')
+        article_slug_for_social = processed_article_full_data.get('slug')
+        if not article_slug_for_social:
+            logger.warning(f"Processed article {article_id_from_filename} missing slug. Cannot form URL for social. Skipping."); continue
+
+        relative_link_for_social = f"articles/{article_slug_for_social}.html"
+        canonical_url_for_social = urljoin(YOUR_SITE_BASE_URL, relative_link_for_social.lstrip('/')) if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else f"/{relative_link_for_social.lstrip('/')}"
+
+        seo_results_data_for_social = processed_article_full_data.get('seo_agent_results', {})
+        summary_short_for_social = ''
+        if isinstance(seo_results_data_for_social, dict):
+            summary_short_for_social = seo_results_data_for_social.get('generated_meta_description', '')
+        else:
+             logger.warning(f"Article {article_id_from_filename} 'seo_agent_results' is not a dict. Meta description for social will be empty.")
+
+        payload = {
+            "id": article_id_from_filename, "title": article_title_for_social,
+            "article_url": canonical_url_for_social, "image_url": processed_article_full_data.get('selected_image_url'),
+            "topic": processed_article_full_data.get('topic'), "tags": processed_article_full_data.get('generated_tags', []),
+            "summary_short": summary_short_for_social
+        }
+        social_media_payloads_for_posting_queue.append(payload)
+        unposted_existing_processed_added_to_queue += 1
+
     if unposted_existing_processed_added_to_queue > 0:
         logger.info(f"Added {unposted_existing_processed_added_to_queue} recent, unposted items from processed_json to social media queue.")
 
@@ -499,41 +499,56 @@ if __name__ == "__main__":
     if social_media_payloads_for_posting_queue:
         logger.info(f"--- Stage 4: Attempting to post {len(social_media_payloads_for_posting_queue)} total articles to Social Media ---")
         final_make_webhook_payloads = []
-        # Sort payloads by published_iso date, newest first, to prioritize recent content for posting
-        social_media_payloads_for_posting_queue.sort(key=lambda p: get_sort_key(load_article_data(os.path.join(PROCESSED_JSON_DIR, f"{p.get('id')}.json")) or {}), reverse=True)
 
+        def get_publish_date_for_social_sort(payload):
+            article_id = payload.get('id')
+            if not article_id: return datetime(1970, 1, 1, tzinfo=timezone.utc)
+            filepath = os.path.join(PROCESSED_JSON_DIR, f"{article_id}.json")
+            data = load_article_data(filepath)
+            return get_sort_key(data or {})
 
+        social_media_payloads_for_posting_queue.sort(key=get_publish_date_for_social_sort, reverse=True)
+        logger.info("Social media queue sorted by publish date (newest first).")
+
+        articles_posted_this_run_count = 0
         for social_payload_item in social_media_payloads_for_posting_queue:
             article_id_for_social_post = social_payload_item.get('id')
-            # Re-check history just before posting, as it might have been updated by a concurrent process (less likely here)
             current_social_history = load_social_post_history()
             if article_id_for_social_post in current_social_history.get('posted_articles', []):
-                logger.info(f"Article {article_id_for_social_post} was already marked in social history just before posting its turn. Skipping.")
+                logger.info(f"Article {article_id_for_social_post} was already marked in social history just before its posting turn. Skipping.")
                 continue
 
             logger.info(f"Preparing to post article ID: {article_id_for_social_post} ('{social_payload_item.get('title', '')[:40]}...')")
             platforms_to_attempt_post = ["bluesky", "reddit"]
-            
+
             if social_media_clients_glob.get("twitter_client"):
                 if twitter_posts_made_today < DAILY_TWEET_LIMIT:
                     platforms_to_attempt_post.append("twitter")
                     logger.info(f"Article {article_id_for_social_post} WILL be attempted on Twitter. (Daily count: {twitter_posts_made_today}/{DAILY_TWEET_LIMIT})")
-                else: 
-                    logger.info(f"Daily Twitter limit ({DAILY_TWEET_LIMIT}) reached. Twitter SKIPPED for {article_id_for_social_post}")
-            
-            # run_social_media_poster is expected to call mark_article_as_posted_in_history internally
-            run_social_media_poster(social_payload_item, social_media_clients_glob, platforms_to_post=tuple(platforms_to_attempt_post))
-            
+                else:
+                    logger.info(f"Daily Twitter limit ({DAILY_TWEET_LIMIT}) reached. Twitter SKIPPED for article ID: {article_id_for_social_post}")
+
+            run_social_media_poster(
+                social_payload_item,
+                social_media_clients_glob,
+                platforms_to_post=tuple(platforms_to_attempt_post)
+            )
+            # mark_article_as_posted_in_history is now called *inside* run_social_media_poster
+            articles_posted_this_run_count +=1
+
             if "twitter" in platforms_to_attempt_post and social_media_clients_glob.get("twitter_client"):
-                twitter_posts_made_today += 1 
+                twitter_posts_made_today += 1
                 _write_tweet_tracker(current_run_date_str, twitter_posts_made_today)
                 logger.info(f"Twitter daily post count for {current_run_date_str} updated to: {twitter_posts_made_today} after attempt for {article_id_for_social_post}.")
-            
-            if MAKE_WEBHOOK_URL: final_make_webhook_payloads.append(social_payload_item)
-            
-            if len(social_media_payloads_for_posting_queue) > 1: # Only sleep if there are more articles to post
-                time.sleep(10) # Delay between posting different articles
 
+            if MAKE_WEBHOOK_URL: final_make_webhook_payloads.append(social_payload_item)
+
+            if articles_posted_this_run_count < len(social_media_payloads_for_posting_queue):
+                 post_delay_seconds = 10
+                 logger.debug(f"Sleeping for {post_delay_seconds} seconds before next social post...")
+                 time.sleep(post_delay_seconds)
+
+        logger.info(f"Social media posting cycle finished. Attempted to post {articles_posted_this_run_count} articles.")
         if MAKE_WEBHOOK_URL and final_make_webhook_payloads:
             logger.info(f"--- Sending {len(final_make_webhook_payloads)} items to Make.com Webhook ---")
             if send_make_webhook(MAKE_WEBHOOK_URL, final_make_webhook_payloads): logger.info("Batched Make.com webhook sent successfully.")

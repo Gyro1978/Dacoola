@@ -2,9 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dacoolaa.netlify.app/</loc>
-    <lastmod>2025-05-11</lastmod>
+    <lastmod>2025-05-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/perplexity-ai-voice-assistant-emerges-as-strong-contender-amid-siri-performance-.html</loc>
+    <lastmod>2025-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/greece-tech-economy-the-mediterraneans-rising-innovation-powerhouse.html</loc>
@@ -31,25 +37,25 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/openai-ceo-transition-instacart’s-fidji-simo-takes-key-leadership-role.html</loc>
+    <loc>https://dacoolaa.netlify.app/articles/openai-ceo-move-instacart’s-fidji-simo-takes-helm-as-ceo-for-applications.html</loc>
     <lastmod>2025-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/google-to-pay-texas-$14-billion-in-privacy-settlement.html</loc>
+    <loc>https://dacoolaa.netlify.app/articles/google-privacy-settlement-texas-secures-$1375-billion-over-unauthorized-tracking.html</loc>
     <lastmod>2025-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/openai-enterprise-adoption-grows-rapidly-while-competitors-struggle.html</loc>
+    <loc>https://dacoolaa.netlify.app/articles/openai-enterprise-adoption-skyrockets-as-competitors-lag-behind.html</loc>
     <lastmod>2025-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/whatsapp-spyware-lawsuit-5-major-takeaways-from-the-$167m-verdict.html</loc>
+    <loc>https://dacoolaa.netlify.app/articles/whatsapp-scores-$167m-victory-in-landmark-nso-group-spyware-lawsuit.html</loc>
     <lastmod>2025-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -79,7 +85,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/us-investment-review-scrutinizes-benchmarks-$75m-bet-on-chinese-ai-startup.html</loc>
+    <loc>https://dacoolaa.netlify.app/articles/us-investment-review-puts-benchmarks-$75m-manus-ai-deal-under-treasury-scrutiny.html</loc>
     <lastmod>2025-05-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -91,19 +97,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/google-gemini-updates-to-take-center-stage-at-io-2025.html</loc>
+    <loc>https://dacoolaa.netlify.app/articles/google-io-2025-major-gemini-updates-and-android-16-reveals-ahead.html</loc>
     <lastmod>2025-05-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/scale-ai-investigation-dropped-by-department-of-labor.html</loc>
+    <loc>https://dacoolaa.netlify.app/articles/scale-ai-investigation-dropped-as-dol-ends-flsa-compliance-probe.html</loc>
     <lastmod>2025-05-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/tesla-robotaxi-trademark-denied-by-us-patent-office.html</loc>
+    <loc>https://dacoolaa.netlify.app/articles/tesla-robotaxi-trademark-denied-as-aurora-co-founder-exits-amid-industry-shifts.html</loc>
     <lastmod>2025-05-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -127,7 +133,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/new-ai-translation-system-enables-multi-speaker-real-time-translation.html</loc>
+    <loc>https://dacoolaa.netlify.app/articles/spatial-speech-translation-ai-system-translates-multiple-voices-in-real-time.html</loc>
     <lastmod>2025-05-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1213,36 +1219,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/trump8217s-2026-nasa-budget-would-slash-iss-crew-and-allocate-more-money-for-elo.html</loc>
-    <lastmod>2025-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/the-fda-just-approved-the-first-crispr-edited-pigs-for-food.html</loc>
-    <lastmod>2025-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/google-is-going-to-let-kids-use-its-gemini-ai.html</loc>
-    <lastmod>2025-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/trump8217s-proposed-budget-deals-another-big-blow-to-science-clean-energy-and-th.html</loc>
-    <lastmod>2025-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/co-op-cyber-attack-affects-customer-data-firm-admits-after-hackers-contact-bbc.html</loc>
-    <lastmod>2025-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://dacoolaa.netlify.app/articles/aurora-launches-its-driverless-commercial-trucking-service-and-a-surprise-bidder.html</loc>
     <lastmod>2025-05-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -1303,12 +1279,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/want-better-ai-images-i-tried-midjourney-7-and-it-blew-me-away-heres-why.html</loc>
-    <lastmod>2025-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://dacoolaa.netlify.app/articles/apple-approves-spotify-app-update-that-allows-us-users-to-access-pricing-info-ex.html</loc>
     <lastmod>2025-05-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -1316,24 +1286,6 @@
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/tiny-“fans-on-chips”-could-cool-big-data-centers.html</loc>
-    <lastmod>2025-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/dozens-of-youtube-channels-are-showing-ai-generated-cartoon-gore-and-fetish-cont.html</loc>
-    <lastmod>2025-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/ready-for-ai-enhanced-credit-cards-heres-visas-vision-of-automated-shopping.html</loc>
-    <lastmod>2025-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/inside-the-battle-over-openais-corporate-restructuring.html</loc>
     <lastmod>2025-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1399,12 +1351,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/hidden-costs-in-ai-deployment-why-claude-models-may-be-20-30-more-expensive-than.html</loc>
-    <lastmod>2025-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://dacoolaa.netlify.app/articles/ai2s-new-small-ai-model-outperforms-similarly-sized-models-from-google-meta.html</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -1453,43 +1399,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/wandercraft-begins-clinical-trials-for-physical-ai-powered-personal-exoskeleton.html</loc>
-    <lastmod>2025-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/astronomers-93m-raise-underscores-a-new-reality-orchestration-is-king-in-ai-infr.html</loc>
-    <lastmod>2025-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/microsoft-launches-phi-4-reasoning-plus-a-small-powerful-open-weights-reasoning-.html</loc>
-    <lastmod>2025-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/salesforce-research-lays-the-foundations-for-more-reliable-enterprise-ai-agents.html</loc>
-    <lastmod>2025-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/salesforce-takes-aim-at-jagged-intelligence-in-push-for-more-reliable-ai.html</loc>
-    <lastmod>2025-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://dacoolaa.netlify.app/articles/meta-warns-of-'worse'-experience-for-european-users.html</loc>
-    <lastmod>2025-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/exclusive-danish-supercomputer-powers-ai-care-companion-for-hospitals.html</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1502,12 +1412,6 @@
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/tesla-leadership-denial-board-stands-firm-behind-elon-musk.html</loc>
-    <lastmod>2025-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/rag-can-make-ai-models-riskier-and-less-reliable-new-research-shows.html</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1663,12 +1567,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/openai-rolls-back-chatgpts-sycophancy-and-explains-what-went-wrong.html</loc>
-    <lastmod>2025-04-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://dacoolaa.netlify.app/articles/the-end-of-an-ai-that-shocked-the-world-openai-retires-gpt-4.html</loc>
     <lastmod>2025-04-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -1693,24 +1591,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/no-more-window-switching-mastercards-agent-pay-transforms-how-enterprises-use-ai.html</loc>
-    <lastmod>2025-04-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/meta-unleashes-llama-api-running-18x-faster-than-openai-cerebras-partnership-del.html</loc>
-    <lastmod>2025-04-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/metas-first-dedicated-ai-app-is-here-with-llama-4-but-its-more-consumer-than-pro.html</loc>
-    <lastmod>2025-04-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://dacoolaa.netlify.app/articles/whatsapp-is-walking-a-tightrope-between-ai-features-and-privacy.html</loc>
     <lastmod>2025-04-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -1723,19 +1603,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/xmems-extends-micro-cooling-fan-on-a-chip-tech-to-ai-data-centers.html</loc>
-    <lastmod>2025-04-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://dacoolaa.netlify.app/articles/ai-generated-code-could-be-a-disaster-for-the-software-supply-chain-heres-why.html</loc>
     <lastmod>2025-04-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/giant-radar-umbrella-launches-into-space-on-mission-to-transform-climate-science.html</loc>
+    <loc>https://dacoolaa.netlify.app/articles/ai-model-advancements-2025-hype-index-exposes-cyber-risks,-racing-robots-&amp;-break.html</loc>
+    <lastmod>2025-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/ai-societal-impact-princeton-researchers-urge-normalizing-ai-technology.html</loc>
     <lastmod>2025-04-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1765,18 +1645,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/beyond-a2a-and-mcp-how-lokas-universal-agent-identity-layer-changes-the-game.html</loc>
-    <lastmod>2025-04-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/30-seconds-vs-3-the-d1-reasoning-framework-thats-slashing-ai-response-times.html</loc>
-    <lastmod>2025-04-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://dacoolaa.netlify.app/articles/customize-amazon-nova-models-to-improve-tool-usage.html</loc>
     <lastmod>2025-04-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -1789,24 +1657,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dacoolaa.netlify.app/articles/how-agentic-ai-enables-the-next-leap-in-cybersecurity.html</loc>
-    <lastmod>2025-04-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/nvidia-brings-cybersecurity-to-every-ai-factory.html</loc>
-    <lastmod>2025-04-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/oracle-cloud-infrastructure-deploys-thousands-of-nvidia-blackwell-gpus-for-agent.html</loc>
-    <lastmod>2025-04-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://dacoolaa.netlify.app/articles/ios-and-android-juice-jacking-defenses-have-been-trivial-to-bypass-for-years.html</loc>
     <lastmod>2025-04-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -1814,12 +1664,6 @@
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/does-rag-make-llms-less-safe-bloomberg-research-reveals-hidden-dangers.html</loc>
-    <lastmod>2025-04-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/arx-robotics-rides-defence-tech-wave-with-31m-for-battlefield-robots.html</loc>
     <lastmod>2025-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1983,30 +1827,6 @@
   <url>
     <loc>https://dacoolaa.netlify.app/articles/singapore-develops-asias-first-ai-based-mobile-app-for-shark-and-ray-fin-identif.html</loc>
     <lastmod>2022-06-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/next-generation-architectures-bridge-gap-between-neural-and-symbolic-representat.html</loc>
-    <lastmod>2019-12-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/project-petridish-efficient-forward-neural-architecture-search.html</loc>
-    <lastmod>2019-12-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/introducing-mass-a-pre-training-method-that-outperforms-bert-and-gpt-in-sequence.html</loc>
-    <lastmod>2019-06-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/autonomous-soaring-ai-on-the-fly.html</loc>
-    <lastmod>2019-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
