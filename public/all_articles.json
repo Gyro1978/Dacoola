@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "b3b4d234a6c9a4b48839ba63b4127b04c420b1284d5e6cddb947a5f5ba4c5e97",
+      "title": "Police AI Tool Circumvents Facial Recognition Bans With New Surveillance Methods",
+      "link": "articles/police-ai-tool-circumvents-facial-recognition-bans-with-new-surveillance-methods.html",
+      "published_iso": "2025-05-13T09:00:00Z",
+      "summary_short": "A new AI surveillance circumvention tool tracks individuals via body attributes, bypassing facial recognition bans. ACLU warns of potential abuse.",
+      "image_url": "https://wp.technologyreview.com/wp-content/uploads/2025/05/face-recognition.jpg?resize=1200,600",
+      "topic": "Regulation",
+      "is_breaking": false,
+      "tags": [
+        "AI tool for police surveillance",
+        "AI surveillance circumvention",
+        "federal agencies AI monitoring",
+        "body size gender tracking AI",
+        "tracking protesters with AI",
+        "new AI methods for law enforcement",
+        "ACLU on AI surveillance",
+        "AI surveillance potential abuse",
+        "facial recognition bans",
+        "police AI tracking tool",
+        "police use of AI for reports",
+        "MIT Technology Review police AI"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "9609dc71fb3f5f7c97a8a5075974aa371e0ff231527256cb7136a06b5eefda07",
       "title": "Ray-Ban Smart Glasses Launch in India: AI-Powered Features at ₹29,990",
       "link": "articles/ray-ban-smart-glasses-launch-in-india-ai-powered-features-at-₹29,990.html",
