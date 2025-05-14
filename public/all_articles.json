@@ -1,7 +1,6 @@
-{
+    {
   "articles": [
     {
-<<<<<<< HEAD
       "id": "gyro-20250514041949-a4359d68",
       "title": "Vectara Unveils AI Hallucination Corrector to Boost Enterprise AI Reliability",
       "link": "articles/vectara-unveils-ai-hallucination-corrector-to-boost-enterprise-ai-reliability.html",
@@ -81,7 +80,8 @@
       ],
       "audio_url": null,
       "trend_score": 8.6
-=======
+    },
+    {
       "id": "3f18465344eb79824ab02f6c0e03675fc81f485a72e0ae11709e997cc6d67dca",
       "title": "Google Search AI Mode Replaces 'I'm Feeling Lucky' in Major Homepage Redesign",
       "link": "articles/google-search-ai-mode-replaces-im-feeling-lucky-in-major-homepage-redesign.html",
@@ -1042,7 +1042,6 @@
       ],
       "audio_url": null,
       "trend_score": 16.0
->>>>>>> 581fd94dd712e80cce60c3ee55ea429bcb9c46cb
     },
     {
       "id": "f7fb5b88db88f2e3385b1da09df3d0bbe7da7b80400515996d91b3f3d4bb8ed0",
