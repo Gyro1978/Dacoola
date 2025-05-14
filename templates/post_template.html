@@ -125,7 +125,6 @@
                             </span>
                             {% endif %}
                         </div>
-                        <!-- Any other meta items can go here, e.g., reading time if you calculate it -->
                     </div>
                 </header>
 
@@ -152,34 +151,32 @@
                 {% endif %}
 
                 <section id="article-body">
-                    {# Logic to insert ad before FAQ if FAQ exists #}
                     {% set body_html_content = ARTICLE_BODY_HTML | safe %}
-                    {% set faq_marker = '#### Frequently Asked Questions' %} {# This is the H4 title of FAQ in Markdown before conversion #}
-                    {# A more robust way would be to check for the specific HTML class/id of the FAQ section #}
-                    {% set faq_html_marker = '<div class="faq-section">' %}
+                    {# Attempt to find the FAQ H4 title. Adjust marker if Markdown output for H4 is different. #}
+                    {% set faq_h4_title_marker_exact = '<h4>Frequently Asked Questions</h4>' %}
+                    {% set faq_h4_title_marker_class = '<h4 class="faq-title-heading">Frequently Asked Questions</h4>' %} {# If class is applied by MD #}
 
+                    {% set faq_found = false %}
+                    {% set processed_body_html = '' %}
 
-                    {% if faq_html_marker in body_html_content %}
-                        {% set parts = body_html_content.split(faq_html_marker, 1) %}
-                        {{ parts[0] }} {# Content before FAQ #}
-                        <!-- Ad Slot 2: Wide ad above FAQ section -->
-                        <section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 25px; margin-bottom: 25px;">
-                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
-                                 crossorigin="anonymous"></script>
-                            <!-- wide ad -->
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-client="ca-pub-8839663991354998"
-                                 data-ad-slot="1948351346" 
-                                 data-ad-format="auto"
-                                 data-full-width-responsive="true"></ins>
-                            <script>
-                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
-                        </section>
-                        {{ faq_html_marker ~ parts[1] }} {# FAQ section itself and rest of content #}
+                    {% if faq_h4_title_marker_class in body_html_content %}
+                        {% set parts = body_html_content.split(faq_h4_title_marker_class, 1) %}
+                        {% set processed_body_html = parts[0] %}
+                        {% set processed_body_html = processed_body_html ~ '<section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 25px; margin-bottom: 15px;"><!-- wide ad above FAQ title --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></section>' %}
+                        {% set processed_body_html = processed_body_html ~ faq_h4_title_marker_class ~ parts[1] %}
+                        {% set faq_found = true %}
+                    {% elif faq_h4_title_marker_exact in body_html_content %}
+                        {% set parts = body_html_content.split(faq_h4_title_marker_exact, 1) %}
+                        {% set processed_body_html = parts[0] %}
+                        {% set processed_body_html = processed_body_html ~ '<section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 25px; margin-bottom: 15px;"><!-- wide ad above FAQ title --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></section>' %}
+                        {% set processed_body_html = processed_body_html ~ faq_h4_title_marker_exact ~ parts[1] %}
+                        {% set faq_found = true %}
+                    {% endif %}
+
+                    {% if faq_found %}
+                        {{ processed_body_html | safe }}
                     {% else %}
-                        {{ body_html_content }} {# Full body if no FAQ #}
+                        {{ body_html_content | safe }} {# Full body if no FAQ H4 title marker found #}
                     {% endif %}
                 </section>
 
@@ -218,15 +215,10 @@
 
     </div> <!-- End site-content-wrapper -->
 
-    <!-- GLOBAL FIXED BROWSER TTS PLAYER BUTTON -->
-    {% if synth_available_check_in_js_or_always_show %} {# Logic to show this button might depend on JS detection or always be present #}
     <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
         <i class="fas fa-headphones" aria-hidden="true"></i>
     </button>
-    {% endif %}
-    {# <audio id="global-audio-player" preload="none" style="display:none;"></audio> #}
 
-    <script src="../js/script.js"></script> <!-- Relative path from articles/ to public/js/ -->
-
+    <script src="../js/script.js"></script> 
 </body>
 </html>
