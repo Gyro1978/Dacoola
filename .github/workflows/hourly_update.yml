@@ -87,6 +87,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
           git add public/sitemap.xml || echo "Sitemap not found or no changes."
+          git add public/ads.txt || echo "ads.txt not found or no changes." # Added this line
           git add public/ 
           git add dacola.log || echo "Log file not found or no changes."
           git add data/processed_article_ids.txt || echo "Processed IDs file not found or no changes."

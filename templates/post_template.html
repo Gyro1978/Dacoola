@@ -82,6 +82,8 @@
       gtag('js', new Date());
       gtag('config', 'G-WGJ5MFBC6X');
     </script>
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -127,6 +129,22 @@
                     </div>
                 </header>
 
+                <!-- Ad Slot 1: Wide ad under meta and above image -->
+                <section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 15px; margin-bottom: 20px;">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
+                         crossorigin="anonymous"></script>
+                    <!-- wide ad -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8839663991354998"
+                         data-ad-slot="1948351346"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </section>
+
                 {% if IMAGE_URL %}
                 <figure class="article-image-container">
                     <img id="article-image" src="{{ IMAGE_URL }}" alt="{{ IMAGE_ALT_TEXT | default(ARTICLE_HEADLINE) }}">
@@ -134,7 +152,35 @@
                 {% endif %}
 
                 <section id="article-body">
-                    {{ ARTICLE_BODY_HTML | safe }}
+                    {# Logic to insert ad before FAQ if FAQ exists #}
+                    {% set body_html_content = ARTICLE_BODY_HTML | safe %}
+                    {% set faq_marker = '#### Frequently Asked Questions' %} {# This is the H4 title of FAQ in Markdown before conversion #}
+                    {# A more robust way would be to check for the specific HTML class/id of the FAQ section #}
+                    {% set faq_html_marker = '<div class="faq-section">' %}
+
+
+                    {% if faq_html_marker in body_html_content %}
+                        {% set parts = body_html_content.split(faq_html_marker, 1) %}
+                        {{ parts[0] }} {# Content before FAQ #}
+                        <!-- Ad Slot 2: Wide ad above FAQ section -->
+                        <section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 25px; margin-bottom: 25px;">
+                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
+                                 crossorigin="anonymous"></script>
+                            <!-- wide ad -->
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-8839663991354998"
+                                 data-ad-slot="1948351346" 
+                                 data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </section>
+                        {{ faq_html_marker ~ parts[1] }} {# FAQ section itself and rest of content #}
+                    {% else %}
+                        {{ body_html_content }} {# Full body if no FAQ #}
+                    {% endif %}
                 </section>
 
                 {% if ARTICLE_TAGS_HTML %}
@@ -144,7 +190,6 @@
                     </div>
                 </footer>
                 {% endif %}
-
             </article>
 
             <aside class="sidebar latest-news">
@@ -156,6 +201,21 @@
             </aside>
 
         </div> <!-- End main-content-grid -->
+
+        <!-- Ad Slot 3: Grid suggestions ad UNDER the main-content-grid (outside article container) -->
+        <section class="ad-slot-container article-bottom-ad-slot" style="text-align: center; margin-top: 30px; margin-bottom: 20px; max-width: 1500px; margin-left: auto; margin-right: auto; padding: 0 15px;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
+                 crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-format="autorelaxed"
+                 data-ad-client="ca-pub-8839663991354998"
+                 data-ad-slot="6562367864"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
+
     </div> <!-- End site-content-wrapper -->
 
     <!-- GLOBAL FIXED BROWSER TTS PLAYER BUTTON -->

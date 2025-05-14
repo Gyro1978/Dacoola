@@ -20,12 +20,28 @@
       gtag('js', new Date());
       gtag('config', 'G-WGJ5MFBC6X');
     </script>
+     <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998" crossorigin="anonymous"></script>
 </head>
 <body class="page-404">
 
     <header id="navbar-placeholder">
         <!-- Navbar loaded by JS -->
     </header>
+    
+     <!-- Ad Slot 1: Grid suggestions under navbar, above 404 content -->
+     <div class="ad-slot-container page-top-ad" style="text-align: center; margin-top: 20px; margin-bottom: 20px; padding: 0 15px;">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
+             crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-format="autorelaxed"
+             data-ad-client="ca-pub-8839663991354998"
+             data-ad-slot="6562367864"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
     <!-- Snow Container -->
     <div class="snow" id="snow-container">
@@ -47,15 +63,29 @@
                 <h2>Maybe you'll find this interesting?</h2>
                 <a href="/latest.html" class="view-all-button">View All News →</a>
             </div>
-            <div id="page-content-area" class="latest-news-grid">
+             <div id="page-content-area" class="latest-news-grid">
                 <p class="placeholder">Loading latest news...</p>
             </div>
         </section>
+         <!-- Ad Slot 2: Grid suggestions At Bottom, after "Interesting" section -->
+         <section class="ad-slot-container page-bottom-ad" style="text-align: center; margin-top: 30px; margin-bottom: 20px; max-width: 1200px; width: 95%;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
+                 crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-format="autorelaxed"
+                 data-ad-client="ca-pub-8839663991354998"
+                 data-ad-slot="6562367864"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
     </main>
+
 
     <!-- JavaScript -->
     <script src="/js/script.js"></script> <!-- Use root path for JS -->
-    <script>
+     <script>
         // Snowflakes JS
         function createSnowflakes(containerId, count) {
             const container = document.getElementById(containerId);
@@ -71,7 +101,7 @@
             }
         }
         document.addEventListener('DOMContentLoaded', () => {
-            createSnowflakes('snow-container', 100); // Adjust count as needed
+             createSnowflakes('snow-container', 100); // Adjust count as needed
             // script.js will handle loading navbar and latest news via initializePageContent
         });
     </script>

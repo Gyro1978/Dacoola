@@ -1,5 +1,32 @@
-    {
+{
   "articles": [
+    {
+      "id": "gyro-20250514045825-fc32d742",
+      "title": "Scientists Announce Breakthrough in Race to Cure Men's Baldness",
+      "link": "articles/scientists-announce-breakthrough-in-race-to-cure-mens-baldness.html",
+      "published_iso": "2025-05-14T04:58:25Z",
+      "summary_short": "Scientists reveal a groundbreaking advancement in the race to cure men's baldness, offering new hope for hair regrowth treatments.",
+      "image_url": "https://www.mensjournal.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_620/MjE0MjcxNDgxNjk2MjMyNDcx/alopecia.webp",
+      "topic": "Other",
+      "is_breaking": false,
+      "is_trending_pick": true,
+      "tags": [
+        "placeholder content",
+        "men's baldness cure breakthrough",
+        "scientists announce baldness cure",
+        "latest research on men's hair loss",
+        "breakthrough in treating male pattern baldness",
+        "new treatment for baldness in men",
+        "men's grooming hair loss solutions",
+        "scientific advancements in baldness cure",
+        "how to cure baldness latest research",
+        "male pattern baldness new findings",
+        "hair regrowth treatments for men",
+        "baldness cure research update"
+      ],
+      "audio_url": null,
+      "trend_score": 15.6
+    },
     {
       "id": "gyro-20250514041949-a4359d68",
       "title": "Vectara Unveils AI Hallucination Corrector to Boost Enterprise AI Reliability",

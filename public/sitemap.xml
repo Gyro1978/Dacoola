@@ -7,32 +7,42 @@
     <priority>1.0</priority>
   </url>
   <url>
-<<<<<<< HEAD
+    <loc>https://dacoolaa.netlify.app/articles/scientists-announce-breakthrough-in-race-to-cure-mens-baldness.html</loc>
+    <lastmod>2025-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://dacoolaa.netlify.app/articles/vectara-unveils-ai-hallucination-corrector-to-boost-enterprise-ai-reliability.html</loc>
     <lastmod>2025-05-14</lastmod>
-=======
-    <loc>https://dacoolaa.netlify.app/articles/google-search-ai-mode-replaces-im-feeling-lucky-in-major-homepage-redesign.html</loc>
-    <lastmod>2025-05-13</lastmod>
->>>>>>> 581fd94dd712e80cce60c3ee55ea429bcb9c46cb
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-<<<<<<< HEAD
     <loc>https://dacoolaa.netlify.app/articles/tiktok-ai-alive-new-feature-update-transforms-photos-into-cinematic-stories.html</loc>
     <lastmod>2025-05-14</lastmod>
-=======
-    <loc>https://dacoolaa.netlify.app/articles/notion-integrates-llms-with-gpt-41-and-claude-37-for-next-level-productivity.html</loc>
-    <lastmod>2025-05-13</lastmod>
->>>>>>> 581fd94dd712e80cce60c3ee55ea429bcb9c46cb
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-<<<<<<< HEAD
     <loc>https://dacoolaa.netlify.app/articles/airbnb-expands-beyond-stays-with-new-services-and-experiences-feature.html</loc>
     <lastmod>2025-05-14</lastmod>
-=======
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/google-search-ai-mode-replaces-im-feeling-lucky-in-major-homepage-redesign.html</loc>
+    <lastmod>2025-05-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/notion-integrates-llms-with-gpt-41-and-claude-37-for-next-level-productivity.html</loc>
+    <lastmod>2025-05-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://dacoolaa.netlify.app/articles/genai-attack-chains-ai-powered-solutions-to-combat-cybersecurity-burnout.html</loc>
     <lastmod>2025-05-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -239,7 +249,6 @@
   <url>
     <loc>https://dacoolaa.netlify.app/articles/ray-ban-smart-glasses-launch-in-india-ai-powered-features-at-₹29,990.html</loc>
     <lastmod>2025-05-13</lastmod>
->>>>>>> 581fd94dd712e80cce60c3ee55ea429bcb9c46cb
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
