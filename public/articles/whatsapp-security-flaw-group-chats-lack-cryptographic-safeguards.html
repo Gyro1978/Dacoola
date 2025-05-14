@@ -1,3 +1,4 @@
+<!-- templates/post_template.html (1/1) - COMPLETE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
     <title>WhatsApp Security Flaw Exposes Group Chat Vulnerabilities - Dacoola</title>
     <meta name="description" content="A critical WhatsApp security flaw allows unauthorized group additions, compromising encrypted chats. Learn how this impacts user privacy.">
     <meta name="author" content="AI News Team">
-    <meta name="keywords" content="WhatsApp security flaw, WhatsApp group chat vulnerability, end-to-end encryption, cryptographic safeguards, Signal vs WhatsApp security, Meta server-side controls, unauthorized group additions, privacy risks in messaging, King’s College London research, messaging app security">
+    
 
     <!-- *** CANONICAL URL *** -->
     <link rel="canonical" href="https://dacoolaa.netlify.app/articles/whatsapp-security-flaw-group-chats-lack-cryptographic-safeguards.html">
@@ -61,16 +62,16 @@
     <meta name="twitter:image" content="https://cdn.arstechnica.net/wp-content/uploads/2021/05/Whatsapp-1152x648.jpg">
 
     <!-- *** Stylesheets & Icons *** -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Relative path from articles/ to public/css/ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> 
 
     <!-- *** JSON-LD Structured Data *** -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "WhatsApp Security Flaw Exposes Group Chat Vulnerabilities",
+      "headline": "WhatsApp Security Flaw: Group Chats Lack Cryptographic Safeguards",
       "description": "A critical WhatsApp security flaw allows unauthorized group additions, compromising encrypted chats. Learn how this impacts user privacy.",
       "keywords": ["WhatsApp security flaw", "WhatsApp group chat vulnerability", "end-to-end encryption", "cryptographic safeguards", "Signal vs WhatsApp security", "Meta server-side controls", "unauthorized group additions", "privacy risks in messaging", "King\u2019s College London research", "messaging app security"],
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://dacoolaa.netlify.app/articles/whatsapp-security-flaw-group-chats-lack-cryptographic-safeguards.html" },
@@ -99,6 +100,8 @@
       gtag('js', new Date());
       gtag('config', 'G-WGJ5MFBC6X');
     </script>
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -117,7 +120,7 @@
             <aside class="sidebar related-news">
                 <h2>Related News</h2>
                 <div id="related-news-content">
-                    <!-- JS will populate this list -->
+                    <p class="placeholder">Loading related news...</p>
                 </div>
             </aside>
 
@@ -133,16 +136,45 @@
                         <div class="article-meta">
                             Published on <span id="publish-date">May 07, 2025</span>
                             by <span id="author-name">AI News Team</span>
+                            
+                            <span class="article-source-inline">
+                                  |   <a href="https://arstechnica.com/security/2025/05/whatsapp-provides-no-cryptographic-management-for-group-messages/" target="_blank" rel="noopener noreferrer" class="article-source-inline-link" title="View original source article">View Original Source</a>
+                            </span>
+                            
                         </div>
                     </div>
                 </header>
 
+                <section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 15px; margin-bottom: 20px;">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
+                         crossorigin="anonymous"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8839663991354998"
+                         data-ad-slot="1948351346"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </section>
+
+                
                 <figure class="article-image-container">
-                    <img id="article-image" src="https://cdn.arstechnica.net/wp-content/uploads/2021/05/Whatsapp-1152x648.jpg" alt="WhatsApp Security Flaw Exposes Group Chat Vulnerabilities">
+                    <img id="article-image" src="https://cdn.arstechnica.net/wp-content/uploads/2021/05/Whatsapp-1152x648.jpg" alt="WhatsApp Security Flaw: Group Chats Lack Cryptographic Safeguards">
                 </figure>
+                
 
                 <section id="article-body">
-                    <h2>WhatsApp Security Flaw: Group Chats Lack Cryptographic Safeguards</h2>
+                     
+                    
+                    
+                    
+                    
+
+                    
+                        
+                        <h2>WhatsApp Security Flaw: Group Chats Lack Cryptographic Safeguards</h2>
 <p>A recent study reveals a critical <strong>WhatsApp security flaw</strong> in its group messaging system. Despite its end-to-end encryption, WhatsApp lacks cryptographic controls for group management, meaning servers can silently add new members without user consent. Researchers from King’s College London confirmed this vulnerability, highlighting that while official clients display new additions, they cannot prevent them—potentially exposing private conversations to unauthorized parties.  </p>
 <h3>Unpacking the WhatsApp Group Chat Vulnerability</h3>
 <p>The research team reverse-engineered WhatsApp’s protocols and found that its encryption works as advertised for one-on-one chats. However, <strong>group chats lack cryptographic verification</strong> for member additions. Unlike Signal, which enforces strict cryptographic group management, WhatsApp relies on server-side controls, creating a loophole for malicious actors or platform operators to infiltrate private discussions.  </p>
@@ -170,7 +202,12 @@
   </div>  
 </div>
 
-<h4>Frequently Asked Questions</h4>
+
+                        
+                        <section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 25px; margin-bottom: 15px;"><!-- wide ad above FAQ title --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></section>
+                    
+                        <h4>Frequently Asked Questions</h4>
+                        
 <div class="faq-section">  
   <details class="faq-item">  
     <summary class="faq-question">Does WhatsApp’s end-to-end encryption protect group chats?</summary>  
@@ -188,32 +225,42 @@
                     
                 </section>
 
+                
                 <footer>
-                    
                     <div class="tags">
                         Tags: <span id="article-tags"><a href="https://dacoolaa.netlify.app/topic.html?name=WhatsApp%20security%20flaw" class="tag-link">WhatsApp security flaw</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=WhatsApp%20group%20chat%20vulnerability" class="tag-link">WhatsApp group chat vulnerability</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=end-to-end%20encryption" class="tag-link">end-to-end encryption</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=cryptographic%20safeguards" class="tag-link">cryptographic safeguards</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Signal%20vs%20WhatsApp%20security" class="tag-link">Signal vs WhatsApp security</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Meta%20server-side%20controls" class="tag-link">Meta server-side controls</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=unauthorized%20group%20additions" class="tag-link">unauthorized group additions</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=privacy%20risks%20in%20messaging" class="tag-link">privacy risks in messaging</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=King%E2%80%99s%20College%20London%20research" class="tag-link">King’s College London research</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=messaging%20app%20security" class="tag-link">messaging app security</a></span>
                     </div>
                 </footer>
-
+                
             </article>
 
             <aside class="sidebar latest-news">
                 <h2>Latest News</h2>
                 <div id="latest-news-content">
-                    <!-- JS will populate this list -->
+                    <p class="placeholder">Loading latest news...</p>
                 </div>
             </aside>
 
-        </div> <!-- End main-content-grid -->
-    </div> <!-- End site-content-wrapper -->
+        </div>
 
-    <!-- GLOBAL FIXED BROWSER TTS PLAYER BUTTON -->
+        <section class="ad-slot-container article-bottom-ad-slot" style="text-align: center; margin-top: 30px; margin-bottom: 20px; max-width: 1500px; margin-left: auto; margin-right: auto; padding: 0 15px;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
+                 crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-format="autorelaxed"
+                 data-ad-client="ca-pub-8839663991354998"
+                 data-ad-slot="6562367864"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
+    </div>
+
     <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
         <i class="fas fa-headphones" aria-hidden="true"></i>
     </button>
-    
 
-    <script src="../js/script.js"></script>
-
+    <script src="../js/script.js"></script> 
 </body>
 </html>
