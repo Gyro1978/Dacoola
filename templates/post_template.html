@@ -102,7 +102,6 @@
             <aside class="sidebar related-news">
                 <h2>Related News</h2>
                 <div id="related-news-content">
-                    <!-- JS will populate this list with article cards -->
                     <p class="placeholder">Loading related news...</p>
                 </div>
             </aside>
@@ -128,11 +127,9 @@
                     </div>
                 </header>
 
-                <!-- Ad Slot 1: Wide ad under meta and above image -->
                 <section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 15px; margin-bottom: 20px;">
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
                          crossorigin="anonymous"></script>
-                    <!-- wide ad -->
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-8839663991354998"
@@ -151,32 +148,28 @@
                 {% endif %}
 
                 <section id="article-body">
-                    {% set body_html_content = ARTICLE_BODY_HTML | safe %}
-                    {# Attempt to find the FAQ H4 title. Adjust marker if Markdown output for H4 is different. #}
+                    {% set body_html_content = ARTICLE_BODY_HTML %} {# Raw HTML from Markdown conversion #}
+                    {% set faq_h4_title_marker_class = '<h4 class="faq-title-heading">Frequently Asked Questions</h4>' %}
                     {% set faq_h4_title_marker_exact = '<h4>Frequently Asked Questions</h4>' %}
-                    {% set faq_h4_title_marker_class = '<h4 class="faq-title-heading">Frequently Asked Questions</h4>' %} {# If class is applied by MD #}
-
-                    {% set faq_found = false %}
-                    {% set processed_body_html = '' %}
+                    
+                    {% set ad_slot_html %}
+                        <section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 25px; margin-bottom: 15px;"><!-- wide ad above FAQ title --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></section>
+                    {% endset %}
 
                     {% if faq_h4_title_marker_class in body_html_content %}
                         {% set parts = body_html_content.split(faq_h4_title_marker_class, 1) %}
-                        {% set processed_body_html = parts[0] %}
-                        {% set processed_body_html = processed_body_html ~ '<section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 25px; margin-bottom: 15px;"><!-- wide ad above FAQ title --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></section>' %}
-                        {% set processed_body_html = processed_body_html ~ faq_h4_title_marker_class ~ parts[1] %}
-                        {% set faq_found = true %}
+                        {{ parts[0] | safe }}
+                        {{ ad_slot_html | safe }}
+                        {{ faq_h4_title_marker_class | safe }}
+                        {{ parts[1] | safe }}
                     {% elif faq_h4_title_marker_exact in body_html_content %}
                         {% set parts = body_html_content.split(faq_h4_title_marker_exact, 1) %}
-                        {% set processed_body_html = parts[0] %}
-                        {% set processed_body_html = processed_body_html ~ '<section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 25px; margin-bottom: 15px;"><!-- wide ad above FAQ title --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></section>' %}
-                        {% set processed_body_html = processed_body_html ~ faq_h4_title_marker_exact ~ parts[1] %}
-                        {% set faq_found = true %}
-                    {% endif %}
-
-                    {% if faq_found %}
-                        {{ processed_body_html | safe }}
+                        {{ parts[0] | safe }}
+                        {{ ad_slot_html | safe }}
+                        {{ faq_h4_title_marker_exact | safe }}
+                        {{ parts[1] | safe }}
                     {% else %}
-                        {{ body_html_content | safe }} {# Full body if no FAQ H4 title marker found #}
+                        {{ body_html_content | safe }}
                     {% endif %}
                 </section>
 
@@ -192,14 +185,12 @@
             <aside class="sidebar latest-news">
                 <h2>Latest News</h2>
                 <div id="latest-news-content">
-                    <!-- JS will populate this list with article cards -->
                     <p class="placeholder">Loading latest news...</p>
                 </div>
             </aside>
 
-        </div> <!-- End main-content-grid -->
+        </div>
 
-        <!-- Ad Slot 3: Grid suggestions ad UNDER the main-content-grid (outside article container) -->
         <section class="ad-slot-container article-bottom-ad-slot" style="text-align: center; margin-top: 30px; margin-bottom: 20px; max-width: 1500px; margin-left: auto; margin-right: auto; padding: 0 15px;">
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
                  crossorigin="anonymous"></script>
@@ -212,8 +203,7 @@
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </section>
-
-    </div> <!-- End site-content-wrapper -->
+    </div>
 
     <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
         <i class="fas fa-headphones" aria-hidden="true"></i>
