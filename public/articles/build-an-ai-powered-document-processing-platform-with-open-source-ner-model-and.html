@@ -15,7 +15,7 @@
 
     <!-- *** CORE SEO & Page Info *** -->
     <title>AI Document Processing with Open Source NER &amp; LLM on SageMaker - Dacoola</title>
-    <meta name="description" content="Learn how to build an AI document processing platform using open-source NER models and LLMs on Amazon SageMaker for efficient archival data management.">
+    <meta name="description" content="Learn how AI document processing using open-source NER and LLMs on Amazon SageMaker improves archival data accessibility and efficiency.">
     <meta name="author" content="AI News Team">
     
 
@@ -24,7 +24,7 @@
 
     <!-- *** OPEN GRAPH *** -->
     <meta property="og:title" content="AI Document Processing with Open Source NER &amp; LLM on SageMaker">
-    <meta property="og:description" content="Learn how to build an AI document processing platform using open-source NER models and LLMs on Amazon SageMaker for efficient archival data management.">
+    <meta property="og:description" content="Learn how AI document processing using open-source NER and LLMs on Amazon SageMaker improves archival data accessibility and efficiency.">
     <meta property="og:image" content="https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/document-processing-sagemaker-1120x630.jpg">
     <meta property="og:url" content="https://dacoolaa.netlify.app/articles/build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-.html">
     <meta property="og:type" content="article">
@@ -38,19 +38,19 @@
     
     <meta property="article:tag" content="Amazon SageMaker">
     
-    <meta property="article:tag" content="Named Entity Recognition">
+    <meta property="article:tag" content="NER model">
     
-    <meta property="article:tag" content="Large Language Models">
+    <meta property="article:tag" content="LLM">
+    
+    <meta property="article:tag" content="BERT-based NER">
     
     <meta property="article:tag" content="Mixtral-8x7B">
     
-    <meta property="article:tag" content="BERT NER model">
-    
-    <meta property="article:tag" content="AWS Step Functions">
-    
-    <meta property="article:tag" content="metadata enrichment">
-    
     <meta property="article:tag" content="serverless architecture">
+    
+    <meta property="article:tag" content="metadata extraction">
+    
+    <meta property="article:tag" content="abstractive summarization">
     
     <meta property="article:tag" content="digital transformation">
     
@@ -58,7 +58,7 @@
     <!-- *** TWITTER CARD *** -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AI Document Processing with Open Source NER &amp; LLM on SageMaker">
-    <meta name="twitter:description" content="Learn how to build an AI document processing platform using open-source NER models and LLMs on Amazon SageMaker for efficient archival data management.">
+    <meta name="twitter:description" content="Learn how AI document processing using open-source NER and LLMs on Amazon SageMaker improves archival data accessibility and efficiency.">
     <meta name="twitter:image" content="https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/23/document-processing-sagemaker-1120x630.jpg">
 
     <!-- *** Stylesheets & Icons *** -->
@@ -72,8 +72,8 @@
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Build an AI-powered document processing platform with open source NER model and LLM on Amazon SageMaker",
-      "description": "Learn how to build an AI document processing platform using open-source NER models and LLMs on Amazon SageMaker for efficient archival data management.",
-      "keywords": ["AI document processing", "Amazon SageMaker", "Named Entity Recognition", "Large Language Models", "Mixtral-8x7B", "BERT NER model", "AWS Step Functions", "metadata enrichment", "serverless architecture", "digital transformation"],
+      "description": "Learn how AI document processing using open-source NER and LLMs on Amazon SageMaker improves archival data accessibility and efficiency.",
+      "keywords": ["AI document processing", "Amazon SageMaker", "NER model", "LLM", "BERT-based NER", "Mixtral-8x7B", "serverless architecture", "metadata extraction", "abstractive summarization", "digital transformation"],
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://dacoolaa.netlify.app/articles/build-an-ai-powered-document-processing-platform-with-open-source-ner-model-and-.html" },
       "image": [
         {
@@ -124,9 +124,9 @@
             </aside>
 
             <article class="main-article"
-                data-article-id="686bb3b13817635b6bbc8885feb8f39c8854672cbec36f1a3517d98d03cbbb7f"
+                data-article-id="6487a7aacbe4b618adb40f5b28f161c136d1959b591115aef5fbfbaa68ba1e3c"
                 data-article-topic="AI Models"
-                data-article-tags='["AI document processing", "Amazon SageMaker", "Named Entity Recognition", "Large Language Models", "Mixtral-8x7B", "BERT NER model", "AWS Step Functions", "metadata enrichment", "serverless architecture", "digital transformation"]'
+                data-article-tags='["AI document processing", "Amazon SageMaker", "NER model", "LLM", "BERT-based NER", "Mixtral-8x7B", "serverless architecture", "metadata extraction", "abstractive summarization", "digital transformation"]'
                 data-audio-url="">
 
                 <header>
@@ -153,15 +153,15 @@
 
                 <section id="article-body">
                     <h2>Build an AI-powered document processing platform with open source NER model and LLM on Amazon SageMaker</h2>
-<p>Archival data in research institutions and national laboratories often remains underutilized due to limited metadata and inconsistent labeling, making traditional keyword-based searches inefficient. To address this, a U.S. National Laboratory has developed an <strong>AI document processing</strong> platform on Amazon SageMaker, integrating named entity recognition (NER) and large language models (LLMs) like Mixtral-8x7B. This solution automates metadata enrichment, document classification, and summarization, significantly improving the accessibility of historical records.  </p>
-<p>The platform employs a serverless, cost-optimized architecture that dynamically provisions SageMaker endpoints for efficient resource use. A BERT-based NER model extracts structured metadata, while Mixtral-8x7B handles abstractive summarization and title generation. By processing documents in batches and automatically cleaning up resources, the system enhances metadata accuracy and search functionality, supporting digital transformation efforts in research and policy development.  </p>
-<p>The solution’s modular design includes specialized Amazon S3 buckets for different processing stages—such as extracts, summaries, and author information—ensuring organized data management. AWS Step Functions orchestrate the workflow, coordinating Lambda functions for tasks like extractive summarization (using TextRank) and author extraction (via BERT NER). This approach reduces LLM workload by 33% and token input by 75-90%, optimizing both performance and cost.</p>
+<p>A U.S. National Laboratory has developed an AI-driven <strong>AI document processing</strong> platform using Amazon SageMaker to enhance archival data accessibility. The solution integrates a BERT-based NER model for metadata extraction and Mixtral-8x7B for abstractive summarization, automating document classification and improving searchability. Designed with a serverless architecture, the platform dynamically provisions SageMaker endpoints for cost-efficient scalability, processing 100,000 documents in 12 hours.  </p>
+<h3>Why It Matters</h3>
+<p>This innovation addresses a critical challenge in research institutions: unlocking vast, underutilized archival data trapped by poor metadata and inconsistent labeling. By combining NER and LLMs, the platform not only streamlines document retrieval but also sets a scalable blueprint for enterprises managing large unstructured datasets. The cost-optimized, serverless approach demonstrates how AI can transform legacy systems without prohibitive infrastructure costs, making it a model for digital transformation in knowledge-intensive industries.</p>
                 </section>
 
                 
                 <footer>
                     <div class="tags">
-                        Tags: <span id="article-tags"><a href="https://dacoolaa.netlify.app/topic.html?name=AI%20document%20processing" class="tag-link">AI document processing</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Amazon%20SageMaker" class="tag-link">Amazon SageMaker</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Named%20Entity%20Recognition" class="tag-link">Named Entity Recognition</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Large%20Language%20Models" class="tag-link">Large Language Models</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Mixtral-8x7B" class="tag-link">Mixtral-8x7B</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=BERT%20NER%20model" class="tag-link">BERT NER model</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=AWS%20Step%20Functions" class="tag-link">AWS Step Functions</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=metadata%20enrichment" class="tag-link">metadata enrichment</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=serverless%20architecture" class="tag-link">serverless architecture</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=digital%20transformation" class="tag-link">digital transformation</a></span>
+                        Tags: <span id="article-tags"><a href="https://dacoolaa.netlify.app/topic.html?name=AI%20document%20processing" class="tag-link">AI document processing</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Amazon%20SageMaker" class="tag-link">Amazon SageMaker</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=NER%20model" class="tag-link">NER model</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=LLM" class="tag-link">LLM</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=BERT-based%20NER" class="tag-link">BERT-based NER</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=Mixtral-8x7B" class="tag-link">Mixtral-8x7B</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=serverless%20architecture" class="tag-link">serverless architecture</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=metadata%20extraction" class="tag-link">metadata extraction</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=abstractive%20summarization" class="tag-link">abstractive summarization</a>, <a href="https://dacoolaa.netlify.app/topic.html?name=digital%20transformation" class="tag-link">digital transformation</a></span>
                     </div>
                 </footer>
                 
