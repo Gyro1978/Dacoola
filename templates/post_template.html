@@ -13,16 +13,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- *** CORE SEO & Page Info *** -->
     <title>{{ PAGE_TITLE }} - Dacoola</title>
     <meta name="description" content="{{ META_DESCRIPTION }}">
     {% if AUTHOR_NAME %}<meta name="author" content="{{ AUTHOR_NAME }}">{% endif %}
     {% if META_KEYWORDS %}<meta name="keywords" content="{{ META_KEYWORDS }}">{% endif %}
-
-    <!-- *** CANONICAL URL *** -->
     <link rel="canonical" href="{{ CANONICAL_URL }}">
-
-    <!-- *** OPEN GRAPH *** -->
     <meta property="og:title" content="{{ PAGE_TITLE }}">
     <meta property="og:description" content="{{ META_DESCRIPTION }}">
     <meta property="og:image" content="{{ IMAGE_URL }}">
@@ -36,19 +31,13 @@
     {% for tag in META_KEYWORDS_LIST %}
     <meta property="article:tag" content="{{ tag }}">
     {% endfor %}
-
-    <!-- *** TWITTER CARD *** -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ PAGE_TITLE }}">
     <meta name="twitter:description" content="{{ META_DESCRIPTION }}">
     <meta name="twitter:image" content="{{ IMAGE_URL }}">
-
-    <!-- *** Stylesheets & Icons *** -->
-    <link rel="stylesheet" href="../css/styles.css"> <!-- Relative path from articles/ to public/css/ -->
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> 
-
-    <!-- *** JSON-LD Structured Data *** -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -57,12 +46,7 @@
       "description": "{{ META_DESCRIPTION | escapejs }}",
       "keywords": {{ META_KEYWORDS_LIST | tojson | safe }},
       "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ CANONICAL_URL | escapejs }}" },
-      "image": [
-        {
-          "@type": "ImageObject",
-          "url": "{{ IMAGE_URL | escapejs }}"
-        }
-      ],
+      "image": [ { "@type": "ImageObject", "url": "{{ IMAGE_URL | escapejs }}" } ],
       "datePublished": "{{ PUBLISH_ISO_FOR_META }}",
       "dateModified": "{{ PUBLISH_ISO_FOR_META }}",
       "author": { "@type": "Person", "name": "{{ AUTHOR_NAME | default('AI News Team') | escapejs }}" },
@@ -73,8 +57,6 @@
       }
     }
     </script>
-
-    <!-- Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -82,36 +64,23 @@
       gtag('js', new Date());
       gtag('config', 'G-WGJ5MFBC6X');
     </script>
-    <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998" crossorigin="anonymous"></script>
-
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSLDZ2QB"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <header id="navbar-placeholder">
-        <!-- Navbar loaded by JS -->
-    </header>
-
+    <header id="navbar-placeholder"></header>
     <div class="site-content-wrapper">
         <div class="main-content-grid">
-
             <aside class="sidebar related-news">
                 <h2>Related News</h2>
-                <div id="related-news-content">
-                    <p class="placeholder">Loading related news...</p>
-                </div>
+                <div id="related-news-content"><p class="placeholder">Loading related news...</p></div>
             </aside>
-
             <article class="main-article"
                 data-article-id="{{ CURRENT_ARTICLE_ID }}"
                 data-article-topic="{{ CURRENT_ARTICLE_TOPIC }}"
                 data-article-tags='{{ CURRENT_ARTICLE_TAGS_JSON | default("[]") | safe }}'
                 data-audio-url="{{ AUDIO_URL or '' }}">
-
                 <header>
                     <h1 id="article-headline">{{ ARTICLE_SEO_H1 | default(ARTICLE_HEADLINE) }}</h1>
                     <div class="article-meta-container">
@@ -126,53 +95,33 @@
                         </div>
                     </div>
                 </header>
-
                 <section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 15px; margin-bottom: 20px;">
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
-                         crossorigin="anonymous"></script>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-8839663991354998"
-                         data-ad-slot="1948351346"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </section>
-
                 {% if IMAGE_URL %}
                 <figure class="article-image-container">
                     <img id="article-image" src="{{ IMAGE_URL }}" alt="{{ IMAGE_ALT_TEXT | default(ARTICLE_HEADLINE) }}">
                 </figure>
                 {% endif %}
-
                 <section id="article-body">
-                    {% set body_html_content = ARTICLE_BODY_HTML %} {# Raw HTML from Markdown conversion #}
-                    {% set faq_h4_title_marker_class = '<h4 class="faq-title-heading">Frequently Asked Questions</h4>' %}
-                    {% set faq_h4_title_marker_exact = '<h4>Frequently Asked Questions</h4>' %}
-                    
-                    {% set ad_slot_html %}
-                        <section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 25px; margin-bottom: 15px;"><!-- wide ad above FAQ title --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></section>
+                    {% set body_html_content = ARTICLE_BODY_HTML %}
+                    {% set faq_div_marker = '<div class="faq-section">' %}
+                    {% set ad_slot_html_faq %}
+                        <section class="ad-slot-container article-ad-slot" style="text-align: center; margin-top: 25px; margin-bottom: 15px;"><!-- wide ad above FAQ --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></section>
                     {% endset %}
+                    {% set faq_title_html = '<h4 class="faq-title-heading">Frequently Asked Questions</h4>' %}
 
-                    {% if faq_h4_title_marker_class in body_html_content %}
-                        {% set parts = body_html_content.split(faq_h4_title_marker_class, 1) %}
-                        {{ parts[0] | safe }}
-                        {{ ad_slot_html | safe }}
-                        {{ faq_h4_title_marker_class | safe }}
-                        {{ parts[1] | safe }}
-                    {% elif faq_h4_title_marker_exact in body_html_content %}
-                        {% set parts = body_html_content.split(faq_h4_title_marker_exact, 1) %}
-                        {{ parts[0] | safe }}
-                        {{ ad_slot_html | safe }}
-                        {{ faq_h4_title_marker_exact | safe }}
-                        {{ parts[1] | safe }}
+                    {% if faq_div_marker in body_html_content %}
+                        {% set parts = body_html_content.split(faq_div_marker, 1) %}
+                        {{ parts[0] | safe }} {# Content before FAQ div #}
+                        {{ ad_slot_html_faq | safe }} {# Ad slot #}
+                        {{ faq_title_html | safe }} {# FAQ H4 Title #}
+                        {{ faq_div_marker | safe }}{{ parts[1] | safe }} {# FAQ div and rest of content #}
                     {% else %}
-                        {{ body_html_content | safe }}
+                        {{ body_html_content | safe }} {# Full body if no FAQ div marker found #}
                     {% endif %}
                 </section>
-
                 {% if ARTICLE_TAGS_HTML %}
                 <footer>
                     <div class="tags">
@@ -181,34 +130,19 @@
                 </footer>
                 {% endif %}
             </article>
-
             <aside class="sidebar latest-news">
                 <h2>Latest News</h2>
-                <div id="latest-news-content">
-                    <p class="placeholder">Loading latest news...</p>
-                </div>
+                <div id="latest-news-content"><p class="placeholder">Loading latest news...</p></div>
             </aside>
-
         </div>
-
         <section class="ad-slot-container article-bottom-ad-slot" style="text-align: center; margin-top: 30px; margin-bottom: 20px; max-width: 1500px; margin-left: auto; margin-right: auto; padding: 0 15px;">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
-                 crossorigin="anonymous"></script>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-format="autorelaxed"
-                 data-ad-client="ca-pub-8839663991354998"
-                 data-ad-slot="6562367864"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-8839663991354998" data-ad-slot="6562367864"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </section>
     </div>
-
     <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
         <i class="fas fa-headphones" aria-hidden="true"></i>
     </button>
-
     <script src="../js/script.js"></script> 
 </body>
 </html>

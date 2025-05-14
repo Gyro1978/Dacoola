@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Page Not Found | Dacoola</title>
     <meta name="description" content="The page you were looking for was not found on Dacoola.">
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Use root path for CSS -->
+    <link rel="stylesheet" href="/css/styles.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png">
-    <!-- Prevent indexing -->
     <meta name="robots" content="noindex">
-    <!-- Google tag (gtag.js) - Optional on 404, but doesn't hurt -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -20,35 +16,26 @@
       gtag('js', new Date());
       gtag('config', 'G-WGJ5MFBC6X');
     </script>
-     <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998" crossorigin="anonymous"></script>
 </head>
 <body class="page-404">
-
-    <header id="navbar-placeholder">
-        <!-- Navbar loaded by JS -->
-    </header>
+    <header id="navbar-placeholder"></header>
     
-     <!-- Ad Slot 1: Grid suggestions under navbar, above 404 content -->
+     <!-- Ad Slot 1: Wide ad under navbar, above 404 content -->
      <div class="ad-slot-container page-top-ad" style="text-align: center; margin-top: 20px; margin-bottom: 20px; padding: 0 15px;">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
-             crossorigin="anonymous"></script>
+        <!-- wide ad -->
         <ins class="adsbygoogle"
              style="display:block"
-             data-ad-format="autorelaxed"
              data-ad-client="ca-pub-8839663991354998"
-             data-ad-slot="6562367864"></ins>
+             data-ad-slot="1948351346"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
         <script>
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
 
-    <!-- Snow Container -->
-    <div class="snow" id="snow-container">
-       <!-- Flakes added via JS -->
-    </div>
-
-    <!-- Error Content -->
+    <div class="snow" id="snow-container"></div>
     <main class="error-page-main">
         <div class="error-container">
             <h1>404</h1>
@@ -56,8 +43,6 @@
             <p>It seems like the page you're looking for has taken a detour into the digital unknown. Don't worry, it happens to the best of us!</p>
             <a href="/home.html" class="button-link">Go to Homepage</a>
         </div>
-
-        <!-- Latest News Section Placeholder -->
         <section id="latest-news-section" class="home-section">
             <div class="section-header">
                 <h2>Maybe you'll find this interesting?</h2>
@@ -67,10 +52,8 @@
                 <p class="placeholder">Loading latest news...</p>
             </div>
         </section>
-         <!-- Ad Slot 2: Grid suggestions At Bottom, after "Interesting" section -->
+         <!-- Ad Slot 2: Grid suggestions At Bottom -->
          <section class="ad-slot-container page-bottom-ad" style="text-align: center; margin-top: 30px; margin-bottom: 20px; max-width: 1200px; width: 95%;">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
-                 crossorigin="anonymous"></script>
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-format="autorelaxed"
@@ -81,12 +64,8 @@
             </script>
         </section>
     </main>
-
-
-    <!-- JavaScript -->
-    <script src="/js/script.js"></script> <!-- Use root path for JS -->
+    <script src="/js/script.js"></script> 
      <script>
-        // Snowflakes JS
         function createSnowflakes(containerId, count) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -94,17 +73,13 @@
                 const flake = document.createElement('div');
                 flake.className = 'snow-flake';
                 flake.style.left = `${Math.random() * 100}%`;
-                flake.style.animationDelay = `-${Math.random() * 10}s`; // Randomize start
-                // Optional: Randomize animation duration slightly for more variety
-                // flake.style.animationDuration = `${Math.random() * 5 + 7}s`; // e.g., 7-12 seconds
+                flake.style.animationDelay = `-${Math.random() * 10}s`;
                 container.appendChild(flake);
             }
         }
         document.addEventListener('DOMContentLoaded', () => {
-             createSnowflakes('snow-container', 100); // Adjust count as needed
-            // script.js will handle loading navbar and latest news via initializePageContent
+             createSnowflakes('snow-container', 100); 
         });
     </script>
-
 </body>
 </html>
