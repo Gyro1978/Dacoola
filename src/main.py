@@ -1,4 +1,4 @@
-# src/main.py (Full Script with Pre-Write JSON Validation)
+# src/main.py (Corrected with Similarity Check Agent)
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -37,6 +37,7 @@ try:
     )
     from src.scrapers.image_scraper import find_best_image, scrape_source_for_image
     from src.agents.filter_news_agent import run_filter_agent
+    from src.agents.similarity_check_agent import run_similarity_check_agent
     from src.agents.keyword_research_agent import run_keyword_research_agent
     from src.agents.seo_article_generator_agent import run_seo_article_agent
     from src.social.social_media_poster import (
@@ -47,7 +48,7 @@ try:
 except ImportError as e:
      print(f"FATAL IMPORT ERROR in main.py (agents/scrapers/social): {e}")
      try: logging.critical(f"FATAL IMPORT ERROR (agents/scrapers/social): {e}")
-     except: pass
+     except ImportError: pass # if logging itself failed
      sys.exit(1)
 
 # --- Load Environment Variables ---
@@ -222,34 +223,24 @@ def update_all_articles_json_file(new_article_summary_info):
     final_data_to_save_to_json_obj = {"articles": updated_articles_list}
 
     try:
-        # Attempt to serialize to string first
         json_string_to_write = json.dumps(final_data_to_save_to_json_obj, indent=2, ensure_ascii=False)
-
-        # --- ADDED VALIDATION STEP ---
         try:
-            json.loads(json_string_to_write) # Validate this string can be parsed back
+            json.loads(json_string_to_write)
             logger.debug(f"JSON content for {ALL_ARTICLES_FILE} validated successfully before writing.")
         except json.JSONDecodeError as jde:
             logger.error(f"CRITICAL: Generated content for {ALL_ARTICLES_FILE} is NOT VALID JSON before writing: {jde}")
             logger.error(f"Problematic data (first 500 chars of generated string): {json_string_to_write[:500]}")
-            # Optionally, you might want to prevent writing the bad file or take other recovery actions here
-            return # Stop before writing corrupted data
-        # --- END ADDED VALIDATION STEP ---
-
+            return
         with open(ALL_ARTICLES_FILE, 'w', encoding='utf-8') as f:
-            f.write(json_string_to_write) # Write the pre-validated string
+            f.write(json_string_to_write)
         logger.info(f"Updated {os.path.basename(ALL_ARTICLES_FILE)} ({len(updated_articles_list)} articles).")
-
     except TypeError as te:
         logger.error(f"CRITICAL: TypeError during JSON serialization for {ALL_ARTICLES_FILE}: {te}.")
-        # Consider logging the structure carefully if this happens
-        # logger.error(f"Problematic object structure (summary): {final_data_to_save_to_json_obj}")
     except Exception as e:
         logger.error(f"Failed to save updated {os.path.basename(ALL_ARTICLES_FILE)}: {e}")
 
-
 # --- Main Processing Function for Scraped Articles ---
-def process_single_scraped_article(raw_json_filepath, existing_articles_summary_data, processed_ids_this_run_set):
+def process_single_scraped_article(raw_json_filepath, existing_articles_summary_data, current_run_fully_processed_data_list):
     article_filename = os.path.basename(raw_json_filepath)
     logger.info(f"--- Processing article file: {article_filename} ---")
     article_data_content = load_article_data(raw_json_filepath)
@@ -279,7 +270,7 @@ def process_single_scraped_article(raw_json_filepath, existing_articles_summary_
         current_title_lower_case = article_data_content.get('title', '').strip().lower()
         if not current_title_lower_case: logger.error(f"Article {article_unique_id} has empty title. Skipping."); remove_scraped_file(raw_json_filepath); return None
 
-        combined_check_list = list(existing_articles_summary_data) + list(processed_ids_this_run_set)
+        combined_check_list = list(existing_articles_summary_data) + [item.get("summary") for item in current_run_fully_processed_data_list if item.get("summary")]
         for existing_article_summary in combined_check_list:
             if isinstance(existing_article_summary, dict) and existing_article_summary.get('title','').strip().lower() == current_title_lower_case and existing_article_summary.get('image_url') == image_url:
                 logger.warning(f"Article {article_unique_id} appears DUPLICATE (Title & Image) of {existing_article_summary.get('id', 'N/A')}. Skipping."); remove_scraped_file(raw_json_filepath); return None
@@ -292,6 +283,14 @@ def process_single_scraped_article(raw_json_filepath, existing_articles_summary_
         article_data_content['topic'] = filter_agent_verdict_data.get('topic', 'Other'); article_data_content['is_breaking'] = (importance_level == "Breaking")
         article_data_content['primary_keyword'] = filter_agent_verdict_data.get('primary_topic_keyword', article_data_content.get('title','Untitled'))
         logger.info(f"Article {article_unique_id} classified '{importance_level}' (Topic: {article_data_content['topic']}).")
+
+        article_data_content = run_similarity_check_agent(article_data_content, PROCESSED_JSON_DIR, current_run_fully_processed_data_list)
+        similarity_verdict = article_data_content.get('similarity_verdict', 'ERROR')
+        if similarity_verdict != "OKAY" and not similarity_verdict.startswith("OKAY_"):
+            logger.warning(f"Article {article_unique_id} flagged by similarity check: {similarity_verdict} (Similar to: {article_data_content.get('similar_article_id', 'N/A')}). Skipping.")
+            remove_scraped_file(raw_json_filepath)
+            return None
+        logger.info(f"Article {article_unique_id} passed advanced similarity check (Verdict: {similarity_verdict}).")
 
         article_data_content = run_keyword_research_agent(article_data_content)
         if article_data_content.get('keyword_agent_error'): logger.warning(f"Keyword Research issue for {article_unique_id}: {article_data_content['keyword_agent_error']}")
@@ -308,7 +307,6 @@ def process_single_scraped_article(raw_json_filepath, existing_articles_summary_
         if article_data_content.get('seo_agent_error'): logger.warning(f"SEO Agent non-critical errors for {article_unique_id}: {article_data_content['seo_agent_error']}")
         if seo_agent_results_data.get('generated_seo_h1') and seo_agent_results_data['generated_seo_h1'] != article_data_content['title']:
              article_data_content['title'] = seo_agent_results_data['generated_seo_h1']
-
 
         num_tags = len(article_data_content.get('generated_tags', [])); calculated_trend_score = 0.0
         if importance_level == "Interesting": calculated_trend_score += 5.0
@@ -352,11 +350,12 @@ def process_single_scraped_article(raw_json_filepath, existing_articles_summary_
                                    "tags": article_data_content.get('generated_tags', []), "summary_short": summary_for_site_list.get('summary_short', '')}
         if save_processed_data(final_processed_file_path, article_data_content):
              remove_scraped_file(raw_json_filepath); logger.info(f"--- Successfully processed scraped article: {article_unique_id} ---")
-             return {"summary": summary_for_site_list, "social_post_data": payload_for_social_media }
+             return {"summary": summary_for_site_list, "social_post_data": payload_for_social_media, "full_data": article_data_content }
         else: logger.error(f"Failed save final JSON {article_unique_id}."); return None
     except Exception as main_process_e:
          logger.exception(f"CRITICAL failure processing {article_unique_id} ({article_filename}): {main_process_e}")
-         if os.path.exists(raw_json_filepath): remove_scraped_file(raw_json_filepath); return None
+         if os.path.exists(raw_json_filepath): remove_scraped_file(raw_json_filepath) # Ensure removal even on error
+         return None
 
 # --- Main Orchestration Logic ---
 if __name__ == "__main__":
@@ -426,7 +425,7 @@ if __name__ == "__main__":
     raw_json_files_to_process_list = sorted(glob.glob(os.path.join(SCRAPED_ARTICLES_DIR, '*.json')), key=os.path.getmtime, reverse=True)
     logger.info(f"Found {len(raw_json_files_to_process_list)} raw scraped articles to process.")
 
-    processed_articles_in_current_run_summaries = []
+    current_run_fully_processed_data = []
     successfully_processed_scraped_count = 0; failed_or_skipped_scraped_count = 0
     social_media_payloads_for_posting_queue = []
 
@@ -434,15 +433,19 @@ if __name__ == "__main__":
         article_potential_id = os.path.basename(raw_filepath).replace('.json', '')
         if article_potential_id in fully_processed_article_ids_set:
             logger.debug(f"Skipping raw file {article_potential_id}, as fully processed JSON exists."); remove_scraped_file(raw_filepath); failed_or_skipped_scraped_count += 1; continue
-        single_article_processing_result = process_single_scraped_article(raw_filepath, all_articles_summary_data_for_run, processed_articles_in_current_run_summaries)
+        
+        single_article_processing_result = process_single_scraped_article(raw_filepath, all_articles_summary_data_for_run, current_run_fully_processed_data)
+        
         if single_article_processing_result and isinstance(single_article_processing_result, dict):
             successfully_processed_scraped_count += 1
-            if "summary" in single_article_processing_result:
-                processed_articles_in_current_run_summaries.append(single_article_processing_result["summary"])
-                all_articles_summary_data_for_run.append(single_article_processing_result["summary"]) # Keep main list updated
-            if "social_post_data" in single_article_processing_result:
+            if "full_data" in single_article_processing_result and isinstance(single_article_processing_result["full_data"], dict):
+               current_run_fully_processed_data.append(single_article_processing_result["full_data"])
+            if "summary" in single_article_processing_result and isinstance(single_article_processing_result["summary"], dict):
+               all_articles_summary_data_for_run.append(single_article_processing_result["summary"]) # Keep overall summary list for all_articles.json up-to-date for next iter
+            if "social_post_data" in single_article_processing_result and isinstance(single_article_processing_result["social_post_data"], dict):
                 social_media_payloads_for_posting_queue.append(single_article_processing_result["social_post_data"])
-                fully_processed_article_ids_set.add(single_article_processing_result["social_post_data"].get("id")) # Add to set to avoid reprocessing
+                if single_article_processing_result["social_post_data"].get("id"):
+                    fully_processed_article_ids_set.add(single_article_processing_result["social_post_data"]["id"])
         else:
             failed_or_skipped_scraped_count += 1
     logger.info(f"Scraped articles processing cycle complete. Success: {successfully_processed_scraped_count}, Failed/Skipped: {failed_or_skipped_scraped_count}")
@@ -453,7 +456,7 @@ if __name__ == "__main__":
 
     unposted_existing_processed_added_to_queue = 0
     now_for_age_check = datetime.now(timezone.utc)
-    cutoff_time_for_social = now_for_age_check - timedelta(hours=MAX_AGE_FOR_SOCIAL_POST_HOURS) # CORRECTED CUTOFF TIME
+    cutoff_time_for_social = now_for_age_check - timedelta(hours=MAX_AGE_FOR_SOCIAL_POST_HOURS)
 
     all_processed_json_files_for_social_check = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
     logger.info(f"Checking {len(all_processed_json_files_for_social_check)} total processed files for social media queue.")
@@ -482,12 +485,9 @@ if __name__ == "__main__":
 
         try:
             article_publish_dt = get_sort_key(processed_article_full_data)
-            # ************************************************************************* #
-            # *** THIS IS THE CORRECTED AGE CHECK USING MAX_AGE_FOR_SOCIAL_POST_HOURS *** #
-            # ************************************************************************* #
             if article_publish_dt < cutoff_time_for_social:
                 logger.debug(f"Processed article {article_id_from_filename} (published: {article_publish_dt.date()}) is older than {MAX_AGE_FOR_SOCIAL_POST_HOURS} hours (cutoff: {cutoff_time_for_social.strftime('%Y-%m-%d %H:%M:%S %Z')}). Skipping social post.")
-                mark_article_as_posted_in_history(article_id_from_filename) # Mark old ones to avoid re-checking
+                mark_article_as_posted_in_history(article_id_from_filename)
                 continue
         except Exception as date_e:
             logger.warning(f"Error parsing date for {article_id_from_filename} for social age check: {date_e}. Skipping.")
@@ -565,7 +565,6 @@ if __name__ == "__main__":
                 social_media_clients_glob,
                 platforms_to_post=tuple(platforms_to_attempt_post)
             )
-            # mark_article_as_posted_in_history is now called *inside* run_social_media_poster
             articles_posted_this_run_count +=1
 
             if "twitter" in platforms_to_attempt_post and social_media_clients_glob.get("twitter_client"):
