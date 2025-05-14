@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "0fe588830fefcdc8106ff45f7f9c0f540297cf434c0b8d4c30859749b85a40fc",
+      "title": "Google’s Gemini GitHub Integration Unlocks AI-Powered Code Analysis",
+      "link": "articles/google’s-gemini-github-integration-unlocks-ai-powered-code-analysis.html",
+      "published_iso": "2025-05-14T14:16:58Z",
+      "summary_short": "Google's Gemini chatbot now integrates with GitHub, allowing Gemini Advanced subscribers to analyze, debug, and generate code directly from repositories.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2024/03/google-gemini.jpg?w=1200",
+      "topic": "Software",
+      "is_breaking": false,
+      "tags": [
+        "Google Gemini GitHub integration",
+        "Gemini chatbot code generation",
+        "Gemini GitHub integration",
+        "debug code with Gemini AI",
+        "Gemini Advanced plan features",
+        "connect GitHub to Gemini",
+        "how to use Gemini with GitHub",
+        "Google Gemini Advanced subscription",
+        "Gemini vs ChatGPT GitHub integration",
+        "AI coding tools comparison",
+        "AI chatbot for GitHub code analysis",
+        "AI code security vulnerabilities"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "0b973feb8fe8535c9618f5fc5b7cd0efad2b39dfcabc8b6dd4b2047c5ddc4e11",
       "title": "Don Diablo’s BLACKOUT Music Video Pushes Boundaries With NVIDIA RTX Generative AI",
       "link": "articles/don-diablo’s-blackout-music-video-pushes-boundaries-with-nvidia-rtx-generative-a.html",
