@@ -1,5 +1,31 @@
-    {
+{
   "articles": [
+    {
+      "id": "fc6b22e2c591c154def88eeb6d607507ecaa9eddb8f0cecede852c798566147a",
+      "title": "Tech Leaders Accelerate Agentic AI Deployment as EY Study Reveals Industry Shift",
+      "link": "articles/tech-leaders-accelerate-agentic-ai-deployment-as-ey-study-reveals-industry-shift.html",
+      "published_iso": "2025-05-14T11:00:20Z",
+      "summary_short": "A new EY study shows 48% of tech leaders are deploying agentic AI, with 50% expecting fully autonomous AI operations within two years. Learn the trends.",
+      "image_url": "https://www.zdnet.com/a/img/resize/2442375cd4bf1d41374145f325e037f15ab850a9/2025/05/13/818255ed-deb9-4c30-b585-3393d0f3c6ba/gettyimages-1562104681.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Ernst & Young AI study",
+        "tech executives AI strategy",
+        "tech leaders AI adoption",
+        "technology pulse poll AI",
+        "autonomous AI operations",
+        "agentic AI deployment",
+        "trustworthy reliable secure AI",
+        "AI agent deployment trends",
+        "AI impact on employment",
+        "AI hiring trends tech",
+        "AI workforce upskilling",
+        "AI adoption competition"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
     {
       "id": "gyro-20250514041949-a4359d68",
       "title": "Vectara Unveils AI Hallucination Corrector to Boost Enterprise AI Reliability",
