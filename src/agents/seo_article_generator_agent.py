@@ -28,10 +28,10 @@ load_dotenv(dotenv_path=dotenv_path)
 DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
 DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
 YOUR_WEBSITE_NAME = os.getenv('YOUR_WEBSITE_NAME', 'Dacoola')
-YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '') 
+YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '') # Ensure this is set in .env
 
 # --- Configuration ---
-AGENT_MODEL = "deepseek-chat" 
+AGENT_MODEL = "deepseek-chat" # or "deepseek-coder" if preferred for structured output
 MAX_TOKENS_RESPONSE = 7000 
 TEMPERATURE = 0.68 
 API_TIMEOUT_SECONDS = 360 
@@ -68,11 +68,10 @@ You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, oper
 11. **Pros & Cons (`#### Pros & Cons`):**
     *   **Generate ONLY if genuinely applicable and supported by content. Omit entirely otherwise.**
     *   Use **exact** H4 title: `#### Pros & Cons`. Use specified HTML.
-12. **FAQ (HTML Block):**
-    *   **Generate ONLY if topic warrants it (2-5 relevant Q&As). Omit ENTIRELY otherwise.**
-    *   You will *only* generate the HTML block starting with `<div class="faq-section">` and ending with `</div>`.
-    *   Do **NOT** include the `#### Frequently Asked Questions` Markdown heading before this block; the template will add it.
-    *   Use the exact HTML structure for `<details>` and `<summary>` as specified in the user prompt.
+11.b. **In-Article Ad Placeholder:** After the first 2 or 3 paragraphs of the main article body (typically after the initial summary paragraphs and before any `### H3` subheading or deeper analysis sections), insert the exact placeholder comment: `<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->`. Only insert this placeholder ONCE in the entire article body.
+12. **FAQ (`#### Frequently Asked Questions`):**
+    *   **Generate ONLY if topic warrants it. Omit entirely otherwise.**
+    *   Use **exact** H4 title: `#### Frequently Asked Questions`. Generate 3-5 Q&As. Use specified HTML.
 13. **Overall Length & Tone:** **500-800 words**. Authoritative, objective, engaging, accessible journalistic tone.
 
 **IV. Writing Style & Avoiding "AI Tells":** (NO CHANGES HERE - REMAINS CRITICAL)
@@ -80,8 +79,8 @@ You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, oper
 
 **V. Output Formatting (Strict Adherence Mandatory):**
 
-20. **Markdown & HTML:** Main body is Markdown. Pros/Cons and FAQ use **exact** specified HTML for their respective blocks.
-21. **Exact Output Order:** `Title Tag: ...\nMeta Description: ...\nSEO H1: ...\n\n## [SEO H1]\n{Article Body - Markdown, potentially including Pros/Cons HTML and FAQ HTML blocks}\nSource: [...](...)\n\n<script...>...</script>`
+20. **Markdown & HTML:** Main body is Markdown. Pros/Cons and FAQ use **exact** specified HTML. The In-Article Ad Placeholder is an HTML comment.
+21. **Exact Output Order:** `Title Tag: ...\nMeta Description: ...\nSEO H1: ...\n\n## [SEO H1]\n{Article Body}\nSource: [...](...)\n\n<script...>...</script>`
 22. **Title Tag:** `Title Tag: [...]`. ≤ 60 chars. Incl. `{{TARGET_KEYWORD}}`. **MUST use Title Case.** Matches H1 closely or is a slightly condensed version.
 23. **Meta Description:** `Meta Description: [...]`. ≤ 160 chars. Incl. `{{TARGET_KEYWORD}}`.
 24. **SEO H1 (in preamble):** `SEO H1: [...]`. Matches `## H1` in body. **MUST use Title Case.**
@@ -92,10 +91,10 @@ You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, oper
 """
 
 SEO_PROMPT_USER_TEMPLATE = """
-Task: Generate Title Tag, Meta Description, SEO-Optimized H1 Heading, Article Body (Markdown, with HTML for Pros/Cons & FAQ if applicable), and JSON-LD Script based on context. Follow ALL System Prompt directives meticulously.
+Task: Generate Title Tag, Meta Description, SEO-Optimized H1 Heading, Article Body (including the in-article ad placeholder `<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->` as per system instructions), and JSON-LD Script based on context. Follow ALL System Prompt directives meticulously. 
 **Key Focus for this Task:**
 1.  **Title & H1 Generation:** Create a **catchy, SEO-friendly Title Tag and H1 in Title Case**. Ensure they prominently feature the main subject/product (e.g., "Absolute Zero" if it's the core topic) AND the `{{TARGET_KEYWORD}}`. The H1 should be engaging and suitable for a news headline.
-2.  **Content Structure:** Adhere to the specified structure. For Pros/Cons and FAQ, if generated, output them as HTML blocks directly within the Markdown body. **For FAQ, only output the `<div class="faq-section">...</div>` HTML block; do NOT include a Markdown H4 title for it.**
+2.  **Content Structure:** Adhere to the specified structure, including the `<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->` placeholder. Omit optional sections (H4s, Pros/Cons, FAQ) if the source content doesn't support them well.
 3.  **Writing Style:** Maintain a natural, human-like journalistic style. Strictly avoid AI clichés, em dashes (use standard hyphens), and unnecessary symbols.
 
 **Input Context:**
@@ -119,7 +118,9 @@ SEO H1: [Generated catchy, SEO-Optimized H1 in Title Case. Must include TARGET_K
 ## [SEO H1 from above, verbatim]
 [Paragraph 1-2: CONCISE summary. Include TARGET_KEYWORD. Journalistic tone. Standard hyphens ONLY.]
 
-### [Contextual H3 Title - be descriptive]
+<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->
+
+### [Contextual H3 Title - be descriptive, this is after the in-article ad placeholder]
 [Paragraphs 2-4+: In-depth analysis. Weave in TARGET_KEYWORD again + 1-2 SECONDARY_KEYWORDS if provided/relevant. Vary sentences/vocabulary. AVOID AI clichés/em dashes.]
 
 #### [Optional: Contextual H4 Title - OMIT IF NOT RELEVANT]
@@ -151,7 +152,8 @@ SEO H1: [Generated catchy, SEO-Optimized H1 in Title Case. Must include TARGET_K
 #### [Optional: Contextual H4 Title - OMIT IF NOT RELEVANT]
 [Optional: 1-2 paragraphs. OMIT ENTIRE SECTION if not applicable.]
 
-[If generating FAQs, output ONLY the HTML block below. The template will add the H4 title.]
+#### [Optional: Frequently Asked Questions - OMIT IF NOT APPLICABLE]
+[Use exact H4 title. Generate 3-5 Q&As (or 2-3). Use exact HTML structure with `<i class="faq-icon fas fa-chevron-down"></i>`.]
 <div class="faq-section">
   <details class="faq-item">
     <summary class="faq-question">First relevant question? <i class="faq-icon fas fa-chevron-down"></i></summary>
@@ -250,14 +252,14 @@ def parse_seo_agent_response(response_text):
             json_content_str = script_match.group(1).strip()
             parsed_data['generated_json_ld'] = script_match.group(0).strip() 
             try: json.loads(json_content_str) 
-            except json.JSONDecodeError as json_err: errors.append(f"JSON-LD content is invalid: {json_err}"); logger.warning(f"Invalid JSON-LD: {json_content_str[:200]}...")
+            except json.JSONDecodeError as json_err: errors.append(f"JSON-LD content is invalid: {json_err}"); logger.warning(f"Invalid JSON-LD detected: {json_content_str[:200]}...") 
         else: errors.append("Missing or malformed JSON-LD script block.")
 
         body_content = None
         body_start_pattern = r"^\s*SEO H1:.*?\n\n(## .*?)(?=\n\s*Source:|\n\s*<script)"
         body_match = re.search(body_start_pattern, response_text, re.MULTILINE | re.DOTALL | re.IGNORECASE)
 
-        if body_match: body_content = body_match.group(1).strip()
+        if body_match: body_content = body_match.group(1).strip() 
         else:
             errors.append("Could not reliably extract Article Body between H1 and Source/Script.")
             seo_h1_line_end_pos = -1
@@ -273,7 +275,7 @@ def parse_seo_agent_response(response_text):
                     if source_pos != -1: end_delimiters.append(source_pos)
                     if script_pos != -1: end_delimiters.append(script_pos)
                     if end_delimiters: body_content = potential_body_start[:min(end_delimiters)].strip()
-                    else: body_content = potential_body_start.strip(); logger.warning("Body extraction fallback: No clear 'Source:' or '<script' delimiter.")
+                    else: body_content = potential_body_start.strip(); logger.warning("Body extraction fallback: No clear 'Source:' or '<script' delimiter found after H1.")
                 else: errors.append("Fallback body extraction: Content after H1 preamble does not start with '##'.")
             else: errors.append("Fallback body extraction: Could not find H1 preamble line end.")
 
@@ -281,28 +283,28 @@ def parse_seo_agent_response(response_text):
             parsed_data['generated_article_body_md'] = body_content
             body_h1_match = re.match(r"##\s*(.*)", body_content, re.IGNORECASE)
             if body_h1_match and parsed_data.get('generated_seo_h1'):
-                if body_h1_match.group(1).strip() != parsed_data['generated_seo_h1']:
-                    errors.append(f"H1 mismatch body ('{body_h1_match.group(1).strip()}') vs preamble ('{parsed_data['generated_seo_h1']})'). Using preamble.")
-            elif not parsed_data.get('generated_seo_h1') and body_h1_match:
-                 parsed_data['generated_seo_h1'] = body_h1_match.group(1).strip(); logger.info("Used H1 from body as preamble H1 was missing.")
+                if body_h1_match.group(1).strip() != parsed_data['generated_seo_h1']: errors.append(f"H1 in body ('{body_h1_match.group(1).strip()}') mismatch with preamble H1 ('{parsed_data['generated_seo_h1']})'). Using preamble H1.")
+            elif not parsed_data.get('generated_seo_h1') and body_h1_match: parsed_data['generated_seo_h1'] = body_h1_match.group(1).strip(); logger.info("Used H1 from article body as preamble H1 was missing.")
         else:
-            if not body_content: errors.append("Article Body content is empty.")
-            elif not body_content.startswith("## "): errors.append(f"Extracted Body does not start with '## '. Actual: '{body_content[:30]}...'")
-            parsed_data['generated_article_body_md'] = ""
+            if not body_content: errors.append("Article Body content is empty after extraction attempts.")
+            elif not body_content.startswith("## "): errors.append(f"Extracted Body does not start with '## '. Actual start: '{body_content[:30]}...'")
+            parsed_data['generated_article_body_md'] = "" 
 
-        if not parsed_data.get('generated_seo_h1'): errors.append("CRITICAL: SEO H1 missing.")
-        if not parsed_data.get('generated_title_tag'): parsed_data['generated_title_tag'] = parsed_data.get('generated_seo_h1', 'Error: Title Missing'); errors.append("Defaulted Title Tag.")
-        if not parsed_data.get('generated_meta_description'): parsed_data['generated_meta_description'] = "Read the latest AI and Technology news from " + YOUR_WEBSITE_NAME; errors.append("Defaulted Meta Desc.")
-        if not parsed_data.get('generated_json_ld'): parsed_data['generated_json_ld'] = '<script type="application/ld+json">{}</script>'
+        if not parsed_data.get('generated_seo_h1'): errors.append("CRITICAL: SEO H1 could not be determined.")
+        if not parsed_data.get('generated_title_tag'):
+             parsed_data['generated_title_tag'] = parsed_data.get('generated_seo_h1', 'Error: Title Missing')
+             if 'Error: Title Missing' not in parsed_data['generated_title_tag']: errors.append("Defaulted Title Tag to SEO H1.")
+        if not parsed_data.get('generated_meta_description'):
+             parsed_data['generated_meta_description'] = "Read the latest AI and Technology news from " + YOUR_WEBSITE_NAME
+             errors.append("Defaulted Meta Description.")
+        if not parsed_data.get('generated_json_ld'): parsed_data['generated_json_ld'] = '<script type="application/ld+json">{}</script>' 
 
         if not parsed_data.get('generated_article_body_md') or not parsed_data.get('generated_seo_h1') or "Error: Title Missing" in parsed_data.get('generated_title_tag',''):
-            final_error_message = f"Critical parsing failure. Errors: {'; '.join(errors or ['Unknown'])}"
-            logger.error(final_error_message); logger.debug(f"Failed response for parsing:\n{response_text[:1000]}...")
+            final_error_message = f"Critical parsing failure: Body or H1/Title missing or invalid. Errors: {'; '.join(errors or ['Unknown parsing error'])}"
+            logger.error(final_error_message); logger.debug(f"Failed response content for parsing:\n{response_text[:1000]}...") 
             return None, final_error_message
         return parsed_data, ("; ".join(errors) if errors else None)
-    except Exception as e:
-        logger.exception(f"Critical parsing exception: {e}")
-        return None, f"Major parsing exception: {e}"
+    except Exception as e: logger.exception(f"Critical parsing exception: {e}"); return None, f"Major parsing exception: {e}"
 
 # --- Main Agent Function ---
 def run_seo_article_agent(article_data):
@@ -310,120 +312,86 @@ def run_seo_article_agent(article_data):
     content_to_process = article_data.get('content_for_processing')
 
     if not content_to_process:
-        error_msg = f"Missing 'content_for_processing' for ID {article_id}."
-        logger.error(error_msg)
-        article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg
-        return article_data
+        error_msg = f"Missing 'content_for_processing' for article ID {article_id}."
+        logger.error(error_msg); article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg; return article_data
 
-    primary_keyword = article_data.get('filter_verdict', {}).get('primary_topic_keyword', article_data.get('title','Untitled Article'))
-    article_data['primary_keyword'] = primary_keyword 
+    primary_keyword = article_data.get('filter_verdict', {}).get('primary_topic_keyword')
+    if not primary_keyword: 
+        primary_keyword = article_data.get('title','Untitled Article')
+        logger.warning(f"Missing primary_topic_keyword for {article_id}. Using article title as primary keyword: '{primary_keyword}'")
+        article_data['primary_keyword'] = primary_keyword 
 
-    generated_tags = article_data.get('researched_keywords', [primary_keyword] if primary_keyword else [])
+    generated_tags = article_data.get('researched_keywords', []) 
+    if not generated_tags and primary_keyword: generated_tags = [primary_keyword]
     secondary_keywords = [tag for tag in generated_tags if tag.lower() != primary_keyword.lower()][:3]
     secondary_keywords_list_str = ", ".join(secondary_keywords)
     all_valid_keywords_for_json_ld = [str(k).strip() for k in generated_tags if k and str(k).strip()]
-    all_generated_keywords_json = json.dumps(list(set(all_valid_keywords_for_json_ld)))
+    all_generated_keywords_json = json.dumps(list(set(all_valid_keywords_for_json_ld))) 
 
     input_data_for_prompt = {
         "article_title_from_source": article_data.get('title', 'Untitled Article'), 
-        "article_content_for_processing": content_to_process,
-        "source_article_url": article_data.get('link', '#'),
-        "target_keyword": primary_keyword,
-        "secondary_keywords_list_str": secondary_keywords_list_str,
-        "article_image_url": article_data.get('selected_image_url', ''),
-        "author_name": article_data.get('author', YOUR_WEBSITE_NAME),
+        "article_content_for_processing": content_to_process, "source_article_url": article_data.get('link', '#'),
+        "target_keyword": primary_keyword, "secondary_keywords_list_str": secondary_keywords_list_str,
+        "article_image_url": article_data.get('selected_image_url', ''), 
+        "author_name": article_data.get('author', YOUR_WEBSITE_NAME), 
         "current_date_iso": article_data.get('published_iso') or datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-        "your_website_name": YOUR_WEBSITE_NAME,
-        "your_website_logo_url": YOUR_WEBSITE_LOGO_URL,
+        "your_website_name": YOUR_WEBSITE_NAME, "your_website_logo_url": YOUR_WEBSITE_LOGO_URL,
         "all_generated_keywords_json": all_generated_keywords_json
     }
-    for key in input_data_for_prompt:
-        if input_data_for_prompt[key] is None: input_data_for_prompt[key] = '' 
+    critical_fields_for_format = ["article_title_from_source", "article_content_for_processing", "source_article_url", "target_keyword", "secondary_keywords_list_str", "article_image_url", "author_name", "current_date_iso", "your_website_name", "your_website_logo_url", "all_generated_keywords_json"]
+    for key in critical_fields_for_format:
+        if input_data_for_prompt[key] is None: logger.warning(f"Input field '{key}' for SEO prompt is None for article {article_id}. Replacing with empty string or default."); input_data_for_prompt[key] = '' 
 
     try:
         formatted_system_prompt = SEO_PROMPT_SYSTEM.replace("{YOUR_WEBSITE_NAME}", YOUR_WEBSITE_NAME)
         user_prompt = SEO_PROMPT_USER_TEMPLATE.format(**input_data_for_prompt)
     except KeyError as e:
-        logger.exception(f"KeyError formatting SEO prompt for {article_id}: {e}.")
-        article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = f"Prompt template error: {e}"
-        return article_data
+        logger.exception(f"KeyError formatting SEO prompt for article {article_id}: {e}. Check template variables.")
+        article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = f"Prompt template formatting error: {e}"; return article_data
 
-    logger.info(f"Running SEO agent for {article_id} (Revised FAQ Prompt)...")
+    logger.info(f"Running SEO agent for {article_id} (In-article ad placeholder update)...")
     raw_response_content = call_deepseek_api(formatted_system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE, temperature=TEMPERATURE)
 
     if not raw_response_content:
-        error_msg = f"SEO Agent API call failed for ID: {article_id}."
-        logger.error(error_msg)
-        article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg
-        return article_data
-    
-    parsed_results, error_msg = parse_seo_agent_response(raw_response_content)
-    article_data['seo_agent_results'] = parsed_results
-    article_data['seo_agent_error'] = error_msg
+        error_msg = "SEO Agent API call failed or returned empty content."
+        logger.error(f"{error_msg} (Article ID: {article_id})."); article_data['seo_agent_results'] = None; article_data['seo_agent_error'] = error_msg; return article_data
 
-    if parsed_results is None: logger.error(f"Failed parse SEO response for {article_id}: {error_msg}"); article_data['seo_agent_raw_response_on_parse_fail'] = raw_response_content 
-    elif error_msg: logger.warning(f"SEO parsing for {article_id} with non-critical errors: {error_msg}")
+    logger.debug(f"Raw SEO Agent Response for {article_id} (first 1500 chars):\n{raw_response_content[:1500]}...")
+    parsed_results, error_msg = parse_seo_agent_response(raw_response_content)
+    article_data['seo_agent_results'] = parsed_results; article_data['seo_agent_error'] = error_msg
+
+    if parsed_results is None: logger.error(f"Failed to parse SEO agent response for {article_id}: {error_msg}"); article_data['seo_agent_raw_response_on_parse_fail'] = raw_response_content 
+    elif error_msg: logger.warning(f"SEO parsing for {article_id} completed with non-critical errors: {error_msg}")
     else: logger.info(f"Successfully generated and parsed SEO content for {article_id}.")
 
     if parsed_results and parsed_results.get('generated_seo_h1'):
         new_title = parsed_results['generated_seo_h1']
-        if article_data.get('title') != new_title: 
-            logger.info(f"Updating article title for {article_id} with SEO H1: '{new_title}' (was: '{article_data.get('title')}')")
-            article_data['title'] = new_title
-    elif not article_data.get('title'): article_data['title'] = "Untitled - SEO Error"
+        if article_data.get('title') != new_title: logger.info(f"Updating article title for {article_id} with generated SEO H1: '{new_title}' (was: '{article_data.get('title')}')"); article_data['title'] = new_title
+    elif not article_data.get('title'): article_data['title'] = "Untitled Article - Processing Error"
     return article_data
 
 # --- Standalone Execution (for testing) ---
 if __name__ == "__main__":
-    # ... (standalone test code remains the same)
     logging.getLogger().setLevel(logging.DEBUG)
     logger.setLevel(logging.DEBUG)
-
-    if not YOUR_WEBSITE_LOGO_URL:
-        logger.warning("YOUR_WEBSITE_LOGO_URL is not set in .env, JSON-LD publisher logo will be empty.")
-
+    if not YOUR_WEBSITE_LOGO_URL: logger.warning("YOUR_WEBSITE_LOGO_URL is not set in .env, JSON-LD publisher logo will be empty.")
     test_article = {
-        'id': 'test-seo-006', # New ID for testing
-        'title': "AI Helps Discover New Materials", 
-        'content_for_processing': """
-A new AI model, MatDiscover, has been used by researchers to identify over 2 million hypothetical new crystal structures. 
-This significantly accelerates the process of materials discovery, which traditionally relies on slow trial-and-error or computationally intensive simulations.
-MatDiscover was trained on a vast database of known materials and their properties. It can predict the stability of novel atomic arrangements.
-From its predictions, several hundred candidates were synthesized and tested, with a high success rate in creating stable new materials.
-One promising discovery is a new type of transparent conductor, potentially useful for solar cells and displays.
-The team plans to open-source the model and the database of predicted structures to foster further research.
-Challenges remain in scaling up synthesis and thorough characterization of all promising candidates.
-This development is seen as a major step towards AI-driven autonomous materials science.
-Source: Example News Site about Materials AI.
-""",
-        'link': "https://example.com/matdiscover-ai-news",
-        'selected_image_url': "https://example.com/matdiscover_image.jpg",
+        'id': 'test-seo-006-in-article-ad', 'title': "AI Image Generation Hits New Photorealism Levels", 
+        'content_for_processing': "Recent advancements in generative AI models for image creation have achieved unprecedented levels of photorealism. Companies like XYZ Corp and AlphaBeta Inc. released new versions of their tools, 'Imagina' and 'PixelPerfector' respectively. These models can now generate highly detailed images from complex text prompts, almost indistinguishable from real photographs. This leap forward is attributed to larger training datasets and innovative diffusion techniques. Experts predict a major impact on creative industries, marketing, and even scientific visualization. However, concerns about misuse for deepfakes and misinformation are also growing. The key challenge remains ethical deployment and robust detection methods. The models are also being used for creating virtual environments for gaming.",
+        'link': "https://example.com/ai-photorealism-news", 'selected_image_url': "https://example.com/photoreal.jpg",
         'published_iso': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-        'filter_verdict': {
-            'primary_topic_keyword': 'AI materials discovery'
-        },
-        'researched_keywords': ['AI materials discovery', 'MatDiscover AI', 'crystal structure prediction', 'AI in materials science', 'new material synthesis AI', 'transparent conductor AI', 'autonomous materials research']
+        'filter_verdict': {'primary_topic_keyword': 'AI photorealism'},
+        'researched_keywords': ['AI photorealism', 'generative AI images', 'Imagina AI', 'PixelPerfector', 'AI creative tools', 'diffusion models', 'AI ethics image generation']
     }
-
-    logger.info("\n--- Running SEO Article Agent Standalone Test (Revised FAQ Prompt) ---")
+    logger.info("\n--- Running SEO Article Agent Standalone Test (In-Article Ad Placeholder) ---")
     result_article = run_seo_article_agent(test_article.copy())
-
     if result_article.get('seo_agent_results'):
-        print("\n--- Generated SEO Content ---")
-        print(f"Title Tag: {result_article['seo_agent_results'].get('generated_title_tag')}")
-        print(f"Meta Desc: {result_article['seo_agent_results'].get('generated_meta_description')}")
-        print(f"SEO H1: {result_article['seo_agent_results'].get('generated_seo_h1')}")
-        print(f"Final Article Title in data: {result_article.get('title')}")
-        print(f"\nArticle Body (MD - first 500 chars):\n{result_article['seo_agent_results'].get('generated_article_body_md')[:500]}...")
-        if "<div class=\"faq-section\">" in result_article['seo_agent_results'].get('generated_article_body_md', ''):
-            print("\nFAQ section was generated by agent.")
-        else:
-            print("\nFAQ section was NOT generated by agent.")
-        if result_article.get('seo_agent_error'):
-            print(f"\nParsing/Validation Warnings: {result_article['seo_agent_error']}")
-    else:
-        print("\n--- SEO Agent FAILED ---")
-        print(f"Error: {result_article.get('seo_agent_error')}")
-        if result_article.get('seo_agent_raw_response_on_parse_fail'):
-            print(f"Raw Response Snippet:\n{result_article['seo_agent_raw_response_on_parse_fail'][:500]}...")
+        print("\n--- Generated SEO Content ---"); print(f"Title Tag: {result_article['seo_agent_results'].get('generated_title_tag')}"); print(f"Meta Desc: {result_article['seo_agent_results'].get('generated_meta_description')}"); print(f"SEO H1: {result_article['seo_agent_results'].get('generated_seo_h1')}"); print(f"Final Article Title in data: {result_article.get('title')}")
+        md_body = result_article['seo_agent_results'].get('generated_article_body_md','')
+        print(f"\nArticle Body (MD) (showing full for ad placeholder check):\n{md_body}")
+        if "<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->" in md_body: print("\nSUCCESS: In-article ad placeholder found in MD body.")
+        else: print("\nWARNING: In-article ad placeholder NOT found in MD body.")
+        if result_article.get('seo_agent_error'): print(f"\nParsing/Validation Warnings: {result_article['seo_agent_error']}")
+    else: print("\n--- SEO Agent FAILED ---"); print(f"Error: {result_article.get('seo_agent_error')}");
+    if result_article.get('seo_agent_raw_response_on_parse_fail'): print(f"Raw Response Snippet:\n{result_article['seo_agent_raw_response_on_parse_fail'][:500]}...")
     logger.info("\n--- SEO Article Agent Standalone Test Complete ---")

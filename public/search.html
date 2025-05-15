@@ -20,8 +20,8 @@
     <!-- Add Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> <!-- Adjust path relative to public root -->
-    <!-- Maybe add noindex tag initially if pages are thin content until populated? -->
-    <!-- <meta name="robots" content="noindex"> -->
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998" crossorigin="anonymous"></script>
      <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
 <script>
@@ -31,8 +31,6 @@
 
   gtag('config', 'G-WGJ5MFBC6X');
 </script>
-    <!-- Google AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -42,24 +40,25 @@
 
     <!-- Navbar Placeholder -->
     <header id="navbar-placeholder">
+        <!-- For now, maybe just paste the navbar.html content here directly -->
+        <!-- Or we adapt script.js to load it -->
     </header>
-
-    <!-- Ad Slot: Grid suggestions under navbar, above title -->
-    <div class="ad-slot-container page-top-ad" style="text-align: center; margin-top: 20px; margin-bottom: 20px; padding: 0 15px;">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
-             crossorigin="anonymous"></script>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-format="autorelaxed"
-             data-ad-client="ca-pub-8839663991354998"
-             data-ad-slot="6562367864"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
 
     <main class="container page-container"> 
         <h1 id="page-title">Loading...</h1> 
+
+        <!-- Wide Ad Slot for Generic Pages -->
+        <section class="ad-slot-container" style="text-align: center; margin-top: 20px; margin-bottom: 25px;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8839663991354998"
+                 data-ad-slot="1948351346" 
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
 
         <div id="page-content-area" class="latest-news-grid"> 
             <p class="placeholder">Loading content...</p>
@@ -69,6 +68,5 @@
     </main>
 
     <script src="js/script.js"></script> 
-
 </body>
 </html>
