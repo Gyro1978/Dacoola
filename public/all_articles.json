@@ -3670,30 +3670,6 @@
       "trend_score": 14.99
     },
     {
-      "id": "058aaaea5035b681868a968469fd5c68c02dd2b05fc691f027d038595f3447ff",
-      "title": "How Deutsche Bahn Revolutionizes Rail Operations with Time Series Forecasting AI",
-      "link": "articles/how-deutsche-bahn-revolutionizes-rail-operations-with-time-series-forecasting-ai.html",
-      "published_iso": "2025-05-07T15:22:11Z",
-      "summary_short": "Discover how Deutsche Bahn leverages time series forecasting AI with Chronos models on Amazon Bedrock for faster, more accurate predictions.",
-      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/04/28/ml-18537-architecture-1260x353.png",
-      "topic": "AI Models",
-      "is_breaking": false,
-      "tags": [
-        "Time Series Forecasting AI",
-        "Deutsche Bahn AI Transformation",
-        "Chronos-Bolt Model",
-        "AI in Rail Logistics",
-        "Transformer-Based Forecasting",
-        "Zero-Shot Time Series Prediction",
-        "Amazon Bedrock Marketplace",
-        "AI for Predictive Maintenance",
-        "AutoARIMA vs AI",
-        "Future of AI in Transportation"
-      ],
-      "audio_url": null,
-      "trend_score": 15.0
-    },
-    {
       "id": "558a0d750af22631dbfdeac04bc20f20b5a17fffb24d727ebe4b5938f5525cfe",
       "title": "Mistral AI Enterprise Models Revolutionize Business AI with Le Chat & Medium 3",
       "link": "articles/mistral-ai-enterprise-models-revolutionize-business-ai-with-le-chat-&-medium-3.html",
