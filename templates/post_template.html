@@ -17,7 +17,7 @@
     <title>{{ PAGE_TITLE }} - Dacoola</title>
     <meta name="description" content="{{ META_DESCRIPTION }}">
     {% if AUTHOR_NAME %}<meta name="author" content="{{ AUTHOR_NAME }}">{% endif %}
-    {% if META_KEYWORDS %}<meta name="keywords" content="{{ META_KEYWORDS }}">{% endif %}
+    {% if META_KEYWORDS %}<meta name="keywords" content="{{ META_KEYWORDS }}">{% endif %} <!-- This variable might not be set, META_KEYWORDS_LIST is used below -->
 
     <!-- *** CANONICAL URL *** -->
     <link rel="canonical" href="{{ CANONICAL_URL }}">
@@ -52,31 +52,9 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
      crossorigin="anonymous"></script>
 
-    <!-- *** JSON-LD Structured Data *** -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": "{{ ARTICLE_SEO_H1 | default(ARTICLE_HEADLINE) | escapejs }}",
-      "description": "{{ META_DESCRIPTION | escapejs }}",
-      "keywords": {{ META_KEYWORDS_LIST | tojson | safe }},
-      "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ CANONICAL_URL | escapejs }}" },
-      "image": [
-        {
-          "@type": "ImageObject",
-          "url": "{{ IMAGE_URL | escapejs }}"
-        }
-      ],
-      "datePublished": "{{ PUBLISH_ISO_FOR_META }}",
-      "dateModified": "{{ PUBLISH_ISO_FOR_META }}",
-      "author": { "@type": "Person", "name": "{{ AUTHOR_NAME | default('AI News Team') | escapejs }}" },
-      "publisher": {
-        "@type": "Organization",
-        "name": "{{ SITE_NAME | escapejs }}",
-        "logo": { "@type": "ImageObject", "url": "{{ YOUR_WEBSITE_LOGO_URL | escapejs }}" }
-      }
-    }
-    </script>
+    <!-- *** JSON-LD Structured Data (from seo_agent_results.generated_json_ld_full_script_tag) *** -->
+    {{ JSON_LD_SCRIPT_BLOCK | safe }}
+
 
     <!-- Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
@@ -171,8 +149,10 @@
                     {% endset %}
 
                     {# Process the main body, replacing the placeholder for the dynamic in-article ad #}
-                    {% set processed_body_with_dynamic_ad = ARTICLE_BODY_HTML | replace('<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->', ইন_আর্টিকেল_এড_এইচটিএমএল) %}
-
+                    {# --- MODIFIED LINE HERE --- #}
+                    {% set processed_body_with_dynamic_ad = (ARTICLE_BODY_HTML | safe | replace('<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->', ইন_আর্টিকেল_এড_এইচটিএমএল)) %}
+                    {# --- END MODIFIED LINE --- #}
+                    
                     {# Now, check if FAQ section exists in this processed body to place an ad before it #}
                     {% set faq_heading_html_marker = '<h4>Frequently Asked Questions</h4>' %} {# This is how Markdown renders `#### Title` #}
                     

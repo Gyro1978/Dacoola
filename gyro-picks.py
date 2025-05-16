@@ -1,4 +1,4 @@
-# gyro-picks.py (Streamlined - Automated Title & Sitemap)
+# gyro-picks.py (Streamlined - Automated Title & Sitemap - API Calls Made Here)
 import sys
 import os
 import json
@@ -9,12 +9,11 @@ import time
 from datetime import datetime, timezone, timedelta
 from urllib.parse import urlparse, urljoin
 import markdown # For converting MD to HTML
+import html     # <--- ADDED THIS IMPORT
 
 # --- Path Setup & Project Root ---
-# Assuming this script is in the project root along with 'src', 'data', 'public', 'templates'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-# If your 'src' directory is indeed a subdirectory, and this script is in the root:
-sys.path.insert(0, os.path.join(PROJECT_ROOT)) # Add root to path so 'src.module' works
+sys.path.insert(0, os.path.join(PROJECT_ROOT))
 
 from dotenv import load_dotenv
 
@@ -22,8 +21,8 @@ try:
     from src.scrapers.news_scraper import get_full_article_content
     from src.scrapers.image_scraper import find_best_image, scrape_source_for_image
     from src.agents.filter_news_agent import run_filter_agent
-    from src.agents.keyword_research_agent import run_keyword_research_agent # This is the updated one
-    from src.agents.seo_article_generator_agent import run_seo_article_agent # This is the updated one
+    from src.agents.keyword_research_agent import run_keyword_research_agent
+    from src.agents.seo_article_generator_agent import run_seo_article_agent
     from generate_sitemap import generate_sitemap as run_sitemap_generator
 except ImportError as e:
     print(f"FATAL IMPORT ERROR: {e}. Ensure 'src' directory is in the project root and PYTHONPATH is correct.")
@@ -43,8 +42,11 @@ ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
 AUTHOR_NAME_DEFAULT = os.getenv('AUTHOR_NAME', 'Gyro Pick Team')
 YOUR_WEBSITE_NAME = os.getenv('YOUR_WEBSITE_NAME', 'Dacoola')
 YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
-raw_base_url = os.getenv('YOUR_SITE_BASE_URL', '')
-YOUR_SITE_BASE_URL = (raw_base_url.rstrip('/') + '/') if raw_base_url else ''
+raw_base_url_env = os.getenv('YOUR_SITE_BASE_URL', '')
+YOUR_SITE_BASE_URL = (raw_base_url_env.rstrip('/') + '/') if raw_base_url_env else ''
+
+BASE_URL_FOR_CANONICAL_PLACEHOLDER_CHECK = os.getenv('YOUR_SITE_BASE_URL', 'https://your-site-url.com')
+
 
 if not YOUR_SITE_BASE_URL:
     print("ERROR: YOUR_SITE_BASE_URL not set in .env. Sitemap and canonical URLs will be affected.")
@@ -71,7 +73,7 @@ except Exception as e:
 # --- Logging Setup ---
 log_file_path = os.path.join(PROJECT_ROOT, 'gyro-picks.log')
 logging.basicConfig(
-    level=logging.DEBUG, # Changed to DEBUG to see new log messages
+    level=logging.DEBUG,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),
@@ -80,7 +82,7 @@ logging.basicConfig(
     force=True
 )
 logger = logging.getLogger('GyroPicks')
-logger.setLevel(logging.DEBUG) # Ensure this logger also respects DEBUG
+logger.setLevel(logging.DEBUG)
 
 
 # --- Helper Functions ---
@@ -90,15 +92,14 @@ def ensure_directories():
     logger.info("Ensured core directories exist.")
 
 def generate_article_id(url_for_hash):
-    """Generates a unique ID for the manually picked article."""
     timestamp = datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')
     url_hash_part = hashlib.sha1(url_for_hash.encode('utf-8')).hexdigest()[:8]
     return f"gyro-{timestamp}-{url_hash_part}"
 
 def get_user_inputs_for_gyro():
-    """Gets URL, breaking, trending, and optional image URL from user."""
     urls = []
-    print("\nPaste article URL(s) for Gyro Pick. Press Enter after each. Type 'done' when finished.")
+    print("\n--- Gyro Pick - Manual Article Processor (Full Pipeline) ---")
+    print("Paste article URL(s) for Gyro Pick. Press Enter after each. Type 'done' when finished.")
     while True:
         url_input = input(f"URL {len(urls) + 1} (or 'done'): ").strip()
         if url_input.lower() == 'done':
@@ -225,7 +226,7 @@ def render_gyro_pick_html(template_variables, slug_for_filename):
         html_output_content = template.render(template_variables)
 
         safe_filename_base = slug_for_filename if slug_for_filename else template_variables.get('id', 'untitled-gyro-pick')
-        temp_slug = re.sub(r'[^\w\s-]', '', safe_filename_base.lower()).strip()
+        temp_slug = re.sub(r'[^\w\s-]', '', str(safe_filename_base).lower()).strip()
         temp_slug = re.sub(r'[-\s]+', '-', temp_slug)
         safe_filename = temp_slug[:80] or template_variables.get('id', 'gyro-pick-error-slug')
 
@@ -297,7 +298,7 @@ def update_all_articles_list_json(new_gyro_pick_summary):
 
 # --- Main Processing Logic for Gyro Picks ---
 def process_gyro_pick():
-    logger.info("--- Gyro Picks - Manual Article Processor ---")
+    logger.info("--- Gyro Picks - Manual Article Processor (Full Pipeline) ---")
     ensure_directories()
 
     article_urls, user_is_breaking, user_is_trending, user_img_url = get_user_inputs_for_gyro()
@@ -337,7 +338,6 @@ def process_gyro_pick():
     if not filtered_article_data or filtered_article_data.get('filter_verdict') is None:
         logger.error(f"Filter Agent failed for Gyro Pick {gyro_pick_id}. ABORTING.")
         return
-
     filter_agent_verdict = filtered_article_data['filter_verdict']
     logger.info(f"Filter Agent classified Gyro Pick as: {filter_agent_verdict.get('importance_level', 'N/A')}.")
 
@@ -351,20 +351,16 @@ def process_gyro_pick():
 
     researched_kw_list = keywords_article_data.get('researched_keywords', [])
     primary_kw_from_filter = keywords_article_data.get('primary_keyword')
-
     final_tags_list = []
     if primary_kw_from_filter and isinstance(primary_kw_from_filter, str) and len(primary_kw_from_filter.strip()) > 1:
         final_tags_list.append(primary_kw_from_filter.strip())
-
     if researched_kw_list:
-        for kw in researched_kw_list:
-            if kw and isinstance(kw, str) and len(kw.strip()) > 1 and kw.strip().lower() not in (t.lower() for t in final_tags_list):
-                final_tags_list.append(kw.strip())
-
+        for kw_item in researched_kw_list: # Corrected variable name
+            if kw_item and isinstance(kw_item, str) and len(kw_item.strip()) > 1 and kw_item.strip().lower() not in (t.lower() for t in final_tags_list):
+                final_tags_list.append(kw_item.strip())
     if not final_tags_list:
         logger.error(f"No usable keywords/tags found for {gyro_pick_id} after keyword research. Using generic tags.")
         final_tags_list = [keywords_article_data.get('topic', "Tech News"), "AI Insights"]
-
     keywords_article_data['generated_tags'] = final_tags_list[:15]
 
     seo_article_data = run_seo_article_agent(keywords_article_data.copy())
@@ -379,57 +375,59 @@ def process_gyro_pick():
     logger.info(f"Final AI Generated Title for Gyro Pick {gyro_pick_id}: '{final_seo_title}'")
 
     gyro_trend_score = 0.0
-    if seo_article_data.get('is_breaking', False):
-        gyro_trend_score += 10.0
-    else:
-        gyro_trend_score += 5.0
-    if user_is_trending:
-        gyro_trend_score += 7.0
+    if seo_article_data.get('is_breaking', False): gyro_trend_score += 10.0
+    else: gyro_trend_score += 5.0
+    if user_is_trending: gyro_trend_score += 7.0
     gyro_trend_score += float(len(seo_article_data.get('generated_tags', []))) * 0.3
     seo_article_data['trend_score'] = round(max(0.0, gyro_trend_score), 2)
 
-    slug_for_file = re.sub(r'[<>:"/\\|?*%\.\'"]+', '', final_seo_title).strip().lower().replace(' ', '-')
+    slug_for_file = re.sub(r'[<>:"/\\|?*%\.\'"]+', '', str(final_seo_title)).strip().lower().replace(' ', '-')
     seo_article_data['slug'] = re.sub(r'-+', '-', slug_for_file).strip('-')[:80] or f'gyro-pick-{gyro_pick_id}'
 
     article_relative_web_path = f"articles/{seo_article_data['slug']}.html"
-    # Construct canonical URL carefully
     if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/':
         canonical_page_url = urljoin(YOUR_SITE_BASE_URL, article_relative_web_path.lstrip('/'))
-    else: # Fallback for local or unconfigured base URL
-        canonical_page_url = f"/{article_relative_web_path.lstrip('/')}"
+    else: canonical_page_url = f"/{article_relative_web_path.lstrip('/')}"
 
-
-    # Prepare for HTML rendering from Markdown
     article_body_markdown = seo_agent_results.get('generated_article_body_md', '')
-
-    # --- Add logging for debugging ---
     logger.debug(f"======= RAW MARKDOWN FROM LLM (GyroPick ID: {gyro_pick_id}) =======")
     logger.debug(article_body_markdown[:1000] + "..." if len(article_body_markdown) > 1000 else article_body_markdown)
     logger.debug(f"======= END RAW MARKDOWN FROM LLM =======")
-    # --- End logging ---
 
     article_body_html_content = markdown.markdown(
         article_body_markdown,
-        extensions=['fenced_code', 'tables', 'nl2br', 'sane_lists', 'extra'] # ADDED 'extra'
+        extensions=['fenced_code', 'tables', 'nl2br', 'sane_lists', 'extra']
     )
+    
+    # --- ADDED UNESCAPE STEP ---
+    logger.critical(f"CRITICAL DEBUG - article_body_html_content PRE-UNESCAPE (first 500 chars): {article_body_html_content[:500]}")
+    if "<" in article_body_html_content or ">" in article_body_html_content or "&" in article_body_html_content: # Check for & too
+        logger.warning(f"Detected HTML entities in markdown output for {gyro_pick_id}. Attempting to unescape.")
+        article_body_html_content = html.unescape(article_body_html_content)
+        logger.critical(f"CRITICAL DEBUG - article_body_html_content POST-UNESCAPE (first 500 chars): {article_body_html_content[:500]}")
+    # --- END ADDED UNESCAPE STEP ---
 
-    # --- Add logging for debugging ---
-    logger.debug(f"======= HTML CONTENT AFTER markdown.markdown() (GyroPick ID: {gyro_pick_id}) =======")
+    logger.debug(f"======= HTML CONTENT AFTER markdown.markdown() (and potential unescape) (GyroPick ID: {gyro_pick_id}) =======")
     logger.debug(article_body_html_content[:1000] + "..." if len(article_body_html_content) > 1000 else article_body_html_content)
     logger.debug(f"======= END HTML CONTENT AFTER markdown.markdown() =======")
-    # --- End logging ---
 
     article_tags_html_content = format_tags_for_html(seo_article_data.get('generated_tags', []))
     publish_datetime_obj = get_article_sort_key(seo_article_data)
 
-    # Update JSON-LD with final canonical URL if placeholder was used
     raw_json_ld = seo_agent_results.get('generated_json_ld_raw', '{}')
-    placeholder_in_json_ld = f"{BASE_URL_FOR_CANONICAL.rstrip('/')}/articles/{{SLUG_PLACEHOLDER}}" # Match placeholder from SEO agent
+    placeholder_in_json_ld = f"{BASE_URL_FOR_CANONICAL_PLACEHOLDER_CHECK.rstrip('/')}/articles/{{SLUG_PLACEHOLDER}}"
+
     if placeholder_in_json_ld in raw_json_ld:
         final_json_ld_str = raw_json_ld.replace(placeholder_in_json_ld, canonical_page_url)
         final_json_ld_script_tag = f'<script type="application/ld+json">\n{final_json_ld_str}\n</script>'
+        logger.info(f"Replaced JSON-LD placeholder for {gyro_pick_id} with actual canonical URL: {canonical_page_url}")
     else:
         final_json_ld_script_tag = seo_agent_results.get('generated_json_ld_full_script_tag', '<script type="application/ld+json">{}</script>')
+        expected_placeholder_debug = f"{BASE_URL_FOR_CANONICAL_PLACEHOLDER_CHECK.rstrip('/')}/articles/{{SLUG_PLACEHOLDER}}"
+        if "{SLUG_PLACEHOLDER}" in raw_json_ld and expected_placeholder_debug not in raw_json_ld:
+             logger.warning(f"JSON-LD for {gyro_pick_id} contains '{{SLUG_PLACEHOLDER}}' but not the expected full placeholder '{expected_placeholder_debug}'. Raw JSON-LD might be malformed or base URL used by SEO agent differs. Raw JSON-LD prefix: {raw_json_ld[:250]}...")
+        elif "{SLUG_PLACEHOLDER}" not in raw_json_ld:
+             logger.info(f"JSON-LD placeholder '{expected_placeholder_debug}' not found in raw_json_ld for {gyro_pick_id}. Using existing full script tag.")
 
 
     template_render_variables = {
@@ -443,11 +441,11 @@ def process_gyro_pick():
         'IMAGE_URL': seo_article_data.get('selected_image_url', ''),
         'IMAGE_ALT_TEXT': final_seo_title,
         'PUBLISH_ISO_FOR_META': seo_article_data.get('published_iso', current_time_iso_str),
-        'JSON_LD_SCRIPT_BLOCK': final_json_ld_script_tag, # Use updated JSON-LD
-        'ARTICLE_HEADLINE': final_seo_title, # This is the AI generated H1
-        'ARTICLE_SEO_H1': final_seo_title, # For consistency if template uses this key
+        'JSON_LD_SCRIPT_BLOCK': final_json_ld_script_tag,
+        'ARTICLE_HEADLINE': final_seo_title,
+        'ARTICLE_SEO_H1': final_seo_title,
         'PUBLISH_DATE': publish_datetime_obj.strftime('%B %d, %Y') if publish_datetime_obj != datetime(1970,1,1,tzinfo=timezone.utc) else "Date Not Available",
-        'ARTICLE_BODY_HTML': article_body_html_content,
+        'ARTICLE_BODY_HTML': article_body_html_content, # This should now be correctly unescaped HTML
         'ARTICLE_TAGS_HTML': article_tags_html_content,
         'SOURCE_ARTICLE_URL': seo_article_data.get('link', '#'),
         'ARTICLE_TITLE': final_seo_title,
@@ -490,6 +488,10 @@ def process_gyro_pick():
 
 
 if __name__ == "__main__":
+    if not os.getenv('DEEPSEEK_API_KEY'):
+        logger.error("DEEPSEEK_API_KEY is not set in the environment. GyroPicks full processing pipeline cannot run.")
+        sys.exit(1)
+
     process_gyro_pick()
 
     if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/':
