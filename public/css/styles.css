@@ -488,3 +488,113 @@ main.error-page-main { display: flex; flex-direction: column; align-items: cente
 .ad-slot-container {
     /* border: 1px dashed #555; */
 }
+
+/* ... (your existing styles) ... */
+
+/* --- Main Article Styling --- */
+/* ... (existing #article-body styles) ... */
+
+/* Table Styling */
+#article-body table {
+    width: 100%;
+    margin-bottom: 1.5em;
+    border-collapse: collapse;
+    border: 1px solid var(--border-color);
+    font-size: 0.9em; /* Slightly smaller for tables */
+}
+#article-body th, 
+#article-body td {
+    border: 1px solid var(--border-color);
+    padding: 10px 12px; /* Increased padding */
+    text-align: left;
+    vertical-align: top; /* Align content to the top of cells */
+}
+#article-body th {
+    background-color: var(--bg-tertiary);
+    color: var(--text-light);
+    font-weight: 600;
+}
+#article-body tr:nth-child(even) {
+    background-color: rgba(44, 47, 51, 0.3); /* Subtle striping for even rows */
+}
+#article-body tr:hover {
+    background-color: rgba(var(--accent-blue-rgb, 0, 174, 255), 0.1); /* Use accent blue with opacity */
+}
+#article-body table caption {
+    caption-side: bottom;
+    text-align: center;
+    font-style: italic;
+    color: var(--text-muted);
+    padding: 8px;
+    font-size: 0.85em;
+}
+
+/* Blockquote Styling */
+#article-body blockquote {
+    margin: 1.5em 0;
+    padding: 15px 20px;
+    border-left: 5px solid var(--accent-blue);
+    background-color: var(--bg-tertiary);
+    color: var(--text-light);
+    font-style: italic;
+    border-radius: 0 4px 4px 0;
+}
+#article-body blockquote p {
+    margin-bottom: 0.5em; /* Adjust paragraph spacing within blockquotes */
+    font-size: 1em; /* Reset font size if needed */
+}
+#article-body blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* Code Block Styling (already present, ensure it's good) */
+#article-body pre { 
+    background-color: var(--bg-dark); 
+    padding: 15px; /* More padding */
+    border-radius: 6px; /* Slightly more rounded */
+    overflow-x: auto; 
+    margin-bottom: 1.5em; 
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow */
+}
+#article-body pre code { 
+    background: none; 
+    padding: 0; 
+    color: #c5c8c6; /* Light grey for code text, good contrast on dark */
+    font-size: 0.9em; /* Adjust as needed */
+    line-height: 1.5;
+    font-family: var(--font-code), Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+/* Styling for [[Internal Links]] and ((External Links)) */
+#article-body a.internal-link {
+    color: var(--accent-blue); /* Same as default links or slightly different */
+    text-decoration: none; /* Optional: underline on hover if desired */
+    border-bottom: 1px dotted var(--accent-blue); /* Subtle underline */
+}
+#article-body a.internal-link:hover {
+    color: var(--accent-blue-darker);
+    border-bottom-style: solid;
+}
+
+#article-body a.external-link {
+    color: #87CEEB; /* Sky blue, or another distinct color for external links */
+    text-decoration: none;
+    border-bottom: 1px dashed #87CEEB;
+}
+#article-body a.external-link:hover {
+    color: #6495ED; /* Cornflower blue on hover */
+    border-bottom-style: solid;
+}
+#article-body a.external-link::after {
+    content: " \f35d"; /* FontAwesome external link icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 0.8em;
+    margin-left: 3px;
+    display: inline-block;
+    text-decoration: none !important; /* Prevent icon from being underlined */
+}
+
+
+/* ... (rest of your existing styles.css) ... */

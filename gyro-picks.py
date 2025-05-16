@@ -7,9 +7,9 @@ import logging
 import re
 import time
 from datetime import datetime, timezone, timedelta
-from urllib.parse import urlparse, urljoin
-import markdown # For converting MD to HTML
-import html     # <--- ADDED THIS IMPORT
+from urllib.parse import urlparse, urljoin, quote # Added quote
+import markdown
+import html
 
 # --- Path Setup & Project Root ---
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -43,13 +43,12 @@ AUTHOR_NAME_DEFAULT = os.getenv('AUTHOR_NAME', 'Gyro Pick Team')
 YOUR_WEBSITE_NAME = os.getenv('YOUR_WEBSITE_NAME', 'Dacoola')
 YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 raw_base_url_env = os.getenv('YOUR_SITE_BASE_URL', '')
-YOUR_SITE_BASE_URL = (raw_base_url_env.rstrip('/') + '/') if raw_base_url_env else ''
-
+YOUR_SITE_BASE_URL_FOR_LINKS = (raw_base_url_env.rstrip('/') + '/') if raw_base_url_env else '/' # Used for link placeholders
 BASE_URL_FOR_CANONICAL_PLACEHOLDER_CHECK = os.getenv('YOUR_SITE_BASE_URL', 'https://your-site-url.com')
 
 
-if not YOUR_SITE_BASE_URL:
-    print("ERROR: YOUR_SITE_BASE_URL not set in .env. Sitemap and canonical URLs will be affected.")
+if not YOUR_SITE_BASE_URL_FOR_LINKS or YOUR_SITE_BASE_URL_FOR_LINKS == "/":
+    print("ERROR: YOUR_SITE_BASE_URL not set or invalid in .env. Sitemap, canonical URLs, and internal links will be affected.")
 
 # --- Jinja2 Setup ---
 try:
@@ -85,7 +84,7 @@ logger = logging.getLogger('GyroPicks')
 logger.setLevel(logging.DEBUG)
 
 
-# --- Helper Functions ---
+# --- Helper Functions (ensure_directories, generate_article_id, etc. remain the same) ---
 def ensure_directories():
     for d_path in [DATA_DIR, PROCESSED_JSON_DIR, PUBLIC_DIR, OUTPUT_HTML_DIR]:
         os.makedirs(d_path, exist_ok=True)
@@ -213,11 +212,11 @@ def format_tags_for_html(tags_list):
         return ""
     import requests
     tag_html_links = []
-    base_site_url = YOUR_SITE_BASE_URL if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else "/"
+    base_site_url = YOUR_SITE_BASE_URL_FOR_LINKS
     for tag_item in tags_list:
-        safe_tag_item = requests.utils.quote(str(tag_item))
+        safe_tag_item = quote(str(tag_item)) # Use urllib.parse.quote
         tag_page_url = urljoin(base_site_url, f"topic.html?name={safe_tag_item}")
-        tag_html_links.append(f'<a href="{tag_page_url}" class="tag-link">{tag_item}</a>')
+        tag_html_links.append(f'<a href="{tag_page_url}" class="tag-link">{html.escape(str(tag_item))}</a>') # Escape tag text
     return ", ".join(tag_html_links)
 
 def render_gyro_pick_html(template_variables, slug_for_filename):
@@ -295,6 +294,56 @@ def update_all_articles_list_json(new_gyro_pick_summary):
     except Exception as e:
         logger.error(f"Failed to save updated {os.path.basename(ALL_ARTICLES_FILE)}: {e}")
 
+# --- NEW: Link Placeholder Processing ---
+def slugify(text):
+    """Generates a URL-friendly slug from text."""
+    if not text: return "untitled"
+    text = text.lower()
+    text = re.sub(r'[^\w\s-]', '', text).strip() # Remove non-alphanumeric (except space, hyphen)
+    text = re.sub(r'[-\s]+', '-', text)       # Replace spaces/hyphens with single hyphen
+    return text[:70] # Max length for slug part
+
+def process_link_placeholders(markdown_text, base_site_url):
+    """
+    Processes [[Internal Link Text | Optional Topic/Slug]] and 
+              ((External Link Text | https://...)) placeholders in Markdown.
+    """
+    if not markdown_text:
+        return ""
+
+    # Process internal links: [[Link Text | Topic/Slug]] or [[Link Text]]
+    def replace_internal(match):
+        link_text = match.group(1).strip()
+        topic_or_slug = match.group(3).strip() if match.group(3) else None
+
+        if topic_or_slug:
+            # Assume it's a topic name, construct topic URL
+            # If it looks like a pre-made slug (e.g., ends .html or has no spaces), use as is
+            if topic_or_slug.endswith(".html") or ' ' not in topic_or_slug:
+                 href = urljoin(base_site_url, f"articles/{topic_or_slug.lstrip('/')}") if topic_or_slug.endswith(".html") else urljoin(base_site_url, f"topic.html?name={quote(topic_or_slug)}")
+            else: # Assume it's a topic name
+                href = urljoin(base_site_url, f"topic.html?name={quote(topic_or_slug)}")
+        else:
+            # Slugify the link text to create a topic URL
+            slugified_link_text = slugify(link_text)
+            href = urljoin(base_site_url, f"topic.html?name={quote(slugified_link_text)}")
+        
+        logger.debug(f"Internal link: Text='{link_text}', Target='{topic_or_slug}', Href='{href}'")
+        return f'<a href="{html.escape(href)}" class="internal-link">{html.escape(link_text)}</a>'
+
+    markdown_text = re.sub(r'\[\[\s*(.*?)\s*(?:\|\s*(.*?)\s*)?\]\]', replace_internal, markdown_text)
+
+    # Process external links: ((Link Text | URL))
+    def replace_external(match):
+        link_text = match.group(1).strip()
+        url = match.group(2).strip()
+        logger.debug(f"External link: Text='{link_text}', URL='{url}'")
+        return f'<a href="{html.escape(url)}" target="_blank" rel="noopener noreferrer" class="external-link">{html.escape(link_text)}</a>'
+
+    markdown_text = re.sub(r'\(\(\s*(.*?)\s*\|\s*(https?://.*?)\s*\)\)', replace_external, markdown_text)
+    
+    return markdown_text
+
 
 # --- Main Processing Logic for Gyro Picks ---
 def process_gyro_pick():
@@ -355,7 +404,7 @@ def process_gyro_pick():
     if primary_kw_from_filter and isinstance(primary_kw_from_filter, str) and len(primary_kw_from_filter.strip()) > 1:
         final_tags_list.append(primary_kw_from_filter.strip())
     if researched_kw_list:
-        for kw_item in researched_kw_list: # Corrected variable name
+        for kw_item in researched_kw_list:
             if kw_item and isinstance(kw_item, str) and len(kw_item.strip()) > 1 and kw_item.strip().lower() not in (t.lower() for t in final_tags_list):
                 final_tags_list.append(kw_item.strip())
     if not final_tags_list:
@@ -385,31 +434,37 @@ def process_gyro_pick():
     seo_article_data['slug'] = re.sub(r'-+', '-', slug_for_file).strip('-')[:80] or f'gyro-pick-{gyro_pick_id}'
 
     article_relative_web_path = f"articles/{seo_article_data['slug']}.html"
-    if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/':
-        canonical_page_url = urljoin(YOUR_SITE_BASE_URL, article_relative_web_path.lstrip('/'))
+    if YOUR_SITE_BASE_URL_FOR_LINKS and YOUR_SITE_BASE_URL_FOR_LINKS != '/': # Use the correct base URL variable
+        canonical_page_url = urljoin(YOUR_SITE_BASE_URL_FOR_LINKS, article_relative_web_path.lstrip('/'))
     else: canonical_page_url = f"/{article_relative_web_path.lstrip('/')}"
 
-    article_body_markdown = seo_agent_results.get('generated_article_body_md', '')
+    article_body_markdown_raw = seo_agent_results.get('generated_article_body_md', '')
     logger.debug(f"======= RAW MARKDOWN FROM LLM (GyroPick ID: {gyro_pick_id}) =======")
-    logger.debug(article_body_markdown[:1000] + "..." if len(article_body_markdown) > 1000 else article_body_markdown)
+    logger.debug(article_body_markdown_raw[:1000] + "..." if len(article_body_markdown_raw) > 1000 else article_body_markdown_raw)
     logger.debug(f"======= END RAW MARKDOWN FROM LLM =======")
 
+    # --- Process Link Placeholders BEFORE Markdown to HTML conversion ---
+    logger.info(f"Processing link placeholders for Gyro Pick {gyro_pick_id}...")
+    article_body_markdown_with_links = process_link_placeholders(article_body_markdown_raw, YOUR_SITE_BASE_URL_FOR_LINKS)
+    logger.debug(f"======= MARKDOWN AFTER LINK PLACEHOLDERS (GyroPick ID: {gyro_pick_id}) =======")
+    logger.debug(article_body_markdown_with_links[:1000] + "..." if len(article_body_markdown_with_links) > 1000 else article_body_markdown_with_links)
+    logger.debug(f"======= END MARKDOWN AFTER LINK PLACEHOLDERS =======")
+    # --- End Link Placeholder Processing ---
+
     article_body_html_content = markdown.markdown(
-        article_body_markdown,
+        article_body_markdown_with_links, # Use the version with <a href> tags already inserted
         extensions=['fenced_code', 'tables', 'nl2br', 'sane_lists', 'extra']
     )
     
-    # --- ADDED UNESCAPE STEP ---
     logger.critical(f"CRITICAL DEBUG - article_body_html_content PRE-UNESCAPE (first 500 chars): {article_body_html_content[:500]}")
-    if "<" in article_body_html_content or ">" in article_body_html_content or "&" in article_body_html_content: # Check for & too
+    if "<" in article_body_html_content or ">" in article_body_html_content or "&" in article_body_html_content:
         logger.warning(f"Detected HTML entities in markdown output for {gyro_pick_id}. Attempting to unescape.")
         article_body_html_content = html.unescape(article_body_html_content)
         logger.critical(f"CRITICAL DEBUG - article_body_html_content POST-UNESCAPE (first 500 chars): {article_body_html_content[:500]}")
-    # --- END ADDED UNESCAPE STEP ---
 
-    logger.debug(f"======= HTML CONTENT AFTER markdown.markdown() (and potential unescape) (GyroPick ID: {gyro_pick_id}) =======")
+    logger.debug(f"======= HTML CONTENT AFTER MARKDOWN & UNESCAPE (GyroPick ID: {gyro_pick_id}) =======")
     logger.debug(article_body_html_content[:1000] + "..." if len(article_body_html_content) > 1000 else article_body_html_content)
-    logger.debug(f"======= END HTML CONTENT AFTER markdown.markdown() =======")
+    logger.debug(f"======= END HTML CONTENT =======")
 
     article_tags_html_content = format_tags_for_html(seo_article_data.get('generated_tags', []))
     publish_datetime_obj = get_article_sort_key(seo_article_data)
@@ -445,7 +500,7 @@ def process_gyro_pick():
         'ARTICLE_HEADLINE': final_seo_title,
         'ARTICLE_SEO_H1': final_seo_title,
         'PUBLISH_DATE': publish_datetime_obj.strftime('%B %d, %Y') if publish_datetime_obj != datetime(1970,1,1,tzinfo=timezone.utc) else "Date Not Available",
-        'ARTICLE_BODY_HTML': article_body_html_content, # This should now be correctly unescaped HTML
+        'ARTICLE_BODY_HTML': article_body_html_content,
         'ARTICLE_TAGS_HTML': article_tags_html_content,
         'SOURCE_ARTICLE_URL': seo_article_data.get('link', '#'),
         'ARTICLE_TITLE': final_seo_title,
@@ -494,7 +549,7 @@ if __name__ == "__main__":
 
     process_gyro_pick()
 
-    if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/':
+    if YOUR_SITE_BASE_URL_FOR_LINKS and YOUR_SITE_BASE_URL_FOR_LINKS != '/':
         logger.info("--- Running Sitemap Generator Post Gyro Pick ---")
         try:
             run_sitemap_generator()

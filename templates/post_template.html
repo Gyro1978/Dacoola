@@ -1,4 +1,4 @@
-<!-- templates/post_template.html (1/1) - COMPLETE -->
+<!-- templates/post_template.html (Revised for Aggressive Safe Rendering) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,16 +13,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- *** CORE SEO & Page Info *** -->
     <title>{{ PAGE_TITLE }} - Dacoola</title>
     <meta name="description" content="{{ META_DESCRIPTION }}">
     {% if AUTHOR_NAME %}<meta name="author" content="{{ AUTHOR_NAME }}">{% endif %}
-    {% if META_KEYWORDS %}<meta name="keywords" content="{{ META_KEYWORDS }}">{% endif %} <!-- This variable might not be set, META_KEYWORDS_LIST is used below -->
+    {% if META_KEYWORDS_LIST %}<meta name="keywords" content="{{ META_KEYWORDS_LIST | join(', ') }}">{% endif %}
 
-    <!-- *** CANONICAL URL *** -->
     <link rel="canonical" href="{{ CANONICAL_URL }}">
 
-    <!-- *** OPEN GRAPH *** -->
     <meta property="og:title" content="{{ PAGE_TITLE }}">
     <meta property="og:description" content="{{ META_DESCRIPTION }}">
     <meta property="og:image" content="{{ IMAGE_URL }}">
@@ -37,26 +34,20 @@
     <meta property="article:tag" content="{{ tag }}">
     {% endfor %}
 
-    <!-- *** TWITTER CARD *** -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ PAGE_TITLE }}">
     <meta name="twitter:description" content="{{ META_DESCRIPTION }}">
     <meta name="twitter:image" content="{{ IMAGE_URL }}">
 
-    <!-- *** Stylesheets & Icons *** -->
-    <link rel="stylesheet" href="../css/styles.css"> <!-- Relative path from articles/ to public/css/ -->
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="image/png" href="https://i.ibb.co/W7xMqdT/dacoola-image-logo.png"> 
 
-    <!-- *** Google AdSense Main Script *** -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
      crossorigin="anonymous"></script>
 
-    <!-- *** JSON-LD Structured Data (from seo_agent_results.generated_json_ld_full_script_tag) *** -->
     {{ JSON_LD_SCRIPT_BLOCK | safe }}
 
-
-    <!-- Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -65,31 +56,24 @@
       gtag('config', 'G-WGJ5MFBC6X');
     </script>
     <style>
-        .ad-placeholder-style { text-align: center; min-height: 90px; } /* Basic styling for ad containers */
+        .ad-placeholder-style { text-align: center; min-height: 90px; }
         .article-ad-slot-top { margin: 20px 0; }
-        .article-ad-slot-incontent { margin: 25px 0; } /* For the <!-- DACCOOLA_IN_ARTICLE_AD_HERE --> replaced ad */
+        .article-ad-slot-incontent { margin: 25px 0; }
         .article-ad-slot-above-faq { margin: 25px 0; }
         .article-ad-slot-bottom-page { margin: 30px auto; max-width: 1200px; padding: 0 15px; }
     </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSLDZ2QB"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
-    <header id="navbar-placeholder">
-        <!-- Navbar loaded by JS -->
-    </header>
+    <header id="navbar-placeholder"></header>
 
     <div class="site-content-wrapper">
         <div class="main-content-grid">
-
             <aside class="sidebar related-news">
                 <h2>Related News</h2>
-                <div id="related-news-content">
-                    <p class="placeholder">Loading related news...</p>
-                </div>
+                <div id="related-news-content"><p class="placeholder">Loading related news...</p></div>
             </aside>
 
             <article class="main-article"
@@ -97,7 +81,6 @@
                 data-article-topic="{{ CURRENT_ARTICLE_TOPIC }}"
                 data-article-tags='{{ CURRENT_ARTICLE_TAGS_JSON | default("[]") | safe }}'
                 data-audio-url="{{ AUDIO_URL or '' }}">
-
                 <header>
                     <h1 id="article-headline">{{ ARTICLE_SEO_H1 | default(ARTICLE_HEADLINE) }}</h1>
                     <div class="article-meta-container">
@@ -113,17 +96,9 @@
                     </div>
                 </header>
 
-                <!-- Ad Slot 1: Wide Ad - Under Meta, Above Image -->
                 <div class="ad-placeholder-style article-ad-slot-top">
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-8839663991354998"
-                         data-ad-slot="1948351346" 
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
 
                 {% if IMAGE_URL %}
@@ -133,50 +108,35 @@
                 {% endif %}
 
                 <section id="article-body">
-                    {# Define the HTML for the dynamically placed in-article ad #}
-                    {% set ইন_আর্টিকেল_এড_এইচটিএমএল %}
+                    {# MARK ARTICLE_BODY_HTML as safe *before* any operations #}
+                    {% set safe_article_body_html = ARTICLE_BODY_HTML | safe %}
+
+                    {% set ad_placeholder_comment = '<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->' %}
+                    {% set in_article_ad_html %}
                         <div class="ad-placeholder-style article-ad-slot-incontent">
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-client="ca-pub-8839663991354998"
-                                 data-ad-slot="1948351346" {# Use wide ad slot, or a specific in-article slot ID #}
-                                 data-ad-format="auto" 
-                                 data-full-width-responsive="true"></ins>
-                            <script>
-                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                         </div>
                     {% endset %}
 
-                    {# Process the main body, replacing the placeholder for the dynamic in-article ad #}
-                    {# --- MODIFIED LINE HERE --- #}
-                    {% set processed_body_with_dynamic_ad = (ARTICLE_BODY_HTML | safe | replace('<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->', ইন_আর্টিকেল_এড_এইচটিএমএল)) %}
-                    {# --- END MODIFIED LINE --- #}
+                    {# Perform replace on the pre-safed HTML string #}
+                    {% set body_with_first_ad = safe_article_body_html | replace(ad_placeholder_comment, in_article_ad_html) %}
                     
-                    {# Now, check if FAQ section exists in this processed body to place an ad before it #}
-                    {% set faq_heading_html_marker = '<h4>Frequently Asked Questions</h4>' %} {# This is how Markdown renders `#### Title` #}
+                    {% set faq_heading_html_marker = '<h4>Frequently Asked Questions</h4>' %}
                     
-                    {% if faq_heading_html_marker in processed_body_with_dynamic_ad %}
-                        {% set body_parts = processed_body_with_dynamic_ad.split(faq_heading_html_marker, 1) %}
-                        {{ body_parts[0] | safe }} {# Content before FAQ #}
+                    {% if faq_heading_html_marker in body_with_first_ad %}
+                        {% set body_parts = body_with_first_ad.split(faq_heading_html_marker, 1) %}
+                        {{ body_parts[0] | safe }} {# Output the first part safely #}
 
-                        <!-- Ad Slot 2: Fixed Wide Ad - Above FAQ section (if FAQ exists) -->
                         <div class="ad-placeholder-style article-ad-slot-above-faq">
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-client="ca-pub-8839663991354998"
-                                 data-ad-slot="1948351346" {# Wide ad slot #}
-                                 data-ad-format="auto"
-                                 data-full-width-responsive="true"></ins>
-                            <script>
-                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                         </div>
 
-                        {{ faq_heading_html_marker | safe }} {# The FAQ heading itself #}
-                        {{ body_parts[1] | safe }}      {# Content of FAQ and anything after it #}
+                        {{ faq_heading_html_marker | safe }} {# Output the FAQ heading safely #}
+                        {{ body_parts[1] | safe }}      {# Output the rest safely #}
                     {% else %}
-                        {{ processed_body_with_dynamic_ad | safe }} {# No FAQ found, render body as is (with dynamic ad if placeholder was present) #}
+                        {{ body_with_first_ad | safe }} {# Output the whole body (with first ad) safely #}
                     {% endif %}
                 </section>
 
@@ -191,32 +151,20 @@
 
             <aside class="sidebar latest-news">
                 <h2>Latest News</h2>
-                <div id="latest-news-content">
-                    <p class="placeholder">Loading latest news...</p>
-                </div>
+                <div id="latest-news-content"><p class="placeholder">Loading latest news...</p></div>
             </aside>
-
-        </div> <!-- End main-content-grid -->
-
-        <!-- Ad Slot 3: Grid Suggestions Ad - At the bottom of the page, after main content grid -->
-        <div class="ad-placeholder-style article-ad-slot-bottom-page">
-             <ins class="adsbygoogle"
-                  style="display:block"
-                  data-ad-format="autorelaxed"
-                  data-ad-client="ca-pub-8839663991354998"
-                  data-ad-slot="6562367864"></ins> {# Grid suggestions slot ID #}
-             <script>
-                  (adsbygoogle = window.adsbygoogle || []).push({});
-             </script>
         </div>
 
-    </div> <!-- End site-content-wrapper -->
+        <div class="ad-placeholder-style article-ad-slot-bottom-page">
+             <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-8839663991354998" data-ad-slot="6562367864"></ins>
+             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
 
     <button id="global-tts-player-button" title="Listen to article (Browser TTS)" aria-label="Listen to main article content">
         <i class="fas fa-headphones" aria-hidden="true"></i>
     </button>
     
     <script src="../js/script.js"></script> 
-
 </body>
 </html>
