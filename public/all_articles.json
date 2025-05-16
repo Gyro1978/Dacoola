@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "c6ec5cc149b60bee85e4b489d9cd8aea464a6516dda115995f54f223e7028729",
+      "title": "Silicon Valley’s Growing Influence in Washington: Power, Contracts, and Ethical Dilemmas",
+      "link": "articles/silicon-valleys-growing-influence-in-washington-power-contracts-and-ethical-dile.html",
+      "published_iso": "2025-05-16T22:14:14Z",
+      "summary_short": "Explore how Silicon Valley billionaires like Elon Musk and Peter Thiel wield unprecedented influence in Washington, securing billions in federal contracts while raising ethical concerns.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/GettyImages-2207245107-1.jpg?resize=1200,765",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Peter Thiel government roles",
+        "Trump administration tech appointments",
+        "tech elite federal contracts",
+        "tech billionaires and federal regulations",
+        "Elon Musk federal agencies",
+        "Marc Andreessen federal contracts",
+        "government ethics tech industry",
+        "DOGE agency tech connections",
+        "Silicon Valley influence",
+        "Silicon Valley influence in Washington",
+        "conflict of interest Silicon Valley",
+        "Palmer Luckey government influence"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "b8365905cd12d59539ef45628fd0dae7ff3b0d1fef34996f5b3e39ce4ef74852",
       "title": "Google Gemini Cars: AI-Powered In-Car Tech and the Shifting Landscape of Mobility",
       "link": "articles/google-gemini-cars-ai-powered-in-car-tech-and-the-shifting-landscape-of-mobility.html",
