@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": "gyro-20250515135152-40f873f9",
+      "title": "Roblox Commerce APIs Now Let Creators Sell Physical Merchandise In-Game",
+      "link": "articles/roblox-commerce-apis-now-let-creators-sell-physical-merchandise-in-game.html",
+      "published_iso": "2025-05-15T13:51:52Z",
+      "summary_short": "Roblox now lets creators sell physical products directly in-game using Commerce APIs, opening new revenue streams and blending virtual and real-world shopping.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/roblox-shop.jpg?w=1200",
+      "topic": "Gaming",
+      "is_breaking": false,
+      "is_trending_pick": true,
+      "tags": [
+        "Roblox Commerce APIs",
+        "sell physical merchandise on Roblox",
+        "Roblox creators revenue",
+        "Roblox and Shopify partnership",
+        "physical products in Roblox games",
+        "Roblox Commerce APIs beta",
+        "Fenty beauty Roblox experience",
+        "digital and physical bundle Roblox",
+        "Roblox for brands",
+        "Roblox U.S. users 13 and up",
+        "Roblox physical merchandise integration",
+        "Roblox shoppable experiences"
+      ],
+      "audio_url": null,
+      "trend_score": 15.6
+    },
+    {
       "id": "48e167ddb381d920b62aa09811df2b16745ec4a7c9b307775a1c728c5e13c434",
       "title": "PixArt-Sigma AI Image Generation Delivers 4K Resolution on AWS Trainium",
       "link": "articles/pixart-sigma-ai-image-generation-delivers-4k-resolution-on-aws-trainium.html",

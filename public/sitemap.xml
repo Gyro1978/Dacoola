@@ -2,9 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dacoolaa.netlify.app/</loc>
-    <lastmod>2025-05-14</lastmod>
+    <lastmod>2025-05-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://dacoolaa.netlify.app/articles/roblox-commerce-apis-now-let-creators-sell-physical-merchandise-in-game.html</loc>
+    <lastmod>2025-05-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/pixart-sigma-ai-image-generation-delivers-4k-resolution-on-aws-trainium.html</loc>
@@ -932,12 +938,6 @@
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/microsoft-embraces-google’s-ai-agent-communication-protocol-for-cross-platform-c.html</loc>
-    <lastmod>2025-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/how-deutsche-bahn-revolutionizes-rail-operations-with-time-series-forecasting-ai.html</loc>
     <lastmod>2025-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

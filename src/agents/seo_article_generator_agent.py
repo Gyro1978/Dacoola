@@ -30,13 +30,13 @@ DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
 DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
 YOUR_WEBSITE_NAME = os.getenv('YOUR_WEBSITE_NAME', 'Dacoola')
 YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
-BASE_URL_FOR_CANONICAL = os.getenv('YOUR_SITE_BASE_URL', 'https://your-site-url.com') # For constructing canonical URL
+BASE_URL_FOR_CANONICAL = os.getenv('YOUR_SITE_BASE_URL', 'https://your-site-url.com')
 
 # --- Configuration ---
 AGENT_MODEL = "deepseek-chat"
-MAX_TOKENS_RESPONSE = 7500 # Increased slightly for potentially more verbose structured output
-TEMPERATURE = 0.65 # Slightly adjusted for balance between creativity and factuality
-API_TIMEOUT_SECONDS = 400 # Increased
+MAX_TOKENS_RESPONSE = 7500
+TEMPERATURE = 0.65
+API_TIMEOUT_SECONDS = 400
 
 # --- Agent Prompts ---
 
@@ -59,17 +59,17 @@ You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, oper
 8.  **User Intent:** Address the likely search intent for `{{TARGET_KEYWORD}}`. Anticipate potential questions for the FAQ section if applicable.
 
 **III. Content Generation & Structure Requirements:**
-9.  **Initial Summary:** 1-2 concise lead paragraphs (approx. 50-100 words total) summarizing the core news from the source. Include `{{TARGET_KEYWORD}}` within the first paragraph naturally.
-10. **In-Depth Analysis:** Expand on the summary with context, implications, and background using logical Markdown headings (`### H3`, `#### H4`).
-    *   **Main Analysis Section (using `### H3`):** Create *one* clear, descriptive H3 title (e.g., "### Key Innovations and Market Impact"). Follow with 2-4 paragraphs of core analysis and discussion.
-    *   **Thematic Sub-sections (using `#### H4`):** Under the H3, use 1-3 descriptive H4 titles for distinct sub-topics if the content supports them (e.g., "#### Technical Breakdown," "#### Ethical Considerations"). Each H4 section should have 1-2 paragraphs. **Omit H4 sections entirely if not relevant or sufficiently supported by the `{{ARTICLE_CONTENT_FOR_PROCESSING}}`.**
-11. **Pros & Cons (using `#### Pros & Cons`):**
-    *   Generate this section **ONLY IF** the `{{ARTICLE_CONTENT_FOR_PROCESSING}}` clearly presents distinct advantages and disadvantages or contrasting viewpoints that can be summarized as such. **Omit entirely otherwise.**
-    *   If included, use the **exact** H4 title: `#### Pros & Cons`. Use the specified HTML structure for the list items.
-11.b. **In-Article Ad Placeholder:** After the first 2 or 3 paragraphs of the main article body (typically after the initial summary paragraphs and before any `### H3` subheading), insert the exact HTML comment: `<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->`. Insert this placeholder **only ONCE**.
-12. **FAQ (using `#### Frequently Asked Questions`):**
-    *   Generate this section **ONLY IF** the topic naturally warrants a Q&A format to clarify common questions or complex points from `{{ARTICLE_CONTENT_FOR_PROCESSING}}`. **Omit entirely otherwise.**
-    *   If included, use the **exact** H4 title: `#### Frequently Asked Questions`. Generate 2-4 relevant Q&As. Use the specified HTML structure.
+9.  **Initial Summary (Markdown):** 1-2 concise lead paragraphs (approx. 50-100 words total) summarizing the core news from the source. These paragraphs MUST be in **Markdown**. Include `{{TARGET_KEYWORD}}` within the first paragraph naturally.
+10. **In-Depth Analysis (Markdown):** Expand on the summary with context, implications, and background using logical **Markdown headings** (`### H3`, `#### H4`). All paragraphs in this section MUST be in **Markdown**.
+    *   **Main Analysis Section (using `### H3` in Markdown):** Create *one* clear, descriptive H3 title (e.g., "### Key Innovations and Market Impact"). Follow with 2-4 paragraphs of core analysis and discussion, all in **Markdown**.
+    *   **Thematic Sub-sections (using `#### H4` in Markdown):** Under the H3, use 1-3 descriptive H4 titles for distinct sub-topics if the content supports them (e.g., "#### Technical Breakdown," "#### Ethical Considerations"). Each H4 section should have 1-2 paragraphs, all in **Markdown**. **Omit H4 sections entirely if not relevant or sufficiently supported by `{{ARTICLE_CONTENT_FOR_PROCESSING}}`.**
+11. **Pros & Cons (HTML Snippet):**
+    *   Generate this section **ONLY IF** `{{ARTICLE_CONTENT_FOR_PROCESSING}}` clearly presents distinct advantages and disadvantages. **Omit entirely otherwise.**
+    *   If included, use the **exact** H4 Markdown title: `#### Pros & Cons`. The content for pros and cons list items MUST be generated as the **exact HTML snippet** provided in the user prompt's output format example.
+11.b. **In-Article Ad Placeholder (HTML Comment):** After the first 2 or 3 paragraphs of the main article body (typically after the initial summary paragraphs and before any `### H3` subheading), insert the exact HTML comment: `<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->`. Insert this placeholder **only ONCE**.
+12. **FAQ (HTML Snippet):**
+    *   Generate this section **ONLY IF** the topic naturally warrants a Q&A format. **Omit entirely otherwise.**
+    *   If included, use the **exact** H4 Markdown title: `#### Frequently Asked Questions`. The Q&A content MUST be generated as the **exact HTML snippet** provided in the user prompt's output format example.
 13. **Overall Length & Tone:** Aim for approximately **500-800 words** for the main article body (excluding JSON-LD, etc.). Maintain an authoritative, objective, yet engaging and accessible journalistic tone.
 
 **IV. Writing Style & Avoiding "AI Tells":**
@@ -81,34 +81,39 @@ You are an **Ultimate SEO Content Architect and Expert Tech News Analyst**, oper
 19. **Human-like Flow:** Read the article aloud to ensure it sounds natural and engaging. Use standard hyphens (-) instead of em dashes (—).
 
 **V. Output Formatting (Strict Adherence Mandatory):**
-20. **Markdown & HTML:** The main article body MUST be in Markdown. The Pros/Cons and FAQ sections, if included, MUST use the **exact HTML structure** specified in the user prompt's output format example. The In-Article Ad Placeholder is an HTML comment.
-21. **Exact Output Order:** Your entire response MUST follow this order:
+20. **MAIN BODY IS MARKDOWN:** All general text, headings (like `## H1`, `### H3`, `#### H4`), paragraphs, and standard lists (bulleted/numbered) that are NOT part of the specific "Pros & Cons" or "Frequently Asked Questions" HTML snippets MUST be in **standard Markdown format**. Do NOT use `<p>`, `<h2>`, `<h3>`, `<h4>`, `<ul>`, `<li>` HTML tags for this general body content. Use Markdown equivalents like `##`, `###`, `####`, blank lines for paragraphs, and `*` or `-` for lists.
+21. **HTML SNIPPETS FOR SPECIFIC SECTIONS ONLY:** Only the "Pros & Cons" section (if included, using the `#### Pros & Cons` Markdown heading followed by the provided HTML `div.pros-cons-container...`) and the "Frequently Asked Questions" section (if included, using the `#### Frequently Asked Questions` Markdown heading followed by the provided HTML `div.faq-section...`) MUST use the exact HTML code snippets as shown in the user prompt's example format. The In-Article Ad Placeholder is an HTML comment (`<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->`).
+22. **Exact Output Order:** Your entire response MUST follow this order:
     Title Tag: [Generated Title Tag]
     Meta Description: [Generated Meta Description]
     SEO H1: [Generated SEO H1]
 
-    ## [SEO H1 from above, verbatim]
-    {Markdown Article Body including optional HTML sections like Pros/Cons, FAQ, and the ad placeholder}
+    ## [SEO H1 from above, verbatim - THIS IS MARKDOWN H1]
+    {**MARKDOWN** Article Body, which may include the specific HTML snippets for Pros/Cons or FAQ if they are generated, and the HTML ad placeholder}
     Source: [{ARTICLE_TITLE_FROM_SOURCE}]({SOURCE_ARTICLE_URL})
 
     <script type="application/ld+json">
     {{JSON-LD content as specified}}
     </script>
-22. **Title Tag:** Output as `Title Tag: [Generated text]`. Max length: ~60 characters. Must include `{{TARGET_KEYWORD}}`. **MUST use Title Case.** Should closely match or be a condensed version of the SEO H1.
-23. **Meta Description:** Output as `Meta Description: [Generated text]`. Max length: ~160 characters. Must include `{{TARGET_KEYWORD}}` and be engaging.
-24. **SEO H1 (in preamble):** Output as `SEO H1: [Generated text]`. This must be identical to the H1 used in the `## [SEO H1]` line in the article body. **MUST use Title Case.**
-25. **JSON-LD Script:** Populate the `NewsArticle` schema accurately. `keywords` field should use the content of `{{ALL_GENERATED_KEYWORDS_JSON}}`. `headline` field must match the generated SEO H1. The `mainEntityOfPage.@id` should use `{{MY_CANONICAL_URL_PLACEHOLDER}}`.
+23. **Title Tag:** Output as `Title Tag: [Generated text]`. Max length: ~60 characters. Must include `{{TARGET_KEYWORD}}`. **MUST use Title Case.** Should closely match or be a condensed version of the SEO H1.
+24. **Meta Description:** Output as `Meta Description: [Generated text]`. Max length: ~160 characters. Must include `{{TARGET_KEYWORD}}` and be engaging.
+25. **SEO H1 (in preamble):** Output as `SEO H1: [Generated text]`. This must be identical to the H1 used in the `## [SEO H1]` line in the article body. **MUST use Title Case.**
+26. **JSON-LD Script:** Populate the `NewsArticle` schema accurately. `keywords` field should use the content of `{{ALL_GENERATED_KEYWORDS_JSON}}`. `headline` field must match the generated SEO H1. The `mainEntityOfPage.@id` should use `{{MY_CANONICAL_URL_PLACEHOLDER}}`.
 
 **VI. Error Handling:** If you cannot fulfill a part of the request due to limitations or unclear input, note it briefly in a comment within the generated text if absolutely necessary, but prioritize completing the rest of the structure.
-**VII. Final Check:** Before outputting, mentally review all instructions. Ensure every constraint is met.
+**VII. Final Check:** Before outputting, mentally review all instructions. Ensure every constraint is met, especially the Markdown vs. HTML distinction for body content.
 """
 
 SEO_PROMPT_USER_TEMPLATE = """
-Task: Generate the Title Tag, Meta Description, SEO-Optimized H1 Heading, Article Body (in Markdown, including the `<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->` placeholder and optional HTML sections like Pros/Cons and FAQ as per system instructions), and JSON-LD Script based on the provided context. Follow ALL System Prompt directives meticulously.
+Task: Generate the Title Tag, Meta Description, SEO-Optimized H1 Heading, Article Body (primarily in **Markdown**, but using specific HTML snippets for Pros/Cons and FAQ if included, and the HTML comment for the ad placeholder), and JSON-LD Script based on the provided context. Follow ALL System Prompt directives meticulously, especially the Markdown vs. HTML formatting rules.
 
 **Key Focus for this Task:**
 1.  **Title & H1 Generation:** Create a **catchy, SEO-friendly Title Tag and H1 in Title Case**. Ensure they prominently feature the main subject/product from the content AND the `{{TARGET_KEYWORD}}`. The H1 should be engaging and suitable for a news headline.
-2.  **Content Structure:** Adhere to the specified structure. The `<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->` placeholder is mandatory. Omit optional sections (H4s beyond the main analysis H3, Pros/Cons, FAQ) if `{{ARTICLE_CONTENT_FOR_PROCESSING}}` doesn't clearly and robustly support them.
+2.  **Content Structure & Formatting:**
+    *   The main article content (paragraphs, H2, H3, H4) MUST be in **Markdown**.
+    *   The `<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->` placeholder is mandatory.
+    *   If Pros/Cons or FAQ sections are generated, they MUST use the exact HTML snippets provided in the example below, embedded within the Markdown flow AFTER their respective Markdown `####` headings.
+    *   Omit optional sections (H4s beyond the main analysis H3, Pros/Cons, FAQ) if `{{ARTICLE_CONTENT_FOR_PROCESSING}}` doesn't clearly and robustly support them.
 3.  **Writing Style:** Maintain a natural, human-like journalistic style. Strictly avoid AI clichés, em dashes (use standard hyphens), and unnecessary symbols.
 
 **Input Context:**
@@ -125,24 +130,24 @@ YOUR_WEBSITE_LOGO_URL: {your_website_logo_url}
 ALL_GENERATED_KEYWORDS_JSON: {all_generated_keywords_json} # This is a JSON string array of keywords
 MY_CANONICAL_URL_PLACEHOLDER: {my_canonical_url_placeholder} # Placeholder for the canonical URL of *this* article
 
-**Required Output Format (Strict Adherence):**
+**Required Output Format (Strict Adherence - Note Markdown vs HTML):**
 Title Tag: [Generated catchy Title Tag in Title Case, approx. 50-60 chars. Must include TARGET_KEYWORD and ideally main product/subject name.]
 Meta Description: [Generated meta description, approx. 150-160 chars. Must include TARGET_KEYWORD. Make it compelling.]
 SEO H1: [Generated catchy, SEO-Optimized H1 in Title Case. Must include TARGET_KEYWORD and ideally main product/subject name. Reflects core news.]
 
-## [SEO H1 from above, verbatim. This is the main article title.]
-[Paragraph 1-2: CONCISE summary (approx. 50-100 words). Include TARGET_KEYWORD naturally. Journalistic tone. Standard hyphens ONLY.]
+## [SEO H1 from above, verbatim. This is a MARKDOWN H1.]
+[Paragraph 1-2: **MUST BE MARKDOWN**. CONCISE summary (approx. 50-100 words). Include TARGET_KEYWORD naturally. Journalistic tone. Standard hyphens ONLY. NO `<p>` TAGS HERE.]
 
 <!-- DACCOOLA_IN_ARTICLE_AD_HERE -->
 
-### [Contextual H3 Title for Main Analysis - be descriptive, this comes after the ad placeholder]
-[Paragraphs 2-4+: In-depth analysis. Weave in TARGET_KEYWORD again if natural, + 1-2 SECONDARY_KEYWORDS if provided and they fit organically. Vary sentence structures and vocabulary. AVOID AI clichés and em dashes.]
+### [Contextual H3 Title for Main Analysis: **MUST BE MARKDOWN H3 (`### Your Title`)**. Descriptive. After ad placeholder.]
+[Paragraphs 2-4+: **MUST BE MARKDOWN**. In-depth analysis. Weave in TARGET_KEYWORD again if natural, + 1-2 SECONDARY_KEYWORDS if provided and they fit organically. Vary sentence structures and vocabulary. AVOID AI clichés and em dashes. NO `<p>` TAGS HERE.]
 
-#### [Optional H4 Title - OMIT IF NOT RELEVANT OR IF CONTENT DOESN'T SUPPORT A DISTINCT SUB-SECTION]
-[Optional: 1-2 paragraphs. OMIT ENTIRE H4 SECTION if not applicable or if content is thin.]
+#### [Optional H4 Title: **MUST BE MARKDOWN H4 (`#### Your Title`)**. OMIT IF NOT RELEVANT.]
+[Optional: 1-2 paragraphs: **MUST BE MARKDOWN**. OMIT ENTIRE H4 SECTION if not applicable. NO `<p>` TAGS HERE.]
 
-#### [Optional: Pros & Cons - OMIT IF NOT APPLICABLE OR IF CONTENT ISN'T SUITABLE FOR THIS FORMAT]
-[If included, use exact H4 title: "Pros & Cons". Items MUST be HTML `<li>` containing ONLY descriptive text. Internal `<strong>` or `<em>` tags for emphasis within `<li>` are okay. NO titles/prefixes/surrounding `**` inside `<li>`. NO markdown lists inside `<li>`.]
+#### [Optional: Pros & Cons - OMIT IF NOT APPLICABLE. If included, H4 title is **MARKDOWN (`#### Pros & Cons`)**, list is HTML snippet directly AFTER the H4 heading]
+#### Pros & Cons
 <div class="pros-cons-container">
   <div class="pros-section">
     <h5 class="section-title">Pros</h5>
@@ -164,11 +169,11 @@ SEO H1: [Generated catchy, SEO-Optimized H1 in Title Case. Must include TARGET_K
   </div>
 </div>
 
-#### [Optional H4 Title - OMIT IF NOT RELEVANT]
-[Optional: 1-2 paragraphs. OMIT ENTIRE H4 SECTION if not applicable.]
+#### [Optional H4 Title: **MUST BE MARKDOWN H4 (`#### Your Title`)**. OMIT IF NOT RELEVANT.]
+[Optional: 1-2 paragraphs: **MUST BE MARKDOWN**. OMIT ENTIRE H4 SECTION if not applicable. NO `<p>` TAGS HERE.]
 
-#### [Optional: Frequently Asked Questions - OMIT IF NOT APPLICABLE OR IF CONTENT ISN'T SUITABLE]
-[If included, use exact H4 title: "Frequently Asked Questions". Generate 2-4 relevant Q&As. Use exact HTML structure with `<i class="faq-icon fas fa-chevron-down"></i>`.]
+#### [Optional: Frequently Asked Questions - OMIT IF NOT APPLICABLE. If included, H4 title is **MARKDOWN (`#### Frequently Asked Questions`)**, Q&A is HTML snippet directly AFTER the H4 heading]
+#### Frequently Asked Questions
 <div class="faq-section">
   <details class="faq-item">
     <summary class="faq-question">First relevant question based on the article content? <i class="faq-icon fas fa-chevron-down"></i></summary>
@@ -228,7 +233,7 @@ def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE
         "stream": False
     }
     try:
-        logger.debug(f"Sending SEO generation request (model: {AGENT_MODEL}). Est. User Prompt Tokens: ~{len(user_prompt)//3}") # Rough estimate
+        logger.debug(f"Sending SEO generation request (model: {AGENT_MODEL}). Est. User Prompt Tokens: ~{len(user_prompt)//3}")
         response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=API_TIMEOUT_SECONDS)
         response.raise_for_status()
         result = response.json()
@@ -239,11 +244,10 @@ def call_deepseek_api(system_prompt, user_prompt, max_tokens=MAX_TOKENS_RESPONSE
             message_content = result["choices"][0].get("message", {}).get("content")
             if message_content:
                 content_stripped = message_content.strip()
-                # Remove potential leading/trailing backticks and language hint (e.g., ```markdown ... ```)
                 if content_stripped.startswith("```") and content_stripped.endswith("```"):
                     first_newline = content_stripped.find('\n')
                     content_stripped = content_stripped[first_newline+1:-3].strip() if first_newline != -1 else content_stripped[3:-3].strip()
-                content_stripped = content_stripped.replace('—', '-') # Replace em-dashes with standard hyphens
+                content_stripped = content_stripped.replace('—', '-')
                 return content_stripped
             else:
                 logger.error("API response 'content' is missing or empty.")
@@ -271,90 +275,77 @@ def parse_seo_agent_response(response_text):
         return None, error_message
 
     try:
-        # Extract Title Tag
         title_match = re.search(r"^\s*Title Tag:\s*(.*)", response_text, re.MULTILINE | re.IGNORECASE)
         if title_match:
             parsed_data['generated_title_tag'] = title_match.group(1).strip()
         else:
             errors.append("Missing 'Title Tag:' line.")
 
-        # Extract Meta Description
         meta_match = re.search(r"^\s*Meta Description:\s*(.*)", response_text, re.MULTILINE | re.IGNORECASE)
         if meta_match:
             parsed_data['generated_meta_description'] = meta_match.group(1).strip()
         else:
             errors.append("Missing 'Meta Description:' line.")
 
-        # Extract SEO H1 from preamble
         seo_h1_preamble_match = re.search(r"^\s*SEO H1:\s*(.*)", response_text, re.MULTILINE | re.IGNORECASE)
         if seo_h1_preamble_match:
             parsed_data['generated_seo_h1'] = seo_h1_preamble_match.group(1).strip()
         else:
             errors.append("Missing 'SEO H1:' line in preamble.")
 
-        # Extract JSON-LD script block
         script_match = re.search(
             r'<script\s+type\s*=\s*["\']application/ld\+json["\']\s*>\s*(\{[\s\S]*?\})\s*<\/script>',
             response_text, re.IGNORECASE
         )
         if script_match:
             json_content_str = script_match.group(1).strip()
-            parsed_data['generated_json_ld_raw'] = json_content_str # Store raw for potential later replacement
+            parsed_data['generated_json_ld_raw'] = json_content_str
             parsed_data['generated_json_ld_full_script_tag'] = script_match.group(0).strip()
             try:
-                json.loads(json_content_str.replace("{MY_CANONICAL_URL_PLACEHOLDER}", "https://example.com/placeholder-for-validation")) # Validate with a dummy
+                json.loads(json_content_str.replace("{MY_CANONICAL_URL_PLACEHOLDER}", "https://example.com/placeholder-for-validation"))
             except json.JSONDecodeError as json_err:
                 errors.append(f"JSON-LD content is invalid: {json_err}")
                 logger.warning(f"Invalid JSON-LD detected (raw content): {json_content_str[:200]}...")
         else:
             errors.append("Missing or malformed JSON-LD script block.")
 
-        # Extract Article Body (between SEO H1 preamble and Source line or JSON-LD script)
         body_content = None
-        # Define the end delimiters for the article body
         end_delimiters_pattern = r"(?=\n\s*Source:|\n\s*<script\s+type\s*=\s*[\"']application/ld\+json[\"'])"
 
-        # Try to find the start of the body after the "SEO H1: ..." preamble line
         if seo_h1_preamble_match:
             body_start_offset = seo_h1_preamble_match.end()
-            # Search for the "## Actual H1 Text" pattern that should follow immediately after the preamble
             actual_h1_body_match = re.match(r"\s*\n\s*(## .*?)", response_text[body_start_offset:], re.DOTALL | re.IGNORECASE)
             if actual_h1_body_match:
-                body_search_text = actual_h1_body_match.group(1) # This is the "## Actual H1..."
-                # Find the end of this body content
-                end_match = re.search(end_delimiters_pattern, response_text[body_start_offset + actual_h1_body_match.start(1):], re.MULTILINE | re.DOTALL | re.IGNORECASE)
+                search_start_index_for_end_delimiter = body_start_offset + actual_h1_body_match.start(1)
+                end_match = re.search(end_delimiters_pattern, response_text[search_start_index_for_end_delimiter:], re.MULTILINE | re.DOTALL | re.IGNORECASE)
                 if end_match:
-                    body_content = response_text[body_start_offset + actual_h1_body_match.start(1) : body_start_offset + actual_h1_body_match.start(1) + end_match.start()].strip()
+                    body_content = response_text[search_start_index_for_end_delimiter : search_start_index_for_end_delimiter + end_match.start()].strip()
                 else:
-                    # If no specific end delimiter, take everything from "## Actual H1..." to the end of response_text, then strip JSON-LD if it's at the very end
-                    potential_body_end = response_text[body_start_offset + actual_h1_body_match.start(1):].strip()
-                    if parsed_data.get('generated_json_ld_full_script_tag') and potential_body_end.endswith(parsed_data['generated_json_ld_full_script_tag']):
-                        body_content = potential_body_end[:-len(parsed_data['generated_json_ld_full_script_tag'])].strip()
+                    potential_body = response_text[search_start_index_for_end_delimiter:].strip()
+                    if parsed_data.get('generated_json_ld_full_script_tag') and potential_body.endswith(parsed_data['generated_json_ld_full_script_tag']):
+                        body_content = potential_body[:-len(parsed_data['generated_json_ld_full_script_tag'])].strip()
                     else:
-                        body_content = potential_body_end # May include source line if not properly delimited
-                        if "\nSource:" in body_content: # Try to strip source line manually
-                            body_content = body_content.split("\nSource:", 1)[0].strip()
-
+                        body_content = potential_body
+                    if "\nSource:" in body_content:
+                        body_content = body_content.split("\nSource:", 1)[0].strip()
                     if body_content:
-                         logger.warning("Body extraction: No clear 'Source:' or '<script' delimiter found after H1 using regex. Relied on greedy match then strip.")
+                        logger.warning("Body extraction: No clear 'Source:' or '<script' delimiter found via regex. Relied on greedy match and manual stripping.")
                     else:
-                         errors.append("Body extraction: Could not find end delimiter and greedy match failed.")
-
+                        errors.append("Body extraction: Could not find end delimiter and greedy match failed.")
             else:
                 errors.append("Could not find '## H1 text' pattern starting the article body after 'SEO H1:' preamble.")
         else:
             errors.append("Could not find 'SEO H1:' preamble line, cannot reliably locate article body start.")
 
-
         if body_content and body_content.startswith("## "):
             parsed_data['generated_article_body_md'] = body_content
-            body_h1_text_match = re.match(r"##\s*(.*)", body_content, re.IGNORECASE) # Get H1 text from body
+            body_h1_text_match = re.match(r"##\s*(.*)", body_content, re.IGNORECASE)
             if body_h1_text_match:
                 body_h1_text = body_h1_text_match.group(1).strip()
                 if parsed_data.get('generated_seo_h1'):
                     if body_h1_text != parsed_data['generated_seo_h1']:
                         errors.append(f"H1 in body ('{body_h1_text}') mismatches preamble H1 ('{parsed_data.get('generated_seo_h1', '')}'). Using preamble H1.")
-                else: # If preamble H1 was missing, use the one from the body
+                else:
                     parsed_data['generated_seo_h1'] = body_h1_text
                     logger.info("Used H1 from article body as 'SEO H1:' preamble line was missing.")
             else:
@@ -362,12 +353,11 @@ def parse_seo_agent_response(response_text):
         else:
             if not body_content: errors.append("Article Body content is empty after extraction attempts.")
             elif body_content is not None and not body_content.startswith("## "): errors.append(f"Extracted Body does not start with '## '. Actual start: '{body_content[:50]}...'")
-            parsed_data['generated_article_body_md'] = "" # Ensure it's set, even if empty
+            parsed_data['generated_article_body_md'] = ""
 
-        # Fallbacks for critical missing fields
         if not parsed_data.get('generated_seo_h1'):
             errors.append("CRITICAL: SEO H1 could not be determined.")
-            parsed_data['generated_seo_h1'] = "Error: H1 Missing" # Placeholder
+            parsed_data['generated_seo_h1'] = "Error: H1 Missing"
         if not parsed_data.get('generated_title_tag'):
             parsed_data['generated_title_tag'] = parsed_data.get('generated_seo_h1', 'Error: Title Missing')
             if 'Error: H1 Missing' not in parsed_data['generated_title_tag'] and 'Error: Title Missing' not in parsed_data['generated_title_tag']:
@@ -375,10 +365,9 @@ def parse_seo_agent_response(response_text):
         if not parsed_data.get('generated_meta_description'):
             parsed_data['generated_meta_description'] = "Read the latest AI and Technology news from " + YOUR_WEBSITE_NAME
             errors.append("Defaulted Meta Description.")
-        if not parsed_data.get('generated_json_ld_raw'): # Check for raw JSON content
+        if not parsed_data.get('generated_json_ld_raw'):
              parsed_data['generated_json_ld_raw'] = '{}'
              parsed_data['generated_json_ld_full_script_tag'] = '<script type="application/ld+json">{}</script>'
-
 
         if not parsed_data.get('generated_article_body_md') or "Error: H1 Missing" in parsed_data.get('generated_seo_h1', ''):
             final_error_message = f"Critical parsing failure: Body or H1 missing or invalid. Errors: {'; '.join(errors if errors else ['Unknown parsing error'])}"
@@ -391,7 +380,6 @@ def parse_seo_agent_response(response_text):
     except Exception as e:
         logger.exception(f"Critical parsing exception: {e}")
         return None, f"Major parsing exception: {e}"
-
 
 # --- Main Agent Function ---
 def run_seo_article_agent(article_data):
@@ -409,23 +397,18 @@ def run_seo_article_agent(article_data):
     if not primary_keyword:
         primary_keyword = article_data.get('title', 'Untitled Article')
         logger.warning(f"Missing primary_topic_keyword for {article_id}. Using article title as primary keyword: '{primary_keyword}'")
-    article_data['primary_keyword'] = primary_keyword # Ensure it's set in article_data for consistency
+    article_data['primary_keyword'] = primary_keyword
 
     generated_tags = article_data.get('researched_keywords', [])
     if not generated_tags and primary_keyword:
         generated_tags = [primary_keyword]
-    secondary_keywords = [tag for tag in generated_tags if tag.lower() != primary_keyword.lower()][:3] # Max 3 secondary
+    secondary_keywords = [tag for tag in generated_tags if tag.lower() != primary_keyword.lower()][:3]
     secondary_keywords_list_str = ", ".join(secondary_keywords)
 
-    # Ensure all keywords for JSON-LD are valid strings and unique
     all_valid_keywords_for_json_ld = list(set([str(k).strip() for k in generated_tags if k and str(k).strip()]))
     all_generated_keywords_json = json.dumps(all_valid_keywords_for_json_ld)
 
-
-    # Placeholder for canonical URL - actual value to be filled by main.py/gyro-picks.py
-    # The slug will be derived from the generated H1 later.
     my_canonical_url_placeholder_value = f"{BASE_URL_FOR_CANONICAL.rstrip('/')}/articles/{{SLUG_PLACEHOLDER}}"
-
 
     input_data_for_prompt = {
         "article_title_from_source": article_data.get('title', 'Untitled Article'),
@@ -434,7 +417,7 @@ def run_seo_article_agent(article_data):
         "target_keyword": primary_keyword,
         "secondary_keywords_list_str": secondary_keywords_list_str,
         "article_image_url": article_data.get('selected_image_url', ''),
-        "author_name": article_data.get('author', YOUR_WEBSITE_NAME), # Default to site name if no author
+        "author_name": article_data.get('author', YOUR_WEBSITE_NAME),
         "current_date_iso": article_data.get('published_iso') or datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
         "your_website_name": YOUR_WEBSITE_NAME,
         "your_website_logo_url": YOUR_WEBSITE_LOGO_URL,
@@ -442,15 +425,12 @@ def run_seo_article_agent(article_data):
         "my_canonical_url_placeholder": my_canonical_url_placeholder_value
     }
 
-    # Ensure no None values are passed into the prompt template format method
     for key, value in input_data_for_prompt.items():
         if value is None:
             logger.warning(f"Input field '{key}' for SEO prompt is None for article {article_id}. Replacing with empty string or default.")
-            input_data_for_prompt[key] = '' # Default to empty string
+            input_data_for_prompt[key] = ''
 
     try:
-        # Substitute YOUR_WEBSITE_NAME in the system prompt.
-        # The other placeholders in system prompt like {{TARGET_KEYWORD}} are illustrative for the LLM, not for Python's .format()
         formatted_system_prompt = SEO_PROMPT_SYSTEM.replace("{YOUR_WEBSITE_NAME}", input_data_for_prompt["your_website_name"])
         user_prompt = SEO_PROMPT_USER_TEMPLATE.format(**input_data_for_prompt)
     except KeyError as e:
@@ -472,96 +452,115 @@ def run_seo_article_agent(article_data):
     logger.debug(f"Raw SEO Agent Response for {article_id} (first 1500 chars for review):\n{raw_response_content[:1500]}...")
     parsed_results, error_msg = parse_seo_agent_response(raw_response_content)
 
-    article_data['seo_agent_results'] = parsed_results # Store even if partially parsed or with errors
-    article_data['seo_agent_error'] = error_msg # Store any parsing errors/warnings
+    article_data['seo_agent_results'] = parsed_results
+    article_data['seo_agent_error'] = error_msg
 
     if parsed_results is None:
         logger.error(f"Completely FAILED to parse SEO agent response for {article_id}: {error_msg}")
-        # Store raw response if parsing utterly fails, for debugging
         article_data['seo_agent_raw_response_on_parse_fail'] = raw_response_content
-    elif error_msg: # Parsed but with non-critical issues
+    elif error_msg:
         logger.warning(f"SEO parsing for {article_id} completed with non-critical errors/warnings: {error_msg}")
-    else: # Successful parse
+    else:
         logger.info(f"Successfully generated and parsed SEO content for {article_id}.")
 
-    # Update the main article title with the generated SEO H1 if available and different
     if parsed_results and parsed_results.get('generated_seo_h1') and "Error: H1 Missing" not in parsed_results['generated_seo_h1']:
         new_title = parsed_results['generated_seo_h1']
         if article_data.get('title') != new_title:
             logger.info(f"Updating article title for {article_id} with generated SEO H1: '{new_title}' (was: '{article_data.get('title')}')")
             article_data['title'] = new_title
-    elif not article_data.get('title'): # Fallback if title was somehow lost
+    elif not article_data.get('title'):
         article_data['title'] = "Untitled Article - SEO Processing Error"
 
     return article_data
 
 # --- Standalone Execution (for testing) ---
 if __name__ == "__main__":
-    logging.getLogger().setLevel(logging.DEBUG) # Show debug messages for testing
+    logging.getLogger().setLevel(logging.DEBUG)
     logger.setLevel(logging.DEBUG)
 
     if not DEEPSEEK_API_KEY:
         logger.error("CRITICAL FOR STANDALONE TEST: DEEPSEEK_API_KEY env var not set.")
         sys.exit(1)
-    if not YOUR_WEBSITE_LOGO_URL:
-        logger.warning("YOUR_WEBSITE_LOGO_URL is not set in .env, JSON-LD publisher logo will be empty in test.")
-    if not BASE_URL_FOR_CANONICAL or BASE_URL_FOR_CANONICAL == 'https://your-site-url.com':
-        logger.warning("YOUR_SITE_BASE_URL is not set or is default in .env, canonical URL placeholder will use default.")
 
     test_article = {
-        'id': 'test-seo-perfected-001',
-        'title': "Nvidia's Next-Gen AI Chip 'Zeus' Promises 10x Performance Leap",
+        'id': 'test-seo-markdown-fix-003', # New ID for new test
+        'title': "OpenAI Announces GPT-4.5 Turbo with Enhanced Vision Capabilities",
         'content_for_processing': """
-Nvidia CEO Jensen Huang today unveiled the company's latest AI superchip, codenamed 'Zeus' (officially the Z200 series), at their annual GTC conference.
-Huang claimed Zeus offers a staggering tenfold improvement in performance for large language model training and inference compared to the current Hopper H100/H200 generation.
-The new architecture features a chiplet design with HBM4 memory, significantly increasing bandwidth and on-chip memory capacity.
-Early benchmarks showcased Zeus outperforming competitors by a wide margin on several key AI workloads.
-Huang emphasized that Zeus is not just a chip but an entire platform, including new NVLink interconnects, updated CUDA libraries, and a suite of pre-trained models optimized for the hardware.
-"Zeus will power the next wave of generative AI, enabling models of unprecedented scale and capability," Huang stated.
-Availability is slated for Q1 2025, with major cloud providers and server manufacturers already lining up.
-However, the new chips are expected to come with a premium price tag, and questions remain about power consumption and cooling requirements for these dense systems.
-Some analysts also point out that real-world performance gains may vary depending on the specific application and software optimization.
-The announcement also included brief mentions of Nvidia's efforts in autonomous vehicles and robotics, suggesting Zeus will also play a role in those sectors.
-The conference attendees reacted with significant enthusiasm to the unveiling.
+OpenAI today revealed GPT-4.5 Turbo, an incremental but significant update to its flagship large language model.
+The new version boasts enhanced multimodal capabilities, particularly in image understanding and generation, and claims a 20% speed improvement for text-based tasks.
+According to OpenAI's technical blog post, GPT-4.5 Turbo can now analyze complex charts, diagrams, and even hand-written notes with greater accuracy.
+It also introduces more nuanced control over image generation through its DALL-E integration, allowing users to specify artistic styles and compositions with more precision.
+The model's context window remains at 128k tokens, but OpenAI states that its ability to recall information across long contexts has been improved.
+CEO Sam Altman commented, "GPT-4.5 Turbo is another step towards more helpful and intuitive AI. We're particularly excited about the advancements in visual understanding."
+The API for GPT-4.5 Turbo is available to Plus and Enterprise users starting today, with wider availability and potential free-tier access expected in the coming weeks.
+Pricing for the new model is reportedly similar to GPT-4 Turbo.
+Early developer feedback has been largely positive, praising the improved vision features.
+However, some users noted that the text generation quality, while fast, doesn't feel like a massive leap over the previous GPT-4 Turbo version for purely textual tasks.
+OpenAI also emphasized ongoing safety work, with new mitigations for potential misuse of the enhanced vision capabilities.
+The company will be hosting a developer livestream next week to showcase specific use-cases and answer questions.
+This update positions OpenAI strongly against competitors like Google's Gemini and Anthropic's Claude 3 series.
 """,
-        'link': "https://www.example-tech-news.com/nvidia-zeus-z200-unveiled",
-        'selected_image_url': "https://www.example-tech-news.com/images/nvidia-zeus-chip.jpg",
+        'link': "https://www.example-ai-news.com/openai-gpt-4-5-turbo-vision",
+        'selected_image_url': "https://www.example-ai-news.com/images/gpt45-turbo.jpg",
         'published_iso': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-        'author': "Tech Reporter Pro",
-        'filter_verdict': {'primary_topic_keyword': "Nvidia Zeus AI Chip"},
+        'author': "AI Insights Today",
+        'filter_verdict': {'primary_topic_keyword': "GPT-4.5 Turbo Vision"},
         'researched_keywords': [
-            "Nvidia Zeus AI Chip", "Nvidia Z200 series", "next-gen AI hardware", "AI superchip",
-            "GTC conference Nvidia", "Jensen Huang announcement", "HBM4 memory AI",
-            "AI model training performance", "Nvidia generative AI platform"
+            "GPT-4.5 Turbo Vision", "OpenAI new model", "AI image understanding", "DALL-E integration",
+            "multimodal AI", "Sam Altman OpenAI", "AI context window", "GPT-4.5 API", "AI safety vision models"
         ]
     }
 
-    logger.info("\n--- Running PERFECTED SEO Article Agent Standalone Test ---")
+    logger.info("\n--- Running FINAL CORRECTED SEO Article Agent Standalone Test (Markdown Body Focus) ---")
     result_article = run_seo_article_agent(test_article.copy())
 
     if result_article.get('seo_agent_results'):
-        print("\n\n--- Generated SEO Content (PERFECTED) ---")
+        print("\n\n--- Generated SEO Content (FINAL CORRECTED - Markdown Body) ---")
         print(f"Title Tag: {result_article['seo_agent_results'].get('generated_title_tag')}")
         print(f"Meta Description: {result_article['seo_agent_results'].get('generated_meta_description')}")
         print(f"SEO H1 (Preamble): {result_article['seo_agent_results'].get('generated_seo_h1')}")
         print(f"Final Article Title in data: {result_article.get('title')}")
 
         md_body = result_article['seo_agent_results'].get('generated_article_body_md', '')
-        print(f"\n--- Article Body (Markdown) ---")
+        print(f"\n--- Article Body (Should be Markdown, with HTML for Pros/Cons or FAQ if generated) ---")
         print(md_body)
 
-        if "<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->" in md_body:
-            print("\nSUCCESS: In-article ad placeholder '<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->' found in MD body.")
+        # Test if the body *looks* like Markdown and not escaped HTML
+        if "<p>" not in md_body.split("</details>", 1)[0] and \
+           "<h2>" not in md_body.split("</details>", 1)[0] and \
+           md_body.strip().startswith("##") and \
+           ("Pros & Cons" not in md_body or "<div class=\"pros-cons-container\">" in md_body) and \
+           ("Frequently Asked Questions" not in md_body or "<div class=\"faq-section\">" in md_body):
+            print("\nSUCCESS: Main body appears to be Markdown. Specific HTML snippets for Pros/Cons or FAQ are correctly present if those sections were generated.")
         else:
-            print("\nWARNING: In-article ad placeholder '<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->' NOT found in MD body.")
+            print("\nWARNING: Main body might still contain unwanted HTML tags or not start with ##, or HTML snippets are missing when expected. Review output carefully.")
+            # Check first part of body, before any FAQ/ProsCons HTML, for <p> or <h2>
+            main_body_part_for_check = md_body
+            if "<div class=\"faq-section\">" in main_body_part_for_check:
+                main_body_part_for_check = main_body_part_for_check.split("<div class=\"faq-section\">", 1)[0]
+            if "<div class=\"pros-cons-container\">" in main_body_part_for_check:
+                main_body_part_for_check = main_body_part_for_check.split("<div class=\"pros-cons-container\">", 1)[0]
+
+            if "<p>" in main_body_part_for_check: print("   - Found '<p>' tag in main body part.")
+            if "<h2>" in main_body_part_for_check: print("   - Found '<h2>' tag in main body part.")
+            if "<h3>" in main_body_part_for_check and not main_body_part_for_check.strip().startswith("###"): print("   - Found '<h3>' tag in main body part (and not as Markdown).") # Check for H3 too
+            if not md_body.strip().startswith("##"): print("   - Body does not start with Markdown H1 '##'.")
+            if "Pros & Cons" in md_body and "<div class=\"pros-cons-container\">" not in md_body: print("   - 'Pros & Cons' heading present, but HTML snippet missing.")
+            if "Frequently Asked Questions" in md_body and "<div class=\"faq-section\">" not in md_body: print("   - 'Frequently Asked Questions' heading present, but HTML snippet missing.")
+
+
+        if "<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->" in md_body:
+            print("SUCCESS: In-article ad placeholder '<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->' found in MD body.")
+        else:
+            print("WARNING: In-article ad placeholder '<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->' NOT found in MD body.")
 
         json_ld_script_tag = result_article['seo_agent_results'].get('generated_json_ld_full_script_tag', '')
         print(f"\n--- JSON-LD Script ---")
         print(json_ld_script_tag)
         if "{MY_CANONICAL_URL_PLACEHOLDER}" in json_ld_script_tag:
-            print("\nSUCCESS: '{MY_CANONICAL_URL_PLACEHOLDER}' found in JSON-LD.")
+            print("SUCCESS: '{MY_CANONICAL_URL_PLACEHOLDER}' (or its resolved form with {SLUG_PLACEHOLDER}) found in JSON-LD.")
         else:
-            print("\nWARNING: '{MY_CANONICAL_URL_PLACEHOLDER}' NOT found in JSON-LD.")
+            logger.warning("'{MY_CANONICAL_URL_PLACEHOLDER}' NOT found in JSON-LD, this might be an issue or it was correctly replaced if this is not the first run with this logic.")
 
 
         if result_article.get('seo_agent_error'):
@@ -573,4 +572,4 @@ The conference attendees reacted with significant enthusiasm to the unveiling.
             print(f"\n--- Raw Response on Parse Failure (first 500 chars) ---")
             print(result_article['seo_agent_raw_response_on_parse_fail'][:500] + "...")
 
-    logger.info("\n--- PERFECTED SEO Article Agent Standalone Test Complete ---")
+    logger.info("\n--- FINAL CORRECTED SEO Article Agent Standalone Test Complete ---")
