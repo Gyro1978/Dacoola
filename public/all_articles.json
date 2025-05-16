@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "b8365905cd12d59539ef45628fd0dae7ff3b0d1fef34996f5b3e39ce4ef74852",
+      "title": "Google Gemini Cars: AI-Powered In-Car Tech and the Shifting Landscape of Mobility",
+      "link": "articles/google-gemini-cars-ai-powered-in-car-tech-and-the-shifting-landscape-of-mobility.html",
+      "published_iso": "2025-05-16T18:06:00Z",
+      "summary_short": "Discover how Google Gemini is transforming Android Auto, the latest TechCrunch Mobility news, and key insights into GM’s electric future and Luminar’s leadership chaos.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/google-gemini-android-auto.jpg?resize=1200,675",
+      "topic": "Transportation",
+      "is_breaking": false,
+      "tags": [
+        "Luminar leadership change",
+        "Aurora self-driving truck service",
+        "GM electric vehicles product line",
+        "ethics inquiry Luminar",
+        "Google Gemini cars",
+        "TechCrunch Mobility news",
+        "Luminar CEO Austin Russell",
+        "Amazonification of Uber 2.0",
+        "Sterling Anderson GM role",
+        "future of transportation insights",
+        "Google Gemini in cars",
+        "General Motors Aurora co-founder"
+      ],
+      "audio_url": null,
+      "trend_score": 15.99
+    },
+    {
       "id": "5e7f6047cf6afff29eb4d78522f87919b27dd4726c7b11d4204e25e84da4ae0d",
       "title": "Meta Delays 'Behemoth' AI Model Again as OpenAI and Google Extend Their Lead",
       "link": "articles/meta-delays-behemoth-ai-model-again-as-openai-and-google-extend-their-lead.html",
