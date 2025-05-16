@@ -40,5 +40,6 @@
     "tags_agent_error": null,
     "audio_url": null,
     "tts_agent_error": "Trigger failed: HTTP Error (403) calling TTS Create API: {\"detail\":\"You are not allowed to use this voice_id.\"}",
-    "slug": "openai-rolls-back-chatgpts-sycophancy-and-explains-what-went-wrong"
+    "slug": "openai-rolls-back-chatgpts-sycophancy-and-explains-what-went-wrong",
+    "post_template_hash": "e014798308478eaefcc5b1d461813eb07fed9c56caa5076dd739ac559c2529aa"
 }
