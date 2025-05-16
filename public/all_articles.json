@@ -1,6 +1,58 @@
 {
   "articles": [
     {
+      "id": "5e7f6047cf6afff29eb4d78522f87919b27dd4726c7b11d4204e25e84da4ae0d",
+      "title": "Meta Delays 'Behemoth' AI Model Again as OpenAI and Google Extend Their Lead",
+      "link": "articles/meta-delays-behemoth-ai-model-again-as-openai-and-google-extend-their-lead.html",
+      "published_iso": "2025-05-16T17:07:11Z",
+      "summary_short": "Meta's 'Behemoth' AI model faces further delays amid internal concerns, giving OpenAI and Google a competitive edge in the accelerating AI race.",
+      "image_url": "https://www.zdnet.com/a/img/resize/d78d69b593ab73f1bb78a6917363064da81bce0c/2025/05/16/52258dfc-0e67-49ca-9755-6ed16893029f/meta-delays-behemoth-ai-model-handing-openai-and-google-even-more-of-a-head-start.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "Meta AI STEM benchmarks performance",
+        "GPT-4.5 Claude Sonnet 3.7 Gemini 2.0 Pro comparison",
+        "Llama 4 release Meta AI",
+        "Meta LlamaCon AI developer conference",
+        "Meta AI model delay",
+        "large language models LLMs AI chatbots",
+        "Meta AI model release postponed",
+        "Behemoth large language model Meta",
+        "AI model training improvements challenges",
+        "Meta AI internal concerns Behemoth",
+        "Meta vs OpenAI Google AI race",
+        "Meta Behemoth AI model delay"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
+      "id": "df189644f48bf3fb042a6a763999de8a5022585d6f172fcd16beea78f9163a43",
+      "title": "RAG Hallucination Detection: Four Cutting-Edge Methods to Boost AI Reliability",
+      "link": "articles/rag-hallucination-detection-four-cutting-edge-methods-to-boost-ai-reliability.html",
+      "published_iso": "2025-05-16T16:44:40Z",
+      "summary_short": "Discover four effective techniques for RAG hallucination detection, including LLM-based and semantic similarity approaches, to enhance your AI system's reliability.",
+      "image_url": "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/05/06/hallucination_image-1260x375.jpg",
+      "topic": "AI Models",
+      "is_breaking": false,
+      "tags": [
+        "hallucination detection for generative AI",
+        "detect hallucinations in RAG systems",
+        "improving RAG system accuracy",
+        "AI hallucination mitigation techniques",
+        "reduce AI hallucinations with RAG",
+        "RAG-based AI systems reliability",
+        "AI hallucination detection methods",
+        "Retrieval Augmented Generation accuracy",
+        "simple hallucination detection techniques",
+        "mitigate false information in AI",
+        "RAG hallucination detection",
+        "hallucination prevention in large language models"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "gyro-20250516163215-f0719e73",
       "title": "Spotify Podcast Feature Sparks Backlash Over Play Count Transparency",
       "link": "articles/spotify-podcast-feature-sparks-backlash-over-play-count-transparency.html",
@@ -26,6 +78,32 @@
       ],
       "audio_url": null,
       "trend_score": 15.6
+    },
+    {
+      "id": "39572dbfc217873ed8b0885cf303fdb79852784876ab6b6ce15e4047392e86ec",
+      "title": "Google One Surpasses 150 Million Subscribers as AI Premium Plan Gains Traction",
+      "link": "articles/google-one-surpasses-150-million-subscribers-as-ai-premium-plan-gains-traction.html",
+      "published_iso": "2025-05-16T16:28:21Z",
+      "summary_short": "Google One surpasses 150 million subscribers, with its $20 AI Premium plan fueling rapid growth. Discover why users are willing to pay for advanced AI features.",
+      "image_url": "https://www.zdnet.com/a/img/resize/7003510886b1adc97c6fb672100e700c49f31bfd/2025/05/16/0ca708c8-6946-4424-9556-f16958b563a2/googai56gettyimages-2215137002.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "how ZDNET tests products",
+        "Google One 150 million subscribers",
+        "Google One vs free Google services",
+        "why pay for Google One",
+        "ZDNET recommendations explained",
+        "tech gear buying guide",
+        "pay for AI Google One",
+        "Google One subscription benefits",
+        "Google One AI features",
+        "Google One subscribers",
+        "ZDNET affiliate commissions",
+        "accurate tech product reviews"
+      ],
+      "audio_url": null,
+      "trend_score": 15.99
     },
     {
       "id": "48e167ddb381d920b62aa09811df2b16745ec4a7c9b307775a1c728c5e13c434",
