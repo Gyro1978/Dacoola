@@ -2,15 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dacoolaa.netlify.app/</loc>
-    <lastmod>2025-05-15</lastmod>
+    <lastmod>2025-05-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/roblox-commerce-apis-now-let-creators-sell-physical-merchandise-in-game.html</loc>
-    <lastmod>2025-05-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/pixart-sigma-ai-image-generation-delivers-4k-resolution-on-aws-trainium.html</loc>
@@ -1358,12 +1352,6 @@
   </url>
   <url>
     <loc>https://dacoolaa.netlify.app/articles/smart-shirt-tracks-workouts—and-goes-straight-to-the-wash.html</loc>
-    <lastmod>2025-05-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dacoolaa.netlify.app/articles/a-gears-of-war-remaster-is-coming-to-playstation-5,-pc-and-xbox-this-summer.html</loc>
     <lastmod>2025-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
