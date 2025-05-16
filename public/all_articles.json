@@ -1,7 +1,6 @@
 {
   "articles": [
     {
-<<<<<<< HEAD
       "id": "gyro-20250516163215-f0719e73",
       "title": "Spotify Podcast Feature Sparks Backlash Over Play Count Transparency",
       "link": "articles/spotify-podcast-feature-sparks-backlash-over-play-count-transparency.html",
@@ -108,7 +107,8 @@
       ],
       "audio_url": null,
       "trend_score": 15.6
-=======
+    },
+    {
       "id": "0a538197f69493a90577638f8dc71aa8e6bd53ebf7a19cb0bd5c29b3991e8e40",
       "title": "OpenAI Unveils Codex: A Web-Based AI Coding Tool for Developers",
       "link": "articles/openai-unveils-codex-a-web-based-ai-coding-tool-for-developers.html",
@@ -263,7 +263,7 @@
       ],
       "audio_url": null,
       "trend_score": 16.0
->>>>>>> e89820613dee4d42a026ce4d04f62b95031174d2
+
     },
     {
       "id": "48e167ddb381d920b62aa09811df2b16745ec4a7c9b307775a1c728c5e13c434",
