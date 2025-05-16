@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "e7770079dc9843d7087e4a06bc288749a0457ee62ec199aeff21691ac9d3125a",
+      "title": "Tesla Board Appointment: Chipotle President Jack Hartung Joins Ahead of Diner Launch",
+      "link": "articles/tesla-board-appointment-chipotle-president-jack-hartung-joins-ahead-of-diner-lau.html",
+      "published_iso": "2025-05-16T13:33:54Z",
+      "summary_short": "Chipotle president Jack Hartung joins Tesla's board as the company prepares to open its retro-futuristic diner and charging station in Los Angeles.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/05/GettyImages-1189429507.jpg?resize=1200,800",
+      "topic": "Business",
+      "is_breaking": false,
+      "tags": [
+        "Tesla retro-futuristic diner charging station",
+        "Tesla board appointment Jack Hartung",
+        "Tesla Diner Experience Specialist job",
+        "Jack Hartung McDonald's to Tesla",
+        "Chipotle CFO Tesla board",
+        "Chipotle president joins Tesla board",
+        "Jack Hartung Tesla director",
+        "Tesla related-party transaction board appointment",
+        "Tesla board appointment",
+        "Tesla SEC filing board member",
+        "Tesla food and beverage strategy",
+        "Tesla Diner launch Los Angeles"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "48e167ddb381d920b62aa09811df2b16745ec4a7c9b307775a1c728c5e13c434",
       "title": "PixArt-Sigma AI Image Generation Delivers 4K Resolution on AWS Trainium",
       "link": "articles/pixart-sigma-ai-image-generation-delivers-4k-resolution-on-aws-trainium.html",
