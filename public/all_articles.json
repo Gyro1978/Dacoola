@@ -1,6 +1,32 @@
 {
   "articles": [
     {
+      "id": "4d0138caea2774ea5cd7a19c685351996767cc452e5b81cb8497561b0fad7f0c",
+      "title": "OpenAI’s Abu Dhabi AI Data Center: A 5-Gigawatt Powerhouse Bigger Than Monaco",
+      "link": "articles/openais-abu-dhabi-ai-data-center-a-5-gigawatt-powerhouse-bigger-than-monaco.html",
+      "published_iso": "2025-05-16T22:56:06Z",
+      "summary_short": "OpenAI’s Abu Dhabi AI data center, spanning 10 square miles and consuming power equivalent to five nuclear reactors, could become the world’s largest AI infrastructure. Explore its scale, geopolitical implications, and the Stargate project.",
+      "image_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2197091379.jpg?w=1024",
+      "topic": "Compute",
+      "is_breaking": false,
+      "tags": [
+        "world’s largest AI infrastructure",
+        "massive data centers for AI",
+        "AI power consumption nuclear reactors",
+        "AI data center",
+        "G42 tech conglomerate partnership",
+        "OpenAI Abu Dhabi data center",
+        "AI development in Middle East",
+        "OpenAI Stargate project",
+        "OpenAI Texas data center comparison",
+        "Sam Altman UAE AI talk",
+        "UAE and US AI ties",
+        "5-gigawatt AI data center"
+      ],
+      "audio_url": null,
+      "trend_score": 16.0
+    },
+    {
       "id": "c6ec5cc149b60bee85e4b489d9cd8aea464a6516dda115995f54f223e7028729",
       "title": "Silicon Valley’s Growing Influence in Washington: Power, Contracts, and Ethical Dilemmas",
       "link": "articles/silicon-valleys-growing-influence-in-washington-power-contracts-and-ethical-dile.html",
