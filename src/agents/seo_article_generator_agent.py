@@ -33,7 +33,7 @@ YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 BASE_URL_FOR_CANONICAL = os.getenv('YOUR_SITE_BASE_URL', 'https://your-site-url.com')
 
 # --- Configuration ---
-AGENT_MODEL = "deepseek-chat"
+AGENT_MODEL = "deepseek-coder"
 MAX_TOKENS_RESPONSE = 8000
 TEMPERATURE = 0.7 # Slightly increased for more creative structuring
 API_TIMEOUT_SECONDS = 450

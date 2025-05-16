@@ -28,7 +28,7 @@ DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
 DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
 
 # --- Configuration ---
-AGENT_MODEL = "deepseek-chat"
+AGENT_MODEL = "deepseek-coder"
 MAX_TOKENS_RESPONSE = 250
 TEMPERATURE = 0.1
 ALLOWED_TOPICS = [
