@@ -178,11 +178,17 @@ def get_random_unposted_article_for_standalone_test(): # Renamed for clarity
         return None
 
     chosen_article = random.choice(available_articles)
+    
+    # Construct the full URL properly
+    base_url = os.getenv('YOUR_SITE_BASE_URL', 'https://dacoolaa.netlify.app').rstrip('/')
+    article_link = chosen_article.get('link', '').lstrip('/')
+    full_article_url = f"{base_url}/{article_link}"
+
 
     return {
         'id': chosen_article['id'],
         'title': chosen_article.get('title', 'Untitled Article'),
-        'article_url': f"https://dacoolaa.netlify.app/{chosen_article.get('link', '')}", # Assumes YOUR_SITE_BASE_URL is used
+        'article_url': full_article_url, 
         'image_url': chosen_article.get('image_url'),
         'summary_short': chosen_article.get('summary_short'),
         'topic': chosen_article.get('topic', 'Technology'),
@@ -375,24 +381,36 @@ def post_to_twitter(twitter_client, article_details):
         logger.error("Missing title or article_url for Twitter post")
         return False
 
-    tco_url_length = 23
-    space_for_title = 280 - tco_url_length - 1
+    tco_url_length = 23 # Standard length for t.co wrapped URLs
+    # Max length for tweet is 280. We need space for title, a space, and the URL.
+    space_for_title = 280 - tco_url_length - 1 # -1 for the space between title and URL
 
-    tweet_text = f"{title} {article_url}"
+    title_for_tweet = title # Start with the full title
 
+    # Truncate title if the combination exceeds 280 characters
     if len(title) > space_for_title:
-        title = title[:space_for_title - 3] + "..."
-        tweet_text = f"{title} {article_url}"
+        title_for_tweet = title[:space_for_title - 3] + "..." # -3 for "..."
+    
+    tweet_text = f"{title_for_tweet} {article_url}"
 
+    # Final check, though usually the above logic should prevent this.
     if len(tweet_text) > 280:
-         logger.warning(f"Tweet text still too long after attempted truncation ({len(tweet_text)} chars). Final attempt to shorten.")
-         tweet_text = tweet_text[:279]
+         logger.warning(f"Tweet text still too long after title truncation ({len(tweet_text)} chars). Shortening further.")
+         # This might happen if article_url itself is extremely long, though t.co wrapping usually handles this.
+         # For safety, truncate the whole tweet_text if it's still over.
+         tweet_text = tweet_text[:279] # Force it under limit, might look odd but prevents API error.
 
     try:
         logger.info(f"Attempting to post to Twitter: {tweet_text}")
+        # With Tweepy v2 Client, just providing the URL in the text is usually enough
+        # for Twitter to attempt to generate a card if the URL's meta tags are correct.
+        # No explicit media_id attachment is needed for link previews (cards).
         response = twitter_client.create_tweet(text=tweet_text)
+        
         if response.data and response.data.get("id"):
             logger.info(f"Successfully posted to Twitter. Tweet ID: {response.data['id']}")
+            # The daily tweet count update should be handled by the calling script (e.g., main.py)
+            # to maintain a centralized daily limit tracker.
             return True
         else:
             error_message_twitter = "Unknown error"
@@ -404,9 +422,9 @@ def post_to_twitter(twitter_client, article_details):
         logger.error(f"Tweepy API error posting to Twitter: {e}")
         if e.response and e.response.status_code == 429:
              logger.error("Twitter API rate limit (429 Too Many Requests) hit during posting.")
-        elif hasattr(e, 'api_codes') and e.api_codes and 187 in e.api_codes:
+        elif hasattr(e, 'api_codes') and e.api_codes and 187 in e.api_codes: # Status is a duplicate
             logger.warning("Twitter reported this as a duplicate tweet.")
-            return False
+            return False # Or True if you consider duplicates as "posted" in a sense
     except Exception as e:
         logger.exception(f"Unexpected error posting to Twitter: {e}")
         return False
@@ -467,10 +485,11 @@ def initialize_social_clients():
             client = tweepy.Client(
                 consumer_key=TWITTER_API_KEY, consumer_secret=TWITTER_API_SECRET,
                 access_token=TWITTER_ACCESS_TOKEN, access_token_secret=TWITTER_ACCESS_SECRET,
-                wait_on_rate_limit=False
+                wait_on_rate_limit=False # Let main script handle rate limits if needed
             )
-            user_info_response = client.get_me()
-            if user_info_response.data:
+            # Verify client
+            user_info_response = client.get_me() # Returns a Response object
+            if user_info_response.data: # Access the 'data' attribute for user info
                 logger.info(f"Twitter client initialized successfully for @{user_info_response.data.username}")
                 clients["twitter_client"] = client
             else:
@@ -480,7 +499,7 @@ def initialize_social_clients():
                 logger.error(f"Twitter client initialization check (get_me) failed: {error_msg_twitter_init}")
         except tweepy.TweepyException as e:
             logger.error(f"Tweepy API error during Twitter client initialization: {e}")
-            if e.response and e.response.status_code == 429:
+            if e.response and e.response.status_code == 429: # Check for rate limit error
                  logger.error("Twitter API rate limit (429 Too Many Requests) hit during client initialization.")
         except Exception as e:
             logger.exception(f"Unexpected error during Twitter client initialization: {e}")
@@ -514,7 +533,7 @@ def run_social_media_poster(article_details, social_clients, platforms_to_post=N
                     if post_to_bluesky(bsky_client_inst, title, article_url, summary_short, image_url):
                         any_post_successful_flag = True
                     if bsky_client_index < len(social_clients["bluesky_clients"]) - 1:
-                        time.sleep(10)
+                        time.sleep(10) # Stagger posts if multiple Bsky accounts
                 else:
                     logger.warning(f"Skipping Bluesky account {bsky_client_index + 1} due to uninitialized client.")
         else:
@@ -531,7 +550,7 @@ def run_social_media_poster(article_details, social_clients, platforms_to_post=N
     if attempt_all or "twitter" in platforms_to_post:
         twitter_client = social_clients.get("twitter_client")
         if twitter_client:
-            if post_to_twitter(twitter_client, article_details):
+            if post_to_twitter(twitter_client, article_details): # Pass the whole dict
                 any_post_successful_flag = True
         else:
             logger.info("Twitter posting requested/default but no client configured or library/credentials missing.")

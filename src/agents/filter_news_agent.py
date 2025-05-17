@@ -29,7 +29,7 @@ DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
 
 # --- Configuration ---
 AGENT_MODEL = "deepseek-coder"
-MAX_TOKENS_RESPONSE = 250
+MAX_TOKENS_RESPONSE = 600
 TEMPERATURE = 0.1
 ALLOWED_TOPICS = [
     "AI Models", "Hardware", "Software", "Robotics", "Compute", "Research", "Open Source",
