@@ -1,4 +1,4 @@
-# src/main.py (Corrected with Similarity Check Agent & Template Hashing)
+# src/main.py (Corrected with Similarity Check Agent & Template Hashing & Link Placeholder Processing)
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -19,7 +19,7 @@ import html
 import hashlib # For template hashing
 from dotenv import load_dotenv
 from datetime import datetime, timezone, timedelta
-from urllib.parse import urljoin
+from urllib.parse import urljoin, quote # Added quote for link placeholder processing
 import markdown
 
 # --- Import Sitemap Generator ---
@@ -294,6 +294,60 @@ def update_all_articles_json_file(new_article_summary_info):
     except Exception as e:
         logger.error(f"Failed to save updated {os.path.basename(ALL_ARTICLES_FILE)}: {e}")
 
+# --- Link Placeholder Processing Functions (copied from gyro-picks.py) ---
+def slugify(text):
+    """Generates a URL-friendly slug from text."""
+    if not text: return "untitled"
+    text = str(text).lower() # Ensure text is string
+    text = re.sub(r'[^\w\s-]', '', text).strip() 
+    text = re.sub(r'[-\s]+', '-', text)       
+    return text[:70] 
+
+def process_link_placeholders(markdown_text, base_site_url):
+    """
+    Processes [[Internal Link Text | Optional Topic/Slug]] and 
+              ((External Link Text | https://...)) placeholders in Markdown.
+    """
+    if not markdown_text: return ""
+    if not base_site_url or base_site_url == '/':
+        logger.warning("Base site URL is not valid for link placeholder processing. Links may be incorrect.")
+        # Default to relative links if base_site_url is problematic
+        base_site_url = "/" 
+
+    def replace_internal(match):
+        link_text = match.group(1).strip()
+        topic_or_slug = match.group(3).strip() if match.group(3) else None
+        href = ""
+        if topic_or_slug:
+            if topic_or_slug.endswith(".html") or ' ' not in topic_or_slug and topic_or_slug.count('-') > 0: # Looks like a pre-made slug
+                 # Ensure 'articles/' prefix for slugs that are just filenames.
+                 if topic_or_slug.endswith(".html") and not topic_or_slug.startswith("articles/"):
+                     href = urljoin(base_site_url, f"articles/{topic_or_slug.lstrip('/')}")
+                 elif not topic_or_slug.endswith(".html"): # It's a topic-like slug without .html, treat as topic
+                     href = urljoin(base_site_url, f"topic.html?name={quote(topic_or_slug)}")
+                 else: # Already has articles/ prefix or is a full path segment
+                     href = urljoin(base_site_url, topic_or_slug.lstrip('/'))
+            else: # Assume it's a topic name
+                href = urljoin(base_site_url, f"topic.html?name={quote(topic_or_slug)}")
+        else:
+            slugified_link_text = slugify(link_text)
+            href = urljoin(base_site_url, f"topic.html?name={quote(slugified_link_text)}")
+        
+        logger.debug(f"Internal link: Text='{link_text}', Target='{topic_or_slug}', Href='{href}'")
+        return f'<a href="{html.escape(href)}" class="internal-link">{html.escape(link_text)}</a>'
+
+    processed_text = re.sub(r'\[\[\s*(.*?)\s*(?:\|\s*(.*?)\s*)?\]\]', replace_internal, markdown_text)
+
+    def replace_external(match):
+        link_text = match.group(1).strip()
+        url = match.group(2).strip()
+        logger.debug(f"External link: Text='{link_text}', URL='{url}'")
+        return f'<a href="{html.escape(url)}" target="_blank" rel="noopener noreferrer" class="external-link">{html.escape(link_text)}</a>'
+
+    processed_text = re.sub(r'\(\(\s*(.*?)\s*\|\s*(https?://.*?)\s*\)\)', replace_external, processed_text)
+    return processed_text
+# --- End Link Placeholder Processing Functions ---
+
 
 def regenerate_article_html_if_needed(article_data_content, force_regen=False):
     global current_post_template_hash
@@ -335,14 +389,22 @@ def regenerate_article_html_if_needed(article_data_content, force_regen=False):
             logger.error(f"Article {article_unique_id} 'seo_agent_results' is not a dictionary. Using empty for regen.")
             seo_agent_results_data = {}
 
-        article_body_md_content = seo_agent_results_data.get('generated_article_body_md', '')
-        if not article_body_md_content:
+        article_body_md_content_raw = seo_agent_results_data.get('generated_article_body_md', '')
+        if not article_body_md_content_raw:
              logger.warning(f"Article {article_unique_id} has empty 'generated_article_body_md'. HTML body will be empty.")
+        
+        # --- Process Link Placeholders before Markdown to HTML conversion ---
+        logger.debug(f"Processing link placeholders for article ID {article_unique_id} during regeneration.")
+        article_body_md_with_links = process_link_placeholders(article_body_md_content_raw, YOUR_SITE_BASE_URL)
+        # --- End Link Placeholder Processing ---
 
         article_body_html_output = markdown.markdown(
-            article_body_md_content,
+            article_body_md_with_links, # Use the version with <a href> tags from placeholders
             extensions=['fenced_code', 'tables', 'nl2br', 'sane_lists', 'extra']
         )
+        # Unescape HTML entities that Markdown might have double-escaped, or that were in the original MD from LLM
+        article_body_html_output = html.unescape(article_body_html_output)
+
 
         current_tags_list = article_data_content.get('generated_tags', [])
         article_tags_html_output = format_tags_html(current_tags_list)
@@ -463,7 +525,7 @@ def process_single_scraped_article(raw_json_filepath, existing_articles_summary_
         article_data_content = run_keyword_research_agent(article_data_content)
         if article_data_content.get('keyword_agent_error'): logger.warning(f"Keyword Research issue for {article_unique_id}: {article_data_content['keyword_agent_error']}")
         current_researched_keywords = article_data_content.setdefault('researched_keywords', []);
-        if not current_researched_keywords and article_data_content.get('primary_keyword'): current_researched_keywords.append(article_data_content['primary_keyword'])
+        if not current_researched_keywords and article_data_content.get('primary_keyword'): current_researched_keywords.append(article_data_content.get('primary_keyword'))
         final_tags = set(kw.strip() for kw in current_researched_keywords if kw and kw.strip())
         if article_data_content.get('primary_keyword'): final_tags.add(article_data_content['primary_keyword'].strip())
         article_data_content['generated_tags'] = list(final_tags)[:15]

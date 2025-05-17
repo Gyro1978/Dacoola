@@ -1,4 +1,4 @@
-/* public/css/styles.css (1/1) - FULL SCRIPT with responsive fixes */
+/* public/css/styles.css (1/1) - FULL SCRIPT with responsive fixes & list styling */
 
 :root {
     --bg-dark: #1a1a1d;
@@ -25,6 +25,10 @@
     /* Font */
     --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --font-code: 'Courier New', Courier, monospace;
+
+    /* For list styling */
+    --list-bullet-color: var(--accent-blue);
+    --list-bullet-size: 6px; 
 }
 
 /* --- General Reset & Body --- */
@@ -165,8 +169,46 @@ img { max-width: 100%; height: auto; display: block; }
 .article-image-container { margin-bottom: 25px; border-radius: 6px; overflow: hidden; }
 #article-body { flex-grow: 1; font-size: 1rem; }
 #article-body p { margin-bottom: 1.3em; font-size: 1.05em; color: var(--text-light); }
-#article-body ul, #article-body ol { margin-bottom: 1.3em; padding-left: 20px; }
-#article-body li { margin-bottom: 0.4em; }
+
+/* Enhanced List Styling */
+#article-body ul, 
+#article-body ol { 
+    margin-bottom: 1.3em; 
+    padding-left: 0; /* Remove default padding, we'll use margin on li */
+    list-style: none; /* Remove default browser bullets/numbers */
+}
+#article-body ul li,
+#article-body ol li { 
+    margin-bottom: 0.6em; /* Spacing between list items */
+    padding-left: 1.8em; /* Indent content from custom bullet/number */
+    position: relative; 
+    line-height: 1.5;
+}
+#article-body ul li::before {
+    content: ""; /* Empty content, we use background for the dot */
+    background-color: var(--list-bullet-color);
+    width: var(--list-bullet-size);
+    height: var(--list-bullet-size);
+    border-radius: 50%;
+    position: absolute;
+    left: 0.5em; /* Position bullet slightly to the right of padding start */
+    top: 0.5em; /* Adjust vertical alignment if needed */
+    transform: translateY(-25%); /* Fine-tune vertical centering */
+}
+#article-body ol {
+    counter-reset: list-counter; /* Initialize counter for ordered list */
+}
+#article-body ol li::before {
+    counter-increment: list-counter; /* Increment counter for each li */
+    content: counter(list-counter) "."; /* Display counter value with a dot */
+    color: var(--list-bullet-color);
+    font-weight: 600;
+    position: absolute;
+    left: 0.3em; /* Adjust position for numbers */
+    top: 0; 
+    line-height: 1.5; /* Align with text line-height */
+}
+
 #article-body h2, #article-body h3, #article-body h4 { margin-top: 1.8em; margin-bottom: 0.7em; color: var(--text-light); padding-bottom: 8px; font-weight: 600; line-height: 1.3; }
 #article-body h2 { font-size: clamp(1.4rem, 3vw, 1.7rem); border-bottom: 2px solid var(--border-color); }
 #article-body h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); border-bottom: 1px solid var(--border-color); }
@@ -185,8 +227,9 @@ img { max-width: 100%; height: auto; display: block; }
 .cons-section { background-color: rgba(220, 53, 69, 0.08); border-left: 4px solid var(--danger-red); }
 .pros-cons-container .item-list ul { list-style-type: none; padding-left: 0; margin-top: 6px; }
 .pros-cons-container .item-list li { padding-left: 1.8em; position: relative; margin-bottom: 0.6em; line-height: 1.5; font-size: 0.95em; }
-.pros-section .item-list ul li::before { content: '✔'; color: var(--success-green); position: absolute; left: 0; top: 1px; font-weight: bold; font-size: 1.1em; }
-.cons-section .item-list ul li::before { content: '✘'; color: var(--danger-red); position: absolute; left: 0; top: 1px; font-weight: bold; font-size: 1.1em; }
+.pros-section .item-list ul li::before { content: '✔'; color: var(--success-green); position: absolute; left: 0; top: 1px; font-weight: bold; font-size: 1.1em; background-color: transparent !important; width: auto; height: auto; } /* Override general ul li::before */
+.cons-section .item-list ul li::before { content: '✘'; color: var(--danger-red); position: absolute; left: 0; top: 1px; font-weight: bold; font-size: 1.1em; background-color: transparent !important; width: auto; height: auto; } /* Override general ul li::before */
+
 
 /* FAQ Section */
 #article-body h4.faq-title-heading { font-size: clamp(1.1rem, 2.2vw, 1.25rem); border-bottom: none; margin-bottom: 15px; }
@@ -483,11 +526,6 @@ main.error-page-main { display: flex; flex-direction: column; align-items: cente
 .snow-flake:nth-child(5n + 2) { width: 4px; height: 4px; animation-duration: 8s; animation-delay: -5s; opacity: 0.6; }
 .snow-flake:nth-child(5n + 3) { width: 2px; height: 2px; animation-duration: 9s; animation-delay: -7s; opacity: 0.5; }
 .snow-flake:nth-child(5n + 4) { width: 3px; height: 3px; animation-duration: 7s; animation-delay: -9s; opacity: 0.6; }
-
-/* Ad container styling */
-.ad-slot-container {
-    /* border: 1px dashed #555; */
-}
 
 /* ... (your existing styles) ... */
 
