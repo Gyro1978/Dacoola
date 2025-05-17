@@ -5,14 +5,14 @@ name: Hourly News Update and Deploy
 on:
   schedule:
     - cron: "0,20,40 * * * *" # Runs at 0, 20, and 40 minutes past the hour
-  workflow_dispatch:
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }} # Ensures only one run of this workflow at a time
-      cancel-in-progress: true # Cancels older runs if a new one starts
+      group: ${{ github.workflow }}-${{ github.ref }} # Ensures only one run per branch at a time
+      cancel-in-progress: true
     permissions:
       contents: write # Required to push changes back to the repository
 
@@ -20,14 +20,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetches all history for accurate pulls/rebases/merges
+          fetch-depth: 0 # Fetches all history
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
+          cache: "pip" # Cache pip dependencies
 
-      - name: Install Dependencies
+      - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then
@@ -36,36 +37,75 @@ jobs:
             echo "requirements.txt not found. Skipping pip install -r."
           fi
 
-      - name: Run Main Script (Generates Content and Sitemap)
+      - name: Setup Ollama
+        id: setup_ollama
+        run: |
+          echo "Starting Ollama setup..."
+          curl -fsSL https://ollama.com/install.sh | sh
+          echo "Ollama installed."
+          # Start Ollama in the background
+          ollama serve &
+          # Wait a few seconds for Ollama to start
+          sleep 10
+          echo "Ollama server started."
+          # Pull initial models (add more as needed)
+          # Check if pull was successful (ollama list might not show it immediately after pull if server is busy)
+          echo "Pulling Mistral model..."
+          if ollama pull mistral; then
+            echo "Mistral pulled successfully."
+          else
+            echo "::error::Failed to pull Mistral. Check Ollama logs or network."
+            # exit 1 # Optionally exit if a critical model fails
+          fi
+          echo "Pulling LLaVA model..."
+          if ollama pull llava; then
+            echo "LLaVA pulled successfully."
+          else
+            echo "::error::Failed to pull LLaVA. Check Ollama logs or network."
+            # exit 1
+          fi
+          # Add other 'ollama pull <model_name>' commands here later
+          # e.g., ollama pull llama3:70b
+          # e.g., ollama pull bge-m3
+          echo "Ollama model pulling complete (or attempted)."
+          ollama list # List models to confirm
+
+      - name: Run Main Script (Generates Content, Processes with Agents, etc.)
         env:
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          # Pass ALL your .env variables as secrets or vars to the GHA context
+          # Example for a few critical ones:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }} # Keep for now, might remove if fully Ollama
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
-          YOUR_WEBSITE_NAME: ${{ secrets.YOUR_WEBSITE_NAME || vars.YOUR_WEBSITE_NAME || 'Dacoola' }}
-          YOUR_WEBSITE_LOGO_URL: ${{ secrets.YOUR_WEBSITE_LOGO_URL || vars.YOUR_WEBSITE_LOGO_URL || '' }}
-          YOUR_SITE_BASE_URL: ${{ secrets.YOUR_SITE_BASE_URL || vars.YOUR_SITE_BASE_URL || '' }}
-          MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES || vars.MAX_HOME_PAGE_ARTICLES || 20 }}
+          # Ollama will be accessed at http://localhost:11434 by Python scripts
+          # General Website Config
+          YOUR_WEBSITE_NAME: ${{ vars.YOUR_WEBSITE_NAME || 'Dacoola' }}
+          YOUR_WEBSITE_LOGO_URL: ${{ vars.YOUR_WEBSITE_LOGO_URL || '' }}
+          YOUR_SITE_BASE_URL: ${{ vars.YOUR_SITE_BASE_URL || '' }}
+          MAX_HOME_PAGE_ARTICLES: ${{ vars.MAX_HOME_PAGE_ARTICLES || 20 }}
           # Twitter Credentials
           TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
           TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
           TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
           TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+          DAILY_TWEET_LIMIT: ${{ vars.DAILY_TWEET_LIMIT || 3 }}
+          MAX_AGE_FOR_SOCIAL_POST_HOURS: ${{ vars.MAX_AGE_FOR_SOCIAL_POST_HOURS || 24 }}
           MAKE_INSTAGRAM_WEBHOOK_URL: ${{ secrets.MAKE_INSTAGRAM_WEBHOOK_URL }}
-          # Google Ads API Credentials
+          # Google Ads (if still used, or for keyword ideas)
           GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEV_TOKEN }}
           GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
           GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
           GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
           GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
-          GOOGLE_ADS_CONFIGURATION_FILE_PATH: ${{ secrets.GOOGLE_ADS_CONFIGURATION_FILE_PATH || vars.GOOGLE_ADS_CONFIGURATION_FILE_PATH || './google-ads.yaml' }}
+          GOOGLE_ADS_CONFIGURATION_FILE_PATH: ${{ vars.GOOGLE_ADS_CONFIGURATION_FILE_PATH || './google-ads.yaml' }}
           SEARCH_CONSOLE_API_KEY: ${{ secrets.SEARCH_CONSOLE_API_KEY }}
           # Reddit API Credentials
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
           REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
           REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
-          REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT || vars.REDDIT_USER_AGENT || 'DacoolaBot/0.1 by Dacoola' }}
-          REDDIT_SUBREDDITS: ${{ secrets.REDDIT_SUBREDDITS || vars.REDDIT_SUBREDDITS || 'testingground4bots' }}
-          # Bluesky Credentials
+          REDDIT_USER_AGENT: ${{ vars.REDDIT_USER_AGENT || 'DacoolaBot/0.1 by Dacoola' }}
+          REDDIT_SUBREDDITS: ${{ vars.REDDIT_SUBREDDITS || 'testingground4bots' }}
+          # Bluesky Credentials (repeat for 1, 2, 3)
           BLUESKY_HANDLE_1: ${{ secrets.BLUESKY_HANDLE_1 }}
           BLUESKY_APP_PASSWORD_1: ${{ secrets.BLUESKY_APP_PASSWORD_1 }}
           BLUESKY_HANDLE_2: ${{ secrets.BLUESKY_HANDLE_2 }}
@@ -75,94 +115,75 @@ jobs:
         run: python src/main.py
 
       - name: Commit and Push Changes
+        id: commit_push
         run: |
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-          # Add all generated/modified files by main.py
-          # It's important that all_articles.json is among these if main.py modifies it
+          # Add all generated/modified files
+          # Using a more robust way to add all relevant files/dirs that main.py might touch
           git add public/sitemap.xml public/ads.txt public/articles/ public/all_articles.json \
                   data/processed_article_ids.txt data/twitter_daily_limit.json \
-                  data/social_media_posts_history.json dacola.log \
+                  data/social_media_posts_history.json dacola.log gyro-picks.log \
                   data/processed_json/ \
                   data/scraped_articles/ \
-                  || echo "Some files expected by 'git add' were not found or had no changes."
+                  public/latest.html public/search.html public/topic.html \
+                  public/images/ # If images are saved here
+                  || echo "Some files/dirs expected by 'git add' were not found or had no changes."
 
           if git diff --staged --quiet; then
             echo "No content changes detected by the script to commit."
+            echo "changes_committed=false" >> $GITHUB_OUTPUT
           else
             echo "Content changes detected. Committing..."
-            # This commit contains the script's version of all_articles.json
-            git commit -m "Automated news update and sitemap generation [skip ci]"
-
-            echo "Attempting to pull remote changes before push..."
-            # Strategy:
-            # 1. Fetch remote changes.
-            # 2. Try a rebase.
-            # 3. If rebase fails due to conflicts (likely in all_articles.json):
-            #    a. Abort the rebase.
-            #    b. Force checkout the remote version of all_articles.json (theirs).
-            #    c. Re-apply the script's commit (which contains our desired all_articles.json).
-            #       This effectively says "my script's version of all_articles.json is the truth".
-            #    d. This can be risky if other important, non-conflicting changes happened to all_articles.json remotely
-            #       that your script wasn't aware of. The ideal solution is often to rebuild all_articles.json
-            #       from source (processed_json/) *after* a clean pull, but that's a script logic change.
-
-            git fetch origin
-            
-            echo "Trying to rebase local commit onto remote branch..."
-            if ! git rebase origin/${{ github.ref_name }}; then
-              echo "Rebase failed. This often means there's a conflict in a frequently updated file like all_articles.json."
-              echo "Aborting rebase to attempt a different strategy."
+            # Fetch latest changes from remote before committing locally
+            git fetch origin ${{ github.ref_name }}
+            # Try to rebase local commits on top of remote changes
+            # This can help avoid merge commits if only this job modifies these files
+            if git rebase origin/${{ github.ref_name }} --autostash; then
+              echo "Rebase successful."
+            else
+              echo "Rebase failed. Aborting rebase and proceeding with merge strategy if needed later."
               git rebase --abort
-              
-              echo "Resetting local branch to remote state to ensure clean base."
-              # This discards the local commit made by this Action run temporarily
-              git reset --hard origin/${{ github.ref_name }} 
-              
-              echo "Re-running the main script to ensure all files are generated based on the latest remote state."
-              # This assumes main.py can safely re-run and regenerate its outputs, including all_articles.json
-              # This is crucial: main.py must now generate the definitive version of all_articles.json for this run.
-              python src/main.py
-              
-              echo "Re-adding all generated files after script re-run."
+              # As a fallback, ensure local working tree is clean if rebase failed mid-way
+              # and we want to attempt a fresh commit based on what the script *just* generated.
+              # This is complex; for now, let's assume the script's output is the desired state.
+              # Re-add files as rebase might have changed staging area
               git add public/sitemap.xml public/ads.txt public/articles/ public/all_articles.json \
-                      data/processed_article_ids.txt data/twitter_daily_limit.json \
-                      data/social_media_posts_history.json dacola.log \
-                      data/processed_json/ \
-                      data/scraped_articles/ \
-                      || echo "Some files not found or no changes after script re-run."
-
-              if git diff --staged --quiet; then
-                echo "No changes to commit after script re-run based on remote state. Pushing remote state."
-                # This means the script re-run didn't produce new changes compared to what's now local (which is remote)
-                # This path should ideally not be taken if new articles were meant to be added.
-              else
-                echo "Committing changes generated after script re-run on updated base."
-                git commit -m "Automated news update (post-rebase-conflict-resolution strategy) [skip ci]"
-              fi
+                  data/processed_article_ids.txt data/twitter_daily_limit.json \
+                  data/social_media_posts_history.json dacola.log gyro-picks.log \
+                  data/processed_json/ \
+                  data/scraped_articles/ \
+                  public/latest.html public/search.html public/topic.html \
+                  public/images/ \
+                  || echo "Re-add: Some files/dirs not found."
             fi
+            
+            git commit -m "Automated content update via GitHub Actions [skip ci]"
+            echo "Changes committed."
+            echo "changes_committed=true" >> $GITHUB_OUTPUT
 
             echo "Attempting to push changes..."
-            retry_count=0; max_retries=5; delay_seconds=10;
+            retry_count=0; max_retries=5; delay_seconds=15;
             until git push origin ${{ github.ref_name }} || [ $retry_count -ge $max_retries ]; do
               retry_count=$((retry_count+1))
-              echo "Push failed (Attempt ${retry_count}/${max_retries}). Will try to pull remote changes and re-push."
+              echo "Push failed (Attempt ${retry_count}/${max_retries}). Pulling remote changes and retrying push."
               
-              # Before retrying push, try to reconcile with remote again
-              # This time, a simple merge might be okay if the rebase attempt structured things,
-              # or if we've already re-run main.py on a clean base.
-              # Using rebase with autostash for safety.
-              echo "Pulling remote changes again before retrying push..."
               git fetch origin
-              if ! git rebase origin/${{ github.ref_name }} --autostash; then
-                echo "Rebase before push retry failed. Aborting rebase and trying simple merge."
-                git rebase --abort
-                if ! git merge origin/${{ github.ref_name }} -m "Merge remote branch during push retry"; then
-                   echo "::error::Merge also failed during push retry. Manual intervention likely needed for conflicts."
-                   exit 1
-                fi
+              # Using merge with 'ours' strategy for conflicts in generated files like all_articles.json
+              # This means if there's a conflict, our Action's version of the file wins.
+              # This is suitable if the Action is the sole source of truth for these generated files.
+              if ! git merge -X ours origin/${{ github.ref_name }} -m "Automated merge during push retry [skip ci]"; then
+                 echo "::error::Merge also failed during push retry. Manual intervention likely needed for conflicts."
+                 # Reset to avoid a broken state if merge fails badly
+                 git reset --hard HEAD~1 # Go back before our commit
+                 git reset --hard origin/${{ github.ref_name }} # Reset to remote
+                 exit 1 # Exit to signal failure
               fi
+              # Re-commit our changes after merge, as the merge might have created a merge commit
+              # This is tricky. A simpler approach might be to force push if this is a dedicated branch.
+              # For main branch, this merge strategy is safer.
+              # If the merge was clean or 'ours' took precedence, our commit is still there.
               
               echo "Retrying push (${retry_count}/${max_retries})..."
               sleep $delay_seconds
@@ -177,35 +198,36 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check for Deployable Changes
-        id: check_changes
+      - name: Check for Deployable Changes in public/
+        id: check_public_changes
         run: |
-          # Check if the last commit was by this bot and if there are actual content changes to deploy
-          # The 'git diff --quiet HEAD^ HEAD -- public/' checks if 'public/' dir changed in the last commit.
-          # Also check if the commit message indicates a script run (not just a merge or other bot activity)
-          # This logic can be improved if you have specific commit messages for deploys vs. other bot commits.
-          if git log -1 --pretty=%B | grep -q "Automated news update"; then
-            if ! git diff --quiet HEAD^ HEAD -- public/ ; then
-              echo "Deployable changes found in public/ directory."
+          # Check if the 'public/' directory was actually changed in the last commit from this Action.
+          # This is more reliable than just checking commit message.
+          # We fetch origin again to ensure `origin/${{ github.ref_name }}` is up-to-date for comparison.
+          git fetch origin ${{ github.ref_name }}
+          if [[ "${{ steps.commit_push.outputs.changes_committed }}" == "true" ]]; then
+            # Compare the public directory between the current HEAD and the previous state of the remote branch
+            # This checks if *our commit that was just pushed* actually modified public/
+            # Note: This assumes the push was successful and HEAD is now ahead of or same as remote.
+            # A simpler check if HEAD is guaranteed to be the commit we just made: git diff --quiet HEAD^ HEAD -- public/
+            if ! git diff --quiet origin/${{ github.ref_name }} HEAD -- public/; then
+              echo "Deployable changes found in public/ directory by this Action run."
               echo "deploy_needed=true" >> $GITHUB_OUTPUT
             else
-              echo "Last commit was by bot but no changes in public/ directory. Skipping deploy."
+              echo "Commit made, but no net changes in public/ directory compared to remote. Skipping deploy."
               echo "deploy_needed=false" >> $GITHUB_OUTPUT
             fi
           else
-             echo "Last commit not by this script's typical update or no commit made. Skipping deploy."
+             echo "No changes were committed by this script. Skipping deploy."
              echo "deploy_needed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Install Netlify CLI
-        if: steps.check_changes.outputs.deploy_needed == 'true'
+      - name: Install Netlify CLI and Deploy
+        if: steps.check_public_changes.outputs.deploy_needed == 'true'
         run: |
-          echo "Changes were committed that affect public/. Proceeding with Netlify deployment."
+          echo "Deployable changes identified in public/. Proceeding with Netlify deployment."
           npm install -g netlify-cli
-
-      - name: Deploy to Netlify
-        if: steps.check_changes.outputs.deploy_needed == 'true'
-        run: netlify deploy --dir=public --prod --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID
+          netlify deploy --dir=public --prod --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

@@ -1,17 +1,32 @@
-# requirements.txt (1/1) - Corrected
+# requirements.txt (Final for New Pipeline - Phase 1 Focus)
 
+# Core & Web
 requests
 python-dotenv
-feedparser
-Jinja2
-Markdown
 beautifulsoup4
-Pillow
-google-search-results # SerpApi client
-sentence-transformers # For CLIP in image_scraper
-tweepy # UNCOMMENTED
-trafilatura # Optional, for news_scraper full text
-google-ads # For Keyword Planner API access
+trafilatura
+duckduckgo_search # For Web Research Agent
+
+# Parsing & Content
+feedparser # For existing RSS scraper (might phase out or use as supplementary)
+Markdown # For article body processing & generation
+Jinja2 # For HTML templating
+
+# Image Processing
+Pillow # For image validation
+
+# AI & Embeddings (Local Focus)
+sentence-transformers # For similarity checks and potentially CLIP if re-enabled locally
+
+# Social Media
+tweepy # For Twitter
 atproto # For Bluesky
 praw # For Reddit
-pyperclip
+
+# Utilities
+pyperclip # For local prompt-maker script
+textstat # For readability scores
+
+# --- Potentially Phased Out or API-based (Review Later) ---
+# google-search-results # SerpApi client - Can be replaced by DDG/LLM-guided search
+# google-ads # For Keyword Planner - Can be replaced by LLM keyword ideas

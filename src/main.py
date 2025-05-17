@@ -1,4 +1,4 @@
-# src/main.py (Full script - No changes needed from previous full version for this request)
+# src/main.py (Orchestrator - Fully Integrated with All Agents)
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -16,10 +16,10 @@ import glob
 import re
 import requests
 import html
-import hashlib # For template hashing
+import hashlib
 from dotenv import load_dotenv
 from datetime import datetime, timezone, timedelta
-from urllib.parse import urljoin, quote # Added quote for link placeholder processing
+from urllib.parse import urljoin, quote
 import markdown
 
 # --- Import Sitemap Generator ---
@@ -29,39 +29,44 @@ except ImportError as e:
     temp_log_msg = f"FATAL IMPORT ERROR: Could not import sitemap generator: {e}."
     print(temp_log_msg); logging.critical(temp_log_msg); sys.exit(1)
 
-# --- Import Agent and Scraper Functions ---
+# --- Import Agent Functions ---
 try:
-    from src.scrapers.news_scraper import (
-        scrape_news, load_processed_ids as load_scraper_processed_ids,
-        save_processed_id as save_scraper_processed_id, get_article_id,
-        NEWS_FEED_URLS
+    from src.agents.web_research_agent import run_web_research_agent
+    from src.agents.filter_enrich_agent import run_filter_enrich_agent
+    from src.agents.deduplication_agent import (
+        run_deduplication_agent,
+        load_historical_embeddings,
+        save_historical_embeddings
     )
-    from src.scrapers.image_scraper import find_best_image, scrape_source_for_image
-    from src.agents.filter_news_agent import run_filter_agent
-    from src.agents.similarity_check_agent import run_similarity_check_agent
-    from src.agents.keyword_research_agent import run_keyword_research_agent
-    from src.agents.seo_article_generator_agent import run_seo_article_agent
+    from src.agents.keyword_intelligence_agent import run_keyword_intelligence_agent
+    from src.agents.seo_writing_agent import run_seo_writing_agent
+    from src.agents.vision_media_agent import run_vision_media_agent
+    from src.agents.image_integration_agent import run_image_integration_agent
+    from src.agents.knowledge_graph_agent import run_knowledge_graph_agent, load_site_content_graph
+    from src.agents.trending_digest_agent import run_trending_digest_agent
+    
     from src.social.social_media_poster import (
         initialize_social_clients, run_social_media_poster,
         load_post_history as load_social_post_history,
         mark_article_as_posted_in_history
     )
 except ImportError as e:
-     print(f"FATAL IMPORT ERROR in main.py (agents/scrapers/social): {e}")
-     try: logging.critical(f"FATAL IMPORT ERROR (agents/scrapers/social): {e}")
-     except ImportError: pass # logging might not be set up yet
+     print(f"FATAL IMPORT ERROR in main.py (agents): {e}")
+     try: logging.critical(f"FATAL IMPORT ERROR (agents): {e}")
+     except: pass 
      sys.exit(1)
 
 # --- Load Environment Variables ---
 dotenv_path = os.path.join(PROJECT_ROOT_FOR_PATH, '.env'); load_dotenv(dotenv_path=dotenv_path)
-AUTHOR_NAME_DEFAULT = os.getenv('AUTHOR_NAME', 'AI News Team')
+AUTHOR_NAME_DEFAULT = os.getenv('AUTHOR_NAME', 'Dacoola AI Team')
 YOUR_WEBSITE_NAME = os.getenv('YOUR_WEBSITE_NAME', 'Dacoola')
 YOUR_WEBSITE_LOGO_URL = os.getenv('YOUR_WEBSITE_LOGO_URL', '')
 raw_base_url = os.getenv('YOUR_SITE_BASE_URL', ''); YOUR_SITE_BASE_URL = (raw_base_url.rstrip('/') + '/') if raw_base_url else ''
-BASE_URL_FOR_CANONICAL_MAIN = YOUR_SITE_BASE_URL # Used for JSON-LD placeholder replacement
+BASE_URL_FOR_CANONICAL_MAIN = YOUR_SITE_BASE_URL 
 MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None)
 DAILY_TWEET_LIMIT = int(os.getenv('DAILY_TWEET_LIMIT', '3'))
-MAX_AGE_FOR_SOCIAL_POST_HOURS = int(os.getenv('MAX_AGE_FOR_SOCIAL_POST_HOURS', '24')) # Made int
+MAX_AGE_FOR_SOCIAL_POST_HOURS = int(os.getenv('MAX_AGE_FOR_SOCIAL_POST_HOURS', '24'))
+MAX_ARTICLES_TO_PROCESS_PER_RUN = int(os.getenv('MAX_ARTICLES_TO_PROCESS_PER_RUN', '5')) # Limit full processing for dev/cost
 
 
 # --- Setup Logging ---
@@ -72,39 +77,36 @@ try:
 except OSError as e: print(f"Log setup warning: {e}. Log console only."); log_handlers = [logging.StreamHandler(sys.stdout)]
 
 logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.DEBUG, 
+    format='%(asctime)s - %(name)s - %(levelname)s - [%(module)s.%(funcName)s:%(lineno)d] - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
     handlers=log_handlers,
     force=True
 )
 logger = logging.getLogger('main_orchestrator')
-logger.setLevel(logging.DEBUG)
 
 if not YOUR_SITE_BASE_URL or YOUR_SITE_BASE_URL == '/':
     logger.error("CRITICAL: YOUR_SITE_BASE_URL is not set or is invalid ('/'). Canonical URLs and sitemap will be incorrect.")
 else:
     logger.info(f"Using site base URL: {YOUR_SITE_BASE_URL}")
-if not YOUR_WEBSITE_LOGO_URL: logger.warning("YOUR_WEBSITE_LOGO_URL not set.")
-
 
 # --- Configuration ---
 DATA_DIR_MAIN = os.path.join(PROJECT_ROOT_FOR_PATH, 'data')
-SCRAPED_ARTICLES_DIR = os.path.join(DATA_DIR_MAIN, 'scraped_articles') # Raw files from scraper AND raw gyro picks
-PROCESSED_JSON_DIR = os.path.join(DATA_DIR_MAIN, 'processed_json')
+RAW_WEB_RESEARCH_OUTPUT_DIR = os.path.join(DATA_DIR_MAIN, 'raw_web_research') 
+PROCESSED_JSON_DIR = os.path.join(DATA_DIR_MAIN, 'processed_json') 
 PUBLIC_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'public')
 OUTPUT_HTML_DIR = os.path.join(PUBLIC_DIR, 'articles')
+DIGEST_OUTPUT_HTML_DIR = os.path.join(PUBLIC_DIR, 'digests') 
 TEMPLATE_DIR = os.path.join(PROJECT_ROOT_FOR_PATH, 'templates')
-ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json')
-ARTICLE_MAX_AGE_DAYS = 30
+ALL_ARTICLES_FILE = os.path.join(PUBLIC_DIR, 'all_articles.json') 
 TWITTER_DAILY_LIMIT_FILE = os.path.join(DATA_DIR_MAIN, 'twitter_daily_limit.json')
 POST_TEMPLATE_FILE = os.path.join(TEMPLATE_DIR, 'post_template.html')
-
+DIGEST_TEMPLATE_FILE = os.path.join(TEMPLATE_DIR, 'digest_page_template.html') 
 
 # --- Jinja2 Setup ---
 try:
     from jinja2 import Environment, FileSystemLoader, select_autoescape
-    def escapejs_filter(value): 
+    def escapejs_filter(value):
         if value is None: return ''
         value = str(value).replace('\\', '\\\\').replace("'", "\\'").replace('"', '\\"').replace('/', '\\/')
         value = value.replace('\n', '\\n').replace('\r', '\\r').replace('\t', '\\t')
@@ -112,581 +114,438 @@ try:
         return value
     if not os.path.isdir(TEMPLATE_DIR):
         logger.critical(f"Jinja2 template directory not found: {TEMPLATE_DIR}. Exiting."); sys.exit(1)
-    env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), autoescape=select_autoescape(['html', 'xml']))
-    env.filters['escapejs'] = escapejs_filter
+    jinja_env_main = Environment(loader=FileSystemLoader(TEMPLATE_DIR), autoescape=select_autoescape(['html', 'xml']))
+    jinja_env_main.filters['escapejs'] = escapejs_filter
     logger.info(f"Jinja2 environment loaded from {TEMPLATE_DIR}")
 except ImportError: logger.critical("Jinja2 library not found. Exiting."); sys.exit(1)
 except Exception as e: logger.exception(f"CRITICAL: Failed Jinja2 init. Exiting: {e}"); sys.exit(1)
 
-# --- Helper Functions --- (Ensure these are identical to gyro-picks.py if shared, or keep local)
+
+# --- Helper Functions ---
 def ensure_directories():
-    dirs_to_create = [ DATA_DIR_MAIN, SCRAPED_ARTICLES_DIR, PROCESSED_JSON_DIR, PUBLIC_DIR, OUTPUT_HTML_DIR, TEMPLATE_DIR ]
+    dirs_to_create = [
+        DATA_DIR_MAIN, RAW_WEB_RESEARCH_OUTPUT_DIR, PROCESSED_JSON_DIR,
+        PUBLIC_DIR, OUTPUT_HTML_DIR, DIGEST_OUTPUT_HTML_DIR, TEMPLATE_DIR
+    ]
     try:
         for d in dirs_to_create: os.makedirs(d, exist_ok=True)
         logger.info("Ensured core directories exist.")
     except OSError as e: logger.exception(f"CRITICAL dir create fail: {e}"); sys.exit(1)
 
 def get_file_hash(filepath):
-    hasher = hashlib.sha256(); logger.debug(f"Hashing: {filepath}")
+    hasher = hashlib.sha256();
     if not os.path.exists(filepath): logger.error(f"NOT FOUND for hash: {filepath}"); return None
     try:
         with open(filepath, 'rb') as f:
             buf = f.read(65536)
             while len(buf) > 0: hasher.update(buf); buf = f.read(65536)
-        hex_digest = hasher.hexdigest(); logger.debug(f"Hashed {filepath}: {hex_digest}"); return hex_digest
+        hex_digest = hasher.hexdigest(); return hex_digest
     except Exception as e: logger.error(f"Error hashing {filepath}: {e}"); return None
 
-current_post_template_hash = None 
+current_post_template_hash_main = None 
+current_digest_template_hash_main = None 
 
-def load_article_data(filepath):
+def load_json_data(filepath, data_description="data"):
     try:
         with open(filepath, 'r', encoding='utf-8') as f: return json.load(f)
-    except FileNotFoundError: logger.warning(f"Not found: {filepath}"); return None
-    except json.JSONDecodeError: logger.error(f"JSON decode error: {filepath}."); return None
-    except Exception as e: logger.error(f"Error loading {filepath}: {e}"); return None
+    except FileNotFoundError: logger.debug(f"{data_description} file not found: {filepath}"); return None
+    except json.JSONDecodeError: logger.error(f"JSON decode error in {data_description} file: {filepath}."); return None
+    except Exception as e: logger.error(f"Error loading {data_description} from {filepath}: {e}"); return None
 
-def save_processed_data(filepath, article_data_to_save):
+def save_json_data(filepath, data_to_save, data_description="data"):
     try:
          os.makedirs(os.path.dirname(filepath), exist_ok=True)
-         if current_post_template_hash: article_data_to_save['post_template_hash'] = current_post_template_hash
-         else: logger.warning("current_post_template_hash None. Hash not saved in JSON.")
-         with open(filepath, 'w', encoding='utf-8') as f: json.dump(article_data_to_save, f, indent=4, ensure_ascii=False)
-         logger.info(f"Saved processed: {os.path.basename(filepath)}"); return True
-    except Exception as e: logger.error(f"Failed save processed {os.path.basename(filepath)}: {e}"); return False
+         with open(filepath, 'w', encoding='utf-8') as f: json.dump(data_to_save, f, indent=4, ensure_ascii=False)
+         logger.info(f"Saved {data_description} to: {os.path.basename(filepath)}"); return True
+    except Exception as e: logger.error(f"Failed to save {data_description} to {os.path.basename(filepath)}: {e}"); return False
 
-def remove_scraped_file(filepath):
-    try:
-         if os.path.exists(filepath): os.remove(filepath); logger.debug(f"Removed raw: {os.path.basename(filepath)}")
-         else: logger.warning(f"Attempted remove non-existent: {filepath}")
-    except OSError as e: logger.error(f"Failed remove raw {filepath}: {e}")
+def get_article_universal_id(article_url_or_identifier_string):
+    if not article_url_or_identifier_string:
+        return hashlib.sha256(str(time.time()).encode('utf-8')).hexdigest()
+    return hashlib.sha256(article_url_or_identifier_string.encode('utf-8')).hexdigest()
 
-def format_tags_html(tags_list):
-    if not tags_list: return ""
-    try:
-        links = []; base = YOUR_SITE_BASE_URL.rstrip('/') + '/' if YOUR_SITE_BASE_URL else '/'
-        for tag in tags_list:
-            safe = requests.utils.quote(str(tag)); url = urljoin(base, f"topic.html?name={safe}")
-            links.append(f'<a href="{url}" class="tag-link">{html.escape(str(tag))}</a>')
-        return ", ".join(links)
-    except Exception as e: logger.error(f"Error formatting tags HTML: {tags_list} - {e}"); return ""
-
-def get_sort_key(item):
+def get_sort_key_for_all_articles(item):
     fallback = datetime(1970, 1, 1, tzinfo=timezone.utc); iso_str = item.get('published_iso')
     if not iso_str: return fallback
     try:
         if iso_str.endswith('Z'): iso_str = iso_str[:-1] + '+00:00'
         dt = datetime.fromisoformat(iso_str)
         return dt.replace(tzinfo=timezone.utc) if dt.tzinfo is None else dt
-    except ValueError: logger.warning(f"Date parse error '{iso_str}'. Fallback."); return fallback
+    except ValueError: logger.warning(f"Date parse error '{iso_str}' for all_articles.json sort. Fallback."); return fallback
 
 def _read_tweet_tracker():
-    today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    today_utc_str = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     try:
         if os.path.exists(TWITTER_DAILY_LIMIT_FILE):
             with open(TWITTER_DAILY_LIMIT_FILE, 'r') as f: data = json.load(f)
-            if data.get('date') == today: return data['date'], data.get('count', 0)
-        return today, 0
-    except Exception as e: logger.error(f"Error read Twitter tracker: {e}. Reset."); return today, 0
-
-def _write_tweet_tracker(date_str, count):
-    try:
-        os.makedirs(os.path.dirname(TWITTER_DAILY_LIMIT_FILE), exist_ok=True)
-        with open(TWITTER_DAILY_LIMIT_FILE, 'w') as f: json.dump({'date': date_str, 'count': count}, f, indent=2)
-        logger.info(f"Twitter tracker: Date {date_str}, Count {count}")
-    except Exception as e: logger.error(f"Error write Twitter tracker: {e}")
-
-def send_make_webhook(url, payload):
-    if not url: logger.warning("Make webhook URL missing."); return False
-    if not payload: logger.warning("No data for Make webhook."); return False
-    data = {"articles": payload} if isinstance(payload, list) else payload
-    log_id = f"batch of {len(payload)}" if isinstance(payload, list) else f"ID: {payload.get('id', 'N/A')}"
-    try:
-        res = requests.post(url, headers={'Content-Type': 'application/json'}, json=data, timeout=30)
-        res.raise_for_status(); logger.info(f"Sent to Make: {log_id}"); return True
-    except Exception as e: logger.error(f"Failed send to Make {log_id}: {e}"); return False
-
-def render_post_page(variables, slug_base):
-    try:
-        template = env.get_template('post_template.html'); html_out = template.render(variables)
-        if not isinstance(slug_base, str): slug_base = str(variables.get('id', 'untitled'))
-        safe_fn = re.sub(r'[<>:"/\\|?*%\.]+', '', slug_base).strip().lower().replace(' ', '-')
-        safe_fn = re.sub(r'-+', '-', safe_fn)[:80] or variables.get('id', 'fallback-slug')
-        fpath = os.path.join(OUTPUT_HTML_DIR, f"{safe_fn}.html")
-        os.makedirs(os.path.dirname(fpath), exist_ok=True)
-        with open(fpath, 'w', encoding='utf-8') as f: f.write(html_out)
-        logger.info(f"Rendered HTML: {os.path.basename(fpath)}"); return fpath
-    except Exception as e: logger.exception(f"CRITICAL HTML render fail ID {variables.get('id','N/A')}: {e}"); return None
-
-def load_all_articles_data_from_json():
-    if not os.path.exists(ALL_ARTICLES_FILE): return []
-    try:
-        with open(ALL_ARTICLES_FILE, 'r') as f: data = json.load(f)
-        if isinstance(data, dict) and isinstance(data.get('articles'), list): return data['articles']
-        logger.warning(f"{ALL_ARTICLES_FILE} invalid structure.")
-    except Exception as e: logger.error(f"Error loading {ALL_ARTICLES_FILE}: {e}.")
-    return []
-
-def update_all_articles_json_file(summary):
-    articles = load_all_articles_data_from_json()
-    article_id = summary.get('id')
-    if not article_id: logger.error("Update all_articles: info missing 'id'."); return
-    articles_map = {a.get('id'): a for a in articles if isinstance(a, dict) and a.get('id')}
-    articles_map[article_id] = summary
-    updated_list = sorted(list(articles_map.values()), key=get_sort_key, reverse=True)
-    try:
-        json_str = json.dumps({"articles": updated_list}, indent=2, ensure_ascii=False)
-        try: json.loads(json_str); logger.debug("all_articles.json content validated.")
-        except json.JSONDecodeError as jde: logger.error(f"CRITICAL: all_articles.json not valid: {jde}. Data: {json_str[:200]}"); return
-        with open(ALL_ARTICLES_FILE, 'w', encoding='utf-8') as f: f.write(json_str)
-        logger.info(f"Updated {os.path.basename(ALL_ARTICLES_FILE)} ({len(updated_list)} articles).")
-    except Exception as e: logger.error(f"Failed save {os.path.basename(ALL_ARTICLES_FILE)}: {e}")
-
-def slugify(text):
-    if not text: return "untitled"; text = str(text).lower()
-    text = re.sub(r'[^\w\s-]', '', text).strip(); text = re.sub(r'[-\s]+', '-', text)      
-    return text[:70]
-
-def process_link_placeholders(markdown_text, base_site_url):
-    if not markdown_text: return ""
-    if not base_site_url or base_site_url == '/': logger.warning("Base URL invalid for link placeholders."); base_site_url = "/"
-    internal_regex = r'\[\[\s*(.*?)\s*(?:\|\s*(.*?)\s*)?\]\]'
-    def replace_internal(match):
-        link_text = match.group(1).strip(); topic_slug = match.group(2).strip() if match.group(2) else None; href = ""
-        if topic_slug:
-            if topic_slug.endswith(".html") or (' ' not in topic_slug and topic_slug.count('-') > 0): # Slug-like
-                 prefix = "articles/" if topic_slug.endswith(".html") and not topic_slug.startswith("articles/") else ""
-                 href = urljoin(base_site_url, f"{prefix}{topic_slug.lstrip('/')}")
-            else: href = urljoin(base_site_url, f"topic.html?name={quote(topic_slug)}") # Topic name
-        else: href = urljoin(base_site_url, f"topic.html?name={quote(slugify(link_text))}") # Slugify link text for topic
-        return f'<a href="{html.escape(href)}" class="internal-link">{html.escape(link_text)}</a>'
-    processed = re.sub(internal_regex, replace_internal, markdown_text)
-    def replace_external(match):
-        text, url = match.group(1).strip(), match.group(2).strip()
-        return f'<a href="{html.escape(url)}" target="_blank" rel="noopener noreferrer" class="external-link">{html.escape(text)}</a>'
-    return re.sub(r'\(\(\s*(.*?)\s*\|\s*(https?://.*?)\s*\)\)', replace_external, processed)
-
-def regenerate_article_html_if_needed(article_data, force_regen=False):
-    global current_post_template_hash
-    if not current_post_template_hash: logger.error("CRITICAL: Template hash None. Cannot regen."); return False
-    article_id, slug = article_data.get('id'), article_data.get('slug')
-    if not article_id: logger.warning(f"Regen skip: no id for {article_data.get('title', 'Unknown')}"); return False
-    if not slug:
-        slug = slugify(article_data.get('title', article_id)) or article_id
-        logger.warning(f"Article {article_id} missing slug. Derived: {slug}"); article_data['slug'] = slug
-    
-    html_path = os.path.join(OUTPUT_HTML_DIR, f"{slug}.html")
-    stored_hash = article_data.get('post_template_hash')
-    regen = False
-    logger.debug(f"RegenCheck ID {article_id}: CurrentHash='{current_post_template_hash}', StoredHash='{stored_hash}', Force='{force_regen}', Exists='{os.path.exists(html_path)}'")
-    if not os.path.exists(html_path): logger.info(f"HTML missing for {article_id}. Regen=True."); regen = True
-    elif force_regen: logger.info(f"Forcing regen for {article_id}. Regen=True."); regen = True
-    elif stored_hash != current_post_template_hash: logger.info(f"Template changed for {article_id}. Old:{stored_hash}, New:{current_post_template_hash}. Regen=True."); regen = True
-    else: logger.debug(f"RegenCheck for {article_id}: No criteria met.")
-
-    if regen:
-        logger.info(f"Regenerating HTML for {article_id}...")
-        seo_results = article_data.get('seo_agent_results', {})
-        if not isinstance(seo_results, dict): seo_results = {}
-        md_raw = seo_results.get('generated_article_body_md', '')
-        if not md_raw: logger.warning(f"{article_id} empty md_body.")
-        
-        md_linked = process_link_placeholders(md_raw, YOUR_SITE_BASE_URL)
-        html_body = html.unescape(markdown.markdown(md_linked, extensions=['fenced_code', 'tables', 'nl2br', 'sane_lists', 'extra']))
-        
-        tags = article_data.get('generated_tags', []); tags_html = format_tags_html(tags)
-        pub_dt = get_sort_key(article_data)
-        rel_path = f"articles/{slug}.html"
-        canon_url = urljoin(YOUR_SITE_BASE_URL, rel_path.lstrip('/')) if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else f"/{rel_path.lstrip('/')}"
-        
-        json_ld_raw = seo_results.get('generated_json_ld_raw', '{}')
-        json_ld_placeholder = f"{BASE_URL_FOR_CANONICAL_MAIN.rstrip('/')}/articles/{{SLUG_PLACEHOLDER}}"
-        final_json_ld_tag = seo_results.get('generated_json_ld_full_script_tag', '<script type="application/ld+json">{}</script>')
-        if json_ld_placeholder in json_ld_raw:
-            final_json_ld_str = json_ld_raw.replace(json_ld_placeholder, canon_url)
-            final_json_ld_tag = f'<script type="application/ld+json">\n{final_json_ld_str}\n</script>'
-        
-        tpl_vars = {
-            'PAGE_TITLE': seo_results.get('generated_title_tag', article_data.get('title')), 'META_DESCRIPTION': seo_results.get('generated_meta_description', ''),
-            'AUTHOR_NAME': article_data.get('author', AUTHOR_NAME_DEFAULT), 'META_KEYWORDS_LIST': tags, 'CANONICAL_URL': canon_url,
-            'SITE_NAME': YOUR_WEBSITE_NAME, 'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL, 'IMAGE_URL': article_data.get('selected_image_url', ''),
-            'IMAGE_ALT_TEXT': article_data.get('title', 'Article Image'), 'PUBLISH_ISO_FOR_META': article_data.get('published_iso', datetime.now(timezone.utc).isoformat()),
-            'JSON_LD_SCRIPT_BLOCK': final_json_ld_tag, 'ARTICLE_HEADLINE': article_data.get('title'), 'ARTICLE_SEO_H1': article_data.get('title'),
-            'PUBLISH_DATE': pub_dt.strftime('%B %d, %Y') if pub_dt != datetime(1970,1,1,tzinfo=timezone.utc) else "Date Unknown",
-            'ARTICLE_BODY_HTML': html_body, 'ARTICLE_TAGS_HTML': tags_html, 'SOURCE_ARTICLE_URL': article_data.get('link', '#'),
-            'ARTICLE_TITLE': article_data.get('title'), 'id': article_id, 'CURRENT_ARTICLE_ID': article_id,
-            'CURRENT_ARTICLE_TOPIC': article_data.get('topic', ''), 'CURRENT_ARTICLE_TAGS_JSON': json.dumps(tags), 'AUDIO_URL': article_data.get('audio_url')
-        }
-        if render_post_page(tpl_vars, slug):
-            logger.info(f"HTML render OK for {article_id}. Updating JSON hash.")
-            article_data['post_template_hash'] = current_post_template_hash
-            json_path_update = os.path.join(PROCESSED_JSON_DIR, f"{article_id}.json")
-            if save_processed_data(json_path_update, article_data): logger.info(f"Updated JSON for {article_id} with new hash: {current_post_template_hash}")
-            else: logger.error(f"Failed update template hash in {json_path_update}.")
-            return True
-        else: logger.error(f"HTML render FAILED for {article_id}."); return False
-    logger.debug(f"RegenCheck for {article_id}: No regen performed.")
-    return False
-
-def process_single_scraped_article(raw_json_filepath, existing_articles_summary_data, current_run_fully_processed_data_list):
-    article_filename = os.path.basename(raw_json_filepath); logger.info(f"--- Processing: {article_filename} ---")
-    article_data = load_article_data(raw_json_filepath)
-    if not article_data: logger.error(f"Load/invalid data {article_filename}. Skip."); remove_scraped_file(raw_json_filepath); return None
-
-    article_id = article_data.get('id') or get_article_id(article_data, article_data.get('source_feed', 'unknown'))
-    article_data['id'] = article_id
-    processed_json_path = os.path.join(PROCESSED_JSON_DIR, f"{article_id}.json")
-
-    try:
-        if os.path.exists(processed_json_path):
-            logger.info(f"ID {article_id} already fully processed. Skip raw."); remove_scraped_file(raw_json_filepath); return None
-
-        pub_iso = article_data.get('published_iso')
-        if pub_iso and get_sort_key(article_data) < (datetime.now(timezone.utc) - timedelta(days=ARTICLE_MAX_AGE_DAYS)):
-            logger.info(f"{article_id} too old. Skip."); remove_scraped_file(raw_json_filepath); return None
-        
-        is_gyro_adv = article_data.get('source_feed') == "Gyro Pick - Advanced"
-        user_importance = article_data.get('user_importance_override') if is_gyro_adv else None
-        user_trending = article_data.get('user_is_trending_pick', False) if is_gyro_adv else False
-        user_img = article_data.get('user_provided_image_url') if is_gyro_adv else None
-
-        if user_img: article_data['selected_image_url'] = user_img
-        elif not article_data.get('selected_image_url'):
-            logger.info(f"Finding image for {article_id} ('{article_data.get('title', '')[:30]}...')")
-            img_url = scrape_source_for_image(article_data.get('link')) or find_best_image(article_data.get('title', 'AI News'), article_url_for_scrape=article_data.get('link'))
-            if not img_url: logger.error(f"No image for {article_id}. Skip."); remove_scraped_file(raw_json_filepath); return None
-            article_data['selected_image_url'] = img_url
-        
-        title_lower = article_data.get('title', '').strip().lower()
-        if not title_lower: logger.error(f"{article_id} empty title. Skip."); remove_scraped_file(raw_json_filepath); return None
-        for ex_sum in existing_articles_summary_data:
-            if isinstance(ex_sum, dict) and ex_sum.get('title','').strip().lower() == title_lower and \
-               ex_sum.get('image_url') == article_data['selected_image_url'] and ex_sum.get('id') != article_id:
-                logger.warning(f"{article_id} DUPLICATE (Title/Img) of {ex_sum.get('id', 'N/A')}. Skip."); remove_scraped_file(raw_json_filepath); return None
-        
-        article_data = run_filter_agent(article_data)
-        if not article_data or article_data.get('filter_verdict') is None: logger.error(f"Filter Agent fail for {article_id}. Skip."); remove_scraped_file(raw_json_filepath); return None
-        
-        filter_verdict = article_data['filter_verdict']; importance = filter_verdict.get('importance_level')
-        if is_gyro_adv and user_importance:
-            logger.info(f"Gyro Adv: Override filter importance. User: {user_importance}. Filter: {importance}")
-            importance = user_importance; filter_verdict['importance_level'] = user_importance
-        article_data['is_breaking'] = (importance == "Breaking")
-        if importance == "Boring" and not is_gyro_adv : # Gyro Advanced is never boring
-            logger.info(f"{article_id} 'Boring'. Skip."); remove_scraped_file(raw_json_filepath); return None
-        
-        article_data['topic'] = filter_verdict.get('topic', 'Other')
-        article_data['primary_keyword'] = filter_verdict.get('primary_topic_keyword', article_data.get('title','Untitled'))
-        logger.info(f"{article_id} final class '{importance}' (Topic: {article_data['topic']}).")
-
-        article_data = run_similarity_check_agent(article_data, PROCESSED_JSON_DIR, current_run_fully_processed_data_list)
-        sim_verdict = article_data.get('similarity_verdict', 'ERROR')
-        if is_gyro_adv and sim_verdict != "OKAY" and not sim_verdict.startswith("OKAY_"): logger.info(f"Gyro Adv {article_id} similarity: {sim_verdict}. Proceeding.")
-        elif sim_verdict != "OKAY" and not sim_verdict.startswith("OKAY_"):
-            logger.warning(f"{article_id} similarity: {sim_verdict} (to {article_data.get('similar_article_id', 'N/A')}). Skip."); remove_scraped_file(raw_json_filepath); return None
-        
-        article_data = run_keyword_research_agent(article_data)
-        tags = list(set(kw.strip() for kw in article_data.get('researched_keywords', []) + [article_data.get('primary_keyword')] if kw and kw.strip()))[:15]
-        article_data['generated_tags'] = tags if tags else [article_data.get('topic', "Tech"), "News"]
-        
-        article_data = run_seo_article_agent(article_data.copy()) 
-        seo_results = article_data.get('seo_agent_results')
-        if not seo_results or not seo_results.get('generated_article_body_md'):
-            logger.error(f"SEO Agent fail for {article_id}. Skip."); remove_scraped_file(raw_json_filepath); return None
-        
-        article_data['slug'] = slugify(article_data.get('title', article_id)) or article_id
-        
-        trend_score = 10.0 if article_data.get('is_breaking') else 5.0
-        actual_trending = user_trending if is_gyro_adv else False
-        if actual_trending: trend_score += 7.0
-        trend_score += float(len(tags)) * 0.5
-        if pub_iso:
-            pub_dt = get_sort_key(article_data); now = datetime.now(timezone.utc)
-            if pub_dt <= now: days_old = (now - pub_dt).total_seconds() / 86400.0
-            if days_old <= ARTICLE_MAX_AGE_DAYS: trend_score += max(0.0, 1.0 - (days_old / float(ARTICLE_MAX_AGE_DAYS))) * 5.0
-        article_data['trend_score'] = round(max(0.0, trend_score), 2)
-        
-        if not regenerate_article_html_if_needed(article_data, force_regen=True): 
-            logger.error(f"HTML render fail for new {article_id}. Skip save."); remove_scraped_file(raw_json_filepath); return None
-        
-        rel_path = f"articles/{article_data['slug']}.html"
-        canon_url = urljoin(YOUR_SITE_BASE_URL, rel_path.lstrip('/')) if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else f"/{rel_path.lstrip('/')}"
-        
-        summary = {
-            "id": article_id, "title": article_data.get('title'), "link": rel_path,
-            "published_iso": article_data.get('published_iso') or datetime.now(timezone.utc).isoformat(), 
-            "summary_short": seo_results.get('generated_meta_description', ''),
-            "image_url": article_data.get('selected_image_url'), "topic": article_data.get('topic', 'News'), 
-            "is_breaking": article_data.get('is_breaking', False), "is_trending_pick": actual_trending,
-            "tags": article_data.get('generated_tags', []), "audio_url": None, 
-            "trend_score": article_data.get('trend_score', 0)
-        }
-        article_data['audio_url'] = None
-        update_all_articles_json_file(summary)
-        if not save_processed_data(processed_json_path, article_data): logger.error(f"Failed save main processed JSON for {article_id}.")
-        
-        social_payload = {
-            "id": article_id, "title": article_data.get('title'), "article_url": canon_url, 
-            "image_url": article_data.get('selected_image_url'), "topic": article_data.get('topic'), 
-            "tags": article_data.get('generated_tags', []), "summary_short": summary.get('summary_short', '')
-        }
-        
-        if os.path.exists(raw_json_filepath): remove_scraped_file(raw_json_filepath)
-        logger.info(f"--- Successfully processed article (scraped/gyro): {article_id} ---")
-        return {"summary": summary, "social_post_data": social_payload, "full_data": article_data }
-
+            if data.get('date') == today_utc_str:
+                return data['date'], data.get('count', 0)
+        return today_utc_str, 0
     except Exception as e:
-        logger.exception(f"CRITICAL failure processing {article_id} ({article_filename}): {e}")
-        if os.path.exists(raw_json_filepath): remove_scraped_file(raw_json_filepath)
-        return None
+        logger.error(f"Error reading Twitter tracker: {e}. Resetting count for {today_utc_str}.")
+        return today_utc_str, 0
+
+# _write_tweet_tracker is now primarily called by social_media_poster.py upon successful tweet.
+# main.py just reads to decide if a Twitter post should be ATTEMPTED.
+
+def slugify_filename(text_to_slugify):
+    if not text_to_slugify: return "untitled-slug"
+    s = str(text_to_slugify).strip().lower()
+    s = re.sub(r'[^\w\s-]', '', s)
+    s = re.sub(r'[-\s]+', '-', s)
+    return s[:75]
+
+def format_tags_html_main(tags_list): 
+    if not tags_list: return ""
+    try:
+        links = []; base = YOUR_SITE_BASE_URL 
+        for tag_item in tags_list:
+            tag_str = str(tag_item) if tag_item is not None else "untagged"
+            safe_tag = quote(tag_str)
+            url = urljoin(base, f"topic.html?name={safe_tag}")
+            links.append(f'<a href="{url}" class="tag-link">{html.escape(tag_str)}</a>')
+        return ", ".join(links)
+    except Exception as e:
+        logger.error(f"Error formatting tags HTML (main): {tags_list} - {e}")
+        return "Error formatting tags"
+
+def process_final_markdown_to_html_main(markdown_text):
+    if not markdown_text: return ""
+    html_content = markdown.markdown(markdown_text, extensions=['fenced_code', 'tables', 'nl2br', 'sane_lists', 'extra', 'attr_list'])
+    return html.unescape(html_content)
+
+def render_html_page_main(template_name, template_vars, output_dir, output_filename_base): # Renamed
+    """Generic HTML page renderer, used by main."""
+    try:
+        template = jinja_env_main.get_template(template_name)
+        html_page_content = template.render(template_vars)
+        
+        filepath = os.path.join(output_dir, f"{output_filename_base}.html")
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(html_page_content)
+        logger.info(f"Successfully rendered HTML page '{template_name}' to: {filepath}")
+        return True
+    except Exception as e:
+        logger.exception(f"Failed to render/save HTML page '{template_name}' for {output_filename_base}: {e}")
+        return False
+
+def update_master_article_list_json(article_summary_data):
+    if not article_summary_data or not isinstance(article_summary_data, dict) or not article_summary_data.get('id'):
+        logger.error("Cannot update all_articles.json: Invalid or missing article summary data/ID.")
+        return
+
+    all_articles = load_json_data(ALL_ARTICLES_FILE, "all_articles_summary")
+    if all_articles is None: all_articles_list = []
+    elif isinstance(all_articles, dict) and 'articles' in all_articles and isinstance(all_articles['articles'], list):
+        all_articles_list = all_articles['articles']
+    else: logger.warning(f"Format of {ALL_ARTICLES_FILE} unexpected. Starting new list."); all_articles_list = []
+
+    article_id_to_update = article_summary_data['id']
+    all_articles_list = [art for art in all_articles_list if isinstance(art,dict) and art.get('id') != article_id_to_update]
+    all_articles_list.append(article_summary_data)
+    all_articles_list.sort(key=get_sort_key_for_all_articles, reverse=True)
+    save_json_data(ALL_ARTICLES_FILE, {"articles": all_articles_list}, "master article list")
 
 
+# --- Main Orchestration Logic ---
 if __name__ == "__main__":
     run_start_timestamp = time.time()
-    logger.info(f"--- === Dacoola AI News Orchestrator Starting Run ({datetime.now(timezone.utc).isoformat()}) === ---")
+    logger.info(f"--- === Dacoola AI Content Engine - Orchestrator Starting Run ({datetime.now(timezone.utc).isoformat()}) === ---")
     ensure_directories()
 
-    logger.info(f"Attempting to read and hash template file: {POST_TEMPLATE_FILE}")
-    current_post_template_hash = get_file_hash(POST_TEMPLATE_FILE) 
-    if not current_post_template_hash:
-        logger.critical(f"CRITICAL FAILURE: Could not hash template file: {POST_TEMPLATE_FILE}. Exiting.")
-        sys.exit(1) 
-    else:
-        logger.info(f"Successfully obtained current post_template.html hash: {current_post_template_hash}")
+    logger.info(f"Hashing templates: {POST_TEMPLATE_FILE}, {DIGEST_TEMPLATE_FILE}")
+    current_post_template_hash_main = get_file_hash(POST_TEMPLATE_FILE)
+    current_digest_template_hash_main = get_file_hash(DIGEST_TEMPLATE_FILE) 
+    if not current_post_template_hash_main:
+        logger.critical(f"CRITICAL FAILURE: Could not hash post_template.html. Exiting.")
+        sys.exit(1)
+    if not current_digest_template_hash_main: 
+        logger.warning(f"Warning: Could not hash digest_page_template.html. Digest regen might be affected.")
+    logger.info(f"Current post_template.html hash: {current_post_template_hash_main}")
+    logger.info(f"Current digest_template.html hash: {current_digest_template_hash_main}")
 
-    social_media_clients_glob = initialize_social_clients()
-    fully_processed_article_ids_set = set(os.path.basename(f).replace('.json', '') for f in glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json')))
-    logger.info(f"Found {len(fully_processed_article_ids_set)} fully processed article JSONs (scraped or Gyro).")
-    scraper_tracker_ids_set = load_scraper_processed_ids()
-    initial_ids_for_scraper_run = scraper_tracker_ids_set.union(fully_processed_article_ids_set)
-    logger.info(f"Total initial IDs (from scraper history or already fully processed) passed to scraper: {len(initial_ids_for_scraper_run)}")
+    social_media_clients = initialize_social_clients()
+    
+    # --- Stage 0: HTML Regeneration for Existing Content ---
+    logger.info("--- Stage 0: Checking/Regenerating HTML for existing processed articles & digests ---")
+    all_existing_processed_files = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
+    html_regen_count_articles = 0
+    if all_existing_processed_files:
+        for proc_json_file in all_existing_processed_files:
+            article_data_for_regen = load_json_data(proc_json_file, f"regen check: {os.path.basename(proc_json_file)}")
+            if not article_data_for_regen or not article_data_for_regen.get('id') or not article_data_for_regen.get('slug'):
+                 logger.warning(f"Skipping HTML regen for {os.path.basename(proc_json_file)}: missing id/slug or invalid data.")
+                 continue
+            stored_template_hash = article_data_for_regen.get('post_template_hash')
+            html_file_path_check = os.path.join(OUTPUT_HTML_DIR, f"{article_data_for_regen['slug']}.html")
+            if not os.path.exists(html_file_path_check) or stored_template_hash != current_post_template_hash_main:
+                # Re-populate all necessary template variables from article_data_for_regen
+                # This is similar to the end of the main processing loop
+                template_vars_for_regen = {
+                    'PAGE_TITLE': article_data_for_regen.get('seo_agent_results',{}).get('generated_title_tag', article_data_for_regen.get('final_title','Untitled')),
+                    'META_DESCRIPTION': article_data_for_regen.get('seo_agent_results',{}).get('generated_meta_description', '...'),
+                    'AUTHOR_NAME': article_data_for_regen.get('author', AUTHOR_NAME_DEFAULT),
+                    'META_KEYWORDS_LIST': article_data_for_regen.get('final_keywords', []),
+                    'CANONICAL_URL': urljoin(YOUR_SITE_BASE_URL, f"articles/{article_data_for_regen['slug']}.html".lstrip('/')),
+                    'SITE_NAME': YOUR_WEBSITE_NAME,
+                    'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
+                    'IMAGE_URL': article_data_for_regen.get('selected_image_url', ''),
+                    'IMAGE_ALT_TEXT': article_data_for_regen.get('final_featured_image_alt_text', article_data_for_regen.get('final_title','Image')),
+                    'PUBLISH_ISO_FOR_META': article_data_for_regen.get('published_iso'),
+                    'JSON_LD_SCRIPT_BLOCK': article_data_for_regen.get('seo_agent_results',{}).get('generated_json_ld_full_script_tag','<script type="application/ld+json">{}</script>'),
+                    'ARTICLE_HEADLINE': article_data_for_regen.get('final_title','Untitled'),
+                    'ARTICLE_SEO_H1': article_data_for_regen.get('final_title','Untitled'),
+                    'PUBLISH_DATE': get_sort_key_for_all_articles(article_data_for_regen).strftime('%B %d, %Y') if article_data_for_regen.get('published_iso') else "N/A",
+                    'ARTICLE_BODY_HTML': process_final_markdown_to_html_main(article_data_for_regen.get('seo_agent_results',{}).get('generated_article_body_md','')),
+                    'ARTICLE_TAGS_HTML': format_tags_html_main(article_data_for_regen.get('final_keywords',[])),
+                    'SOURCE_ARTICLE_URL': article_data_for_regen.get('original_source_url','#'),
+                    'ARTICLE_TITLE': article_data_for_regen.get('final_title','Untitled'),
+                    'id': article_data_for_regen['id'],
+                    'CURRENT_ARTICLE_ID': article_data_for_regen['id'],
+                    'CURRENT_ARTICLE_TOPIC': article_data_for_regen.get('primary_topic','News'),
+                    'CURRENT_ARTICLE_TAGS_JSON': json.dumps(article_data_for_regen.get('final_keywords',[])),
+                    'AUDIO_URL': article_data_for_regen.get('generated_audio_url')
+                }
+                if render_html_page_main('post_template.html', template_vars_for_regen, OUTPUT_HTML_DIR, article_data_for_regen['slug']):
+                    article_data_for_regen['post_template_hash'] = current_post_template_hash_main
+                    save_json_data(proc_json_file, article_data_for_regen, f"processed article {article_data_for_regen['id']} (hash update)")
+                    html_regen_count_articles +=1
+    logger.info(f"Article HTML Regeneration complete. Regenerated/Verified {html_regen_count_articles} files.")
+    
+    # --- Stage 1: Web Research ---
+    logger.info("--- Stage 1: Running Web Research Agent ---")
+    topics_for_research = [ 
+        "latest breakthroughs in AI model architectures", "NVIDIA AI hardware news", "OpenAI new products",
+        "Google DeepMind advancements", "AI ethics and regulation", "Robotics and AI"
+    ]
+    raw_articles_from_web = run_web_research_agent(topics_for_research)
+    if raw_articles_from_web:
+        logger.info(f"Web Research Agent found {len(raw_articles_from_web)} raw articles.")
+        raw_research_output_path = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"web_research_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+        save_json_data(raw_research_output_path, raw_articles_from_web, "raw web research output")
+    else: logger.info("Web Research Agent found no new articles.")
 
-    logger.info("--- Stage 1: Checking/Regenerating HTML from Processed Data (Scraped & Gyro) ---")
-    all_processed_json_files = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
-    html_regenerated_count = 0
-    if all_processed_json_files:
-        logger.info(f"Found {len(all_processed_json_files)} processed JSON files to check for HTML regeneration.")
-        logger.info(f"Using current template hash for this run: {current_post_template_hash}")
-        for proc_json_filepath in all_processed_json_files:
-            article_id_for_log = os.path.basename(proc_json_filepath).replace('.json', '')
-            try:
-                article_data_content = load_article_data(proc_json_filepath)
-                if not article_data_content:
-                    logger.warning(f"Skipping HTML regen for invalid/unreadable JSON: {article_id_for_log}"); continue
-                
-                article_id_from_content = article_data_content.get('id', article_id_for_log)
-                if article_id_from_content != article_id_for_log:
-                    logger.warning(f"Mismatch: Filename ID '{article_id_for_log}' vs Content ID '{article_id_from_content}'. Using content ID.")
-                
-                logger.debug(f"Checking regen for article ID: {article_id_from_content}. Stored hash: {article_data_content.get('post_template_hash')}")
-                if regenerate_article_html_if_needed(article_data_content): 
-                    html_regenerated_count += 1
-                    logger.info(f"Successfully regenerated HTML for {article_id_from_content} and its JSON should now have the new hash.")
-                else:
-                    logger.debug(f"HTML for {article_id_from_content} did NOT need regeneration OR regeneration process failed.")
-            except Exception as regen_exc:
-                logger.exception(f"Error during HTML regeneration main loop for {article_id_for_log}: {regen_exc}")
-    logger.info(f"--- HTML Regeneration Stage Complete. Regenerated/Verified {html_regenerated_count} files. ---")
+    gyro_pick_files = glob.glob(os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, "gyro-*.json"))
+    if gyro_pick_files:
+        logger.info(f"Found {len(gyro_pick_files)} raw Gyro Pick files to process.")
+        for gyro_file in gyro_pick_files:
+            gyro_data = load_json_data(gyro_file, "raw gyro pick")
+            if gyro_data: raw_articles_from_web.append(gyro_data)
+            else: logger.warning(f"Could not load gyro pick file: {gyro_file}")
+    
+    successfully_processed_articles_this_run = []
+    social_media_queue_this_run = []
+    historical_embeddings = load_historical_embeddings()
+    site_content_graph_data = load_site_content_graph() 
 
-    logger.info("--- Stage 2: Running News Scraper ---")
-    new_raw_articles_count = 0
-    try: new_raw_articles_count = scrape_news(NEWS_FEED_URLS, initial_ids_for_scraper_run)
-    except Exception as main_scrape_e: logger.exception(f"News scraper run failed: {main_scrape_e}")
-    logger.info(f"News Scraper run completed. Found {new_raw_articles_count} new raw article files.")
+    logger.info(f"--- Starting main processing pipeline for {len(raw_articles_from_web)} total raw articles (Web + Gyro) ---")
+    processed_in_run_count = 0
+    for raw_article_input in raw_articles_from_web:
+        if processed_in_run_count >= MAX_ARTICLES_TO_PROCESS_PER_RUN:
+            logger.info(f"Reached MAX_ARTICLES_TO_PROCESS_PER_RUN ({MAX_ARTICLES_TO_PROCESS_PER_RUN}). Stopping further processing in this cycle.")
+            break
 
-    logger.info("--- Stage 3: Processing Newly Scraped Articles (and Raw Gyro Picks) ---")
-    all_articles_summary_data_for_run = load_all_articles_data_from_json()
-    # Process files from SCRAPED_ARTICLES_DIR (includes raw gyro picks now)
-    raw_json_files_to_process_list = sorted(glob.glob(os.path.join(SCRAPED_ARTICLES_DIR, '*.json')), key=os.path.getmtime, reverse=True)
-    logger.info(f"Found {len(raw_json_files_to_process_list)} raw article files (scraped & gyro) to process.")
+        article_id_source_key = raw_article_input.get('id') 
+        if not article_id_source_key and 'url' in raw_article_input : 
+            article_id_source_key = raw_article_input['url']
+        elif not article_id_source_key and 'initial_title_from_web' in raw_article_input: 
+             article_id_source_key = raw_article_input['initial_title_from_web']
 
-    current_run_fully_processed_data = [] 
-    successfully_processed_scraped_count = 0; failed_or_skipped_scraped_count = 0
-    social_media_payloads_for_posting_queue = []
+        current_article_id_str = get_article_universal_id(article_id_source_key)
+        logger.info(f"--- Processing Article ID: {current_article_id_str} (Source Key: {article_id_source_key}) ---")
 
-    for raw_filepath in raw_json_files_to_process_list:
-        article_potential_id = os.path.basename(raw_filepath).replace('.json', '')
-        if article_potential_id in fully_processed_article_ids_set and not article_potential_id.startswith("gyro-"): 
-            logger.debug(f"Skipping raw file {article_potential_id}, as fully processed JSON already exists.");
-            remove_scraped_file(raw_filepath);
+        processed_json_path = os.path.join(PROCESSED_JSON_DIR, f"{current_article_id_str}.json")
+        if os.path.exists(processed_json_path):
+            logger.info(f"Article {current_article_id_str} already has a final processed JSON. Skipping full pipeline.")
+            raw_file_to_remove_path = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json") if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id') else None
+            if raw_file_to_remove_path and os.path.exists(raw_file_to_remove_path): # Check path existence
+                 try: os.remove(raw_file_to_remove_path); logger.debug(f"Removed already-processed raw file: {raw_file_to_remove_path}")
+                 except Exception as e_rem: logger.warning(f"Could not remove raw file {raw_file_to_remove_path}: {e_rem}")
             continue
 
-        single_article_processing_result = process_single_scraped_article(
-            raw_filepath,
-            all_articles_summary_data_for_run, 
-            current_run_fully_processed_data 
-        )
-
-        if single_article_processing_result and isinstance(single_article_processing_result, dict):
-            successfully_processed_scraped_count += 1
-            if "full_data" in single_article_processing_result and isinstance(single_article_processing_result["full_data"], dict):
-               current_run_fully_processed_data.append(single_article_processing_result["full_data"]) 
-            if "social_post_data" in single_article_processing_result and isinstance(single_article_processing_result["social_post_data"], dict):
-                social_media_payloads_for_posting_queue.append(single_article_processing_result["social_post_data"])
-                if single_article_processing_result["social_post_data"].get("id"):
-                    fully_processed_article_ids_set.add(single_article_processing_result["social_post_data"]["id"])
-        else:
-            failed_or_skipped_scraped_count += 1
-    logger.info(f"Article processing cycle complete. Success: {successfully_processed_scraped_count}, Failed/Skipped: {failed_or_skipped_scraped_count}")
-
-
-    logger.info(f"--- Stage 3.5: Queuing Unposted Processed Articles (Last {MAX_AGE_FOR_SOCIAL_POST_HOURS}h) for Social Media ---")
-    social_post_history_data = load_social_post_history()
-    already_posted_social_ids = set(social_post_history_data.get('posted_articles', []))
-
-    unposted_existing_processed_added_to_queue = 0
-    now_for_age_check = datetime.now(timezone.utc)
-    cutoff_time_for_social = now_for_age_check - timedelta(hours=MAX_AGE_FOR_SOCIAL_POST_HOURS)
-
-    all_processed_json_files_for_social_check = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
-    logger.info(f"Checking {len(all_processed_json_files_for_social_check)} total processed files for social media queue.")
-
-    ids_already_in_current_scrape_queue = {p.get('id') for p in social_media_payloads_for_posting_queue if p.get('id')}
-
-    for processed_json_file_path_check in all_processed_json_files_for_social_check:
-        article_id_from_filename = os.path.basename(processed_json_file_path_check).replace('.json', '')
-
-        if article_id_from_filename in ids_already_in_current_scrape_queue:
-            logger.debug(f"Article {article_id_from_filename} was from current processing run; already in social queue if eligible.")
-            continue
-        if article_id_from_filename in already_posted_social_ids:
-            logger.debug(f"Article {article_id_from_filename} already in social post history. Skipping for queue.")
-            continue
-
-        processed_article_full_data = load_article_data(processed_json_file_path_check)
-        if not processed_article_full_data:
-            logger.warning(f"Could not load data from {processed_json_file_path_check} for social queue. Skipping.")
-            continue
-
-        published_iso_for_social = processed_article_full_data.get('published_iso')
-        if not published_iso_for_social:
-            logger.warning(f"Processed article {article_id_from_filename} missing 'published_iso'. Skipping social.")
-            continue
-
-        try:
-            article_publish_dt = get_sort_key(processed_article_full_data)
-            if article_publish_dt < cutoff_time_for_social:
-                logger.debug(f"Processed article {article_id_from_filename} too old ({article_publish_dt.date()}). Skipping social.")
-                mark_article_as_posted_in_history(article_id_from_filename) 
-                continue
-        except Exception as date_e:
-            logger.warning(f"Error parsing date for {article_id_from_filename} for social age check: {date_e}. Skipping.")
-            continue
-
-        logger.info(f"Article ID {article_id_from_filename} (from processed_json) not in history & recent. Adding to social queue.")
-        article_title_for_social = processed_article_full_data.get('title', 'Untitled')
-        article_slug_for_social = processed_article_full_data.get('slug')
-        if not article_slug_for_social:
-            logger.warning(f"Processed article {article_id_from_filename} missing slug. Cannot form URL for social. Skipping."); continue
-
-        relative_link_for_social = f"articles/{article_slug_for_social}.html"
-        canonical_url_for_social = urljoin(YOUR_SITE_BASE_URL, relative_link_for_social.lstrip('/')) if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else f"/{relative_link_for_social.lstrip('/')}"
-
-        seo_results_data_for_social = processed_article_full_data.get('seo_agent_results', {})
-        summary_short_for_social = seo_results_data_for_social.get('generated_meta_description', '') if isinstance(seo_results_data_for_social, dict) else ''
-        
-        payload = {
-            "id": article_id_from_filename, "title": article_title_for_social,
-            "article_url": canonical_url_for_social, "image_url": processed_article_full_data.get('selected_image_url'),
-            "topic": processed_article_full_data.get('topic'), "tags": processed_article_full_data.get('generated_tags', []),
-            "summary_short": summary_short_for_social
+        article_pipeline_data = {
+            'id': current_article_id_str,
+            'original_source_url': raw_article_input.get('url', raw_article_input.get('original_source_url')),
+            'initial_title_from_web': raw_article_input.get('title', raw_article_input.get('initial_title_from_web')),
+            'raw_scraped_text': raw_article_input.get('scraped_text', raw_article_input.get('raw_scraped_text')),
+            'research_topic': raw_article_input.get('research_topic'), 
+            'published_iso': raw_article_input.get('published_iso', raw_article_input.get('retrieved_at', datetime.now(timezone.utc).isoformat())),
+            'pipeline_status': 'started',
+            'is_gyro_pick': raw_article_input.get('is_gyro_pick', False),
+            'gyro_pick_mode': raw_article_input.get('gyro_pick_mode'),
+            'user_importance_override_gyro': raw_article_input.get('user_importance_override_gyro'),
+            'user_is_trending_pick_gyro': raw_article_input.get('user_is_trending_pick_gyro'),
+            'selected_image_url': raw_article_input.get('selected_image_url'), 
+            'author': raw_article_input.get('author', AUTHOR_NAME_DEFAULT) 
         }
-        social_media_payloads_for_posting_queue.append(payload)
-        unposted_existing_processed_added_to_queue += 1
 
-    if unposted_existing_processed_added_to_queue > 0:
-        logger.info(f"Added {unposted_existing_processed_added_to_queue} recent, unposted items from processed_json to social media queue.")
+        article_pipeline_data = run_filter_enrich_agent(article_pipeline_data)
+        if not article_pipeline_data.get('filter_passed', False):
+            logger.info(f"Skipping {current_article_id_str}: Failed filter/enrichment. Reason: {article_pipeline_data.get('filter_reason')}")
+            continue
 
-    current_run_date_str = datetime.now(timezone.utc).strftime('%Y-%m-%d')
-    twitter_limit_file_date, twitter_posts_made_today = _read_tweet_tracker()
-    if twitter_limit_file_date != current_run_date_str:
-        logger.info(f"New day ({current_run_date_str}) for Twitter. Resetting daily post count.")
-        twitter_posts_made_today = 0; _write_tweet_tracker(current_run_date_str, 0)
-    logger.info(f"Twitter posts made today before this social posting cycle: {twitter_posts_made_today} (Daily Limit: {DAILY_TWEET_LIMIT})")
+        article_pipeline_data = run_deduplication_agent(article_pipeline_data, historical_embeddings)
+        if article_pipeline_data.get('is_duplicate', False):
+            logger.info(f"Skipping {current_article_id_str}: Duplicate of {article_pipeline_data.get('similar_article_id')}.")
+            continue
+        
+        article_pipeline_data = run_keyword_intelligence_agent(article_pipeline_data)
+        
+        article_pipeline_data = run_seo_writing_agent(article_pipeline_data)
+        if not article_pipeline_data.get('seo_agent_results', {}).get('generated_article_body_md'):
+            logger.error(f"Skipping {current_article_id_str}: SEO Writing Agent failed. Status: {article_pipeline_data.get('seo_agent_status')}")
+            continue
+        
+        article_pipeline_data = run_vision_media_agent(article_pipeline_data)
+        article_pipeline_data = run_image_integration_agent(article_pipeline_data)
+        article_pipeline_data = run_knowledge_graph_agent(article_pipeline_data, site_content_graph_data)
+        
+        # Prepare template variables for render_html_page_main
+        final_render_vars = {
+            'PAGE_TITLE': article_pipeline_data.get('seo_agent_results',{}).get('generated_title_tag', article_pipeline_data.get('final_title','Untitled')),
+            'META_DESCRIPTION': article_pipeline_data.get('seo_agent_results',{}).get('generated_meta_description', '...'),
+            'AUTHOR_NAME': article_pipeline_data.get('author', AUTHOR_NAME_DEFAULT),
+            'META_KEYWORDS_LIST': article_pipeline_data.get('final_keywords', []),
+            'CANONICAL_URL': urljoin(YOUR_SITE_BASE_URL, f"articles/{article_pipeline_data['slug']}.html".lstrip('/')),
+            'SITE_NAME': YOUR_WEBSITE_NAME,
+            'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
+            'IMAGE_URL': article_pipeline_data.get('selected_image_url', ''),
+            'IMAGE_ALT_TEXT': article_pipeline_data.get('final_featured_image_alt_text', article_pipeline_data.get('final_title','Image')),
+            'PUBLISH_ISO_FOR_META': article_pipeline_data.get('published_iso'),
+            'JSON_LD_SCRIPT_BLOCK': article_pipeline_data.get('seo_agent_results',{}).get('generated_json_ld_full_script_tag','<script type="application/ld+json">{}</script>'),
+            'ARTICLE_HEADLINE': article_pipeline_data.get('final_title','Untitled'),
+            'ARTICLE_SEO_H1': article_pipeline_data.get('final_title','Untitled'),
+            'PUBLISH_DATE': get_sort_key_for_all_articles(article_pipeline_data).strftime('%B %d, %Y') if article_pipeline_data.get('published_iso') else "N/A",
+            'ARTICLE_BODY_HTML': process_final_markdown_to_html_main(article_pipeline_data.get('seo_agent_results',{}).get('generated_article_body_md','')),
+            'ARTICLE_TAGS_HTML': format_tags_html_main(article_pipeline_data.get('final_keywords',[])),
+            'SOURCE_ARTICLE_URL': article_pipeline_data.get('original_source_url','#'),
+            'ARTICLE_TITLE': article_pipeline_data.get('final_title','Untitled'),
+            'id': current_article_id_str,
+            'CURRENT_ARTICLE_ID': current_article_id_str,
+            'CURRENT_ARTICLE_TOPIC': article_pipeline_data.get('primary_topic','News'),
+            'CURRENT_ARTICLE_TAGS_JSON': json.dumps(article_pipeline_data.get('final_keywords',[])),
+            'AUDIO_URL': article_pipeline_data.get('generated_audio_url')
+        }
+        if not render_html_page_main('post_template.html', final_render_vars, OUTPUT_HTML_DIR, article_pipeline_data['slug']):
+            logger.error(f"Failed to render final HTML for {current_article_id_str}. Skipping further processing.")
+            continue
+        
+        article_pipeline_data['post_template_hash'] = current_post_template_hash_main
+        save_json_data(processed_json_path, article_pipeline_data, f"final processed article {current_article_id_str}")
 
-    if social_media_payloads_for_posting_queue:
-        logger.info(f"--- Stage 4: Attempting to post {len(social_media_payloads_for_posting_queue)} total articles to Social Media ---")
-        final_make_webhook_payloads = []
+        summary_for_master = {
+            "id": current_article_id_str, "title": article_pipeline_data['final_title'],
+            "link": f"articles/{article_pipeline_data['slug']}.html", "published_iso": article_pipeline_data['published_iso'],
+            "summary_short": article_pipeline_data.get('seo_agent_results', {}).get('generated_meta_description', article_pipeline_data.get('processed_summary','')),
+            "image_url": article_pipeline_data.get('selected_image_url'), "topic": article_pipeline_data.get('primary_topic', 'News'),
+            "is_breaking": article_pipeline_data.get('importance_level') == "Breaking",
+            "is_trending_pick": article_pipeline_data.get('user_is_trending_pick_gyro', False),
+            "tags": article_pipeline_data.get('final_keywords', []), "audio_url": None, "trend_score": 0
+        }
+        update_master_article_list_json(summary_for_master)
+        
+        social_payload = {
+            "id": current_article_id_str, "title": summary_for_master['title'],
+            "article_url": urljoin(YOUR_SITE_BASE_URL, summary_for_master['link'].lstrip('/')),
+            "image_url": summary_for_master['image_url'], "topic": summary_for_master['topic'],
+            "tags": summary_for_master['tags'], "summary_short": summary_for_master['summary_short']
+        }
+        social_media_queue_this_run.append(social_payload)
+        successfully_processed_articles_this_run.append(article_pipeline_data)
+        
+        if article_pipeline_data.get('is_gyro_pick'): # Gyro raw files are named by their ID
+            raw_file_to_remove_path_gyro = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{article_pipeline_data.get('id')}.json")
+            if os.path.exists(raw_file_to_remove_path_gyro):
+                try: os.remove(raw_file_to_remove_path_gyro); logger.info(f"Removed processed raw Gyro pick file: {raw_file_to_remove_path_gyro}")
+                except OSError as e: logger.warning(f"Could not remove raw Gyro pick file {raw_file_to_remove_path_gyro}: {e}")
+        
+        processed_in_run_count += 1
+        logger.info(f"--- Successfully processed Article ID: {current_article_id_str} through all stages ---")
 
-        def get_publish_date_for_social_sort(payload): 
-            article_id = payload.get('id')
-            if not article_id: return datetime(1970, 1, 1, tzinfo=timezone.utc)
-            filepath = os.path.join(PROCESSED_JSON_DIR, f"{article_id}.json")
-            data = load_article_data(filepath)
-            return get_sort_key(data or {})
+    save_historical_embeddings(historical_embeddings)
 
-        social_media_payloads_for_posting_queue.sort(key=get_publish_date_for_social_sort, reverse=True)
-        logger.info("Social media queue sorted by publish date (newest first).")
+    # --- Stage 9: Trending Digest Agent ---
+    logger.info("--- Stage 9: Running Trending Digest Agent ---")
+    all_site_articles_for_digest = load_json_data(ALL_ARTICLES_FILE, "all_articles_for_digest").get('articles', [])
+    digest_pages_generated_data = run_trending_digest_agent(raw_articles_from_web, all_site_articles_for_digest) # Pass original raw for trend analysis
 
-        articles_posted_this_run_count = 0
-        for social_payload_item in social_media_payloads_for_posting_queue:
-            article_id_for_social_post = social_payload_item.get('id')
-            current_social_history = load_social_post_history() 
-            if article_id_for_social_post in current_social_history.get('posted_articles', []):
-                logger.info(f"Article {article_id_for_social_post} already marked in history. Skipping.")
-                continue
-
-            logger.info(f"Preparing to post article ID: {article_id_for_social_post} ('{social_payload_item.get('title', '')[:40]}...')")
-            platforms_to_attempt_post = ["bluesky", "reddit"] 
-
-            if social_media_clients_glob.get("twitter_client"):
-                current_date_for_twitter_check, posts_today_for_twitter = _read_tweet_tracker()
-                if current_date_for_twitter_check != current_run_date_str: 
-                    posts_today_for_twitter = 0
-                    _write_tweet_tracker(current_run_date_str, 0) 
-
-                if posts_today_for_twitter < DAILY_TWEET_LIMIT:
-                    platforms_to_attempt_post.append("twitter")
-                    logger.info(f"Article {article_id_for_social_post} WILL be attempted on Twitter. (Count: {posts_today_for_twitter}/{DAILY_TWEET_LIMIT})")
-                else:
-                    logger.info(f"Daily Twitter limit ({DAILY_TWEET_LIMIT}) reached. Twitter SKIPPED for ID: {article_id_for_social_post}")
-            else:
-                logger.debug("Twitter client not available for social posting.")
-
-            post_success = run_social_media_poster(
-                social_payload_item,
-                social_media_clients_glob,
-                platforms_to_post=tuple(platforms_to_attempt_post)
-            )
-            
-            # Logic for updating twitter count if a twitter post was SUCCESSFUL
-            if "twitter" in platforms_to_attempt_post and social_media_clients_glob.get("twitter_client"):
-                # Check if post_to_twitter actually succeeded by inspecting history or a return value from it
-                # For now, we assume run_social_media_poster handles marking history which might imply success.
-                # A more direct way is if post_to_twitter in social_media_poster.py returned a clear success for Twitter.
-                # The current social_media_poster returns a general any_post_successful_flag.
-                # Let's refine this slightly: if twitter was attempted and the generic success flag is true,
-                # we *assume* twitter might have been one of the successes if not the only one.
-                # A better way is for run_social_media_poster to return a dict of successes.
-                # For now, if twitter was in the list of attempts, and *any* post was successful, we'll re-read and write the tracker.
-                # This might over-increment if a Bsky post succeeded but Twitter failed due to non-limit reasons.
-                # A more robust solution: post_to_twitter should update the tracker if it succeeds.
-                # The existing `post_to_twitter` in `social_media_poster.py` was given logic to update this file itself.
-                # So, we just re-read here to get the latest count for logging.
-                _, twitter_posts_made_today_after_post = _read_tweet_tracker()
-                logger.info(f"Twitter daily post count now: {twitter_posts_made_today_after_post} after attempt for {article_id_for_social_post}.")
-
-
-            articles_posted_this_run_count +=1 
-            if MAKE_WEBHOOK_URL: final_make_webhook_payloads.append(social_payload_item)
-
-            if articles_posted_this_run_count < len(social_media_payloads_for_posting_queue):
-                 post_delay_seconds = 10 
-                 logger.debug(f"Sleeping for {post_delay_seconds} seconds before next social post...")
-                 time.sleep(post_delay_seconds)
-
-        logger.info(f"Social media posting cycle finished. Attempted {articles_posted_this_run_count} articles.")
-        if MAKE_WEBHOOK_URL and final_make_webhook_payloads:
-            logger.info(f"--- Sending {len(final_make_webhook_payloads)} items to Make.com Webhook ---")
-            if send_make_webhook(MAKE_WEBHOOK_URL, final_make_webhook_payloads): logger.info("Batched Make.com webhook sent successfully.")
-            else: logger.error("Batched Make.com webhook failed.")
+    if digest_pages_generated_data:
+        logger.info(f"Trending Digest Agent produced {len(digest_pages_generated_data)} digest pages. Rendering them...")
+        for digest_item_data in digest_pages_generated_data:
+            # Prepare template variables for digest pages
+            digest_template_vars = {
+                'PAGE_TITLE': digest_item_data.get('page_title'),
+                'META_DESCRIPTION': digest_item_data.get('meta_description'),
+                'META_KEYWORDS_LIST': digest_item_data.get('theme_source_keywords', []),
+                'CANONICAL_URL': urljoin(YOUR_SITE_BASE_URL, f"digests/{digest_item_data['slug']}.html".lstrip('/')),
+                'SITE_NAME': YOUR_WEBSITE_NAME,
+                'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
+                'FAVICON_URL': os.getenv('YOUR_FAVICON_URL', 'https://i.ibb.co/W7xMqdT/dacoola-image-logo.png'),
+                'OG_IMAGE_URL': os.getenv('DEFAULT_OG_IMAGE_FOR_DIGESTS', YOUR_WEBSITE_LOGO_URL),
+                'PUBLISH_ISO_FOR_META': datetime.now(timezone.utc).isoformat(),
+                'JSON_LD_SCRIPT_TAG': digest_item_data.get('json_ld_script_tag', ''),
+                'INTRODUCTION_HTML': process_final_markdown_to_html_main(digest_item_data.get('introduction_md','')),
+                'SELECTED_ARTICLES': digest_item_data.get('selected_articles', [])
+            }
+            render_html_page_main('digest_page_template.html', digest_template_vars, DIGEST_OUTPUT_HTML_DIR, digest_item_data['slug'])
     else:
-        logger.info("No new or unposted recent articles queued for social media posting in this run.")
+        logger.info("Trending Digest Agent produced no digest pages this run.")
 
-    logger.info("--- Stage 5: Generating Sitemap ---")
-    if not YOUR_SITE_BASE_URL or YOUR_SITE_BASE_URL == '/': logger.error("Sitemap generation SKIPPED: YOUR_SITE_BASE_URL not set or invalid.");
+    # --- Stage 10: Social Media Posting ---
+    social_post_history = load_social_post_history()
+    already_posted_social_ids_set = set(social_post_history.get('posted_articles', []))
+    final_queue_for_social_posting = [p for p in social_media_queue_this_run if p['id'] not in already_posted_social_ids_set]
+    for pid_current_run in (p['id'] for p in final_queue_for_social_posting): already_posted_social_ids_set.add(pid_current_run)
+
+    now_utc = datetime.now(timezone.utc)
+    social_cutoff_time = now_utc - timedelta(hours=MAX_AGE_FOR_SOCIAL_POST_HOURS)
+    for processed_file_path in glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json')):
+        hist_article_id = os.path.basename(processed_file_path).replace('.json','')
+        if hist_article_id not in already_posted_social_ids_set:
+            hist_data = load_json_data(processed_file_path, "historical for social")
+            if hist_data and hist_data.get('published_iso') and hist_data.get('slug'):
+                try:
+                    if get_sort_key_for_all_articles(hist_data) >= social_cutoff_time:
+                        hist_payload = {
+                            "id": hist_data['id'], "title": hist_data.get('final_title', 'Article'),
+                            "article_url": urljoin(YOUR_SITE_BASE_URL, f"articles/{hist_data['slug']}.html".lstrip('/')),
+                            "image_url": hist_data.get('selected_image_url'), "topic": hist_data.get('primary_topic'),
+                            "tags": hist_data.get('final_keywords', []),
+                            "summary_short": hist_data.get('seo_agent_results',{}).get('generated_meta_description','')
+                        }
+                        final_queue_for_social_posting.append(hist_payload)
+                        already_posted_social_ids_set.add(hist_data['id']) # Add to set after queuing
+                except Exception as e: logger.warning(f"Error queueing hist article {hist_article_id}: {e}")
+    
+    if final_queue_for_social_posting:
+        logger.info(f"--- Stage 10: Attempting {len(final_queue_for_social_posting)} posts to Social Media ---")
+        # Sort by actual publish_iso from their full data, not just summary
+        def get_true_publish_date_for_social_sort(payload):
+            article_id_lookup = payload.get('id')
+            if not article_id_lookup: return datetime(1970, 1, 1, tzinfo=timezone.utc)
+            
+            # Check if it's from the current run's fully processed data
+            data_for_sort = next((art for art in successfully_processed_articles_this_run if art.get('id') == article_id_lookup), None)
+            if not data_for_sort: # If not, load its full processed JSON
+                data_for_sort = load_json_data(os.path.join(PROCESSED_JSON_DIR, f"{article_id_lookup}.json"))
+            return get_sort_key_for_all_articles(data_for_sort or {}) # Pass the full data dict
+        
+        final_queue_for_social_posting.sort(key=get_true_publish_date_for_social_sort, reverse=True)
+
+        for item_to_post in final_queue_for_social_posting:
+            run_social_media_poster(item_to_post, social_media_clients)
+            time.sleep(10) 
+    else: logger.info("No articles for social media this run.")
+
+
+    # --- Stage 11: Generate Sitemap ---
+    logger.info("--- Stage 11: Generating Sitemap ---")
+    if not YOUR_SITE_BASE_URL or YOUR_SITE_BASE_URL == '/':
+        logger.error("Sitemap generation SKIPPED: YOUR_SITE_BASE_URL not set or invalid.");
     else:
         try: run_sitemap_generator(); logger.info("Sitemap generation completed successfully.")
-        except Exception as main_sitemap_e: logger.exception(f"Sitemap generation failed: {main_sitemap_e}")
+        except Exception as e: logger.exception(f"Sitemap generation failed: {e}")
 
     run_end_timestamp = time.time()
-    logger.info(f"--- === Dacoola AI News Orchestrator Run Finished ({run_end_timestamp - run_start_timestamp:.2f} seconds) === ---")
+    logger.info(f"--- === Dacoola AI Content Engine - Orchestrator Run Finished ({run_end_timestamp - run_start_timestamp:.2f} seconds) === ---")

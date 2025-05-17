@@ -1,0 +1,133 @@
+<!-- templates/digest_page_template.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WSLDZ2QB');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ PAGE_TITLE }} - {{ SITE_NAME }} Trending Digest</title>
+    <meta name="description" content="{{ META_DESCRIPTION }}">
+    {% if META_KEYWORDS_LIST %}<meta name="keywords" content="{{ META_KEYWORDS_LIST | join(', ') }}">{% endif %}
+
+    <link rel="canonical" href="{{ CANONICAL_URL }}"> <!-- Full URL to this digest page -->
+
+    <meta property="og:title" content="{{ PAGE_TITLE }} - {{ SITE_NAME }} Trending Digest">
+    <meta property="og:description" content="{{ META_DESCRIPTION }}">
+    <!-- You might want a generic OG image for digests, or one related to the theme if available -->
+    <meta property="og:image" content="{{ OG_IMAGE_URL | default(YOUR_WEBSITE_LOGO_URL) }}">
+    <meta property="og:url" content="{{ CANONICAL_URL }}">
+    <meta property="og:type" content="website"> <!-- Or 'article' if you treat digests as articles -->
+    <meta property="og:site_name" content="{{ SITE_NAME }}">
+    {% if PUBLISH_ISO_FOR_META %}
+    <meta property="article:published_time" content="{{ PUBLISH_ISO_FOR_META }}">
+    <meta property="article:modified_time" content="{{ PUBLISH_ISO_FOR_META }}">
+    {% endif %}
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ PAGE_TITLE }} - {{ SITE_NAME }} Trending Digest">
+    <meta name="twitter:description" content="{{ META_DESCRIPTION }}">
+    <meta name="twitter:image" content="{{ OG_IMAGE_URL | default(YOUR_WEBSITE_LOGO_URL) }}">
+
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Adjust path if digests are in a subfolder -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" href="{{ FAVICON_URL | default('https://i.ibb.co/W7xMqdT/dacoola-image-logo.png') }}">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8839663991354998"
+     crossorigin="anonymous"></script>
+
+    {{ JSON_LD_SCRIPT_TAG | safe if JSON_LD_SCRIPT_TAG else '' }}
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGJ5MFBC6X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-WGJ5MFBC6X');
+    </script>
+    <style>
+        /* Minimal styles for digest page, can extend or rely on styles.css */
+        .digest-container { max-width: 900px; margin: 30px auto; padding: 20px; background-color: var(--bg-secondary); border-radius: 8px; }
+        .digest-header h1 { font-size: clamp(1.8rem, 4vw, 2.2rem); color: var(--accent-blue); margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;}
+        .digest-introduction p { font-size: 1.05em; margin-bottom: 25px; color: var(--text-light); }
+        .digest-article-list { list-style: none; padding: 0; }
+        .digest-article-item { background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 20px; padding: 15px; }
+        .digest-article-item h2 { font-size: 1.3rem; margin-bottom: 8px; }
+        .digest-article-item h2 a { color: var(--text-light); text-decoration: none; }
+        .digest-article-item h2 a:hover { color: var(--accent-blue); }
+        .digest-article-summary { font-size: 0.95em; color: var(--text-muted); margin-bottom: 10px; line-height: 1.5; }
+        .digest-article-source { font-size: 0.8em; color: var(--text-muted); }
+        .digest-article-source a { color: var(--accent-blue); }
+        .digest-article-source .internal-source { font-weight: bold; }
+        .ad-placeholder-style { text-align: center; min-height: 90px; margin: 20px 0; }
+    </style>
+</head><body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSLDZ2QB"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <header id="navbar-placeholder"></header>
+
+    <main class="digest-container">
+        <div class="digest-header">
+            <h1>{{ PAGE_TITLE }}</h1>
+        </div>
+
+        <!-- Ad Slot: Top of Digest -->
+        <div class="ad-placeholder-style digest-ad-top">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        {% if INTRODUCTION_HTML %}
+        <section class="digest-introduction">
+            {{ INTRODUCTION_HTML | safe }}
+        </section>
+        {% endif %}
+
+        {% if SELECTED_ARTICLES and SELECTED_ARTICLES | length > 0 %}
+        <section class="digest-content">
+            <ul class="digest-article-list">
+                {% for article in SELECTED_ARTICLES %}
+                <li class="digest-article-item">
+                    <h2><a href="{{ article.url }}" {% if not article.is_internal %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ article.title }}</a></h2>
+                    {% if article.summary_for_digest %}
+                    <p class="digest-article-summary">{{ article.summary_for_digest }}</p>
+                    {% endif %}
+                    <p class="digest-article-source">
+                        Source: 
+                        {% if article.is_internal %}
+                            <a href="{{ article.url }}" class="internal-source">{{ SITE_NAME }} (Internal)</a>
+                        {% else %}
+                            <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
+                                {% set domain = article.url.split('//')[-1].split('/')[0] %}
+                                {{ domain }} (External)
+                            </a>
+                        {% endif %}
+                    </p>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% else %}
+        <p>No articles selected for this digest at the moment. Check back later!</p>
+        {% endif %}
+
+        <!-- Ad Slot: Bottom of Digest (e.g., Related Content Ad) -->
+         <div class="ad-placeholder-style digest-ad-bottom">
+             <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-8839663991354998" data-ad-slot="6562367864"></ins>
+             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+    </main>
+    
+    <script src="../js/script.js"></script> 
+</body>
+</html>
