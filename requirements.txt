@@ -1,4 +1,4 @@
-# requirements.txt (Final for New Pipeline - Phase 1 Focus)
+# requirements.txt
 
 # Core & Web
 requests
@@ -8,25 +8,29 @@ trafilatura
 duckduckgo_search # For Web Research Agent
 
 # Parsing & Content
-feedparser # For existing RSS scraper (might phase out or use as supplementary)
-Markdown # For article body processing & generation
-Jinja2 # For HTML templating
+feedparser
+Markdown
+Jinja2
 
 # Image Processing
-Pillow # For image validation
+Pillow
 
 # AI & Embeddings (Local Focus)
-sentence-transformers # For similarity checks and potentially CLIP if re-enabled locally
+sentence-transformers # Let this pull its dependencies (torch, transformers, etc.)
+# numpy will be pulled as a dependency by sentence-transformers/torch
 
 # Social Media
-tweepy # For Twitter
-atproto # For Bluesky
-praw # For Reddit
+tweepy
+atproto
+praw
 
 # Utilities
-pyperclip # For local prompt-maker script
-textstat # For readability scores
+pyperclip
+textstat
 
-# --- Potentially Phased Out or API-based (Review Later) ---
-# google-search-results # SerpApi client - Can be replaced by DDG/LLM-guided search
-# google-ads # For Keyword Planner - Can be replaced by LLM keyword ideas
+# If you are certain you are no longer using DeepSeek or SerpApi directly:
+# DEEPSEEK_API_KEY (Handled via env, no library needed for direct HTTP)
+# google-search-results # SerpApi client - REMOVE if not used
+
+# If not using Google Ads API for keywords:
+# google-ads # REMOVE if not used
