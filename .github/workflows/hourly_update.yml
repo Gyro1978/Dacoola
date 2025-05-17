@@ -37,57 +37,13 @@ jobs:
             echo "requirements.txt not found. Skipping pip install -r."
           fi
 
-      - name: Setup Ollama
-        id: setup_ollama
-        run: |
-          echo "Starting Ollama setup..."
-          curl -fsSL https://ollama.com/install.sh | sh
-          echo "Ollama installed."
-          # Start Ollama in the background
-          ollama serve > ollama_server.log 2>&1 &
-          # Wait a few seconds for Ollama to start
-          echo "Waiting for Ollama server to start..."
-          sleep 15 # Increased wait time
-
-          # Check if Ollama server is running
-          if curl http://localhost:11434 > /dev/null 2>&1; then
-            echo "Ollama server is running."
-          else
-            echo "::error::Ollama server failed to start. Check ollama_server.log."
-            cat ollama_server.log
-            exit 1
-          fi
-
-          # Pull all required models
-          models_to_pull=(
-            "mistral:latest"
-            "bge-m3:latest"
-            "llava:latest"
-            "mixtral:latest"
-            "llama3:70b"
-            "falcon:7b-instruct-q4_K_M"
-            "tinyllama" # Added as a fallback option
-          )
-          for model in "${models_to_pull[@]}"; do
-            echo "Pulling $model model..."
-            if ollama pull "$model"; then
-              echo "$model pulled successfully."
-            else
-              echo "::warning::Failed to pull $model. This might cause issues if the model is essential."
-              # Do not exit for non-critical models, but log a warning
-            fi
-          done
-
-          echo "Ollama model pulling complete (or attempted)."
-          ollama list # List models to confirm
+      # Ollama Setup Step REMOVED
 
       - name: Run Main Script (Generates Content, Processes with Agents, etc.)
         env:
-          # Pass ALL your .env variables as secrets or vars to the GHA context
-          # Example for a few critical ones:
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }} # Keep for now, might remove if fully Ollama
+          # Ensure DEEPSEEK_API_KEY is set in GitHub secrets
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
-          # Ollama will be accessed at http://localhost:11434 by Python scripts
           # General Website Config
           YOUR_WEBSITE_NAME: ${{ vars.YOUR_WEBSITE_NAME || 'Dacoola' }}
           YOUR_WEBSITE_LOGO_URL: ${{ vars.YOUR_WEBSITE_LOGO_URL || '' }}
@@ -130,16 +86,13 @@ jobs:
         run: |
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
-          # Add all generated/modified files
-          # Using a more robust way to add all relevant files/dirs that main.py might touch
           git add public/sitemap.xml public/ads.txt public/articles/ public/all_articles.json \
                   data/processed_article_ids.txt data/twitter_daily_limit.json \
                   data/social_media_posts_history.json dacola.log gyro-picks.log \
                   data/processed_json/ \
                   data/scraped_articles/ \
                   public/latest.html public/search.html public/topic.html \
-                  public/images/ # If images are saved here
+                  public/images/ \
                   || echo "Some files/dirs expected by 'git add' were not found or had no changes."
 
           if git diff --staged --quiet; then
@@ -147,19 +100,12 @@ jobs:
             echo "changes_committed=false" >> $GITHUB_OUTPUT
           else
             echo "Content changes detected. Committing..."
-            # Fetch latest changes from remote before committing locally
             git fetch origin ${{ github.ref_name }}
-            # Try to rebase local commits on top of remote changes
-            # This can help avoid merge commits if only this job modifies these files
             if git rebase origin/${{ github.ref_name }} --autostash; then
               echo "Rebase successful."
             else
               echo "Rebase failed. Aborting rebase and proceeding with merge strategy if needed later."
               git rebase --abort
-              # As a fallback, ensure local working tree is clean if rebase failed mid-way
-              # and we want to attempt a fresh commit based on what the script *just* generated.
-              # This is complex; for now, let's assume the script's output is the desired state.
-              # Re-add files as rebase might have changed staging area
               git add public/sitemap.xml public/ads.txt public/articles/ public/all_articles.json \
                   data/processed_article_ids.txt data/twitter_daily_limit.json \
                   data/social_media_posts_history.json dacola.log gyro-picks.log \
@@ -181,21 +127,12 @@ jobs:
               echo "Push failed (Attempt ${retry_count}/${max_retries}). Pulling remote changes and retrying push."
               
               git fetch origin
-              # Using merge with 'ours' strategy for conflicts in generated files like all_articles.json
-              # This means if there's a conflict, our Action's version of the file wins.
-              # This is suitable if the Action is the sole source of truth for these generated files.
               if ! git merge -X ours origin/${{ github.ref_name }} -m "Automated merge during push retry [skip ci]"; then
                  echo "::error::Merge also failed during push retry. Manual intervention likely needed for conflicts."
-                 # Reset to avoid a broken state if merge fails badly
-                 git reset --hard HEAD~1 # Go back before our commit
-                 git reset --hard origin/${{ github.ref_name }} # Reset to remote
-                 exit 1 # Exit to signal failure
+                 git reset --hard HEAD~1 
+                 git reset --hard origin/${{ github.ref_name }} 
+                 exit 1 
               fi
-              # Re-commit our changes after merge, as the merge might have created a merge commit
-              # This is tricky. A simpler approach might be to force push if this is a dedicated branch.
-              # For main branch, this merge strategy is safer.
-              # If the merge was clean or 'ours' took precedence, our commit is still there.
-              
               echo "Retrying push (${retry_count}/${max_retries})..."
               sleep $delay_seconds
             done
@@ -212,15 +149,8 @@ jobs:
       - name: Check for Deployable Changes in public/
         id: check_public_changes
         run: |
-          # Check if the 'public/' directory was actually changed in the last commit from this Action.
-          # This is more reliable than just checking commit message.
-          # We fetch origin again to ensure `origin/${{ github.ref_name }}` is up-to-date for comparison.
           git fetch origin ${{ github.ref_name }}
           if [[ "${{ steps.commit_push.outputs.changes_committed }}" == "true" ]]; then
-            # Compare the public directory between the current HEAD and the previous state of the remote branch
-            # This checks if *our commit that was just pushed* actually modified public/
-            # Note: This assumes the push was successful and HEAD is now ahead of or same as remote.
-            # A simpler check if HEAD is guaranteed to be the commit we just made: git diff --quiet HEAD^ HEAD -- public/
             if ! git diff --quiet origin/${{ github.ref_name }} HEAD -- public/; then
               echo "Deployable changes found in public/ directory by this Action run."
               echo "deploy_needed=true" >> $GITHUB_OUTPUT

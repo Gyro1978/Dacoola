@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup, Comment
 from datetime import datetime 
 import time 
 import re 
-from urllib.parse import urlparse # <<< --- THIS WAS MISSING, NOW ADDED BACK
+from urllib.parse import urlparse
 
 try:
     from duckduckgo_search import DDGS
@@ -30,6 +30,10 @@ SRC_DIR = os.path.dirname(SCRIPT_DIR)
 PROJECT_ROOT = os.path.dirname(SRC_DIR)
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
+
+from dotenv import load_dotenv
+dotenv_path = os.path.join(PROJECT_ROOT, '.env')
+load_dotenv(dotenv_path=dotenv_path)
 # --- End Path Setup ---
 
 # --- Setup Logging ---
@@ -43,111 +47,106 @@ if not logger.handlers:
 logger.setLevel(logging.DEBUG) 
 
 # --- Configuration ---
-OLLAMA_API_URL = "http://localhost:11434/api/generate" 
-OLLAMA_QUERY_MODEL = "mistral:latest" 
+DEEPSEEK_API_KEY_WR = os.getenv('DEEPSEEK_API_KEY') # WR for Web Research
+DEEPSEEK_CHAT_API_URL_WR = "https://api.deepseek.com/chat/completions"
+DEEPSEEK_MODEL_FOR_QUERY = "deepseek-chat" # Using chat model for query generation
+
 MAX_SEARCH_RESULTS_PER_QUERY = 5 
 MAX_QUERIES_PER_TOPIC = 3
 ARTICLE_FETCH_TIMEOUT_SECONDS = 15
-MIN_SCRAPED_TEXT_LENGTH = 200 
+MIN_SCRAPED_TEXT_LENGTH = 200
+API_TIMEOUT_QUERY_GEN = 60
 
 # --- Agent Prompts ---
-QUERY_GENERATION_PROMPT_TEMPLATE = """
-You are an expert search query generator. Given the following topic, generate {num_queries} diverse and effective search queries that would help find the latest and most relevant news articles and in-depth information about it.
-Focus on queries that target recent developments, key players, and significant events.
-Output ONLY a JSON list of strings, where each string is a search query. Example: ["query 1", "query 2", "query 3"]
-
+QUERY_GENERATION_SYSTEM_MESSAGE_WR = "You are an expert search query generator. Generate diverse and effective search queries for the given topic. Respond ONLY with a JSON list of strings."
+QUERY_GENERATION_USER_TEMPLATE_WR = """
 Topic: {topic}
+Generate {num_queries} search queries to find the latest and most relevant news articles and in-depth information about this topic.
+Focus on recent developments, key players, and significant events.
+Output ONLY a JSON list of strings, where each string is a search query. Example: ["query 1", "query 2", "query 3"]
 """
 
-def call_ollama_for_queries(topic, num_queries=MAX_QUERIES_PER_TOPIC):
-    """Generates search queries for a given topic using a local Ollama LLM."""
-    prompt = QUERY_GENERATION_PROMPT_TEMPLATE.format(topic=topic, num_queries=num_queries)
+def call_deepseek_for_queries(topic, num_queries=MAX_QUERIES_PER_TOPIC):
+    """Generates search queries for a given topic using DeepSeek API."""
+    if not DEEPSEEK_API_KEY_WR:
+        logger.error("DEEPSEEK_API_KEY not found. Cannot call DeepSeek API for query generation.")
+        return None
+
+    user_prompt = QUERY_GENERATION_USER_TEMPLATE_WR.format(topic=topic, num_queries=num_queries)
+    
     payload = {
-        "model": OLLAMA_QUERY_MODEL,
-        "prompt": prompt,
-        "format": "json", 
-        "stream": False
+        "model": DEEPSEEK_MODEL_FOR_QUERY,
+        "messages": [
+            {"role": "system", "content": QUERY_GENERATION_SYSTEM_MESSAGE_WR},
+            {"role": "user", "content": user_prompt}
+        ],
+        "temperature": 0.7, # Higher temperature for more diverse queries
+        "response_format": {"type": "json_object"} 
     }
+    headers = {
+        "Authorization": f"Bearer {DEEPSEEK_API_KEY_WR}",
+        "Content-Type": "application/json"
+    }
+
     try:
-        logger.debug(f"Sending query generation request to Ollama for topic: {topic}")
-        response = requests.post(OLLAMA_API_URL, json=payload, timeout=90) # Increased timeout
+        logger.debug(f"Sending query generation request to DeepSeek for topic: {topic}")
+        response = requests.post(DEEPSEEK_CHAT_API_URL_WR, headers=headers, json=payload, timeout=API_TIMEOUT_QUERY_GEN)
         response.raise_for_status()
         
         response_json = response.json()
-        generated_json_string = response_json.get("response")
+        
+        if response_json.get("choices") and response_json["choices"][0].get("message") and response_json["choices"][0]["message"].get("content"):
+            generated_json_string = response_json["choices"][0]["message"]["content"]
+            try:
+                # DeepSeek might return a dict with a key like "queries" or just a list directly
+                parsed_response = json.loads(generated_json_string)
+                queries = None
+                if isinstance(parsed_response, list) and all(isinstance(q, str) for q in parsed_response):
+                    queries = parsed_response
+                elif isinstance(parsed_response, dict):
+                    # Try common keys for a list of queries
+                    for key in ["queries", "search_queries", "generated_queries", "query_list"]:
+                        if key in parsed_response and isinstance(parsed_response[key], list):
+                            queries = [q for q in parsed_response[key] if isinstance(q, str)]
+                            break
+                    if not queries: # If no specific key, check if dict values are strings (less ideal)
+                        queries = [val for val in parsed_response.values() if isinstance(val, str)]
+                
+                if queries:
+                    logger.info(f"DeepSeek generated queries for '{topic}': {queries[:num_queries]}")
+                    return queries[:num_queries]
+                else:
+                    logger.error(f"DeepSeek response parsed but no valid query list found: {parsed_response}")
+                    return None
 
-        if not generated_json_string:
-            logger.error(f"Ollama query generation response missing 'response' field or empty: {response_json}")
-            return None
-
-        queries = None
-        try:
-            parsed_response = json.loads(generated_json_string)
-            if isinstance(parsed_response, list) and all(isinstance(q, str) for q in parsed_response):
-                queries = parsed_response
-            elif isinstance(parsed_response, dict): 
-                queries = [q_text for q_text in parsed_response.values() if isinstance(q_text, str)]
-                if not queries: 
-                    if "queries" in parsed_response and isinstance(parsed_response["queries"], list):
-                         queries = [q for q in parsed_response["queries"] if isinstance(q, str)]
-            
-            if queries:
-                logger.info(f"Ollama generated queries for '{topic}': {queries[:num_queries]}")
-                return queries[:num_queries] 
-            else:
-                logger.error(f"Ollama response parsed but no valid query list found: {parsed_response}")
-                if "[" in generated_json_string and "]" in generated_json_string:
-                    logger.debug(f"Attempting fallback list extraction for: {generated_json_string}")
+            except json.JSONDecodeError as e:
+                logger.error(f"Failed to decode JSON from DeepSeek query response: {generated_json_string}. Error: {e}")
+                # Fallback: try to extract a list-like string if response_format failed
+                match_list = re.search(r'\[\s*".*?"\s*(?:,\s*".*?"\s*)*\]', generated_json_string)
+                if match_list:
                     try:
-                        match = re.search(r'(\[.*?\])', generated_json_string.replace('\\n', ''))
-                        if match:
-                            extracted_list_str = match.group(1)
-                            extracted_list_str = re.sub(r',\s*\]', ']', extracted_list_str)
-                            temp_queries = json.loads(extracted_list_str)
-                            if isinstance(temp_queries, list) and all(isinstance(q, str) for q in temp_queries):
-                                logger.info(f"Ollama fallback list extraction successful: {temp_queries[:num_queries]}")
-                                return temp_queries[:num_queries]
-                    except Exception as e_fallback_list:
-                        logger.error(f"Fallback list extraction also failed: {e_fallback_list}")
+                        queries = json.loads(match_list.group(0))
+                        if isinstance(queries, list) and all(isinstance(q, str) for q in queries):
+                            logger.info(f"DeepSeek query gen (regex fallback) successful for '{topic}': {queries[:num_queries]}")
+                            return queries[:num_queries]
+                    except Exception as fallback_e:
+                        logger.error(f"DeepSeek query gen regex fallback failed: {fallback_e}")
                 return None
-
-        except json.JSONDecodeError as e:
-            logger.warning(f"Failed to decode JSON directly from Ollama query response: {generated_json_string}. Error: {e}. Trying fallback extraction.")
-            match = re.search(r'```json\s*(\[[\s\S]*?\])\s*```', generated_json_string, re.DOTALL)
-            if match:
-                try:
-                    queries = json.loads(match.group(1))
-                    if isinstance(queries, list) and all(isinstance(q, str) for q in queries):
-                        logger.info(f"Ollama fallback JSON list extraction successful for queries: {queries[:num_queries]}")
-                        return queries[:num_queries]
-                except Exception as ext_e:
-                     logger.error(f"Fallback JSON list extraction also failed: {ext_e}")
-            
-            if "[" in generated_json_string and "]" in generated_json_string: 
-                try:
-                    extracted_list_str = generated_json_string[generated_json_string.find("[") : generated_json_string.rfind("]") + 1]
-                    extracted_list_str = re.sub(r'(?<!\\)"?([^"\n\[\],]+)"?', r'"\1"', extracted_list_str) 
-                    extracted_list_str = extracted_list_str.replace("'", '"') 
-                    
-                    queries = json.loads(extracted_list_str)
-                    if isinstance(queries, list) and all(isinstance(q, str) for q in queries):
-                        logger.info(f"Ollama fallback (string manipulation) successful for queries: {queries[:num_queries]}")
-                        return queries[:num_queries]
-                except Exception as e_fallback_str:
-                    logger.error(f"Final fallback query extraction (string manipulation) also failed: {e_fallback_str}")
-            logger.error(f"Could not parse queries from Ollama response: {generated_json_string}")
+        else:
+            logger.error(f"DeepSeek query generation response missing expected content: {response_json}")
             return None
-
+            
     except requests.exceptions.RequestException as e:
-        logger.error(f"Ollama API request for query generation failed: {e}")
+        logger.error(f"DeepSeek API request for query generation failed: {e}")
+        if hasattr(e, 'response') and e.response is not None:
+            logger.error(f"DeepSeek API Response Content: {e.response.text}")
         return None
     except Exception as e:
-        logger.exception(f"Unexpected error in call_ollama_for_queries: {e}")
+        logger.exception(f"Unexpected error in call_deepseek_for_queries: {e}")
         return None
 
 
 def search_web_ddg(query, num_results=MAX_SEARCH_RESULTS_PER_QUERY):
-    """Performs a web search using DuckDuckGo and returns URLs and titles."""
     if not DDGS:
         logger.error("DDGS (duckduckgo_search) is not available. Cannot perform web search.")
         return []
@@ -168,7 +167,6 @@ def search_web_ddg(query, num_results=MAX_SEARCH_RESULTS_PER_QUERY):
 
 
 def scrape_article_content(url):
-    """Scrapes the main content from a given URL."""
     try:
         headers = { 
             'User-Agent': 'Mozilla/5.0 (compatible; DacoolaWebResearchBot/1.0; +https://dacoolaa.netlify.app)',
@@ -267,10 +265,10 @@ def run_web_research_agent(topics_of_interest, preferred_domains=None):
 
     for topic in topics_of_interest:
         logger.info(f"Researching topic: {topic}")
-        generated_queries = call_ollama_for_queries(topic)
+        generated_queries = call_deepseek_for_queries(topic) # Changed function call
 
         if not generated_queries:
-            logger.warning(f"No search queries generated by Ollama for topic '{topic}'. Skipping topic.")
+            logger.warning(f"No search queries generated for topic '{topic}'. Skipping topic.")
             continue
 
         for query in generated_queries:
@@ -291,9 +289,8 @@ def run_web_research_agent(topics_of_interest, preferred_domains=None):
                 processed_urls_this_run.add(url)
                 
                 try:
-                    # Correctly use urlparse here
                     domain = urlparse(url).netloc.replace('www.', '')
-                except Exception as e_parse: # Catch potential errors during parsing
+                except Exception as e_parse: 
                     logger.warning(f"Could not parse domain from URL {url}: {e_parse}")
                     domain = "unknown_domain"
 
@@ -324,12 +321,16 @@ if __name__ == "__main__":
                             format='%(asctime)s - %(name)s - %(levelname)s - [%(module)s.%(funcName)s:%(lineno)d] - %(message)s')
     logger.setLevel(logging.DEBUG) 
 
+    if not DEEPSEEK_API_KEY_WR:
+        logger.error("DEEPSEEK_API_KEY not set in .env. Cannot run standalone test for web_research_agent with DeepSeek.")
+        sys.exit(1)
+
     sample_topics = [
         "latest breakthroughs in AI model architectures",
         "Nvidia Blackwell GPU impact on AI training"
     ]
     
-    logger.info("Starting web_research_agent.py standalone test...")
+    logger.info("Starting web_research_agent.py standalone test (with DeepSeek)...")
     found_articles = run_web_research_agent(sample_topics)
 
     if found_articles:
@@ -345,7 +346,7 @@ if __name__ == "__main__":
         
         test_data_dir = os.path.join(PROJECT_ROOT, "data")
         os.makedirs(test_data_dir, exist_ok=True)
-        output_test_file = os.path.join(test_data_dir, "web_research_test_output.json")
+        output_test_file = os.path.join(test_data_dir, "web_research_test_output_deepseek.json")
         
         with open(output_test_file, "w", encoding="utf-8") as f:
             json.dump(found_articles, f, indent=2, ensure_ascii=False)

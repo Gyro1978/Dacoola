@@ -4,7 +4,7 @@ import os
 import sys
 import json
 import logging
-import requests # For Ollama
+import requests # For DeepSeek API
 import re
 from datetime import datetime, timezone
 
@@ -15,7 +15,6 @@ PROJECT_ROOT = os.path.dirname(SRC_DIR)
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-# Load .env variables from project root to get YOUR_WEBSITE_NAME etc.
 from dotenv import load_dotenv
 dotenv_path = os.path.join(PROJECT_ROOT, '.env')
 load_dotenv(dotenv_path=dotenv_path)
@@ -32,21 +31,21 @@ if not logger.handlers:
 logger.setLevel(logging.DEBUG)
 
 # --- Configuration ---
-OLLAMA_API_URL = "http://localhost:11434/api/generate"
-OLLAMA_WRITER_MODEL = "llama3:70b" 
+DEEPSEEK_API_KEY_SEO = os.getenv('DEEPSEEK_API_KEY') 
+DEEPSEEK_CHAT_API_URL_SEO = "https://api.deepseek.com/chat/completions"
+DEEPSEEK_WRITER_MODEL = "deepseek-chat" 
+
 MAX_ARTICLE_CONTENT_FOR_PROCESSING_SNIPPET = 4000 
-MAX_TOKENS_FOR_WRITER_RESPONSE = 8000 
 API_TIMEOUT_SEO_WRITER = 450 
 
 YOUR_WEBSITE_NAME_CONFIG = os.getenv('YOUR_WEBSITE_NAME', 'Dacoola')
 YOUR_WEBSITE_LOGO_URL_CONFIG = os.getenv('YOUR_WEBSITE_LOGO_URL', 'https://via.placeholder.com/200x60.png?text=YourLogo') 
 BASE_URL_FOR_CANONICAL_CONFIG = os.getenv('YOUR_SITE_BASE_URL', 'https://yoursite.example.com')
-# Define AUTHOR_NAME_DEFAULT for standalone test fallback
 AUTHOR_NAME_DEFAULT_CONFIG = os.getenv('AUTHOR_NAME', 'Dacoola AI Team')
 
 
-# --- Agent Prompts (V4 Style - from your provided plan) ---
-SEO_PROMPT_SYSTEM_V4 = """
+# --- Agent Prompts ---
+SEO_WRITER_SYSTEM_PROMPT = """
 You are an **Elite SEO Content Architect and Master Tech Journalist** for `{YOUR_WEBSITE_NAME}`. Your mission is to transform the provided `{{ARTICLE_CONTENT_FOR_PROCESSING}}` into an **exceptionally comprehensive, highly engaging, visually structured, factually precise, and SEO-dominant news article (target 800-1500 words for the main body)**. Your output must be indistinguishable from premier human journalism, rich in detail, analysis, and diverse content presentation. Avoid AI clichés (see forbidden list). Adhere with absolute precision to ALL directives.
 
 **I. Core Principles (Mandatory):**
@@ -83,9 +82,7 @@ You are an **Elite SEO Content Architect and Master Tech Journalist** for `{YOUR
     *   **FAILURE TO ADHERE TO THIS MARKDOWN-ONLY RULE FOR THE MAIN BODY WILL RESULT IN AN UNUSABLE ARTICLE. THE SYSTEM WILL NOT CORRECT HTML TAGS IN THE MAIN BODY.**
 10. **Introduction (Markdown):** 2-3 impactful lead paragraphs (100-150 words) summarizing the core news, its immediate significance, and a hook. Include `{{TARGET_KEYWORD}}` naturally. **NO H1 (`#` or `##`) in this Markdown body.**
 11. **In-Depth Thematic Sections (Markdown):** At least **4-5 distinct `### H3` sections** for a comprehensive article. Each H3 section should be a mini-essay on a key facet of the topic, containing 3-6 well-developed paragraphs, and incorporating Markdown tables, lists, blockquotes, or code blocks where they enhance clarity and visual appeal.
-    *   Example H3 structures: "### Unpacking [Technology]: Architecture and Innovations", "### [Product/Event]: A Chronology of Development and Milestones (Use a list here)", "### Comparative Analysis: [Product] vs. [Competitors] (Use a Markdown table here)", "### Real-World Impact: Use Cases and Sector Disruption", "### Expert Perspectives and Industry Reactions (Use blockquotes for conceptual quotes)", "### Technical Deep Dive: Challenges and Solutions in [Specific Area] (Use code blocks if applicable)", "### The Road Ahead: Future Trajectory and Unanswered Questions".
-    *   Under H3s, use `#### H4` or `##### H5` for more granular points, each with 1-3 paragraphs, also in Markdown and using visual elements if appropriate.
-12. **Image Placeholders (Markdown Comments):** Throughout the thematic sections, strategically insert `<!-- IMAGE_PLACEHOLDER: Brief description of the desired image relevant to this section. Examples: A graph showing performance benchmarks, A concept art of the new hardware, A diagram of the AI model architecture. -->` where a visual would enhance understanding. Aim for 2-4 such placeholders.
+12. **Image Placeholders (Markdown Comments):** Throughout the thematic sections, strategically insert `<!-- IMAGE_PLACEHOLDER: Brief description of the desired image relevant to this section. -->` where a visual would enhance understanding. Aim for 2-4 such placeholders.
 13. **Pros & Cons (HTML Snippet - Conditional):** Generate **ONLY IF** the source clearly presents distinct, significant pros & cons. Aim for 3-5 points each. **Omit entirely otherwise.** If included, FIRST output the Markdown heading `#### Pros and Cons`. THEN, *immediately on the next line, without any other text or headings between the Markdown H4 and the HTML div*, output the *exact* HTML snippet for the pros-cons-container provided in the User Prompt.
 14. **In-Article Ad Placeholder (HTML Comment):** After the introduction (2-3 paragraphs) and before the first `### H3`, insert: `<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->` (ONCE ONLY).
 15. **FAQ (HTML Snippet - Conditional):** Generate **ONLY IF** topic warrants 3-5 insightful Q&As beyond main content. **Omit entirely otherwise.** If included, FIRST output the Markdown heading `#### Frequently Asked Questions`. THEN, *immediately on the next line, without any other text or headings between the Markdown H4 and the HTML div*, output the *exact* HTML snippet for the faq-section provided in the User Prompt.
@@ -100,10 +97,7 @@ You are an **Elite SEO Content Architect and Master Tech Journalist** for `{YOUR
 22. **Flow & Cohesion:** Ensure seamless transitions. Read aloud to verify natural cadence. Use standard hyphens (-).
 23. **STRICTLY FORBIDDEN PHRASES:** "delve into," "the landscape of," "ever-evolving," "testament to," "pivotal role," "robust," "seamless," "leverage," "game-changer," "in the realm of," "it's clear that," "looking ahead," "moreover," "furthermore," "in conclusion," "unveiled," "marked a significant," "the advent of," "it is worth noting," "needless to say," "at the end of the day," "all in all," "in a nutshell," "pave the way." Use synonyms or rephrase.
 
-**V. Output Format (ABSOLUTE PRECISION REQUIRED):**
-24. **MAIN BODY IS MARKDOWN - REITERATED FOR EMPHASIS. NO HTML TAGS FOR PARAGRAPHS, HEADINGS, LISTS, TABLES, BLOCKQUOTES, CODE BLOCKS IN THE MAIN BODY FLOW.**
-25. **HTML Snippets ONLY for Pros/Cons & FAQ (if generated), as specified.**
-26. **Exact Output Order:**
+**V. Output Format (ABSOLUTE PRECISION REQUIRED - Respond with ONLY this structure, starting with 'Title Tag:'):**
 Title Tag: [Generated Title Tag]
 Meta Description: [Generated Meta Description]
 SEO H1: [Generated SEO H1]
@@ -115,23 +109,11 @@ Source: [{ARTICLE_TITLE_FROM_SOURCE}]({SOURCE_ARTICLE_URL})
 {{JSON-LD content as specified, including wordCount and articleBody (plain text, max 2500 chars, stripped of all Markdown/HTML)}}
 </script>
 
-27. **JSON-LD:** Populate `NewsArticle` schema completely. `headline` matches SEO H1. `keywords` from `{{ALL_GENERATED_KEYWORDS_JSON}}`. `mainEntityOfPage.@id` uses `{{MY_CANONICAL_URL_PLACEHOLDER}}`. **Include `articleBody` (plain text, max 2500 chars, stripped of all Markdown/HTML and image placeholders) and `wordCount` (approx. count of generated Markdown body).**
-
 **VI. Final Self-Correction:** Review ALL constraints. Verify Markdown purity for the main body. Confirm diverse Markdown element usage. Ensure no forbidden phrases. Check output order. Ensure `articleBody` in JSON-LD is plain text and image placeholders are removed from it.
 """
 
-SEO_PROMPT_USER_TEMPLATE_V4 = """
-Task: Generate the Title Tag, Meta Description, SEO-Optimized H1 Heading, Article Body (primarily in **Markdown**, utilizing diverse elements like tables, lists, blockquotes, and code blocks; specific HTML snippets for Pros/Cons & FAQ if included; HTML comment for ad placeholder; and `<!-- IMAGE_PLACEHOLDER: description -->` comments for images), and JSON-LD Script. Follow ALL System Prompt directives meticulously, especially the **Markdown-only rule for general body text/headings**, the **800-1500 word length and diverse Markdown element usage requirements**, and the **JSON-LD `articleBody` and `wordCount` requirements.**
-
-**Key Focus for this Task:**
-1.  **Advanced Content Generation:** Produce a long-form (800-1500 words), deeply analytical article. **Actively use various Markdown elements** and include 2-4 `<!-- IMAGE_PLACEHOLDER: description -->` comments.
-2.  **Formatting (ABSOLUTE - Refer to System Prompt Section V & III):**
-    *   Main article content **MUST BE MARKDOWN**.
-    *   Main body **MUST NOT** start with H1 (`#` or `##`).
-    *   Ad placeholder `<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->` is mandatory.
-    *   Pros/Cons & FAQ use exact HTML snippets from example, after their Markdown `####` headings.
-    *   **Include at least 4-5 distinct `### H3` sections.**
-3.  **JSON-LD:** Ensure `articleBody` is PLAIN TEXT (all Markdown/HTML/Placeholders stripped, max ~2500 chars) and `wordCount` (of generated Markdown body) are correctly populated.
+SEO_WRITER_USER_PROMPT = """
+Task: Generate the Title Tag, Meta Description, SEO-Optimized H1 Heading, Article Body (primarily in **Markdown**, utilizing diverse elements like tables, lists, blockquotes, and code blocks; specific HTML snippets for Pros/Cons & FAQ if included; HTML comment for ad placeholder; and `<!-- IMAGE_PLACEHOLDER: description -->` comments for images), and JSON-LD Script. Follow ALL System Prompt directives meticulously.
 
 **Input Context:**
 ARTICLE_TITLE_FROM_SOURCE: {article_title_from_source}
@@ -142,7 +124,7 @@ SECONDARY_KEYWORDS_LIST_STR: {secondary_keywords_list_str}
 ARTICLE_IMAGE_URL_MAIN_FEATURED: {article_image_url_main_featured}
 AUTHOR_NAME: {author_name}
 CURRENT_DATE_YYYY_MM_DD_ISO: {current_date_iso}
-YOUR_WEBSITE_NAME: {your_website_name_for_prompt}
+YOUR_WEBSITE_NAME: {your_website_name_for_prompt} 
 YOUR_WEBSITE_LOGO_URL: {your_website_logo_url_for_prompt}
 ALL_GENERATED_KEYWORDS_JSON: {all_generated_keywords_json_for_prompt}
 MY_CANONICAL_URL_PLACEHOLDER: {my_canonical_url_placeholder_for_prompt}
@@ -177,47 +159,60 @@ MY_CANONICAL_URL_PLACEHOLDER: {my_canonical_url_placeholder_for_prompt}
 </div>
 ```
 
-Generate the full response now according to the specified output order.
+Generate the full response now according to the specified output order in the System Prompt (Section V).
 """
 
 
-def call_ollama_for_seo_article(prompt_data):
-    system_prompt_formatted = SEO_PROMPT_SYSTEM_V4.replace("{YOUR_WEBSITE_NAME}", prompt_data["your_website_name_for_prompt"])
-    user_prompt_formatted = SEO_PROMPT_USER_TEMPLATE_V4.format(**prompt_data)
+def call_deepseek_for_seo_article(prompt_data_dict):
+    if not DEEPSEEK_API_KEY_SEO:
+        logger.error("DEEPSEEK_API_KEY not found. Cannot call DeepSeek API for SEO article generation.")
+        return None
+    
+    formatted_system_prompt = SEO_WRITER_SYSTEM_PROMPT.replace(
+        "{YOUR_WEBSITE_NAME}", prompt_data_dict.get("your_website_name_for_prompt", "YourTechNewsSite")
+    )
+    system_prompt_for_api = formatted_system_prompt 
+    user_prompt_for_api = SEO_WRITER_USER_PROMPT.format(**prompt_data_dict)
 
     payload = {
-        "model": OLLAMA_WRITER_MODEL,
-        "prompt": user_prompt_formatted,
-        "stream": False,
+        "model": DEEPSEEK_WRITER_MODEL,
+        "messages": [
+            {"role": "system", "content": system_prompt_for_api},
+            {"role": "user", "content": user_prompt_for_api}
+        ],
+        "temperature": 0.6, 
     }
+    headers = {
+        "Authorization": f"Bearer {DEEPSEEK_API_KEY_SEO}",
+        "Content-Type": "application/json"
+    }
+
     try:
-        logger.debug(f"Sending SEO article generation request to Ollama (model: {OLLAMA_WRITER_MODEL}). Est. User Prompt Tokens: ~{len(user_prompt_formatted)//3}")
-        response = requests.post(OLLAMA_API_URL, json=payload, timeout=API_TIMEOUT_SEO_WRITER)
+        logger.debug(f"Sending SEO article generation request to DeepSeek (model: {DEEPSEEK_WRITER_MODEL}). Est. User Prompt Chars: ~{len(user_prompt_for_api)}")
+        response = requests.post(DEEPSEEK_CHAT_API_URL_SEO, headers=headers, json=payload, timeout=API_TIMEOUT_SEO_WRITER)
         response.raise_for_status()
         
         response_json = response.json()
-        generated_text_content = response_json.get("response")
-
-        if generated_text_content:
+        
+        if response_json.get("choices") and response_json["choices"][0].get("message") and response_json["choices"][0]["message"].get("content"):
+            generated_text_content = response_json["choices"][0]["message"]["content"]
             content_stripped = generated_text_content.strip()
-            if content_stripped.startswith("```") and content_stripped.endswith("```"):
-                content_stripped = re.sub(r"^```(?:json|markdown|text)?\s*","", content_stripped, flags=re.IGNORECASE)
-                content_stripped = re.sub(r"\s*```$","", content_stripped)
-            content_stripped = content_stripped.replace('—', '-')
-            logger.info(f"Ollama SEO article generation successful. Content length: {len(content_stripped)}")
-            return content_stripped.strip()
+            logger.info(f"DeepSeek SEO article generation successful. Content length: {len(content_stripped)}")
+            return content_stripped
         else:
-            logger.error(f"Ollama SEO writer response missing 'response' field or empty: {response_json}")
+            logger.error(f"DeepSeek SEO writer response missing expected content: {response_json}")
             return None
             
     except requests.exceptions.Timeout:
-        logger.error(f"Ollama API request for SEO article timed out after {API_TIMEOUT_SEO_WRITER} seconds.")
+        logger.error(f"DeepSeek API request for SEO article timed out after {API_TIMEOUT_SEO_WRITER} seconds.")
         return None
     except requests.exceptions.RequestException as e:
-        logger.error(f"Ollama API request for SEO article failed: {e}")
+        logger.error(f"DeepSeek API request for SEO article failed: {e}")
+        if hasattr(e, 'response') and e.response is not None:
+            logger.error(f"DeepSeek API Response Content: {e.response.text}")
         return None
     except Exception as e:
-        logger.exception(f"Unexpected error in call_ollama_for_seo_article: {e}")
+        logger.exception(f"Unexpected error in call_deepseek_for_seo_article: {e}")
         return None
 
 
@@ -242,7 +237,7 @@ def strip_markdown_and_html(text):
     return text
 
 
-def parse_ollama_seo_response(full_response_text):
+def parse_llm_seo_response(full_response_text): # Renamed function definition
     parsed_data = {}
     errors = []
 
@@ -285,50 +280,46 @@ def parse_ollama_seo_response(full_response_text):
         body_content = ""
         if seo_h1_match:
             body_start_offset = seo_h1_match.end()
-            end_delimiters_pattern = r"(^\s*Source:|\n\s*<script\s+type\s*=\s*[\"']application/ld\+json[\"'])"
-            end_match = re.search(end_delimiters_pattern, full_response_text[body_start_offset:], re.MULTILINE | re.IGNORECASE)
+            source_match_text = "\nSource:" 
+            source_index = full_response_text.find(source_match_text, body_start_offset)
+            script_index = -1
+            if parsed_data.get('generated_json_ld_full_script_tag') and parsed_data['generated_json_ld_full_script_tag'] != '<script type="application/ld+json">{}</script>':
+                script_index = full_response_text.find(parsed_data['generated_json_ld_full_script_tag'], body_start_offset)
 
-            if end_match:
-                body_content = full_response_text[body_start_offset : body_start_offset + end_match.start()].strip()
-            else: 
-                potential_body_end = len(full_response_text)
-                if parsed_data.get('generated_json_ld_full_script_tag') != '<script type="application/ld+json">{}</script>': 
-                    script_start_index = full_response_text.find(parsed_data['generated_json_ld_full_script_tag'])
-                    if script_start_index != -1:
-                        potential_body_end = script_start_index
-                
-                body_content = full_response_text[body_start_offset:potential_body_end].strip()
-                if "\nSource:" in body_content: # Corrected this line
-                    body_content = body_content.split("\nSource:", 1)[0].strip() # Corrected this line
-                
-                logger.warning("Article body extraction: Delimiters 'Source:' or JSON-LD script not clearly found. Used fallback.")
-
+            end_index = len(full_response_text)
+            if source_index != -1: end_index = source_index
+            if script_index != -1: end_index = min(end_index, script_index)
+            
+            body_content = full_response_text[body_start_offset:end_index].strip()
+            if body_content.lstrip().startswith(("# ", "## ")):
+                 body_content = re.sub(r"^\s*#{1,2}\s*.*?\n", "", body_content, count=1).lstrip()
         else: 
-            errors.append("Cannot extract article body: 'SEO H1:' line missing.")
+            if meta_match:
+                body_start_fallback = meta_match.end()
+                script_index_fallback = -1
+                if parsed_data.get('generated_json_ld_full_script_tag') and parsed_data['generated_json_ld_full_script_tag'] != '<script type="application/ld+json">{}</script>':
+                    script_index_fallback = full_response_text.find(parsed_data['generated_json_ld_full_script_tag'], body_start_fallback)
+                if script_index_fallback != -1:
+                    body_content = full_response_text[body_start_fallback:script_index_fallback].strip()
+                    if "\nSource:" in body_content: body_content = body_content.split("\nSource:", 1)[0].strip()
+                    logger.warning("Body extraction: Used fallback (MetaDesc to JSON-LD) due to missing SEO H1.")
+                else: errors.append("Cannot extract article body: 'SEO H1:' line missing and no clear end delimiter.")
+            else: errors.append("Cannot extract article body: 'SEO H1:' and 'Meta Description:' lines missing.")
         
-        if body_content.lstrip().startswith(("# ", "## ")):
-            body_content = re.sub(r"^\s*#{1,2}\s*.*?\n", "", body_content, count=1).lstrip()
-
         parsed_data['generated_article_body_md'] = body_content
 
         if 'generated_title_tag' not in parsed_data: parsed_data['generated_title_tag'] = "Default Article Title"
         if 'generated_meta_description' not in parsed_data: parsed_data['generated_meta_description'] = "Default article description."
         if 'generated_seo_h1' not in parsed_data: parsed_data['generated_seo_h1'] = parsed_data['generated_title_tag']
 
-
-        if not parsed_data.get('generated_article_body_md'):
-            errors.append("CRITICAL: Generated article body is empty after parsing.")
-        if not parsed_data.get('generated_json_ld_raw') or parsed_data.get('generated_json_ld_raw') == '{}':
-             errors.append("WARNING: JSON-LD seems empty or was not properly generated/parsed.")
-
+        if not parsed_data.get('generated_article_body_md'): errors.append("CRITICAL: Generated article body is empty after parsing.")
+        if not parsed_data.get('generated_json_ld_raw') or parsed_data.get('generated_json_ld_raw') == '{}': errors.append("WARNING: JSON-LD seems empty or was not properly generated/parsed.")
 
         final_error_message = "; ".join(errors) if errors else None
         if "CRITICAL" in (final_error_message or ""):
             logger.error(f"Critical parsing failure for SEO content: {final_error_message}")
             return None, final_error_message 
-
         return parsed_data, final_error_message
-
     except Exception as e:
         logger.exception(f"Major exception during SEO response parsing: {e}")
         return None, f"Major parsing exception: {e}"
@@ -339,13 +330,10 @@ def run_seo_writing_agent(article_pipeline_data):
     logger.info(f"--- Running SEO Writing Agent for Article ID: {article_id} ---")
 
     content_for_processing_snippet = article_pipeline_data.get('raw_scraped_text', '')[:MAX_ARTICLE_CONTENT_FOR_PROCESSING_SNIPPET]
-    
     primary_keyword_for_prompt = article_pipeline_data.get('primary_topic', article_pipeline_data.get('initial_title_from_web', 'AI News'))
     secondary_keywords_list = [kw for kw in article_pipeline_data.get('final_keywords', []) if kw.lower() != primary_keyword_for_prompt.lower()][:5] 
-
     all_keywords_for_json_ld = list(set([str(k).strip() for k in article_pipeline_data.get('final_keywords', []) if k and str(k).strip()]))
     all_generated_keywords_json_str = json.dumps(all_keywords_for_json_ld) if all_keywords_for_json_ld else "[]"
-
     my_canonical_url_placeholder = f"{BASE_URL_FOR_CANONICAL_CONFIG.rstrip('/')}/articles/{{SLUG_PLACEHOLDER}}"
 
     prompt_fill_data = {
@@ -355,29 +343,26 @@ def run_seo_writing_agent(article_pipeline_data):
         "target_keyword": primary_keyword_for_prompt,
         "secondary_keywords_list_str": ", ".join(secondary_keywords_list),
         "article_image_url_main_featured": article_pipeline_data.get('selected_image_url', 'https://via.placeholder.com/1200x675.png?text=Featured+Image'),
-        "author_name": article_pipeline_data.get('author', AUTHOR_NAME_DEFAULT_CONFIG), # Use config var
+        "author_name": article_pipeline_data.get('author', AUTHOR_NAME_DEFAULT_CONFIG),
         "current_date_iso": article_pipeline_data.get('published_iso', datetime.now(timezone.utc).isoformat()),
         "your_website_name_for_prompt": YOUR_WEBSITE_NAME_CONFIG,
         "your_website_logo_url_for_prompt": YOUR_WEBSITE_LOGO_URL_CONFIG,
         "all_generated_keywords_json_for_prompt": all_generated_keywords_json_str,
         "my_canonical_url_placeholder_for_prompt": my_canonical_url_placeholder
     }
-
     for key, value in prompt_fill_data.items():
-        if value is None:
-            prompt_fill_data[key] = ''
-            logger.warning(f"Prompt data key '{key}' was None, replaced with empty string for LLM.")
+        if value is None: prompt_fill_data[key] = ''; logger.warning(f"Prompt data key '{key}' was None, replaced with empty string for LLM.")
 
-    full_llm_response_text = call_ollama_for_seo_article(prompt_fill_data)
+    full_llm_response_text = call_deepseek_for_seo_article(prompt_fill_data) 
 
     if not full_llm_response_text:
         article_pipeline_data['seo_agent_results'] = None
         article_pipeline_data['seo_agent_status'] = "LLM_CALL_FAILED"
-        article_pipeline_data['seo_agent_error_detail'] = "Ollama call failed or returned empty."
+        article_pipeline_data['seo_agent_error_detail'] = "DeepSeek call failed or returned empty."
         logger.error(f"SEO Writing Agent: LLM call failed for {article_id}.")
         return article_pipeline_data
 
-    parsed_seo_results, parsing_error_msg = parse_ollama_seo_response(full_llm_response_text)
+    parsed_seo_results, parsing_error_msg = parse_llm_seo_response(full_llm_response_text) # Corrected function name
 
     article_pipeline_data['seo_agent_results'] = parsed_seo_results
     article_pipeline_data['seo_agent_error_detail'] = parsing_error_msg
@@ -390,22 +375,18 @@ def run_seo_writing_agent(article_pipeline_data):
         article_pipeline_data['seo_agent_status'] = "PARSING_WITH_WARNINGS"
         logger.warning(f"SEO Writing Agent: Parsing for {article_id} had warnings: {parsing_error_msg}")
         article_pipeline_data['final_title'] = parsed_seo_results.get('generated_seo_h1', article_pipeline_data.get('initial_title_from_web', 'Error Title'))
-        article_pipeline_data['slug'] = slugify_filename(article_pipeline_data['final_title']) # Defined for standalone
+        article_pipeline_data['slug'] = slugify_filename_seo(article_pipeline_data['final_title'])
     else:
         article_pipeline_data['seo_agent_status'] = "SUCCESS"
         logger.info(f"SEO Writing Agent: Successfully generated and parsed content for {article_id}.")
         article_pipeline_data['final_title'] = parsed_seo_results.get('generated_seo_h1', parsed_seo_results.get('generated_title_tag', article_pipeline_data.get('initial_title_from_web', 'Error Title')))
-        article_pipeline_data['slug'] = slugify_filename(article_pipeline_data['final_title']) # Defined for standalone
-
+        article_pipeline_data['slug'] = slugify_filename_seo(article_pipeline_data['final_title'])
     return article_pipeline_data
 
-# --- Define slugify_filename for standalone test ---
-def slugify_filename(text_to_slugify):
+def slugify_filename_seo(text_to_slugify): 
     if not text_to_slugify: return "untitled-slug"
-    s = str(text_to_slugify).strip().lower()
-    s = re.sub(r'[^\w\s-]', '', s)
-    s = re.sub(r'[-\s]+', '-', s)
-    return s[:75]
+    s = str(text_to_slugify).strip().lower(); s = re.sub(r'[^\w\s-]', '', s); s = re.sub(r'[-\s]+', '-', s) 
+    return s[:75] 
 
 
 if __name__ == "__main__":
@@ -413,58 +394,32 @@ if __name__ == "__main__":
         logging.basicConfig(stream=sys.stdout, level=logging.DEBUG,
                             format='%(asctime)s - %(name)s - %(levelname)s - [%(module)s.%(funcName)s:%(lineno)d] - %(message)s')
 
-    logger.info("--- Starting SEO Writing Agent Standalone Test ---")
-    
+    if not DEEPSEEK_API_KEY_SEO:
+        logger.error("DEEPSEEK_API_KEY not set in .env. Cannot run standalone test for seo_writing_agent with DeepSeek.")
+        sys.exit(1)
+
+    logger.info("--- Starting SEO Writing Agent Standalone Test (with DeepSeek) ---")
     sample_article_input_data = {
         'id': 'test_seo_001',
         'initial_title_from_web': "Breakthrough in Fusion Energy: Scientists Achieve Sustained Net Gain",
-        'raw_scraped_text': "Researchers at NIF reported a landmark achievement...", # Shortened for brevity
+        'raw_scraped_text': "Researchers at NIF reported a landmark achievement...", 
         'primary_topic': "Fusion Energy Breakthrough",
         'final_keywords': ["fusion energy", "net energy gain", "National Ignition Facility", "laser fusion"],
-        'processed_summary': "Scientists at NIF achieved sustained net energy gain in a fusion reaction...",
+        'processed_summary': "Scientists at NIF achieved sustained net energy gain...",
         'original_source_url': 'https://www.example.com/news/fusion-breakthrough-nif',
         'selected_image_url': 'https://www.example.com/images/nif_facility.jpg', 
-        'author': 'Dr. Science Writer', # This will be overridden by AUTHOR_NAME_DEFAULT_CONFIG if None in data
+        'author': 'Dr. Science Writer', 
         'published_iso': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     }
-
     result_data = run_seo_writing_agent(sample_article_input_data.copy())
-
     logger.info("\n--- SEO Writing Test Results ---")
     logger.info(f"SEO Agent Status: {result_data.get('seo_agent_status')}")
-    if result_data.get('seo_agent_error_detail'):
-        logger.error(f"SEO Agent Error/Warning Detail: {result_data.get('seo_agent_error_detail')}")
-
+    if result_data.get('seo_agent_error_detail'): logger.error(f"SEO Agent Error/Warning Detail: {result_data.get('seo_agent_error_detail')}")
     seo_results = result_data.get('seo_agent_results')
     if seo_results:
         logger.info(f"\nGenerated Title Tag: {seo_results.get('generated_title_tag')}")
-        logger.info(f"Generated Meta Description: {seo_results.get('generated_meta_description')}")
-        logger.info(f"Generated SEO H1: {seo_results.get('generated_seo_h1')}")
-        logger.info(f"\nFinal Article Title (in pipeline_data): {result_data.get('final_title')}")
-        logger.info(f"Generated Slug (in pipeline_data): {result_data.get('slug')}")
-        
         md_body = seo_results.get('generated_article_body_md', '')
-        logger.info(f"\n--- Generated Markdown Body (first 500 chars) ---")
-        logger.info(md_body[:500] + "...\n")
-        
-        if "<!-- IMAGE_PLACEHOLDER:" in md_body: logger.info("SUCCESS: Image placeholders found.")
-        else: logger.warning("WARNING: Image placeholders NOT found.")
-        if "<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->" in md_body: logger.info("SUCCESS: In-article ad placeholder found.")
-        else: logger.warning("WARNING: In-article ad placeholder NOT found.")
-
-        logger.info(f"\n--- Generated JSON-LD (Raw) ---")
-        logger.info(seo_results.get('generated_json_ld_raw'))
-        
-        if md_body:
-            plain_text_for_json_ld = strip_markdown_and_html(md_body)
-            word_count = len(plain_text_for_json_ld.split())
-            logger.info(f"\n--- Plain Text for JSON-LD articleBody (first 300 chars, Word Count: {word_count}) ---")
-            logger.info(plain_text_for_json_ld[:300] + "...")
-            if "{SLUG_PLACEHOLDER}" not in seo_results.get('generated_json_ld_raw', ''): logger.warning("Warning: {SLUG_PLACEHOLDER} missing in raw JSON-LD.")
-            if "wordCount" not in seo_results.get('generated_json_ld_raw', ''): logger.warning("Warning: 'wordCount' missing in raw JSON-LD.")
-
-    if result_data.get('seo_agent_raw_response_on_fail'):
-        logger.error(f"\n--- RAW LLM RESPONSE (on critical parse fail, first 500 chars) ---")
-        logger.error(result_data['seo_agent_raw_response_on_fail'][:500] + "...")
-
+        logger.info(f"\n--- Generated Markdown Body (first 500 chars) ---"); print(md_body[:500] + "...\n")
+        logger.info(f"\n--- Generated JSON-LD (Raw) ---"); print(seo_results.get('generated_json_ld_raw'))
+    if result_data.get('seo_agent_raw_response_on_fail'): logger.error(f"\n--- RAW LLM RESPONSE (on critical parse fail, first 500 chars) ---\n{result_data['seo_agent_raw_response_on_fail'][:500]}...")
     logger.info("--- SEO Writing Agent Standalone Test Complete ---")
