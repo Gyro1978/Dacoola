@@ -35,9 +35,11 @@ logger.setLevel(logging.DEBUG)
 
 # --- Configuration ---
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
-OLLAMA_FILTER_MODEL = "mistral:latest" # Or "mixtral:latest" for more complex reasoning if resources allow
+OLLAMA_FILTER_MODEL = "falcon:7b-instruct-q4_K_M" # Changed to a faster model
 MIN_READABILITY_SCORE = 40 # Flesch Reading Ease, lower is harder. Adjust as needed.
-MAX_SUMMARY_LENGTH_FOR_LLM = 2000 # Max characters of raw text to send for LLM processing
+MAX_SUMMARY_LENGTH_FOR_LLM = 1500 
+API_TIMEOUT_FILTER_ENRICH = 150 
+
 
 # --- Load Important Entities for Filtering ---
 def load_important_entities_for_filter():
@@ -118,7 +120,7 @@ def call_ollama_for_filter_enrich(article_title, article_raw_text):
     }
     try:
         logger.debug(f"Sending filter/enrich request to Ollama for title: {article_title[:50]}...")
-        response = requests.post(OLLAMA_API_URL, json=payload, timeout=90) # Increased timeout for potentially longer processing
+        response = requests.post(OLLAMA_API_URL, json=payload, timeout=API_TIMEOUT_FILTER_ENRICH) 
         response.raise_for_status()
         
         response_json = response.json()
@@ -140,9 +142,6 @@ def call_ollama_for_filter_enrich(article_title, article_raw_text):
                 return None
         except json.JSONDecodeError as e:
             logger.error(f"Failed to decode JSON from Ollama filter/enrich response: {generated_json_string}. Error: {e}")
-            # Attempt to fix common LLM JSON issues (e.g. trailing commas, unescaped quotes within strings if simple)
-            # This is a basic attempt; more robust JSON cleaning might be needed if issues persist.
-            # For now, we log and return None.
             return None
             
     except requests.exceptions.RequestException as e:
@@ -175,9 +174,8 @@ def run_filter_enrich_agent(article_pipeline_data):
     llm_analysis = call_ollama_for_filter_enrich(title, raw_text)
 
     if llm_analysis:
-        article_pipeline_data.update(llm_analysis) # Add all keys from LLM response
+        article_pipeline_data.update(llm_analysis) 
         
-        # Validate importance level
         valid_importance = ["Breaking", "Interesting", "Boring"]
         if article_pipeline_data.get('importance_level') not in valid_importance:
             logger.warning(f"Invalid importance_level '{article_pipeline_data.get('importance_level')}' from LLM for {article_id}. Defaulting to 'Boring'.")
@@ -188,22 +186,19 @@ def run_filter_enrich_agent(article_pipeline_data):
         logger.error(f"LLM analysis failed for {article_id}. Article will be marked as not passing filter.")
         article_pipeline_data['filter_passed'] = False
         article_pipeline_data['filter_reason'] = "LLM analysis failed or returned invalid data"
-        # Provide some defaults if LLM fails completely
         article_pipeline_data['processed_summary'] = raw_text[:150] + "..." if raw_text else ""
-        article_pipeline_data['importance_level'] = "Boring" # Default if LLM fails
+        article_pipeline_data['importance_level'] = "Boring" 
         article_pipeline_data['importance_confidence'] = 0.0
         article_pipeline_data['primary_topic'] = "Unknown"
         article_pipeline_data['candidate_keywords'] = []
         article_pipeline_data['tone_analysis'] = "Unknown"
         article_pipeline_data['llm_filter_notes'] = "LLM analysis failed."
-        return article_pipeline_data # Early exit if LLM failed
+        return article_pipeline_data
 
-    # Readability Check (optional, based on textstat availability)
     if textstat:
         try:
-            # Use processed_summary if available and substantial, else raw_text
             text_for_readability = article_pipeline_data.get('processed_summary', raw_text)
-            if len(text_for_readability) < 100 and raw_text: # If summary is too short, use raw text
+            if len(text_for_readability) < 100 and raw_text: 
                 text_for_readability = raw_text
 
             readability_score = textstat.flesch_reading_ease(text_for_readability)
@@ -211,23 +206,17 @@ def run_filter_enrich_agent(article_pipeline_data):
             logger.info(f"Readability (Flesch Reading Ease) for {article_id}: {readability_score}")
             if readability_score < MIN_READABILITY_SCORE:
                 logger.warning(f"Article {article_id} has low readability ({readability_score}). May need review or be filtered.")
-                # Potentially set filter_passed = False here if readability is a hard filter
-                # article_pipeline_data['filter_passed'] = False
-                # article_pipeline_data['filter_reason'] = f"Low readability score: {readability_score}"
-                # return article_pipeline_data
         except Exception as e:
             logger.error(f"Failed to calculate readability for {article_id}: {e}")
             article_pipeline_data['readability_score'] = None
     else:
-        article_pipeline_data['readability_score'] = None # textstat not available
+        article_pipeline_data['readability_score'] = None 
 
-    # Final filter decision based on LLM output
     if article_pipeline_data.get('importance_level') == "Boring":
         logger.info(f"Article {article_id} classified as 'Boring' by LLM. Not passing filter.")
         article_pipeline_data['filter_passed'] = False
         article_pipeline_data['filter_reason'] = "Classified as 'Boring' by LLM"
     else:
-        # If not "Boring", and other checks (like readability if implemented as a hard filter) pass
         article_pipeline_data['filter_passed'] = True
         article_pipeline_data['filter_reason'] = f"Passed: Importance '{article_pipeline_data.get('importance_level')}'"
         logger.info(f"Article {article_id} passed filter. Importance: '{article_pipeline_data.get('importance_level')}'")
