@@ -1,4 +1,4 @@
-// public/js/script.js (1/1) - FULL SCRIPT with advanced slider logic and pagination
+// public/js/script.js (Modifications for topic.html)
 
 // --- Global Variables ---
 const synth = window.speechSynthesis; 
@@ -31,17 +31,25 @@ function processArticleBodyFormatting() {
     if (articleBody) {
         let content = articleBody.innerHTML;
         content = content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-        content = content.replace(/—/g, '-');
+        content = content.replace(/—/g, '-'); // Em dash to hyphen
         articleBody.innerHTML = content;
     }
 }
 
 function initializePageContent() {
     const bodyClassList = document.body.classList;
-    if (document.querySelector('.main-article')) { loadSidebarData(); processArticleBodyFormatting(); } 
-    else if (document.querySelector('.home-container')) { loadHomepageData(); } 
-    else if (bodyClassList.contains('page-404')) { loadLatestNewsFor404(); } 
-    else if (document.querySelector('.page-container')) { loadGenericPageData(); }
+    if (document.querySelector('.main-article')) { // Single article page
+        loadSidebarData(); 
+        processArticleBodyFormatting(); 
+    } else if (document.querySelector('.home-container')) { // Homepage
+        loadHomepageData(); 
+    } else if (bodyClassList.contains('page-404')) { // 404 page
+        loadLatestNewsFor404(); 
+    } else if (window.location.pathname.endsWith('/topic.html')) { // Topic page
+        loadTopicPageData();
+    } else if (document.querySelector('.page-container')) { // Other generic pages like latest.html, search.html
+        loadGenericPageData(); 
+    }
 }
 
 async function loadNavbar() {
@@ -77,7 +85,7 @@ async function loadHomepageData() {
         const now = new Date();
         const articlesForGrid = allArticles.filter(a => {
             const isRecentBreaking = a.is_breaking && a.published_iso && (now - new Date(a.published_iso))/(1000*60*60) <= 6;
-            const isInBanner = bannerArticleLinks.includes(`/${a.link}`);
+            const isInBanner = bannerArticleLinks.includes(`/${a.link}`); // Ensure link format matches
             return !isRecentBreaking && !isInBanner;
         }).slice(0, LATEST_NEWS_GRID_COUNT);
         renderLatestNewsGrid(articlesForGrid);
@@ -95,7 +103,84 @@ async function loadHomepageData() {
     }
 }
 
+async function loadTopicPageData() {
+    const container = document.getElementById('page-content-area');
+    const titleElement = document.getElementById('page-title');
+    if (!container || !titleElement) {
+        console.error("Topic page elements not found (page-content-area or page-title).");
+        return;
+    }
+    container.innerHTML = '<p class="placeholder">Loading articles...</p>';
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const topicNameParam = urlParams.get('name');
+    const siteName = "Dacoola"; // Or get from a global JS var / meta tag if preferred
+
+    if (!topicNameParam) {
+        titleElement.textContent = "Topic Not Specified";
+        container.innerHTML = '<p class="placeholder error">No topic specified in the URL.</p>';
+        document.title = `Topic Not Specified | ${siteName}`;
+        updateMetaForTopicPage("Topic Not Specified", "No topic specified.", window.location.href);
+        return;
+    }
+
+    const decodedTopicName = decodeURIComponent(topicNameParam.replace(/\+/g, ' ')); // Handle '+' as space
+    const formattedTopicName = decodedTopicName.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
+    titleElement.textContent = `Topic: ${formattedTopicName}`;
+    document.title = `Topic: ${formattedTopicName} | ${siteName}`;
+    updateMetaForTopicPage(
+        `Articles on ${formattedTopicName}`,
+        `Explore news and analysis about ${formattedTopicName} on ${siteName}.`,
+        window.location.href
+    );
+
+    try {
+        const response = await fetch('/all_articles.json', { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+        const data = await response.json();
+        if (!data?.articles) throw new Error("Invalid all_articles.json format.");
+        
+        const articlesToDisplay = data.articles.filter(article => {
+            const articleTopic = article.topic ? article.topic.toLowerCase().replace(/-/g, ' ') : '';
+            const articleTags = Array.isArray(article.tags) ? article.tags.map(tag => tag.toLowerCase().replace(/-/g, ' ')) : [];
+            const searchTopic = decodedTopicName.toLowerCase(); // Use the decoded name for matching
+            return articleTopic === searchTopic || articleTags.includes(searchTopic);
+        });
+        
+        renderArticleCardList(container, articlesToDisplay, `No articles found for topic: "${formattedTopicName}".`);
+    } catch (error) {
+        console.error(`Error loading articles for topic "${formattedTopicName}":`, error);
+        titleElement.textContent = `Topic: ${formattedTopicName}`;
+        container.innerHTML = `<p class="placeholder error">Could not load articles for topic: "${formattedTopicName}".</p>`;
+    }
+}
+
+function updateMetaForTopicPage(title, description, url) {
+    // Update canonical URL
+    let canonicalLink = document.querySelector("link[rel='canonical']");
+    if (canonicalLink) {
+        canonicalLink.setAttribute("href", url);
+    } else {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        canonicalLink.setAttribute('href', url);
+        document.head.appendChild(canonicalLink);
+    }
+
+    // Update OG and Twitter meta tags
+    document.querySelector("meta[property='og:title']")?.setAttribute("content", title + " | Dacoola");
+    document.querySelector("meta[property='og:description']")?.setAttribute("content", description);
+    document.querySelector("meta[property='og:url']")?.setAttribute("content", url);
+    
+    document.querySelector("meta[name='twitter:title']")?.setAttribute("content", title + " | Dacoola");
+    document.querySelector("meta[name='twitter:description']")?.setAttribute("content", description);
+    // You might want to set a default og:image and twitter:image if no specific topic image is available
+}
+
+
 async function loadGenericPageData() {
+    // (Keep your existing loadGenericPageData for latest.html and search.html)
     const container = document.getElementById('page-content-area');
     const titleElement = document.getElementById('page-title');
     if (!container || !titleElement) return;
@@ -104,7 +189,7 @@ async function loadGenericPageData() {
     const pagePath = window.location.pathname;
     const pageType = pagePath.substring(pagePath.lastIndexOf('/') + 1).split('.')[0];
     const query = urlParams.get('q');
-    const topicName = urlParams.get('name');
+    // const topicName = urlParams.get('name'); // Handled by loadTopicPageData now
     let pageTitle = "News", articlesToDisplay = [], emptyMessage = "No articles found.";
     const dataSourcePath = '/all_articles.json';
     try {
@@ -115,29 +200,30 @@ async function loadGenericPageData() {
         const sourceArticles = fetchedData.articles;
         if (pageType === 'latest') {
             pageTitle = "All News"; articlesToDisplay = sourceArticles; emptyMessage = "No news available.";
-        } else if (pageType === 'topic' && topicName) {
-            const decodedTopic = decodeURIComponent(topicName);
-            pageTitle = `Topic: ${decodedTopic}`;
-            articlesToDisplay = sourceArticles.filter(a => a.topic === decodedTopic || (a.tags && a.tags.includes(decodedTopic)));
-            emptyMessage = `No articles for topic "${decodedTopic}".`;
         } else if (pageType === 'search' && query) {
             pageTitle = `Search: "${query}"`;
             const tokens = query.toLowerCase().split(/[\s\W]+/).filter(Boolean);
             articlesToDisplay = sourceArticles.map(a => ({ ...a, score: calculateSearchScore(a, tokens) })).filter(a => a.score > 0).sort((a, b) => b.score - a.score);
             emptyMessage = `No results for "${query}".`;
         } else {
-            pageTitle = "Not Found"; emptyMessage = "Content not found.";
+            // This case should ideally not be hit if routing is correct
+            pageTitle = "Content Not Found"; emptyMessage = "The content you are looking for could not be found.";
         }
         titleElement.textContent = pageTitle;
-        document.title = `${pageTitle} - ${document.title.split(' - ')[1] || 'Dacoola'}`;
+        document.title = `${pageTitle} | Dacoola`; // Standardized site name
+        updateMetaForTopicPage(pageTitle, `Explore ${pageTitle.toLowerCase()} on Dacoola.`, window.location.href);
+
+
         renderArticleCardList(container, articlesToDisplay, emptyMessage);
     } catch (error) {
         console.error(`Error on generic page '${pageType}':`, error);
-        titleElement.textContent = "Error"; container.innerHTML = '<p class="placeholder error">Could not load.</p>';
+        titleElement.textContent = "Error"; container.innerHTML = '<p class="placeholder error">Could not load content.</p>';
     }
 }
 
+
 async function loadLatestNewsFor404() {
+    // ... (keep this function as is)
     const container = document.getElementById('page-content-area');
     if (!container) return;
     container.innerHTML = '<p class="placeholder">Loading latest news...</p>';
@@ -156,6 +242,7 @@ async function loadLatestNewsFor404() {
 }
 
 async function loadSidebarData() {
+    // ... (keep this function as is)
     const relatedContainer = document.getElementById('related-news-content');
     const latestContainer = document.getElementById('latest-news-content');
     const mainArticleElement = document.querySelector('.main-article');
@@ -227,6 +314,7 @@ async function loadSidebarData() {
 }
 
 function renderBreakingNews(articles) {
+    // ... (keep this function as is)
     const section = document.getElementById('breaking-news-section');
     const sliderContainer = document.getElementById('breaking-news-content');
     const titleElement = document.getElementById('breaking-news-title');
@@ -243,7 +331,7 @@ function renderBreakingNews(articles) {
 
     sliderTrack.innerHTML = ''; 
     if (autoSlideInterval) clearInterval(autoSlideInterval);
-    sliderTrack.style.transform = 'translateX(0px)'; // Start with pixel-based for drag calc
+    sliderTrack.style.transform = 'translateX(0px)'; 
 
     const now = new Date();
     const breakingArticles = articles.filter(a => a.is_breaking && a.published_iso && (now - new Date(a.published_iso))/(1000*60*60) <= 6);
@@ -280,18 +368,16 @@ function renderBreakingNews(articles) {
     if (slides.length > 1) {
         let currentSlideIndex = 0;
         const totalSlides = slides.length;
-        let slideWidth = sliderContainer.offsetWidth; // Get initial width
+        let slideWidth = sliderContainer.offsetWidth; 
 
-        const paginationContainer = document.createElement('div'); // Create pagination container
+        const paginationContainer = document.createElement('div'); 
         paginationContainer.className = 'slider-pagination';
 
         const updateSlidePosition = (animate = true) => {
-            slideWidth = sliderContainer.offsetWidth; // Recalculate on update, important for resize
+            slideWidth = sliderContainer.offsetWidth; 
             const offset = -currentSlideIndex * slideWidth;
             sliderTrack.style.transition = animate ? 'transform 0.4s ease-in-out' : 'none';
             sliderTrack.style.transform = `translateX(${offset}px)`;
-            
-            // Update dots
             paginationContainer.querySelectorAll('.slider-dot').forEach((dot, i) => {
                 dot.classList.toggle('active', i === currentSlideIndex);
             });
@@ -302,7 +388,6 @@ function renderBreakingNews(articles) {
         const goToSlide = (index) => { currentSlideIndex = index; updateSlidePosition(); resetAutoSlide(); };
         const resetAutoSlide = () => { clearInterval(autoSlideInterval); autoSlideInterval = setInterval(nextSlide, 7000); };
 
-        // Create and append dots
         for (let i = 0; i < totalSlides; i++) {
             const dot = document.createElement('button');
             dot.className = 'slider-dot';
@@ -311,7 +396,7 @@ function renderBreakingNews(articles) {
             dot.addEventListener('click', () => goToSlide(i));
             paginationContainer.appendChild(dot);
         }
-        sliderContainer.appendChild(paginationContainer); // Append dots to main container
+        sliderContainer.appendChild(paginationContainer); 
 
 
         const prevButton = document.createElement('button'); prevButton.className = 'slider-control slider-prev'; prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>'; prevButton.title="Previous";
@@ -326,24 +411,15 @@ function renderBreakingNews(articles) {
         sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
         sliderContainer.addEventListener('mouseleave', resetAutoSlide);
 
-        let pointerDownX = 0;
-        let currentTrackPixelOffset = 0; 
-        let pointerIsDown = false;
-        let downTimestamp = 0;
-        const dragThreshold = 50; 
-        const clickTimeThreshold = 250; 
+        let pointerDownX = 0; let currentTrackPixelOffset = 0; let pointerIsDown = false; let downTimestamp = 0;
+        const dragThreshold = 50; const clickTimeThreshold = 250; 
 
         sliderContainer.addEventListener('pointerdown', (e) => {
             if (e.target.closest('.slider-control, .slider-pagination')) return;
-            pointerDownX = e.clientX;
-            downTimestamp = e.timeStamp;
-            pointerIsDown = true;
-            sliderContainer.classList.add('dragging');
-            sliderTrack.style.transition = 'none'; 
-            // Calculate current offset in pixels relative to the first slide's natural position
+            pointerDownX = e.clientX; downTimestamp = e.timeStamp; pointerIsDown = true;
+            sliderContainer.classList.add('dragging'); sliderTrack.style.transition = 'none'; 
             currentTrackPixelOffset = -currentSlideIndex * slideWidth;
-            clearInterval(autoSlideInterval);
-            e.preventDefault(); 
+            clearInterval(autoSlideInterval); e.preventDefault(); 
         }, { passive: false });
 
         sliderContainer.addEventListener('pointermove', (e) => {
@@ -354,50 +430,36 @@ function renderBreakingNews(articles) {
 
         const handlePointerRelease = (e) => {
             if (!pointerIsDown) return;
-            pointerIsDown = false;
-            sliderContainer.classList.remove('dragging');
-            
-            const dragDeltaX = e.clientX - pointerDownX;
-            const timeElapsed = e.timeStamp - downTimestamp;
+            pointerIsDown = false; sliderContainer.classList.remove('dragging');
+            const dragDeltaX = e.clientX - pointerDownX; const timeElapsed = e.timeStamp - downTimestamp;
             let targetSlideElement = e.target.closest('a.slider-item');
-
             if (Math.abs(dragDeltaX) < dragThreshold && timeElapsed < clickTimeThreshold) { 
-                if (targetSlideElement && targetSlideElement.href) {
-                    window.location.href = targetSlideElement.href;
-                    return; 
-                }
-                updateSlidePosition(true); // Snap back if not a link click
+                if (targetSlideElement && targetSlideElement.href) { window.location.href = targetSlideElement.href; return; }
+                updateSlidePosition(true); 
             } else if (Math.abs(dragDeltaX) >= dragThreshold) {
-                if (dragDeltaX < 0) { 
-                    currentSlideIndex = Math.min(currentSlideIndex + 1, totalSlides - 1);
-                } else { 
-                    currentSlideIndex = Math.max(currentSlideIndex - 1, 0);
-                }
+                if (dragDeltaX < 0) { currentSlideIndex = Math.min(currentSlideIndex + 1, totalSlides - 1); } 
+                else { currentSlideIndex = Math.max(currentSlideIndex - 1, 0); }
                 updateSlidePosition(true);
-            } else { 
-                updateSlidePosition(true);
-            }
+            } else { updateSlidePosition(true); }
             resetAutoSlide();
         };
-
         sliderContainer.addEventListener('pointerup', handlePointerRelease);
         sliderContainer.addEventListener('pointerleave', (e) => { if(pointerIsDown) handlePointerRelease(e);});
         sliderContainer.addEventListener('pointercancel', (e) => { if(pointerIsDown) handlePointerRelease(e);});
-        
-        window.addEventListener('resize', () => {
-            updateSlidePosition(false); // Recalculate and reposition on resize without animation
-        });
+        window.addEventListener('resize', () => { updateSlidePosition(false); });
         updateSlidePosition(false); 
     }
 }
 
 function renderLatestNewsGrid(articlesToRender) {
+    // ... (keep this function as is)
     const container = document.querySelector('#latest-news-section .latest-news-grid');
     if (!container) { console.error("Latest news grid container not found."); return; }
     renderArticleCardList(container, articlesToRender, "No recent news available.");
 }
 
 function renderTopics() {
+    // ... (keep this function as is)
     const container = document.querySelector('#topics-section .topics-list'); if (!container) { return; } container.innerHTML = '';
     const predefinedTopics = [ "AI Models", "Hardware", "Software", "Robotics", "Compute", "Research", "Open Source", "Business", "Startups", "Finance", "Health", "Society", "Ethics", "Regulation", "Art & Media", "Environment", "Education", "Security", "Gaming", "Transportation" ];
     if (predefinedTopics.length === 0) { container.innerHTML = '<p class="placeholder">No topics defined.</p>'; return; }
@@ -405,6 +467,7 @@ function renderTopics() {
 }
 
 function renderTrendingNews(articles) {
+    // ... (keep this function as is)
     const container = document.querySelector('#trending-news-section .trending-news-list'); if (!container) return; container.innerHTML = '';
     if (!articles || articles.length === 0) { container.innerHTML = '<p class="placeholder">No articles.</p>'; return; }
     const sortedByTrend = articles.slice().sort((a, b) => (b.trend_score || 0) - (a.trend_score || 0));
@@ -419,6 +482,7 @@ function renderTrendingNews(articles) {
 }
 
 function renderArticleCardList(container, articles, emptyMessage) {
+    // ... (keep this function as is)
     if (!container) return; container.innerHTML = '';
     if (!articles || articles.length === 0) { container.innerHTML = `<p class="placeholder">${emptyMessage}</p>`; return; }
     articles.forEach(article => {
@@ -435,6 +499,7 @@ function renderArticleCardList(container, articles, emptyMessage) {
 }
 
 function timeAgo(isoDateString) {
+    // ... (keep this function as is)
     if (!isoDateString) return 'Date unknown'; 
     try { 
         const date = new Date(isoDateString); 
@@ -461,6 +526,7 @@ function timeAgo(isoDateString) {
 }
 
 function updateTimestamps() {
+    // ... (keep this function as is)
     document.querySelectorAll('.timestamp').forEach(el => { 
         const isoDate = el.getAttribute('data-iso-date'); 
         if (isoDate) { 
@@ -478,6 +544,7 @@ function updateTimestamps() {
 }
 
 function calculateSearchScore(article, searchTokens) {
+    // ... (keep this function as is)
     let score = 0; 
     const title = article.title?.toLowerCase() || ''; 
     const topic = article.topic?.toLowerCase() || ''; 
@@ -502,6 +569,7 @@ function calculateSearchScore(article, searchTokens) {
 }
 
 function setupSearch() {
+    // ... (keep this function as is)
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
     const suggestionsContainer = document.getElementById('search-suggestions');
@@ -558,6 +626,7 @@ function setupSearch() {
 }
 
 function setupMobileSearchToggle() {
+    // ... (keep this function as is)
     const toggleButton = document.getElementById('mobile-search-toggle');
     const navbar = document.querySelector('.navbar');
     const searchContainer = document.querySelector('.nav-search'); 
@@ -589,6 +658,7 @@ function setupMobileSearchToggle() {
 }
 
 function setupFAQAccordion() {
+    // ... (keep this function as is)
     const faqSections = document.querySelectorAll('#article-body .faq-section');
     faqSections.forEach(faqSection => {
         const faqItems = faqSection.querySelectorAll('details.faq-item');
@@ -597,6 +667,7 @@ function setupFAQAccordion() {
 }
 
 function setupBrowserTTSListeners() {
+    // ... (keep this function as is)
     if (!synth) { 
         console.warn("Browser TTS not supported."); 
         document.querySelectorAll('.listen-button, #global-tts-player-button').forEach(btn => btn.style.display = 'none'); 
@@ -617,6 +688,7 @@ function setupBrowserTTSListeners() {
 }
 
 function handleTTSDelegatedClick(event) {
+    // ... (keep this function as is)
     const button = event.target.closest('.listen-button, #global-tts-player-button');
     if (!button || !synth) return; 
     event.preventDefault(); event.stopPropagation(); 
@@ -657,6 +729,7 @@ function handleTTSDelegatedClick(event) {
 }
 
 function speakText(text, button) {
+    // ... (keep this function as is)
     if (!synth || !text || !button) { if(button) resetTTSButtonState(button); return; }
     button.disabled = true; button.classList.remove('playing', 'paused'); button.classList.add('loading');
     button.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i>'; 
@@ -687,6 +760,7 @@ function speakText(text, button) {
 }
 
 function resetTTSButtonState(button) {
+    // ... (keep this function as is)
     if (button) {
         button.classList.remove('playing', 'loading', 'paused');
         const iconClass = button.id === 'global-tts-player-button' ? 'fa-headphones' : 'fa-headphones';
@@ -698,6 +772,7 @@ function resetTTSButtonState(button) {
 }
 
 function cancelSpeech() {
+    // ... (keep this function as is)
     if (!synth) return;
     if (synth.speaking || synth.pending) { synth.cancel(); }
     if (currentPlayingButton) { resetTTSButtonState(currentPlayingButton); }

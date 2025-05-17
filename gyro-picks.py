@@ -1,4 +1,4 @@
-# gyro-picks.py (Full Script - Corrected Pylance "not defined" errors)
+# gyro-picks.py (Full Script - Corrected Pylance "not defined" errors & link placeholder logic)
 import sys
 import os
 import json
@@ -116,7 +116,7 @@ def process_link_placeholders(markdown_text, base_site_url):
 
     def replace_internal(match):
         link_text = match.group(1).strip()
-        topic_or_slug = match.group(2).strip() if match.group(2) else None # Corrected to group 2
+        topic_or_slug = match.group(2).strip() if match.group(2) else None # Correctly access group 2
         href = ""
         if topic_or_slug:
             if topic_or_slug.endswith(".html") or (' ' not in topic_or_slug and topic_or_slug.count('-') > 0):
@@ -194,7 +194,7 @@ def get_content_and_initial_title(url):
 def determine_image_url_for_gyro(user_img, sources, title):
     if user_img: logger.info(f"Using user image: {user_img}"); return user_img
     logger.info("No user image. Scraping sources...")
-    for url_to_scan in sources: # Iterate through all provided source URLs for an image
+    for url_to_scan in sources: 
         scraped = scrape_source_for_image(url_to_scan)
         if scraped: logger.info(f"Scraped from {url_to_scan}: {scraped}"); return scraped
     logger.warning(f"Image scrape failed for all sources. SerpAPI search: '{title}'.")
@@ -459,7 +459,7 @@ if __name__ == "__main__":
             for i, url in enumerate(q_urls):
                 logger.info(f"\nProcessing Quick Add {i+1}/{len(q_urls)}: {url}")
                 if process_one_gyro_pick([url], mode="Quick"): p_count += 1
-                if i < len(q_urls) - 1: logger.info("Brief pause..."); time.sleep(2) # Reduced delay for testing
+                if i < len(q_urls) - 1: logger.info("Brief pause..."); time.sleep(2) 
             logger.info(f"Quick Add finished. Processed {p_count}/{len(q_urls)}.")
         elif mode_choice == '2':
             adv_urls, imp, trend, img = get_advanced_add_inputs()
