@@ -1,4 +1,4 @@
-# src/agents/seo_writing_agent.py (1/1)
+# src/agents/seo_writing_agent.py (1/1) - Enhanced Parsing & deepseek-chat
 
 import os
 import sys
@@ -33,11 +33,14 @@ logger.setLevel(logging.DEBUG)
 # --- Configuration ---
 DEEPSEEK_API_KEY_SEO = os.getenv('DEEPSEEK_API_KEY') 
 DEEPSEEK_CHAT_API_URL_SEO = "https://api.deepseek.com/chat/completions"
-DEEPSEEK_WRITER_MODEL = "deepseek-chat" 
+DEEPSEEK_WRITER_MODEL = "deepseek-chat" # Switched to deepseek-chat
 
-MAX_ARTICLE_CONTENT_FOR_PROCESSING_SNIPPET = 4000 
-API_TIMEOUT_SEO_WRITER = 600 
-MAX_TOKENS_OUTPUT_SEO = 4090 
+MAX_ARTICLE_CONTENT_FOR_PROCESSING_SNIPPET = 5000 
+API_TIMEOUT_SEO_WRITER = 750 
+# For deepseek-chat, this can be higher. The dynamic adjustment will still apply.
+# The actual limit will be (Model_Context_Limit - Prompt_Tokens_Size - Buffer).
+# DeepSeek Chat models generally support up to 8192 or more for OUTPUT tokens if the model allows.
+MAX_TOKENS_OUTPUT_SEO = 8190 # Max value for the parameter itself, if API allows.
 
 YOUR_WEBSITE_NAME_CONFIG = os.getenv('YOUR_WEBSITE_NAME', 'Dacoola')
 YOUR_WEBSITE_LOGO_URL_CONFIG = os.getenv('YOUR_WEBSITE_LOGO_URL', 'https://via.placeholder.com/200x60.png?text=YourLogo') 
@@ -115,7 +118,6 @@ Source: [{ARTICLE_TITLE_FROM_SOURCE}]({SOURCE_ARTICLE_URL})
 If any answer is unsatisfactory, refine until perfection. Output only when ready to publish a masterpiece.
 """
 
-# User prompt (V5/V6 is the same structure for user inputs, system prompt carries the new instructions)
 SEO_WRITER_USER_PROMPT = """
 Task: Generate the Title Tag, Meta Description, SEO-Optimized H1 Heading, Article Body (compelling, well-formatted **Markdown** with diverse elements like tables, lists, blockquotes, code blocks; specific HTML snippets for Pros/Cons & FAQ if you include them; HTML ad placeholder; and detailed `<!-- IMAGE_PLACEHOLDER: specific description -->` comments for images), and JSON-LD Script.
 Follow ALL System Prompt directives meticulously. Key focus: **Engaging tone, superior Markdown formatting, intelligent image placeholder descriptions, and strict adherence to output structure.**
@@ -154,7 +156,9 @@ Generate the full response now according to the System Prompt's specified output
 
 
 def call_deepseek_for_seo_article(prompt_data_dict):
-    if not DEEPSEEK_API_KEY_SEO: logger.error("DS_KEY_SEO missing."); return None
+    if not DEEPSEEK_API_KEY_SEO: 
+        logger.error("DEEPSEEK_API_KEY_SEO missing.")
+        return None
     
     formatted_system_prompt = SEO_WRITER_SYSTEM_PROMPT_V6.replace( 
         "{YOUR_WEBSITE_NAME}", prompt_data_dict.get("your_website_name_for_prompt", YOUR_WEBSITE_NAME_CONFIG)
@@ -162,19 +166,39 @@ def call_deepseek_for_seo_article(prompt_data_dict):
     
     user_prompt_for_api = SEO_WRITER_USER_PROMPT.format(**prompt_data_dict)
 
+    estimated_prompt_tokens = len(formatted_system_prompt) / 4 + len(user_prompt_for_api) / 4
+    
+    # For deepseek-chat, context limits are typically larger (e.g., 8k, 16k, or even 128k for some versions)
+    # We'll assume a common large context like 32k for calculation, but the API might have its own output token limits.
+    MODEL_TOTAL_CONTEXT_LIMIT = 32768 # Example for a larger chat model
+    BUFFER_TOKENS = 1024 # Larger buffer for chat models which might have more overhead
+
+    available_for_completion = MODEL_TOTAL_CONTEXT_LIMIT - estimated_prompt_tokens - BUFFER_TOKENS
+    
+    user_requested_max_tokens = 10000 # As per user's preference
+    api_parameter_hard_limit = 8190   # DeepSeek API's max for the 'max_tokens' parameter itself, if that was the cause.
+
+    effective_max_tokens = min(user_requested_max_tokens, int(available_for_completion), api_parameter_hard_limit)
+
+    if effective_max_tokens <= 0:
+        logger.error(f"Estimated prompt tokens ({estimated_prompt_tokens:.0f}) with buffer exceed model context limit ({MODEL_TOTAL_CONTEXT_LIMIT}). Cannot generate completion.")
+        return None
+    
+    logger.info(f"Estimated prompt tokens: {estimated_prompt_tokens:.0f}. User requested max_tokens: {user_requested_max_tokens}. API Param Limit: {api_parameter_hard_limit}. Available for completion (post-prompt): {available_for_completion:.0f}. Effective MAX_TOKENS_OUTPUT_SEO for API call: {effective_max_tokens}")
+
     payload = {
-        "model": DEEPSEEK_WRITER_MODEL,
+        "model": DEEPSEEK_WRITER_MODEL, # Should be "deepseek-chat"
         "messages": [
             {"role": "system", "content": formatted_system_prompt},
             {"role": "user", "content": user_prompt_for_api}
         ],
         "temperature": 0.6, 
-        "max_tokens": MAX_TOKENS_OUTPUT_SEO, 
+        "max_tokens": effective_max_tokens, 
     }
     headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY_SEO}", "Content-Type": "application/json"}
 
     try:
-        logger.debug(f"Sending ASI-level SEO article generation request to DeepSeek (model: {DEEPSEEK_WRITER_MODEL}). User Prompt Chars: ~{len(user_prompt_for_api)}")
+        logger.debug(f"Sending ASI-level SEO article generation request to DeepSeek (model: {DEEPSEEK_WRITER_MODEL}). User Prompt Chars: ~{len(user_prompt_for_api)}, Effective Max Tokens: {effective_max_tokens}")
         response = requests.post(DEEPSEEK_CHAT_API_URL_SEO, headers=headers, json=payload, timeout=API_TIMEOUT_SEO_WRITER)
         response.raise_for_status()
         response_json = response.json()
@@ -188,14 +212,21 @@ def call_deepseek_for_seo_article(prompt_data_dict):
             logger.error(f"DeepSeek SEO writer response missing expected content or error: {response_json}")
             if response_json.get("error"): logger.error(f"DeepSeek API Error details: {response_json.get('error')}")
             return None
-    except requests.exceptions.Timeout: logger.error(f"DS API SEO article timed out ({API_TIMEOUT_SEO_WRITER}s)."); return None
+    except requests.exceptions.Timeout: 
+        logger.error(f"DS API SEO article timed out ({API_TIMEOUT_SEO_WRITER}s).")
+        return None
     except requests.exceptions.RequestException as e:
         logger.error(f"DS API SEO article request failed: {e}")
-        if hasattr(e, 'response') and e.response is not None: logger.error(f"DS API Response Content: {e.response.text}")
+        if hasattr(e, 'response') and e.response is not None: 
+            logger.error(f"DS API Response Status: {e.response.status_code}")
+            logger.error(f"DS API Response Content: {e.response.text}")
         return None
-    except Exception as e: logger.exception(f"Unexpected error in call_deepseek_for_seo_article: {e}"); return None
+    except Exception as e: 
+        logger.exception(f"Unexpected error in call_deepseek_for_seo_article: {e}")
+        return None
 
 def strip_markdown_and_html(text):
+    # (Keep this function as is)
     if not text: return ""
     text = re.sub(r'<[^>]+>', ' ', text); text = re.sub(r'#{1,6}\s*', '', text)                     
     text = re.sub(r'\[(.*?)\]\(.*?\)', r'\1', text); text = re.sub(r'!\[(.*?)\]\(.*?\)', r'\1', text)         
@@ -210,106 +241,114 @@ def strip_markdown_and_html(text):
     return text
 
 def parse_llm_seo_response(full_response_text):
-    parsed_data = { # Initialize with defaults
-        'generated_title_tag': "Default Title - Check LLM Output",
-        'generated_meta_description': "Default meta description. Review LLM output.",
-        'generated_seo_h1': "Default H1 - Review LLM Output",
+    # Initialize with defaults that are clearly identifiable as placeholders
+    parsed_data = {
+        'generated_title_tag': "Default Title - LLM Response Invalid or Missing",
+        'generated_meta_description': "Default meta description. Check LLM output.",
+        'generated_seo_h1': "Default H1 - LLM Response Invalid or Missing",
         'generated_article_body_md': "",
         'generated_json_ld_raw': "{}",
         'generated_json_ld_full_script_tag': '<script type="application/ld+json">{}</script>'
     }
     errors = []
 
-    if not full_response_text or not isinstance(full_response_text, str):
-        return parsed_data, "CRITICAL: Full response text is empty or not a string."
+    if not full_response_text or not isinstance(full_response_text, str) or len(full_response_text.strip()) < 50: # Check for minimal length
+        return parsed_data, "CRITICAL: Full response text is empty, not a string, or too short to parse."
 
-    try:
-        # Extract Title Tag
-        title_match = re.search(r"^\s*Title Tag:\s*(.*)", full_response_text, re.MULTILINE | re.IGNORECASE)
-        if title_match:
-            parsed_data['generated_title_tag'] = title_match.group(1).strip()
-        else:
-            errors.append("Missing 'Title Tag:' line.")
+    # Attempt to find the start of the main Markdown body first, as it's the largest part
+    # Markers like "Title Tag:", "Meta Description:", "SEO H1:" are expected AT THE VERY TOP.
+    # The Markdown body should follow "SEO H1: ...\n\n{Markdown Body Starts Here}"
+    
+    # Define regex patterns for each expected part
+    # Using re.IGNORECASE for flexibility with LLM output
+    # Using re.DOTALL for . to match newlines within JSON-LD
+    title_tag_pattern = re.compile(r"^\s*Title Tag:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE)
+    meta_desc_pattern = re.compile(r"^\s*Meta Description:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE)
+    seo_h1_pattern = re.compile(r"^\s*SEO H1:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE)
+    source_pattern = re.compile(r"^\s*Source:\s*\[.*?\]\(.*?\)\s*$", re.MULTILINE | re.IGNORECASE)
+    json_ld_pattern = re.compile(r'<script\s+type\s*=\s*["\']application/ld\+json["\']\s*>\s*(\{[\s\S]*?\})\s*<\/script>', re.IGNORECASE | re.DOTALL)
 
-        # Extract Meta Description
-        meta_match = re.search(r"^\s*Meta Description:\s*(.*)", full_response_text, re.MULTILINE | re.IGNORECASE)
-        if meta_match:
-            parsed_data['generated_meta_description'] = meta_match.group(1).strip()
-        else:
-            errors.append("Missing 'Meta Description:' line.")
+    title_match = title_tag_pattern.search(full_response_text)
+    meta_match = meta_desc_pattern.search(full_response_text)
+    seo_h1_match = seo_h1_pattern.search(full_response_text)
+    json_ld_match = json_ld_pattern.search(full_response_text)
+    
+    # Find the last "Source: [...]..." line as the potential end of the markdown body before JSON-LD
+    source_match_end_pos = -1
+    for match_src in source_pattern.finditer(full_response_text):
+        source_match_end_pos = match_src.end()
 
-        # Extract SEO H1
-        seo_h1_match = re.search(r"^\s*SEO H1:\s*(.*)", full_response_text, re.MULTILINE | re.IGNORECASE)
-        if seo_h1_match:
-            parsed_data['generated_seo_h1'] = seo_h1_match.group(1).strip()
-        else:
-            errors.append("Missing 'SEO H1:' line.")
-        
-        # Use SEO H1 as fallback for Title Tag if missing
-        if errors and "Missing 'Title Tag:' line." in errors and parsed_data['generated_seo_h1'] != "Default H1 - Review LLM Output":
-            parsed_data['generated_title_tag'] = parsed_data['generated_seo_h1'] + " | " + YOUR_WEBSITE_NAME_CONFIG # Simple fallback
-            logger.warning("Used SEO H1 as fallback for missing Title Tag.")
-            errors.remove("Missing 'Title Tag:' line.")
+    if title_match: parsed_data['generated_title_tag'] = title_match.group(1).strip()
+    else: errors.append("Missing or malformed 'Title Tag:' line.")
+
+    if meta_match: parsed_data['generated_meta_description'] = meta_match.group(1).strip()
+    else: errors.append("Missing or malformed 'Meta Description:' line.")
+
+    if seo_h1_match: parsed_data['generated_seo_h1'] = seo_h1_match.group(1).strip()
+    else: errors.append("Missing or malformed 'SEO H1:' line.")
+    
+    # Fallback for Title Tag if H1 was found
+    if not title_match and seo_h1_match:
+        parsed_data['generated_title_tag'] = parsed_data['generated_seo_h1'] + " | " + YOUR_WEBSITE_NAME_CONFIG
+        logger.warning("Used SEO H1 as fallback for missing Title Tag.")
+        if "Missing or malformed 'Title Tag:' line." in errors: errors.remove("Missing or malformed 'Title Tag:' line.")
 
 
-        # Extract JSON-LD
-        script_match = re.search(r'<script\s+type\s*=\s*["\']application/ld\+json["\']\s*>\s*(\{[\s\S]*?\})\s*<\/script>', full_response_text, re.IGNORECASE | re.DOTALL)
-        if script_match:
-            json_content_str = script_match.group(1).strip()
-            try:
-                json.loads(json_content_str) # Validate JSON
-                parsed_data['generated_json_ld_raw'] = json_content_str
-                parsed_data['generated_json_ld_full_script_tag'] = script_match.group(0).strip()
-            except json.JSONDecodeError as json_err:
-                errors.append(f"JSON-LD invalid: {json_err}")
-                logger.warning(f"Invalid JSON-LD: {json_content_str[:200]}...")
-        else:
-            errors.append("Missing JSON-LD script tag.")
+    if json_ld_match:
+        json_content_str = json_ld_match.group(1).strip()
+        try:
+            json.loads(json_content_str) # Validate
+            parsed_data['generated_json_ld_raw'] = json_content_str
+            parsed_data['generated_json_ld_full_script_tag'] = json_ld_match.group(0).strip()
+        except json.JSONDecodeError as json_err:
+            errors.append(f"JSON-LD invalid: {json_err}")
+            logger.warning(f"Invalid JSON-LD found: {json_content_str[:200]}...")
+    else:
+        errors.append("Missing JSON-LD script tag.")
 
-        # Extract Markdown Body
-        # Determine start of body: after H1, or Meta, or Title, or beginning of text
-        body_start_offset = 0
-        if seo_h1_match: body_start_offset = seo_h1_match.end()
-        elif meta_match: body_start_offset = meta_match.end()
-        elif title_match: body_start_offset = title_match.end()
-        
-        # Determine end of body: before "Source:" or before JSON-LD script
-        end_index = len(full_response_text)
-        source_marker = "\nSource:"
-        source_index = full_response_text.rfind(source_marker, body_start_offset) # Use rfind to get the last one
-        
-        if script_match: # If JSON-LD was found
-            script_start_index = script_match.start()
-            if source_index != -1 and source_index < script_start_index : # Source marker is before script
-                 end_index = source_index
-            else: # Script is before source, or source not found
-                 end_index = script_start_index
-        elif source_index != -1: # No script, but source found
-            end_index = source_index
-        
-        body_content = full_response_text[body_start_offset:end_index].strip()
+    # Determine body boundaries more carefully
+    body_start_pos = 0
+    if seo_h1_match: body_start_pos = seo_h1_match.end()
+    elif meta_match: body_start_pos = meta_match.end()
+    elif title_match: body_start_pos = title_match.end()
+    else: 
+        errors.append("Could not determine start of body (missing H1, Meta, and Title tags).")
+        # Attempt to find body after the first few lines if markers are totally absent
+        lines = full_response_text.splitlines()
+        if len(lines) > 3: body_start_pos = full_response_text.find(lines[3]) 
 
-        # Remove potential leading H1/H2 if they were part of the body block
-        if body_content.lstrip().startswith(("# ", "## ")):
-             body_content = re.sub(r"^\s*#{1,2}\s*.*?\n", "", body_content, count=1).lstrip()
-        
-        parsed_data['generated_article_body_md'] = body_content
 
-        # Final checks and logging
-        if not parsed_data['generated_article_body_md']:
-            errors.append("CRITICAL: Article body is empty after parsing.")
-        if parsed_data['generated_json_ld_raw'] == "{}":
-            errors.append("WARNING: JSON-LD is empty or default.")
-        
-        final_error_message = "; ".join(errors) if errors else None
-        if final_error_message:
-            logger.warning(f"SEO Parsing completed with issues: {final_error_message}")
-        
-        return parsed_data, final_error_message
+    body_end_pos = len(full_response_text)
+    if source_match_end_pos > body_start_pos: # Source marker is after potential body start
+        body_end_pos = source_match_end_pos 
+    if json_ld_match and json_ld_match.start() > body_start_pos: # JSON-LD is after potential body start
+        # If Source marker was also found and is BEFORE json_ld, body_end_pos is already correct (source_match_end_pos)
+        # If Source marker was NOT found or is AFTER json_ld, then end before json_ld
+        if source_match_end_pos == -1 or source_match_end_pos > json_ld_match.start():
+            body_end_pos = min(body_end_pos, json_ld_match.start())
+    
+    markdown_body = full_response_text[body_start_pos:body_end_pos].strip()
+    
+    # Remove any leading H1/H2 if they were captured from LLM being too verbose
+    if markdown_body.lstrip().startswith(("# ", "## ")):
+         markdown_body = re.sub(r"^\s*#{1,2}\s*.*?\n", "", markdown_body, count=1).lstrip()
+    
+    # Remove "Source: [...]..." line if it was accidentally included at the end of the body
+    if source_pattern.search(markdown_body.split('\n')[-1] if markdown_body else ''): # Check last line
+        markdown_body = "\n".join(markdown_body.split('\n')[:-1]).strip()
 
-    except Exception as e:
-        logger.exception(f"Major exception during SEO response parsing: {e}")
-        return parsed_data, f"Major parsing exception: {e}" # Return defaults with error
+    parsed_data['generated_article_body_md'] = markdown_body
+
+    if not parsed_data['generated_article_body_md'] and not ("CRITICAL" in "".join(errors)):
+        errors.append("CRITICAL: Article body is empty after improved parsing attempts.")
+    if parsed_data['generated_json_ld_raw'] == "{}" and not ("Missing JSON-LD script tag." in errors):
+         errors.append("WARNING: JSON-LD is empty or default despite script tag potentially found.")
+
+    final_error_message = "; ".join(errors) if errors else None
+    if final_error_message:
+        logger.warning(f"SEO Parsing completed with issues: {final_error_message}")
+    
+    return parsed_data, final_error_message
 
 
 def run_seo_writing_agent(article_pipeline_data):
@@ -342,35 +381,35 @@ def run_seo_writing_agent(article_pipeline_data):
     full_llm_response_text = call_deepseek_for_seo_article(prompt_fill_data) 
     
     parsed_seo_results, parsing_error_msg = parse_llm_seo_response(full_llm_response_text)
-    article_pipeline_data['seo_agent_results'] = parsed_seo_results # Always assign, even if partially parsed
+    article_pipeline_data['seo_agent_results'] = parsed_seo_results 
     article_pipeline_data['seo_agent_error_detail'] = parsing_error_msg
 
     if not full_llm_response_text: 
         article_pipeline_data['seo_agent_status'] = "LLM_CALL_FAILED"
-        # seo_agent_results will be the default dict from parse_llm_seo_response
         logger.error(f"SEO Agent: LLM call failed for {article_id}. Default SEO results used.")
     elif "CRITICAL" in (parsing_error_msg or "") or not parsed_seo_results.get('generated_article_body_md'):
         article_pipeline_data['seo_agent_status'] = "PARSING_FAILED_CRITICAL"
         article_pipeline_data['seo_agent_raw_response_on_fail'] = full_llm_response_text[:5000] 
         logger.error(f"SEO Agent: CRITICAL parsing failure for {article_id}. Raw response snippet logged. Default SEO results used.")
-    elif parsing_error_msg:
+    elif parsing_error_msg: # Non-critical parsing errors
         article_pipeline_data['seo_agent_status'] = "PARSING_WITH_WARNINGS"
         logger.warning(f"SEO Agent: Parsing for {article_id} had warnings: {parsing_error_msg}")
-        # Use parsed H1 or Title Tag, fall back to initial title
-        article_pipeline_data['final_title'] = parsed_seo_results.get('generated_seo_h1') or \
-                                           parsed_seo_results.get('generated_title_tag') or \
-                                           article_pipeline_data.get('initial_title_from_web', 'Error Title')
+        # Still try to use parsed H1 or Title if available, otherwise fallback
+        article_pipeline_data['final_title'] = parsed_seo_results.get('generated_seo_h1', "Default H1 - Review LLM Output")
+        if article_pipeline_data['final_title'] == "Default H1 - Review LLM Output":
+             article_pipeline_data['final_title'] = parsed_seo_results.get('generated_title_tag', article_pipeline_data.get('initial_title_from_web', 'Error Title'))
         article_pipeline_data['slug'] = slugify_filename_seo(article_pipeline_data['final_title'])
     else: # Successful parsing
         article_pipeline_data['seo_agent_status'] = "SUCCESS"
         logger.info(f"SEO Agent: Successfully generated and parsed content for {article_id}.")
-        article_pipeline_data['final_title'] = parsed_seo_results.get('generated_seo_h1') or \
-                                           parsed_seo_results.get('generated_title_tag') or \
-                                           article_pipeline_data.get('initial_title_from_web', 'Error Title')
+        article_pipeline_data['final_title'] = parsed_seo_results.get('generated_seo_h1', parsed_seo_results.get('generated_title_tag', article_pipeline_data.get('initial_title_from_web', 'Error Title')))
         article_pipeline_data['slug'] = slugify_filename_seo(article_pipeline_data['final_title'])
         
-    # Ensure slug is always set if final_title exists
-    if not article_pipeline_data.get('slug') and article_pipeline_data.get('final_title'):
+    # Final fallback for title and slug if all else failed
+    if article_pipeline_data['final_title'] in ["Default H1 - Review LLM Output", "Default Title - Check LLM Output", "Error Title"] :
+        article_pipeline_data['final_title'] = article_pipeline_data.get('initial_title_from_web', 'Untitled Article - Processing Error')
+    
+    if not article_pipeline_data.get('slug') or "default-h1" in article_pipeline_data.get('slug') or "error-title" in article_pipeline_data.get('slug'):
         article_pipeline_data['slug'] = slugify_filename_seo(article_pipeline_data.get('final_title'))
         
     return article_pipeline_data
@@ -393,26 +432,46 @@ if __name__ == "__main__":
         'final_keywords': ["quantum entanglement", "room temperature quantum", "quantum internet", "qutrits", "Nature Quantum Systems", "Dr. Evelyn Reed", "quantum communication", "macroscopic entanglement"],
         'processed_summary': "Researchers achieved record-distance room-temperature quantum entanglement between two macroscopic qutrits over 20km of optical fiber, a major step for quantum networks and computing.",
         'original_source_url': 'https://example.com/news/quantum-entanglement-record',
-        'selected_image_url': '', 
+        'selected_image_url': 'https://example.com/placeholder.jpg', 
         'author': AUTHOR_NAME_DEFAULT_CONFIG, 
         'published_iso': datetime.now(timezone.utc).isoformat()
     }
+    
+    # For testing, let's assume user_requested_max_tokens is the desired high value
+    # MAX_TOKENS_OUTPUT_SEO = 10000 # Simulate user's wish for high output, dynamic adjustment will cap it
+
+    logger.info(f"Using DEEPSEEK_WRITER_MODEL = {DEEPSEEK_WRITER_MODEL}")
+    logger.info(f"Initial MAX_TOKENS_OUTPUT_SEO config value: {MAX_TOKENS_OUTPUT_SEO}")
+
     result_data = run_seo_writing_agent(sample_article_input_data.copy())
+    
     logger.info("\n--- ASI-Level SEO Writing Test Results ---")
     logger.info(f"SEO Agent Status: {result_data.get('seo_agent_status')}")
-    if result_data.get('seo_agent_error_detail'): logger.error(f"SEO Agent Error/Warning: {result_data.get('seo_agent_error_detail')}")
+    if result_data.get('seo_agent_error_detail'): 
+        logger.error(f"SEO Agent Error/Warning Detail: {result_data.get('seo_agent_error_detail')}")
     
-    seo_results = result_data.get('seo_agent_results') # This will now be a dict, even on failure
+    seo_results = result_data.get('seo_agent_results', {}) # Ensure seo_results is a dict
     
-    logger.info(f"\nTitle Tag: {seo_results.get('generated_title_tag')}")
-    logger.info(f"Meta Desc: {seo_results.get('generated_meta_description')}")
-    logger.info(f"SEO H1: {seo_results.get('generated_seo_h1')}")
+    logger.info(f"\nFinal Title (used for slug): {result_data.get('final_title')}")
+    logger.info(f"Slug: {result_data.get('slug')}")
+
+    logger.info(f"\nGenerated Title Tag: {seo_results.get('generated_title_tag')}")
+    logger.info(f"Generated Meta Desc: {seo_results.get('generated_meta_description')}")
+    logger.info(f"Generated SEO H1: {seo_results.get('generated_seo_h1')}")
+    
     md_body = seo_results.get('generated_article_body_md', '')
-    logger.info(f"\n--- Generated Markdown Body (Snippet) ---"); print(md_body[:1000] + "...\n")
-    if "<!-- IMAGE_PLACEHOLDER:" in md_body: logger.info("SUCCESS: Image placeholders found.")
-    else: logger.warning("WARNING: Image placeholders NOT found in generated body.")
-    logger.info(f"\n--- Generated JSON-LD (Raw) ---"); print(seo_results.get('generated_json_ld_raw'))
+    logger.info(f"\n--- Generated Markdown Body (First 1000 chars) ---"); 
+    print(md_body[:1000] + ("..." if len(md_body) > 1000 else ""))
+    
+    if "<!-- IMAGE_PLACEHOLDER:" in md_body: 
+        logger.info("\nSUCCESS: Image placeholders found in generated body.")
+    else: 
+        logger.warning("\nWARNING: Image placeholders NOT found in generated body.")
+        
+    logger.info(f"\n--- Generated JSON-LD (Raw) ---"); 
+    print(seo_results.get('generated_json_ld_raw'))
     
     if result_data.get('seo_agent_raw_response_on_fail'): 
-        logger.error(f"\n--- RAW LLM RESPONSE (Snippet on Fail) ---\n{result_data['seo_agent_raw_response_on_fail'][:500]}...")
+        logger.error(f"\n--- RAW LLM RESPONSE (First 500 chars on Fail) ---\n{result_data['seo_agent_raw_response_on_fail'][:500]}...")
+    
     logger.info("--- ASI-Level SEO Writing Agent Standalone Test Complete ---")
