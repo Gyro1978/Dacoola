@@ -44,29 +44,40 @@ jobs:
           curl -fsSL https://ollama.com/install.sh | sh
           echo "Ollama installed."
           # Start Ollama in the background
-          ollama serve &
+          ollama serve > ollama_server.log 2>&1 &
           # Wait a few seconds for Ollama to start
-          sleep 10
-          echo "Ollama server started."
-          # Pull initial models (add more as needed)
-          # Check if pull was successful (ollama list might not show it immediately after pull if server is busy)
-          echo "Pulling Mistral model..."
-          if ollama pull mistral; then
-            echo "Mistral pulled successfully."
+          echo "Waiting for Ollama server to start..."
+          sleep 15 # Increased wait time
+
+          # Check if Ollama server is running
+          if curl http://localhost:11434 > /dev/null 2>&1; then
+            echo "Ollama server is running."
           else
-            echo "::error::Failed to pull Mistral. Check Ollama logs or network."
-            # exit 1 # Optionally exit if a critical model fails
+            echo "::error::Ollama server failed to start. Check ollama_server.log."
+            cat ollama_server.log
+            exit 1
           fi
-          echo "Pulling LLaVA model..."
-          if ollama pull llava; then
-            echo "LLaVA pulled successfully."
-          else
-            echo "::error::Failed to pull LLaVA. Check Ollama logs or network."
-            # exit 1
-          fi
-          # Add other 'ollama pull <model_name>' commands here later
-          # e.g., ollama pull llama3:70b
-          # e.g., ollama pull bge-m3
+
+          # Pull all required models
+          models_to_pull=(
+            "mistral:latest"
+            "bge-m3:latest"
+            "llava:latest"
+            "mixtral:latest"
+            "llama3:70b"
+            "falcon:7b-instruct-q4_K_M"
+            "tinyllama" # Added as a fallback option
+          )
+          for model in "${models_to_pull[@]}"; do
+            echo "Pulling $model model..."
+            if ollama pull "$model"; then
+              echo "$model pulled successfully."
+            else
+              echo "::warning::Failed to pull $model. This might cause issues if the model is essential."
+              # Do not exit for non-critical models, but log a warning
+            fi
+          done
+
           echo "Ollama model pulling complete (or attempted)."
           ollama list # List models to confirm
 
