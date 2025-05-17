@@ -4,10 +4,12 @@ import os
 import sys
 import json
 import logging
-import requests # For Ollama and potentially page fetching
-from bs4 import BeautifulSoup
-from datetime import datetime # Added missing import
-import time # Added missing import
+import requests 
+from bs4 import BeautifulSoup, Comment
+from datetime import datetime 
+import time 
+import re 
+from urllib.parse import urlparse # <<< --- THIS WAS MISSING, NOW ADDED BACK
 
 try:
     from duckduckgo_search import DDGS
@@ -32,21 +34,21 @@ if PROJECT_ROOT not in sys.path:
 
 # --- Setup Logging ---
 logger = logging.getLogger(__name__)
-if not logger.handlers: # Check if handlers are already configured
+if not logger.handlers: 
     logging.basicConfig(
         level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        handlers=[logging.StreamHandler(sys.stdout)] # Ensure output goes to console
+        format='%(asctime)s - %(name)s - %(levelname)s - [%(module)s.%(funcName)s:%(lineno)d] - %(message)s',
+        handlers=[logging.StreamHandler(sys.stdout)] 
     )
-logger.setLevel(logging.DEBUG) # Set to DEBUG for more verbose output during development
+logger.setLevel(logging.DEBUG) 
 
 # --- Configuration ---
-OLLAMA_API_URL = "http://localhost:11434/api/generate" # Standard Ollama API endpoint
-OLLAMA_QUERY_MODEL = "mistral:latest" # Or your preferred small model for query generation
-MAX_SEARCH_RESULTS_PER_QUERY = 5 # Number of search results to process per query
+OLLAMA_API_URL = "http://localhost:11434/api/generate" 
+OLLAMA_QUERY_MODEL = "mistral:latest" 
+MAX_SEARCH_RESULTS_PER_QUERY = 5 
 MAX_QUERIES_PER_TOPIC = 3
 ARTICLE_FETCH_TIMEOUT_SECONDS = 15
-MIN_SCRAPED_TEXT_LENGTH = 200 # Minimum characters for scraped text to be considered useful
+MIN_SCRAPED_TEXT_LENGTH = 200 
 
 # --- Agent Prompts ---
 QUERY_GENERATION_PROMPT_TEMPLATE = """
@@ -63,12 +65,12 @@ def call_ollama_for_queries(topic, num_queries=MAX_QUERIES_PER_TOPIC):
     payload = {
         "model": OLLAMA_QUERY_MODEL,
         "prompt": prompt,
-        "format": "json", # Request JSON output
+        "format": "json", 
         "stream": False
     }
     try:
         logger.debug(f"Sending query generation request to Ollama for topic: {topic}")
-        response = requests.post(OLLAMA_API_URL, json=payload, timeout=30)
+        response = requests.post(OLLAMA_API_URL, json=payload, timeout=90) # Increased timeout
         response.raise_for_status()
         
         response_json = response.json()
@@ -78,25 +80,62 @@ def call_ollama_for_queries(topic, num_queries=MAX_QUERIES_PER_TOPIC):
             logger.error(f"Ollama query generation response missing 'response' field or empty: {response_json}")
             return None
 
+        queries = None
         try:
-            queries = json.loads(generated_json_string)
-            if isinstance(queries, list) and all(isinstance(q, str) for q in queries):
+            parsed_response = json.loads(generated_json_string)
+            if isinstance(parsed_response, list) and all(isinstance(q, str) for q in parsed_response):
+                queries = parsed_response
+            elif isinstance(parsed_response, dict): 
+                queries = [q_text for q_text in parsed_response.values() if isinstance(q_text, str)]
+                if not queries: 
+                    if "queries" in parsed_response and isinstance(parsed_response["queries"], list):
+                         queries = [q for q in parsed_response["queries"] if isinstance(q, str)]
+            
+            if queries:
                 logger.info(f"Ollama generated queries for '{topic}': {queries[:num_queries]}")
                 return queries[:num_queries] 
             else:
-                logger.error(f"Ollama returned unexpected JSON structure for queries: {queries}")
+                logger.error(f"Ollama response parsed but no valid query list found: {parsed_response}")
+                if "[" in generated_json_string and "]" in generated_json_string:
+                    logger.debug(f"Attempting fallback list extraction for: {generated_json_string}")
+                    try:
+                        match = re.search(r'(\[.*?\])', generated_json_string.replace('\\n', ''))
+                        if match:
+                            extracted_list_str = match.group(1)
+                            extracted_list_str = re.sub(r',\s*\]', ']', extracted_list_str)
+                            temp_queries = json.loads(extracted_list_str)
+                            if isinstance(temp_queries, list) and all(isinstance(q, str) for q in temp_queries):
+                                logger.info(f"Ollama fallback list extraction successful: {temp_queries[:num_queries]}")
+                                return temp_queries[:num_queries]
+                    except Exception as e_fallback_list:
+                        logger.error(f"Fallback list extraction also failed: {e_fallback_list}")
                 return None
+
         except json.JSONDecodeError as e:
-            logger.error(f"Failed to decode JSON from Ollama query response: {generated_json_string}. Error: {e}")
-            if "[" in generated_json_string and "]" in generated_json_string:
+            logger.warning(f"Failed to decode JSON directly from Ollama query response: {generated_json_string}. Error: {e}. Trying fallback extraction.")
+            match = re.search(r'```json\s*(\[[\s\S]*?\])\s*```', generated_json_string, re.DOTALL)
+            if match:
+                try:
+                    queries = json.loads(match.group(1))
+                    if isinstance(queries, list) and all(isinstance(q, str) for q in queries):
+                        logger.info(f"Ollama fallback JSON list extraction successful for queries: {queries[:num_queries]}")
+                        return queries[:num_queries]
+                except Exception as ext_e:
+                     logger.error(f"Fallback JSON list extraction also failed: {ext_e}")
+            
+            if "[" in generated_json_string and "]" in generated_json_string: 
                 try:
                     extracted_list_str = generated_json_string[generated_json_string.find("[") : generated_json_string.rfind("]") + 1]
+                    extracted_list_str = re.sub(r'(?<!\\)"?([^"\n\[\],]+)"?', r'"\1"', extracted_list_str) 
+                    extracted_list_str = extracted_list_str.replace("'", '"') 
+                    
                     queries = json.loads(extracted_list_str)
                     if isinstance(queries, list) and all(isinstance(q, str) for q in queries):
-                        logger.info(f"Ollama fallback extraction successful for queries: {queries[:num_queries]}")
+                        logger.info(f"Ollama fallback (string manipulation) successful for queries: {queries[:num_queries]}")
                         return queries[:num_queries]
-                except Exception:
-                    pass 
+                except Exception as e_fallback_str:
+                    logger.error(f"Final fallback query extraction (string manipulation) also failed: {e_fallback_str}")
+            logger.error(f"Could not parse queries from Ollama response: {generated_json_string}")
             return None
 
     except requests.exceptions.RequestException as e:
@@ -116,11 +155,12 @@ def search_web_ddg(query, num_results=MAX_SEARCH_RESULTS_PER_QUERY):
     search_results = []
     try:
         logger.info(f"Searching DDG for: '{query}' (max {num_results} results)")
-        with DDGS() as ddgs:
-            results = list(ddgs.text(query, max_results=num_results, region='wt-wt')) 
-            for r in results:
-                if r.get('href') and r.get('title'):
-                    search_results.append({'url': r['href'], 'title': r['title']})
+        ddgs_instance = DDGS() 
+        results = list(ddgs_instance.text(query, max_results=num_results, region='wt-wt', safesearch='moderate')) 
+        
+        for r in results:
+            if r.get('href') and r.get('title'):
+                search_results.append({'url': r['href'], 'title': r['title']})
         logger.debug(f"DDG found {len(search_results)} results for '{query}'.")
     except Exception as e:
         logger.error(f"Error during DuckDuckGo search for '{query}': {e}")
@@ -163,35 +203,53 @@ def scrape_article_content(url):
         logger.debug(f"Falling back to BeautifulSoup for {url}")
         soup = BeautifulSoup(html_content, 'html.parser')
         
-        for unwanted_tag in soup(['script', 'style', 'nav', 'footer', 'aside', 'header', 'form', 'button', 'input', '.ad', '.banner', '.share', '.comments', '.sidebar', '.related-posts']):
-            unwanted_tag.decompose()
+        for comment_tag in soup.find_all(string=lambda text: isinstance(text, Comment)):
+            comment_tag.extract()
 
-        main_content_selectors = ['article', 'main', '.post-content', '.entry-content', '.article-body', '#main-content', '#content']
-        text_parts = []
-        for selector in main_content_selectors:
-            content_area = soup.select_one(selector)
-            if content_area:
-                paragraphs = content_area.find_all('p')
-                for p in paragraphs:
-                    p_text = p.get_text(separator=' ', strip=True)
-                    if len(p_text) > 20: 
-                        text_parts.append(p_text)
-                if text_parts: break 
+        tags_to_remove = ['script', 'style', 'nav', 'footer', 'aside', 'header', 'form', 'button', 'input',
+                          '.related-posts', '.comments', '.sidebar', '.ad', '.banner', '.share-buttons',
+                          '.newsletter-signup', '.cookie-banner', '.site-header', '.site-footer',
+                          '.navigation', '.menu', '.social-links', '.author-bio', '.pagination',
+                          '#comments', '#sidebar', '#header', '#footer', '#navigation', '.print-button',
+                          '.breadcrumbs', 'figcaption', 'figure > div']
+        for selector in tags_to_remove:
+            for element in soup.select(selector):
+                element.decompose()
         
-        if not text_parts: 
-            body_paragraphs = soup.body.find_all('p') if soup.body else []
-            for p in body_paragraphs:
-                p_text = p.get_text(separator=' ', strip=True)
-                if len(p_text) > 30: 
-                    text_parts.append(p_text)
-
-        full_text = "\n\n".join(text_parts).strip()
-        if len(full_text) >= MIN_SCRAPED_TEXT_LENGTH:
-            logger.info(f"BeautifulSoup fallback extracted content from {url} (Length: {len(full_text)})")
-            return full_text
-        else:
-            logger.warning(f"BeautifulSoup fallback also extracted insufficient text from {url}. Length: {len(full_text)}")
-            return None
+        main_content_selectors = ['article[class*="content"]', 'article[class*="post"]', 'article[class*="article"]',
+                                  'main[id*="content"]', 'main[class*="content"]', 'div[class*="article-body"]',
+                                  'div[class*="post-body"]', 'div[class*="entry-content"]', 'div[class*="story-content"]',
+                                  'div[id*="article"]', 'div#content', 'div#main', '.article-content']
+        best_text = ""
+        for selector in main_content_selectors:
+            element = soup.select_one(selector)
+            if element:
+                text_parts = []
+                for child in element.find_all(['p', 'h1', 'h2', 'h3', 'h4', 'li', 'blockquote', 'pre']):
+                    if child.name == 'p' and child.find('a') and len(child.find_all(text=True, recursive=False)) == 0 and len(child.find_all('a')) == 1:
+                        link_text = child.find('a').get_text(strip=True)
+                        if link_text and len(link_text) > 20: text_parts.append(link_text)
+                        continue
+                    text_parts.append(child.get_text(separator=' ', strip=True))
+                current_text = "\n\n".join(filter(None, text_parts)).strip()
+                if len(current_text) > len(best_text): best_text = current_text
+        
+        if best_text and len(best_text) >= MIN_SCRAPED_TEXT_LENGTH:
+            logger.info(f"BS (selector strategy) extracted from {url} (Length: {len(best_text)})")
+            return best_text
+        
+        body = soup.find('body')
+        if body:
+            content_text = ""
+            paragraphs = body.find_all('p')
+            if paragraphs:
+                 text_parts = [p.get_text(separator=' ', strip=True) for p in paragraphs if len(p.get_text(strip=True)) > 50]
+                 content_text = "\n\n".join(filter(None, text_parts)).strip()
+            if content_text and len(content_text) >= MIN_SCRAPED_TEXT_LENGTH:
+                logger.info(f"BS (aggressive fallback) extracted from {url} (Length: {len(content_text)})")
+                return content_text
+        logger.warning(f"BS fallback failed for {url} after all attempts.")
+        return None
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout fetching content from {url}")
@@ -233,9 +291,11 @@ def run_web_research_agent(topics_of_interest, preferred_domains=None):
                 processed_urls_this_run.add(url)
                 
                 try:
-                    domain = url.split('//')[-1].split('/')[0].replace('www.', '')
-                except:
-                    domain = "unknown"
+                    # Correctly use urlparse here
+                    domain = urlparse(url).netloc.replace('www.', '')
+                except Exception as e_parse: # Catch potential errors during parsing
+                    logger.warning(f"Could not parse domain from URL {url}: {e_parse}")
+                    domain = "unknown_domain"
 
                 scraped_text_content = scrape_article_content(url)
 
@@ -243,17 +303,17 @@ def run_web_research_agent(topics_of_interest, preferred_domains=None):
                     all_found_articles_data.append({
                         'url': url,
                         'title': title,
-                        'scraped_text': scraped_text_content,
+                        'scraped_text': scraped_text_content, 
                         'source_domain': domain,
                         'research_topic': topic, 
-                        'retrieved_at': datetime.now().isoformat() # Corrected: datetime
+                        'retrieved_at': datetime.now().isoformat() 
                     })
                     logger.info(f"Successfully scraped and added: '{title}' from {url}")
                 else:
                     logger.warning(f"Failed to scrape sufficient content for: '{title}' from {url}")
             
-            if len(generated_queries) > 1 :
-                 time.sleep(2) # Corrected: time
+            if len(generated_queries) > 1 : 
+                 time.sleep(2) 
     
     logger.info(f"--- Web Research Agent finished. Found {len(all_found_articles_data)} potentially useful articles. ---")
     return all_found_articles_data
@@ -261,11 +321,11 @@ def run_web_research_agent(topics_of_interest, preferred_domains=None):
 if __name__ == "__main__":
     if not logging.getLogger(__name__).handlers:
         logging.basicConfig(stream=sys.stdout, level=logging.INFO, 
-                            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+                            format='%(asctime)s - %(name)s - %(levelname)s - [%(module)s.%(funcName)s:%(lineno)d] - %(message)s')
     logger.setLevel(logging.DEBUG) 
 
     sample_topics = [
-        "latest advancements in large language models safety",
+        "latest breakthroughs in AI model architectures",
         "Nvidia Blackwell GPU impact on AI training"
     ]
     
@@ -283,8 +343,10 @@ if __name__ == "__main__":
             logger.info(f"  Scraped Text Length: {len(article.get('scraped_text', ''))}")
             logger.info("-" * 20)
         
-        output_test_file = os.path.join(PROJECT_ROOT, "data", "web_research_test_output.json")
-        os.makedirs(os.path.dirname(output_test_file), exist_ok=True)
+        test_data_dir = os.path.join(PROJECT_ROOT, "data")
+        os.makedirs(test_data_dir, exist_ok=True)
+        output_test_file = os.path.join(test_data_dir, "web_research_test_output.json")
+        
         with open(output_test_file, "w", encoding="utf-8") as f:
             json.dump(found_articles, f, indent=2, ensure_ascii=False)
         logger.info(f"Test output saved to {output_test_file}")

@@ -1,4 +1,4 @@
-# src/main.py (Orchestrator - Fully Integrated with All Agents - With new logging)
+# src/main.py (Orchestrator - Fully Integrated with All Agents - Corrected with logging)
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -48,7 +48,7 @@ try:
     from src.social.social_media_poster import (
         initialize_social_clients, run_social_media_poster,
         load_post_history as load_social_post_history,
-        mark_article_as_posted_in_history
+        mark_article_as_posted_in_history # This is used by social_media_poster internally
     )
 except ImportError as e:
      print(f"FATAL IMPORT ERROR in main.py (agents): {e}")
@@ -177,22 +177,35 @@ def get_sort_key_for_all_articles(item):
 
 def _read_tweet_tracker():
     today_utc_str = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    default_data = {'date': today_utc_str, 'count': 0}
     try:
+        os.makedirs(os.path.dirname(TWITTER_DAILY_LIMIT_FILE), exist_ok=True) # Ensure directory exists
         if os.path.exists(TWITTER_DAILY_LIMIT_FILE):
-            with open(TWITTER_DAILY_LIMIT_FILE, 'r') as f: data = json.load(f)
+            with open(TWITTER_DAILY_LIMIT_FILE, 'r', encoding='utf-8') as f: 
+                data = json.load(f)
             if data.get('date') == today_utc_str:
                 return data['date'], data.get('count', 0)
+        
+        # If file doesn't exist, or date is old, create/overwrite it with default
+        with open(TWITTER_DAILY_LIMIT_FILE, 'w', encoding='utf-8') as f:
+            json.dump(default_data, f, indent=2)
+        logger.info(f"Initialized/reset Twitter tracker for {today_utc_str} at {TWITTER_DAILY_LIMIT_FILE}.")
         return today_utc_str, 0
     except Exception as e:
-        logger.error(f"Error reading Twitter tracker: {e}. Resetting count for {today_utc_str}.")
+        logger.error(f"Error R/W Twitter tracker: {e}. Resetting count for {today_utc_str}.")
+        try: # Try to write default even on error
+            with open(TWITTER_DAILY_LIMIT_FILE, 'w', encoding='utf-8') as f:
+                json.dump(default_data, f, indent=2)
+        except Exception as e_write:
+            logger.error(f"Could not even write default twitter tracker: {e_write}")
         return today_utc_str, 0
 
 def slugify_filename(text_to_slugify):
     if not text_to_slugify: return "untitled-slug"
     s = str(text_to_slugify).strip().lower()
-    s = re.sub(r'[^\w\s-]', '', s) # Remove non-alphanumeric, non-space, non-hyphen
-    s = re.sub(r'[-\s]+', '-', s) # Replace spaces and multiple hyphens with single hyphen
-    return s[:75] # Truncate
+    s = re.sub(r'[^\w\s-]', '', s) 
+    s = re.sub(r'[-\s]+', '-', s) 
+    return s[:75] 
 
 def format_tags_html_main(tags_list): 
     if not tags_list: return ""
@@ -200,9 +213,10 @@ def format_tags_html_main(tags_list):
         links = []; base = YOUR_SITE_BASE_URL 
         for tag_item in tags_list:
             tag_str = str(tag_item) if tag_item is not None else "untagged"
-            safe_tag = quote(slugify_filename(tag_str)) # Slugify for URL, then quote
-            url = urljoin(base, f"topic.html?name={safe_tag}") # Use slugified tag for name param
-            links.append(f'<a href="{url}" class="tag-link">{html.escape(tag_str)}</a>') # Display original tag
+            safe_tag_slug = slugify_filename(tag_str) # Slugify for URL consistency
+            quoted_slug = quote(safe_tag_slug)
+            url = urljoin(base, f"topic.html?name={quoted_slug}") 
+            links.append(f'<a href="{url}" class="tag-link">{html.escape(tag_str)}</a>') # Display original tag text
         return ", ".join(links)
     except Exception as e:
         logger.error(f"Error formatting tags HTML (main): {tags_list} - {e}")
@@ -217,7 +231,7 @@ def process_final_markdown_to_html_main(markdown_text):
                            r'<a href="/\2" class="internal-link">\1</a>', 
                            markdown_text)
     # Convert custom internal topic links: [[Text | Topic Name]] (slugify Topic Name for URL)
-    markdown_text = re.sub(r'\[\[\s*(.*?)\s*\|\s*([^\]]*?)\s*\]\]', 
+    markdown_text = re.sub(r'\[\[\s*(.*?)\s*\|\s*([^\]]+?)\s*\]\]', 
                            lambda m: f'<a href="/topic.html?name={quote(slugify_filename(m.group(2).strip()))}" class="internal-link">{m.group(1).strip()}</a>', 
                            markdown_text)
     # Convert custom internal topic links (short form, no pipe): [[Topic Name Only]]
@@ -231,6 +245,7 @@ def process_final_markdown_to_html_main(markdown_text):
 
     html_content = markdown.markdown(markdown_text, extensions=['fenced_code', 'tables', 'nl2br', 'sane_lists', 'extra', 'attr_list'])
     return html.unescape(html_content)
+
 
 def render_html_page_main(template_name, template_vars, output_dir, output_filename_base):
     """Generic HTML page renderer, used by main."""
@@ -257,10 +272,9 @@ def update_master_article_list_json(article_summary_data):
     all_articles_list = []
     if all_articles_data_envelope and isinstance(all_articles_data_envelope, dict) and 'articles' in all_articles_data_envelope and isinstance(all_articles_data_envelope['articles'], list):
         all_articles_list = all_articles_data_envelope['articles']
-    elif all_articles_data_envelope is not None: # File exists but is malformed
+    elif all_articles_data_envelope is not None: 
         logger.warning(f"Format of {ALL_ARTICLES_FILE} unexpected or empty. Starting new list.")
-    # If file doesn't exist or is empty, all_articles_list remains []
-
+    
     article_id_to_update = article_summary_data['id']
     all_articles_list = [art for art in all_articles_list if isinstance(art,dict) and art.get('id') != article_id_to_update]
     all_articles_list.append(article_summary_data)
@@ -337,35 +351,39 @@ if __name__ == "__main__":
                     html_regen_count_articles +=1
     logger.info(f"Article HTML Regeneration complete. Regenerated/Verified {html_regen_count_articles} files.")
     
-    # --- Stage 1: Running Web Research Agent (if not using RSS scraper primarily) ---
-    logger.info("--- Stage 1: Running Web Research Agent ---")
-    topics_for_research = [ 
-        "latest breakthroughs in AI model architectures", "NVIDIA AI hardware news", "OpenAI new products",
-        "Google DeepMind advancements", "AI ethics and regulation", "Robotics and AI"
-    ]
-    raw_articles_from_web = run_web_research_agent(topics_for_research) # This will be the primary source of new articles
-    if raw_articles_from_web:
-        logger.info(f"Web Research Agent found {len(raw_articles_from_web)} raw articles.")
-        # Optional: Save the direct output of web_research_agent if needed for debugging its specific findings
-        # raw_research_output_path = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"web_research_output_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
-        # save_json_data(raw_research_output_path, raw_articles_from_web, "raw web research agent output")
-    else: 
-        logger.info("Web Research Agent found no new articles.")
+    # --- Stage 1: Web Research / Gyro Picks ---
+    raw_articles_from_web = [] # Initialize empty list
+    # Web Research (Optional, can be primary source if no Gyro Picks)
+    # To disable, comment out or set topics_for_research to empty list
+    run_web_research = True # Set to False to disable Web Research Agent
+    if run_web_research:
+        logger.info("--- Stage 1a: Running Web Research Agent ---")
+        topics_for_research = [ 
+            "latest breakthroughs in AI model architectures", "NVIDIA AI hardware news", "OpenAI new products",
+            "Google DeepMind advancements", "AI ethics and regulation", "Robotics and AI"
+        ]
+        web_agent_articles = run_web_research_agent(topics_for_research) 
+        if web_agent_articles:
+            logger.info(f"Web Research Agent found {len(web_agent_articles)} raw articles.")
+            raw_articles_from_web.extend(web_agent_articles)
+        else: 
+            logger.info("Web Research Agent found no new articles.")
+    else:
+        logger.info("Skipping Web Research Agent based on configuration.")
 
-    # Combine with Gyro Picks
+
+    # Process Gyro Picks
     gyro_pick_files = glob.glob(os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, "gyro-*.json"))
     if gyro_pick_files:
-        logger.info(f"Found {len(gyro_pick_files)} raw Gyro Pick files to process.")
-        for gyro_file_path in gyro_pick_files: # Changed variable name
+        logger.info(f"--- Stage 1b: Processing {len(gyro_pick_files)} raw Gyro Pick files ---")
+        for gyro_file_path in gyro_pick_files:
             gyro_data = load_json_data(gyro_file_path, "raw gyro pick")
             if gyro_data: 
-                # Ensure gyro_data has the necessary top-level keys expected by the pipeline
-                # based on web_research_agent's output structure, or adapt mapping.
-                # Example: web_research returns 'url', gyro pick uses 'original_source_url'.
-                # For now, assume gyro_data structure is mostly compatible.
                 raw_articles_from_web.append(gyro_data) 
             else: 
                 logger.warning(f"Could not load gyro pick file: {gyro_file_path}")
+    else:
+        logger.info("No Gyro Pick files found in raw_web_research directory.")
     
     successfully_processed_articles_this_run = []
     social_media_queue_this_run = []
@@ -379,28 +397,22 @@ if __name__ == "__main__":
             logger.info(f"Reached MAX_ARTICLES_TO_PROCESS_PER_RUN ({MAX_ARTICLES_TO_PROCESS_PER_RUN}). Stopping further processing.")
             break
 
-        # Determine a consistent source key for ID generation
-        # Gyro picks have a specific 'id' field which is `gyro-<timestamp>-<hash>`
-        # Web research items typically use their 'url' as the primary unique identifier.
-        article_id_source_key = raw_article_input.get('id') # Gyro picks will have this
-        if not article_id_source_key: # If not a Gyro pick, use its URL (from web_research_agent)
+        article_id_source_key = raw_article_input.get('id') 
+        if not article_id_source_key: 
             article_id_source_key = raw_article_input.get('url') 
         
-        if not article_id_source_key: # Fallback if somehow both are missing
+        if not article_id_source_key: 
             logger.warning(f"Raw article input missing 'id' (for Gyro) and 'url' (for Web). Skipping. Data: {str(raw_article_input)[:200]}")
             continue
             
         current_article_id_str = get_article_universal_id(article_id_source_key)
         
-        # <<< NEW LOGGING >>>
-        logger.info(f"MAIN.PY STARTING PIPELINE FOR RAW INPUT: url={raw_article_input.get('original_source_url', raw_article_input.get('url', 'N/A'))}, gyro={raw_article_input.get('is_gyro_pick', False)}, RAW_TITLE: {raw_article_input.get('initial_title_from_web', raw_article_input.get('title','N/A'))}")
-        
+        logger.info(f"MAIN.PY RAW_INPUT: url={raw_article_input.get('original_source_url', raw_article_input.get('url', 'N/A'))}, gyro={raw_article_input.get('is_gyro_pick', False)}, RAW_TITLE: {raw_article_input.get('initial_title_from_web', raw_article_input.get('title','N/A'))}")
         logger.info(f"--- Processing Article ID: {current_article_id_str} (Source Key: {str(article_id_source_key)[:60]}) ---")
 
         processed_json_path = os.path.join(PROCESSED_JSON_DIR, f"{current_article_id_str}.json")
         if os.path.exists(processed_json_path):
             logger.info(f"Article {current_article_id_str} already has a final processed JSON. Skipping full pipeline.")
-            # If it's a gyro pick and its raw file exists, remove it as it's now "processed" (or found to be already processed)
             if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'):
                 raw_gyro_file_to_remove = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json")
                 if os.path.exists(raw_gyro_file_to_remove):
@@ -410,11 +422,11 @@ if __name__ == "__main__":
 
         article_pipeline_data = {
             'id': current_article_id_str,
-            'original_source_url': raw_article_input.get('url', raw_article_input.get('original_source_url')), # Web uses 'url', Gyro 'original_source_url'
-            'initial_title_from_web': raw_article_input.get('title', raw_article_input.get('initial_title_from_web')), # Web uses 'title', Gyro 'initial_title_from_web'
-            'raw_scraped_text': raw_article_input.get('scraped_text', raw_article_input.get('raw_scraped_text')), # Web uses 'scraped_text', Gyro 'raw_scraped_text'
+            'original_source_url': raw_article_input.get('url', raw_article_input.get('original_source_url')), 
+            'initial_title_from_web': raw_article_input.get('title', raw_article_input.get('initial_title_from_web')), 
+            'raw_scraped_text': raw_article_input.get('scraped_text', raw_article_input.get('raw_scraped_text')), 
             'research_topic': raw_article_input.get('research_topic'), 
-            'published_iso': raw_article_input.get('retrieved_at', raw_article_input.get('published_iso', datetime.now(timezone.utc).isoformat())), # Web uses 'retrieved_at'
+            'published_iso': raw_article_input.get('retrieved_at', raw_article_input.get('published_iso', datetime.now(timezone.utc).isoformat())), 
             'pipeline_status': 'started',
             'is_gyro_pick': raw_article_input.get('is_gyro_pick', False),
             'gyro_pick_mode': raw_article_input.get('gyro_pick_mode'),
@@ -423,17 +435,16 @@ if __name__ == "__main__":
             'selected_image_url': raw_article_input.get('selected_image_url'), 
             'author': raw_article_input.get('author', AUTHOR_NAME_DEFAULT) 
         }
-        # <<< NEW LOGGING >>>
+        
         logger.info(f"MAIN.PY PIPELINE_DATA_INIT for ID {article_pipeline_data.get('id')}: Title='{article_pipeline_data.get('initial_title_from_web')}', Gyro={article_pipeline_data.get('is_gyro_pick')}, TextLen={len(str(article_pipeline_data.get('raw_scraped_text')))}")
 
 
         article_pipeline_data = run_filter_enrich_agent(article_pipeline_data)
-        # <<< NEW LOGGING >>>
         logger.info(f"MAIN.PY POST_FILTER_ENRICH for ID {article_pipeline_data.get('id')}: Importance='{article_pipeline_data.get('importance_level')}', Summary='{str(article_pipeline_data.get('processed_summary'))[:50]}', Passed={article_pipeline_data.get('filter_passed')}")
 
         if not article_pipeline_data.get('filter_passed', False):
             logger.info(f"Skipping {current_article_id_str}: Failed filter/enrichment. Reason: {article_pipeline_data.get('filter_reason')}")
-            if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'): # Clean up failed Gyro raw file
+            if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'): 
                 raw_gyro_file_to_remove = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json")
                 if os.path.exists(raw_gyro_file_to_remove):
                     try: os.remove(raw_gyro_file_to_remove); logger.debug(f"Removed failed Gyro raw file: {raw_gyro_file_to_remove}")
@@ -443,7 +454,7 @@ if __name__ == "__main__":
         article_pipeline_data = run_deduplication_agent(article_pipeline_data, historical_embeddings)
         if article_pipeline_data.get('is_duplicate', False):
             logger.info(f"Skipping {current_article_id_str}: Duplicate of {article_pipeline_data.get('similar_article_id')}.")
-            if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'): # Clean up duplicate Gyro raw file
+            if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'): 
                 raw_gyro_file_to_remove = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json")
                 if os.path.exists(raw_gyro_file_to_remove):
                     try: os.remove(raw_gyro_file_to_remove); logger.debug(f"Removed duplicate Gyro raw file: {raw_gyro_file_to_remove}")
@@ -453,13 +464,13 @@ if __name__ == "__main__":
         article_pipeline_data = run_keyword_intelligence_agent(article_pipeline_data)
         
         article_pipeline_data = run_seo_writing_agent(article_pipeline_data)
-        # <<< NEW LOGGING >>>
         seo_res_check_main = article_pipeline_data.get('seo_agent_results', {})
         logger.info(f"MAIN.PY POST_SEO_WRITER for ID {article_pipeline_data.get('id')}: H1='{seo_res_check_main.get('generated_seo_h1')}', MD_Body_Len={len(str(seo_res_check_main.get('generated_article_body_md')))}")
 
+
         if not article_pipeline_data.get('seo_agent_results', {}).get('generated_article_body_md'):
             logger.error(f"Skipping {current_article_id_str}: SEO Writing Agent failed. Status: {article_pipeline_data.get('seo_agent_status')}")
-            if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'): # Clean up failed Gyro raw file
+            if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'): 
                 raw_gyro_file_to_remove = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json")
                 if os.path.exists(raw_gyro_file_to_remove):
                     try: os.remove(raw_gyro_file_to_remove); logger.debug(f"Removed failed (SEO) Gyro raw file: {raw_gyro_file_to_remove}")
@@ -468,7 +479,7 @@ if __name__ == "__main__":
         
         article_pipeline_data = run_vision_media_agent(article_pipeline_data)
         article_pipeline_data = run_image_integration_agent(article_pipeline_data)
-        article_pipeline_data = run_knowledge_graph_agent(article_pipeline_data, site_content_graph_data) # site_content_graph_data comes from load_site_content_graph()
+        article_pipeline_data = run_knowledge_graph_agent(article_pipeline_data, site_content_graph_data) 
         
         final_render_vars_main = {
             'PAGE_TITLE': article_pipeline_data.get('seo_agent_results',{}).get('generated_title_tag', article_pipeline_data.get('final_title','Untitled Article')),
@@ -509,7 +520,7 @@ if __name__ == "__main__":
             "image_url": article_pipeline_data.get('selected_image_url'), "topic": article_pipeline_data.get('primary_topic', 'News'),
             "is_breaking": article_pipeline_data.get('importance_level') == "Breaking",
             "is_trending_pick": article_pipeline_data.get('user_is_trending_pick_gyro', False),
-            "tags": article_pipeline_data.get('final_keywords', []), "audio_url": None, "trend_score": 0 # trend_score placeholder
+            "tags": article_pipeline_data.get('final_keywords', []), "audio_url": None, "trend_score": 0 
         }
         update_master_article_list_json(summary_for_master)
         
@@ -534,8 +545,15 @@ if __name__ == "__main__":
     save_historical_embeddings(historical_embeddings)
 
     logger.info("--- Stage 9: Running Trending Digest Agent ---")
-    all_site_articles_for_digest = load_json_data(ALL_ARTICLES_FILE, "all_articles_for_digest").get('articles', [])
+    all_site_articles_for_digest = load_json_data(ALL_ARTICLES_FILE, "all_articles_for_digest")
+    # Ensure all_site_articles_for_digest is a list, even if file was empty or malformed
+    if not isinstance(all_site_articles_for_digest, dict) or not isinstance(all_site_articles_for_digest.get('articles'), list):
+        all_site_articles_for_digest = [] 
+    else:
+        all_site_articles_for_digest = all_site_articles_for_digest.get('articles',[])
+
     digest_pages_generated_data = run_trending_digest_agent(raw_articles_from_web, all_site_articles_for_digest)
+
 
     if digest_pages_generated_data:
         logger.info(f"Trending Digest Agent produced {len(digest_pages_generated_data)} digest pages. Rendering them...")
@@ -547,7 +565,7 @@ if __name__ == "__main__":
                 'CANONICAL_URL': urljoin(YOUR_SITE_BASE_URL, f"digests/{digest_data_item['slug']}.html".lstrip('/')),
                 'SITE_NAME': YOUR_WEBSITE_NAME,
                 'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
-                'FAVICON_URL': os.getenv('YOUR_FAVICON_URL', 'https://i.ibb.co/W7xMqdT/dacoola-image-logo.png'),
+                'FAVICON_URL': os.getenv('YOUR_FAVICON_URL', 'https://i.ibb.co/W7xMqdT/dacoola-image-logo.png'), # Keep default if not set
                 'OG_IMAGE_URL': os.getenv('DEFAULT_OG_IMAGE_FOR_DIGESTS', YOUR_WEBSITE_LOGO_URL),
                 'PUBLISH_ISO_FOR_META': datetime.now(timezone.utc).isoformat(),
                 'JSON_LD_SCRIPT_TAG': digest_data_item.get('json_ld_script_tag', ''),
@@ -562,16 +580,13 @@ if __name__ == "__main__":
     social_post_history = load_social_post_history()
     already_posted_social_ids_set = set(social_post_history.get('posted_articles', []))
     
-    # Start with articles processed successfully *in this specific run*
     final_queue_for_social_posting = [
         p for p in social_media_queue_this_run 
         if p['id'] not in already_posted_social_ids_set
     ]
-    # Add their IDs to the set to avoid re-queueing them from historical check
-    for p in final_queue_for_social_posting:
+    for p in final_queue_for_social_posting: # Mark current run's items as "to be posted"
         already_posted_social_ids_set.add(p['id'])
 
-    # Then, check older (historically) processed articles that haven't been posted yet
     now_utc = datetime.now(timezone.utc)
     social_cutoff_time = now_utc - timedelta(hours=MAX_AGE_FOR_SOCIAL_POST_HOURS)
     
@@ -602,16 +617,15 @@ if __name__ == "__main__":
             article_id_lookup = payload_item.get('id')
             if not article_id_lookup: return datetime(1970, 1, 1, tzinfo=timezone.utc)
             
-            # Check if it was processed in *this* run first
             data_for_sort = next((art for art in successfully_processed_articles_this_run if art.get('id') == article_id_lookup), None)
-            if not data_for_sort: # If not, load its processed JSON
+            if not data_for_sort: 
                 data_for_sort = load_json_data(os.path.join(PROCESSED_JSON_DIR, f"{article_id_lookup}.json"))
             return get_sort_key_for_all_articles(data_for_sort or {})
         
         final_queue_for_social_posting.sort(key=get_true_publish_date_for_social_sort, reverse=True)
 
         for item_to_post in final_queue_for_social_posting:
-            platforms_to_attempt_final = ["bluesky", "reddit"] # Default platforms
+            platforms_to_attempt_final = ["bluesky", "reddit"] 
             if social_media_clients.get("twitter_client"):
                 current_run_date_str_twitter, posts_today_twitter = _read_tweet_tracker()
                 today_utc_str_twitter = datetime.now(timezone.utc).strftime('%Y-%m-%d')
@@ -622,7 +636,7 @@ if __name__ == "__main__":
                 else:
                     logger.info(f"Daily Twitter limit reached. Twitter SKIPPED for social post ID: {item_to_post.get('id')}")
 
-            # run_social_media_poster now handles marking as posted internally
+            # run_social_media_poster should handle marking as posted
             run_social_media_poster(item_to_post, social_media_clients, tuple(platforms_to_attempt_final))
             time.sleep(10) 
     else: 
