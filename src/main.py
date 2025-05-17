@@ -1,4 +1,4 @@
-# src/main.py (Orchestrator - Fully Integrated with All Agents)
+# src/main.py (Orchestrator - Fully Integrated with All Agents - With new logging)
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -66,7 +66,7 @@ BASE_URL_FOR_CANONICAL_MAIN = YOUR_SITE_BASE_URL
 MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None)
 DAILY_TWEET_LIMIT = int(os.getenv('DAILY_TWEET_LIMIT', '3'))
 MAX_AGE_FOR_SOCIAL_POST_HOURS = int(os.getenv('MAX_AGE_FOR_SOCIAL_POST_HOURS', '24'))
-MAX_ARTICLES_TO_PROCESS_PER_RUN = int(os.getenv('MAX_ARTICLES_TO_PROCESS_PER_RUN', '5')) # Limit full processing for dev/cost
+MAX_ARTICLES_TO_PROCESS_PER_RUN = int(os.getenv('MAX_ARTICLES_TO_PROCESS_PER_RUN', '5')) 
 
 
 # --- Setup Logging ---
@@ -161,8 +161,10 @@ def save_json_data(filepath, data_to_save, data_description="data"):
 
 def get_article_universal_id(article_url_or_identifier_string):
     if not article_url_or_identifier_string:
+        # Fallback if truly no identifier - should be rare with Gyro having its own ID
         return hashlib.sha256(str(time.time()).encode('utf-8')).hexdigest()
-    return hashlib.sha256(article_url_or_identifier_string.encode('utf-8')).hexdigest()
+    return hashlib.sha256(str(article_url_or_identifier_string).encode('utf-8')).hexdigest()
+
 
 def get_sort_key_for_all_articles(item):
     fallback = datetime(1970, 1, 1, tzinfo=timezone.utc); iso_str = item.get('published_iso')
@@ -185,15 +187,12 @@ def _read_tweet_tracker():
         logger.error(f"Error reading Twitter tracker: {e}. Resetting count for {today_utc_str}.")
         return today_utc_str, 0
 
-# _write_tweet_tracker is now primarily called by social_media_poster.py upon successful tweet.
-# main.py just reads to decide if a Twitter post should be ATTEMPTED.
-
 def slugify_filename(text_to_slugify):
     if not text_to_slugify: return "untitled-slug"
     s = str(text_to_slugify).strip().lower()
-    s = re.sub(r'[^\w\s-]', '', s)
-    s = re.sub(r'[-\s]+', '-', s)
-    return s[:75]
+    s = re.sub(r'[^\w\s-]', '', s) # Remove non-alphanumeric, non-space, non-hyphen
+    s = re.sub(r'[-\s]+', '-', s) # Replace spaces and multiple hyphens with single hyphen
+    return s[:75] # Truncate
 
 def format_tags_html_main(tags_list): 
     if not tags_list: return ""
@@ -201,9 +200,9 @@ def format_tags_html_main(tags_list):
         links = []; base = YOUR_SITE_BASE_URL 
         for tag_item in tags_list:
             tag_str = str(tag_item) if tag_item is not None else "untagged"
-            safe_tag = quote(tag_str)
-            url = urljoin(base, f"topic.html?name={safe_tag}")
-            links.append(f'<a href="{url}" class="tag-link">{html.escape(tag_str)}</a>')
+            safe_tag = quote(slugify_filename(tag_str)) # Slugify for URL, then quote
+            url = urljoin(base, f"topic.html?name={safe_tag}") # Use slugified tag for name param
+            links.append(f'<a href="{url}" class="tag-link">{html.escape(tag_str)}</a>') # Display original tag
         return ", ".join(links)
     except Exception as e:
         logger.error(f"Error formatting tags HTML (main): {tags_list} - {e}")
@@ -211,10 +210,29 @@ def format_tags_html_main(tags_list):
 
 def process_final_markdown_to_html_main(markdown_text):
     if not markdown_text: return ""
+    
+    # Custom link processing MUST happen BEFORE markdown.markdown()
+    # Convert custom internal article links: [[Text | articles/slug.html]]
+    markdown_text = re.sub(r'\[\[\s*(.*?)\s*\|\s*(articles\/.*?\.html)\s*\]\]', 
+                           r'<a href="/\2" class="internal-link">\1</a>', 
+                           markdown_text)
+    # Convert custom internal topic links: [[Text | Topic Name]] (slugify Topic Name for URL)
+    markdown_text = re.sub(r'\[\[\s*(.*?)\s*\|\s*([^\]]*?)\s*\]\]', 
+                           lambda m: f'<a href="/topic.html?name={quote(slugify_filename(m.group(2).strip()))}" class="internal-link">{m.group(1).strip()}</a>', 
+                           markdown_text)
+    # Convert custom internal topic links (short form, no pipe): [[Topic Name Only]]
+    markdown_text = re.sub(r'\[\[\s*([^\]|]+?)\s*\]\]', 
+                           lambda m: f'<a href="/topic.html?name={quote(slugify_filename(m.group(1).strip()))}" class="internal-link">{m.group(1).strip()}</a>', 
+                           markdown_text)
+    # Convert custom external links: ((Text | URL))
+    markdown_text = re.sub(r'\(\(\s*(.*?)\s*\|\s*(https?://.*?)\s*\)\)', 
+                           r'<a href="\2" class="external-link" target="_blank" rel="noopener noreferrer">\1</a>', 
+                           markdown_text)
+
     html_content = markdown.markdown(markdown_text, extensions=['fenced_code', 'tables', 'nl2br', 'sane_lists', 'extra', 'attr_list'])
     return html.unescape(html_content)
 
-def render_html_page_main(template_name, template_vars, output_dir, output_filename_base): # Renamed
+def render_html_page_main(template_name, template_vars, output_dir, output_filename_base):
     """Generic HTML page renderer, used by main."""
     try:
         template = jinja_env_main.get_template(template_name)
@@ -235,11 +253,13 @@ def update_master_article_list_json(article_summary_data):
         logger.error("Cannot update all_articles.json: Invalid or missing article summary data/ID.")
         return
 
-    all_articles = load_json_data(ALL_ARTICLES_FILE, "all_articles_summary")
-    if all_articles is None: all_articles_list = []
-    elif isinstance(all_articles, dict) and 'articles' in all_articles and isinstance(all_articles['articles'], list):
-        all_articles_list = all_articles['articles']
-    else: logger.warning(f"Format of {ALL_ARTICLES_FILE} unexpected. Starting new list."); all_articles_list = []
+    all_articles_data_envelope = load_json_data(ALL_ARTICLES_FILE, "all_articles_summary")
+    all_articles_list = []
+    if all_articles_data_envelope and isinstance(all_articles_data_envelope, dict) and 'articles' in all_articles_data_envelope and isinstance(all_articles_data_envelope['articles'], list):
+        all_articles_list = all_articles_data_envelope['articles']
+    elif all_articles_data_envelope is not None: # File exists but is malformed
+        logger.warning(f"Format of {ALL_ARTICLES_FILE} unexpected or empty. Starting new list.")
+    # If file doesn't exist or is empty, all_articles_list remains []
 
     article_id_to_update = article_summary_data['id']
     all_articles_list = [art for art in all_articles_list if isinstance(art,dict) and art.get('id') != article_id_to_update]
@@ -267,7 +287,6 @@ if __name__ == "__main__":
 
     social_media_clients = initialize_social_clients()
     
-    # --- Stage 0: HTML Regeneration for Existing Content ---
     logger.info("--- Stage 0: Checking/Regenerating HTML for existing processed articles & digests ---")
     all_existing_processed_files = glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json'))
     html_regen_count_articles = 0
@@ -277,30 +296,35 @@ if __name__ == "__main__":
             if not article_data_for_regen or not article_data_for_regen.get('id') or not article_data_for_regen.get('slug'):
                  logger.warning(f"Skipping HTML regen for {os.path.basename(proc_json_file)}: missing id/slug or invalid data.")
                  continue
+            
+            seo_results_regen = article_data_for_regen.get('seo_agent_results')
+            if not isinstance(seo_results_regen, dict): seo_results_regen = {} 
+
             stored_template_hash = article_data_for_regen.get('post_template_hash')
             html_file_path_check = os.path.join(OUTPUT_HTML_DIR, f"{article_data_for_regen['slug']}.html")
+            
             if not os.path.exists(html_file_path_check) or stored_template_hash != current_post_template_hash_main:
-                # Re-populate all necessary template variables from article_data_for_regen
-                # This is similar to the end of the main processing loop
+                logger.info(f"Regenerating HTML for {article_data_for_regen['id']} (Reason: {'missing HTML' if not os.path.exists(html_file_path_check) else 'template changed'}).")
+                
                 template_vars_for_regen = {
-                    'PAGE_TITLE': article_data_for_regen.get('seo_agent_results',{}).get('generated_title_tag', article_data_for_regen.get('final_title','Untitled')),
-                    'META_DESCRIPTION': article_data_for_regen.get('seo_agent_results',{}).get('generated_meta_description', '...'),
+                    'PAGE_TITLE': seo_results_regen.get('generated_title_tag', article_data_for_regen.get('final_title', article_data_for_regen.get('initial_title_from_web', 'Untitled'))),
+                    'META_DESCRIPTION': seo_results_regen.get('generated_meta_description', 'Read the latest AI and tech news from Dacoola.'),
                     'AUTHOR_NAME': article_data_for_regen.get('author', AUTHOR_NAME_DEFAULT),
                     'META_KEYWORDS_LIST': article_data_for_regen.get('final_keywords', []),
                     'CANONICAL_URL': urljoin(YOUR_SITE_BASE_URL, f"articles/{article_data_for_regen['slug']}.html".lstrip('/')),
                     'SITE_NAME': YOUR_WEBSITE_NAME,
                     'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
                     'IMAGE_URL': article_data_for_regen.get('selected_image_url', ''),
-                    'IMAGE_ALT_TEXT': article_data_for_regen.get('final_featured_image_alt_text', article_data_for_regen.get('final_title','Image')),
-                    'PUBLISH_ISO_FOR_META': article_data_for_regen.get('published_iso'),
-                    'JSON_LD_SCRIPT_BLOCK': article_data_for_regen.get('seo_agent_results',{}).get('generated_json_ld_full_script_tag','<script type="application/ld+json">{}</script>'),
-                    'ARTICLE_HEADLINE': article_data_for_regen.get('final_title','Untitled'),
-                    'ARTICLE_SEO_H1': article_data_for_regen.get('final_title','Untitled'),
-                    'PUBLISH_DATE': get_sort_key_for_all_articles(article_data_for_regen).strftime('%B %d, %Y') if article_data_for_regen.get('published_iso') else "N/A",
-                    'ARTICLE_BODY_HTML': process_final_markdown_to_html_main(article_data_for_regen.get('seo_agent_results',{}).get('generated_article_body_md','')),
+                    'IMAGE_ALT_TEXT': article_data_for_regen.get('final_featured_image_alt_text', article_data_for_regen.get('final_title', 'Article Image')),
+                    'PUBLISH_ISO_FOR_META': article_data_for_regen.get('published_iso', datetime.now(timezone.utc).isoformat()),
+                    'JSON_LD_SCRIPT_BLOCK': seo_results_regen.get('generated_json_ld_full_script_tag','<script type="application/ld+json">{}</script>'),
+                    'ARTICLE_HEADLINE': article_data_for_regen.get('final_title', article_data_for_regen.get('initial_title_from_web', 'Untitled')),
+                    'ARTICLE_SEO_H1': article_data_for_regen.get('final_title', article_data_for_regen.get('initial_title_from_web', 'Untitled')),
+                    'PUBLISH_DATE': get_sort_key_for_all_articles(article_data_for_regen).strftime('%B %d, %Y') if article_data_for_regen.get('published_iso') else "Date Not Available",
+                    'ARTICLE_BODY_HTML': process_final_markdown_to_html_main(seo_results_regen.get('generated_article_body_md','')),
                     'ARTICLE_TAGS_HTML': format_tags_html_main(article_data_for_regen.get('final_keywords',[])),
                     'SOURCE_ARTICLE_URL': article_data_for_regen.get('original_source_url','#'),
-                    'ARTICLE_TITLE': article_data_for_regen.get('final_title','Untitled'),
+                    'ARTICLE_TITLE': article_data_for_regen.get('final_title', article_data_for_regen.get('initial_title_from_web', 'Untitled')),
                     'id': article_data_for_regen['id'],
                     'CURRENT_ARTICLE_ID': article_data_for_regen['id'],
                     'CURRENT_ARTICLE_TOPIC': article_data_for_regen.get('primary_topic','News'),
@@ -313,64 +337,84 @@ if __name__ == "__main__":
                     html_regen_count_articles +=1
     logger.info(f"Article HTML Regeneration complete. Regenerated/Verified {html_regen_count_articles} files.")
     
-    # --- Stage 1: Web Research ---
+    # --- Stage 1: Running Web Research Agent (if not using RSS scraper primarily) ---
     logger.info("--- Stage 1: Running Web Research Agent ---")
     topics_for_research = [ 
         "latest breakthroughs in AI model architectures", "NVIDIA AI hardware news", "OpenAI new products",
         "Google DeepMind advancements", "AI ethics and regulation", "Robotics and AI"
     ]
-    raw_articles_from_web = run_web_research_agent(topics_for_research)
+    raw_articles_from_web = run_web_research_agent(topics_for_research) # This will be the primary source of new articles
     if raw_articles_from_web:
         logger.info(f"Web Research Agent found {len(raw_articles_from_web)} raw articles.")
-        raw_research_output_path = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"web_research_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
-        save_json_data(raw_research_output_path, raw_articles_from_web, "raw web research output")
-    else: logger.info("Web Research Agent found no new articles.")
+        # Optional: Save the direct output of web_research_agent if needed for debugging its specific findings
+        # raw_research_output_path = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"web_research_output_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+        # save_json_data(raw_research_output_path, raw_articles_from_web, "raw web research agent output")
+    else: 
+        logger.info("Web Research Agent found no new articles.")
 
+    # Combine with Gyro Picks
     gyro_pick_files = glob.glob(os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, "gyro-*.json"))
     if gyro_pick_files:
         logger.info(f"Found {len(gyro_pick_files)} raw Gyro Pick files to process.")
-        for gyro_file in gyro_pick_files:
-            gyro_data = load_json_data(gyro_file, "raw gyro pick")
-            if gyro_data: raw_articles_from_web.append(gyro_data)
-            else: logger.warning(f"Could not load gyro pick file: {gyro_file}")
+        for gyro_file_path in gyro_pick_files: # Changed variable name
+            gyro_data = load_json_data(gyro_file_path, "raw gyro pick")
+            if gyro_data: 
+                # Ensure gyro_data has the necessary top-level keys expected by the pipeline
+                # based on web_research_agent's output structure, or adapt mapping.
+                # Example: web_research returns 'url', gyro pick uses 'original_source_url'.
+                # For now, assume gyro_data structure is mostly compatible.
+                raw_articles_from_web.append(gyro_data) 
+            else: 
+                logger.warning(f"Could not load gyro pick file: {gyro_file_path}")
     
     successfully_processed_articles_this_run = []
     social_media_queue_this_run = []
     historical_embeddings = load_historical_embeddings()
     site_content_graph_data = load_site_content_graph() 
 
-    logger.info(f"--- Starting main processing pipeline for {len(raw_articles_from_web)} total raw articles (Web + Gyro) ---")
+    logger.info(f"--- Starting main processing pipeline for {len(raw_articles_from_web)} total raw items (Web Research + Gyro) ---")
     processed_in_run_count = 0
     for raw_article_input in raw_articles_from_web:
         if processed_in_run_count >= MAX_ARTICLES_TO_PROCESS_PER_RUN:
-            logger.info(f"Reached MAX_ARTICLES_TO_PROCESS_PER_RUN ({MAX_ARTICLES_TO_PROCESS_PER_RUN}). Stopping further processing in this cycle.")
+            logger.info(f"Reached MAX_ARTICLES_TO_PROCESS_PER_RUN ({MAX_ARTICLES_TO_PROCESS_PER_RUN}). Stopping further processing.")
             break
 
-        article_id_source_key = raw_article_input.get('id') 
-        if not article_id_source_key and 'url' in raw_article_input : 
-            article_id_source_key = raw_article_input['url']
-        elif not article_id_source_key and 'initial_title_from_web' in raw_article_input: 
-             article_id_source_key = raw_article_input['initial_title_from_web']
-
+        # Determine a consistent source key for ID generation
+        # Gyro picks have a specific 'id' field which is `gyro-<timestamp>-<hash>`
+        # Web research items typically use their 'url' as the primary unique identifier.
+        article_id_source_key = raw_article_input.get('id') # Gyro picks will have this
+        if not article_id_source_key: # If not a Gyro pick, use its URL (from web_research_agent)
+            article_id_source_key = raw_article_input.get('url') 
+        
+        if not article_id_source_key: # Fallback if somehow both are missing
+            logger.warning(f"Raw article input missing 'id' (for Gyro) and 'url' (for Web). Skipping. Data: {str(raw_article_input)[:200]}")
+            continue
+            
         current_article_id_str = get_article_universal_id(article_id_source_key)
-        logger.info(f"--- Processing Article ID: {current_article_id_str} (Source Key: {article_id_source_key}) ---")
+        
+        # <<< NEW LOGGING >>>
+        logger.info(f"MAIN.PY STARTING PIPELINE FOR RAW INPUT: url={raw_article_input.get('original_source_url', raw_article_input.get('url', 'N/A'))}, gyro={raw_article_input.get('is_gyro_pick', False)}, RAW_TITLE: {raw_article_input.get('initial_title_from_web', raw_article_input.get('title','N/A'))}")
+        
+        logger.info(f"--- Processing Article ID: {current_article_id_str} (Source Key: {str(article_id_source_key)[:60]}) ---")
 
         processed_json_path = os.path.join(PROCESSED_JSON_DIR, f"{current_article_id_str}.json")
         if os.path.exists(processed_json_path):
             logger.info(f"Article {current_article_id_str} already has a final processed JSON. Skipping full pipeline.")
-            raw_file_to_remove_path = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json") if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id') else None
-            if raw_file_to_remove_path and os.path.exists(raw_file_to_remove_path): # Check path existence
-                 try: os.remove(raw_file_to_remove_path); logger.debug(f"Removed already-processed raw file: {raw_file_to_remove_path}")
-                 except Exception as e_rem: logger.warning(f"Could not remove raw file {raw_file_to_remove_path}: {e_rem}")
+            # If it's a gyro pick and its raw file exists, remove it as it's now "processed" (or found to be already processed)
+            if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'):
+                raw_gyro_file_to_remove = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json")
+                if os.path.exists(raw_gyro_file_to_remove):
+                    try: os.remove(raw_gyro_file_to_remove); logger.debug(f"Removed already-processed raw Gyro file: {raw_gyro_file_to_remove}")
+                    except Exception as e_rem: logger.warning(f"Could not remove raw Gyro file {raw_gyro_file_to_remove}: {e_rem}")
             continue
 
         article_pipeline_data = {
             'id': current_article_id_str,
-            'original_source_url': raw_article_input.get('url', raw_article_input.get('original_source_url')),
-            'initial_title_from_web': raw_article_input.get('title', raw_article_input.get('initial_title_from_web')),
-            'raw_scraped_text': raw_article_input.get('scraped_text', raw_article_input.get('raw_scraped_text')),
+            'original_source_url': raw_article_input.get('url', raw_article_input.get('original_source_url')), # Web uses 'url', Gyro 'original_source_url'
+            'initial_title_from_web': raw_article_input.get('title', raw_article_input.get('initial_title_from_web')), # Web uses 'title', Gyro 'initial_title_from_web'
+            'raw_scraped_text': raw_article_input.get('scraped_text', raw_article_input.get('raw_scraped_text')), # Web uses 'scraped_text', Gyro 'raw_scraped_text'
             'research_topic': raw_article_input.get('research_topic'), 
-            'published_iso': raw_article_input.get('published_iso', raw_article_input.get('retrieved_at', datetime.now(timezone.utc).isoformat())),
+            'published_iso': raw_article_input.get('retrieved_at', raw_article_input.get('published_iso', datetime.now(timezone.utc).isoformat())), # Web uses 'retrieved_at'
             'pipeline_status': 'started',
             'is_gyro_pick': raw_article_input.get('is_gyro_pick', False),
             'gyro_pick_mode': raw_article_input.get('gyro_pick_mode'),
@@ -379,56 +423,80 @@ if __name__ == "__main__":
             'selected_image_url': raw_article_input.get('selected_image_url'), 
             'author': raw_article_input.get('author', AUTHOR_NAME_DEFAULT) 
         }
+        # <<< NEW LOGGING >>>
+        logger.info(f"MAIN.PY PIPELINE_DATA_INIT for ID {article_pipeline_data.get('id')}: Title='{article_pipeline_data.get('initial_title_from_web')}', Gyro={article_pipeline_data.get('is_gyro_pick')}, TextLen={len(str(article_pipeline_data.get('raw_scraped_text')))}")
+
 
         article_pipeline_data = run_filter_enrich_agent(article_pipeline_data)
+        # <<< NEW LOGGING >>>
+        logger.info(f"MAIN.PY POST_FILTER_ENRICH for ID {article_pipeline_data.get('id')}: Importance='{article_pipeline_data.get('importance_level')}', Summary='{str(article_pipeline_data.get('processed_summary'))[:50]}', Passed={article_pipeline_data.get('filter_passed')}")
+
         if not article_pipeline_data.get('filter_passed', False):
             logger.info(f"Skipping {current_article_id_str}: Failed filter/enrichment. Reason: {article_pipeline_data.get('filter_reason')}")
+            if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'): # Clean up failed Gyro raw file
+                raw_gyro_file_to_remove = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json")
+                if os.path.exists(raw_gyro_file_to_remove):
+                    try: os.remove(raw_gyro_file_to_remove); logger.debug(f"Removed failed Gyro raw file: {raw_gyro_file_to_remove}")
+                    except: pass
             continue
 
         article_pipeline_data = run_deduplication_agent(article_pipeline_data, historical_embeddings)
         if article_pipeline_data.get('is_duplicate', False):
             logger.info(f"Skipping {current_article_id_str}: Duplicate of {article_pipeline_data.get('similar_article_id')}.")
+            if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'): # Clean up duplicate Gyro raw file
+                raw_gyro_file_to_remove = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json")
+                if os.path.exists(raw_gyro_file_to_remove):
+                    try: os.remove(raw_gyro_file_to_remove); logger.debug(f"Removed duplicate Gyro raw file: {raw_gyro_file_to_remove}")
+                    except: pass
             continue
         
         article_pipeline_data = run_keyword_intelligence_agent(article_pipeline_data)
         
         article_pipeline_data = run_seo_writing_agent(article_pipeline_data)
+        # <<< NEW LOGGING >>>
+        seo_res_check_main = article_pipeline_data.get('seo_agent_results', {})
+        logger.info(f"MAIN.PY POST_SEO_WRITER for ID {article_pipeline_data.get('id')}: H1='{seo_res_check_main.get('generated_seo_h1')}', MD_Body_Len={len(str(seo_res_check_main.get('generated_article_body_md')))}")
+
         if not article_pipeline_data.get('seo_agent_results', {}).get('generated_article_body_md'):
             logger.error(f"Skipping {current_article_id_str}: SEO Writing Agent failed. Status: {article_pipeline_data.get('seo_agent_status')}")
+            if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'): # Clean up failed Gyro raw file
+                raw_gyro_file_to_remove = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json")
+                if os.path.exists(raw_gyro_file_to_remove):
+                    try: os.remove(raw_gyro_file_to_remove); logger.debug(f"Removed failed (SEO) Gyro raw file: {raw_gyro_file_to_remove}")
+                    except: pass
             continue
         
         article_pipeline_data = run_vision_media_agent(article_pipeline_data)
         article_pipeline_data = run_image_integration_agent(article_pipeline_data)
-        article_pipeline_data = run_knowledge_graph_agent(article_pipeline_data, site_content_graph_data)
+        article_pipeline_data = run_knowledge_graph_agent(article_pipeline_data, site_content_graph_data) # site_content_graph_data comes from load_site_content_graph()
         
-        # Prepare template variables for render_html_page_main
-        final_render_vars = {
-            'PAGE_TITLE': article_pipeline_data.get('seo_agent_results',{}).get('generated_title_tag', article_pipeline_data.get('final_title','Untitled')),
-            'META_DESCRIPTION': article_pipeline_data.get('seo_agent_results',{}).get('generated_meta_description', '...'),
+        final_render_vars_main = {
+            'PAGE_TITLE': article_pipeline_data.get('seo_agent_results',{}).get('generated_title_tag', article_pipeline_data.get('final_title','Untitled Article')),
+            'META_DESCRIPTION': article_pipeline_data.get('seo_agent_results',{}).get('generated_meta_description', 'Default description...'),
             'AUTHOR_NAME': article_pipeline_data.get('author', AUTHOR_NAME_DEFAULT),
             'META_KEYWORDS_LIST': article_pipeline_data.get('final_keywords', []),
             'CANONICAL_URL': urljoin(YOUR_SITE_BASE_URL, f"articles/{article_pipeline_data['slug']}.html".lstrip('/')),
             'SITE_NAME': YOUR_WEBSITE_NAME,
             'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
             'IMAGE_URL': article_pipeline_data.get('selected_image_url', ''),
-            'IMAGE_ALT_TEXT': article_pipeline_data.get('final_featured_image_alt_text', article_pipeline_data.get('final_title','Image')),
+            'IMAGE_ALT_TEXT': article_pipeline_data.get('final_featured_image_alt_text', article_pipeline_data.get('final_title','Article Image')),
             'PUBLISH_ISO_FOR_META': article_pipeline_data.get('published_iso'),
             'JSON_LD_SCRIPT_BLOCK': article_pipeline_data.get('seo_agent_results',{}).get('generated_json_ld_full_script_tag','<script type="application/ld+json">{}</script>'),
-            'ARTICLE_HEADLINE': article_pipeline_data.get('final_title','Untitled'),
-            'ARTICLE_SEO_H1': article_pipeline_data.get('final_title','Untitled'),
-            'PUBLISH_DATE': get_sort_key_for_all_articles(article_pipeline_data).strftime('%B %d, %Y') if article_pipeline_data.get('published_iso') else "N/A",
+            'ARTICLE_HEADLINE': article_pipeline_data.get('final_title','Untitled Article'),
+            'ARTICLE_SEO_H1': article_pipeline_data.get('final_title','Untitled Article'),
+            'PUBLISH_DATE': get_sort_key_for_all_articles(article_pipeline_data).strftime('%B %d, %Y') if article_pipeline_data.get('published_iso') else "Date Not Available",
             'ARTICLE_BODY_HTML': process_final_markdown_to_html_main(article_pipeline_data.get('seo_agent_results',{}).get('generated_article_body_md','')),
             'ARTICLE_TAGS_HTML': format_tags_html_main(article_pipeline_data.get('final_keywords',[])),
             'SOURCE_ARTICLE_URL': article_pipeline_data.get('original_source_url','#'),
-            'ARTICLE_TITLE': article_pipeline_data.get('final_title','Untitled'),
+            'ARTICLE_TITLE': article_pipeline_data.get('final_title','Untitled Article'),
             'id': current_article_id_str,
             'CURRENT_ARTICLE_ID': current_article_id_str,
             'CURRENT_ARTICLE_TOPIC': article_pipeline_data.get('primary_topic','News'),
             'CURRENT_ARTICLE_TAGS_JSON': json.dumps(article_pipeline_data.get('final_keywords',[])),
-            'AUDIO_URL': article_pipeline_data.get('generated_audio_url')
+            'AUDIO_URL': article_pipeline_data.get('generated_audio_url') 
         }
-        if not render_html_page_main('post_template.html', final_render_vars, OUTPUT_HTML_DIR, article_pipeline_data['slug']):
-            logger.error(f"Failed to render final HTML for {current_article_id_str}. Skipping further processing.")
+        if not render_html_page_main('post_template.html', final_render_vars_main, OUTPUT_HTML_DIR, article_pipeline_data['slug']):
+            logger.error(f"Failed to render final HTML for {current_article_id_str}. Skipping further processing for this item.")
             continue
         
         article_pipeline_data['post_template_hash'] = current_post_template_hash_main
@@ -437,11 +505,11 @@ if __name__ == "__main__":
         summary_for_master = {
             "id": current_article_id_str, "title": article_pipeline_data['final_title'],
             "link": f"articles/{article_pipeline_data['slug']}.html", "published_iso": article_pipeline_data['published_iso'],
-            "summary_short": article_pipeline_data.get('seo_agent_results', {}).get('generated_meta_description', article_pipeline_data.get('processed_summary','')),
+            "summary_short": (article_pipeline_data.get('seo_agent_results') if isinstance(article_pipeline_data.get('seo_agent_results'), dict) else {}).get('generated_meta_description', article_pipeline_data.get('processed_summary','')),
             "image_url": article_pipeline_data.get('selected_image_url'), "topic": article_pipeline_data.get('primary_topic', 'News'),
             "is_breaking": article_pipeline_data.get('importance_level') == "Breaking",
             "is_trending_pick": article_pipeline_data.get('user_is_trending_pick_gyro', False),
-            "tags": article_pipeline_data.get('final_keywords', []), "audio_url": None, "trend_score": 0
+            "tags": article_pipeline_data.get('final_keywords', []), "audio_url": None, "trend_score": 0 # trend_score placeholder
         }
         update_master_article_list_json(summary_for_master)
         
@@ -454,52 +522,59 @@ if __name__ == "__main__":
         social_media_queue_this_run.append(social_payload)
         successfully_processed_articles_this_run.append(article_pipeline_data)
         
-        if article_pipeline_data.get('is_gyro_pick'): # Gyro raw files are named by their ID
-            raw_file_to_remove_path_gyro = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{article_pipeline_data.get('id')}.json")
-            if os.path.exists(raw_file_to_remove_path_gyro):
-                try: os.remove(raw_file_to_remove_path_gyro); logger.info(f"Removed processed raw Gyro pick file: {raw_file_to_remove_path_gyro}")
-                except OSError as e: logger.warning(f"Could not remove raw Gyro pick file {raw_file_to_remove_path_gyro}: {e}")
+        if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'):
+            raw_gyro_file_to_remove = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json")
+            if os.path.exists(raw_gyro_file_to_remove):
+                try: os.remove(raw_gyro_file_to_remove); logger.info(f"Removed processed raw Gyro file: {raw_gyro_file_to_remove}")
+                except OSError as e_rem: logger.warning(f"Could not remove raw Gyro file {raw_gyro_file_to_remove}: {e_rem}")
         
         processed_in_run_count += 1
         logger.info(f"--- Successfully processed Article ID: {current_article_id_str} through all stages ---")
-
+            
     save_historical_embeddings(historical_embeddings)
 
-    # --- Stage 9: Trending Digest Agent ---
     logger.info("--- Stage 9: Running Trending Digest Agent ---")
     all_site_articles_for_digest = load_json_data(ALL_ARTICLES_FILE, "all_articles_for_digest").get('articles', [])
-    digest_pages_generated_data = run_trending_digest_agent(raw_articles_from_web, all_site_articles_for_digest) # Pass original raw for trend analysis
+    digest_pages_generated_data = run_trending_digest_agent(raw_articles_from_web, all_site_articles_for_digest)
 
     if digest_pages_generated_data:
         logger.info(f"Trending Digest Agent produced {len(digest_pages_generated_data)} digest pages. Rendering them...")
-        for digest_item_data in digest_pages_generated_data:
-            # Prepare template variables for digest pages
+        for digest_data_item in digest_pages_generated_data:
             digest_template_vars = {
-                'PAGE_TITLE': digest_item_data.get('page_title'),
-                'META_DESCRIPTION': digest_item_data.get('meta_description'),
-                'META_KEYWORDS_LIST': digest_item_data.get('theme_source_keywords', []),
-                'CANONICAL_URL': urljoin(YOUR_SITE_BASE_URL, f"digests/{digest_item_data['slug']}.html".lstrip('/')),
+                'PAGE_TITLE': digest_data_item.get('page_title'),
+                'META_DESCRIPTION': digest_data_item.get('meta_description'),
+                'META_KEYWORDS_LIST': digest_data_item.get('theme_source_keywords', []),
+                'CANONICAL_URL': urljoin(YOUR_SITE_BASE_URL, f"digests/{digest_data_item['slug']}.html".lstrip('/')),
                 'SITE_NAME': YOUR_WEBSITE_NAME,
                 'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
                 'FAVICON_URL': os.getenv('YOUR_FAVICON_URL', 'https://i.ibb.co/W7xMqdT/dacoola-image-logo.png'),
                 'OG_IMAGE_URL': os.getenv('DEFAULT_OG_IMAGE_FOR_DIGESTS', YOUR_WEBSITE_LOGO_URL),
                 'PUBLISH_ISO_FOR_META': datetime.now(timezone.utc).isoformat(),
-                'JSON_LD_SCRIPT_TAG': digest_item_data.get('json_ld_script_tag', ''),
-                'INTRODUCTION_HTML': process_final_markdown_to_html_main(digest_item_data.get('introduction_md','')),
-                'SELECTED_ARTICLES': digest_item_data.get('selected_articles', [])
+                'JSON_LD_SCRIPT_TAG': digest_data_item.get('json_ld_script_tag', ''),
+                'INTRODUCTION_HTML': process_final_markdown_to_html_main(digest_data_item.get('introduction_md','')),
+                'SELECTED_ARTICLES': digest_data_item.get('selected_articles', [])
             }
-            render_html_page_main('digest_page_template.html', digest_template_vars, DIGEST_OUTPUT_HTML_DIR, digest_item_data['slug'])
+            render_html_page_main('digest_page_template.html', digest_template_vars, DIGEST_OUTPUT_HTML_DIR, digest_data_item['slug'])
     else:
         logger.info("Trending Digest Agent produced no digest pages this run.")
 
     # --- Stage 10: Social Media Posting ---
     social_post_history = load_social_post_history()
     already_posted_social_ids_set = set(social_post_history.get('posted_articles', []))
-    final_queue_for_social_posting = [p for p in social_media_queue_this_run if p['id'] not in already_posted_social_ids_set]
-    for pid_current_run in (p['id'] for p in final_queue_for_social_posting): already_posted_social_ids_set.add(pid_current_run)
+    
+    # Start with articles processed successfully *in this specific run*
+    final_queue_for_social_posting = [
+        p for p in social_media_queue_this_run 
+        if p['id'] not in already_posted_social_ids_set
+    ]
+    # Add their IDs to the set to avoid re-queueing them from historical check
+    for p in final_queue_for_social_posting:
+        already_posted_social_ids_set.add(p['id'])
 
+    # Then, check older (historically) processed articles that haven't been posted yet
     now_utc = datetime.now(timezone.utc)
     social_cutoff_time = now_utc - timedelta(hours=MAX_AGE_FOR_SOCIAL_POST_HOURS)
+    
     for processed_file_path in glob.glob(os.path.join(PROCESSED_JSON_DIR, '*.json')):
         hist_article_id = os.path.basename(processed_file_path).replace('.json','')
         if hist_article_id not in already_posted_social_ids_set:
@@ -507,36 +582,51 @@ if __name__ == "__main__":
             if hist_data and hist_data.get('published_iso') and hist_data.get('slug'):
                 try:
                     if get_sort_key_for_all_articles(hist_data) >= social_cutoff_time:
+                        seo_res_hist = hist_data.get('seo_agent_results') if isinstance(hist_data.get('seo_agent_results'), dict) else {}
                         hist_payload = {
-                            "id": hist_data['id'], "title": hist_data.get('final_title', 'Article'),
+                            "id": hist_data['id'], 
+                            "title": hist_data.get('final_title', 'Article'),
                             "article_url": urljoin(YOUR_SITE_BASE_URL, f"articles/{hist_data['slug']}.html".lstrip('/')),
-                            "image_url": hist_data.get('selected_image_url'), "topic": hist_data.get('primary_topic'),
+                            "image_url": hist_data.get('selected_image_url'), 
+                            "topic": hist_data.get('primary_topic'),
                             "tags": hist_data.get('final_keywords', []),
-                            "summary_short": hist_data.get('seo_agent_results',{}).get('generated_meta_description','')
+                            "summary_short": seo_res_hist.get('generated_meta_description','')
                         }
                         final_queue_for_social_posting.append(hist_payload)
-                        already_posted_social_ids_set.add(hist_data['id']) # Add to set after queuing
+                        already_posted_social_ids_set.add(hist_data['id']) 
                 except Exception as e: logger.warning(f"Error queueing hist article {hist_article_id}: {e}")
     
     if final_queue_for_social_posting:
         logger.info(f"--- Stage 10: Attempting {len(final_queue_for_social_posting)} posts to Social Media ---")
-        # Sort by actual publish_iso from their full data, not just summary
-        def get_true_publish_date_for_social_sort(payload):
-            article_id_lookup = payload.get('id')
+        def get_true_publish_date_for_social_sort(payload_item):
+            article_id_lookup = payload_item.get('id')
             if not article_id_lookup: return datetime(1970, 1, 1, tzinfo=timezone.utc)
             
-            # Check if it's from the current run's fully processed data
+            # Check if it was processed in *this* run first
             data_for_sort = next((art for art in successfully_processed_articles_this_run if art.get('id') == article_id_lookup), None)
-            if not data_for_sort: # If not, load its full processed JSON
+            if not data_for_sort: # If not, load its processed JSON
                 data_for_sort = load_json_data(os.path.join(PROCESSED_JSON_DIR, f"{article_id_lookup}.json"))
-            return get_sort_key_for_all_articles(data_for_sort or {}) # Pass the full data dict
+            return get_sort_key_for_all_articles(data_for_sort or {})
         
         final_queue_for_social_posting.sort(key=get_true_publish_date_for_social_sort, reverse=True)
 
         for item_to_post in final_queue_for_social_posting:
-            run_social_media_poster(item_to_post, social_media_clients)
+            platforms_to_attempt_final = ["bluesky", "reddit"] # Default platforms
+            if social_media_clients.get("twitter_client"):
+                current_run_date_str_twitter, posts_today_twitter = _read_tweet_tracker()
+                today_utc_str_twitter = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+                if current_run_date_str_twitter != today_utc_str_twitter: posts_today_twitter = 0
+                
+                if posts_today_twitter < DAILY_TWEET_LIMIT:
+                    platforms_to_attempt_final.append("twitter")
+                else:
+                    logger.info(f"Daily Twitter limit reached. Twitter SKIPPED for social post ID: {item_to_post.get('id')}")
+
+            # run_social_media_poster now handles marking as posted internally
+            run_social_media_poster(item_to_post, social_media_clients, tuple(platforms_to_attempt_final))
             time.sleep(10) 
-    else: logger.info("No articles for social media this run.")
+    else: 
+        logger.info("No articles queued for social media posting this run.")
 
 
     # --- Stage 11: Generate Sitemap ---

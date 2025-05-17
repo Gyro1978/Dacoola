@@ -39,5 +39,5 @@
     "audio_url": null,
     "tts_agent_error": "Trigger failed: HTTP Error (403) calling TTS Create API: {\"detail\":\"You are not allowed to use this voice_id.\"}",
     "slug": "ai-code-hallucinations-increase-the-risk-of-package-confusion-attacks",
-    "post_template_hash": "7a34e3dba5945832e6f4e2288e1bdc5a445c645dd5f7ce6e39751b31c2a668db"
+    "post_template_hash": "c3831ae59bdf615c6cf491b278dcca53d254b448a7420510b50d004bb9072292"
 }
