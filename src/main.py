@@ -1,4 +1,4 @@
-# src/main.py (Orchestrator - Fully Integrated with All Agents - Corrected with logging)
+# src/main.py (1/1)
 
 # --- !! Path Setup - Must be at the very top !! ---
 import sys
@@ -161,7 +161,6 @@ def save_json_data(filepath, data_to_save, data_description="data"):
 
 def get_article_universal_id(article_url_or_identifier_string):
     if not article_url_or_identifier_string:
-        # Fallback if truly no identifier - should be rare with Gyro having its own ID
         return hashlib.sha256(str(time.time()).encode('utf-8')).hexdigest()
     return hashlib.sha256(str(article_url_or_identifier_string).encode('utf-8')).hexdigest()
 
@@ -179,21 +178,20 @@ def _read_tweet_tracker():
     today_utc_str = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     default_data = {'date': today_utc_str, 'count': 0}
     try:
-        os.makedirs(os.path.dirname(TWITTER_DAILY_LIMIT_FILE), exist_ok=True) # Ensure directory exists
+        os.makedirs(os.path.dirname(TWITTER_DAILY_LIMIT_FILE), exist_ok=True) 
         if os.path.exists(TWITTER_DAILY_LIMIT_FILE):
             with open(TWITTER_DAILY_LIMIT_FILE, 'r', encoding='utf-8') as f: 
                 data = json.load(f)
             if data.get('date') == today_utc_str:
                 return data['date'], data.get('count', 0)
         
-        # If file doesn't exist, or date is old, create/overwrite it with default
         with open(TWITTER_DAILY_LIMIT_FILE, 'w', encoding='utf-8') as f:
             json.dump(default_data, f, indent=2)
         logger.info(f"Initialized/reset Twitter tracker for {today_utc_str} at {TWITTER_DAILY_LIMIT_FILE}.")
         return today_utc_str, 0
     except Exception as e:
         logger.error(f"Error R/W Twitter tracker: {e}. Resetting count for {today_utc_str}.")
-        try: # Try to write default even on error
+        try: 
             with open(TWITTER_DAILY_LIMIT_FILE, 'w', encoding='utf-8') as f:
                 json.dump(default_data, f, indent=2)
         except Exception as e_write:
@@ -213,10 +211,10 @@ def format_tags_html_main(tags_list):
         links = []; base = YOUR_SITE_BASE_URL 
         for tag_item in tags_list:
             tag_str = str(tag_item) if tag_item is not None else "untagged"
-            safe_tag_slug = slugify_filename(tag_str) # Slugify for URL consistency
+            safe_tag_slug = slugify_filename(tag_str) 
             quoted_slug = quote(safe_tag_slug)
             url = urljoin(base, f"topic.html?name={quoted_slug}") 
-            links.append(f'<a href="{url}" class="tag-link">{html.escape(tag_str)}</a>') # Display original tag text
+            links.append(f'<a href="{url}" class="tag-link">{html.escape(tag_str)}</a>')
         return ", ".join(links)
     except Exception as e:
         logger.error(f"Error formatting tags HTML (main): {tags_list} - {e}")
@@ -225,20 +223,15 @@ def format_tags_html_main(tags_list):
 def process_final_markdown_to_html_main(markdown_text):
     if not markdown_text: return ""
     
-    # Custom link processing MUST happen BEFORE markdown.markdown()
-    # Convert custom internal article links: [[Text | articles/slug.html]]
     markdown_text = re.sub(r'\[\[\s*(.*?)\s*\|\s*(articles\/.*?\.html)\s*\]\]', 
                            r'<a href="/\2" class="internal-link">\1</a>', 
                            markdown_text)
-    # Convert custom internal topic links: [[Text | Topic Name]] (slugify Topic Name for URL)
     markdown_text = re.sub(r'\[\[\s*(.*?)\s*\|\s*([^\]]+?)\s*\]\]', 
                            lambda m: f'<a href="/topic.html?name={quote(slugify_filename(m.group(2).strip()))}" class="internal-link">{m.group(1).strip()}</a>', 
                            markdown_text)
-    # Convert custom internal topic links (short form, no pipe): [[Topic Name Only]]
     markdown_text = re.sub(r'\[\[\s*([^\]|]+?)\s*\]\]', 
                            lambda m: f'<a href="/topic.html?name={quote(slugify_filename(m.group(1).strip()))}" class="internal-link">{m.group(1).strip()}</a>', 
                            markdown_text)
-    # Convert custom external links: ((Text | URL))
     markdown_text = re.sub(r'\(\(\s*(.*?)\s*\|\s*(https?://.*?)\s*\)\)', 
                            r'<a href="\2" class="external-link" target="_blank" rel="noopener noreferrer">\1</a>', 
                            markdown_text)
@@ -248,7 +241,6 @@ def process_final_markdown_to_html_main(markdown_text):
 
 
 def render_html_page_main(template_name, template_vars, output_dir, output_filename_base):
-    """Generic HTML page renderer, used by main."""
     try:
         template = jinja_env_main.get_template(template_name)
         html_page_content = template.render(template_vars)
@@ -311,8 +303,12 @@ if __name__ == "__main__":
                  logger.warning(f"Skipping HTML regen for {os.path.basename(proc_json_file)}: missing id/slug or invalid data.")
                  continue
             
-            seo_results_regen = article_data_for_regen.get('seo_agent_results')
-            if not isinstance(seo_results_regen, dict): seo_results_regen = {} 
+            # Ensure seo_results_regen is a dict, default to empty if not found or wrong type
+            seo_results_regen = article_data_for_regen.get('seo_agent_results', {})
+            if not isinstance(seo_results_regen, dict): 
+                logger.warning(f"seo_agent_results for {article_data_for_regen.get('id')} is not a dict. Using empty for regen. Value: {seo_results_regen}")
+                seo_results_regen = {}
+
 
             stored_template_hash = article_data_for_regen.get('post_template_hash')
             html_file_path_check = os.path.join(OUTPUT_HTML_DIR, f"{article_data_for_regen['slug']}.html")
@@ -352,10 +348,8 @@ if __name__ == "__main__":
     logger.info(f"Article HTML Regeneration complete. Regenerated/Verified {html_regen_count_articles} files.")
     
     # --- Stage 1: Web Research / Gyro Picks ---
-    raw_articles_from_web = [] # Initialize empty list
-    # Web Research (Optional, can be primary source if no Gyro Picks)
-    # To disable, comment out or set topics_for_research to empty list
-    run_web_research = True # Set to False to disable Web Research Agent
+    raw_articles_from_web = [] 
+    run_web_research = True 
     if run_web_research:
         logger.info("--- Stage 1a: Running Web Research Agent ---")
         topics_for_research = [ 
@@ -371,8 +365,6 @@ if __name__ == "__main__":
     else:
         logger.info("Skipping Web Research Agent based on configuration.")
 
-
-    # Process Gyro Picks
     gyro_pick_files = glob.glob(os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, "gyro-*.json"))
     if gyro_pick_files:
         logger.info(f"--- Stage 1b: Processing {len(gyro_pick_files)} raw Gyro Pick files ---")
@@ -438,7 +430,6 @@ if __name__ == "__main__":
         
         logger.info(f"MAIN.PY PIPELINE_DATA_INIT for ID {article_pipeline_data.get('id')}: Title='{article_pipeline_data.get('initial_title_from_web')}', Gyro={article_pipeline_data.get('is_gyro_pick')}, TextLen={len(str(article_pipeline_data.get('raw_scraped_text')))}")
 
-
         article_pipeline_data = run_filter_enrich_agent(article_pipeline_data)
         logger.info(f"MAIN.PY POST_FILTER_ENRICH for ID {article_pipeline_data.get('id')}: Importance='{article_pipeline_data.get('importance_level')}', Summary='{str(article_pipeline_data.get('processed_summary'))[:50]}', Passed={article_pipeline_data.get('filter_passed')}")
 
@@ -464,11 +455,11 @@ if __name__ == "__main__":
         article_pipeline_data = run_keyword_intelligence_agent(article_pipeline_data)
         
         article_pipeline_data = run_seo_writing_agent(article_pipeline_data)
-        seo_res_check_main = article_pipeline_data.get('seo_agent_results', {})
+        # Default to empty dict if seo_agent_results is None to prevent AttributeError
+        seo_res_check_main = article_pipeline_data.get('seo_agent_results', {}) 
         logger.info(f"MAIN.PY POST_SEO_WRITER for ID {article_pipeline_data.get('id')}: H1='{seo_res_check_main.get('generated_seo_h1')}', MD_Body_Len={len(str(seo_res_check_main.get('generated_article_body_md')))}")
 
-
-        if not article_pipeline_data.get('seo_agent_results', {}).get('generated_article_body_md'):
+        if not seo_res_check_main.get('generated_article_body_md'):
             logger.error(f"Skipping {current_article_id_str}: SEO Writing Agent failed. Status: {article_pipeline_data.get('seo_agent_status')}")
             if raw_article_input.get('is_gyro_pick') and raw_article_input.get('id'): 
                 raw_gyro_file_to_remove = os.path.join(RAW_WEB_RESEARCH_OUTPUT_DIR, f"{raw_article_input.get('id')}.json")
@@ -481,9 +472,11 @@ if __name__ == "__main__":
         article_pipeline_data = run_image_integration_agent(article_pipeline_data)
         article_pipeline_data = run_knowledge_graph_agent(article_pipeline_data, site_content_graph_data) 
         
+        # Default to empty dict for seo_agent_results in template vars as well
+        seo_agent_results_for_template = article_pipeline_data.get('seo_agent_results',{})
         final_render_vars_main = {
-            'PAGE_TITLE': article_pipeline_data.get('seo_agent_results',{}).get('generated_title_tag', article_pipeline_data.get('final_title','Untitled Article')),
-            'META_DESCRIPTION': article_pipeline_data.get('seo_agent_results',{}).get('generated_meta_description', 'Default description...'),
+            'PAGE_TITLE': seo_agent_results_for_template.get('generated_title_tag', article_pipeline_data.get('final_title','Untitled Article')),
+            'META_DESCRIPTION': seo_agent_results_for_template.get('generated_meta_description', 'Default description...'),
             'AUTHOR_NAME': article_pipeline_data.get('author', AUTHOR_NAME_DEFAULT),
             'META_KEYWORDS_LIST': article_pipeline_data.get('final_keywords', []),
             'CANONICAL_URL': urljoin(YOUR_SITE_BASE_URL, f"articles/{article_pipeline_data['slug']}.html".lstrip('/')),
@@ -492,11 +485,11 @@ if __name__ == "__main__":
             'IMAGE_URL': article_pipeline_data.get('selected_image_url', ''),
             'IMAGE_ALT_TEXT': article_pipeline_data.get('final_featured_image_alt_text', article_pipeline_data.get('final_title','Article Image')),
             'PUBLISH_ISO_FOR_META': article_pipeline_data.get('published_iso'),
-            'JSON_LD_SCRIPT_BLOCK': article_pipeline_data.get('seo_agent_results',{}).get('generated_json_ld_full_script_tag','<script type="application/ld+json">{}</script>'),
+            'JSON_LD_SCRIPT_BLOCK': seo_agent_results_for_template.get('generated_json_ld_full_script_tag','<script type="application/ld+json">{}</script>'),
             'ARTICLE_HEADLINE': article_pipeline_data.get('final_title','Untitled Article'),
             'ARTICLE_SEO_H1': article_pipeline_data.get('final_title','Untitled Article'),
             'PUBLISH_DATE': get_sort_key_for_all_articles(article_pipeline_data).strftime('%B %d, %Y') if article_pipeline_data.get('published_iso') else "Date Not Available",
-            'ARTICLE_BODY_HTML': process_final_markdown_to_html_main(article_pipeline_data.get('seo_agent_results',{}).get('generated_article_body_md','')),
+            'ARTICLE_BODY_HTML': process_final_markdown_to_html_main(seo_agent_results_for_template.get('generated_article_body_md','')),
             'ARTICLE_TAGS_HTML': format_tags_html_main(article_pipeline_data.get('final_keywords',[])),
             'SOURCE_ARTICLE_URL': article_pipeline_data.get('original_source_url','#'),
             'ARTICLE_TITLE': article_pipeline_data.get('final_title','Untitled Article'),
@@ -516,7 +509,7 @@ if __name__ == "__main__":
         summary_for_master = {
             "id": current_article_id_str, "title": article_pipeline_data['final_title'],
             "link": f"articles/{article_pipeline_data['slug']}.html", "published_iso": article_pipeline_data['published_iso'],
-            "summary_short": (article_pipeline_data.get('seo_agent_results') if isinstance(article_pipeline_data.get('seo_agent_results'), dict) else {}).get('generated_meta_description', article_pipeline_data.get('processed_summary','')),
+            "summary_short": seo_agent_results_for_template.get('generated_meta_description', article_pipeline_data.get('processed_summary','')), # Use seo_agent_results_for_template
             "image_url": article_pipeline_data.get('selected_image_url'), "topic": article_pipeline_data.get('primary_topic', 'News'),
             "is_breaking": article_pipeline_data.get('importance_level') == "Breaking",
             "is_trending_pick": article_pipeline_data.get('user_is_trending_pick_gyro', False),
@@ -545,12 +538,13 @@ if __name__ == "__main__":
     save_historical_embeddings(historical_embeddings)
 
     logger.info("--- Stage 9: Running Trending Digest Agent ---")
-    all_site_articles_for_digest = load_json_data(ALL_ARTICLES_FILE, "all_articles_for_digest")
-    # Ensure all_site_articles_for_digest is a list, even if file was empty or malformed
-    if not isinstance(all_site_articles_for_digest, dict) or not isinstance(all_site_articles_for_digest.get('articles'), list):
-        all_site_articles_for_digest = [] 
-    else:
-        all_site_articles_for_digest = all_site_articles_for_digest.get('articles',[])
+    all_site_articles_for_digest_envelope = load_json_data(ALL_ARTICLES_FILE, "all_articles_for_digest")
+    all_site_articles_for_digest = []
+    if isinstance(all_site_articles_for_digest_envelope, dict) and isinstance(all_site_articles_for_digest_envelope.get('articles'), list):
+        all_site_articles_for_digest = all_site_articles_for_digest_envelope.get('articles',[])
+    elif all_site_articles_for_digest_envelope is not None:
+        logger.warning(f"Format of {ALL_ARTICLES_FILE} for digest unexpected. Using empty list.")
+
 
     digest_pages_generated_data = run_trending_digest_agent(raw_articles_from_web, all_site_articles_for_digest)
 
@@ -565,7 +559,7 @@ if __name__ == "__main__":
                 'CANONICAL_URL': urljoin(YOUR_SITE_BASE_URL, f"digests/{digest_data_item['slug']}.html".lstrip('/')),
                 'SITE_NAME': YOUR_WEBSITE_NAME,
                 'YOUR_WEBSITE_LOGO_URL': YOUR_WEBSITE_LOGO_URL,
-                'FAVICON_URL': os.getenv('YOUR_FAVICON_URL', 'https://i.ibb.co/W7xMqdT/dacoola-image-logo.png'), # Keep default if not set
+                'FAVICON_URL': os.getenv('YOUR_FAVICON_URL', 'https://i.ibb.co/W7xMqdT/dacoola-image-logo.png'), 
                 'OG_IMAGE_URL': os.getenv('DEFAULT_OG_IMAGE_FOR_DIGESTS', YOUR_WEBSITE_LOGO_URL),
                 'PUBLISH_ISO_FOR_META': datetime.now(timezone.utc).isoformat(),
                 'JSON_LD_SCRIPT_TAG': digest_data_item.get('json_ld_script_tag', ''),
@@ -584,7 +578,7 @@ if __name__ == "__main__":
         p for p in social_media_queue_this_run 
         if p['id'] not in already_posted_social_ids_set
     ]
-    for p in final_queue_for_social_posting: # Mark current run's items as "to be posted"
+    for p in final_queue_for_social_posting: 
         already_posted_social_ids_set.add(p['id'])
 
     now_utc = datetime.now(timezone.utc)
@@ -597,7 +591,9 @@ if __name__ == "__main__":
             if hist_data and hist_data.get('published_iso') and hist_data.get('slug'):
                 try:
                     if get_sort_key_for_all_articles(hist_data) >= social_cutoff_time:
-                        seo_res_hist = hist_data.get('seo_agent_results') if isinstance(hist_data.get('seo_agent_results'), dict) else {}
+                        seo_res_hist = hist_data.get('seo_agent_results',{}) # Default to empty dict
+                        if not isinstance(seo_res_hist, dict): seo_res_hist = {} # Ensure it's a dict
+
                         hist_payload = {
                             "id": hist_data['id'], 
                             "title": hist_data.get('final_title', 'Article'),
@@ -636,12 +632,10 @@ if __name__ == "__main__":
                 else:
                     logger.info(f"Daily Twitter limit reached. Twitter SKIPPED for social post ID: {item_to_post.get('id')}")
 
-            # run_social_media_poster should handle marking as posted
             run_social_media_poster(item_to_post, social_media_clients, tuple(platforms_to_attempt_final))
             time.sleep(10) 
     else: 
         logger.info("No articles queued for social media posting this run.")
-
 
     # --- Stage 11: Generate Sitemap ---
     logger.info("--- Stage 11: Generating Sitemap ---")

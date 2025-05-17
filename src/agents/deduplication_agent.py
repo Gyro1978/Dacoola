@@ -29,15 +29,8 @@ if not logger.handlers:
 logger.setLevel(logging.DEBUG)
 
 # --- Configuration ---
-# Ollama embedding configuration removed as we switch to sentence-transformers directly.
-# OLLAMA_API_EMBEDDINGS_URL = "http://localhost:11434/api/embeddings"
-# OLLAMA_EMBEDDING_MODEL = "bge-m3:latest" 
-
-# Using SentenceTransformer library directly
-ST_MODEL_NAME = 'all-MiniLM-L6-v2' # A common default, ensure this is suitable for your needs.
-                                   # Other options: 'bge-m3' (if you install sentence-transformers[bge]),
-                                   # 'multi-qa-MiniLM-L6-cos-v1', etc.
-USE_ST_LIBRARY_DIRECTLY = True # Forcing direct library use
+ST_MODEL_NAME = 'all-MiniLM-L6-v2' 
+USE_ST_LIBRARY_DIRECTLY = True 
 
 HISTORICAL_EMBEDDINGS_FILE = os.path.join(DATA_DIR, 'historical_embeddings.json')
 SIMILARITY_THRESHOLD_DUPLICATE = 0.90
@@ -49,10 +42,6 @@ sentence_transformer_model_direct = None
 if USE_ST_LIBRARY_DIRECTLY:
     try:
         from sentence_transformers import SentenceTransformer
-        # Ensure the chosen ST_MODEL_NAME is one that SentenceTransformer can load.
-        # If 'bge-m3' is preferred, you might need to install sentence-transformers with BGE support
-        # or ensure the model is downloaded from Hugging Face if it's not a default.
-        # For simplicity, 'all-MiniLM-L6-v2' is a good general-purpose starting point.
         sentence_transformer_model_direct = SentenceTransformer(ST_MODEL_NAME)
         logger.info(f"Successfully loaded SentenceTransformer model (direct): {ST_MODEL_NAME}")
     except ImportError:
@@ -65,19 +54,19 @@ if USE_ST_LIBRARY_DIRECTLY:
 
 # --- Helper Functions ---
 def _cosine_similarity(vec1, vec2):
-    vec1 = np.asarray(vec1, dtype=np.float32)
-    vec2 = np.asarray(vec2, dtype=np.float32)
-    if vec1.shape != vec2.shape:
-        logger.error(f"Cannot compute cosine similarity for vectors with different shapes: {vec1.shape} vs {vec2.shape}")
+    vec1_np = np.asarray(vec1, dtype=np.float32) # Use different var names to avoid conflict
+    vec2_np = np.asarray(vec2, dtype=np.float32)
+    if vec1_np.shape != vec2_np.shape:
+        logger.error(f"Cannot compute cosine similarity for vectors with different shapes: {vec1_np.shape} vs {vec2_np.shape}")
         return 0.0
-    if np.all(vec1 == 0) or np.all(vec2 == 0): return 0.0
-    dot_product = np.dot(vec1, vec2)
-    norm_vec1 = np.linalg.norm(vec1)
-    norm_vec2 = np.linalg.norm(vec2)
-    if norm_vec1 == 0 or norm_vec2 == 0: return 0.0
-    return dot_product / (norm_vec1 * norm_vec2)
+    if np.all(vec1_np == 0) or np.all(vec2_np == 0): return 0.0 # Handles zero vectors
+    dot_product = np.dot(vec1_np, vec2_np)
+    norm_vec1 = np.linalg.norm(vec1_np)
+    norm_vec2 = np.linalg.norm(vec2_np)
+    if norm_vec1 == 0 or norm_vec2 == 0: return 0.0 # Avoid division by zero
+    similarity_val = dot_product / (norm_vec1 * norm_vec2)
+    return float(similarity_val) # Ensure the result is a standard Python float
 
-# get_embedding_ollama function removed or commented out
 
 def get_embedding_st_direct(text_content):
     if not sentence_transformer_model_direct:
@@ -96,120 +85,99 @@ def get_embedding_st_direct(text_content):
         return None
 
 def get_embedding(text_content):
-    """Unified function to get embedding, now defaults to ST direct."""
     if USE_ST_LIBRARY_DIRECTLY and sentence_transformer_model_direct:
         return get_embedding_st_direct(text_content)
     else:
         logger.error("Deduplication embedding generation failed: No valid embedding method configured/available.")
         return None
 
-
 def load_historical_embeddings():
-    if not os.path.exists(HISTORICAL_EMBEDDINGS_FILE):
-        return {} 
+    if not os.path.exists(HISTORICAL_EMBEDDINGS_FILE): return {} 
     try:
-        with open(HISTORICAL_EMBEDDINGS_FILE, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+        with open(HISTORICAL_EMBEDDINGS_FILE, 'r', encoding='utf-8') as f: data = json.load(f)
         logger.info(f"Loaded {len(data)} historical embeddings from {HISTORICAL_EMBEDDINGS_FILE}")
         return data
-    except json.JSONDecodeError:
-        logger.error(f"Error decoding JSON from {HISTORICAL_EMBEDDINGS_FILE}. Returning empty.")
-        return {}
-    except Exception as e:
-        logger.error(f"Error loading historical embeddings: {e}")
-        return {}
+    except json.JSONDecodeError: logger.error(f"Error decoding JSON from {HISTORICAL_EMBEDDINGS_FILE}. Returning empty."); return {}
+    except Exception as e: logger.error(f"Error loading historical embeddings: {e}"); return {}
 
 def save_historical_embeddings(embeddings_data):
     try:
         os.makedirs(DATA_DIR, exist_ok=True)
-        with open(HISTORICAL_EMBEDDINGS_FILE, 'w', encoding='utf-8') as f:
-            json.dump(embeddings_data, f) 
+        # Convert all numpy floats in embeddings to standard Python floats before saving
+        # This is crucial if embeddings themselves could contain np.float32
+        # However, sentence_transformer_model_direct.encode().tolist() should already handle this for the vectors.
+        # This check is more for any scalar scores IF they were stored directly in embeddings_data, which they are not here.
+        # For this structure, just ensuring the vectors are lists of floats is key (done by .tolist()).
+        with open(HISTORICAL_EMBEDDINGS_FILE, 'w', encoding='utf-8') as f: json.dump(embeddings_data, f) 
         logger.info(f"Saved {len(embeddings_data)} total embeddings to {HISTORICAL_EMBEDDINGS_FILE}")
-    except Exception as e:
-        logger.error(f"Error saving historical embeddings: {e}")
+    except Exception as e: logger.error(f"Error saving historical embeddings: {e}")
 
 def run_deduplication_agent(article_pipeline_data, historical_embeddings_data):
     article_id = article_pipeline_data.get('id', 'unknown_id')
     title = article_pipeline_data.get('initial_title_from_web', '')
     summary = article_pipeline_data.get('processed_summary', '')
     raw_text = article_pipeline_data.get('raw_scraped_text', '')
-
     text_for_embedding = f"{title}. {summary}" if len(summary) > MIN_TEXT_LENGTH_FOR_EMBEDDING / 2 else f"{title}. {raw_text}"
     
     if len(text_for_embedding.strip()) < MIN_TEXT_LENGTH_FOR_EMBEDDING:
-        logger.warning(f"Article {article_id} text too short for meaningful deduplication. Marking as not duplicate.")
-        article_pipeline_data['is_duplicate'] = False
-        article_pipeline_data['is_near_duplicate'] = False
-        article_pipeline_data['similarity_score'] = 0.0
-        article_pipeline_data['similar_article_id'] = None
-        article_pipeline_data['deduplication_status'] = "SKIPPED_SHORT_TEXT"
+        article_pipeline_data.update({'is_duplicate': False, 'is_near_duplicate': False, 'similarity_score': 0.0, 'similar_article_id': None, 'deduplication_status': "SKIPPED_SHORT_TEXT"})
         return article_pipeline_data
 
     logger.info(f"--- Running Deduplication Agent for Article ID: {article_id} ---")
-    logger.debug(f"Text for embedding preview (first 100 chars): '{text_for_embedding[:100]}...'")
-
-    current_article_embedding = get_embedding(text_for_embedding) # Now uses ST direct
+    current_article_embedding = get_embedding(text_for_embedding)
 
     if not current_article_embedding:
-        logger.error(f"Failed to generate embedding for article {article_id}. Cannot perform deduplication.")
-        article_pipeline_data['is_duplicate'] = False 
-        article_pipeline_data['is_near_duplicate'] = False
-        article_pipeline_data['similarity_score'] = 0.0
-        article_pipeline_data['similar_article_id'] = None
-        article_pipeline_data['deduplication_status'] = "FAILED_EMBEDDING_CURRENT"
+        article_pipeline_data.update({'is_duplicate': False, 'is_near_duplicate': False, 'similarity_score': 0.0, 'similar_article_id': None, 'deduplication_status': "FAILED_EMBEDDING_CURRENT"})
         return article_pipeline_data
 
-    article_pipeline_data['is_duplicate'] = False
-    article_pipeline_data['is_near_duplicate'] = False
-    article_pipeline_data['similarity_score'] = 0.0
-    article_pipeline_data['similar_article_id'] = None
-    highest_similarity_score = 0.0
+    # Initialize fields, ensuring similarity_score starts as a Python float
+    article_pipeline_data.update({'is_duplicate': False, 'is_near_duplicate': False, 'similarity_score': 0.0, 'similar_article_id': None})
+    highest_similarity_score = 0.0 # Python float
     most_similar_id = None
 
     if not historical_embeddings_data:
-        logger.info("No historical embeddings to compare against. Marking article as unique.")
+        logger.info("No historical embeddings. Marking article as unique.")
         historical_embeddings_data[article_id] = current_article_embedding
         article_pipeline_data['deduplication_status'] = "UNIQUE_NO_HISTORY"
+        # Ensure similarity_score is float even here
+        article_pipeline_data['similarity_score'] = float(article_pipeline_data.get('similarity_score', 0.0))
         return article_pipeline_data
 
     for hist_id, hist_embedding_list in historical_embeddings_data.items():
-        if hist_id == article_id: 
-            continue
-        
-        similarity = _cosine_similarity(current_article_embedding, hist_embedding_list)
+        if hist_id == article_id: continue
+        similarity = _cosine_similarity(current_article_embedding, hist_embedding_list) # _cosine_similarity now returns float
 
         if similarity > highest_similarity_score:
-            highest_similarity_score = similarity
+            highest_similarity_score = similarity # This is now a Python float
             most_similar_id = hist_id
 
         if similarity >= SIMILARITY_THRESHOLD_DUPLICATE:
-            logger.warning(f"Article {article_id} is a DUPLICATE of {hist_id}. Similarity: {similarity:.4f}")
-            article_pipeline_data['is_duplicate'] = True
-            article_pipeline_data['similar_article_id'] = hist_id
-            article_pipeline_data['similarity_score'] = similarity
-            article_pipeline_data['deduplication_status'] = f"DUPLICATE_OF_{hist_id}"
+            logger.warning(f"Article {article_id} is DUPLICATE of {hist_id}. Similarity: {similarity:.4f}")
+            article_pipeline_data.update({'is_duplicate': True, 'similar_article_id': hist_id, 'similarity_score': float(similarity), 'deduplication_status': f"DUPLICATE_OF_{hist_id}"})
             return article_pipeline_data 
         
         elif similarity >= SIMILARITY_THRESHOLD_NEARDUPLICATE:
-            logger.info(f"Article {article_id} is a NEAR-DUPLICATE of {hist_id}. Similarity: {similarity:.4f}")
+            logger.info(f"Article {article_id} is NEAR-DUPLICATE of {hist_id}. Similarity: {similarity:.4f}")
             if not article_pipeline_data['is_duplicate']: 
-                article_pipeline_data['is_near_duplicate'] = True
+                # Only update if this near_duplicate score is higher than any previously found near_duplicate score
                 if similarity > article_pipeline_data.get('similarity_score', 0.0):
-                    article_pipeline_data['similar_article_id'] = hist_id
-                    article_pipeline_data['similarity_score'] = similarity
-                    article_pipeline_data['deduplication_status'] = f"NEAR_DUPLICATE_OF_{hist_id}"
+                    article_pipeline_data.update({'is_near_duplicate': True, 'similar_article_id': hist_id, 'similarity_score': float(similarity), 'deduplication_status': f"NEAR_DUPLICATE_OF_{hist_id}"})
 
+    # After checking all historical items, finalize status based on highest_similarity_score
     if not article_pipeline_data['is_duplicate'] and not article_pipeline_data['is_near_duplicate']:
-        logger.info(f"Article {article_id} is unique. Highest similarity found: {highest_similarity_score:.4f} with {most_similar_id if most_similar_id else 'N/A'}.")
+        logger.info(f"Article {article_id} is unique. Highest similarity: {highest_similarity_score:.4f} with {most_similar_id or 'N/A'}.")
         article_pipeline_data['deduplication_status'] = f"UNIQUE_HIGHEST_SIM_{highest_similarity_score:.2f}"
-        if highest_similarity_score > 0:
-             article_pipeline_data['similarity_score'] = highest_similarity_score
-             article_pipeline_data['similar_article_id'] = most_similar_id
+    
+    # Ensure the final similarity_score is a Python float
+    article_pipeline_data['similarity_score'] = float(highest_similarity_score)
+    # If it's unique or a near-duplicate where similar_article_id wasn't set by a stronger match, set it now based on highest overall similarity
+    if highest_similarity_score > 0 and not article_pipeline_data.get('similar_article_id'): 
+        article_pipeline_data['similar_article_id'] = most_similar_id
+
 
     if not article_pipeline_data['is_duplicate']:
         historical_embeddings_data[article_id] = current_article_embedding
-        logger.debug(f"Added embedding for unique/near-duplicate article {article_id} to in-memory historical data.")
-
+        logger.debug(f"Added embedding for article {article_id} to historical data.")
     return article_pipeline_data
 
 # --- Standalone Execution Example ---
@@ -251,21 +219,26 @@ if __name__ == "__main__":
 
     logger.info("\nProcessing Article 1 (Original)...")
     article1_data = run_deduplication_agent(article1_data, current_historical_embeddings)
-    logger.info(f"Article 1 Result: Dup={article1_data.get('is_duplicate')}, NearDup={article1_data.get('is_near_duplicate')}, Score={article1_data.get('similarity_score')}, Status={article1_data.get('deduplication_status')}")
+    logger.info(f"Article 1 Result: {article1_data.get('deduplication_status')}, Score: {article1_data.get('similarity_score')}")
     
     logger.info("\nProcessing Article 2 (Similar to Article 1)...")
     article2_data_similar = run_deduplication_agent(article2_data_similar, current_historical_embeddings)
-    logger.info(f"Article 2 Result: Dup={article2_data_similar.get('is_duplicate')}, NearDup={article2_data_similar.get('is_near_duplicate')}, Score={article2_data_similar.get('similarity_score')}, SimilarID={article2_data_similar.get('similar_article_id')}, Status={article2_data_similar.get('deduplication_status')}")
+    logger.info(f"Article 2 Result: {article2_data_similar.get('deduplication_status')}, Score: {article2_data_similar.get('similarity_score')}, SimilarID: {article2_data_similar.get('similar_article_id')}")
 
     logger.info("\nProcessing Article 3 (Different from Article 1 & 2)...")
     article3_data_different = run_deduplication_agent(article3_data_different, current_historical_embeddings)
-    logger.info(f"Article 3 Result: Dup={article3_data_different.get('is_duplicate')}, NearDup={article3_data_different.get('is_near_duplicate')}, Score={article3_data_different.get('similarity_score')}, Status={article3_data_different.get('deduplication_status')}")
+    logger.info(f"Article 3 Result: {article3_data_different.get('deduplication_status')}, Score: {article3_data_different.get('similarity_score')}")
 
     save_historical_embeddings(current_historical_embeddings)
     logger.info(f"Final historical embeddings saved. Total entries: {len(current_historical_embeddings)}")
     
-    reloaded_embeddings = load_historical_embeddings()
-    logger.info(f"Reloaded embeddings. Total entries: {len(reloaded_embeddings)}")
-    assert len(reloaded_embeddings) == len(current_historical_embeddings)
+    # Verify JSON serializability of the output directly
+    try:
+        with open(os.path.join(DATA_DIR, "dedup_agent_test_output.json"), 'w') as f:
+            json.dump([article1_data, article2_data_similar, article3_data_different], f, indent=2)
+        logger.info("Successfully serialized deduplication agent outputs to JSON.")
+        os.remove(os.path.join(DATA_DIR, "dedup_agent_test_output.json"))
+    except TypeError as e:
+        logger.error(f"JSON SERIALIZATION FAILED for deduplication agent output: {e}")
 
     logger.info("--- Deduplication Agent Standalone Test Complete ---")

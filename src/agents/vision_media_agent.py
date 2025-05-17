@@ -6,7 +6,7 @@ import json
 import logging
 import requests 
 import re
-from PIL import Image, UnidentifiedImageError # Ensure UnidentifiedImageError is imported
+from PIL import Image, UnidentifiedImageError 
 import io
 from bs4 import BeautifulSoup
 
@@ -50,17 +50,21 @@ MIN_IMAGE_HEIGHT = 200
 MAX_IMAGE_FILESIZE_BYTES = 2 * 1024 * 1024 
 
 CLIP_MODEL_NAME = 'clip-ViT-B-32'
-CLIP_AVAILABLE = False
-clip_model = None
+CLIP_AVAILABLE = False # Initial status
+clip_model = None 
 try:
     from sentence_transformers import SentenceTransformer
     from sentence_transformers.util import cos_sim
-    CLIP_AVAILABLE = True
-    logger.info(f"SentenceTransformer library available for potential CLIP usage.")
+    # We will attempt to load clip_model on first use in filter_images_with_clip_vlm
+    CLIP_AVAILABLE = True # Mark as potentially available
+    logger.info(f"SentenceTransformer library found, CLIP can be loaded on demand.")
 except ImportError:
     logging.warning("sentence-transformers library not found. CLIP filtering will be disabled.")
+    CLIP_AVAILABLE = False # Explicitly set to false
 except Exception as e:
     logging.error(f"Error importing SentenceTransformer for CLIP: {e}. CLIP filtering disabled.")
+    CLIP_AVAILABLE = False # Explicitly set to false
+
 
 ENABLE_CLIP_FILTERING_CONFIG = True 
 MIN_CLIP_SCORE = 0.23
@@ -73,7 +77,6 @@ IMAGE_SEARCH_PARAMS_IMG = {
 }
 
 
-# --- Helper: Download Image and Convert to Base64 (needed if VLM is used) ---
 def download_image_as_base64_vlm(image_url): 
     if not image_url or not image_url.startswith('http'): return None
     try:
@@ -120,32 +123,33 @@ def download_image_pil(url, attempt=1):
         if img.width < MIN_IMAGE_WIDTH or img.height < MIN_IMAGE_HEIGHT: return None
         if img.mode != 'RGB': img = img.convert('RGB')
         return img
-    except UnidentifiedImageError: # Added specific exception
+    except UnidentifiedImageError: 
          logger.warning(f"Could not identify image file from: {url}")
          return None
     except Exception: return None
 
 
 def filter_images_with_clip_vlm(image_results, text_prompt): 
-    global clip_model 
-    if not ENABLE_CLIP_FILTERING_CONFIG or not CLIP_AVAILABLE:
-        logger.info("CLIP filtering skipped: Disabled or model not available.")
-        for img_data in image_results:
+    global clip_model, CLIP_AVAILABLE # Declare upfront that we might modify global CLIP_AVAILABLE
+
+    if not ENABLE_CLIP_FILTERING_CONFIG or not CLIP_AVAILABLE: # Check initial availability
+        logger.info("CLIP filtering skipped: Disabled by config or SentenceTransformer library not available.")
+        for img_data in image_results: # Fallback
             if img_data.get('url') and download_image_pil(img_data.get('url')): return img_data.get('url')
         return None
 
     if not clip_model: 
         try:
             logger.info(f"Loading CLIP model for filtering: {CLIP_MODEL_NAME}")
-            clip_model = SentenceTransformer(CLIP_MODEL_NAME)
+            clip_model = SentenceTransformer(CLIP_MODEL_NAME) # Attempt to load
         except Exception as e:
             logger.error(f"Failed to load CLIP model ({CLIP_MODEL_NAME}) on demand: {e}. Disabling CLIP for this run.")
-            global CLIP_AVAILABLE # Allow modification of global
-            CLIP_AVAILABLE = False 
-            for img_data in image_results: 
+            CLIP_AVAILABLE = False # Modify global if loading fails
+            for img_data in image_results: # Fallback
                 if img_data.get('url') and download_image_pil(img_data.get('url')): return img_data.get('url')
             return None
-
+    
+    # If model loaded successfully (or was already loaded), proceed
     logger.info(f"CLIP filtering {len(image_results)} candidates for prompt: '{text_prompt}'")
     image_objects, valid_original_urls = [], []
     for img_data in image_results:
@@ -153,7 +157,11 @@ def filter_images_with_clip_vlm(image_results, text_prompt):
         if url:
             pil_image = download_image_pil(url)
             if pil_image: image_objects.append(pil_image); valid_original_urls.append(url)
-    if not image_objects: return image_results[0].get('url') if image_results else None
+    
+    if not image_objects: 
+        logger.warning("No valid images to process with CLIP after download step.")
+        return image_results[0].get('url') if image_results else None # Fallback to first original if any
+
     try:
         image_embeddings = clip_model.encode(image_objects, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
         text_embedding = clip_model.encode([text_prompt], convert_to_tensor=True, show_progress_bar=False)
@@ -161,8 +169,15 @@ def filter_images_with_clip_vlm(image_results, text_prompt):
         scored_images = [{'score': score.item(), 'url': valid_original_urls[i]} for i, score in enumerate(similarities)]
         scored_images.sort(key=lambda x: x['score'], reverse=True)
         best_above_threshold = next((item for item in scored_images if item['score'] >= MIN_CLIP_SCORE), None)
-        if best_above_threshold: return best_above_threshold['url']
-        elif scored_images: return scored_images[0]['url']
+        
+        if best_above_threshold: 
+            logger.info(f"CLIP selected: {best_above_threshold['url']} (Score: {best_above_threshold['score']:.2f})")
+            return best_above_threshold['url']
+        elif scored_images: 
+            logger.warning(f"No image met CLIP threshold {MIN_CLIP_SCORE}. Best score: {scored_images[0]['score']:.2f} for {scored_images[0]['url']}")
+            return scored_images[0]['url'] # Return highest score even if below threshold
+        
+        logger.warning("CLIP: No scored images available.")
         return image_results[0].get('url') if image_results else None
     except Exception as e:
         logger.exception(f"Exception during CLIP processing: {e}")
@@ -185,17 +200,17 @@ def scrape_source_for_image_vlm(article_url):
     except Exception: return None
 
 def search_images_serpapi_vlm(query, num_results=7): 
-    if not SERPAPI_API_KEY_IMG or not GoogleSearch: # Check if GoogleSearch was imported
+    if not SERPAPI_API_KEY_IMG or not GoogleSearch: 
         logger.error("SerpApi key missing or google-search-results library not installed.")
         return None
     params = IMAGE_SEARCH_PARAMS_IMG.copy(); params['q'] = query; params['api_key'] = SERPAPI_API_KEY_IMG
     try:
-        search = GoogleSearch(params); results = search.get_dict() # GoogleSearch used here
-        if 'error' in results: return None
+        search = GoogleSearch(params); results = search.get_dict() 
+        if 'error' in results: logger.error(f"SerpApi error: {results['error']}"); return None
         if results.get('images_results'):
             return [{"url": img.get("original"), "title": img.get("title")} for img in results['images_results'][:num_results] if img.get("original")]
         return []
-    except Exception: return None
+    except Exception as e: logger.exception(f"SerpApi search failed: {e}"); return None
 
 def find_best_image_vlm(search_query, use_clip=ENABLE_CLIP_FILTERING_CONFIG, article_url_for_scrape=None): 
     if not search_query: return None
@@ -205,14 +220,20 @@ def find_best_image_vlm(search_query, use_clip=ENABLE_CLIP_FILTERING_CONFIG, art
         if scraped_image_url and download_image_pil(scraped_image_url):
             logger.info(f"Using valid image directly scraped from source: {scraped_image_url}")
             return scraped_image_url
-    serpapi_results = search_images_serpapi_vlm(search_query)
-    if not serpapi_results: return None
     
-    if use_clip and CLIP_AVAILABLE:
+    serpapi_results = search_images_serpapi_vlm(search_query)
+    if not serpapi_results: 
+        logger.warning(f"No SerpApi results for query '{search_query}'.")
+        return None
+    
+    if use_clip and CLIP_AVAILABLE: # Check CLIP_AVAILABLE again as it might have been set to False
         return filter_images_with_clip_vlm(serpapi_results, search_query)
     else: 
         for res in serpapi_results:
-            if res.get('url') and download_image_pil(res.get('url')): return res.get('url')
+            if res.get('url') and download_image_pil(res.get('url')): 
+                logger.info(f"Using first valid SerpApi result (CLIP disabled/failed): {res.get('url')}")
+                return res.get('url')
+    logger.warning(f"Could not find any valid image for '{search_query}' from SerpApi results.")
     return None
 
 
@@ -226,9 +247,12 @@ def run_vision_media_agent(article_pipeline_data):
     featured_image_search_query = article_pipeline_data.get('initial_title_from_web', 'technology news')
     source_url_for_scrape = article_pipeline_data.get('original_source_url')
     
+    # Check CLIP_AVAILABLE before passing use_clip=True
+    actual_use_clip = ENABLE_CLIP_FILTERING_CONFIG and CLIP_AVAILABLE
+
     best_url_featured = find_best_image_vlm(
         featured_image_search_query, 
-        use_clip=(ENABLE_CLIP_FILTERING_CONFIG and CLIP_AVAILABLE), 
+        use_clip=actual_use_clip, 
         article_url_for_scrape=source_url_for_scrape
     )
 
@@ -256,7 +280,7 @@ def run_vision_media_agent(article_pipeline_data):
         logger.info(f"Finding image for placeholder: '{placeholder_desc[:60]}...'")
         found_image_for_placeholder = find_best_image_vlm(
             placeholder_desc, 
-            use_clip=(ENABLE_CLIP_FILTERING_CONFIG and CLIP_AVAILABLE),
+            use_clip=actual_use_clip, # Use actual_use_clip here too
             article_url_for_scrape=None 
         ) 
         if found_image_for_placeholder and found_image_for_placeholder != article_pipeline_data.get('selected_image_url'):

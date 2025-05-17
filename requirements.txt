@@ -34,3 +34,4 @@ textstat
 
 # If not using Google Ads API for keywords:
 # google-ads # REMOVE if not used
+htmldate
