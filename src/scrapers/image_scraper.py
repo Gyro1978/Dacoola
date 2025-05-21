@@ -19,22 +19,6 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 # --- End Path Setup ---
 
-# --- CLIP Integration ---
-CLIP_MODEL_NAME = 'clip-ViT-B-32'
-CLIP_AVAILABLE = False
-clip_model = None
-try:
-    from sentence_transformers import SentenceTransformer
-    from sentence_transformers.util import cos_sim 
-    # clip_model will be loaded on first use in filter_images_with_clip
-    CLIP_AVAILABLE = True # Mark as potentially available
-    logging.info(f"SentenceTransformer library found. CLIP model '{CLIP_MODEL_NAME}' can be loaded on demand.")
-except ImportError:
-    logging.warning("sentence-transformers library not found. CLIP filtering will be disabled.")
-except Exception as e:
-    logging.error(f"Error importing SentenceTransformer for CLIP: {e}. CLIP filtering disabled.")
-# --- End CLIP Integration ---
-
 # --- Load Environment Variables ---
 dotenv_path = os.path.join(PROJECT_ROOT, '.env')
 load_dotenv(dotenv_path=dotenv_path)
@@ -46,13 +30,11 @@ IMAGE_SEARCH_PARAMS = {
     "engine": "google_images", "ijn": "0", "safe": "active",
     "tbs": "isz:l,itp:photo,iar:w", 
 }
-ENABLE_CLIP_FILTERING = CLIP_AVAILABLE 
 IMAGE_DOWNLOAD_TIMEOUT = 20 
 IMAGE_DOWNLOAD_RETRIES = 2
 IMAGE_RETRY_DELAY = 3 
 MIN_IMAGE_WIDTH = 400  
 MIN_IMAGE_HEIGHT = 250 
-MIN_CLIP_SCORE = 0.23 
 MIN_IMAGE_FILESIZE_BYTES_FOR_VALIDATION = 1024 * 5 # 5KB, very small images are likely icons/errors
 
 # --- Setup Logging ---
@@ -112,73 +94,6 @@ def download_image(url, attempt=1):
     except Exception as e:
         logger.error(f"Error processing image {url}: {e}", exc_info=True) # Added exc_info for more detail
         return None
-
-def filter_images_with_clip(image_results, text_prompt):
-    global clip_model # Allow modification of the global model instance
-
-    if not ENABLE_CLIP_FILTERING or not CLIP_AVAILABLE:
-        logger.info("CLIP filtering skipped: Disabled by config or SentenceTransformer library not available.")
-        # Fallback: return first downloadable image from results
-        for img_data in image_results:
-            if img_data.get('url') and download_image(img_data.get('url')):
-                return img_data.get('url')
-        return None
-
-    if not clip_model:
-        try:
-            logger.info(f"Loading CLIP model for filtering: {CLIP_MODEL_NAME}")
-            clip_model = SentenceTransformer(CLIP_MODEL_NAME)
-        except Exception as e:
-            logger.error(f"Failed to load CLIP model ({CLIP_MODEL_NAME}) on demand: {e}. CLIP disabled for this call.")
-            # Fallback to first downloadable image if CLIP load fails
-            for img_data in image_results:
-                if img_data.get('url') and download_image(img_data.get('url')):
-                    return img_data.get('url')
-            return None
-    
-    logger.info(f"CLIP filtering {len(image_results)} candidates for prompt: '{text_prompt}'")
-    image_objects, valid_original_urls = [], []
-    for img_data in image_results:
-        url = img_data.get('url')
-        if url:
-            pil_image = download_image(url) 
-            if pil_image:
-                image_objects.append(pil_image); valid_original_urls.append(url)
-            else: logger.debug(f"Skipping image for CLIP (download/validation failed): {url}")
-
-    if not image_objects:
-        logger.warning("No images suitable for CLIP analysis after download/validation.")
-        return image_results[0].get('url') if image_results and download_image(image_results[0].get('url')) else None
-
-    try:
-        logger.debug(f"Encoding {len(image_objects)} images and text prompt with CLIP...")
-        image_embeddings = clip_model.encode(image_objects, batch_size=8, convert_to_tensor=True, show_progress_bar=False) 
-        text_embedding = clip_model.encode([text_prompt], convert_to_tensor=True, show_progress_bar=False)
-        similarities = cos_sim(text_embedding, image_embeddings)[0]
-
-        scored_images = [{'score': score.item(), 'url': valid_original_urls[i]} for i, score in enumerate(similarities)]
-        scored_images.sort(key=lambda x: x['score'], reverse=True) 
-
-        for i, item in enumerate(scored_images[:3]):
-            logger.debug(f"CLIP Candidate {i+1}: {item['url']}, Score: {item['score']:.4f}")
-
-        best_above_threshold = next((item for item in scored_images if item['score'] >= MIN_CLIP_SCORE), None)
-
-        if best_above_threshold:
-            logger.info(f"CLIP selected best image above threshold: {best_above_threshold['url']} (Score: {best_above_threshold['score']:.4f})")
-            return best_above_threshold['url']
-        elif scored_images: 
-            logger.warning(f"No images met MIN_CLIP_SCORE ({MIN_CLIP_SCORE}). Taking highest overall: {scored_images[0]['url']} (Score: {scored_images[0]['score']:.4f})")
-            return scored_images[0]['url']
-        else: 
-            logger.error("Critical CLIP error: No similarities or images processed. Using first original result if valid.")
-            return image_results[0].get('url') if image_results and download_image(image_results[0].get('url')) else None
-
-    except Exception as e:
-        logger.exception(f"Exception during CLIP processing: {e}")
-        if valid_original_urls: return valid_original_urls[0]
-        return image_results[0].get('url') if image_results and download_image(image_results[0].get('url')) else None
-
 
 def scrape_source_for_image(article_url):
     if not article_url or not article_url.startswith('http'):
@@ -266,54 +181,53 @@ def search_images_serpapi(query, num_results=7):
         logger.warning(f"No image results via SerpApi for '{query}'"); return []
     except Exception as e: logger.exception(f"SerpApi image search exception for '{query}': {e}"); return None
 
-def find_best_image(search_query, use_clip=ENABLE_CLIP_FILTERING, article_url_for_scrape=None):
-    if not search_query: logger.error("Cannot find image: search_query is empty."); return None
-    logger.info(f"Finding best image for query: '{search_query}' (CLIP: {use_clip and CLIP_AVAILABLE})")
+def find_best_image(search_query, article_url_for_scrape=None):
+    if not search_query:
+        logger.error("Cannot find image: search_query is empty.")
+        return None
+    logger.info(f"Finding best image for query: '{search_query}'")
 
     if article_url_for_scrape:
         scraped_image_url = scrape_source_for_image(article_url_for_scrape)
         if scraped_image_url:
+            logger.info(f"Attempting to validate image directly scraped from source: {scraped_image_url}")
             img_obj = download_image(scraped_image_url)
-            if img_obj: 
+            if img_obj:
                 logger.info(f"Using valid image directly scraped from source: {scraped_image_url}")
                 return scraped_image_url
             else:
-                logger.warning(f"Scraped image {scraped_image_url} was invalid/too small. Proceeding to search.")
+                logger.warning(f"Scraped image {scraped_image_url} was invalid or too small. Proceeding to search.")
     else:
-        logger.debug("No article_url_for_scrape provided to find_best_image, skipping direct source scrape step.")
+        logger.debug("No article_url_for_scrape provided, skipping direct source scrape step.")
 
+    logger.info(f"Direct scraping failed or not attempted. Searching images via SerpApi for query: '{search_query}'")
     serpapi_results = search_images_serpapi(search_query)
-    if not serpapi_results: 
-        logger.error(f"SerpApi returned no image results for '{search_query}'. Cannot find image."); return None
 
-    best_image_url = None
-    if use_clip and CLIP_AVAILABLE:
-        best_image_url = filter_images_with_clip(serpapi_results, search_query)
-    else:
-        if not CLIP_AVAILABLE and use_clip: logger.warning("CLIP requested but model unavailable. Using first valid SerpApi result.")
-        for res in serpapi_results:
-            if res.get('url'):
-                img_obj = download_image(res.get('url'))
-                if img_obj:
-                    best_image_url = res.get('url')
-                    logger.info(f"Using first valid SerpApi result (CLIP disabled or invalid): {best_image_url}")
-                    break
-        if not best_image_url:
-             logger.error(f"None of the initial SerpApi results were downloadable/valid for '{search_query}'.")
+    if not serpapi_results:
+        logger.error(f"SerpApi returned no image results for '{search_query}'. Cannot find image.")
+        return None
 
-    if best_image_url: logger.info(f"Selected image URL for '{search_query}': {best_image_url}")
-    else: logger.error(f"Could not determine a best image URL for '{search_query}' after all steps.")
-    return best_image_url
+    for res in serpapi_results:
+        candidate_url = res.get('url')
+        if candidate_url:
+            logger.debug(f"Attempting to validate SerpApi candidate: {candidate_url}")
+            img_obj = download_image(candidate_url)
+            if img_obj:
+                logger.info(f"Using valid image from SerpApi result: {candidate_url}")
+                return candidate_url
+    
+    logger.error(f"None of the SerpApi results were downloadable or valid for '{search_query}'.")
+    return None
 
 if __name__ == "__main__":
     test_query = "NVIDIA Blackwell B200 event"
     logger.info(f"\n--- Running Image Scraper Standalone Test ---")
     logger.info(f"Test Query: '{test_query}'")
-    logger.info(f"CLIP Available: {CLIP_AVAILABLE}, CLIP Filtering Enabled: {ENABLE_CLIP_FILTERING}")
-
-    test_article_page_url = "https://techcrunch.com/2024/03/18/nvidia-unveils-blackwell-ai-superchip-platform/"
+    
+    # Test with article_url_for_scrape
+    test_article_page_url = "https://techcrunch.com/2024/03/18/nvidia-unveils-blackwell-ai-superchip-platform/" # Example URL
     logger.info(f"\nTesting with article_url_for_scrape: {test_article_page_url}")
-    best_image_with_scrape = find_best_image(test_query, use_clip=True, article_url_for_scrape=test_article_page_url)
+    best_image_with_scrape = find_best_image(test_query, article_url_for_scrape=test_article_page_url)
     if best_image_with_scrape:
         logger.info(f"Result (with source scrape): {best_image_with_scrape}")
         img_obj = download_image(best_image_with_scrape)
@@ -321,8 +235,9 @@ if __name__ == "__main__":
         else: logger.error("Failed to download the scraped/selected image.")
     else: logger.error("Test (with source scrape) failed to find an image URL.")
 
+    # Test with query only (no direct scrape URL)
     logger.info(f"\nTesting with query only (no direct scrape URL): '{test_query}'")
-    best_image_query_only = find_best_image(test_query, use_clip=True)
+    best_image_query_only = find_best_image(test_query)
     if best_image_query_only:
         logger.info(f"Result (query only): {best_image_query_only}")
         img_obj = download_image(best_image_query_only)
@@ -330,13 +245,13 @@ if __name__ == "__main__":
         else: logger.error("Failed to download the query-only selected image.")
     else: logger.error("Test (query only) failed to find an image URL.")
     
+    # Test a known problematic URL (e.g., one that might fail validation or is not an image)
     logger.info("\nTesting TikTok API URL image download (expected to fail validation):")
-    tiktok_api_url = "https://www.tiktok.com/api/img/?itemId=7430656270497238318&location=0&aid=1988"
+    tiktok_api_url = "https://www.tiktok.com/api/img/?itemId=7430656270497238318&location=0&aid=1988" # Example non-direct image URL
     tiktok_img_obj = download_image(tiktok_api_url)
     if tiktok_img_obj:
         logger.error(f"UNEXPECTED SUCCESS: TikTok API URL {tiktok_api_url} yielded an image object: {tiktok_img_obj.size}")
     else:
         logger.info(f"EXPECTED FAIL: TikTok API URL {tiktok_api_url} did not yield a valid image object.")
-
 
     logger.info("--- Image Scraper Standalone Test Complete ---\n")

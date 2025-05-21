@@ -30,7 +30,6 @@ except ImportError as e:
 
 # --- Import Agent Functions ---
 try:
-    from src.agents.web_research_agent import run_web_research_agent
     from src.agents.filter_enrich_agent import run_filter_enrich_agent
     from src.agents.deduplication_agent import (
         run_deduplication_agent, load_historical_embeddings, save_historical_embeddings
@@ -43,6 +42,7 @@ try:
     from src.agents.content_assembler_agent import assemble_article_content
     from src.agents.json_ld_agent import run_json_ld_agent
     from src.agents.final_review_agent import run_final_review_agent
+from src.agents.content_discovery_agent import run_web_research_agent
     from src.agents.vision_media_agent import run_vision_media_agent
     from src.agents.image_integration_agent import run_image_integration_agent
     from src.agents.knowledge_graph_agent import run_knowledge_graph_agent, load_site_content_graph
