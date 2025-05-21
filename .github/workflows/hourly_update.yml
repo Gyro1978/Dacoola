@@ -4,7 +4,7 @@ name: Hourly News Update and Deploy
 
 on:
   schedule:
-    - cron: "0,20,40 * * * *" # Runs at 0, 20, and 40 minutes past the hour
+    - cron: "0,30 * * * *" # Runs at 0, 20, and 40 minutes past the hour
   workflow_dispatch: # Allows manual triggering
 
 jobs:

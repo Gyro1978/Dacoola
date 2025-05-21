@@ -5,33 +5,36 @@ requests
 python-dotenv
 beautifulsoup4
 trafilatura
-duckduckgo_search # For Web Research Agent
+feedparser # For RSS feed processing in SiteMonitorAgent
+htmldate # For precise date extraction
+requests-html # Optional: for JavaScript rendering in SiteMonitorAgent (if enabled)
+lxml # Often a faster parser for BeautifulSoup and used by other libs
 
 # Parsing & Content
-feedparser
-Markdown
-Jinja2
+Markdown # For Markdown to HTML conversion
+Jinja2   # For HTML templating
 
-# Image Processing
-Pillow
+# Image Processing & Analysis
+Pillow             
+imagehash          
 
-# AI & Embeddings (Local Focus)
-sentence-transformers # Let this pull its dependencies (torch, transformers, etc.)
-# numpy will be pulled as a dependency by sentence-transformers/torch
+# AI & Embeddings (Local Focus & Hugging Face)
+sentence-transformers 
+torch                 
+transformers          
+einops                
+# accelerate            # Optional: For optimizing HF model loading & inference
+# bitsandbytes          # Optional: For 8-bit/4-bit quantization of HF models
 
 # Social Media
-tweepy
-atproto
-praw
+tweepy>=4.0.0         
+atproto               
+praw                  
 
 # Utilities
-pyperclip
-textstat
+pyperclip             # For prompt-maker.py (optional)
+textstat              # For readability scores
 
-# If you are certain you are no longer using DeepSeek or SerpApi directly:
-# DEEPSEEK_API_KEY (Handled via env, no library needed for direct HTTP)
-# google-search-results # SerpApi client - REMOVE if not used
-
-# If not using Google Ads API for keywords:
-# google-ads # REMOVE if not used
-htmldate
+# Google Search Results (SerpApi Client) - No longer primary for web_research_agent
+# but kept if vision_media_agent or other parts use it.
+google-search-results 
