@@ -1,5 +1,5 @@
-<!-- templates/post_template.html (Revised for Aggressive Safe Rendering) -->
-<!-- Template Version: 1.2 (Forcing hash change to ensure ads on old articles) -->
+<!-- templates/post_template.html -->
+<!-- Template Version: 2.5 (Simplified - Relies on main.py for correct HTML body assembly) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ PAGE_TITLE }} - Dacoola</title>
+    <title>{{ PAGE_TITLE }}</title> <!-- Branding is now part of PAGE_TITLE from title_generator_agent -->
     <meta name="description" content="{{ META_DESCRIPTION }}">
     {% if AUTHOR_NAME %}<meta name="author" content="{{ AUTHOR_NAME }}">{% endif %}
     {% if META_KEYWORDS_LIST %}<meta name="keywords" content="{{ META_KEYWORDS_LIST | join(', ') }}">{% endif %}
@@ -29,7 +29,7 @@
     <meta property="og:site_name" content="{{ SITE_NAME }}">
     {% if PUBLISH_ISO_FOR_META %}
     <meta property="article:published_time" content="{{ PUBLISH_ISO_FOR_META }}">
-    <meta property="article:modified_time" content="{{ PUBLISH_ISO_FOR_META }}">
+    <meta property="article:modified_time" content="{{ PUBLISH_ISO_FOR_META }}"> <!-- Or use a dedicated last_modified_iso if available -->
     {% endif %}
     {% for tag in META_KEYWORDS_LIST %}
     <meta property="article:tag" content="{{ tag }}">
@@ -59,8 +59,8 @@
     <style>
         .ad-placeholder-style { text-align: center; min-height: 90px; }
         .article-ad-slot-top { margin: 20px 0; }
-        .article-ad-slot-incontent { margin: 25px 0; }
-        .article-ad-slot-above-faq { margin: 25px 0; }
+        /* In-content ad slot styling can be simplified if not dynamically inserted by template anymore */
+        .article-ad-slot-incontent { margin: 25px 0; } 
         .article-ad-slot-bottom-page { margin: 30px auto; max-width: 1200px; padding: 0 15px; }
     </style>
 </head>
@@ -90,7 +90,7 @@
                             by <span id="author-name">{{ AUTHOR_NAME | default('AI News Team') }}</span>
                             {% if SOURCE_ARTICLE_URL and SOURCE_ARTICLE_URL != '#' %}
                             <span class="article-source-inline">
-                                  |   <a href="{{ SOURCE_ARTICLE_URL }}" target="_blank" rel="noopener noreferrer" class="article-source-inline-link" title="View original source article">View Original Source</a>
+                                 |   <a href="{{ SOURCE_ARTICLE_URL }}" target="_blank" rel="noopener noreferrer" class="article-source-inline-link" title="View original source article">View Source</a>
                             </span>
                             {% endif %}
                         </div>
@@ -109,36 +109,12 @@
                 {% endif %}
 
                 <section id="article-body">
-                    {# MARK ARTICLE_BODY_HTML as safe *before* any operations #}
-                    {% set safe_article_body_html = ARTICLE_BODY_HTML | safe %}
-
-                    {% set ad_placeholder_comment = '<!-- DACCOOLA_IN_ARTICLE_AD_HERE -->' %}
-                    {% set in_article_ad_html %}
-                        <div class="ad-placeholder-style article-ad-slot-incontent">
-                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                        </div>
-                    {% endset %}
-
-                    {# Perform replace on the pre-safed HTML string #}
-                    {% set body_with_first_ad = safe_article_body_html | replace(ad_placeholder_comment, in_article_ad_html) %}
-                    
-                    {% set faq_heading_html_marker = '<h4>Frequently Asked Questions</h4>' %}
-                    
-                    {% if faq_heading_html_marker in body_with_first_ad %}
-                        {% set body_parts = body_with_first_ad.split(faq_heading_html_marker, 1) %}
-                        {{ body_parts[0] | safe }} {# Output the first part safely #}
-
-                        <div class="ad-placeholder-style article-ad-slot-above-faq">
-                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8839663991354998" data-ad-slot="1948351346" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                        </div>
-
-                        {{ faq_heading_html_marker | safe }} {# Output the FAQ heading safely #}
-                        {{ body_parts[1] | safe }}      {# Output the rest safely #}
-                    {% else %}
-                        {{ body_with_first_ad | safe }} {# Output the whole body (with first ad) safely #}
-                    {% endif %}
+                    {# ARTICLE_BODY_HTML is now pre-assembled by main.py 
+                       with correct order and mix of MD-rendered and HTML snippets.
+                       It should already include necessary headings for sections like Pros/Cons, FAQ, Conclusion
+                       if they were part of the generated content for those sections.
+                    #}
+                    {{ ARTICLE_BODY_HTML | safe }}
                 </section>
 
                 {% if ARTICLE_TAGS_HTML %}
@@ -152,7 +128,7 @@
 
             <aside class="sidebar latest-news">
                 <h2>Latest News</h2>
-                <div id="latest-news-content"><p class="placeholder">Loading latest news...</p></div>
+                <div id="latest-news-content"><p class="placeholder">Loading related news...</p></div>
             </aside>
         </div>
 

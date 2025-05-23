@@ -7,6 +7,8 @@ import logging
 import re
 from dotenv import load_dotenv
 from datetime import datetime, timezone
+from typing import Dict, List, Tuple, Optional, TypedDict, Union
+import time
 
 # --- Path Setup (Ensure src is in path if run standalone) ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -24,13 +26,26 @@ if not logging.getLogger().hasHandlers():
 # --- Load Environment Variables ---
 dotenv_path = os.path.join(PROJECT_ROOT, '.env')
 load_dotenv(dotenv_path=dotenv_path)
-DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
-DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
 
-# --- Configuration ---
-AGENT_MODEL = "deepseek-coder"
-MAX_TOKENS_RESPONSE = 600
-TEMPERATURE = 0.1
+# --- API and Model Configuration from .env ---
+# Note: Using keys from your provided .env file
+DEEPSEEK_API_KEY = os.getenv('LLM_API_KEY')
+DEEPSEEK_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions")
+AGENT_MODEL = os.getenv('FILTER_AGENT_MODEL', "deepseek-coder")
+
+# --- General Configuration (can be static or from .env) ---
+MAX_TOKENS_RESPONSE = 800  # Or int(os.getenv('FILTER_MAX_TOKENS_RESPONSE', 800)) if you add to .env
+TEMPERATURE = 0.05       # Or float(os.getenv('FILTER_TEMPERATURE', 0.05)) if you add to .env
+
+# --- Retry, Length, and Scale Configuration from .env ---
+MAX_RETRIES_API = int(os.getenv('MAX_RETRIES_API', 3))
+BASE_RETRY_DELAY = int(os.getenv('BASE_RETRY_DELAY', 1))
+MAX_RETRY_DELAY = int(os.getenv('MAX_RETRY_DELAY', 60))
+MAX_SUMMARY_LENGTH = int(os.getenv('MAX_SUMMARY_LENGTH', 2000))
+CONFIDENCE_SCALE_MIN = float(os.getenv('CONFIDENCE_SCALE_MIN', 0.0))
+CONFIDENCE_SCALE_MAX = float(os.getenv('CONFIDENCE_SCALE_MAX', 1.0))
+
+# --- Static Configuration ---
 ALLOWED_TOPICS = [
     "AI Models", "Hardware", "Software", "Robotics", "Compute", "Research", "Open Source",
     "Business", "Startups", "Finance", "Health", "Society", "Ethics", "Regulation",
@@ -38,85 +53,214 @@ ALLOWED_TOPICS = [
 ]
 IMPORTANT_ENTITIES_FILE = os.path.join(PROJECT_ROOT, 'data', 'important_entities.json')
 
-# --- Load Important Entities ---
-def load_important_entities():
-    """Loads important entities from the JSON file."""
+
+# --- Type Definitions ---
+class AnalysisContentSignals(TypedDict): # More specific for content_signals
+    breaking_score: int
+    technical_score: int
+    hype_score: int
+    length_score: float
+    entity_matches: List[Dict[str, Union[str, List[str]]]]
+
+class AnalysisMetadata(TypedDict):
+    content_signals: AnalysisContentSignals
+    entity_categories_matched: int
+    processing_timestamp: str
+
+class FilterVerdict(TypedDict):
+    importance_level: str
+    topic: str
+    reasoning_summary: str
+    primary_topic_keyword: str
+    confidence_score: Optional[Union[int, float]]
+    entity_influence_factor: Optional[str]
+    factual_basis_score: Optional[Union[int, float]]
+    analysis_metadata: AnalysisMetadata
+
+# --- Enhanced Entity Loading with Validation ---
+def load_important_entities() -> Tuple[List[str], List[str], List[str], Dict[str, List[str]]]:
+    """Loads and validates important entities from the JSON file."""
     try:
         with open(IMPORTANT_ENTITIES_FILE, 'r', encoding='utf-8') as f:
             data = json.load(f)
-            people = [p.lower() for p in data.get("people", [])]
-            companies_products = [cp.lower() for cp in data.get("companies_products", [])]
-            # Combine for Python-side check if ever needed, but primarily for prompt injection
-            all_entities_for_py_check = list(set(people + companies_products))
-            logger.info(f"Loaded {len(people)} important people and {len(companies_products)} important companies/products.")
-            return people, companies_products, all_entities_for_py_check
+
+        required_keys = ["people", "companies_products"]
+        for key in required_keys:
+            if key not in data or not isinstance(data[key], list):
+                logger.error(f"Invalid structure in {IMPORTANT_ENTITIES_FILE}: missing or invalid '{key}' field")
+                return [], [], [], {}
+
+        people = [p.strip().lower() for p in data.get("people", []) if p.strip()]
+        companies_products = [cp.strip().lower() for cp in data.get("companies_products", []) if cp.strip()]
+
+        entity_categories = {
+            "top_tier_people": [p for p in people if any(name in p for name in ["elon musk", "sam altman", "satya nadella", "jensen huang", "sundar pichai"])],
+            "top_tier_companies": [c for c in companies_products if any(name in c for name in ["openai", "google", "microsoft", "nvidia", "tesla", "meta", "apple", "amazon"])],
+            "ai_companies": [c for c in companies_products if any(term in c for term in ["ai", "anthropic", "deepmind", "stability"])],
+            "all_people": people,
+            "all_companies": companies_products
+        }
+
+        all_entities = list(set(people + companies_products))
+        logger.info(f"Loaded {len(people)} people, {len(companies_products)} companies/products. Top tier: {len(entity_categories['top_tier_people'])} people, {len(entity_categories['top_tier_companies'])} companies.")
+        return people, companies_products, all_entities, entity_categories
+
     except FileNotFoundError:
-        logger.error(f"CRITICAL: {IMPORTANT_ENTITIES_FILE} not found. Override rule will be incomplete.")
-        return [], [], []
-    except json.JSONDecodeError:
-        logger.error(f"CRITICAL: Error decoding {IMPORTANT_ENTITIES_FILE}. Override rule will be incomplete.")
-        return [], [], []
+        logger.error(f"CRITICAL: {IMPORTANT_ENTITIES_FILE} not found. Entity-based filtering will fail.")
+        return [], [], [], {}
+    except json.JSONDecodeError as e:
+        logger.error(f"CRITICAL: JSON decode error in {IMPORTANT_ENTITIES_FILE}: {e}")
+        return [], [], [], {}
     except Exception as e:
-        logger.error(f"CRITICAL: Unexpected error loading {IMPORTANT_ENTITIES_FILE}: {e}. Override rule will be incomplete.")
-        return [], [], []
+        logger.error(f"CRITICAL: Unexpected error loading {IMPORTANT_ENTITIES_FILE}: {e}")
+        return [], [], [], {}
 
-IMPORTANT_PEOPLE_LIST, IMPORTANT_COMPANIES_PRODUCTS_LIST, _ = load_important_entities()
-# --- End Important Entities ---
+IMPORTANT_PEOPLE_LIST, IMPORTANT_COMPANIES_PRODUCTS_LIST, ALL_ENTITIES, ENTITY_CATEGORIES = load_important_entities()
 
+# --- Enhanced Content Analysis ---
+def analyze_content_signals(title: str, summary: str) -> AnalysisContentSignals:
+    """Analyzes content for various signals that indicate importance."""
+    combined_text = f"{title} {summary}".lower()
 
-# --- Agent Prompts ---
+    breaking_indicators = [
+        "breaking", "urgent", "just in", "announced", "launches", "releases",
+        "reveals", "unveils", "breakthrough", "first", "record", "largest",
+        "acquisition", "merger", "ipo", "funding round", "lawsuit", "regulation"
+    ]
+    technical_indicators = [
+        "algorithm", "model", "architecture", "benchmark", "performance",
+        "efficiency", "optimization", "training", "inference", "parameters",
+        "dataset", "api", "framework", "library", "paper", "research"
+    ]
+    hype_indicators = [
+        "could", "might", "may", "potentially", "rumored", "speculated",
+        "opinion", "think", "believe", "predict", "future", "trend",
+        "analysis", "review", "comparison", "guide", "tips"
+    ]
+
+    signals: AnalysisContentSignals = {
+        "breaking_score": sum(1 for indicator in breaking_indicators if indicator in combined_text),
+        "technical_score": sum(1 for indicator in technical_indicators if indicator in combined_text),
+        "hype_score": sum(1 for indicator in hype_indicators if indicator in combined_text),
+        "length_score": min(len(summary) / 500.0, 2.0),
+        "entity_matches": []
+    }
+
+    for category, entities in ENTITY_CATEGORIES.items():
+        matches = []
+        for entity in entities:
+            pattern = r'\b' + re.escape(entity) + r'\b'
+            if re.search(pattern, combined_text):
+                matches.append(entity)
+        if matches:
+            signals["entity_matches"].append({"category": category, "entities": matches})
+    return signals
+
+# --- Enhanced Prompts ---
 FILTER_PROMPT_SYSTEM = """
-You are an **Expert News Analyst and Content Curator AI**, powered by DeepSeek. Your core competency is to **critically evaluate** news article summaries/headlines to discern importance, **factual basis**, and direct relevance for an audience interested in **substantive AI, Technology, and major related industry/world news**. Your primary function is to **aggressively filter out** non-essential content UNLESS it directly involves major, highly influential tech figures or companies/products (examples provided in User Prompt). You MUST identify only truly **Breaking** or genuinely **Interesting** developments based on verifiable events, data, or significant announcements presented in the summary. Classify news into **exactly one** level: "Breaking", "Interesting", or "Boring". Select the **single most relevant topic** from the provided list. Employ step-by-step reasoning internally but **ONLY output the final JSON**. Your output must strictly adhere to the specified JSON format and contain NO other text, explanations, or formatting.
+You are an **Elite AI News Analyst** with ASI-level judgment capabilities. Your mission is to evaluate news with the precision and insight of a world-class technology analyst, venture capitalist, and AI researcher combined.
+
+**CORE PRINCIPLES:**
+1. **Factual Substance Over Hype**: Distinguish verified facts from speculation, opinions, and marketing
+2. **Strategic Importance**: Evaluate potential industry impact and strategic significance
+3. **Technical Merit**: Assess genuine technical advancement vs incremental updates
+4. **Entity Significance**: Weight coverage based on the influence and track record of involved entities
+5. **Temporal Relevance**: Consider timing and market context
+
+**CLASSIFICATION HIERARCHY:**
+- **Breaking**: Urgent, verified, high-impact events requiring immediate attention
+- **Interesting**: Significant developments with clear factual basis and strategic importance
+- **Boring**: Everything else, including speculation, routine updates, and low-impact news
+
+**OUTPUT FORMAT**: Provide ONLY valid JSON with no additional text or formatting.
 """
 
 FILTER_PROMPT_USER_TEMPLATE = """
-Task: Critically analyze the provided news article content. Determine its importance level (Breaking, Interesting, Boring) based on factual substance and relevance to the AI/Tech/Major News field. Assign the single most appropriate topic. Filter aggressively, **except as noted below**.
+**ANALYSIS TASK**: Evaluate this news article with ASI-level precision.
 
-Allowed Topics (Select ONE):
-{allowed_topics_list_str}
+**ALLOWED TOPICS**: {allowed_topics_list_str}
 
-**CRITICAL OVERRIDE RULE:** Any article primarily focused on actions, statements, product launches, or significant events directly involving the following MAJOR entities **must** be classified as at least **Interesting**, even if it otherwise seems like routine news, opinion, or political commentary (as long as it relates to their role in tech/AI). This rule overrides the default "Boring" classification for these specific entities.
-- **Key Individuals (Examples from dynamically provided list):** {key_individuals_examples_str}
-- **Key Companies/Products (Examples from dynamically provided list):** {key_companies_products_examples_str}
+**CRITICAL ENTITY OVERRIDE RULES**:
+**Top-Tier Entities** (Auto-promote to at least "Interesting" if substantive):
+- **Key Individuals**: {top_tier_people_str}
+- **Key Companies**: {top_tier_companies_str}
 
-Importance Level Criteria (Apply *after* considering the CRITICAL OVERRIDE RULE):
-- **Breaking**: Reserved for **verified, urgent, high-impact factual events** demanding immediate widespread attention within the AI/Tech sphere (e.g., verified SOTA model release *significantly* outperforming others, critical exploited AI vulnerability, landmark AI regulation enacted affecting many, confirmed huge tech acquisition/shutdown with clear industry-wide effects). Standard product launches or statements, even by key entities, are typically **not** Breaking unless truly exceptional.
-- **Interesting**: Requires *demonstrable significance* AND *clear factual reporting* within the summary, relevant to AI, Tech, or major related industry news OR falls under the **CRITICAL OVERRIDE RULE**. Must present *new, verifiable information* OR be about a key entity. Examples: Notable AI model releases (GPT-4o, Claude 3.5), major player strategic shifts (open-sourcing Llama), *confirmed* major controversy/ethical incident involving key players, landmark legal rulings impacting the tech industry, significant funding for *foundational* AI tech, significant factual statements/actions by key individuals listed above related to AI/tech. **General analysis, predictions, or unverified rumors about non-key entities are NOT Interesting.**
-- **Boring**: All other content **NOT** covered by the CRITICAL OVERRIDE RULE. Includes: Routine business news *not* involving key entities (standard earnings, generic partnerships, most funding rounds), minor software updates, UI tweaks, *most* product reviews/comparisons, PR announcements for minor features, standard personnel changes (unless CEO level at key company), *satire/parody*, *opinion/editorials* about non-key entities, *speculation/predictions* about non-key entities, most 'explainer' articles, news clearly unrelated to AI/Tech/Major Industry events. **Filter Aggressively for content NOT involving the key entities.**
+**All Important Entities** (Consider for upgrade):
+- **People**: {key_individuals_examples_str}
+- **Companies/Products**: {key_companies_products_examples_str}
 
-Input News Article Content (Title and Summary):
+**CLASSIFICATION CRITERIA**:
+
+**Breaking** (Reserved for exceptional events):
+- Verified major AI model releases with significant capability jumps
+- Critical security vulnerabilities with immediate impact
+- Major regulatory decisions affecting the industry
+- Large-scale acquisitions/shutdowns with industry-wide implications
+- Breakthrough research with immediate practical applications
+- Major platform/service outages affecting millions
+
+**Interesting** (Substantive developments):
+- Notable product launches from key entities
+- Significant funding rounds (>$50M or strategic importance)
+- Important research publications with novel findings
+- Strategic partnerships between major players
+- Regulatory developments affecting specific companies
+- Technical achievements with clear advancement
+- Key personnel changes at major companies
+- Verified performance improvements or benchmarks
+
+**Boring** (Filter out aggressively):
+- Speculation, predictions, and opinion pieces
+- Routine business updates (earnings, minor partnerships)
+- Product reviews and comparisons
+- Tutorial/guide content
+- Minor feature updates or UI changes
+- Unverified rumors or leaks
+- Generic industry analysis without specific insights
+
+**CONTENT ANALYSIS SIGNALS**:
+{content_signals}
+
+**ARTICLE TO ANALYZE**:
 Title: {article_title}
 Summary: {article_summary}
 
-Based on your internal step-by-step reasoning for the current input article:
-1. Check if the article centrally features any of the listed **Key Individuals** or **Key Companies/Products** (refer to the dynamically provided examples).
-2. If YES, the importance level MUST be at least "Interesting". Proceed to determine if it meets the "Breaking" criteria. If not Breaking, classify as "Interesting".
-3. If NO key entity is featured, apply the standard "Interesting" vs "Boring" criteria aggressively. Default to "Boring" if unsure or non-factual.
-4. Determine the core news event or claim.
-5. Evaluate its factual basis based only on the summary.
-6. Assess impact and novelty against the criteria. Assign ONE final importance level: "Breaking", "Interesting", or "Boring".
-7. If not Boring, compare the core event to the Allowed Topics list. Select the SINGLE most fitting topic. Use "Other" if nothing else fits well.
-8. Extract a concise primary topic keyword phrase (3-5 words max) reflecting the core factual event (or the general topic if Boring).
-9. Provide your final judgment ONLY in the following valid JSON format. Do not include any text before or after the JSON block.
+**REASONING PROCESS**:
+1. **Entity Check**: Does this involve top-tier or important entities? What's their role?
+2. **Factual Assessment**: What are the verified facts vs speculation?
+3. **Impact Analysis**: What's the potential industry/strategic significance?
+4. **Technical Merit**: Is there genuine technical advancement or novelty?
+5. **Temporal Context**: Is this time-sensitive or strategically timed?
+6. **Final Classification**: Based on the above, what's the appropriate level?
 
+**REQUIRED OUTPUT** (JSON only, confidence_score as float 0.0-1.0, factual_basis_score as float 0.0-1.0):
 {{
-"importance_level": "string", // MUST be "Breaking", "Interesting", or "Boring"
-"topic": "string", // MUST be exactly one item from the Allowed Topics list (or "Other")
-"reasoning_summary": "string", // Brief justification for importance level based on criteria & factuality
-"primary_topic_keyword": "string" // Short keyword phrase for the core news/topic
+"importance_level": "string",
+"topic": "string",
+"reasoning_summary": "string",
+"primary_topic_keyword": "string",
+"confidence_score": "float",
+"entity_influence_factor": "string",
+"factual_basis_score": "float"
 }}
 """
 
-# --- API Call Function (remains unchanged) ---
-def call_deepseek_api(system_prompt, user_prompt):
+# --- Enhanced API Call with Exponential Backoff ---
+def call_deepseek_api(system_prompt: str, user_prompt: str) -> Optional[str]: # Removed max_retries from signature, uses global
+    """Enhanced API call with exponential backoff retry logic."""
     if not DEEPSEEK_API_KEY:
-        logger.error("DEEPSEEK_API_KEY environment variable not set.")
+        logger.error("LLM_API_KEY environment variable not set.") # Matched .env key name
         return None
+    if not DEEPSEEK_API_URL:
+        logger.error("LLM_API_URL environment variable not set.") # Matched .env key name
+        return None
+
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
         "Accept": "application/json"
     }
+
     payload = {
         "model": AGENT_MODEL,
         "messages": [
@@ -127,134 +271,291 @@ def call_deepseek_api(system_prompt, user_prompt):
         "temperature": TEMPERATURE,
         "stream": False
     }
-    try:
-        logger.debug(f"Sending filter request to DeepSeek API (model: {AGENT_MODEL}).")
-        response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=60)
-        response.raise_for_status()
-        result = response.json()
-        if result.get("choices") and result["choices"][0].get("message"):
-            content = result["choices"][0]["message"].get("content","").strip()
-            if content.startswith("```json"): content = content[7:-3].strip()
-            elif content.startswith("```"): content = content[3:-3].strip()
-            return content
-        logger.error(f"API response missing 'choices' or message content: {result}")
-        return None
-    except Exception as e: logger.exception(f"API call failed: {e}"); return None
+
+    for attempt in range(MAX_RETRIES_API):
+        try:
+            logger.debug(f"API call attempt {attempt + 1}/{MAX_RETRIES_API}")
+            response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=90)
+
+            if response.status_code == 401:
+                logger.error("API authentication failed (401). Check LLM_API_KEY.")
+                return None # No retry on auth failure
+            elif response.status_code == 429: # Rate limit
+                logger.warning(f"Rate limit hit (429) on attempt {attempt + 1}")
+                if attempt < MAX_RETRIES_API - 1:
+                    delay = min(BASE_RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
+                    logger.info(f"Waiting {delay}s before retry...")
+                    time.sleep(delay)
+                    continue
+                else:
+                    logger.error("Max retries reached for rate limit.")
+                    return None
+            elif response.status_code >= 500: # Server-side errors
+                logger.warning(f"Server error ({response.status_code}) on attempt {attempt + 1}")
+                if attempt < MAX_RETRIES_API - 1:
+                    delay = min(BASE_RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
+                    logger.info(f"Waiting {delay}s for server error before retry...")
+                    time.sleep(delay)
+                    continue
+                else:
+                    logger.error("Max retries reached for server error.")
+                    return None
+
+            response.raise_for_status() # For other client errors (4xx) or if we want to re-raise
+
+            result = response.json()
+            if result.get("choices") and result["choices"][0].get("message"):
+                content = result["choices"][0]["message"].get("content", "").strip()
+                if content.startswith("```json"):
+                    content = content[7:-3].strip()
+                elif content.startswith("```"):
+                    content = content[3:-3].strip()
+                return content
+            else:
+                logger.error(f"API response missing content: {result}")
+                # Consider if retry is useful here, probably not if content is missing
+
+        except requests.exceptions.Timeout:
+            logger.warning(f"API timeout on attempt {attempt + 1}")
+            if attempt < MAX_RETRIES_API - 1:
+                delay = min(BASE_RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY) # Exponential backoff for timeout
+                logger.info(f"Waiting {delay}s for timeout before retry...")
+                time.sleep(delay)
+                continue # Go to next attempt
+            else:
+                logger.error("All API attempts timed out.")
+        except requests.exceptions.RequestException as e:
+            logger.error(f"API request failed on attempt {attempt + 1}: {e}")
+            if attempt < MAX_RETRIES_API - 1:
+                delay = min(BASE_RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY) # Exponential backoff for other request errors
+                logger.info(f"Waiting {delay}s for request error before retry...")
+                time.sleep(delay)
+                continue # Go to next attempt
+            else:
+                logger.error("All API attempts failed due to request errors.")
+        except Exception as e: # Catch-all for unexpected errors during API call
+            logger.exception(f"Unexpected API error on attempt {attempt + 1}: {e}")
+            # Decide if retry is safe/useful for truly unexpected errors, often it's better to fail fast.
+            # For now, we'll let it exhaust retries if it happens multiple times.
+            if attempt == MAX_RETRIES_API -1:
+                 logger.error("All API attempts failed due to unexpected errors.")
 
 
-# --- Main Agent Function ---
-def run_filter_agent(article_data):
-    if not isinstance(article_data, dict) or not article_data.get('title') or not article_data.get('summary'):
-        logger.error("Invalid article_data for filter agent.");
-        if isinstance(article_data, dict): article_data['filter_error'] = "Invalid input";
-        return article_data
+    logger.error("All API retry attempts exhausted or unrecoverable error.")
+    return None
 
-    article_title = article_data['title']
-    article_summary = article_data['summary'] # Use the summary from scraper (which might be full text)
+# --- Enhanced Main Agent Function ---
+def run_filter_agent(article_data: Dict) -> Dict:
+    """Enhanced filter agent with comprehensive analysis."""
+    if not isinstance(article_data, dict):
+        logger.error("Invalid article_data: not a dictionary")
+        return {"filter_error": "Invalid input: not a dictionary", "filter_verdict": None}
+
+    title = article_data.get('title')
+    summary = article_data.get('summary')
+
+    if not title or not summary:
+        logger.error("Invalid article_data: missing title or summary")
+        return {"filter_error": "Invalid input: missing title or summary", "filter_verdict": None, **article_data}
+
+
+    article_title = str(title).strip()
+    article_summary = str(summary).strip()
     article_id = article_data.get('id', 'N/A')
 
-    # For the Python-side check (though LLM is primary now for this)
-    text_for_py_override_check = f"{article_title} {article_summary}".lower()
+    if len(article_summary) > MAX_SUMMARY_LENGTH:
+        logger.warning(f"Truncating summary ({len(article_summary)} > {MAX_SUMMARY_LENGTH} chars) for ID: {article_id}")
+        article_summary = article_summary[:MAX_SUMMARY_LENGTH] + "..."
 
-    max_summary_length = 1500 # Increased slightly for potentially longer summaries from scraper
-    if len(article_summary) > max_summary_length:
-        logger.warning(f"Truncating summary (> {max_summary_length} chars) for filtering (ID: {article_id})")
-        article_summary = article_summary[:max_summary_length] + "..."
+    content_signals = analyze_content_signals(article_title, article_summary)
 
     allowed_topics_str = "\n".join([f"- {topic}" for topic in ALLOWED_TOPICS])
-    
-    # Prepare example strings for the prompt
-    # Take a sample (e.g., first 15) to keep prompt manageable
-    key_individuals_examples_str = ", ".join(IMPORTANT_PEOPLE_LIST[:15]) + (", etc." if len(IMPORTANT_PEOPLE_LIST) > 15 else "")
-    key_companies_products_examples_str = ", ".join(IMPORTANT_COMPANIES_PRODUCTS_LIST[:20]) + (", etc." if len(IMPORTANT_COMPANIES_PRODUCTS_LIST) > 20 else "")
+    top_tier_people_str = ", ".join(ENTITY_CATEGORIES.get("top_tier_people", [])[:10])
+    top_tier_companies_str = ", ".join(ENTITY_CATEGORIES.get("top_tier_companies", [])[:15])
+    key_individuals_examples_str = ", ".join(IMPORTANT_PEOPLE_LIST[:20]) + (", etc." if len(IMPORTANT_PEOPLE_LIST) > 20 else "")
+    key_companies_products_examples_str = ", ".join(IMPORTANT_COMPANIES_PRODUCTS_LIST[:25]) + (", etc." if len(IMPORTANT_COMPANIES_PRODUCTS_LIST) > 25 else "")
+
+    signals_str_list = [
+        f"- Breaking indicators: {content_signals['breaking_score']}",
+        f"- Technical depth: {content_signals['technical_score']}",
+        f"- Hype/speculation signals: {content_signals['hype_score']}",
+        f"- Content length score: {content_signals['length_score']:.1f}",
+        f"- Entity matches: {len(content_signals['entity_matches'])} categories"
+    ]
+    signals_str = "\n".join(signals_str_list)
 
 
     try:
         user_prompt = FILTER_PROMPT_USER_TEMPLATE.format(
             article_title=article_title,
-            article_summary=article_summary, # This is the (potentially truncated) content for the LLM
+            article_summary=article_summary,
             allowed_topics_list_str=allowed_topics_str,
+            top_tier_people_str=top_tier_people_str,
+            top_tier_companies_str=top_tier_companies_str,
             key_individuals_examples_str=key_individuals_examples_str,
-            key_companies_products_examples_str=key_companies_products_examples_str
+            key_companies_products_examples_str=key_companies_products_examples_str,
+            content_signals=signals_str
         )
     except KeyError as e:
-        logger.exception(f"KeyError formatting filter prompt template! Error: {e}")
-        article_data['filter_verdict'] = None; article_data['filter_error'] = f"Prompt template formatting error: {e}"; return article_data
+        logger.exception(f"Prompt template formatting error: {e}")
+        article_data['filter_verdict'] = None
+        article_data['filter_error'] = f"Prompt template error: {e}"
+        return article_data
 
-    logger.info(f"Running filter agent for article ID: {article_id} Title: {article_title[:60]}...")
-    raw_response_content = call_deepseek_api(FILTER_PROMPT_SYSTEM, user_prompt)
+    logger.info(f"Analyzing article ID: {article_id} | Title: {article_title[:80]}...")
+    raw_response = call_deepseek_api(FILTER_PROMPT_SYSTEM, user_prompt)
 
-    if not raw_response_content:
-        logger.error(f"Filter agent API call failed for article ID: {article_id}.")
-        article_data['filter_verdict'] = None; article_data['filter_error'] = "API call failed"; return article_data
+    if not raw_response:
+        logger.error(f"Filter agent API call failed for ID: {article_id}")
+        article_data['filter_verdict'] = None
+        article_data['filter_error'] = "API call failed"
+        return article_data
 
     try:
-        filter_verdict = json.loads(raw_response_content)
+        # Explicitly cast to FilterVerdict after loading. Relies on LLM adhering to structure.
+        parsed_verdict = json.loads(raw_response)
+        filter_verdict: FilterVerdict = parsed_verdict # type: ignore
+
         required_keys = ["importance_level", "topic", "reasoning_summary", "primary_topic_keyword"]
         if not all(k in filter_verdict for k in required_keys):
-            raise ValueError("Missing required keys in filter verdict JSON")
+            missing_keys = [k for k in required_keys if k not in filter_verdict]
+            raise ValueError(f"Missing required keys: {missing_keys}")
 
         valid_levels = ["Breaking", "Interesting", "Boring"]
         if filter_verdict['importance_level'] not in valid_levels:
-            logger.warning(f"Invalid importance_level '{filter_verdict['importance_level']}'. Forcing to 'Boring'. ID: {article_id}")
+            logger.warning(f"Invalid importance_level '{filter_verdict['importance_level']}' for ID {article_id}. Defaulting to 'Boring'.")
             filter_verdict['importance_level'] = "Boring"
         
         if filter_verdict['topic'] not in ALLOWED_TOPICS:
-            logger.warning(f"Invalid topic '{filter_verdict['topic']}'. Forcing to 'Other'. ID: {article_id}")
+            logger.warning(f"Invalid topic '{filter_verdict['topic']}' for ID {article_id}. Defaulting to 'Other'.")
             filter_verdict['topic'] = "Other"
 
-        # The LLM should handle the override based on the prompt.
-        # A secondary Python check could be added here as a failsafe if desired,
-        # but the goal is to rely on the improved prompt.
-        # Example for such a failsafe:
-        # if filter_verdict['importance_level'] == "Boring":
-        #     combined_entities_for_py_check = IMPORTANT_PEOPLE_LIST + IMPORTANT_COMPANIES_PRODUCTS_LIST
-        #     if any(re.search(r'\b' + re.escape(entity) + r'\b', text_for_py_override_check) for entity in combined_entities_for_py_check):
-        #         logger.info(f"Python Failsafe: Overriding 'Boring' to 'Interesting' for ID {article_id} due to entity match.")
-        #         filter_verdict['importance_level'] = "Interesting"
-        #         filter_verdict['reasoning_summary'] = f"[Python Override] {filter_verdict.get('reasoning_summary', '')}"
+
+        # Validate and normalize confidence score
+        raw_confidence = filter_verdict.get('confidence_score')
+        if raw_confidence is not None:
+            try:
+                confidence = float(raw_confidence)
+                if not (CONFIDENCE_SCALE_MIN <= confidence <= CONFIDENCE_SCALE_MAX):
+                     # Attempt normalization if it looks like a 1-10 scale was used
+                    if CONFIDENCE_SCALE_MIN < confidence <= CONFIDENCE_SCALE_MAX * 10:
+                        confidence = confidence / 10.0
+                        logger.warning(f"Normalized confidence score from {raw_confidence} to {confidence:.2f} for ID {article_id}")
+                    else: # Out of expected range even for 1-10, clamp it
+                        logger.warning(f"Confidence score {raw_confidence} out of expected range [0-1] or [0-10]. Clamping.")
+                filter_verdict['confidence_score'] = max(CONFIDENCE_SCALE_MIN, min(confidence, CONFIDENCE_SCALE_MAX))
+            except (ValueError, TypeError):
+                logger.warning(f"Invalid confidence_score '{raw_confidence}' for ID {article_id}. Setting to None.")
+                filter_verdict['confidence_score'] = None
+        
+        # Validate and normalize factual_basis_score
+        raw_factual_score = filter_verdict.get('factual_basis_score')
+        if raw_factual_score is not None:
+            try:
+                factual_score = float(raw_factual_score)
+                if not (CONFIDENCE_SCALE_MIN <= factual_score <= CONFIDENCE_SCALE_MAX):
+                    if CONFIDENCE_SCALE_MIN < factual_score <= CONFIDENCE_SCALE_MAX * 10:
+                        factual_score = factual_score / 10.0
+                        logger.warning(f"Normalized factual_basis_score from {raw_factual_score} to {factual_score:.2f} for ID {article_id}")
+                    else:
+                        logger.warning(f"Factual_basis_score {raw_factual_score} out of expected range [0-1] or [0-10]. Clamping.")
+                filter_verdict['factual_basis_score'] = max(CONFIDENCE_SCALE_MIN, min(factual_score, CONFIDENCE_SCALE_MAX))
+            except (ValueError, TypeError):
+                logger.warning(f"Invalid factual_basis_score '{raw_factual_score}' for ID {article_id}. Setting to None.")
+                filter_verdict['factual_basis_score'] = None
+
+        # Ensure analysis_metadata structure is present if not provided by LLM
+        # and then populate it.
+        if 'analysis_metadata' not in filter_verdict or not isinstance(filter_verdict.get('analysis_metadata'), dict):
+             filter_verdict['analysis_metadata'] = {} # type: ignore
+
+        filter_verdict['analysis_metadata']['content_signals'] = content_signals
+        filter_verdict['analysis_metadata']['entity_categories_matched'] = len(content_signals['entity_matches'])
+        filter_verdict['analysis_metadata']['processing_timestamp'] = datetime.now(timezone.utc).isoformat()
 
 
-        logger.info(f"Filter verdict for ID {article_id}: {filter_verdict['importance_level']}, Topic: '{filter_verdict['topic']}', Keyword: '{filter_verdict['primary_topic_keyword']}'")
+        logger.info(f"Filter result for ID {article_id}: {filter_verdict['importance_level']} | "
+                   f"Topic: {filter_verdict['topic']} | Confidence: {filter_verdict.get('confidence_score', 'N/A')}")
+
         article_data['filter_verdict'] = filter_verdict
         article_data['filter_error'] = None
-        article_data['filtered_at_iso'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+        article_data['filtered_at_iso'] = datetime.now(timezone.utc).isoformat()
         return article_data
 
-    except json.JSONDecodeError:
-        logger.error(f"Failed to parse JSON from filter agent for ID {article_id}: {raw_response_content}")
-        article_data['filter_verdict'] = None; article_data['filter_error'] = "Invalid JSON response"; return article_data
-    except ValueError as ve:
-        logger.error(f"Validation error on filter verdict for ID {article_id}: {ve}")
-        article_data['filter_verdict'] = None; article_data['filter_error'] = f"Verdict validation failed: {ve}"; return article_data
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON decode error for ID {article_id}: {e}")
+        logger.debug(f"Raw response: {raw_response}")
+        article_data['filter_verdict'] = None
+        article_data['filter_error'] = "Invalid JSON response"
+        return article_data
+    except ValueError as e: # Catches missing keys from our validation
+        logger.error(f"Validation error for ID {article_id}: {e}")
+        logger.debug(f"Parsed verdict that failed validation: {parsed_verdict if 'parsed_verdict' in locals() else 'N/A'}")
+        article_data['filter_verdict'] = None
+        article_data['filter_error'] = f"Response validation failed: {e}"
+        return article_data
     except Exception as e:
-        logger.exception(f"Unexpected error processing filter response for ID {article_id}: {e}")
-        article_data['filter_verdict'] = None; article_data['filter_error'] = "Unexpected processing error"; return article_data
+        logger.exception(f"Unexpected error processing response for ID {article_id}: {e}")
+        article_data['filter_verdict'] = None
+        article_data['filter_error'] = f"Processing error: {str(e)}"
+        return article_data
 
-# --- Example Usage (for standalone testing) ---
+# --- Enhanced Testing ---
 if __name__ == "__main__":
-    logging.getLogger().setLevel(logging.DEBUG)
-    logger.setLevel(logging.DEBUG)
+    logging.getLogger().setLevel(logging.DEBUG) # Global logger level
+    logger.setLevel(logging.DEBUG) # This specific module's logger level
 
-    test_article_override = {
-        'id': 'test-override-004',
-        'title': "Elon Musk Announces New Tesla Solar Panel Efficiency Record at GTC Event",
-        'summary': "During a surprise appearance at Nvidia's GTC, Elon Musk revealed that Tesla's solar division has achieved a new world record for solar panel efficiency, though specific numbers were not immediately disclosed. He hinted this technology would integrate with Powerwall and upcoming Tesla vehicles. OpenAI's CEO was also reportedly in attendance but did not speak.",
-    }
-    test_article_still_boring = {
-        'id': 'test-still-boring-005',
-        'title': "Review: The Best Robot Vacuums of 2025 for Pet Hair",
-        'summary': "We test the latest robot vacuums from iRobot, Shark, and Eufy to see which offers the best cleaning performance for homes with pets and various floor types."
-    }
+    test_cases = [
+        {
+            'id': 'test-breaking-001',
+            'title': "OpenAI Releases GPT-5 with Unprecedented 10x Performance Improvement",
+            'summary': "OpenAI today officially launched GPT-5, demonstrating significant improvements across all benchmarks with 90% accuracy on complex reasoning tasks. The model features a new architecture achieving 10x efficiency gains. CEO Sam Altman confirmed commercial availability within 30 days.",
+        },
+        {
+            'id': 'test-interesting-002',
+            'title': "Elon Musk Announces Tesla's New Neural Network Chip for Autonomous Driving",
+            'summary': "At Tesla's AI Day, Elon Musk unveiled the D1 chip, claiming 3x performance improvement over current hardware. The chip will power the next generation of Tesla's Full Self-Driving capabilities with rollout planned for Q4 2025.",
+        },
+        {
+            'id': 'test-boring-003',
+            'title': "Best Productivity Apps for Remote Workers in 2025",
+            'summary': "A comprehensive review of the top productivity applications including Notion, Microsoft Teams, and Slack. We tested each app's features and provide recommendations for different workflow needs.",
+        },
+        {
+            'id': 'test-edge-case-004', # Skeptical claims
+            'title': "Meta AI Researcher Claims Breakthrough in Quantum Computing for ML",
+            'summary': "A researcher at Meta's AI lab published a paper suggesting potential quantum advantages for machine learning, though the work has not been peer-reviewed and other experts express skepticism about the claims. The paper details a novel qubit stabilization technique.",
+        },
+        {
+            'id': 'test-short-summary-005',
+            'title': "Google announces minor update to Search algorithm",
+            'summary': "Google confirmed a small tweak. Impact unknown.",
+        },
+        {
+            'id': 'test-no-entities-006',
+            'title': "New Open Source LLM Framework Released by Independent Devs",
+            'summary': "A group of independent developers today released 'OpenLLMFramework', a new Python library designed to simplify LLM training and deployment. It is available on GitHub and aims to rival existing proprietary solutions.",
+        }
+    ]
 
-    logger.info("\n--- Running Filter Agent Standalone Test (Perfected Override) ---")
+    logger.info("\n=== ENHANCED FILTER AGENT TEST SUITE ===")
 
-    logger.info("\nTesting article mentioning KEY ENTITY (Should be Interesting due to prompt rule)...")
-    result_override = run_filter_agent(test_article_override.copy())
-    print("Result (Key Entity):", json.dumps(result_override, indent=2))
+    for i, test_case in enumerate(test_cases, 1):
+        logger.info(f"\n--- Test Case {i}: {test_case['id']} ---")
+        # Create a copy to avoid modifying the original test_case dict if run_filter_agent modifies it
+        result_data = run_filter_agent(test_case.copy())
 
-    logger.info("\nTesting BORING article NOT mentioning key entity...")
-    result_still_boring = run_filter_agent(test_article_still_boring.copy())
-    print("Result (Still Boring):", json.dumps(result_still_boring, indent=2))
+        if result_data.get('filter_verdict'):
+            verdict = result_data['filter_verdict']
+            print(f"VERDICT: {verdict.get('importance_level')} | TOPIC: {verdict.get('topic')}")
+            print(f"REASONING: {verdict.get('reasoning_summary')}")
+            print(f"CONFIDENCE: {verdict.get('confidence_score', 'N/A')}")
+            print(f"FACTUAL BASIS: {verdict.get('factual_basis_score', 'N/A')}")
+            if verdict.get('analysis_metadata'):
+                print(f"ENTITY MATCHES: {verdict['analysis_metadata'].get('entity_categories_matched')}")
+        else:
+            print(f"ERROR: {result_data.get('filter_error', 'Unknown error')}")
 
-    logger.info("\n--- Filter Agent Standalone Test Complete ---")
+        print("-" * 60)
+
+    logger.info("\n=== TEST SUITE COMPLETE ===")

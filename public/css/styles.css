@@ -64,7 +64,7 @@ body {
 
 a { color: var(--accent-blue); text-decoration: none; }
 a:hover { text-decoration: none; color: var(--accent-blue-darker); }
-img { max-width: 100%; height: auto; display: block; }
+img { max-width: 100%; height: auto; display: block; } /* General img rule, might be overridden below */
 
 /* --- Navbar Styling --- */
 .navbar {
@@ -166,7 +166,22 @@ img { max-width: 100%; height: auto; display: block; }
 .article-source-inline { display: inline; font-size: 0.85em; }
 .article-source-inline-link { color: var(--text-muted); text-decoration: underline; }
 .article-source-inline-link:hover { color: var(--accent-blue); }
-.article-image-container { margin-bottom: 25px; border-radius: 6px; overflow: hidden; }
+
+/* Image Centering/Width Fix: Ensure image fills its container and is centered */
+.article-image-container {
+    margin-bottom: 25px;
+    border-radius: 6px;
+    overflow: hidden;
+    /* Optional: if the container itself needs centering, add margin: 0 auto; if it has a max-width */
+}
+.article-image-container img { /* Target the img inside the figure */
+    width: 100%; /* Make it fill the full width of its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure it's a block element for margin auto */
+    margin: 0 auto; /* Center the image within its container if it doesn't take 100% width (e.g. smaller intrinsic size) */
+}
+
+
 #article-body { flex-grow: 1; font-size: 1rem; }
 #article-body p { margin-bottom: 1.3em; font-size: 1.05em; color: var(--text-light); }
 
@@ -226,7 +241,7 @@ img { max-width: 100%; height: auto; display: block; }
 .pros-section { background-color: rgba(40, 167, 69, 0.08); border-left: 4px solid var(--success-green); }
 .cons-section { background-color: rgba(220, 53, 69, 0.08); border-left: 4px solid var(--danger-red); }
 .pros-cons-container .item-list ul { list-style-type: none; padding-left: 0; margin-top: 6px; }
-.pros-cons-container .item-list li { padding-left: 1.8em; position: relative; margin-bottom: 0.6em; line-height: 1.5; font-size: 0.95em; }
+.pros-cons-container .item-list ul li { padding-left: 1.8em; position: relative; margin-bottom: 0.6em; line-height: 1.5; font-size: 0.95em; }
 .pros-section .item-list ul li::before { content: '✔'; color: var(--success-green); position: absolute; left: 0; top: 1px; font-weight: bold; font-size: 1.1em; background-color: transparent !important; width: auto; height: auto; } /* Override general ul li::before */
 .cons-section .item-list ul li::before { content: '✘'; color: var(--danger-red); position: absolute; left: 0; top: 1px; font-weight: bold; font-size: 1.1em; background-color: transparent !important; width: auto; height: auto; } /* Override general ul li::before */
 
@@ -520,7 +535,6 @@ main.error-page-main { display: flex; flex-direction: column; align-items: cente
 /* --- Snow Animation (for 404 page) --- */
 @keyframes snowfall { 0% { transform: translateY(-10vh); } 100% { transform: translateY(110vh); } }
 .snow { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1; }
-.snow-flake { position: absolute; top: -10vh; background-color: rgba(255, 255, 255, 0.3); border-radius: 50%; animation: snowfall linear infinite; opacity: 0; }
 .snow-flake:nth-child(5n) { width: 2px; height: 2px; animation-duration: 12s; animation-delay: -1s; opacity: 0.4; }
 .snow-flake:nth-child(5n + 1) { width: 3px; height: 3px; animation-duration: 10s; animation-delay: -3s; opacity: 0.5; }
 .snow-flake:nth-child(5n + 2) { width: 4px; height: 4px; animation-duration: 8s; animation-delay: -5s; opacity: 0.6; }
@@ -634,5 +648,28 @@ main.error-page-main { display: flex; flex-direction: column; align-items: cente
     text-decoration: none !important; /* Prevent icon from being underlined */
 }
 
-
-/* ... (rest of your existing styles.css) ... */
+/* Pros & Cons Section - No changes needed here, as the previous HTML restructuring ensures these apply */
+.pros-section .item-list ul li::before { 
+    content: '✔'; 
+    color: var(--success-green); 
+    position: absolute; 
+    left: 0; 
+    top: 1px; 
+    font-weight: bold; 
+    font-size: 1.1em; 
+    background-color: transparent !important; 
+    width: auto; 
+    height: auto; 
+}
+.cons-section .item-list ul li::before { 
+    content: '✘'; 
+    color: var(--danger-red); 
+    position: absolute; 
+    left: 0; 
+    top: 1px; 
+    font-weight: bold; 
+    font-size: 1.1em; 
+    background-color: transparent !important; 
+    width: auto; 
+    height: auto; 
+}
