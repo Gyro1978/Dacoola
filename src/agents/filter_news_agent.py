@@ -269,14 +269,13 @@ def call_deepseek_api(system_prompt: str, user_prompt: str) -> Optional[str]:
             
             ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
             if not ModelClass:
-                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
-                if attempt == MAX_RETRIES_API - 1: return None # Last attempt
-                delay = min(BASE_RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
-                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
-                time.sleep(delay)
-                continue
-
-            model_instance = ModelClass()
+                logger.error(f"CRITICAL: Could not look up Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME} on attempt {attempt + 1}/{MAX_RETRIES_API}. Ensure it's deployed and names are correct.")
+                if attempt == MAX_RETRIES_API - 1:
+                    logger.error(f"Modal function lookup failed on final attempt for {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Returning None.")
+                    return None # Explicit return on final attempt after logging
+                # No 'continue' needed here, will proceed to sleep and retry logic below
+            else:
+                model_instance = ModelClass() # Only create instance if lookup succeeded
             
             # The Modal `generate` method should return a dict like:
             # {"choices": [{"message": {"content": "response_string_here"}}]}
@@ -285,7 +284,7 @@ def call_deepseek_api(system_prompt: str, user_prompt: str) -> Optional[str]:
                 max_new_tokens=MAX_TOKENS_RESPONSE
                 # temperature=TEMPERATURE # If Modal class's generate method supports it
             )
-
+            logger.debug(f"Raw result from Modal for filter agent (attempt {attempt + 1}/{MAX_RETRIES_API}): {str(result)[:1000]}")
             if result and result.get("choices") and result["choices"][0].get("message") and \
                isinstance(result["choices"][0]["message"].get("content"), str):
                 content = result["choices"][0]["message"]["content"].strip()
