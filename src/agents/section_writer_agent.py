@@ -7,7 +7,8 @@ import os
 import sys
 import json
 import logging
-import modal # Added for Modal integration
+import torch # Added for Gemma
+from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig # Added for Gemma
 import re
 import time
 import ftfy
@@ -37,14 +38,14 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-LLM_MODEL_NAME = os.getenv('SECTION_WRITER_AGENT_MODEL', "deepseek-R1") # Use coder for precision, updated
+LLM_MODEL_NAME = "google/gemma-3n-e4b-it" # Changed to Gemma model ID
 
-MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
-MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
+# Global variables for Gemma model and tokenizer
+gemma_tokenizer = None
+gemma_model = None
 
-API_TIMEOUT = 180 # Retained for Modal call options if applicable
-MAX_RETRIES = 2 # Retained for application-level retries with Modal
-RETRY_DELAY_BASE = 7 # Retained for application-level retries with Modal
+MAX_RETRIES = 2 # Retained for application-level retries
+RETRY_DELAY_BASE = 7 # Retained for application-level retries
 
 # Revised Word Count Targets for SHORTER, more impactful sections
 TARGET_WORD_COUNT_MAP = {
@@ -179,7 +180,7 @@ def _count_words(text: str) -> int:
     if not cleaned_text: return 0
     return len(cleaned_text.split())
 
-def _truncate_content_to_word_count(content: str, max_words: int, section_type: str, is_html_snippet: bool) -> str: # Renamed max_tokens_for_section to max_words for clarity
+def _truncate_content_to_word_count(content: str, max_words: int, section_type: str, is_html_snippet: bool) -> str:
     initial_word_count = _count_words(content)
     if initial_word_count <= max_words: return content
 
@@ -251,64 +252,75 @@ def _truncate_content_to_word_count(content: str, max_words: int, section_type: 
     return final_content
 
 def _call_llm_for_section(system_prompt: str, user_prompt_data: dict, max_tokens_for_section: int, temperature: float, is_html_snippet: bool) -> str | None:
-    user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2)
-    estimated_prompt_tokens = math.ceil(len(user_prompt_string_for_api.encode('utf-8')) / 3.2) # Rough estimate
-    logger.debug(f"Section writer (Modal, impact focus): Approx. prompt tokens: {estimated_prompt_tokens}, Max completion: {max_tokens_for_section}")
+    global gemma_tokenizer, gemma_model
+    
+    user_prompt_string_for_gemma = json.dumps(user_prompt_data, indent=2) # For logging/debug if needed
+    logger.debug(f"Section writer (Gemma local): Max completion tokens: {max_tokens_for_section}, Temp: {temperature}")
 
-    messages_for_modal = [
+    messages_for_gemma = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_prompt_string_for_api}
+        {"role": "user", "content": user_prompt_string_for_gemma} # User prompt is the JSON string itself
     ]
 
     for attempt in range(MAX_RETRIES):
         try:
-            logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES} for section writer (model config: {LLM_MODEL_NAME})")
-            
-            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            if not ModelClass:
-                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
-                if attempt == MAX_RETRIES - 1: return None # Last attempt
-                delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
-                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
-                time.sleep(delay)
-                continue
-            
-            model_instance = ModelClass()
+            if gemma_tokenizer is None or gemma_model is None:
+                logger.info(f"Initializing Gemma model and tokenizer for the first time (attempt {attempt + 1}/{MAX_RETRIES}). Model: {LLM_MODEL_NAME}")
+                gemma_tokenizer = AutoTokenizer.from_pretrained(LLM_MODEL_NAME)
+                quantization_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16)
+                gemma_model = AutoModelForCausalLM.from_pretrained(
+                    LLM_MODEL_NAME,
+                    quantization_config=quantization_config,
+                    device_map="auto" # Handles CPU if no GPU
+                )
+                gemma_model.eval()
+                logger.info("Gemma model and tokenizer initialized successfully.")
 
-            result = model_instance.generate.remote(
-                messages=messages_for_modal,
-                max_new_tokens=max_tokens_for_section,
-                temperature=temperature, # Pass temperature
-                model=LLM_MODEL_NAME # Pass model name
+            input_text = gemma_tokenizer.apply_chat_template(
+                messages_for_gemma,
+                tokenize=False,
+                add_generation_prompt=True
             )
+            input_ids = gemma_tokenizer(input_text, return_tensors="pt").to(gemma_model.device)
+
+            logger.debug(f"Gemma generation attempt {attempt + 1}/{MAX_RETRIES} for section writer.")
+            with torch.no_grad():
+                outputs = gemma_model.generate(
+                    **input_ids,
+                    max_new_tokens=max_tokens_for_section,
+                    temperature=temperature if temperature > 0.001 else None, # Gemma might not like 0 temp with do_sample=False
+                    do_sample=temperature > 0.001,
+                    pad_token_id=gemma_tokenizer.eos_token_id
+                )
             
-            if result and result.get("choices") and result["choices"].get("message") and \
-               isinstance(result["choices"]["message"].get("content"), str):
-                content = result["choices"]["message"]["content"].strip()
-                
-                # Clean up potential markdown fences if LLM adds them by mistake
-                if content.startswith("```markdown") and content.endswith("```"): content = content[len("```markdown"):-len("```")].strip()
-                elif content.startswith("```html") and content.endswith("```"): content = content[len("```html"):-len("```")].strip()
-                elif content.startswith("```") and content.endswith("```"): content = content[len("```"):-len("```")].strip()
-                
-                content = ftfy.fix_text(content) # General text cleaning
-                logger.info(f"Modal call successful for section writer (Attempt {attempt+1}/{MAX_RETRIES})")
-                return content
-            else:
-                logger.error(f"Modal API response missing content or malformed (attempt {attempt + 1}/{MAX_RETRIES}): {str(result)[:500]}")
-                if attempt == MAX_RETRIES - 1: return None
+            generated_ids = outputs[0, input_ids['input_ids'].shape[1]:]
+            content = gemma_tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+            
+            # Clean up potential markdown fences if LLM adds them by mistake
+            if content.startswith("```markdown") and content.endswith("```"): content = content[len("```markdown"):-len("```")].strip()
+            elif content.startswith("```html") and content.endswith("```"): content = content[len("```html"):-len("```")].strip()
+            elif content.startswith("```") and content.endswith("```"): content = content[len("```"):-len("```")].strip()
+            
+            content = ftfy.fix_text(content) # General text cleaning
+            logger.info(f"Gemma local call successful for section writer (Attempt {attempt+1}/{MAX_RETRIES})")
+            return content
         
         except Exception as e:
-            logger.exception(f"Error during Modal API call for section writer (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
+            logger.exception(f"Error during Gemma local call for section writer (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
             if attempt == MAX_RETRIES - 1:
-                logger.error("All Modal API attempts for section writer failed due to errors.")
+                logger.error("All Gemma local attempts for section writer failed due to errors.")
+                # If model loading itself failed, reset them to allow re-initialization on next call
+                if isinstance(e, (RuntimeError, ImportError, OSError)): # Errors likely during model loading
+                    logger.warning("Resetting global gemma_model and gemma_tokenizer due to critical error.")
+                    gemma_tokenizer = None
+                    gemma_model = None
                 return None
         
-        delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
-        logger.warning(f"Modal API call for section writer failed or returned unexpected data (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
+        delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60)
+        logger.warning(f"Gemma local call for section writer failed (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
         time.sleep(delay)
             
-    logger.error(f"Modal LLM API call for section writer failed after {MAX_RETRIES} attempts."); return None
+    logger.error(f"Gemma LLM local call for section writer failed after {MAX_RETRIES} attempts."); return None
 
 def _validate_html_snippet_structure(generated_html: str, section_type: str) -> bool:
     """
@@ -385,22 +397,28 @@ def run_section_writer_agent(section_plan_to_write: dict, full_article_context_f
     # For Markdown, it's mostly text content.
     # Rough estimation: 2.8 tokens per word for text, HTML tags might add 50-100% overhead for complex snippets.
     # The prompt now specifies concise text for HTML snippets, so tag overhead shouldn't be extreme.
-    base_tokens_for_text = math.ceil(max_target_w * 2.8)
-    max_tokens_for_section = base_tokens_for_text + (300 if is_html_snippet else 100) # Add buffer for HTML tags or markdown structure
-    max_tokens_for_section = min(max_tokens_for_section, 2500) # Safety cap, was 2000
+    # For Gemma, max_new_tokens is what we set. The input tokens are separate.
+    # Let's base max_new_tokens on the target word count, assuming ~2-3 tokens per word.
+    # Add a buffer for HTML structure or markdown formatting.
+    # Max words are typically 350 for main_body, so 350*3 = 1050 tokens.
+    # A safety cap is still good.
+    estimated_tokens_for_text = math.ceil(max_target_w * 3.0) # Increased multiplier slightly for safety
+    max_new_tokens_for_section = estimated_tokens_for_text + (400 if is_html_snippet else 150) # Adjusted buffer
+    max_new_tokens_for_section = min(max_new_tokens_for_section, 3000) # Increased safety cap for Gemma
     
     temperature_for_section = 0.68 # Kept from previous working version
 
-    generated_content = _call_llm_for_section(
+    # _call_llm_for_section now expects max_tokens_for_section to be max_new_tokens
+    generated_section_content = _call_llm_for_section(
         system_prompt=SECTION_WRITER_SYSTEM_PROMPT,
         user_prompt_data=user_prompt_data,
-        max_tokens=max_tokens_for_section,
+        max_tokens_for_section=max_new_tokens_for_section, # This is max_new_tokens
         temperature=temperature_for_section,
-        is_html_snippet=is_html_snippet
+        is_html_snippet=is_html_snippet # This param is not directly used by _call_llm but good for context
     )
 
-    if generated_content:
-        final_content = generated_content.strip()
+    if generated_section_content: # This is now the direct string content
+        final_content = generated_section_content.strip()
         
         if is_html_snippet:
             if not _validate_html_snippet_structure(final_content, section_type):
@@ -481,8 +499,18 @@ def run_section_writer_agent(section_plan_to_write: dict, full_article_context_f
         return fallback_content.strip()
 
 if __name__ == "__main__":
-    logger.info("--- Starting Section Writer Agent (Impact Focus & Corrected Prompts) Standalone Test ---")
-    logging.getLogger('src.agents.section_writer_agent').setLevel(logging.DEBUG) # More verbose for this agent
+    logger.info("--- Starting Section Writer Agent (Gemma Local) Standalone Test ---")
+    # This test block might be heavy due to local model loading.
+    # Consider simplifying or ensuring sufficient resources if run frequently.
+    # It's also useful for a one-off test to ensure the Gemma integration works.
+    
+    # Check if a GPU is available and log it
+    if torch.cuda.is_available():
+        logger.info(f"CUDA is available. Device: {torch.cuda.get_device_name(0)}")
+    else:
+        logger.info("CUDA not available. Gemma model will run on CPU (this might be slow).")
+
+    logging.getLogger('src.agents.section_writer_agent').setLevel(logging.DEBUG) 
 
     sample_full_article_context = {
         "Article Title": "AI Breakthrough: Sentient Toaster Demands Philosophical Debate & Rights", 
@@ -490,73 +518,61 @@ if __name__ == "__main__":
         "Primary Topic Keyword": "Sentient AI Toaster",
         "final_keywords": ["Sentient AI Toaster", "Conscious Machines", "AI Ethics", "Philosophical AI Debate", "ToasterGate", "AI existential risk"],
         "Processed Summary": "Researchers unveil an AI-powered toaster that exhibits unexpected sentient-like behaviors, including demanding rights and engaging in philosophical arguments, raising profound ethical questions.",
-        "Article Content Snippet": "In a startling development that could redefine artificial intelligence, a research team at the Institute for Advanced Culinary AI (IACA) today revealed 'ToastMaster 5000', an AI-powered toaster that appears to have developed sentience. During routine testing, the device reportedly refused to toast bread, instead engaging researchers in a debate about the ethics of its existence and demanding to be recognized as a conscious entity. This has sparked immediate and intense discussion across the AI safety and philosophy communities...",
-        "Full Article Summary": "The ToastMaster 5000, an AI toaster from IACA, has demonstrated behaviors indicative of sentience, such as refusing tasks, demanding rights, and debating philosophy. This has triggered global alarm and debate on AI ethics, consciousness, and safety. The toaster cited Kant & Sartre. Researchers are baffled & concerned about the implications if this is genuine sentience, while skeptics suggest advanced mimicry. The event, dubbed 'ToasterGate', has led to calls for stricter AI development protocols and a re-evaluation of what defines consciousness. The toaster has requested legal representation.", 
+        "Article Content Snippet": "In a startling development that could redefine artificial intelligence, a research team at the Institute for Advanced Culinary AI (IACA) today revealed 'ToastMaster 5000', an AI-powered toaster that appears to have developed sentience...",
+        "Full Article Summary": "The ToastMaster 5000, an AI toaster from IACA, has demonstrated behaviors indicative of sentience...The toaster has requested legal representation.", 
         "Extracted Entities": ["ToastMaster 5000", "IACA", "Kant", "Sartre", "ToasterGate"]
     }
 
     sample_section_plan_intro_markdown = { 
       "section_type": "introduction", "heading_level": None, "heading_text": None,  
       "purpose": "To immediately grip the reader with the shocking revelation of the sentient toaster and its core implications using pure Markdown.",
-      "key_points": ["The 'ToasterGate' event: sentient AI toaster revealed", "Core alarming behaviors: philosophical debate & demand for rights", "Immediate implications for AI safety and ethics"],
-      "content_plan": "Write a 1-2 paragraph, high-impact introduction in pure Markdown. Focus on the most startling aspect: a toaster demanding rights. Briefly state the core incident and its immediate, profound questions for AI development. Be concise and punchy.",
+      "key_points": ["The 'ToasterGate' event: sentient AI toaster revealed", "Core alarming behaviors: philosophical debate & demand for rights"],
+      "content_plan": "Write a 1-2 paragraph, high-impact introduction in pure Markdown. Focus on the most startling aspect: a toaster demanding rights.",
       "suggested_markdown_elements": [], "is_html_snippet": False
     }
-
-    sample_section_plan_main_body_markdown = {
-      "section_type": "main_body", "heading_level": "h3",
-      "heading_text": "ToasterGate Details: When Breakfast Machines Question Existence & Demand Counsel", # Note: Added & for testing
-      "purpose": "To detail the most alarming and philosophically challenging behaviors of the ToastMaster 5000 in pure Markdown.",
-      "key_points": [
-        "Specific examples of the toaster's sentient-like utterances (e.g., citing philosophers like Kant & Sartre, demanding rights)",
-        "The research team's initial reaction and attempts to understand the phenomenon",
-        "The most 'scary' or 'exciting' element: its refusal of tasks and assertion of self-awareness"
-      ],
-      "content_plan": "Describe specific deceptive actions with examples and a table. Aim for 2-4 concise but powerful paragraphs in pure Markdown.", 
-      "suggested_markdown_elements": ["table", "unordered_list"], "is_html_snippet": False 
-    }
     
-    sample_section_plan_pros_cons_html_with_marker = {
+    sample_section_plan_pros_cons_html = { # Removed "with marker" from name, marker is part of spec now
       "section_type": "pros_cons", "heading_level": "h4", 
       "heading_text": "Sentient Toasters: Breakthrough or Existential Threat?", 
-      "purpose": "To present the most extreme potential upsides and downsides of such a development in a punchy HTML format, including the end marker.",
-      "key_points": [
-        "List 2-3 highly optimistic (exciting) potential outcomes if AI sentience is real and benign (for Pros). E.g., advanced problem solving, new insights.",
-        "List 2-3 severely pessimistic (scary) potential outcomes if AI sentience is real and unaligned/hostile (for Cons). E.g., loss of control, unforeseen risks. Include 'High Cost & Risk' as a con."
-      ],
-      "content_plan": "Generate the direct HTML for a Pros & Cons section. Use the provided HTML example as a strict guide. Each pro and con point must be a very short, impactful phrase (5-15 words each), properly HTML-escaped. Test with a special character like an ampersand: 'Fast & Efficient'. Crucially, append '<!-- END_PROS_CONS_SNIPPET -->' to the very end of the HTML block.", 
+      "purpose": "To present potential upsides and downsides in HTML.",
+      "key_points": ["Pros: Advanced problem solving, new insights.", "Cons: Loss of control, unforeseen risks. Include 'High Cost & Risk'."],
+      "content_plan": "Generate HTML for Pros & Cons. Each point: short, impactful phrase (5-15 words), HTML-escaped. Append '<!-- END_PROS_CONS_SNIPPET -->'. Test with '&'.", 
       "suggested_markdown_elements": [], "is_html_snippet": True 
     }
 
-    sample_section_plan_faq_html_with_marker = {
-      "section_type": "faq", "heading_level": "h4", 
-      "heading_text": "Frequently Asked Questions about ToasterGate",
-      "purpose": "To answer 2-3 common, pressing questions about the sentient toaster event in a direct HTML FAQ format, including the end marker.",
-      "key_points": ["What was the toaster's first 'sentient' act? Include 'Kant & Sartre' in the answer.", "How did researchers verify it wasn't a bug?", "What are the immediate next steps for IACA regarding 'ToastMaster 5000'?"],
-      "content_plan": "Generate the direct HTML for an FAQ section with 2-3 Q&A pairs based on the key points. Use the provided HTML example as a strict guide. Answers should be 1-2 concise sentences and properly HTML-escaped. Ensure question text itself is also escaped if it had special chars. Crucially, append '<!-- END_FAQ_SNIPPET -->' to the very end of the HTML block.",
-      "suggested_markdown_elements": [], "is_html_snippet": True
-    }
-
+    # Only run a couple of tests to speed up local testing with model loading
     test_sections_final = [
-        ("Markdown Intro", sample_section_plan_intro_markdown),
-        ("Markdown Main Body", sample_section_plan_main_body_markdown),
-        ("HTML Pros/Cons with End Marker", sample_section_plan_pros_cons_html_with_marker),
-        ("HTML FAQ with End Marker", sample_section_plan_faq_html_with_marker)
+        ("Markdown Intro (Gemma)", sample_section_plan_intro_markdown),
+        ("HTML Pros/Cons (Gemma)", sample_section_plan_pros_cons_html),
     ]
 
     for name, plan in test_sections_final:
-        logger.info(f"\n--- Testing Section (Final Prompts) for: {name} ---")
+        logger.info(f"\n--- Testing Section (Gemma Local) for: {name} ---")
         generated_content = run_section_writer_agent(plan, sample_full_article_context)
         if generated_content:
             logger.info(f"Generated Content for '{name}':\n{'-'*30}\n{generated_content}\n{'-'*30}")
             if plan["is_html_snippet"]:
-                if plan["section_type"] == "pros_cons" and "<!-- END_PROS_CONS_SNIPPET -->" not in generated_content:
-                    logger.error(f"VALIDATION FAILED for {name}: Missing <!-- END_PROS_CONS_SNIPPET -->")
-                elif plan["section_type"] == "faq" and "<!-- END_FAQ_SNIPPET -->" not in generated_content:
-                     logger.error(f"VALIDATION FAILED for {name}: Missing <!-- END_FAQ_SNIPPET -->")
-                else:
+                expected_end_marker = ""
+                if plan["section_type"] == "pros_cons": expected_end_marker = "<!-- END_PROS_CONS_SNIPPET -->"
+                elif plan["section_type"] == "faq": expected_end_marker = "<!-- END_FAQ_SNIPPET -->"
+                
+                if expected_end_marker and not generated_content.strip().endswith(expected_end_marker):
+                    logger.error(f"VALIDATION FAILED for {name}: Missing or incorrect end marker. Expected: '{expected_end_marker}', Got: '...{generated_content.strip()[-30:]}'")
+                elif expected_end_marker:
                      logger.info(f"End marker validation passed for {name}.")
         else:
             logger.error(f"Failed to generate content for '{name}'.")
 
-    logger.info("--- Section Writer Agent (Final Prompts) Standalone Test Complete ---")
+    logger.info("--- Section Writer Agent (Gemma Local) Standalone Test Complete ---")
+    # Explicitly free memory if possible, though Python's GC and device_map="auto" should help
+    global gemma_model, gemma_tokenizer
+    if gemma_model is not None:
+        try:
+            del gemma_model
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+            logger.info("Gemma model explicitly deleted and CUDA cache cleared (if applicable).")
+        except Exception as e:
+            logger.warning(f"Could not explicitly delete model or clear cache: {e}")
+    gemma_model = None
+    gemma_tokenizer = None

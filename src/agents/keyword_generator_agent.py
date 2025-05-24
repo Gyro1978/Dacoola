@@ -12,7 +12,8 @@ import os
 import sys
 import json
 import logging
-import modal # Added for Modal integration
+import torch # Added for Gemma
+from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig # Added for Gemma
 import re
 import time # For retry delays
 
@@ -68,14 +69,14 @@ except Exception as e:
 
 
 # --- Configuration & Constants ---
-LLM_MODEL_NAME = os.getenv('KEYWORD_AGENT_MODEL', "deepseek-R1") # Updated model name
-SUMMARY_AGENT_MODEL_NAME = os.getenv('SUMMARY_AGENT_MODEL', "deepseek-R1") # For internal summary, updated
+LLM_MODEL_NAME = "google/gemma-3n-e4b-it" # Changed to Gemma model ID
+SUMMARY_AGENT_MODEL_NAME = "google/gemma-3n-e4b-it" # Changed to Gemma model ID
 
-MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
-MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
+# Global variables for Gemma model and tokenizer
+gemma_tokenizer = None
+gemma_model = None
 
-API_TIMEOUT = 90 # Retained for Modal call options if applicable
-MAX_RETRIES = 3 # Retained for application-level retries with Modal
+MAX_RETRIES = 3 
 RETRY_DELAY_BASE = 5 # seconds
 
 TARGET_NUM_KEYWORDS = 20 # Final desired number of keywords
@@ -262,56 +263,68 @@ def _format_user_prompt_content(user_data_dict: dict) -> str:
     return user_prompt_content
 
 def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, model_name: str) -> str | None:
-    """Generic function to call LLM API using Modal with retry logic."""
+    """Generic function to call LLM API using local Gemma model with retry logic."""
+    global gemma_tokenizer, gemma_model
     user_prompt_string = _format_user_prompt_content(user_prompt_data)
 
-    messages_for_modal = [
+    messages_for_gemma = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt_string}
     ]
 
     for attempt in range(MAX_RETRIES):
         try:
-            logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES} for keywords (model config: {model_name})")
+            logger.debug(f"Local Gemma API call attempt {attempt + 1}/{MAX_RETRIES} for keywords (model config: {model_name})")
             
-            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            if not ModelClass:
-                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
-                if attempt == MAX_RETRIES - 1: return None # Last attempt
-                delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
-                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
-                time.sleep(delay)
-                continue
-            
-            model_instance = ModelClass()
+            if gemma_tokenizer is None or gemma_model is None:
+                logger.info(f"Initializing Gemma model and tokenizer for Keyword Agent (attempt {attempt + 1}/{MAX_RETRIES}). Model: {model_name}")
+                gemma_tokenizer = AutoTokenizer.from_pretrained(model_name)
+                quantization_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16)
+                gemma_model = AutoModelForCausalLM.from_pretrained(
+                    model_name,
+                    quantization_config=quantization_config,
+                    device_map="auto"
+                )
+                gemma_model.eval()
+                logger.info("Gemma model and tokenizer initialized successfully for Keyword Agent.")
 
-            result = model_instance.generate.remote(
-                messages=messages_for_modal,
-                max_new_tokens=max_tokens,
-                temperature=temperature, # Pass temperature
-                model=model_name # Pass model name
+            input_text = gemma_tokenizer.apply_chat_template(
+                messages_for_gemma,
+                tokenize=False,
+                add_generation_prompt=True
             )
+            input_ids = gemma_tokenizer(input_text, return_tensors="pt").to(gemma_model.device)
 
-            if result and result.get("choices") and result["choices"].get("message") and \
-               isinstance(result["choices"]["message"].get("content"), str):
-                content = result["choices"]["message"]["content"].strip()
-                logger.info(f"Modal call successful for keywords (Attempt {attempt+1}/{MAX_RETRIES})")
-                return content
-            else:
-                logger.error(f"Modal API response missing content or malformed (attempt {attempt + 1}/{MAX_RETRIES}): {str(result)[:500]}")
-                if attempt == MAX_RETRIES - 1: return None
+            with torch.no_grad():
+                outputs = gemma_model.generate(
+                    **input_ids,
+                    max_new_tokens=max_tokens,
+                    temperature=temperature,
+                    do_sample=temperature > 0.001,
+                    pad_token_id=gemma_tokenizer.eos_token_id
+                )
+            
+            generated_ids = outputs[0, input_ids['input_ids'].shape[1]:]
+            content_str = gemma_tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+            
+            logger.info(f"Local Gemma call successful for keywords (Attempt {attempt+1}/{MAX_RETRIES})")
+            return content_str
         
         except Exception as e:
-            logger.exception(f"Error during Modal API call for keywords (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
+            logger.exception(f"Error during local Gemma API call for keywords (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
             if attempt == MAX_RETRIES - 1:
-                logger.error("All Modal API attempts for keywords failed due to errors.")
+                logger.error("All local Gemma API attempts for keywords failed due to errors.")
+                if isinstance(e, (RuntimeError, ImportError, OSError)): # Errors likely during model loading
+                    logger.warning("Resetting global gemma_model and gemma_tokenizer for Keyword Agent due to critical error.")
+                    gemma_tokenizer = None
+                    gemma_model = None
                 return None
         
-        delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
-        logger.warning(f"Modal API call for keywords failed or returned unexpected data (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
+        delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60)
+        logger.warning(f"Local Gemma API call for keywords failed (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
         time.sleep(delay)
         
-    logger.error(f"Modal LLM API call for keywords failed after {MAX_RETRIES} attempts.")
+    logger.error(f"Local Gemma LLM API call for keywords failed after {MAX_RETRIES} attempts.")
     return None
 
 def _parse_llm_keyword_response(json_string: str) -> list | None:
@@ -495,7 +508,11 @@ def run_keyword_generator_agent(article_pipeline_data: dict) -> dict:
 
 # --- Standalone Execution ---
 if __name__ == "__main__":
-    logger.info("--- Starting Keyword Generator Agent Standalone Test ---")
+    logger.info("--- Starting Keyword Generator Agent Standalone Test (Gemma Local) ---")
+    if torch.cuda.is_available():
+        logger.info(f"CUDA is available. Device: {torch.cuda.get_device_name(0)}")
+    else:
+        logger.info("CUDA not available. Gemma model will run on CPU (this might be slow).")
     
     # IMPORTANT: Ensure SpaCy model is downloaded for full functionality!
     # Run this command in your terminal if you see 'SpaCy model not found' warnings:
@@ -541,16 +558,28 @@ The research was supported by a substantial grant from the National Science Foun
 
     result_data_1 = run_keyword_generator_agent(test_article_data.copy())
     logger.info("\n--- Keyword Generator Results (Test 1) ---")
-    logger.info(f"Status: {result_data_1.get('keyword_agent_status')}")
+    logger.info(f"Status (Gemma): {result_data_1.get('keyword_agent_status')}")
     if result_data_1.get('keyword_agent_error'):
-        logger.error(f"Error: {result_data_1.get('keyword_agent_error')}")
-    logger.info(f"Final Keywords ({len(result_data_1.get('final_keywords', []))}): {result_data_1.get('final_keywords')}")
+        logger.error(f"Error (Gemma): {result_data_1.get('keyword_agent_error')}")
+    logger.info(f"Final Keywords (Gemma) ({len(result_data_1.get('final_keywords', []))}): {result_data_1.get('final_keywords')}")
 
-    logger.info("\n--- Keyword Generator Results (Test 2: Long Text) ---")
+    logger.info("\n--- Keyword Generator Results (Test 2: Long Text, Gemma) ---")
     result_data_2 = run_keyword_generator_agent(test_long_text_data.copy())
-    logger.info(f"Status: {result_data_2.get('keyword_agent_status')}")
+    logger.info(f"Status (Gemma): {result_data_2.get('keyword_agent_status')}")
     if result_data_2.get('keyword_agent_error'):
-        logger.error(f"Error: {result_data_2.get('keyword_agent_error')}")
-    logger.info(f"Final Keywords ({len(result_data_2.get('final_keywords', []))}): {result_data_2.get('final_keywords')}")
+        logger.error(f"Error (Gemma): {result_data_2.get('keyword_agent_error')}")
+    logger.info(f"Final Keywords (Gemma) ({len(result_data_2.get('final_keywords', []))}): {result_data_2.get('final_keywords')}")
 
-    logger.info("--- Keyword Generator Agent Standalone Test Complete ---")
+    logger.info("--- Keyword Generator Agent Standalone Test Complete (Gemma Local) ---")
+    # Explicitly free memory
+    global gemma_model, gemma_tokenizer
+    if gemma_model is not None:
+        try:
+            del gemma_model
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+            logger.info("Gemma model explicitly deleted and CUDA cache cleared for Keyword Agent (if applicable).")
+        except Exception as e:
+            logger.warning(f"Could not explicitly delete model or clear cache for Keyword Agent: {e}")
+    gemma_model = None
+    gemma_tokenizer = None

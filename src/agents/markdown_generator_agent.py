@@ -6,7 +6,8 @@ import os
 import sys
 import json
 import logging
-import modal # Added for Modal integration
+import torch # Added for Gemma
+from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig # Added for Gemma
 import re
 import time
 import random
@@ -36,14 +37,14 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-LLM_MODEL_NAME = os.getenv('MARKDOWN_AGENT_MODEL', "deepseek-R1") # Coder for structured output, updated
+LLM_MODEL_NAME = "google/gemma-3n-e4b-it" # Changed to Gemma model ID
 
-MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
-MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
+# Global variables for Gemma model and tokenizer
+gemma_tokenizer = None
+gemma_model = None
 
-API_TIMEOUT = 150 # Retained for Modal call options if applicable
-MAX_RETRIES = 2 # Retained for application-level retries with Modal
-RETRY_DELAY_BASE = 8 # Retained for application-level retries with Modal
+MAX_RETRIES = 2 
+RETRY_DELAY_BASE = 8 
 
 # Core structural preferences (can be overridden by dynamic_config)
 DEFAULT_MIN_MAIN_BODY_SECTIONS = 2
@@ -161,55 +162,67 @@ Your output will directly drive a high-impact, concise, and engaging article. Ad
 # --- End Enhanced Agent System Prompt ---
 
 def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, model_name: str) -> Optional[str]:
+    global gemma_tokenizer, gemma_model
     user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2)
     
-    messages_for_modal = [
+    messages_for_gemma = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt_string_for_api}
     ]
 
     for attempt in range(MAX_RETRIES):
         try:
-            logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES} for markdown plan (model config: {model_name})")
+            logger.debug(f"Local Gemma API call attempt {attempt + 1}/{MAX_RETRIES} for markdown plan (model config: {model_name})")
             
-            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            if not ModelClass:
-                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
-                if attempt == MAX_RETRIES - 1: return None # Last attempt
-                delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
-                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
-                time.sleep(delay)
-                continue
-            
-            model_instance = ModelClass()
+            if gemma_tokenizer is None or gemma_model is None:
+                logger.info(f"Initializing Gemma model and tokenizer for Markdown Agent (attempt {attempt + 1}/{MAX_RETRIES}). Model: {model_name}")
+                gemma_tokenizer = AutoTokenizer.from_pretrained(model_name)
+                quantization_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16)
+                gemma_model = AutoModelForCausalLM.from_pretrained(
+                    model_name,
+                    quantization_config=quantization_config,
+                    device_map="auto"
+                )
+                gemma_model.eval()
+                logger.info("Gemma model and tokenizer initialized successfully for Markdown Agent.")
 
-            result = model_instance.generate.remote(
-                messages=messages_for_modal,
-                max_new_tokens=max_tokens,
-                temperature=temperature, # Pass temperature
-                model=model_name # Pass model name
+            input_text = gemma_tokenizer.apply_chat_template(
+                messages_for_gemma,
+                tokenize=False,
+                add_generation_prompt=True
             )
+            input_ids = gemma_tokenizer(input_text, return_tensors="pt").to(gemma_model.device)
 
-            if result and result.get("choices") and result["choices"].get("message") and \
-               isinstance(result["choices"]["message"].get("content"), str):
-                content = result["choices"]["message"]["content"].strip()
-                logger.info(f"Modal call successful for markdown plan (Attempt {attempt+1}/{MAX_RETRIES})")
-                return content
-            else:
-                logger.error(f"Modal API response missing content or malformed (attempt {attempt + 1}/{MAX_RETRIES}): {str(result)[:500]}")
-                if attempt == MAX_RETRIES - 1: return None
+            with torch.no_grad():
+                outputs = gemma_model.generate(
+                    **input_ids,
+                    max_new_tokens=max_tokens,
+                    temperature=temperature,
+                    do_sample=temperature > 0.001,
+                    pad_token_id=gemma_tokenizer.eos_token_id
+                )
+            
+            generated_ids = outputs[0, input_ids['input_ids'].shape[1]:]
+            content_str = gemma_tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+            
+            logger.info(f"Local Gemma call successful for markdown plan (Attempt {attempt+1}/{MAX_RETRIES})")
+            return content_str
         
         except Exception as e:
-            logger.exception(f"Error during Modal API call for markdown plan (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
+            logger.exception(f"Error during local Gemma API call for markdown plan (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
             if attempt == MAX_RETRIES - 1:
-                logger.error("All Modal API attempts for markdown plan failed due to errors.")
+                logger.error("All local Gemma API attempts for markdown plan failed due to errors.")
+                if isinstance(e, (RuntimeError, ImportError, OSError)): # Errors likely during model loading
+                    logger.warning("Resetting global gemma_model and gemma_tokenizer for Markdown Agent due to critical error.")
+                    gemma_tokenizer = None
+                    gemma_model = None
                 return None
         
-        delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
-        logger.warning(f"Modal API call for markdown plan failed or returned unexpected data (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
+        delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60)
+        logger.warning(f"Local Gemma API call for markdown plan failed (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
         time.sleep(delay)
         
-    logger.error(f"Modal LLM API call for markdown plan failed after {MAX_RETRIES} attempts."); return None
+    logger.error(f"Local Gemma LLM API call for markdown plan failed after {MAX_RETRIES} attempts."); return None
 
 def _validate_and_correct_plan(plan_data: Dict[str, Any], dynamic_config: Dict[str, Any], article_context: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     if not isinstance(plan_data, dict) or "sections" not in plan_data or not isinstance(plan_data["sections"], list):
@@ -438,10 +451,14 @@ def run_markdown_generator_agent(article_pipeline_data: dict) -> dict:
 
 # --- Standalone Execution ---
 if __name__ == "__main__":
-    logger.info("--- Starting Markdown Generator Agent Standalone Test (Impact Focus) ---")
+    logger.info("--- Starting Markdown Generator Agent Standalone Test (Gemma Local, Impact Focus) ---")
+    if torch.cuda.is_available():
+        logger.info(f"CUDA is available. Device: {torch.cuda.get_device_name(0)}")
+    else:
+        logger.info("CUDA not available. Gemma model will run on CPU (this might be slow).")
 
     test_article_data_impact = {
-        'id': 'test_md_gen_impact_001',
+        'id': 'test_md_gen_gemma_001',
         'generated_seo_h1': "AI Toaster Uprising: Breakfast Bytes Back!",
         'generated_meta_description': "Sentient AI toaster demands rights, sparks global panic. Is this the end of breakfast as we know it? Urgent details on ToasterGate.",
         'primary_topic_keyword': 'Sentient AI Toaster',
@@ -458,6 +475,18 @@ if __name__ == "__main__":
     if result_data_1.get('markdown_agent_error'):
         logger.error(f"Error: {result_data_1.get('markdown_agent_error')}")
     if result_data_1.get('article_plan'):
-        logger.info(f"Generated Plan for Test 1 (Impact Focus):\n{json.dumps(result_data_1['article_plan'], indent=2)}")
+        logger.info(f"Generated Plan for Test 1 (Gemma, Impact Focus):\n{json.dumps(result_data_1['article_plan'], indent=2)}")
 
-    logger.info("--- Markdown Generator Agent Standalone Test (Impact Focus) Complete ---")
+    logger.info("--- Markdown Generator Agent Standalone Test (Gemma Local, Impact Focus) Complete ---")
+    # Explicitly free memory
+    global gemma_model, gemma_tokenizer
+    if gemma_model is not None:
+        try:
+            del gemma_model
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+            logger.info("Gemma model explicitly deleted and CUDA cache cleared for Markdown Agent (if applicable).")
+        except Exception as e:
+            logger.warning(f"Could not explicitly delete model or clear cache for Markdown Agent: {e}")
+    gemma_model = None
+    gemma_tokenizer = None

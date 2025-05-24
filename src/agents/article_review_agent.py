@@ -16,7 +16,8 @@ import os
 import sys
 import json
 import logging
-import modal # Added for Modal integration
+import torch # Added for Gemma
+from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig # Added for Gemma
 import re
 import time
 import html # For unescaping to compare with source if needed
@@ -46,12 +47,12 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-LLM_MODEL_NAME = os.getenv('ARTICLE_REVIEW_AGENT_MODEL', "deepseek-R1") # Updated model name, actual model is in Modal class
+LLM_MODEL_NAME = "google/gemma-3n-e4b-it" # Changed to Gemma model ID
 
-MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
-MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
+# Global variables for Gemma model and tokenizer
+gemma_tokenizer = None
+gemma_model = None
 
-API_TIMEOUT = 200  # Retained for Modal call options if applicable, though Modal has its own timeout mechanisms
 MAX_RETRIES = 2
 RETRY_DELAY_BASE = 10
 
@@ -171,13 +172,14 @@ Your output is ONLY the JSON object. No other text.
 # --- End Enhanced Agent System Prompt ---
 
 
-def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, model_name: str) -> Optional[str]: # model_name is now more for logging/config
+def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, model_name: str) -> Optional[str]:
+    global gemma_tokenizer, gemma_model
     user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2, ensure_ascii=False)
 
     estimated_prompt_tokens = math.ceil(len(user_prompt_string_for_api.encode('utf-8')) / 3.0)
-    logger.debug(f"Article Reviewer (Modal): Approx. prompt tokens: {estimated_prompt_tokens}, Max completion: {max_tokens}, Target Model (config): {model_name}")
+    logger.debug(f"Article Reviewer (Local Gemma): Approx. prompt tokens: {estimated_prompt_tokens}, Max completion: {max_tokens}, Target Model (config): {model_name}")
 
-    MAX_HTML_BODY_IN_PROMPT = 25000
+    MAX_HTML_BODY_IN_PROMPT = 25000 # Preserved logic
     if "rendered_html_body" in user_prompt_data and \
        user_prompt_data["rendered_html_body"] and \
        len(user_prompt_data["rendered_html_body"]) > MAX_HTML_BODY_IN_PROMPT:
@@ -193,57 +195,63 @@ def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, tempe
         user_prompt_data_truncated["rendered_html_body"] = user_prompt_data_truncated["rendered_html_body"][:trunc_point] + "\n... [HTML TRUNCATED FOR REVIEW INPUT] ..."
         user_prompt_string_for_api = json.dumps(user_prompt_data_truncated, indent=2, ensure_ascii=False)
         estimated_prompt_tokens_truncated = math.ceil(len(user_prompt_string_for_api.encode('utf-8')) / 3.0)
-        logger.debug(f"Article Reviewer (Modal): Approx. TRUNCATED prompt tokens: {estimated_prompt_tokens_truncated}")
+        logger.debug(f"Article Reviewer (Local Gemma): Approx. TRUNCATED prompt tokens: {estimated_prompt_tokens_truncated}")
 
-    # Construct messages list for Modal function
-    # The Modal function is expected to handle the conversion to its specific API format if needed.
-    # We pass the "user_prompt_string_for_api" which contains the JSON of all context.
-    # The system prompt is passed separately.
-    messages_for_modal = [
+    messages_for_gemma = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_prompt_string_for_api} # This is a JSON string
+        {"role": "user", "content": user_prompt_string_for_api} 
     ]
 
     for attempt in range(MAX_RETRIES):
         try:
-            logger.info(f"Attempting to call Modal function: {MODAL_APP_NAME} / {MODAL_CLASS_NAME} (Attempt {attempt+1}/{MAX_RETRIES})")
-            # Get a handle to the Modal class
-            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            if not ModelClass:
-                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
-                return None
-
-            # Instantiate the remote class
-            model_instance = ModelClass()
-
-            # Call the generate method
-            # The remote generate method should be designed to accept 'messages' and 'max_new_tokens'
-            # and return a dict like: {"choices": [{"message": {"content": "..."}}]}
-            # Temperature is not directly passed here, assuming it's configured in the Modal class or
-            # could be added as a parameter to generate if the Modal class supports it.
-            result = model_instance.generate.remote(
-                messages=messages_for_modal,
-                max_new_tokens=max_tokens,
-                temperature=temperature, # Pass temperature
-                model=model_name # Pass model name
-            )
-
-            if result and result.get("choices") and result["choices"].get("message"):
-                logger.info(f"Modal call successful (Attempt {attempt+1}/{MAX_RETRIES})")
-                return result["choices"]["message"].get("content", "").strip()
+            logger.info(f"Attempting local Gemma call (Attempt {attempt+1}/{MAX_RETRIES})")
             
-            logger.error(f"Modal LLM API response missing content or malformed (attempt {attempt+1}/{MAX_RETRIES}): {result}")
-            # Do not return None immediately, allow retry
-            if attempt == MAX_RETRIES - 1:
-                return None
+            if gemma_tokenizer is None or gemma_model is None:
+                logger.info(f"Initializing Gemma model and tokenizer for Article Review Agent (attempt {attempt + 1}/{MAX_RETRIES}). Model: {model_name}")
+                gemma_tokenizer = AutoTokenizer.from_pretrained(model_name)
+                quantization_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16)
+                gemma_model = AutoModelForCausalLM.from_pretrained(
+                    model_name,
+                    quantization_config=quantization_config,
+                    device_map="auto"
+                )
+                gemma_model.eval()
+                logger.info("Gemma model and tokenizer initialized successfully for Article Review Agent.")
 
-        except Exception as e: # Broad exception for Modal calls, can be refined
-            logger.exception(f"Error during Modal LLM API call (attempt {attempt+1}/{MAX_RETRIES}): {e}")
+            input_text = gemma_tokenizer.apply_chat_template(
+                messages_for_gemma,
+                tokenize=False,
+                add_generation_prompt=True
+            )
+            input_ids = gemma_tokenizer(input_text, return_tensors="pt").to(gemma_model.device)
+
+            with torch.no_grad():
+                outputs = gemma_model.generate(
+                    **input_ids,
+                    max_new_tokens=max_tokens,
+                    temperature=temperature,
+                    do_sample=temperature > 0.001,
+                    pad_token_id=gemma_tokenizer.eos_token_id
+                )
+            
+            generated_ids = outputs[0, input_ids['input_ids'].shape[1]:]
+            content_str = gemma_tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+            
+            logger.info(f"Local Gemma call successful (Attempt {attempt+1}/{MAX_RETRIES})")
+            return content_str
+            
+        except Exception as e: 
+            logger.exception(f"Error during local Gemma API call (attempt {attempt+1}/{MAX_RETRIES}): {e}")
             if attempt == MAX_RETRIES - 1:
+                if isinstance(e, (RuntimeError, ImportError, OSError)): 
+                    logger.warning("Resetting global gemma_model and gemma_tokenizer for Article Review Agent due to critical error.")
+                    gemma_tokenizer = None
+                    gemma_model = None
                 return None
-            logger.warning(f"Modal LLM API call failed (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {RETRY_DELAY_BASE * (2**attempt)}s.")
-            time.sleep(RETRY_DELAY_BASE * (2**attempt))
-    logger.error(f"Modal LLM API call failed after {MAX_RETRIES} attempts."); return None
+            delay = RETRY_DELAY_BASE * (2**attempt)
+            logger.warning(f"Local Gemma API call failed (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
+            time.sleep(delay)
+    logger.error(f"Local Gemma API call failed after {MAX_RETRIES} attempts."); return None
 
 def _parse_llm_review_response(json_string: str) -> Optional[dict]:
     if not json_string:
@@ -355,13 +363,17 @@ def run_article_review_agent(article_pipeline_data: dict) -> dict:
 
 # --- Standalone Execution ---
 if __name__ == "__main__":
-    logger.setLevel(logging.DEBUG)
-    logging.getLogger().setLevel(logging.DEBUG) 
+    logger.setLevel(logging.DEBUG) # Ensure this agent's logger is verbose for testing
+    # logging.getLogger().setLevel(logging.DEBUG) # Uncomment for global verbosity
     
-    logger.info("--- Starting Article Review Agent Standalone Test (Hyper-Critical HTML Check Focus) ---")
+    logger.info("--- Starting Article Review Agent Standalone Test (Gemma Local, Hyper-Critical HTML Check Focus) ---")
+    if torch.cuda.is_available():
+        logger.info(f"CUDA is available. Device: {torch.cuda.get_device_name(0)}")
+    else:
+        logger.info("CUDA not available. Gemma model will run on CPU (this might be slow).")
 
     base_test_data = {
-        'generated_article_title_h1': "AI Breakthrough: Understanding Quantum Entanglement",
+        'generated_article_title_h1': "AI Breakthrough: Understanding Quantum Entanglement (Gemma)",
         'generated_meta_description': "Explore how new AI models are deciphering quantum entanglement, leading to potential revolutions in computing and communication.",
         'original_scraped_text': "Researchers at the Quantum Institute today announced a new AI model capable of predicting entanglement patterns with 99% accuracy. The model, named 'QuantaMind', uses a novel transformer architecture. This could unlock new quantum communication methods. The lead scientist, Dr. Eva Rostova, stated, 'This is a pivotal moment.'",
         'processed_summary': "AI model 'QuantaMind' predicts quantum entanglement patterns, potentially revolutionizing quantum communication.",
@@ -435,6 +447,18 @@ if __name__ == "__main__":
         logger.info(f"Verdict (Good Article): {result_good['article_review_results'].get('review_verdict')}")
         logger.info(f"Score (Good Article): {result_good['article_review_results'].get('quality_score')}")
         logger.info(f"Issues (Good Article): {json.dumps(result_good['article_review_results'].get('issues_found'), indent=2)}")
-        logger.info(f"HTML Notes (Good Article): {result_good['article_review_results'].get('html_rendering_assessment_notes')}")
+    logger.info(f"HTML Notes (Good Article, Gemma): {result_good['article_review_results'].get('html_rendering_assessment_notes')}")
 
-    logger.info("--- Article Review Agent Standalone Test Complete ---")
+    logger.info("--- Article Review Agent Standalone Test Complete (Gemma Local) ---")
+    # Explicitly free memory
+    global gemma_model, gemma_tokenizer
+    if gemma_model is not None:
+        try:
+            del gemma_model
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+            logger.info("Gemma model explicitly deleted and CUDA cache cleared for Article Review Agent (if applicable).")
+        except Exception as e:
+            logger.warning(f"Could not explicitly delete model or clear cache for Article Review Agent: {e}")
+    gemma_model = None
+    gemma_tokenizer = None

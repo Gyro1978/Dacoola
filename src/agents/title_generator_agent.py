@@ -12,7 +12,8 @@ import os
 import sys
 import json
 import logging
-import modal # Added for Modal integration
+import torch # Added for Gemma
+from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig # Added for Gemma
 import re
 import ftfy # For fixing text encoding issues
 import time
@@ -40,14 +41,14 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-LLM_MODEL_NAME = os.getenv('TITLE_AGENT_MODEL', "deepseek-R1") # Updated model name
+LLM_MODEL_NAME = "google/gemma-3n-e4b-it" # Changed to Gemma model ID
 WEBSITE_NAME = os.getenv('WEBSITE_NAME', 'Dacoola') # Retain for branding logic
 BRAND_SUFFIX_FOR_TITLE_TAG = f" - {WEBSITE_NAME}"
 
-MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
-MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
+# Global variables for Gemma model and tokenizer
+gemma_tokenizer = None
+gemma_model = None
 
-API_TIMEOUT = 90 # Retained for Modal call options if applicable
 MAX_SUMMARY_SNIPPET_LEN_CONTEXT = 1000
 MAX_CONTENT_SNIPPET_LEN_CONTEXT = 200
 
@@ -192,71 +193,74 @@ def call_llm_for_titles(primary_keyword: str,
 **Secondary Keywords**: {secondary_keywords_str}
 **Processed Summary**: {processed_summary_snippet}
 **Article Content Snippet**: {content_snippet_context}
-    """.strip() # Ensure user_input_content is stripped
+    """.strip()
 
-    # Max tokens for the title generation, temperature, and response_format are assumed
-    # to be handled by the Modal class or can be passed if supported.
-    # Using a placeholder for max_tokens for now.
-    max_new_tokens_for_titles = 450 # Corresponds to "max_tokens" in original payload
+    max_new_tokens_for_titles = 450 
+    temperature_for_titles = 0.65
 
-    messages_for_modal = [
+    messages_for_gemma = [
         {"role": "system", "content": TITLE_AGENT_SYSTEM_PROMPT},
         {"role": "user", "content": user_input_content}
     ]
     
-    # Using global MAX_RETRIES and RETRY_DELAY_BASE if available, or define locally
-    # For consistency with other agents, let's assume they are available globally or define them if needed.
-    # If not defined globally, ensure they are defined in this file (e.g., MAX_RETRIES = 3, RETRY_DELAY_BASE = 5)
-    # Assuming MAX_RETRIES and RETRY_DELAY_BASE are defined globally or imported.
-    # If not, they should be added here. For this example, I'll assume they are accessible.
-    # Define local constants if not globally available:
     LOCAL_MAX_RETRIES = int(os.getenv('MAX_RETRIES', 3))
     LOCAL_RETRY_DELAY_BASE = int(os.getenv('BASE_RETRY_DELAY', 5))
 
+    global gemma_tokenizer, gemma_model
 
     for attempt in range(LOCAL_MAX_RETRIES):
         try:
-            logger.debug(f"Modal API call attempt {attempt + 1}/{LOCAL_MAX_RETRIES} for titles (PK: '{primary_keyword}')")
-            
-            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            if not ModelClass:
-                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
-                if attempt == LOCAL_MAX_RETRIES - 1: return None # Last attempt
-                delay = min(LOCAL_RETRY_DELAY_BASE * (2 ** attempt), 60)
-                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
-                time.sleep(delay)
-                continue
-            
-            model_instance = ModelClass()
+            if gemma_tokenizer is None or gemma_model is None:
+                logger.info(f"Initializing Gemma model and tokenizer for Title Agent (attempt {attempt + 1}/{LOCAL_MAX_RETRIES}). Model: {LLM_MODEL_NAME}")
+                gemma_tokenizer = AutoTokenizer.from_pretrained(LLM_MODEL_NAME)
+                quantization_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16)
+                gemma_model = AutoModelForCausalLM.from_pretrained(
+                    LLM_MODEL_NAME,
+                    quantization_config=quantization_config,
+                    device_map="auto"
+                )
+                gemma_model.eval()
+                logger.info("Gemma model and tokenizer initialized successfully for Title Agent.")
 
-            result = model_instance.generate.remote(
-                messages=messages_for_modal,
-                max_new_tokens=max_new_tokens_for_titles,
-                temperature=0.65, # Pass temperature
-                model=LLM_MODEL_NAME # Pass model name
+            input_text = gemma_tokenizer.apply_chat_template(
+                messages_for_gemma,
+                tokenize=False,
+                add_generation_prompt=True
             )
+            input_ids = gemma_tokenizer(input_text, return_tensors="pt").to(gemma_model.device)
 
-            if result and result.get("choices") and result["choices"].get("message") and \
-               isinstance(result["choices"]["message"].get("content"), str):
-                json_str = result["choices"]["message"]["content"]
-                logger.info(f"Modal LLM title gen successful for '{primary_keyword}'.")
-                logger.debug(f"Raw JSON for titles from Modal: {json_str}")
-                return json_str
-            else:
-                logger.error(f"Modal LLM title response missing content or malformed (attempt {attempt + 1}/{LOCAL_MAX_RETRIES}): {str(result)[:500]}")
-                if attempt == LOCAL_MAX_RETRIES - 1: return None
+            logger.debug(f"Gemma generation attempt {attempt + 1}/{LOCAL_MAX_RETRIES} for titles (PK: '{primary_keyword}')")
+            with torch.no_grad():
+                outputs = gemma_model.generate(
+                    **input_ids,
+                    max_new_tokens=max_new_tokens_for_titles,
+                    temperature=temperature_for_titles if temperature_for_titles > 0.001 else None,
+                    do_sample=temperature_for_titles > 0.001,
+                    pad_token_id=gemma_tokenizer.eos_token_id
+                )
+            
+            generated_ids = outputs[0, input_ids['input_ids'].shape[1]:]
+            json_str = gemma_tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+            
+            logger.info(f"Gemma local LLM title gen successful for '{primary_keyword}'.")
+            logger.debug(f"Raw JSON for titles from Gemma: {json_str}")
+            return json_str
         
         except Exception as e:
-            logger.exception(f"Error during Modal API call for titles (attempt {attempt + 1}/{LOCAL_MAX_RETRIES}): {e}")
+            logger.exception(f"Error during Gemma local call for titles (attempt {attempt + 1}/{LOCAL_MAX_RETRIES}): {e}")
             if attempt == LOCAL_MAX_RETRIES - 1:
-                logger.error("All Modal API attempts for titles failed due to errors.")
+                logger.error("All Gemma local attempts for titles failed due to errors.")
+                if isinstance(e, (RuntimeError, ImportError, OSError)): # Errors likely during model loading
+                    logger.warning("Resetting global gemma_model and gemma_tokenizer for Title Agent due to critical error.")
+                    gemma_tokenizer = None
+                    gemma_model = None
                 return None
         
         delay = min(LOCAL_RETRY_DELAY_BASE * (2 ** attempt), 60)
-        logger.warning(f"Modal API call for titles failed or returned unexpected data (attempt {attempt+1}/{LOCAL_MAX_RETRIES}). Retrying in {delay}s.")
+        logger.warning(f"Gemma local call for titles failed (attempt {attempt+1}/{LOCAL_MAX_RETRIES}). Retrying in {delay}s.")
         time.sleep(delay)
-        
-    logger.error(f"Modal LLM API call for titles failed after {LOCAL_MAX_RETRIES} attempts for PK '{primary_keyword}'.")
+            
+    logger.error(f"Gemma LLM local call for titles failed after {LOCAL_MAX_RETRIES} attempts for PK '{primary_keyword}'.")
     return None
 
 def _clean_and_validate_title(title_str: str | None, max_len: int, title_type: str, pk_for_log: str, is_title_tag_content: bool = False) -> str:
@@ -439,10 +443,14 @@ def run_title_generator_agent(article_pipeline_data: dict) -> dict:
 
 if __name__ == "__main__":
     logging.getLogger('src.agents.title_generator_agent').setLevel(logging.DEBUG) # More verbose for this agent
-    logger.info("--- Starting Title Generator Agent (Colon-Free, ftfy) Standalone Test ---")
+    logger.info("--- Starting Title Generator Agent (Gemma Local, Colon-Free, ftfy) Standalone Test ---")
+    if torch.cuda.is_available():
+        logger.info(f"CUDA is available. Device: {torch.cuda.get_device_name(0)}")
+    else:
+        logger.info("CUDA not available. Gemma model will run on CPU (this might be slow).")
 
     sample_article_data = {
-        'id': 'test_title_ftfy_001',
+        'id': 'test_title_gemma_001',
         'title': "NVIDIA Blackwell B200 GPU: A New AI Chip with Nvidia’s latest tech", # Original title with ’
         'processed_summary': "NVIDIA unveiled its new Blackwell B200 GPU, the successor to H100, promising massive performance gains for AI training & inference.", # & for testing
         'primary_topic_keyword': "NVIDIA Blackwell B200 GPU", 
@@ -480,20 +488,31 @@ if __name__ == "__main__":
     if not colon_fail: logger.info("COLON TEST PASSED: No problematic colons found.")
     if not problem_chars_fail: logger.info("MOJIBAKE TEST PASSED: No '�' found.")
     
-    logger.info("\n--- Test Fallback (Colon-Free, ftfy Focus) ---")
-    minimal_data = {'id': 'test_fallback_ftfy_002', 'primary_topic_keyword': "Quantum Computing: The Future?"} # Test with colon in PK
+    logger.info("\n--- Test Fallback (Gemma Local, Colon-Free, ftfy Focus) ---")
+    minimal_data = {'id': 'test_fallback_gemma_002', 'primary_topic_keyword': "Quantum Computing: The Future?"} # Test with colon in PK
     result_minimal = run_title_generator_agent(minimal_data.copy())
-    logger.info(f"Minimal Data Status: {result_minimal.get('title_agent_status')}")
-    logger.info(f"Minimal Title Tag: '{result_minimal.get('generated_title_tag')}'")
-    logger.info(f"Minimal SEO H1: '{result_minimal.get('generated_seo_h1')}'")
+    logger.info(f"Minimal Data Status (Gemma): {result_minimal.get('title_agent_status')}")
+    logger.info(f"Minimal Title Tag (Gemma): '{result_minimal.get('generated_title_tag')}'")
+    logger.info(f"Minimal SEO H1 (Gemma): '{result_minimal.get('generated_seo_h1')}'")
     if ":" in result_minimal.get('generated_title_tag','').replace(BRAND_SUFFIX_FOR_TITLE_TAG, '') or ":" in result_minimal.get('generated_seo_h1',''):
-        logger.error("FALLBACK COLON TEST FAILED: Colon found in fallback title tag or H1 (excluding allowed patterns).")
+        logger.error("FALLBACK COLON TEST FAILED (Gemma): Colon found in fallback title tag or H1 (excluding allowed patterns).")
     else:
-        logger.info("FALLBACK COLON TEST PASSED: No problematic colons found in fallback titles.")
+        logger.info("FALLBACK COLON TEST PASSED (Gemma): No problematic colons found in fallback titles.")
     if '�' in result_minimal.get('generated_title_tag','') or '�' in result_minimal.get('generated_seo_h1',''):
-        logger.error("FALLBACK MOJIBAKE TEST FAILED: '�' found in fallback titles!")
+        logger.error("FALLBACK MOJIBAKE TEST FAILED (Gemma): '�' found in fallback titles!")
     else:
-        logger.info("FALLBACK MOJIBAKE TEST PASSED: No '�' found in fallback titles.")
+        logger.info("FALLBACK MOJIBAKE TEST PASSED (Gemma): No '�' found in fallback titles.")
 
-
-    logger.info("--- Standalone Test (Colon-Free, ftfy Focus) Complete ---")
+    logger.info("--- Standalone Test (Gemma Local, Colon-Free, ftfy Focus) Complete ---")
+    # Explicitly free memory
+    global gemma_model, gemma_tokenizer
+    if gemma_model is not None:
+        try:
+            del gemma_model
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+            logger.info("Gemma model explicitly deleted and CUDA cache cleared for Title Agent (if applicable).")
+        except Exception as e:
+            logger.warning(f"Could not explicitly delete model or clear cache for Title Agent: {e}")
+    gemma_model = None
+    gemma_tokenizer = None

@@ -12,7 +12,8 @@ import os
 import sys
 import json
 import logging
-import modal # Added for Modal integration
+import torch # Added for Gemma
+from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig # Added for Gemma
 import re
 import time
 
@@ -39,12 +40,12 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-LLM_MODEL_NAME = os.getenv('DESCRIPTION_AGENT_MODEL', "deepseek-R1") # Updated model name, actual model is in Modal class
+LLM_MODEL_NAME = "google/gemma-3n-e4b-it" # Changed to Gemma model ID
 
-MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
-MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
+# Global variables for Gemma model and tokenizer
+gemma_tokenizer = None
+gemma_model = None
 
-API_TIMEOUT = 110 # Retained for Modal call options if applicable
 MAX_SUMMARY_SNIPPET_LEN_CONTEXT = 1500
 MAX_TITLE_LEN_CONTEXT = 150
 
@@ -183,10 +184,10 @@ def call_llm_for_meta_description(h1_or_final_title: str,
 
     llm_params = {
         "temperature": 0.82, 
-        "max_tokens": 300,
+        "max_tokens": 300, # This will be max_new_tokens for Gemma
     }
 
-    messages_for_modal = [
+    messages_for_gemma = [
         {"role": "system", "content": META_AGENT_SYSTEM_PROMPT},
         {"role": "user", "content": user_input_content}
     ]
@@ -194,51 +195,61 @@ def call_llm_for_meta_description(h1_or_final_title: str,
     MAX_RETRIES_DESC = int(os.getenv('MAX_RETRIES_API', 3)) 
     RETRY_DELAY_BASE_DESC = int(os.getenv('BASE_RETRY_DELAY', 1)) 
 
+    global gemma_tokenizer, gemma_model
 
     for attempt in range(MAX_RETRIES_DESC):
         try:
-            logger.debug(f"Attempting Modal call for meta desc for: '{title_context}' (Attempt {attempt+1}/{MAX_RETRIES_DESC})")
+            logger.debug(f"Attempting local Gemma call for meta desc for: '{title_context}' (Attempt {attempt+1}/{MAX_RETRIES_DESC})")
             
-            # For calling methods on a class deployed via @stub.cls or @app.cls
-            # Use modal.Cls.from_name to get a handle to the deployed class stub.
-            RemoteModelClass = modal.Cls.from_name(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            
-            # Create an instance of the remote class to call its methods.
-            model_instance = RemoteModelClass()
-            
-            result = model_instance.generate.remote(
-                messages=messages_for_modal,
-                max_new_tokens=llm_params["max_tokens"],
-                temperature=llm_params["temperature"],
-                model=LLM_MODEL_NAME 
+            if gemma_tokenizer is None or gemma_model is None:
+                logger.info(f"Initializing Gemma model and tokenizer for Description Agent (attempt {attempt + 1}/{MAX_RETRIES_DESC}). Model: {LLM_MODEL_NAME}")
+                gemma_tokenizer = AutoTokenizer.from_pretrained(LLM_MODEL_NAME)
+                quantization_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16)
+                gemma_model = AutoModelForCausalLM.from_pretrained(
+                    LLM_MODEL_NAME,
+                    quantization_config=quantization_config,
+                    device_map="auto"
+                )
+                gemma_model.eval()
+                logger.info("Gemma model and tokenizer initialized successfully for Description Agent.")
+
+            input_text = gemma_tokenizer.apply_chat_template(
+                messages_for_gemma,
+                tokenize=False,
+                add_generation_prompt=True
             )
+            input_ids = gemma_tokenizer(input_text, return_tensors="pt").to(gemma_model.device)
 
-            if result and result.get("choices") and result["choices"].get("message") and \
-               isinstance(result["choices"]["message"].get("content"), str):
-                json_str = result["choices"]["message"]["content"]
-                logger.info(f"Modal LLM meta desc gen successful for '{title_context}'.")
-                logger.debug(f"Raw JSON for meta from Modal: {json_str}")
-                return json_str
+            with torch.no_grad():
+                outputs = gemma_model.generate(
+                    **input_ids,
+                    max_new_tokens=llm_params["max_tokens"],
+                    temperature=llm_params["temperature"],
+                    do_sample=llm_params["temperature"] > 0.001,
+                    pad_token_id=gemma_tokenizer.eos_token_id
+                )
             
-            logger.error(f"Modal LLM meta desc response missing content or malformed (attempt {attempt+1}/{MAX_RETRIES_DESC}): {str(result)[:500]}")
-            if attempt == MAX_RETRIES_DESC - 1: return None
-
-        except modal.exception.NotFoundError: 
-            logger.error(f"Modal App/Class '{MODAL_APP_NAME}/{MODAL_CLASS_NAME}' not found (attempt {attempt+1}/{MAX_RETRIES_DESC}). Ensure it's deployed correctly.")
-            return None 
-        except AttributeError as ae: 
-            logger.error(f"AttributeError during Modal call (attempt {attempt+1}/{MAX_RETRIES_DESC}): {ae}.")
-            logger.error("This likely means an issue with Modal object interaction (e.g., method name) or the remote class structure is not as expected (e.g., __enter__ failed).")
-            if attempt == MAX_RETRIES_DESC - 1: return None 
+            generated_ids = outputs[0, input_ids['input_ids'].shape[1]:]
+            json_str = gemma_tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+            
+            logger.info(f"Local Gemma LLM meta desc gen successful for '{title_context}'.")
+            logger.debug(f"Raw JSON for meta from Gemma: {json_str}")
+            return json_str
 
         except Exception as e:
-            logger.exception(f"Error during Modal LLM call for meta description (attempt {attempt+1}/{MAX_RETRIES_DESC}): {e}")
-            if attempt == MAX_RETRIES_DESC - 1: return None
+            logger.exception(f"Error during local Gemma LLM call for meta description (attempt {attempt+1}/{MAX_RETRIES_DESC}): {e}")
+            if attempt == MAX_RETRIES_DESC - 1:
+                if isinstance(e, (RuntimeError, ImportError, OSError)): # Errors likely during model loading
+                    logger.warning("Resetting global gemma_model and gemma_tokenizer for Description Agent due to critical error.")
+                    gemma_tokenizer = None
+                    gemma_model = None
+                return None
         
-        logger.warning(f"Modal LLM call for meta desc failed or returned unexpected data (attempt {attempt+1}/{MAX_RETRIES_DESC}). Retrying in {RETRY_DELAY_BASE_DESC * (2**attempt)}s.")
-        time.sleep(RETRY_DELAY_BASE_DESC * (2**attempt))
+        delay = RETRY_DELAY_BASE_DESC * (2**attempt)
+        logger.warning(f"Local Gemma LLM call for meta desc failed (attempt {attempt+1}/{MAX_RETRIES_DESC}). Retrying in {delay}s.")
+        time.sleep(delay)
 
-    logger.error(f"Modal LLM call for meta description failed after {MAX_RETRIES_DESC} attempts for '{title_context}'.")
+    logger.error(f"Local Gemma LLM call for meta description failed after {MAX_RETRIES_DESC} attempts for '{title_context}'.")
     return None
 
 def parse_llm_meta_response(json_string: str | None, primary_keyword_for_fallback: str) -> dict:
@@ -327,10 +338,14 @@ def run_description_generator_agent(article_pipeline_data: dict) -> dict:
     return article_pipeline_data
 
 if __name__ == "__main__":
-    logger.info("--- Starting Description Generator Agent Standalone Test ---")
+    logger.info("--- Starting Description Generator Agent Standalone Test (Gemma Local) ---")
+    if torch.cuda.is_available():
+        logger.info(f"CUDA is available. Device: {torch.cuda.get_device_name(0)}")
+    else:
+        logger.info("CUDA not available. Gemma model will run on CPU (this might be slow).")
 
     sample_data = {
-        'id': 'test_meta_asi_final_001',
+        'id': 'test_meta_gemma_001',
         'generated_seo_h1': "NVIDIA Blackwell B200 Arrives, Crushes AI Speed Records",
         'final_keywords': ["NVIDIA Blackwell B200", "AI Benchmarks", "Fastest GPU"],
         'processed_summary': "NVIDIA's new Blackwell B200 GPU is here, delivering massive speed improvements for AI model training and inference operations, setting new industry performance benchmarks.",
@@ -346,5 +361,17 @@ if __name__ == "__main__":
     minimal_data = {'id': 'test_fallback_meta_final_002', 'final_keywords': ["Tech Breakthroughs"]}
     result_min = run_description_generator_agent(minimal_data.copy())
     logger.info(f"Minimal Status: {result_min.get('meta_agent_status')}")
-    logger.info(f"Minimal Meta Desc: '{result_min.get('generated_meta_description')}'")
-    logger.info("--- Standalone Test Complete ---")
+    logger.info(f"Minimal Meta Desc (Gemma): '{result_min.get('generated_meta_description')}'")
+    logger.info("--- Standalone Test Complete (Gemma Local) ---")
+    # Explicitly free memory
+    global gemma_model, gemma_tokenizer
+    if gemma_model is not None:
+        try:
+            del gemma_model
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+            logger.info("Gemma model explicitly deleted and CUDA cache cleared for Description Agent (if applicable).")
+        except Exception as e:
+            logger.warning(f"Could not explicitly delete model or clear cache for Description Agent: {e}")
+    gemma_model = None
+    gemma_tokenizer = None
