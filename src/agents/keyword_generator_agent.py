@@ -264,7 +264,7 @@ def _format_user_prompt_content(user_data_dict: dict) -> str:
 
 def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, model_name: str) -> str | None:
     """Generic function to call LLM API using local Gemma model with retry logic."""
-    global gemma_tokenizer, gemma_model
+    global gemma_tokenizer, gemma_model # Moved to the top
     user_prompt_string = _format_user_prompt_content(user_prompt_data)
 
     messages_for_gemma = [

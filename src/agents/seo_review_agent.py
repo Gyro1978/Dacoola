@@ -207,56 +207,68 @@ Execute your analysis with the precision and depth expected of an ASI. Your outp
 
 # --- Helper Functions ---
 def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float) -> str | None:
-    """Generic function to call LLM API using Modal with retry logic."""
+    """Generic function to call LLM API using local Gemma model with retry logic."""
+    global gemma_tokenizer, gemma_model # Moved to the top
     user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2)
 
-    messages_for_modal = [
+    messages_for_gemma = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt_string_for_api}
     ]
 
     for attempt in range(MAX_RETRIES):
         try:
-            logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES} for SEO review (model config: {LLM_MODEL_NAME})")
+            logger.debug(f"Local Gemma API call attempt {attempt + 1}/{MAX_RETRIES} for SEO review (model config: {LLM_MODEL_NAME})")
             
-            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            if not ModelClass:
-                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
-                if attempt == MAX_RETRIES - 1: return None # Last attempt
-                delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
-                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
-                time.sleep(delay)
-                continue
-            
-            model_instance = ModelClass()
+            if gemma_tokenizer is None or gemma_model is None:
+                logger.info(f"Initializing Gemma model and tokenizer for SEO Review Agent (attempt {attempt + 1}/{MAX_RETRIES}). Model: {LLM_MODEL_NAME}")
+                gemma_tokenizer = AutoTokenizer.from_pretrained(LLM_MODEL_NAME)
+                quantization_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16)
+                gemma_model = AutoModelForCausalLM.from_pretrained(
+                    LLM_MODEL_NAME,
+                    quantization_config=quantization_config,
+                    device_map="auto"
+                )
+                gemma_model.eval()
+                logger.info("Gemma model and tokenizer initialized successfully for SEO Review Agent.")
 
-            result = model_instance.generate.remote(
-                messages=messages_for_modal,
-                max_new_tokens=max_tokens,
-                temperature=temperature, # Pass temperature
-                model=LLM_MODEL_NAME # Pass model name
+            input_text = gemma_tokenizer.apply_chat_template(
+                messages_for_gemma,
+                tokenize=False,
+                add_generation_prompt=True
             )
+            input_ids = gemma_tokenizer(input_text, return_tensors="pt").to(gemma_model.device)
 
-            if result and result.get("choices") and result["choices"].get("message") and \
-               isinstance(result["choices"]["message"].get("content"), str):
-                content = result["choices"]["message"]["content"].strip()
-                logger.info(f"Modal call successful for SEO review (Attempt {attempt+1}/{MAX_RETRIES})")
-                return content
-            else:
-                logger.error(f"Modal API response missing content or malformed (attempt {attempt + 1}/{MAX_RETRIES}): {str(result)[:500]}")
-                if attempt == MAX_RETRIES - 1: return None
+            with torch.no_grad():
+                outputs = gemma_model.generate(
+                    **input_ids,
+                    max_new_tokens=max_tokens,
+                    temperature=temperature,
+                    do_sample=temperature > 0.001,
+                    pad_token_id=gemma_tokenizer.eos_token_id
+                )
+            
+            generated_ids = outputs[0, input_ids['input_ids'].shape[1]:]
+            content_str = gemma_tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+            
+            logger.info(f"Local Gemma call successful for SEO review (Attempt {attempt+1}/{MAX_RETRIES})")
+            return content_str
         
         except Exception as e:
-            logger.exception(f"Error during Modal API call for SEO review (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
+            logger.exception(f"Error during local Gemma API call for SEO review (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
             if attempt == MAX_RETRIES - 1:
-                logger.error("All Modal API attempts for SEO review failed due to errors.")
+                logger.error("All local Gemma API attempts for SEO review failed due to errors.")
+                if isinstance(e, (RuntimeError, ImportError, OSError)): 
+                    logger.warning("Resetting global gemma_model and gemma_tokenizer for SEO Review Agent due to critical error.")
+                    gemma_tokenizer = None
+                    gemma_model = None
                 return None
         
-        delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
-        logger.warning(f"Modal API call for SEO review failed or returned unexpected data (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
+        delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60)
+        logger.warning(f"Local Gemma API call for SEO review failed (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
         time.sleep(delay)
         
-    logger.error(f"Modal LLM API call for SEO review failed after {MAX_RETRIES} attempts.")
+    logger.error(f"Local Gemma LLM API call for SEO review failed after {MAX_RETRIES} attempts.")
     return None
 
 def _parse_llm_seo_review_response(json_string: str) -> dict | None:

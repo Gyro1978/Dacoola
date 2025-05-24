@@ -184,6 +184,7 @@ def call_llm_for_titles(primary_keyword: str,
                         secondary_keywords_list: list,
                         processed_summary: str,
                         article_content_snippet_val: str) -> str | None:
+    global gemma_tokenizer, gemma_model # Moved to the top
     secondary_keywords_str = ", ".join(secondary_keywords_list) if secondary_keywords_list else "None"
     processed_summary_snippet = (processed_summary or "No summary provided.")[:MAX_SUMMARY_SNIPPET_LEN_CONTEXT]
     content_snippet_context = (article_content_snippet_val or "No content snippet provided.")[:MAX_CONTENT_SNIPPET_LEN_CONTEXT]
@@ -195,18 +196,16 @@ def call_llm_for_titles(primary_keyword: str,
 **Article Content Snippet**: {content_snippet_context}
     """.strip()
 
-    max_new_tokens_for_titles = 450 
+    max_new_tokens_for_titles = 450
     temperature_for_titles = 0.65
 
     messages_for_gemma = [
         {"role": "system", "content": TITLE_AGENT_SYSTEM_PROMPT},
         {"role": "user", "content": user_input_content}
     ]
-    
+
     LOCAL_MAX_RETRIES = int(os.getenv('MAX_RETRIES', 3))
     LOCAL_RETRY_DELAY_BASE = int(os.getenv('BASE_RETRY_DELAY', 5))
-
-    global gemma_tokenizer, gemma_model
 
     for attempt in range(LOCAL_MAX_RETRIES):
         try:
@@ -408,19 +407,33 @@ def run_title_generator_agent(article_pipeline_data: dict) -> dict:
     logger.info(f"--- Running Title Generator Agent (Colon-Free, ftfy Enhanced) for Article ID: {article_id} ---")
 
     final_keywords_list = article_pipeline_data.get('final_keywords', [])
-    primary_keyword = final_keywords_list if final_keywords_list and isinstance(final_keywords_list, list) else None
-    if not primary_keyword:
-        primary_keyword = article_pipeline_data.get('primary_topic_keyword', article_pipeline_data.get('title', 'Key Tech Topic'))
-        logger.warning(f"Primary keyword for title gen not from 'final_keywords' for {article_id}, using fallback: '{primary_keyword}'")
+    primary_keyword_str = None # Initialize as None
 
-    secondary_keywords = [kw for kw in final_keywords_list if kw.lower() != primary_keyword.lower()][:2] if final_keywords_list else []
+    if final_keywords_list and isinstance(final_keywords_list, list) and len(final_keywords_list) > 0:
+        # Ensure the first item is taken and converted to string if it's not already
+        first_kw = final_keywords_list[0]
+        if isinstance(first_kw, str):
+            primary_keyword_str = first_kw
+        elif first_kw is not None: # Handle cases where it might be non-string but convertible
+            primary_keyword_str = str(first_kw)
+       
+    if not primary_keyword_str: # If still None or empty after checking final_keywords_list
+        primary_keyword_str = article_pipeline_data.get('primary_topic_keyword', None)
+        if not primary_keyword_str: # Further fallback to title
+            primary_keyword_str = article_pipeline_data.get('title', 'Key Tech Topic')
+        logger.warning(f"Primary keyword for title gen not from 'final_keywords' or 'primary_topic_keyword' for {article_id}, using fallback: '{primary_keyword_str}'")
+   
+    # Ensure primary_keyword used in the rest of the function is this string version
+    primary_keyword = primary_keyword_str 
+
+    secondary_keywords = [kw for kw in final_keywords_list if isinstance(kw, str) and kw.lower() != primary_keyword.lower()][:2] if final_keywords_list else []
     processed_summary = article_pipeline_data.get('processed_summary', '')
     article_content_for_snippet = article_pipeline_data.get('raw_scraped_text', processed_summary) 
     article_content_snippet_for_llm = (article_content_for_snippet or "")[:MAX_CONTENT_SNIPPET_LEN_CONTEXT] 
     
-    pk_for_fallback_logic = primary_keyword or "Tech Insight"
+    pk_for_fallback_logic = primary_keyword_str or "Tech Insight" # Corrected to use primary_keyword_str
 
-    if not primary_keyword and not processed_summary and not article_content_snippet_for_llm:
+    if not primary_keyword_str and not processed_summary and not article_content_snippet_for_llm: # Use primary_keyword_str here
         logger.error(f"Insufficient context (PK, summary, snippet all missing/short) for {article_id}. Using fallbacks for titles.")
         fallback_title_content = truncate_text(to_title_case(DEFAULT_FALLBACK_TITLE_TAG_RAW.format(primary_keyword=pk_for_fallback_logic)), TITLE_TAG_CONTENT_TARGET_MAX_LEN)
         title_results = {
@@ -428,7 +441,7 @@ def run_title_generator_agent(article_pipeline_data: dict) -> dict:
             'generated_seo_h1': truncate_text(to_title_case(DEFAULT_FALLBACK_H1_RAW.format(primary_keyword=pk_for_fallback_logic)), SEO_H1_HARD_MAX_LEN),
             'title_strategy_notes': "Fallback: Insufficient input for LLM.", 'error': "Insufficient input."}
     else:
-        raw_llm_response = call_llm_for_titles(primary_keyword, secondary_keywords, processed_summary, article_content_snippet_for_llm)
+        raw_llm_response = call_llm_for_titles(primary_keyword_str, secondary_keywords, processed_summary, article_content_snippet_for_llm) # Pass primary_keyword_str
         title_results = parse_llm_title_response(raw_llm_response, pk_for_fallback_logic)
 
     article_pipeline_data.update(title_results)

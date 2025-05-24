@@ -173,7 +173,7 @@ Your output is ONLY the JSON object. No other text.
 
 
 def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, model_name: str) -> Optional[str]:
-    global gemma_tokenizer, gemma_model
+    global gemma_tokenizer, gemma_model # Moved to the top
     user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2, ensure_ascii=False)
 
     estimated_prompt_tokens = math.ceil(len(user_prompt_string_for_api.encode('utf-8')) / 3.0)

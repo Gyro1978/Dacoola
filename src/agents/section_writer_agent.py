@@ -252,8 +252,7 @@ def _truncate_content_to_word_count(content: str, max_words: int, section_type: 
     return final_content
 
 def _call_llm_for_section(system_prompt: str, user_prompt_data: dict, max_tokens_for_section: int, temperature: float, is_html_snippet: bool) -> str | None:
-    global gemma_tokenizer, gemma_model
-    
+    global gemma_tokenizer, gemma_model # Moved to the top
     user_prompt_string_for_gemma = json.dumps(user_prompt_data, indent=2) # For logging/debug if needed
     logger.debug(f"Section writer (Gemma local): Max completion tokens: {max_tokens_for_section}, Temp: {temperature}")
 

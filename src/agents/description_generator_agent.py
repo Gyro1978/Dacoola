@@ -175,6 +175,11 @@ def call_llm_for_meta_description(h1_or_final_title: str,
     processed_summary_snippet = (processed_summary or "No summary available for context.")[:MAX_SUMMARY_SNIPPET_LEN_CONTEXT]
     title_context = (h1_or_final_title or "Untitled Article")[:MAX_TITLE_LEN_CONTEXT]
 
+    global gemma_tokenizer, gemma_model # Moved to the top
+    secondary_keywords_str = ", ".join(secondary_keywords_list) if secondary_keywords_list else "None"
+    processed_summary_snippet = (processed_summary or "No summary available for context.")[:MAX_SUMMARY_SNIPPET_LEN_CONTEXT]
+    title_context = (h1_or_final_title or "Untitled Article")[:MAX_TITLE_LEN_CONTEXT]
+
     user_input_content = f"""
 **SEO H1 Heading / Final Title**: {title_context}
 **Primary Keyword**: {primary_keyword}
@@ -194,8 +199,6 @@ def call_llm_for_meta_description(h1_or_final_title: str,
 
     MAX_RETRIES_DESC = int(os.getenv('MAX_RETRIES_API', 3)) 
     RETRY_DELAY_BASE_DESC = int(os.getenv('BASE_RETRY_DELAY', 1)) 
-
-    global gemma_tokenizer, gemma_model
 
     for attempt in range(MAX_RETRIES_DESC):
         try:

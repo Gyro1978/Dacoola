@@ -250,8 +250,7 @@ Summary: {article_summary}
 # --- API Call with Local Gemma Model ---
 def call_gemma_api_local(system_prompt: str, user_prompt: str) -> Optional[str]:
     """API call using local Gemma model with exponential backoff retry logic."""
-    global gemma_tokenizer, gemma_model
-
+    global gemma_tokenizer, gemma_model # Moved to the top
     messages_for_gemma = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt}
