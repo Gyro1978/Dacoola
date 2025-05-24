@@ -41,7 +41,7 @@ jobs:
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
           YOUR_WEBSITE_NAME: ${{ secrets.YOUR_WEBSITE_NAME || vars.YOUR_WEBSITE_NAME || 'Dacoola' }}
           YOUR_WEBSITE_LOGO_URL: ${{ secrets.YOUR_WEBSITE_LOGO_URL || vars.YOUR_WEBSITE_LOGO_URL || '' }}
-          YOUR_SITE_BASE_URL: ${{ secrets.YOUR_SITE_BASE_URL || vars.YOUR_SITE_BASE_URL || '' }}
+          YOUR_SITE_BASE_URL: ${{ secrets.YOUR_SITE_BASE_URL || vars.YOUR_SITE_BASE_URL || 'https://dacoolaa.netlify.app' }}
           MAX_HOME_PAGE_ARTICLES: ${{ secrets.MAX_HOME_PAGE_ARTICLES || vars.MAX_HOME_PAGE_ARTICLES || 20 }}
           # Twitter Credentials
           TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
