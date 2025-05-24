@@ -26,11 +26,11 @@ load_dotenv(dotenv_path=dotenv_path)
 
 # --- Corrected Environment Variable Name ---
 # Ensure BASE_URL ends with a slash
-raw_base_url = os.getenv('WEBSITE_BASE_URL') # Changed from YOUR_SITE_BASE_URL
+raw_base_url = os.getenv('YOUR_SITE_BASE_URL') # Now consistently using YOUR_SITE_BASE_URL
 if not raw_base_url:
     # This error message will be printed if the script is run standalone and the var is missing
     # It will also be logged by the logger instance.
-    error_msg_sitemap_base_url = "ERROR: WEBSITE_BASE_URL is not set in the .env file. Cannot generate sitemap."
+    error_msg_sitemap_base_url = "ERROR: YOUR_SITE_BASE_URL is not set in the environment variables or .env file. Cannot generate sitemap."
     print(error_msg_sitemap_base_url)
     try:
         # Attempt to log using a logger instance if available
@@ -93,7 +93,7 @@ def generate_sitemap():
     logger.info("Starting sitemap generation...")
 
     if not BASE_URL or BASE_URL == "/": # Double check after initial load
-        logger.error("Sitemap generation aborted: WEBSITE_BASE_URL is invalid or missing.")
+        logger.error("Sitemap generation aborted: YOUR_SITE_BASE_URL (derived as BASE_URL) is invalid or missing.")
         return
 
     try:
