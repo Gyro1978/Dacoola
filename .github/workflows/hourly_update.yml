@@ -71,6 +71,8 @@ jobs:
           BLUESKY_APP_PASSWORD_2: ${{ secrets.BLUESKY_APP_PASSWORD_2 }}
           BLUESKY_HANDLE_3: ${{ secrets.BLUESKY_HANDLE_3 }}
           BLUESKY_APP_PASSWORD_3: ${{ secrets.BLUESKY_APP_PASSWORD_3 }}
+          MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+          MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
         run: python src/main.py
 
       - name: Commit and Push Changes
