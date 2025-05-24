@@ -182,7 +182,7 @@ def call_llm_for_meta_description(h1_or_final_title: str,
     """.strip()
 
     llm_params = {
-        "temperature": 0.82, # Example, Modal class may have its own default
+        "temperature": 0.82, 
         "max_tokens": 300,
     }
 
@@ -191,28 +191,26 @@ def call_llm_for_meta_description(h1_or_final_title: str,
         {"role": "user", "content": user_input_content}
     ]
 
-    MAX_RETRIES_DESC = int(os.getenv('MAX_RETRIES_API', 3)) # Using global MAX_RETRIES_API
-    RETRY_DELAY_BASE_DESC = int(os.getenv('BASE_RETRY_DELAY', 1)) # Using global BASE_RETRY_DELAY
+    MAX_RETRIES_DESC = int(os.getenv('MAX_RETRIES_API', 3)) 
+    RETRY_DELAY_BASE_DESC = int(os.getenv('BASE_RETRY_DELAY', 1)) 
 
 
     for attempt in range(MAX_RETRIES_DESC):
         try:
             logger.debug(f"Attempting Modal call for meta desc for: '{title_context}' (Attempt {attempt+1}/{MAX_RETRIES_DESC})")
             
-            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            if not ModelClass:
-                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
-                if attempt == MAX_RETRIES_DESC - 1: return None
-                time.sleep(RETRY_DELAY_BASE_DESC * (2**attempt))
-                continue
+            # For calling methods on a class deployed via @stub.cls or @app.cls
+            # Use modal.Cls.from_name to get a handle to the deployed class stub.
+            RemoteModelClass = modal.Cls.from_name(MODAL_APP_NAME, MODAL_CLASS_NAME)
             
-            model_instance = ModelClass()
+            # Create an instance of the remote class to call its methods.
+            model_instance = RemoteModelClass()
             
             result = model_instance.generate.remote(
                 messages=messages_for_modal,
                 max_new_tokens=llm_params["max_tokens"],
-                temperature=llm_params["temperature"], # Pass temperature
-                model=LLM_MODEL_NAME # Pass model name
+                temperature=llm_params["temperature"],
+                model=LLM_MODEL_NAME 
             )
 
             if result and result.get("choices") and result["choices"].get("message") and \
@@ -224,6 +222,14 @@ def call_llm_for_meta_description(h1_or_final_title: str,
             
             logger.error(f"Modal LLM meta desc response missing content or malformed (attempt {attempt+1}/{MAX_RETRIES_DESC}): {str(result)[:500]}")
             if attempt == MAX_RETRIES_DESC - 1: return None
+
+        except modal.exception.NotFoundError: 
+            logger.error(f"Modal App/Class '{MODAL_APP_NAME}/{MODAL_CLASS_NAME}' not found (attempt {attempt+1}/{MAX_RETRIES_DESC}). Ensure it's deployed correctly.")
+            return None 
+        except AttributeError as ae: 
+            logger.error(f"AttributeError during Modal call (attempt {attempt+1}/{MAX_RETRIES_DESC}): {ae}.")
+            logger.error("This likely means an issue with Modal object interaction (e.g., method name) or the remote class structure is not as expected (e.g., __enter__ failed).")
+            if attempt == MAX_RETRIES_DESC - 1: return None 
 
         except Exception as e:
             logger.exception(f"Error during Modal LLM call for meta description (attempt {attempt+1}/{MAX_RETRIES_DESC}): {e}")
@@ -286,21 +292,29 @@ def run_description_generator_agent(article_pipeline_data: dict) -> dict:
 
     h1_or_final_title = article_pipeline_data.get('generated_seo_h1', article_pipeline_data.get('final_title', article_pipeline_data.get('initial_title_from_web')))
     final_keywords_list = article_pipeline_data.get('final_keywords', [])
-    primary_keyword = final_keywords_list if final_keywords_list and isinstance(final_keywords_list, list) else None
-    if not primary_keyword:
-        primary_keyword = article_pipeline_data.get('primary_topic', h1_or_final_title or 'Key Information')
-        logger.warning(f"Primary keyword for meta not from 'final_keywords' for {article_id}, using fallback: '{primary_keyword}'")
+    
+    primary_keyword_str = None 
+    if final_keywords_list and isinstance(final_keywords_list, list) and len(final_keywords_list) > 0:
+        # Ensure the first item is a string before assigning
+        if isinstance(final_keywords_list, str): 
+             primary_keyword_str = final_keywords_list
+        elif isinstance(final_keywords_list, list) and final_keywords_list and isinstance(final_keywords_list, str) : # Check first item of list
+            primary_keyword_str = final_keywords_list
+    
+    if not primary_keyword_str:
+        primary_keyword_str = article_pipeline_data.get('primary_topic_keyword', h1_or_final_title or 'Key Information')
+        logger.warning(f"Primary keyword for meta not found in 'final_keywords_list' for {article_id}. Using fallback: '{primary_keyword_str}'")
 
-    secondary_keywords = [kw for kw in final_keywords_list if kw.lower() != primary_keyword.lower()][:1] if final_keywords_list else []
+    secondary_keywords = [kw for kw in final_keywords_list if isinstance(kw, str) and kw.lower() != primary_keyword_str.lower()][:1] if final_keywords_list and primary_keyword_str else []
     processed_summary = article_pipeline_data.get('processed_summary', '')
-    pk_for_fallback_logic = primary_keyword or "Tech Insight"
+    pk_for_fallback_logic = primary_keyword_str or "Tech Insight"
 
     if not h1_or_final_title and not processed_summary:
         logger.error(f"Insufficient context for {article_id} for meta. Using fallback.")
         meta_results = {'generated_meta_description': truncate_meta_description(DEFAULT_FALLBACK_META_DESCRIPTION_RAW.format(primary_keyword=pk_for_fallback_logic)),
                         'meta_description_strategy_notes': "Fallback: Insufficient input.", 'error': "Insufficient input."}
     else:
-        raw_llm_response = call_llm_for_meta_description(h1_or_final_title, primary_keyword, secondary_keywords, processed_summary)
+        raw_llm_response = call_llm_for_meta_description(h1_or_final_title, primary_keyword_str, secondary_keywords, processed_summary)
         meta_results = parse_llm_meta_response(raw_llm_response, pk_for_fallback_logic)
 
     article_pipeline_data.update(meta_results)
@@ -320,7 +334,7 @@ if __name__ == "__main__":
         'generated_seo_h1': "NVIDIA Blackwell B200 Arrives, Crushes AI Speed Records",
         'final_keywords': ["NVIDIA Blackwell B200", "AI Benchmarks", "Fastest GPU"],
         'processed_summary': "NVIDIA's new Blackwell B200 GPU is here, delivering massive speed improvements for AI model training and inference operations, setting new industry performance benchmarks.",
-        'primary_topic': "NVIDIA Blackwell B200"
+        'primary_topic_keyword': "NVIDIA Blackwell B200" 
     }
     result = run_description_generator_agent(sample_data.copy())
     logger.info("\n--- Test Results ---")
