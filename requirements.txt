@@ -15,4 +15,4 @@ google-ads # For Keyword Planner API access
 atproto # For Bluesky
 praw # For Reddit
 pyperclip
-modal-client
+modal
