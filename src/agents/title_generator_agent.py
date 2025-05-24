@@ -12,7 +12,6 @@ import os
 import sys
 import json
 import logging
-# import requests # Commented out for Modal integration
 import modal # Added for Modal integration
 import re
 import ftfy # For fixing text encoding issues
@@ -41,13 +40,11 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-# LLM_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
-# LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
 LLM_MODEL_NAME = os.getenv('TITLE_AGENT_MODEL', "deepseek-R1") # Updated model name
 WEBSITE_NAME = os.getenv('WEBSITE_NAME', 'Dacoola') # Retain for branding logic
 BRAND_SUFFIX_FOR_TITLE_TAG = f" - {WEBSITE_NAME}"
 
-MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
 MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
 
 API_TIMEOUT = 90 # Retained for Modal call options if applicable
@@ -85,7 +82,7 @@ def to_title_case(text_str: str) -> str:
             title_cased_words.append(word)
             continue
 
-        cap_word = word[0].upper() + word[1:].lower() if len(word) > 1 else word.upper()
+        cap_word = word.upper() + word[1:].lower() if len(word) > 1 else word.upper()
         if i == 0 or i == len(words) - 1 or word.lower() not in small_words:
             title_cased_words.append(cap_word)
         else:
@@ -186,8 +183,6 @@ def call_llm_for_titles(primary_keyword: str,
                         secondary_keywords_list: list,
                         processed_summary: str,
                         article_content_snippet_val: str) -> str | None:
-    # LLM_API_KEY check not needed for Modal
-
     secondary_keywords_str = ", ".join(secondary_keywords_list) if secondary_keywords_list else "None"
     processed_summary_snippet = (processed_summary or "No summary provided.")[:MAX_SUMMARY_SNIPPET_LEN_CONTEXT]
     content_snippet_context = (article_content_snippet_val or "No content snippet provided.")[:MAX_CONTENT_SNIPPET_LEN_CONTEXT]
@@ -216,7 +211,7 @@ def call_llm_for_titles(primary_keyword: str,
     # If not, they should be added here. For this example, I'll assume they are accessible.
     # Define local constants if not globally available:
     LOCAL_MAX_RETRIES = int(os.getenv('MAX_RETRIES', 3))
-    LOCAL_RETRY_DELAY_BASE = int(os.getenv('RETRY_DELAY_BASE', 5))
+    LOCAL_RETRY_DELAY_BASE = int(os.getenv('BASE_RETRY_DELAY', 5))
 
 
     for attempt in range(LOCAL_MAX_RETRIES):
@@ -236,14 +231,14 @@ def call_llm_for_titles(primary_keyword: str,
 
             result = model_instance.generate.remote(
                 messages=messages_for_modal,
-                max_new_tokens=max_new_tokens_for_titles
-                # temperature=0.65, # If Modal class supports it
-                # response_format={"type": "json_object"} # If Modal class supports it
+                max_new_tokens=max_new_tokens_for_titles,
+                temperature=0.65, # Pass temperature
+                model=LLM_MODEL_NAME # Pass model name
             )
 
-            if result and result.get("choices") and result["choices"][0].get("message") and \
-               isinstance(result["choices"][0]["message"].get("content"), str):
-                json_str = result["choices"][0]["message"]["content"]
+            if result and result.get("choices") and result["choices"].get("message") and \
+               isinstance(result["choices"]["message"].get("content"), str):
+                json_str = result["choices"]["message"]["content"]
                 logger.info(f"Modal LLM title gen successful for '{primary_keyword}'.")
                 logger.debug(f"Raw JSON for titles from Modal: {json_str}")
                 return json_str
@@ -318,15 +313,15 @@ def _clean_and_validate_title(title_str: str | None, max_len: int, title_type: s
         parts = [p.strip() for p in cleaned_title.split(":", 1)]
         if len(parts) == 2:
             # Prioritize the part with the primary keyword if it exists and is substantial
-            if pk_for_log.lower() in parts[0].lower() and len(parts[0]) > len(parts[1]) * 0.4:
-                 merged_title = parts[0]
-            elif pk_for_log.lower() in parts[1].lower():
-                 merged_title = parts[1]
+            if pk_for_log.lower() in parts.lower() and len(parts) > len(parts) * 0.4:
+                 merged_title = parts
+            elif pk_for_log.lower() in parts.lower():
+                 merged_title = parts
             # Otherwise, try to merge or pick the longer/more descriptive part
-            elif len(parts[0]) > len(parts[1]) * 0.6 or len(parts[1]) < 10: # If first part is significantly longer or second is too short
-                merged_title = parts[0] + " " + parts[1]
+            elif len(parts) > len(parts) * 0.6 or len(parts) < 10: # If first part is significantly longer or second is too short
+                merged_title = parts + " " + parts
             else: # Second part is likely more descriptive
-                merged_title = parts[1]
+                merged_title = parts
             cleaned_title_before_colon_removal = cleaned_title
             cleaned_title = re.sub(r'\s+', ' ', merged_title).strip() # Consolidate spaces
             logger.info(f"Colon processed for {title_type} for '{pk_for_log}'. Original: '{cleaned_title_before_colon_removal}', Processed: '{cleaned_title}'")
@@ -409,7 +404,7 @@ def run_title_generator_agent(article_pipeline_data: dict) -> dict:
     logger.info(f"--- Running Title Generator Agent (Colon-Free, ftfy Enhanced) for Article ID: {article_id} ---")
 
     final_keywords_list = article_pipeline_data.get('final_keywords', [])
-    primary_keyword = final_keywords_list[0] if final_keywords_list and isinstance(final_keywords_list, list) else None
+    primary_keyword = final_keywords_list if final_keywords_list and isinstance(final_keywords_list, list) else None
     if not primary_keyword:
         primary_keyword = article_pipeline_data.get('primary_topic_keyword', article_pipeline_data.get('title', 'Key Tech Topic'))
         logger.warning(f"Primary keyword for title gen not from 'final_keywords' for {article_id}, using fallback: '{primary_keyword}'")
@@ -445,7 +440,6 @@ def run_title_generator_agent(article_pipeline_data: dict) -> dict:
 if __name__ == "__main__":
     logging.getLogger('src.agents.title_generator_agent').setLevel(logging.DEBUG) # More verbose for this agent
     logger.info("--- Starting Title Generator Agent (Colon-Free, ftfy) Standalone Test ---")
-    # if not os.getenv('LLM_API_KEY'): logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1) # Modal handles auth
 
     sample_article_data = {
         'id': 'test_title_ftfy_001',

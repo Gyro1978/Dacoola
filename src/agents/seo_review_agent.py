@@ -4,7 +4,6 @@ import os
 import sys
 import json
 import logging
-# import requests # Commented out for Modal integration
 import modal # Added for Modal integration
 import re
 import time
@@ -32,11 +31,9 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-# LLM_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
-# LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
 LLM_MODEL_NAME = os.getenv('SEO_REVIEW_AGENT_MODEL', "deepseek-R1") # Updated model name
 
-MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
 MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
 
 API_TIMEOUT = 180 # Retained for Modal call options if applicable
@@ -211,18 +208,12 @@ Execute your analysis with the precision and depth expected of an ASI. Your outp
 # --- Helper Functions ---
 def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float) -> str | None:
     """Generic function to call LLM API using Modal with retry logic."""
-    # LLM_API_KEY check not needed for Modal
-
     user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2)
 
     messages_for_modal = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt_string_for_api}
     ]
-
-    # Temperature and response_format are assumed to be handled by the Modal class
-    # or can be passed to generate.remote if the Modal class supports them.
-    # LLM_MODEL_NAME (e.g. "deepseek-R1") is for logging/config; actual model used is defined in Modal class.
 
     for attempt in range(MAX_RETRIES):
         try:
@@ -241,14 +232,14 @@ def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, tempe
 
             result = model_instance.generate.remote(
                 messages=messages_for_modal,
-                max_new_tokens=max_tokens
-                # temperature=temperature, # If Modal class supports it
-                # response_format={"type": "json_object"} # If Modal class supports it
+                max_new_tokens=max_tokens,
+                temperature=temperature, # Pass temperature
+                model=LLM_MODEL_NAME # Pass model name
             )
 
-            if result and result.get("choices") and result["choices"][0].get("message") and \
-               isinstance(result["choices"][0]["message"].get("content"), str):
-                content = result["choices"][0]["message"]["content"].strip()
+            if result and result.get("choices") and result["choices"].get("message") and \
+               isinstance(result["choices"]["message"].get("content"), str):
+                content = result["choices"]["message"]["content"].strip()
                 logger.info(f"Modal call successful for SEO review (Attempt {attempt+1}/{MAX_RETRIES})")
                 return content
             else:
@@ -427,10 +418,6 @@ if __name__ == "__main__":
     logging.getLogger('src.agents.seo_review_agent').setLevel(logging.DEBUG)
     logger.info("--- Starting SEO Review Agent Standalone Test ---")
 
-    # if not os.getenv('LLM_API_KEY'): # Modal handles auth
-    #     logger.error("LLM_API_KEY env var not set. Test aborted.")
-    #     sys.exit(1)
-
     # Standalone test data, ensuring `full_generated_article_body_md` is used
     test_article_data = {
         'id': 'test_seo_review_002_standalone',
@@ -490,7 +477,6 @@ In summary, the NVIDIA Blackwell B200 GPU represents more than just an increment
     result = run_seo_review_agent(test_article_data.copy())
 
     logger.info(f"\n--- SEO Review Agent Test Results (Standalone) ---")
-    logger.info(f"Status: {result.get('seo_review_status')}")
     seo_results_output = result.get('seo_review_results', {})
     
     if seo_results_output.get('error'):

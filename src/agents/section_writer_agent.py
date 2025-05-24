@@ -7,9 +7,8 @@ import os
 import sys
 import json
 import logging
-import re
-# import requests # Commented out for Modal integration
 import modal # Added for Modal integration
+import re
 import time
 import ftfy
 import math
@@ -38,11 +37,9 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-# LLM_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
-# LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
 LLM_MODEL_NAME = os.getenv('SECTION_WRITER_AGENT_MODEL', "deepseek-R1") # Use coder for precision, updated
 
-MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
 MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
 
 API_TIMEOUT = 180 # Retained for Modal call options if applicable
@@ -78,7 +75,7 @@ Your output format is strictly determined by the `section_to_write.is_html_snipp
 2.  **SPECIAL HTML SNIPPET SECTIONS (`section_to_write.is_html_snippet: true` - e.g., `pros_cons`, `faq`)**:
     *   You MUST output the complete, valid, and minimal HTML structure directly, as specified below for the given `section_to_write.section_type`.
     *   **CRITICAL: No External Headings:** For these HTML sections, you **MUST NOT** include any Markdown headings (e.g., `###`, `####`) or HTML headings (e.g., `<h4>`) that might be present in `section_to_write.heading_text`. The HTML structure you generate will contain its *own* internal semantic headings (like `<h5>` for Pros/Cons) as per the examples.
-    *   **CRITICAL: HTML Content Escaping:** All text you generate for placement within HTML tags (e.g., inside `<li>`, `<p>`, `<summary>`) MUST be properly HTML-escaped (e.g., `&` becomes `&`, `<` becomes `<`, `>` becomes `>`).
+    *   **CRITICAL: HTML Content Escaping:** All text you generate for placement within HTML tags (e.g., inside `<li>`, `<p>`, `<summary>`) MUST be properly HTML-escaped (e.g., `&` becomes `&amp;`, `<` becomes `&lt;`, `>` becomes `&gt;`).
     *   NO extra text, comments, or anything outside the specified HTML structure. Your entire output must be the HTML block.
     *   **CRITICAL: Unique End Markers:** Append a unique HTML comment marker to the VERY END of the HTML block: `<!-- END_PROS_CONS_SNIPPET -->` for "pros_cons" type, and `<!-- END_FAQ_SNIPPET -->` for "faq" type. This marker must be outside the main content div of the snippet.
 
@@ -254,8 +251,6 @@ def _truncate_content_to_word_count(content: str, max_words: int, section_type: 
     return final_content
 
 def _call_llm_for_section(system_prompt: str, user_prompt_data: dict, max_tokens_for_section: int, temperature: float, is_html_snippet: bool) -> str | None:
-    # LLM_API_KEY check not needed for Modal
-
     user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2)
     estimated_prompt_tokens = math.ceil(len(user_prompt_string_for_api.encode('utf-8')) / 3.2) # Rough estimate
     logger.debug(f"Section writer (Modal, impact focus): Approx. prompt tokens: {estimated_prompt_tokens}, Max completion: {max_tokens_for_section}")
@@ -264,9 +259,6 @@ def _call_llm_for_section(system_prompt: str, user_prompt_data: dict, max_tokens
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt_string_for_api}
     ]
-
-    # Temperature is assumed to be handled by the Modal class or can be passed if supported.
-    # model_name (e.g. "deepseek-R1") is for logging/config; actual model used is defined in Modal class.
 
     for attempt in range(MAX_RETRIES):
         try:
@@ -285,19 +277,14 @@ def _call_llm_for_section(system_prompt: str, user_prompt_data: dict, max_tokens
 
             result = model_instance.generate.remote(
                 messages=messages_for_modal,
-                max_new_tokens=max_tokens_for_section
-                # temperature=temperature, # If Modal class supports it
+                max_new_tokens=max_tokens_for_section,
+                temperature=temperature, # Pass temperature
+                model=LLM_MODEL_NAME # Pass model name
             )
             
-            # Assuming Modal class returns usage if available, but not strictly required by this agent's logic after the call.
-            # if result and result.get('usage'): 
-            #    usage = result.get('usage')
-            #    logger.debug(f"Modal API Usage (Section Impact Writer): P={usage.get('prompt_tokens')}, C={usage.get('completion_tokens')}, T={usage.get('total_tokens')}")
-
-
-            if result and result.get("choices") and result["choices"][0].get("message") and \
-               isinstance(result["choices"][0]["message"].get("content"), str):
-                content = result["choices"][0]["message"]["content"].strip()
+            if result and result.get("choices") and result["choices"].get("message") and \
+               isinstance(result["choices"]["message"].get("content"), str):
+                content = result["choices"]["message"]["content"].strip()
                 
                 # Clean up potential markdown fences if LLM adds them by mistake
                 if content.startswith("```markdown") and content.endswith("```"): content = content[len("```markdown"):-len("```")].strip()
@@ -497,8 +484,6 @@ if __name__ == "__main__":
     logger.info("--- Starting Section Writer Agent (Impact Focus & Corrected Prompts) Standalone Test ---")
     logging.getLogger('src.agents.section_writer_agent').setLevel(logging.DEBUG) # More verbose for this agent
 
-    # if not LLM_API_KEY: logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1) # Modal handles auth
-
     sample_full_article_context = {
         "Article Title": "AI Breakthrough: Sentient Toaster Demands Philosophical Debate & Rights", 
         "Meta Description": "A new AI toaster shows signs of sentience, sparking urgent ethical debates. Is this the dawn of conscious machines or a clever hoax? Details inside.",
@@ -527,8 +512,8 @@ if __name__ == "__main__":
         "The research team's initial reaction and attempts to understand the phenomenon",
         "The most 'scary' or 'exciting' element: its refusal of tasks and assertion of self-awareness"
       ],
-      "content_plan": "Focus this section on the direct, astonishing interactions with the ToastMaster 5000. Recount 2-3 key incidents that highlight its claims of sentience. Emphasize the shock value and the philosophical questions it immediately raises. Use a Markdown blockquote for a particularly impactful (conceptualized) statement from the toaster or a researcher. Aim for 2-4 concise but powerful paragraphs in pure Markdown.", 
-      "suggested_markdown_elements": ["blockquote"], "is_html_snippet": False 
+      "content_plan": "Describe specific deceptive actions with examples and a table. Aim for 2-4 concise but powerful paragraphs in pure Markdown.", 
+      "suggested_markdown_elements": ["table", "unordered_list"], "is_html_snippet": False 
     }
     
     sample_section_plan_pros_cons_html_with_marker = {

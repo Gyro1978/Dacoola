@@ -16,7 +16,6 @@ import os
 import sys
 import json
 import logging
-# import requests # Commented out as Modal will be used
 import modal # Added for Modal integration
 import re
 import time
@@ -47,11 +46,9 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-# LLM_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
-# LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
 LLM_MODEL_NAME = os.getenv('ARTICLE_REVIEW_AGENT_MODEL', "deepseek-R1") # Updated model name, actual model is in Modal class
 
-MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
 MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
 
 API_TIMEOUT = 200  # Retained for Modal call options if applicable, though Modal has its own timeout mechanisms
@@ -175,10 +172,6 @@ Your output is ONLY the JSON object. No other text.
 
 
 def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, model_name: str) -> Optional[str]: # model_name is now more for logging/config
-    # current_llm_api_key = LLM_API_KEY # Modal handles auth
-    # if not current_llm_api_key:
-    #     logger.error("LLM_API_KEY not set."); return None # Not needed for Modal
-
     user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2, ensure_ascii=False)
 
     estimated_prompt_tokens = math.ceil(len(user_prompt_string_for_api.encode('utf-8')) / 3.0)
@@ -230,25 +223,20 @@ def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, tempe
             # could be added as a parameter to generate if the Modal class supports it.
             result = model_instance.generate.remote(
                 messages=messages_for_modal,
-                max_new_tokens=max_tokens
-                # temperature=temperature # If Modal class's generate method supports it
+                max_new_tokens=max_tokens,
+                temperature=temperature, # Pass temperature
+                model=model_name # Pass model name
             )
 
-            if result and result.get("choices") and result["choices"][0].get("message"):
+            if result and result.get("choices") and result["choices"].get("message"):
                 logger.info(f"Modal call successful (Attempt {attempt+1}/{MAX_RETRIES})")
-                return result["choices"][0]["message"].get("content", "").strip()
+                return result["choices"]["message"].get("content", "").strip()
             
             logger.error(f"Modal LLM API response missing content or malformed (attempt {attempt+1}/{MAX_RETRIES}): {result}")
             # Do not return None immediately, allow retry
             if attempt == MAX_RETRIES - 1:
                 return None
 
-        # except requests.exceptions.RequestException as e: # Replaced with general Exception for Modal
-        #     if attempt == MAX_RETRIES - 1 or (hasattr(e, 'response') and e.response is not None and 400 <= e.response.status_code < 500):
-        #         logger.error(f"LLM API call failed definitively: {e}. Response: {e.response.text[:200] if hasattr(e, 'response') and e.response else 'N/A'}")
-        #         return None
-        #     logger.warning(f"LLM API call failed (attempt {attempt+1}/{MAX_RETRIES}): {e}. Retrying in {RETRY_DELAY_BASE * (2**attempt)}s.")
-        #     time.sleep(RETRY_DELAY_BASE * (2**attempt))
         except Exception as e: # Broad exception for Modal calls, can be refined
             logger.exception(f"Error during Modal LLM API call (attempt {attempt+1}/{MAX_RETRIES}): {e}")
             if attempt == MAX_RETRIES - 1:
@@ -371,7 +359,6 @@ if __name__ == "__main__":
     logging.getLogger().setLevel(logging.DEBUG) 
     
     logger.info("--- Starting Article Review Agent Standalone Test (Hyper-Critical HTML Check Focus) ---")
-    # if not LLM_API_KEY: logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1) # Modal handles auth
 
     base_test_data = {
         'generated_article_title_h1': "AI Breakthrough: Understanding Quantum Entanglement",

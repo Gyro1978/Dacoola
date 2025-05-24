@@ -261,9 +261,9 @@ MIN_IMAGE_HEIGHT: int = int(os.getenv('MIN_IMAGE_HEIGHT', '250'))
 MIN_CLIP_SCORE: float = float(os.getenv('MIN_CLIP_SCORE', '0.5'))
 ENABLE_CLIP_FILTERING: bool = SENTENCE_TRANSFORMERS_AVAILABLE and PIL_AVAILABLE
 
-ARTICLE_FETCH_TIMEOUT: int = 20
-MIN_FULL_TEXT_LENGTH: int = 250
-
+# Define new constants for text length and article fetch timeout
+MIN_FULL_TEXT_LENGTH: int = int(os.getenv('MIN_FULL_TEXT_LENGTH', '300')) # Minimum characters for extracted full text
+ARTICLE_FETCH_TIMEOUT: int = int(os.getenv('ARTICLE_FETCH_TIMEOUT', '15')) # Timeout for fetching article HTML
 
 def _get_article_id(entry: Dict[str, Any], source_identifier: str) -> str:
     raw_title: str = entry.get('title', '')
@@ -410,7 +410,7 @@ def _filter_images_with_clip(image_results_candidates: List[Dict[str, str]], tex
         logger.debug(f"Encoding {len(image_objects_for_clip)} images and text prompt with CLIP...")
         image_embeddings: Any = CLIP_MODEL_INSTANCE.encode(image_objects_for_clip, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
         text_embedding: Any = CLIP_MODEL_INSTANCE.encode([text_prompt], convert_to_tensor=True, show_progress_bar=False)
-        similarities: Any = st_cos_sim(text_embedding, image_embeddings)[0] 
+        similarities: Any = st_cos_sim(text_embedding, image_embeddings) 
         scored_images: List[Dict[str, Any]] = [{'score': score.item(), 'url': valid_original_urls[i]} for i, score in enumerate(similarities)]
         scored_images.sort(key=lambda x: x['score'], reverse=True)
         for i, item in enumerate(scored_images[:3]): logger.debug(f"CLIP Candidate {i+1}: {item['url']}, Score: {item['score']:.4f}")
@@ -419,14 +419,15 @@ def _filter_images_with_clip(image_results_candidates: List[Dict[str, str]], tex
             logger.info(f"CLIP selected best image above threshold: {best_above_threshold['url']} (Score: {best_above_threshold['score']:.4f})")
             return best_above_threshold['url']
         elif scored_images:
+            # If no image meets threshold, still return the best available one
             logger.warning(f"No images met MIN_CLIP_SCORE ({MIN_CLIP_SCORE}). Taking highest overall: {scored_images[0]['url']} (Score: {scored_images[0]['score']:.4f})")
             return scored_images[0]['url']
         else:
             logger.error("Critical CLIP error: No similarities or images processed. Falling back to first valid original URL if available.")
-            return valid_original_urls[0] if valid_original_urls else None
+            return valid_original_urls[0] if valid_original_urls else None # Fixed potential list out of bounds if valid_original_urls is empty
     except Exception as e:
         logger.exception(f"Exception during CLIP processing: {e}. Falling back to first valid original URL if available.")
-        return valid_original_urls[0] if valid_original_urls else None
+        return valid_original_urls[0] if valid_original_urls else None # Fixed potential list out of bounds if valid_original_urls is empty
 
 def _scrape_source_for_image(article_url: str) -> Optional[str]:
     if not BS4_AVAILABLE: logger.warning("BeautifulSoup not available. Skipping source image scraping."); return None
@@ -505,7 +506,7 @@ def _find_best_image(search_query: str, article_url_for_scrape: Optional[str] = 
         if _load_sentence_model_clip() and CLIP_MODEL_INSTANCE:
             best_image_url = _filter_images_with_clip(serpapi_results, search_query)
         else:
-            logger.debug("CLIP model loading failed or instance not available. Falling back.")
+            logger.debug("CLIP model loading failed or instance not available. Falling back to first valid SerpApi result.")
             # Fallback to first valid SerpApi result if CLIP setup fails
             for res in serpapi_results:
                 url: Optional[str] = res.get('url')
@@ -646,7 +647,7 @@ def _process_feed_entry(entry: Dict[str, Any], feed_url: str, processed_ids_set:
     final_content_for_processing: str = ""
     if full_article_text and len(full_article_text) > len(summary): final_content_for_processing = full_article_text
     elif summary: final_content_for_processing = summary
-    if not final_content_for_processing or len(final_content_for_processing) < 50:
+    if not final_content_for_processing or len(final_content_for_processing) < MIN_FULL_TEXT_LENGTH: # Use MIN_FULL_TEXT_LENGTH here
         logger.warning(f"Article '{title}' ({article_id}) has insufficient content ({len(final_content_for_processing or '')} chars). Skipping."); return None
     image_search_query: str = title or summary
     selected_image_url: Optional[str] = _find_best_image(image_search_query, article_url_for_scrape=link)

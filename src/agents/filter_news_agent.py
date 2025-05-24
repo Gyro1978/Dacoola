@@ -1,8 +1,7 @@
 # src/agents/filter_news_agent.py
 import os
 import sys
-# import requests # Commented out for Modal integration
-import modal # Added for Modal integration
+import modal
 import json
 import logging
 import re
@@ -29,12 +28,9 @@ dotenv_path = os.path.join(PROJECT_ROOT, '.env')
 load_dotenv(dotenv_path=dotenv_path)
 
 # --- API and Model Configuration from .env ---
-# Note: Using keys from your provided .env file
-# DEEPSEEK_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
-# DEEPSEEK_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
 AGENT_MODEL = os.getenv('FILTER_AGENT_MODEL', "deepseek-R1") # Updated model name, actual model is in Modal class
 
-MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
 MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
 
 # --- General Configuration (can be static or from .env) ---
@@ -252,17 +248,11 @@ Summary: {article_summary}
 # --- Enhanced API Call with Exponential Backoff ---
 def call_deepseek_api(system_prompt: str, user_prompt: str) -> Optional[str]:
     """Enhanced API call using Modal with exponential backoff retry logic."""
-    # API key and URL checks are not needed for Modal as it handles configuration and authentication.
-
     messages_for_modal = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt}
     ]
     
-    # Temperature and other model-specific params are assumed to be handled by the Modal class
-    # or can be passed to generate.remote if the Modal class supports it.
-    # MAX_TOKENS_RESPONSE is used directly in generate.remote()
-
     for attempt in range(MAX_RETRIES_API):
         try:
             logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES_API} for filter agent")
@@ -273,21 +263,19 @@ def call_deepseek_api(system_prompt: str, user_prompt: str) -> Optional[str]:
                 if attempt == MAX_RETRIES_API - 1:
                     logger.error(f"Modal function lookup failed on final attempt for {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Returning None.")
                     return None # Explicit return on final attempt after logging
-                # No 'continue' needed here, will proceed to sleep and retry logic below
             else:
                 model_instance = ModelClass() # Only create instance if lookup succeeded
             
-            # The Modal `generate` method should return a dict like:
-            # {"choices": [{"message": {"content": "response_string_here"}}]}
             result = model_instance.generate.remote(
                 messages=messages_for_modal,
-                max_new_tokens=MAX_TOKENS_RESPONSE
-                # temperature=TEMPERATURE # If Modal class's generate method supports it
+                max_new_tokens=MAX_TOKENS_RESPONSE,
+                temperature=TEMPERATURE, # Pass temperature
+                model=AGENT_MODEL # Pass model name
             )
             logger.debug(f"Raw result from Modal for filter agent (attempt {attempt + 1}/{MAX_RETRIES_API}): {str(result)[:1000]}")
-            if result and result.get("choices") and result["choices"][0].get("message") and \
-               isinstance(result["choices"][0]["message"].get("content"), str):
-                content = result["choices"][0]["message"]["content"].strip()
+            if result and result.get("choices") and result["choices"].get("message") and \
+               isinstance(result["choices"]["message"].get("content"), str):
+                content = result["choices"]["message"]["content"].strip()
                 # The existing logic for stripping markdown fences for JSON
                 if content.startswith("```json"):
                     content = content[7:-3].strip()
@@ -300,9 +288,6 @@ def call_deepseek_api(system_prompt: str, user_prompt: str) -> Optional[str]:
                 # Allow retry for malformed content unless it's the last attempt
                 if attempt == MAX_RETRIES_API - 1: return None
 
-
-        # Modal might raise specific exceptions, e.g., modal.exception.TimeoutError
-        # For now, catching a general Exception for Modal-related issues.
         except Exception as e:
             logger.exception(f"Error during Modal API call (attempt {attempt + 1}/{MAX_RETRIES_API}): {e}")
             if attempt == MAX_RETRIES_API - 1:
@@ -390,7 +375,7 @@ def run_filter_agent(article_data: Dict) -> Dict:
         filter_verdict: FilterVerdict = parsed_verdict # type: ignore
 
         required_keys = ["importance_level", "topic", "reasoning_summary", "primary_topic_keyword"]
-        if not all(k in filter_verdict for k in required_keys):
+        if not all(k in filter_verdict for k in required_keys): # Fix: Changed 'required_verdict' to 'required_keys'
             missing_keys = [k for k in required_keys if k not in filter_verdict]
             raise ValueError(f"Missing required keys: {missing_keys}")
 

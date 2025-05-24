@@ -6,9 +6,8 @@ import os
 import sys
 import json
 import logging
-import re
-# import requests # Commented out for Modal integration
 import modal # Added for Modal integration
+import re
 import time
 import random
 from typing import List, Dict, Any, Optional, Tuple
@@ -37,11 +36,9 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-# LLM_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
-# LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
 LLM_MODEL_NAME = os.getenv('MARKDOWN_AGENT_MODEL', "deepseek-R1") # Coder for structured output, updated
 
-MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_APP_NAME = "deepseek-gpu-inference-app" # Updated: Name of the Modal app
 MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
 
 API_TIMEOUT = 150 # Retained for Modal call options if applicable
@@ -164,8 +161,6 @@ Your output will directly drive a high-impact, concise, and engaging article. Ad
 # --- End Enhanced Agent System Prompt ---
 
 def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, model_name: str) -> Optional[str]:
-    # LLM_API_KEY check not needed for Modal
-
     user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2)
     
     messages_for_modal = [
@@ -173,10 +168,6 @@ def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, tempe
         {"role": "user", "content": user_prompt_string_for_api}
     ]
 
-    # Temperature and response_format are assumed to be handled by the Modal class
-    # or can be passed to generate.remote if the Modal class supports them.
-    # model_name (e.g. "deepseek-R1") is for logging/config; actual model used is defined in Modal class.
-    
     for attempt in range(MAX_RETRIES):
         try:
             logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES} for markdown plan (model config: {model_name})")
@@ -194,14 +185,14 @@ def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, tempe
 
             result = model_instance.generate.remote(
                 messages=messages_for_modal,
-                max_new_tokens=max_tokens
-                # temperature=temperature, # If Modal class supports it
-                # response_format={"type": "json_object"} # If Modal class supports it and is needed
+                max_new_tokens=max_tokens,
+                temperature=temperature, # Pass temperature
+                model=model_name # Pass model name
             )
 
-            if result and result.get("choices") and result["choices"][0].get("message") and \
-               isinstance(result["choices"][0]["message"].get("content"), str):
-                content = result["choices"][0]["message"]["content"].strip()
+            if result and result.get("choices") and result["choices"].get("message") and \
+               isinstance(result["choices"]["message"].get("content"), str):
+                content = result["choices"]["message"]["content"].strip()
                 logger.info(f"Modal call successful for markdown plan (Attempt {attempt+1}/{MAX_RETRIES})")
                 return content
             else:
@@ -274,7 +265,7 @@ def _validate_and_correct_plan(plan_data: Dict[str, Any], dynamic_config: Dict[s
         
         if not isinstance(section_draft.get("key_points"), list) or \
            not all(isinstance(kp, str) and kp.strip() for kp in section_draft["key_points"]):
-            section_draft["key_points"] = [f"Main aspect of {sec_type}"]
+            section_draft["key_points"] = [f"Main aspect 1 of {sec_type}", f"Main aspect 2 of {sec_type}"]
         
         sugg_elements = section_draft.get("suggested_markdown_elements", [])
         section_draft["suggested_markdown_elements"] = [el for el in sugg_elements if isinstance(el, str) and el in ALLOWED_MARKDOWN_ELEMENTS] if isinstance(sugg_elements, list) else []
@@ -287,7 +278,7 @@ def _validate_and_correct_plan(plan_data: Dict[str, Any], dynamic_config: Dict[s
     if not corrected_sections: return {"sections": _generate_minimal_fallback_plan(article_context, dynamic_config)} # Critical failure
 
     # Ensure Intro is first
-    if corrected_sections[0]["section_type"] != SECTION_TYPE_INTRODUCTION:
+    if corrected_sections["section_type"] != SECTION_TYPE_INTRODUCTION:
         intro = next((s for s in corrected_sections if s["section_type"] == SECTION_TYPE_INTRODUCTION), None)
         if intro: corrected_sections = [intro] + [s for s in corrected_sections if s != intro]
         else: corrected_sections.insert(0, _create_default_section(SECTION_TYPE_INTRODUCTION, article_context))
@@ -448,7 +439,6 @@ def run_markdown_generator_agent(article_pipeline_data: dict) -> dict:
 # --- Standalone Execution ---
 if __name__ == "__main__":
     logger.info("--- Starting Markdown Generator Agent Standalone Test (Impact Focus) ---")
-    # if not LLM_API_KEY: logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1) # Modal handles auth
 
     test_article_data_impact = {
         'id': 'test_md_gen_impact_001',
