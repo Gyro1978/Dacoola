@@ -57,14 +57,37 @@ except ImportError as e:
      sys.exit(1)
 
 # --- Load Environment Variables ---
-dotenv_path = os.path.join(PROJECT_ROOT_FOR_PATH, '.env'); load_dotenv(dotenv_path=dotenv_path)
+dotenv_path = os.path.join(PROJECT_ROOT_FOR_PATH, '.env'); load_dotenv(dotenv_path=dotenv_path) # Initial load for other vars
 AUTHOR_NAME_DEFAULT = os.getenv('AUTHOR_NAME', 'Dacoola AI Team')
 YOUR_WEBSITE_NAME = os.getenv('WEBSITE_NAME', 'Dacoola')
 YOUR_WEBSITE_LOGO_URL = os.getenv('WEBSITE_LOGO_URL', 'https://ibb.co/tpKjc98q')
-raw_base_url = os.getenv('YOUR_SITE_BASE_URL', 'https://dacoolaa.netlify.app');
-YOUR_SITE_BASE_URL = (raw_base_url.rstrip('/') + '/') if raw_base_url else ''
-BASE_URL_FOR_CANONICAL_MAIN = YOUR_SITE_BASE_URL 
-MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None) 
+
+# Explicitly get YOUR_SITE_BASE_URL from environment, this is what GitHub Actions sets
+# Use a distinct variable name first to avoid confusion with the later script variable
+env_your_site_base_url = os.getenv('YOUR_SITE_BASE_URL')
+dotenv_path = os.path.join(PROJECT_ROOT_FOR_PATH, '.env') # Ensure dotenv_path is defined before use
+
+if env_your_site_base_url:
+    raw_base_url = env_your_site_base_url
+    # Logger is not configured yet, print statements for this initial phase were removed
+    # Logger calls will be made after logger initialization for these.
+else:
+    # Fallback if YOUR_SITE_BASE_URL is not in env (e.g. local run without .env properly set)
+    raw_base_url = os.getenv('WEBSITE_BASE_URL') # Try WEBSITE_BASE_URL from env first
+    if not raw_base_url: # If still not found, try .env
+        # load_dotenv(dotenv_path=dotenv_path) # Already called initially
+        raw_base_url = os.getenv('WEBSITE_BASE_URL', 'https://dacoolaa.netlify.app') # Default if not in .env
+
+# The main script variable for the processed base URL
+YOUR_SITE_BASE_URL_SCRIPT_VAR = (raw_base_url.rstrip('/') + '/') if raw_base_url and raw_base_url != 'https://dacoolaa.netlify.app' else ''
+if not YOUR_SITE_BASE_URL_SCRIPT_VAR and raw_base_url == 'https://dacoolaa.netlify.app': # Handle case where default is used
+    YOUR_SITE_BASE_URL_SCRIPT_VAR = 'https://dacoolaa.netlify.app/'
+
+
+# Ensure BASE_URL_FOR_CANONICAL_MAIN uses the new variable
+BASE_URL_FOR_CANONICAL_MAIN = YOUR_SITE_BASE_URL_SCRIPT_VAR
+
+MAKE_WEBHOOK_URL = os.getenv('MAKE_INSTAGRAM_WEBHOOK_URL', None)
 DAILY_TWEET_LIMIT = int(os.getenv('DAILY_TWEET_LIMIT', '3'))
 MAX_AGE_FOR_SOCIAL_POST_HOURS = int(os.getenv('MAX_AGE_FOR_SOCIAL_POST_HOURS', '24'))
 MAX_HOME_PAGE_ARTICLES = int(os.getenv('MAX_HOME_PAGE_ARTICLES', '20'))
@@ -89,12 +112,24 @@ logging.basicConfig(
     handlers=log_handlers,
     force=True 
 )
-logger = logging.getLogger('main_orchestrator') 
+logger = logging.getLogger('main_orchestrator')
 
-if not YOUR_SITE_BASE_URL or YOUR_SITE_BASE_URL == '/':
-    logger.error("CRITICAL: WEBSITE_BASE_URL is not set or is invalid ('/'). Canonical URLs and sitemap will be incorrect.")
+# Log the determined base URL after logger is initialized
+if env_your_site_base_url: # This was the variable holding the direct result of os.getenv('YOUR_SITE_BASE_URL')
+    logger.info(f"Successfully read YOUR_SITE_BASE_URL from environment: {env_your_site_base_url}")
+elif os.getenv('WEBSITE_BASE_URL') and os.getenv('WEBSITE_BASE_URL') != 'https://dacoolaa.netlify.app': # WEBSITE_BASE_URL was found in env
+    logger.info(f"YOUR_SITE_BASE_URL not in env. Successfully read WEBSITE_BASE_URL from environment as fallback: {os.getenv('WEBSITE_BASE_URL')}")
+elif raw_base_url and raw_base_url != 'https://dacoolaa.netlify.app': # WEBSITE_BASE_URL was found in .env
+    logger.info(f"YOUR_SITE_BASE_URL and WEBSITE_BASE_URL not in env. Loaded WEBSITE_BASE_URL from .env file: {raw_base_url}")
+elif raw_base_url == 'https://dacoolaa.netlify.app': # Default was used
+    logger.warning("Neither YOUR_SITE_BASE_URL nor WEBSITE_BASE_URL found in environment or .env. Using default: https://dacoolaa.netlify.app")
+# else: # This case should ideally not be reached if raw_base_url is always set to something.
+    # logger.debug("Initial base URL check: Undetermined state or only default was available.")
+
+if not YOUR_SITE_BASE_URL_SCRIPT_VAR or YOUR_SITE_BASE_URL_SCRIPT_VAR == '/':
+    logger.error(f"CRITICAL: Site base URL is not properly set (derived value: '{YOUR_SITE_BASE_URL_SCRIPT_VAR}'). Check environment variables ('YOUR_SITE_BASE_URL' or 'WEBSITE_BASE_URL') or .env. Canonical URLs and sitemap will be incorrect.")
 else:
-    logger.info(f"Using site base URL: {YOUR_SITE_BASE_URL}")
+    logger.info(f"Using site base URL for sitemap/canonicals: {YOUR_SITE_BASE_URL_SCRIPT_VAR}")
 if not YOUR_WEBSITE_LOGO_URL:
     logger.warning("WEBSITE_LOGO_URL not set. Default or placeholder might be used in templates.")
 
@@ -209,7 +244,7 @@ def format_tags_html(tags_list_for_html):
         return ""
     try:
         tag_html_links = []
-        base_url_for_tags = YOUR_SITE_BASE_URL.rstrip('/') + '/' if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else '/'
+        base_url_for_tags = YOUR_SITE_BASE_URL_SCRIPT_VAR.rstrip('/') + '/' if YOUR_SITE_BASE_URL_SCRIPT_VAR and YOUR_SITE_BASE_URL_SCRIPT_VAR != '/' else '/'
         
         for tag_item in tags_list_for_html:
             safe_tag_item_for_url = quote(str(tag_item))
@@ -353,11 +388,11 @@ def slugify(text_to_slugify):
     slug = slug.strip('-')[:70] 
     return slug or "untitled-article" 
 
-def process_link_placeholders(text_input, base_site_url_param):
+def process_link_placeholders(text_input, base_site_url_param): # Parameter name is fine, it receives YOUR_SITE_BASE_URL_SCRIPT_VAR
     if not text_input: return ""
     if not base_site_url_param or base_site_url_param == '/':
-        logger.warning("Base site URL is invalid for link placeholder processing. Using relative links.")
-        base_site_url_param = "/" 
+        logger.warning(f"Base site URL ('{base_site_url_param}') is invalid for link placeholder processing. Using relative links.")
+        base_site_url_param = "/"
 
     def replace_internal(match):
         link_text = match.group(1).strip()
@@ -508,7 +543,7 @@ def regenerate_article_html_if_needed(article_data_content, force_regen=False):
                 # This might lead to incorrect rendering if it contains mixed HTML/Markdown.
                 logger.warning(f"Regenerating HTML for {article_unique_id} using 'full_generated_article_body_md' as fallback due to missing detailed plan. Rendering issues may occur if it contains pre-rendered HTML snippets.")
                 fallback_md = article_data_content.get('full_generated_article_body_md', '<p>Error: Content data missing for regeneration.</p>')
-                md_with_links = process_link_placeholders(fallback_md, YOUR_SITE_BASE_URL)
+                md_with_links = process_link_placeholders(fallback_md, YOUR_SITE_BASE_URL_SCRIPT_VAR)
                 try:
                     final_article_body_html = html.unescape(markdown.markdown(md_with_links, extensions=['fenced_code', 'tables', 'sane_lists', 'extra', 'nl2br']))
                 except Exception as md_exc:
@@ -518,7 +553,7 @@ def regenerate_article_html_if_needed(article_data_content, force_regen=False):
             # Preferred path: Re-assemble HTML from section content stored in the plan
             final_article_body_html, _ = assemble_article_html_body(
                 article_plan_for_regen, 
-                YOUR_SITE_BASE_URL, 
+                YOUR_SITE_BASE_URL_SCRIPT_VAR, 
                 article_unique_id
             )
             if not final_article_body_html: # If assembly fails
@@ -530,7 +565,7 @@ def regenerate_article_html_if_needed(article_data_content, force_regen=False):
         article_publish_datetime_obj = get_sort_key(article_data_content)
         
         relative_article_path_str = f"articles/{article_slug_str}.html"
-        page_canonical_url = urljoin(YOUR_SITE_BASE_URL, relative_article_path_str.lstrip('/')) if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else f"/{relative_article_path_str.lstrip('/')}"
+        page_canonical_url = urljoin(YOUR_SITE_BASE_URL_SCRIPT_VAR, relative_article_path_str.lstrip('/')) if YOUR_SITE_BASE_URL_SCRIPT_VAR and YOUR_SITE_BASE_URL_SCRIPT_VAR != '/' else f"/{relative_article_path_str.lstrip('/')}"
         
         generated_json_ld_raw, generated_json_ld_full_script_tag = generate_json_ld(article_data_content, page_canonical_url)
         article_data_content['generated_json_ld_raw'] = generated_json_ld_raw
@@ -649,7 +684,7 @@ def process_researched_article_data(article_data_content, existing_articles_summ
         # Now assemble the final HTML body and the pure Markdown body
         final_html_body, final_pure_markdown_body = assemble_article_html_body(
             article_data_content['article_plan'], # Pass the plan which now contains 'generated_content_for_section'
-            YOUR_SITE_BASE_URL,
+            YOUR_SITE_BASE_URL_SCRIPT_VAR,
             article_unique_id
         )
         article_data_content['article_body_html_for_review'] = final_html_body
@@ -691,7 +726,7 @@ def process_researched_article_data(article_data_content, existing_articles_summ
             logger.error(f"Failed to render final HTML for new article {article_unique_id}. Skipping save and further processing."); return None
         
         relative_article_path_str = f"articles/{article_data_content['slug']}.html"
-        page_canonical_url = urljoin(YOUR_SITE_BASE_URL, relative_article_path_str.lstrip('/')) if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else f"/{relative_article_path_str.lstrip('/')}"
+        page_canonical_url = urljoin(YOUR_SITE_BASE_URL_SCRIPT_VAR, relative_article_path_str.lstrip('/')) if YOUR_SITE_BASE_URL_SCRIPT_VAR and YOUR_SITE_BASE_URL_SCRIPT_VAR != '/' else f"/{relative_article_path_str.lstrip('/')}"
         
         summary_for_site_list = {
             "id": article_unique_id,
@@ -862,7 +897,7 @@ if __name__ == "__main__":
         if not article_slug_for_social: logger.warning(f"Skipping {article_id_from_filename} for social queue: missing slug."); continue
 
         relative_link_for_social = f"articles/{article_slug_for_social}.html"
-        canonical_url_for_social = urljoin(YOUR_SITE_BASE_URL, relative_link_for_social.lstrip('/')) if YOUR_SITE_BASE_URL and YOUR_SITE_BASE_URL != '/' else f"/{relative_link_for_social.lstrip('/')}"
+        canonical_url_for_social = urljoin(YOUR_SITE_BASE_URL_SCRIPT_VAR, relative_link_for_social.lstrip('/')) if YOUR_SITE_BASE_URL_SCRIPT_VAR and YOUR_SITE_BASE_URL_SCRIPT_VAR != '/' else f"/{relative_link_for_social.lstrip('/')}"
         summary_short_for_social = processed_article_full_data.get('generated_meta_description', '')
 
         payload = { "id": article_id_from_filename, "title": article_title_for_social, "article_url": canonical_url_for_social,
@@ -948,8 +983,8 @@ if __name__ == "__main__":
         logger.info("No new or unposted recent articles were queued for social media posting in this run.")
 
     logger.info("--- Stage 5: Generating Sitemap ---")
-    if not YOUR_SITE_BASE_URL or YOUR_SITE_BASE_URL == '/':
-        logger.error("Sitemap generation SKIPPED: WEBSITE_BASE_URL is not set or is invalid.");
+    if not YOUR_SITE_BASE_URL_SCRIPT_VAR or YOUR_SITE_BASE_URL_SCRIPT_VAR == '/':
+        logger.error(f"Sitemap generation SKIPPED: Site base URL is not properly set (derived value: '{YOUR_SITE_BASE_URL_SCRIPT_VAR}').");
     else:
         try:
             run_sitemap_generator()
