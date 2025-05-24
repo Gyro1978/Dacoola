@@ -16,3 +16,4 @@ atproto # For Bluesky
 praw # For Reddit
 pyperclip
 modal
+ftfy
