@@ -16,6 +16,7 @@ import logging
 import modal # Added for Modal integration
 import re
 import ftfy # For fixing text encoding issues
+import time
 
 # --- Path Setup ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

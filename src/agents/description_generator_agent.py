@@ -14,6 +14,7 @@ import logging
 # import requests # Commented out for Modal integration
 import modal # Added for Modal integration
 import re
+import time
 
 # --- Path Setup ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
