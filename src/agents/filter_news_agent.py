@@ -1,7 +1,8 @@
 # src/agents/filter_news_agent.py
 import os
 import sys
-import requests
+# import requests # Commented out for Modal integration
+import modal # Added for Modal integration
 import json
 import logging
 import re
@@ -29,17 +30,20 @@ load_dotenv(dotenv_path=dotenv_path)
 
 # --- API and Model Configuration from .env ---
 # Note: Using keys from your provided .env file
-DEEPSEEK_API_KEY = os.getenv('LLM_API_KEY')
-DEEPSEEK_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions")
-AGENT_MODEL = os.getenv('FILTER_AGENT_MODEL', "deepseek-coder")
+# DEEPSEEK_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
+# DEEPSEEK_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
+AGENT_MODEL = os.getenv('FILTER_AGENT_MODEL', "deepseek-R1") # Updated model name, actual model is in Modal class
+
+MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
 
 # --- General Configuration (can be static or from .env) ---
-MAX_TOKENS_RESPONSE = 800  # Or int(os.getenv('FILTER_MAX_TOKENS_RESPONSE', 800)) if you add to .env
-TEMPERATURE = 0.05       # Or float(os.getenv('FILTER_TEMPERATURE', 0.05)) if you add to .env
+MAX_TOKENS_RESPONSE = 800  # Or int(os.getenv('FILTER_MAX_TOKENS_RESPONSE', 800))
+TEMPERATURE = 0.05       # Or float(os.getenv('FILTER_TEMPERATURE', 0.05)) # Modal class may handle this
 
 # --- Retry, Length, and Scale Configuration from .env ---
-MAX_RETRIES_API = int(os.getenv('MAX_RETRIES_API', 3))
-BASE_RETRY_DELAY = int(os.getenv('BASE_RETRY_DELAY', 1))
+MAX_RETRIES_API = int(os.getenv('MAX_RETRIES_API', 3)) # Retained for application-level retries with Modal
+BASE_RETRY_DELAY = int(os.getenv('BASE_RETRY_DELAY', 1)) # Retained for application-level retries with Modal
 MAX_RETRY_DELAY = int(os.getenv('MAX_RETRY_DELAY', 60))
 MAX_SUMMARY_LENGTH = int(os.getenv('MAX_SUMMARY_LENGTH', 2000))
 CONFIDENCE_SCALE_MIN = float(os.getenv('CONFIDENCE_SCALE_MIN', 0.0))
@@ -246,102 +250,72 @@ Summary: {article_summary}
 """
 
 # --- Enhanced API Call with Exponential Backoff ---
-def call_deepseek_api(system_prompt: str, user_prompt: str) -> Optional[str]: # Removed max_retries from signature, uses global
-    """Enhanced API call with exponential backoff retry logic."""
-    if not DEEPSEEK_API_KEY:
-        logger.error("LLM_API_KEY environment variable not set.") # Matched .env key name
-        return None
-    if not DEEPSEEK_API_URL:
-        logger.error("LLM_API_URL environment variable not set.") # Matched .env key name
-        return None
+def call_deepseek_api(system_prompt: str, user_prompt: str) -> Optional[str]:
+    """Enhanced API call using Modal with exponential backoff retry logic."""
+    # API key and URL checks are not needed for Modal as it handles configuration and authentication.
 
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
-        "Accept": "application/json"
-    }
-
-    payload = {
-        "model": AGENT_MODEL,
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ],
-        "max_tokens": MAX_TOKENS_RESPONSE,
-        "temperature": TEMPERATURE,
-        "stream": False
-    }
+    messages_for_modal = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt}
+    ]
+    
+    # Temperature and other model-specific params are assumed to be handled by the Modal class
+    # or can be passed to generate.remote if the Modal class supports it.
+    # MAX_TOKENS_RESPONSE is used directly in generate.remote()
 
     for attempt in range(MAX_RETRIES_API):
         try:
-            logger.debug(f"API call attempt {attempt + 1}/{MAX_RETRIES_API}")
-            response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=90)
+            logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES_API} for filter agent")
+            
+            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
+            if not ModelClass:
+                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
+                if attempt == MAX_RETRIES_API - 1: return None # Last attempt
+                delay = min(BASE_RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
+                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
+                time.sleep(delay)
+                continue
 
-            if response.status_code == 401:
-                logger.error("API authentication failed (401). Check LLM_API_KEY.")
-                return None # No retry on auth failure
-            elif response.status_code == 429: # Rate limit
-                logger.warning(f"Rate limit hit (429) on attempt {attempt + 1}")
-                if attempt < MAX_RETRIES_API - 1:
-                    delay = min(BASE_RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
-                    logger.info(f"Waiting {delay}s before retry...")
-                    time.sleep(delay)
-                    continue
-                else:
-                    logger.error("Max retries reached for rate limit.")
-                    return None
-            elif response.status_code >= 500: # Server-side errors
-                logger.warning(f"Server error ({response.status_code}) on attempt {attempt + 1}")
-                if attempt < MAX_RETRIES_API - 1:
-                    delay = min(BASE_RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
-                    logger.info(f"Waiting {delay}s for server error before retry...")
-                    time.sleep(delay)
-                    continue
-                else:
-                    logger.error("Max retries reached for server error.")
-                    return None
+            model_instance = ModelClass()
+            
+            # The Modal `generate` method should return a dict like:
+            # {"choices": [{"message": {"content": "response_string_here"}}]}
+            result = model_instance.generate.remote(
+                messages=messages_for_modal,
+                max_new_tokens=MAX_TOKENS_RESPONSE
+                # temperature=TEMPERATURE # If Modal class's generate method supports it
+            )
 
-            response.raise_for_status() # For other client errors (4xx) or if we want to re-raise
-
-            result = response.json()
-            if result.get("choices") and result["choices"][0].get("message"):
-                content = result["choices"][0]["message"].get("content", "").strip()
+            if result and result.get("choices") and result["choices"][0].get("message") and \
+               isinstance(result["choices"][0]["message"].get("content"), str):
+                content = result["choices"][0]["message"]["content"].strip()
+                # The existing logic for stripping markdown fences for JSON
                 if content.startswith("```json"):
                     content = content[7:-3].strip()
-                elif content.startswith("```"):
+                elif content.startswith("```"): # More general case
                     content = content[3:-3].strip()
+                logger.info(f"Modal call successful for filter agent (Attempt {attempt+1}/{MAX_RETRIES_API})")
                 return content
             else:
-                logger.error(f"API response missing content: {result}")
-                # Consider if retry is useful here, probably not if content is missing
-
-        except requests.exceptions.Timeout:
-            logger.warning(f"API timeout on attempt {attempt + 1}")
-            if attempt < MAX_RETRIES_API - 1:
-                delay = min(BASE_RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY) # Exponential backoff for timeout
-                logger.info(f"Waiting {delay}s for timeout before retry...")
-                time.sleep(delay)
-                continue # Go to next attempt
-            else:
-                logger.error("All API attempts timed out.")
-        except requests.exceptions.RequestException as e:
-            logger.error(f"API request failed on attempt {attempt + 1}: {e}")
-            if attempt < MAX_RETRIES_API - 1:
-                delay = min(BASE_RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY) # Exponential backoff for other request errors
-                logger.info(f"Waiting {delay}s for request error before retry...")
-                time.sleep(delay)
-                continue # Go to next attempt
-            else:
-                logger.error("All API attempts failed due to request errors.")
-        except Exception as e: # Catch-all for unexpected errors during API call
-            logger.exception(f"Unexpected API error on attempt {attempt + 1}: {e}")
-            # Decide if retry is safe/useful for truly unexpected errors, often it's better to fail fast.
-            # For now, we'll let it exhaust retries if it happens multiple times.
-            if attempt == MAX_RETRIES_API -1:
-                 logger.error("All API attempts failed due to unexpected errors.")
+                logger.error(f"Modal API response missing content or malformed (attempt {attempt + 1}/{MAX_RETRIES_API}): {str(result)[:500]}")
+                # Allow retry for malformed content unless it's the last attempt
+                if attempt == MAX_RETRIES_API - 1: return None
 
 
-    logger.error("All API retry attempts exhausted or unrecoverable error.")
+        # Modal might raise specific exceptions, e.g., modal.exception.TimeoutError
+        # For now, catching a general Exception for Modal-related issues.
+        except Exception as e:
+            logger.exception(f"Error during Modal API call (attempt {attempt + 1}/{MAX_RETRIES_API}): {e}")
+            if attempt == MAX_RETRIES_API - 1:
+                logger.error("All Modal API attempts failed due to errors.")
+                return None
+        
+        # Common retry delay logic for all handled failures before next attempt
+        delay = min(BASE_RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
+        logger.warning(f"Modal API call failed or returned unexpected data (attempt {attempt+1}/{MAX_RETRIES_API}). Retrying in {delay}s.")
+        time.sleep(delay)
+
+    logger.error("All Modal API retry attempts exhausted or unrecoverable error.")
     return None
 
 # --- Enhanced Main Agent Function ---

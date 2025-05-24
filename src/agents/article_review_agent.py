@@ -16,11 +16,12 @@ import os
 import sys
 import json
 import logging
-import requests
+# import requests # Commented out as Modal will be used
+import modal # Added for Modal integration
 import re
 import time
 import html # For unescaping to compare with source if needed
-from typing import Optional 
+from typing import Optional
 import math
 
 # --- Path Setup ---
@@ -46,12 +47,15 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-LLM_API_KEY = os.getenv('LLM_API_KEY')
-LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions")
-LLM_MODEL_NAME = os.getenv('ARTICLE_REVIEW_AGENT_MODEL', "deepseek-coder") # Coder for precision
+# LLM_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
+# LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
+LLM_MODEL_NAME = os.getenv('ARTICLE_REVIEW_AGENT_MODEL', "deepseek-R1") # Updated model name, actual model is in Modal class
 
-API_TIMEOUT = 200 
-MAX_RETRIES = 2 
+MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
+
+API_TIMEOUT = 200  # Retained for Modal call options if applicable, though Modal has its own timeout mechanisms
+MAX_RETRIES = 2
 RETRY_DELAY_BASE = 10
 
 # --- Enhanced Agent System Prompt ---
@@ -170,60 +174,88 @@ Your output is ONLY the JSON object. No other text.
 # --- End Enhanced Agent System Prompt ---
 
 
-def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, model_name: str) -> Optional[str]:
-    current_llm_api_key = LLM_API_KEY
-    if not current_llm_api_key:
-        logger.error("LLM_API_KEY not set."); return None
-    
-    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {current_llm_api_key}", "Accept": "application/json"}
-    user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2, ensure_ascii=False)
-    
-    estimated_prompt_tokens = math.ceil(len(user_prompt_string_for_api.encode('utf-8')) / 3.0) 
-    logger.debug(f"Article Reviewer: Approx. prompt tokens: {estimated_prompt_tokens}, Max completion: {max_tokens}")
+def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, model_name: str) -> Optional[str]: # model_name is now more for logging/config
+    # current_llm_api_key = LLM_API_KEY # Modal handles auth
+    # if not current_llm_api_key:
+    #     logger.error("LLM_API_KEY not set."); return None # Not needed for Modal
 
-    MAX_HTML_BODY_IN_PROMPT = 25000 
+    user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2, ensure_ascii=False)
+
+    estimated_prompt_tokens = math.ceil(len(user_prompt_string_for_api.encode('utf-8')) / 3.0)
+    logger.debug(f"Article Reviewer (Modal): Approx. prompt tokens: {estimated_prompt_tokens}, Max completion: {max_tokens}, Target Model (config): {model_name}")
+
+    MAX_HTML_BODY_IN_PROMPT = 25000
     if "rendered_html_body" in user_prompt_data and \
        user_prompt_data["rendered_html_body"] and \
        len(user_prompt_data["rendered_html_body"]) > MAX_HTML_BODY_IN_PROMPT:
-        
+
         logger.warning(f"Prompt for review: 'rendered_html_body' is very long ({len(user_prompt_data['rendered_html_body'])} chars). Truncating to {MAX_HTML_BODY_IN_PROMPT} chars for LLM call.")
         user_prompt_data_truncated = user_prompt_data.copy()
         trunc_point = user_prompt_data_truncated["rendered_html_body"].rfind('\n', 0, MAX_HTML_BODY_IN_PROMPT)
         if trunc_point == -1:
             trunc_point = user_prompt_data_truncated["rendered_html_body"].rfind('>', 0, MAX_HTML_BODY_IN_PROMPT)
-        if trunc_point == -1 or trunc_point < MAX_HTML_BODY_IN_PROMPT / 2: 
+        if trunc_point == -1 or trunc_point < MAX_HTML_BODY_IN_PROMPT / 2:
             trunc_point = MAX_HTML_BODY_IN_PROMPT
 
         user_prompt_data_truncated["rendered_html_body"] = user_prompt_data_truncated["rendered_html_body"][:trunc_point] + "\n... [HTML TRUNCATED FOR REVIEW INPUT] ..."
         user_prompt_string_for_api = json.dumps(user_prompt_data_truncated, indent=2, ensure_ascii=False)
         estimated_prompt_tokens_truncated = math.ceil(len(user_prompt_string_for_api.encode('utf-8')) / 3.0)
-        logger.debug(f"Article Reviewer: Approx. TRUNCATED prompt tokens: {estimated_prompt_tokens_truncated}")
+        logger.debug(f"Article Reviewer (Modal): Approx. TRUNCATED prompt tokens: {estimated_prompt_tokens_truncated}")
 
-    payload = {
-        "model": model_name,
-        "messages": [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt_string_for_api}],
-        "max_tokens": max_tokens, "temperature": temperature, "stream": False, "response_format": {"type": "json_object"}
-    }
+    # Construct messages list for Modal function
+    # The Modal function is expected to handle the conversion to its specific API format if needed.
+    # We pass the "user_prompt_string_for_api" which contains the JSON of all context.
+    # The system prompt is passed separately.
+    messages_for_modal = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt_string_for_api} # This is a JSON string
+    ]
 
     for attempt in range(MAX_RETRIES):
         try:
-            response = requests.post(LLM_API_URL, headers=headers, json=payload, timeout=API_TIMEOUT)
-            response.raise_for_status()
-            result = response.json()
-            if result.get("choices") and result["choices"][0].get("message"):
-                return result["choices"][0]["message"].get("content", "").strip()
-            logger.error(f"LLM API response missing content (attempt {attempt+1}/{MAX_RETRIES}): {result}"); return None
-        except requests.exceptions.RequestException as e:
-            if attempt == MAX_RETRIES - 1 or (hasattr(e, 'response') and e.response is not None and 400 <= e.response.status_code < 500):
-                logger.error(f"LLM API call failed definitively: {e}. Response: {e.response.text[:200] if hasattr(e, 'response') and e.response else 'N/A'}")
+            logger.info(f"Attempting to call Modal function: {MODAL_APP_NAME} / {MODAL_CLASS_NAME} (Attempt {attempt+1}/{MAX_RETRIES})")
+            # Get a handle to the Modal class
+            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
+            if not ModelClass:
+                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
                 return None
-            logger.warning(f"LLM API call failed (attempt {attempt+1}/{MAX_RETRIES}): {e}. Retrying in {RETRY_DELAY_BASE * (2**attempt)}s.")
+
+            # Instantiate the remote class
+            model_instance = ModelClass()
+
+            # Call the generate method
+            # The remote generate method should be designed to accept 'messages' and 'max_new_tokens'
+            # and return a dict like: {"choices": [{"message": {"content": "..."}}]}
+            # Temperature is not directly passed here, assuming it's configured in the Modal class or
+            # could be added as a parameter to generate if the Modal class supports it.
+            result = model_instance.generate.remote(
+                messages=messages_for_modal,
+                max_new_tokens=max_tokens
+                # temperature=temperature # If Modal class's generate method supports it
+            )
+
+            if result and result.get("choices") and result["choices"][0].get("message"):
+                logger.info(f"Modal call successful (Attempt {attempt+1}/{MAX_RETRIES})")
+                return result["choices"][0]["message"].get("content", "").strip()
+            
+            logger.error(f"Modal LLM API response missing content or malformed (attempt {attempt+1}/{MAX_RETRIES}): {result}")
+            # Do not return None immediately, allow retry
+            if attempt == MAX_RETRIES - 1:
+                return None
+
+        # except requests.exceptions.RequestException as e: # Replaced with general Exception for Modal
+        #     if attempt == MAX_RETRIES - 1 or (hasattr(e, 'response') and e.response is not None and 400 <= e.response.status_code < 500):
+        #         logger.error(f"LLM API call failed definitively: {e}. Response: {e.response.text[:200] if hasattr(e, 'response') and e.response else 'N/A'}")
+        #         return None
+        #     logger.warning(f"LLM API call failed (attempt {attempt+1}/{MAX_RETRIES}): {e}. Retrying in {RETRY_DELAY_BASE * (2**attempt)}s.")
+        #     time.sleep(RETRY_DELAY_BASE * (2**attempt))
+        except Exception as e: # Broad exception for Modal calls, can be refined
+            logger.exception(f"Error during Modal LLM API call (attempt {attempt+1}/{MAX_RETRIES}): {e}")
+            if attempt == MAX_RETRIES - 1:
+                return None
+            logger.warning(f"Modal LLM API call failed (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {RETRY_DELAY_BASE * (2**attempt)}s.")
             time.sleep(RETRY_DELAY_BASE * (2**attempt))
-        except Exception as e:
-            logger.exception(f"Unexpected error during LLM API call (attempt {attempt+1}/{MAX_RETRIES}): {e}")
-            if attempt == MAX_RETRIES - 1: return None
-            time.sleep(RETRY_DELAY_BASE * (2**attempt))
-    logger.error(f"LLM API call failed after {MAX_RETRIES} attempts."); return None
+    logger.error(f"Modal LLM API call failed after {MAX_RETRIES} attempts."); return None
 
 def _parse_llm_review_response(json_string: str) -> Optional[dict]:
     if not json_string:
@@ -339,7 +371,7 @@ if __name__ == "__main__":
     logging.getLogger().setLevel(logging.DEBUG) 
     
     logger.info("--- Starting Article Review Agent Standalone Test (Hyper-Critical HTML Check Focus) ---")
-    if not LLM_API_KEY: logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1)
+    # if not LLM_API_KEY: logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1) # Modal handles auth
 
     base_test_data = {
         'generated_article_title_h1': "AI Breakthrough: Understanding Quantum Entanglement",

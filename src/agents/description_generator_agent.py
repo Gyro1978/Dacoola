@@ -11,7 +11,8 @@ import os
 import sys
 import json
 import logging
-import requests
+# import requests # Commented out for Modal integration
+import modal # Added for Modal integration
 import re
 
 # --- Path Setup ---
@@ -37,11 +38,14 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-LLM_API_KEY = os.getenv('LLM_API_KEY')
-LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions")
-LLM_MODEL_NAME = os.getenv('DESCRIPTION_AGENT_MODEL', "deepseek-chat")
+# LLM_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
+# LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
+LLM_MODEL_NAME = os.getenv('DESCRIPTION_AGENT_MODEL', "deepseek-R1") # Updated model name, actual model is in Modal class
 
-API_TIMEOUT = 110
+MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
+
+API_TIMEOUT = 110 # Retained for Modal call options if applicable
 MAX_SUMMARY_SNIPPET_LEN_CONTEXT = 1500
 MAX_TITLE_LEN_CONTEXT = 150
 
@@ -167,9 +171,9 @@ def call_llm_for_meta_description(h1_or_final_title: str,
                                        primary_keyword: str,
                                        secondary_keywords_list: list,
                                        processed_summary: str) -> str | None:
-    if not LLM_API_KEY:
-        logger.error("LLM_API_KEY not found.")
-        return None
+    # if not LLM_API_KEY: # Modal handles auth
+    #     logger.error("LLM_API_KEY not found.")
+    #     return None
 
     secondary_keywords_str = ", ".join(secondary_keywords_list) if secondary_keywords_list else "None"
     processed_summary_snippet = (processed_summary or "No summary available for context.")[:MAX_SUMMARY_SNIPPET_LEN_CONTEXT]
@@ -180,37 +184,66 @@ def call_llm_for_meta_description(h1_or_final_title: str,
 **Primary Keyword**: {primary_keyword}
 **Secondary Keywords**: {secondary_keywords_str}
 **Processed Summary**: {processed_summary_snippet}
-    """
-    payload = {
-        "model": LLM_MODEL_NAME,
-        "messages": [
-            {"role": "system", "content": META_AGENT_SYSTEM_PROMPT},
-            {"role": "user", "content": user_input_content.strip()}
-        ],
-        "temperature": 0.82,
-        "max_tokens": 300,
-        "response_format": {"type": "json_object"}
-    }
-    headers = {"Authorization": f"Bearer {LLM_API_KEY}", "Content-Type": "application/json"}
+    """.strip()
 
-    try:
-        logger.debug(f"Sending meta desc request for: '{title_context}'")
-        response = requests.post(LLM_API_URL, headers=headers, json=payload, timeout=API_TIMEOUT)
-        response.raise_for_status()
-        response_json = response.json()
-        if response_json.get("choices") and response_json["choices"][0].get("message") and response_json["choices"][0]["message"].get("content"):
-            json_str = response_json["choices"][0]["message"]["content"]
-            logger.info(f"LLM meta desc gen successful for '{title_context}'.")
-            logger.debug(f"Raw JSON for meta: {json_str}")
-            return json_str
-        logger.error(f"LLM meta desc response missing content: {response_json}")
-        return None
-    except requests.exceptions.RequestException as e:
-        logger.error(f"LLM API req for meta desc failed: {e}. Response: {e.response.text[:500] if e.response else 'No response'}")
-        return None
-    except Exception as e:
-        logger.exception(f"Unexpected error in call_llm_for_meta_description: {e}")
-        return None
+    # This payload structure is for reference; the actual payload sent to Modal
+    # will be just the messages list and any other direct parameters for the generate method.
+    # "model", "temperature", "response_format" are assumed to be handled by the Modal class.
+    # max_tokens will be passed to the generate method.
+    llm_params = {
+        "temperature": 0.82, # Example, Modal class may have its own default
+        "max_tokens": 300,
+        # "response_format": {"type": "json_object"} # Assumed handled by Modal class
+    }
+
+    messages_for_modal = [
+        {"role": "system", "content": META_AGENT_SYSTEM_PROMPT},
+        {"role": "user", "content": user_input_content}
+    ]
+
+    # Using MAX_RETRIES from article_review_agent, define if not present
+    MAX_RETRIES_DESC = int(os.getenv('MAX_RETRIES', 2))
+    RETRY_DELAY_BASE_DESC = int(os.getenv('RETRY_DELAY_BASE', 5))
+
+
+    for attempt in range(MAX_RETRIES_DESC):
+        try:
+            logger.debug(f"Attempting Modal call for meta desc for: '{title_context}' (Attempt {attempt+1}/{MAX_RETRIES_DESC})")
+            
+            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
+            if not ModelClass:
+                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
+                if attempt == MAX_RETRIES_DESC - 1: return None
+                time.sleep(RETRY_DELAY_BASE_DESC * (2**attempt))
+                continue
+            
+            model_instance = ModelClass()
+            
+            result = model_instance.generate.remote(
+                messages=messages_for_modal,
+                max_new_tokens=llm_params["max_tokens"]
+                # temperature=llm_params["temperature"] # If Modal class's generate method supports it
+            )
+
+            if result and result.get("choices") and result["choices"][0].get("message") and \
+               isinstance(result["choices"][0]["message"].get("content"), str):
+                json_str = result["choices"][0]["message"]["content"]
+                logger.info(f"Modal LLM meta desc gen successful for '{title_context}'.")
+                logger.debug(f"Raw JSON for meta from Modal: {json_str}")
+                return json_str
+            
+            logger.error(f"Modal LLM meta desc response missing content or malformed (attempt {attempt+1}/{MAX_RETRIES_DESC}): {str(result)[:500]}")
+            if attempt == MAX_RETRIES_DESC - 1: return None
+
+        except Exception as e:
+            logger.exception(f"Error during Modal LLM call for meta description (attempt {attempt+1}/{MAX_RETRIES_DESC}): {e}")
+            if attempt == MAX_RETRIES_DESC - 1: return None
+        
+        logger.warning(f"Modal LLM call for meta desc failed or returned unexpected data (attempt {attempt+1}/{MAX_RETRIES_DESC}). Retrying in {RETRY_DELAY_BASE_DESC * (2**attempt)}s.")
+        time.sleep(RETRY_DELAY_BASE_DESC * (2**attempt))
+
+    logger.error(f"Modal LLM call for meta description failed after {MAX_RETRIES_DESC} attempts for '{title_context}'.")
+    return None
 
 def parse_llm_meta_response(json_string: str | None, primary_keyword_for_fallback: str) -> dict:
     parsed_data = {'generated_meta_description': None, 'meta_description_strategy_notes': None, 'error': None}
@@ -291,7 +324,7 @@ def run_description_generator_agent(article_pipeline_data: dict) -> dict:
 
 if __name__ == "__main__":
     logger.info("--- Starting Description Generator Agent Standalone Test ---")
-    if not os.getenv('LLM_API_KEY'): logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1)
+    # if not os.getenv('LLM_API_KEY'): logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1) # Modal handles auth
 
     sample_data = {
         'id': 'test_meta_asi_final_001',

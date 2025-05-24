@@ -7,7 +7,8 @@ import sys
 import json
 import logging
 import re
-import requests
+# import requests # Commented out for Modal integration
+import modal # Added for Modal integration
 import time
 import random
 from typing import List, Dict, Any, Optional, Tuple
@@ -36,13 +37,16 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-LLM_API_KEY = os.getenv('LLM_API_KEY')
-LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions")
-LLM_MODEL_NAME = os.getenv('MARKDOWN_AGENT_MODEL', "deepseek-coder") # Coder for structured output
+# LLM_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
+# LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
+LLM_MODEL_NAME = os.getenv('MARKDOWN_AGENT_MODEL', "deepseek-R1") # Coder for structured output, updated
 
-API_TIMEOUT = 150 # Increased for potentially more complex planning logic
-MAX_RETRIES = 2 # Fail faster on persistent LLM issues
-RETRY_DELAY_BASE = 8
+MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
+
+API_TIMEOUT = 150 # Retained for Modal call options if applicable
+MAX_RETRIES = 2 # Retained for application-level retries with Modal
+RETRY_DELAY_BASE = 8 # Retained for application-level retries with Modal
 
 # Core structural preferences (can be overridden by dynamic_config)
 DEFAULT_MIN_MAIN_BODY_SECTIONS = 2
@@ -160,37 +164,61 @@ Your output will directly drive a high-impact, concise, and engaging article. Ad
 # --- End Enhanced Agent System Prompt ---
 
 def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, model_name: str) -> Optional[str]:
-    current_llm_api_key = LLM_API_KEY
-    if not current_llm_api_key:
-        logger.error("LLM_API_KEY not set."); return None
-    
-    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {current_llm_api_key}", "Accept": "application/json"}
-    user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2)
-    payload = {
-        "model": model_name,
-        "messages": [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt_string_for_api}],
-        "max_tokens": max_tokens, "temperature": temperature, "stream": False, "response_format": {"type": "json_object"}
-    }
+    # LLM_API_KEY check not needed for Modal
 
+    user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2)
+    
+    messages_for_modal = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt_string_for_api}
+    ]
+
+    # Temperature and response_format are assumed to be handled by the Modal class
+    # or can be passed to generate.remote if the Modal class supports them.
+    # model_name (e.g. "deepseek-R1") is for logging/config; actual model used is defined in Modal class.
+    
     for attempt in range(MAX_RETRIES):
         try:
-            response = requests.post(LLM_API_URL, headers=headers, json=payload, timeout=API_TIMEOUT)
-            response.raise_for_status()
-            result = response.json()
-            if result.get("choices") and result["choices"][0].get("message"):
-                return result["choices"][0]["message"].get("content", "").strip()
-            logger.error(f"LLM API response missing content (attempt {attempt+1}/{MAX_RETRIES}): {result}"); return None
-        except requests.exceptions.RequestException as e:
-            if attempt == MAX_RETRIES - 1 or (hasattr(e, 'response') and e.response is not None and 400 <= e.response.status_code < 500): # Fail fast on client errors
-                logger.error(f"LLM API call failed definitively: {e}. Response: {e.response.text[:200] if hasattr(e, 'response') and e.response else 'N/A'}")
-                return None
-            logger.warning(f"LLM API call failed (attempt {attempt+1}/{MAX_RETRIES}): {e}. Retrying in {RETRY_DELAY_BASE * (2**attempt)}s.")
-            time.sleep(RETRY_DELAY_BASE * (2**attempt))
+            logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES} for markdown plan (model config: {model_name})")
+            
+            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
+            if not ModelClass:
+                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
+                if attempt == MAX_RETRIES - 1: return None # Last attempt
+                delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
+                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
+                time.sleep(delay)
+                continue
+            
+            model_instance = ModelClass()
+
+            result = model_instance.generate.remote(
+                messages=messages_for_modal,
+                max_new_tokens=max_tokens
+                # temperature=temperature, # If Modal class supports it
+                # response_format={"type": "json_object"} # If Modal class supports it and is needed
+            )
+
+            if result and result.get("choices") and result["choices"][0].get("message") and \
+               isinstance(result["choices"][0]["message"].get("content"), str):
+                content = result["choices"][0]["message"]["content"].strip()
+                logger.info(f"Modal call successful for markdown plan (Attempt {attempt+1}/{MAX_RETRIES})")
+                return content
+            else:
+                logger.error(f"Modal API response missing content or malformed (attempt {attempt + 1}/{MAX_RETRIES}): {str(result)[:500]}")
+                if attempt == MAX_RETRIES - 1: return None
+        
         except Exception as e:
-            logger.exception(f"Unexpected error during LLM API call (attempt {attempt+1}/{MAX_RETRIES}): {e}")
-            if attempt == MAX_RETRIES - 1: return None # Final attempt failed
-            time.sleep(RETRY_DELAY_BASE * (2**attempt))
-    logger.error(f"LLM API call failed after {MAX_RETRIES} attempts."); return None
+            logger.exception(f"Error during Modal API call for markdown plan (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
+            if attempt == MAX_RETRIES - 1:
+                logger.error("All Modal API attempts for markdown plan failed due to errors.")
+                return None
+        
+        delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
+        logger.warning(f"Modal API call for markdown plan failed or returned unexpected data (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
+        time.sleep(delay)
+        
+    logger.error(f"Modal LLM API call for markdown plan failed after {MAX_RETRIES} attempts."); return None
 
 def _validate_and_correct_plan(plan_data: Dict[str, Any], dynamic_config: Dict[str, Any], article_context: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     if not isinstance(plan_data, dict) or "sections" not in plan_data or not isinstance(plan_data["sections"], list):
@@ -420,7 +448,7 @@ def run_markdown_generator_agent(article_pipeline_data: dict) -> dict:
 # --- Standalone Execution ---
 if __name__ == "__main__":
     logger.info("--- Starting Markdown Generator Agent Standalone Test (Impact Focus) ---")
-    if not LLM_API_KEY: logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1)
+    # if not LLM_API_KEY: logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1) # Modal handles auth
 
     test_article_data_impact = {
         'id': 'test_md_gen_impact_001',

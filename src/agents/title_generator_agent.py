@@ -12,7 +12,8 @@ import os
 import sys
 import json
 import logging
-import requests
+# import requests # Commented out for Modal integration
+import modal # Added for Modal integration
 import re
 import ftfy # For fixing text encoding issues
 
@@ -39,14 +40,16 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-LLM_API_KEY = os.getenv('LLM_API_KEY')
-LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions")
-LLM_MODEL_NAME = os.getenv('TITLE_AGENT_MODEL', "deepseek-chat")
-WEBSITE_NAME = os.getenv('WEBSITE_NAME', 'Dacoola')
+# LLM_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
+# LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
+LLM_MODEL_NAME = os.getenv('TITLE_AGENT_MODEL', "deepseek-R1") # Updated model name
+WEBSITE_NAME = os.getenv('WEBSITE_NAME', 'Dacoola') # Retain for branding logic
 BRAND_SUFFIX_FOR_TITLE_TAG = f" - {WEBSITE_NAME}"
 
+MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
 
-API_TIMEOUT = 90
+API_TIMEOUT = 90 # Retained for Modal call options if applicable
 MAX_SUMMARY_SNIPPET_LEN_CONTEXT = 1000
 MAX_CONTENT_SNIPPET_LEN_CONTEXT = 200
 
@@ -182,51 +185,83 @@ def call_llm_for_titles(primary_keyword: str,
                         secondary_keywords_list: list,
                         processed_summary: str,
                         article_content_snippet_val: str) -> str | None:
-    if not LLM_API_KEY:
-        logger.error("LLM_API_KEY not found.")
-        return None
+    # LLM_API_KEY check not needed for Modal
 
     secondary_keywords_str = ", ".join(secondary_keywords_list) if secondary_keywords_list else "None"
     processed_summary_snippet = (processed_summary or "No summary provided.")[:MAX_SUMMARY_SNIPPET_LEN_CONTEXT]
     content_snippet_context = (article_content_snippet_val or "No content snippet provided.")[:MAX_CONTENT_SNIPPET_LEN_CONTEXT]
-
 
     user_input_content = f"""
 **Primary Keyword**: {primary_keyword}
 **Secondary Keywords**: {secondary_keywords_str}
 **Processed Summary**: {processed_summary_snippet}
 **Article Content Snippet**: {content_snippet_context}
-    """
-    payload = {
-        "model": LLM_MODEL_NAME,
-        "messages": [
-            {"role": "system", "content": TITLE_AGENT_SYSTEM_PROMPT},
-            {"role": "user", "content": user_input_content.strip()}
-        ],
-        "temperature": 0.65, 
-        "max_tokens": 450,   
-        "response_format": {"type": "json_object"}
-    }
-    headers = {"Authorization": f"Bearer {LLM_API_KEY}", "Content-Type": "application/json"}
+    """.strip() # Ensure user_input_content is stripped
 
-    try:
-        logger.debug(f"Sending title gen request for PK: '{primary_keyword}'")
-        response = requests.post(LLM_API_URL, headers=headers, json=payload, timeout=API_TIMEOUT)
-        response.raise_for_status()
-        response_json = response.json()
-        if response_json.get("choices") and response_json["choices"][0].get("message") and response_json["choices"][0]["message"].get("content"):
-            json_str = response_json["choices"][0]["message"]["content"]
-            logger.info(f"LLM title gen successful for '{primary_keyword}'.")
-            logger.debug(f"Raw JSON for titles: {json_str}")
-            return json_str
-        logger.error(f"LLM title response missing content: {response_json}")
-        return None
-    except requests.exceptions.RequestException as e:
-        logger.error(f"LLM API req for titles failed: {e}. Response: {e.response.text[:500] if e.response else 'No response'}")
-        return None
-    except Exception as e:
-        logger.exception(f"Unexpected error in call_llm_for_titles: {e}")
-        return None
+    # Max tokens for the title generation, temperature, and response_format are assumed
+    # to be handled by the Modal class or can be passed if supported.
+    # Using a placeholder for max_tokens for now.
+    max_new_tokens_for_titles = 450 # Corresponds to "max_tokens" in original payload
+
+    messages_for_modal = [
+        {"role": "system", "content": TITLE_AGENT_SYSTEM_PROMPT},
+        {"role": "user", "content": user_input_content}
+    ]
+    
+    # Using global MAX_RETRIES and RETRY_DELAY_BASE if available, or define locally
+    # For consistency with other agents, let's assume they are available globally or define them if needed.
+    # If not defined globally, ensure they are defined in this file (e.g., MAX_RETRIES = 3, RETRY_DELAY_BASE = 5)
+    # Assuming MAX_RETRIES and RETRY_DELAY_BASE are defined globally or imported.
+    # If not, they should be added here. For this example, I'll assume they are accessible.
+    # Define local constants if not globally available:
+    LOCAL_MAX_RETRIES = int(os.getenv('MAX_RETRIES', 3))
+    LOCAL_RETRY_DELAY_BASE = int(os.getenv('RETRY_DELAY_BASE', 5))
+
+
+    for attempt in range(LOCAL_MAX_RETRIES):
+        try:
+            logger.debug(f"Modal API call attempt {attempt + 1}/{LOCAL_MAX_RETRIES} for titles (PK: '{primary_keyword}')")
+            
+            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
+            if not ModelClass:
+                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
+                if attempt == LOCAL_MAX_RETRIES - 1: return None # Last attempt
+                delay = min(LOCAL_RETRY_DELAY_BASE * (2 ** attempt), 60)
+                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
+                time.sleep(delay)
+                continue
+            
+            model_instance = ModelClass()
+
+            result = model_instance.generate.remote(
+                messages=messages_for_modal,
+                max_new_tokens=max_new_tokens_for_titles
+                # temperature=0.65, # If Modal class supports it
+                # response_format={"type": "json_object"} # If Modal class supports it
+            )
+
+            if result and result.get("choices") and result["choices"][0].get("message") and \
+               isinstance(result["choices"][0]["message"].get("content"), str):
+                json_str = result["choices"][0]["message"]["content"]
+                logger.info(f"Modal LLM title gen successful for '{primary_keyword}'.")
+                logger.debug(f"Raw JSON for titles from Modal: {json_str}")
+                return json_str
+            else:
+                logger.error(f"Modal LLM title response missing content or malformed (attempt {attempt + 1}/{LOCAL_MAX_RETRIES}): {str(result)[:500]}")
+                if attempt == LOCAL_MAX_RETRIES - 1: return None
+        
+        except Exception as e:
+            logger.exception(f"Error during Modal API call for titles (attempt {attempt + 1}/{LOCAL_MAX_RETRIES}): {e}")
+            if attempt == LOCAL_MAX_RETRIES - 1:
+                logger.error("All Modal API attempts for titles failed due to errors.")
+                return None
+        
+        delay = min(LOCAL_RETRY_DELAY_BASE * (2 ** attempt), 60)
+        logger.warning(f"Modal API call for titles failed or returned unexpected data (attempt {attempt+1}/{LOCAL_MAX_RETRIES}). Retrying in {delay}s.")
+        time.sleep(delay)
+        
+    logger.error(f"Modal LLM API call for titles failed after {LOCAL_MAX_RETRIES} attempts for PK '{primary_keyword}'.")
+    return None
 
 def _clean_and_validate_title(title_str: str | None, max_len: int, title_type: str, pk_for_log: str, is_title_tag_content: bool = False) -> str:
     """Cleans, title cases, truncates, and validates a title string."""
@@ -409,7 +444,7 @@ def run_title_generator_agent(article_pipeline_data: dict) -> dict:
 if __name__ == "__main__":
     logging.getLogger('src.agents.title_generator_agent').setLevel(logging.DEBUG) # More verbose for this agent
     logger.info("--- Starting Title Generator Agent (Colon-Free, ftfy) Standalone Test ---")
-    if not os.getenv('LLM_API_KEY'): logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1)
+    # if not os.getenv('LLM_API_KEY'): logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1) # Modal handles auth
 
     sample_article_data = {
         'id': 'test_title_ftfy_001',

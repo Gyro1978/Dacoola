@@ -8,7 +8,8 @@ import sys
 import json
 import logging
 import re
-import requests
+# import requests # Commented out for Modal integration
+import modal # Added for Modal integration
 import time
 import ftfy
 import math
@@ -37,13 +38,16 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-LLM_API_KEY = os.getenv('LLM_API_KEY')
-LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions")
-LLM_MODEL_NAME = os.getenv('SECTION_WRITER_AGENT_MODEL', "deepseek-coder") # Use coder for precision
+# LLM_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
+# LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
+LLM_MODEL_NAME = os.getenv('SECTION_WRITER_AGENT_MODEL', "deepseek-R1") # Use coder for precision, updated
 
-API_TIMEOUT = 180 # Timeout for LLM calls
-MAX_RETRIES = 2 # Reduced retries for faster failure if LLM is problematic
-RETRY_DELAY_BASE = 7
+MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
+
+API_TIMEOUT = 180 # Retained for Modal call options if applicable
+MAX_RETRIES = 2 # Retained for application-level retries with Modal
+RETRY_DELAY_BASE = 7 # Retained for application-level retries with Modal
 
 # Revised Word Count Targets for SHORTER, more impactful sections
 TARGET_WORD_COUNT_MAP = {
@@ -178,7 +182,7 @@ def _count_words(text: str) -> int:
     if not cleaned_text: return 0
     return len(cleaned_text.split())
 
-def _truncate_content_to_word_count(content: str, max_words: int, section_type: str, is_html_snippet: bool) -> str:
+def _truncate_content_to_word_count(content: str, max_words: int, section_type: str, is_html_snippet: bool) -> str: # Renamed max_tokens_for_section to max_words for clarity
     initial_word_count = _count_words(content)
     if initial_word_count <= max_words: return content
 
@@ -249,32 +253,51 @@ def _truncate_content_to_word_count(content: str, max_words: int, section_type: 
         logger.warning(f"Markdown content for section '{section_type}' (impact focus) truncated: {initial_word_count} -> {final_word_count} words.")
     return final_content
 
-def _call_llm_for_section(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float, is_html_snippet: bool) -> str | None:
-    current_llm_api_key = LLM_API_KEY
-    if not current_llm_api_key:
-        logger.error("LLM_API_KEY not set."); return None
-    
-    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {current_llm_api_key}", "Accept": "application/json"}
-    user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2)
-    estimated_prompt_tokens = math.ceil(len(user_prompt_string_for_api.encode('utf-8')) / 3.2) 
-    logger.debug(f"Section writer (impact focus): Approx. prompt tokens: {estimated_prompt_tokens}, Max completion: {max_tokens}")
+def _call_llm_for_section(system_prompt: str, user_prompt_data: dict, max_tokens_for_section: int, temperature: float, is_html_snippet: bool) -> str | None:
+    # LLM_API_KEY check not needed for Modal
 
-    payload = {
-        "model": LLM_MODEL_NAME,
-        "messages": [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt_string_for_api}],
-        "max_tokens": max_tokens, "temperature": temperature, "stream": False
-    }
+    user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2)
+    estimated_prompt_tokens = math.ceil(len(user_prompt_string_for_api.encode('utf-8')) / 3.2) # Rough estimate
+    logger.debug(f"Section writer (Modal, impact focus): Approx. prompt tokens: {estimated_prompt_tokens}, Max completion: {max_tokens_for_section}")
+
+    messages_for_modal = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt_string_for_api}
+    ]
+
+    # Temperature is assumed to be handled by the Modal class or can be passed if supported.
+    # model_name (e.g. "deepseek-R1") is for logging/config; actual model used is defined in Modal class.
 
     for attempt in range(MAX_RETRIES):
         try:
-            response = requests.post(LLM_API_URL, headers=headers, json=payload, timeout=API_TIMEOUT)
-            response.raise_for_status()
-            result = response.json()
-            usage = result.get('usage')
-            if usage: logger.debug(f"API Usage (Section Impact Writer): P={usage.get('prompt_tokens')}, C={usage.get('completion_tokens')}, T={usage.get('total_tokens')}")
+            logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES} for section writer (model config: {LLM_MODEL_NAME})")
+            
+            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
+            if not ModelClass:
+                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
+                if attempt == MAX_RETRIES - 1: return None # Last attempt
+                delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
+                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
+                time.sleep(delay)
+                continue
+            
+            model_instance = ModelClass()
 
-            if result.get("choices") and result["choices"][0].get("message"):
-                content = result["choices"][0]["message"].get("content", "").strip()
+            result = model_instance.generate.remote(
+                messages=messages_for_modal,
+                max_new_tokens=max_tokens_for_section
+                # temperature=temperature, # If Modal class supports it
+            )
+            
+            # Assuming Modal class returns usage if available, but not strictly required by this agent's logic after the call.
+            # if result and result.get('usage'): 
+            #    usage = result.get('usage')
+            #    logger.debug(f"Modal API Usage (Section Impact Writer): P={usage.get('prompt_tokens')}, C={usage.get('completion_tokens')}, T={usage.get('total_tokens')}")
+
+
+            if result and result.get("choices") and result["choices"][0].get("message") and \
+               isinstance(result["choices"][0]["message"].get("content"), str):
+                content = result["choices"][0]["message"]["content"].strip()
                 
                 # Clean up potential markdown fences if LLM adds them by mistake
                 if content.startswith("```markdown") and content.endswith("```"): content = content[len("```markdown"):-len("```")].strip()
@@ -282,19 +305,23 @@ def _call_llm_for_section(system_prompt: str, user_prompt_data: dict, max_tokens
                 elif content.startswith("```") and content.endswith("```"): content = content[len("```"):-len("```")].strip()
                 
                 content = ftfy.fix_text(content) # General text cleaning
+                logger.info(f"Modal call successful for section writer (Attempt {attempt+1}/{MAX_RETRIES})")
                 return content
-            
-            logger.error(f"LLM API response missing content (attempt {attempt+1}/{MAX_RETRIES}): {result}"); return None
+            else:
+                logger.error(f"Modal API response missing content or malformed (attempt {attempt + 1}/{MAX_RETRIES}): {str(result)[:500]}")
+                if attempt == MAX_RETRIES - 1: return None
         
-        except requests.exceptions.RequestException as e:
-            logger.warning(f"LLM API call failed (attempt {attempt+1}/{MAX_RETRIES}): {e}. Retrying in {RETRY_DELAY_BASE * (2**attempt)}s.")
-            time.sleep(RETRY_DELAY_BASE * (2**attempt))
         except Exception as e:
-            logger.exception(f"Unexpected error during LLM API call (attempt {attempt+1}/{MAX_RETRIES}): {e}")
-            if attempt == MAX_RETRIES - 1: logger.error("LLM API call failed: unexpected error after all retries.")
-            else: time.sleep(RETRY_DELAY_BASE * (2**attempt))
+            logger.exception(f"Error during Modal API call for section writer (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
+            if attempt == MAX_RETRIES - 1:
+                logger.error("All Modal API attempts for section writer failed due to errors.")
+                return None
+        
+        delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
+        logger.warning(f"Modal API call for section writer failed or returned unexpected data (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
+        time.sleep(delay)
             
-    logger.error(f"LLM API call failed after {MAX_RETRIES} attempts."); return None
+    logger.error(f"Modal LLM API call for section writer failed after {MAX_RETRIES} attempts."); return None
 
 def _validate_html_snippet_structure(generated_html: str, section_type: str) -> bool:
     """
@@ -470,7 +497,7 @@ if __name__ == "__main__":
     logger.info("--- Starting Section Writer Agent (Impact Focus & Corrected Prompts) Standalone Test ---")
     logging.getLogger('src.agents.section_writer_agent').setLevel(logging.DEBUG) # More verbose for this agent
 
-    if not LLM_API_KEY: logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1)
+    # if not LLM_API_KEY: logger.error("LLM_API_KEY not set. Test aborted."); sys.exit(1) # Modal handles auth
 
     sample_full_article_context = {
         "Article Title": "AI Breakthrough: Sentient Toaster Demands Philosophical Debate & Rights", 

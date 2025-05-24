@@ -4,7 +4,8 @@ import os
 import sys
 import json
 import logging
-import requests
+# import requests # Commented out for Modal integration
+import modal # Added for Modal integration
 import re
 import time
 
@@ -31,13 +32,16 @@ if not logger.handlers:
 # --- End Setup Logging ---
 
 # --- Configuration & Constants ---
-LLM_API_KEY = os.getenv('LLM_API_KEY')
-LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions")
-LLM_MODEL_NAME = os.getenv('SEO_REVIEW_AGENT_MODEL', "deepseek-chat")
+# LLM_API_KEY = os.getenv('LLM_API_KEY') # Commented out, Modal handles auth
+# LLM_API_URL = os.getenv('LLM_API_URL', "https://api.deepseek.com/chat/completions") # Commented out, Modal endpoint used
+LLM_MODEL_NAME = os.getenv('SEO_REVIEW_AGENT_MODEL', "deepseek-R1") # Updated model name
 
-API_TIMEOUT = 180
-MAX_RETRIES = 3
-RETRY_DELAY_BASE = 10
+MODAL_APP_NAME = "deepseek-inference-app" # Name of the Modal app
+MODAL_CLASS_NAME = "DeepSeekModel" # Name of the class in the Modal app
+
+API_TIMEOUT = 180 # Retained for Modal call options if applicable
+MAX_RETRIES = 3 # Retained for application-level retries with Modal
+RETRY_DELAY_BASE = 10 # Retained for application-level retries with Modal
 
 EARLY_BODY_WORD_COUNT = 150 # Approx word count for "early in body" check
 
@@ -206,61 +210,62 @@ Execute your analysis with the precision and depth expected of an ASI. Your outp
 
 # --- Helper Functions ---
 def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, temperature: float) -> str | None:
-    """Generic function to call LLM API with retry logic."""
-    if not LLM_API_KEY:
-        logger.error("LLM_API_KEY not set (checked from global).")
-        return None
-
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {LLM_API_KEY}",
-        "Accept": "application/json"
-    }
+    """Generic function to call LLM API using Modal with retry logic."""
+    # LLM_API_KEY check not needed for Modal
 
     user_prompt_string_for_api = json.dumps(user_prompt_data, indent=2)
 
-    payload = {
-        "model": LLM_MODEL_NAME,
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt_string_for_api}
-        ],
-        "max_tokens": max_tokens,
-        "temperature": temperature,
-        "stream": False,
-        "response_format": {"type": "json_object"}
-    }
+    messages_for_modal = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt_string_for_api}
+    ]
+
+    # Temperature and response_format are assumed to be handled by the Modal class
+    # or can be passed to generate.remote if the Modal class supports them.
+    # LLM_MODEL_NAME (e.g. "deepseek-R1") is for logging/config; actual model used is defined in Modal class.
 
     for attempt in range(MAX_RETRIES):
         try:
-            response = requests.post(LLM_API_URL, headers=headers, json=payload, timeout=API_TIMEOUT)
-            response.raise_for_status()
-            result = response.json()
-            if result.get("choices") and result["choices"][0].get("message"):
-                content = result["choices"][0]["message"].get("content", "").strip()
-                return content
-            logger.error(f"LLM API response missing content (attempt {attempt + 1}/{MAX_RETRIES}): {result}")
-            return None
-        except requests.exceptions.RequestException as e:
-            status_code_str = 'N/A'
-            response_text_str = 'No response text'
-            if hasattr(e, 'response') and e.response is not None:
-                status_code_str = str(e.response.status_code)
-                try:
-                    response_text_str = e.response.text[:500] if e.response.text else "Empty response text"
-                except Exception:
-                    response_text_str = "Error reading response text"
+            logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES} for SEO review (model config: {LLM_MODEL_NAME})")
             
-            error_details = f"HTTP Status: {status_code_str}"
-            if response_text_str != 'No response text':
-                error_details += f", Response Snippet: {response_text_str}"
+            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
+            if not ModelClass:
+                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
+                if attempt == MAX_RETRIES - 1: return None # Last attempt
+                delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
+                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
+                time.sleep(delay)
+                continue
+            
+            model_instance = ModelClass()
 
-            logger.warning(f"LLM API call failed (attempt {attempt + 1}/{MAX_RETRIES}): {type(e).__name__} - {e}. {error_details}. Retrying in {RETRY_DELAY_BASE * (2 ** attempt)} seconds.")
-            time.sleep(RETRY_DELAY_BASE * (2 ** attempt))
+            result = model_instance.generate.remote(
+                messages=messages_for_modal,
+                max_new_tokens=max_tokens
+                # temperature=temperature, # If Modal class supports it
+                # response_format={"type": "json_object"} # If Modal class supports it
+            )
+
+            if result and result.get("choices") and result["choices"][0].get("message") and \
+               isinstance(result["choices"][0]["message"].get("content"), str):
+                content = result["choices"][0]["message"]["content"].strip()
+                logger.info(f"Modal call successful for SEO review (Attempt {attempt+1}/{MAX_RETRIES})")
+                return content
+            else:
+                logger.error(f"Modal API response missing content or malformed (attempt {attempt + 1}/{MAX_RETRIES}): {str(result)[:500]}")
+                if attempt == MAX_RETRIES - 1: return None
+        
         except Exception as e:
-            logger.exception(f"Unexpected error during LLM API call (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
-            break
-    logger.error(f"LLM API call failed after {MAX_RETRIES} attempts.")
+            logger.exception(f"Error during Modal API call for SEO review (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
+            if attempt == MAX_RETRIES - 1:
+                logger.error("All Modal API attempts for SEO review failed due to errors.")
+                return None
+        
+        delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
+        logger.warning(f"Modal API call for SEO review failed or returned unexpected data (attempt {attempt+1}/{MAX_RETRIES}). Retrying in {delay}s.")
+        time.sleep(delay)
+        
+    logger.error(f"Modal LLM API call for SEO review failed after {MAX_RETRIES} attempts.")
     return None
 
 def _parse_llm_seo_review_response(json_string: str) -> dict | None:
@@ -422,9 +427,9 @@ if __name__ == "__main__":
     logging.getLogger('src.agents.seo_review_agent').setLevel(logging.DEBUG)
     logger.info("--- Starting SEO Review Agent Standalone Test ---")
 
-    if not os.getenv('LLM_API_KEY'):
-        logger.error("LLM_API_KEY env var not set. Test aborted.")
-        sys.exit(1)
+    # if not os.getenv('LLM_API_KEY'): # Modal handles auth
+    #     logger.error("LLM_API_KEY env var not set. Test aborted.")
+    #     sys.exit(1)
 
     # Standalone test data, ensuring `full_generated_article_body_md` is used
     test_article_data = {

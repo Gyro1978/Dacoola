@@ -38,7 +38,6 @@ jobs:
 
       - name: Run Main Script (Generates Content and Sitemap)
         env:
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
           YOUR_WEBSITE_NAME: ${{ secrets.YOUR_WEBSITE_NAME || vars.YOUR_WEBSITE_NAME || 'Dacoola' }}
           YOUR_WEBSITE_LOGO_URL: ${{ secrets.YOUR_WEBSITE_LOGO_URL || vars.YOUR_WEBSITE_LOGO_URL || '' }}

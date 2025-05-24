@@ -1,0 +1,5 @@
+## LLM Setup with Modal and DeepSeek R1
+
+This project has been updated to utilize a custom-deployed instance of the DeepSeek R1 language model, hosted on the [Modal](https://modal.com/) serverless platform. This replaces previous direct API calls to public LLM services (like DeepSeek's public API endpoints) for all core text generation tasks performed by the agents. This approach allows for greater control over the model environment, potentially better performance, and more predictable costs.
+
+For detailed instructions on configuring your local environment to work with this Modal-based LLM setup, including essential environment variables and the required configuration for the Modal deployment script (notably the specific JSON output format expected from the `generate` method of the deployed model class), please refer to the [**MODAL_INTEGRATION_GUIDE.md**](MODAL_INTEGRATION_GUIDE.md). To verify that your Modal deployment and the integrated agents are functioning correctly, please consult the [**TESTING_PLAN.md**](TESTING_PLAN.md).
