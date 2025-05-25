@@ -404,19 +404,45 @@ def run_title_generator_agent(article_pipeline_data: dict) -> dict:
     logger.info(f"--- Running Title Generator Agent (Colon-Free, ftfy Enhanced) for Article ID: {article_id} ---")
 
     final_keywords_list = article_pipeline_data.get('final_keywords', [])
-    primary_keyword = final_keywords_list if final_keywords_list and isinstance(final_keywords_list, list) else None
-    if not primary_keyword:
-        primary_keyword = article_pipeline_data.get('primary_topic_keyword', article_pipeline_data.get('title', 'Key Tech Topic'))
-        logger.warning(f"Primary keyword for title gen not from 'final_keywords' for {article_id}, using fallback: '{primary_keyword}'")
+    primary_keyword_str = None
 
-    secondary_keywords = [kw for kw in final_keywords_list if kw.lower() != primary_keyword.lower()][:2] if final_keywords_list else []
+    if final_keywords_list and isinstance(final_keywords_list, list) and len(final_keywords_list) > 0:
+        if isinstance(final_keywords_list[0], str) and final_keywords_list[0].strip():
+            primary_keyword_str = final_keywords_list[0].strip()
+        else:
+            logger.warning(f"First element of final_keywords_list for {article_id} is not a valid string. Proceeding to fallbacks.")
+
+    if not primary_keyword_str:
+        fallback_pk_source = article_pipeline_data.get('primary_topic_keyword')
+        if fallback_pk_source and isinstance(fallback_pk_source, str) and fallback_pk_source.strip():
+            primary_keyword_str = fallback_pk_source.strip()
+            logger.warning(f"Primary keyword for title gen for {article_id} not from final_keywords[0], using 'primary_topic_keyword': '{primary_keyword_str}'")
+        else:
+            fallback_pk_source = article_pipeline_data.get('title')
+            if fallback_pk_source and isinstance(fallback_pk_source, str) and fallback_pk_source.strip():
+                primary_keyword_str = fallback_pk_source.strip()
+                logger.warning(f"Primary keyword for title gen for {article_id} not from final_keywords[0] or 'primary_topic_keyword', using 'title': '{primary_keyword_str}'")
+            else:
+                primary_keyword_str = "Key Tech Topic" # Ultimate fallback
+                logger.warning(f"Primary keyword for title gen for {article_id} could not be determined from keywords or title, using default: '{primary_keyword_str}'")
+
+    secondary_keywords = []
+    if final_keywords_list and isinstance(final_keywords_list, list):
+        seen_keywords = {primary_keyword_str.lower()}
+        for kw in final_keywords_list:
+            if isinstance(kw, str) and kw.strip() and kw.lower() not in seen_keywords:
+                secondary_keywords.append(kw.strip())
+                seen_keywords.add(kw.lower())
+            if len(secondary_keywords) >= 2:
+                break
+    
     processed_summary = article_pipeline_data.get('processed_summary', '')
     article_content_for_snippet = article_pipeline_data.get('raw_scraped_text', processed_summary) 
     article_content_snippet_for_llm = (article_content_for_snippet or "")[:MAX_CONTENT_SNIPPET_LEN_CONTEXT] 
     
-    pk_for_fallback_logic = primary_keyword or "Tech Insight"
+    pk_for_fallback_logic = primary_keyword_str if (primary_keyword_str and primary_keyword_str != "Key Tech Topic") else "Tech Insight"
 
-    if not primary_keyword and not processed_summary and not article_content_snippet_for_llm:
+    if not primary_keyword_str and not processed_summary and not article_content_snippet_for_llm : # Check if primary_keyword_str is meaningful
         logger.error(f"Insufficient context (PK, summary, snippet all missing/short) for {article_id}. Using fallbacks for titles.")
         fallback_title_content = truncate_text(to_title_case(DEFAULT_FALLBACK_TITLE_TAG_RAW.format(primary_keyword=pk_for_fallback_logic)), TITLE_TAG_CONTENT_TARGET_MAX_LEN)
         title_results = {
@@ -424,7 +450,7 @@ def run_title_generator_agent(article_pipeline_data: dict) -> dict:
             'generated_seo_h1': truncate_text(to_title_case(DEFAULT_FALLBACK_H1_RAW.format(primary_keyword=pk_for_fallback_logic)), SEO_H1_HARD_MAX_LEN),
             'title_strategy_notes': "Fallback: Insufficient input for LLM.", 'error': "Insufficient input."}
     else:
-        raw_llm_response = call_llm_for_titles(primary_keyword, secondary_keywords, processed_summary, article_content_snippet_for_llm)
+        raw_llm_response = call_llm_for_titles(primary_keyword_str, secondary_keywords, processed_summary, article_content_snippet_for_llm)
         title_results = parse_llm_title_response(raw_llm_response, pk_for_fallback_logic)
 
     article_pipeline_data.update(title_results)
