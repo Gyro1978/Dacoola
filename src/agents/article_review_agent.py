@@ -207,20 +207,19 @@ def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, tempe
     for attempt in range(MAX_RETRIES):
         try:
             logger.info(f"Attempting to call Modal function: {MODAL_APP_NAME} / {MODAL_CLASS_NAME} (Attempt {attempt+1}/{MAX_RETRIES})")
+            
             # Get a handle to the Modal class
-            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            if not ModelClass:
-                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
-                return None
+            RemoteModelClass = modal.Cls.from_name(MODAL_APP_NAME, MODAL_CLASS_NAME)
+            if not RemoteModelClass:
+                logger.error(f"Could not find Modal class {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
+                # Allow retry logic to handle this by raising an exception caught below
+                if attempt == MAX_RETRIES - 1: return None
+                raise modal.exception.NotFoundError(f"Modal class {MODAL_APP_NAME}/{MODAL_CLASS_NAME} not found on attempt {attempt+1}.")
 
             # Instantiate the remote class
-            model_instance = ModelClass()
+            model_instance = RemoteModelClass()
 
             # Call the generate method
-            # The remote generate method should be designed to accept 'messages' and 'max_new_tokens'
-            # and return a dict like: {"choices": [{"message": {"content": "..."}}]}
-            # Temperature is not directly passed here, assuming it's configured in the Modal class or
-            # could be added as a parameter to generate if the Modal class supports it.
             result = model_instance.generate.remote(
                 messages=messages_for_modal,
                 max_new_tokens=max_tokens,

@@ -257,14 +257,14 @@ def call_deepseek_api(system_prompt: str, user_prompt: str) -> Optional[str]:
         try:
             logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES_API} for filter agent")
             
-            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            if not ModelClass:
-                logger.error(f"CRITICAL: Could not look up Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME} on attempt {attempt + 1}/{MAX_RETRIES_API}. Ensure it's deployed and names are correct.")
+            RemoteModelClass = modal.Cls.from_name(MODAL_APP_NAME, MODAL_CLASS_NAME)
+            if not RemoteModelClass:
+                logger.error(f"CRITICAL: Could not find Modal class {MODAL_APP_NAME}/{MODAL_CLASS_NAME} on attempt {attempt + 1}/{MAX_RETRIES_API}. Ensure it's deployed and names are correct.")
                 if attempt == MAX_RETRIES_API - 1:
-                    logger.error(f"Modal function lookup failed on final attempt for {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Returning None.")
-                    return None # Explicit return on final attempt after logging
-            else:
-                model_instance = ModelClass() # Only create instance if lookup succeeded
+                    logger.error(f"Modal class lookup failed on final attempt for {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Returning None.")
+                    return None
+            
+            model_instance = RemoteModelClass() # Instantiate the remote class
             
             result = model_instance.generate.remote(
                 messages=messages_for_modal,

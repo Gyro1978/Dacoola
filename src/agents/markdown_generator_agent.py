@@ -172,16 +172,16 @@ def _call_llm(system_prompt: str, user_prompt_data: dict, max_tokens: int, tempe
         try:
             logger.debug(f"Modal API call attempt {attempt + 1}/{MAX_RETRIES} for markdown plan (model config: {model_name})")
             
-            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            if not ModelClass:
-                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
+            RemoteModelClass = modal.Cls.from_name(MODAL_APP_NAME, MODAL_CLASS_NAME)
+            if not RemoteModelClass:
+                logger.error(f"Could not find Modal class {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
                 if attempt == MAX_RETRIES - 1: return None # Last attempt
                 delay = min(RETRY_DELAY_BASE * (2 ** attempt), 60) # Using global RETRY_DELAY_BASE
-                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
+                logger.info(f"Waiting {delay}s for Modal class lookup before retry...")
                 time.sleep(delay)
                 continue
             
-            model_instance = ModelClass()
+            model_instance = RemoteModelClass() # Instantiate the remote class
 
             result = model_instance.generate.remote(
                 messages=messages_for_modal,

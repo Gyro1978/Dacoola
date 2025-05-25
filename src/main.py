@@ -65,18 +65,18 @@ YOUR_WEBSITE_LOGO_URL = os.getenv('WEBSITE_LOGO_URL', 'https://ibb.co/tpKjc98q')
 # Explicitly get YOUR_SITE_BASE_URL from environment, this is what GitHub Actions sets
 # Use a distinct variable name first to avoid confusion with the later script variable
 env_your_site_base_url = os.getenv('YOUR_SITE_BASE_URL')
-dotenv_path = os.path.join(PROJECT_ROOT_FOR_PATH, '.env') # Ensure dotenv_path is defined before use
+# dotenv_path is defined earlier, and load_dotenv() has already been called.
+# os.getenv will check environment variables first, then .env variables if load_dotenv was effective.
 
 if env_your_site_base_url:
     raw_base_url = env_your_site_base_url
     # Logger is not configured yet, print statements for this initial phase were removed
     # Logger calls will be made after logger initialization for these.
 else:
-    # Fallback if YOUR_SITE_BASE_URL is not in env (e.g. local run without .env properly set)
-    raw_base_url = os.getenv('WEBSITE_BASE_URL') # Try WEBSITE_BASE_URL from env first
-    if not raw_base_url: # If still not found, try .env
-        # load_dotenv(dotenv_path=dotenv_path) # Already called initially
-        raw_base_url = os.getenv('WEBSITE_BASE_URL', 'https://dacoolaa.netlify.app') # Default if not in .env
+    # Fallback if YOUR_SITE_BASE_URL is not in env
+    raw_base_url = os.getenv('WEBSITE_BASE_URL') # Checks env, then .env if not in env
+    if not raw_base_url: # If WEBSITE_BASE_URL is also not found in either env or .env
+        raw_base_url = 'https://dacoolaa.netlify.app' # Set default directly
 
 # The main script variable for the processed base URL
 YOUR_SITE_BASE_URL_SCRIPT_VAR = (raw_base_url.rstrip('/') + '/') if raw_base_url and raw_base_url != 'https://dacoolaa.netlify.app' else ''

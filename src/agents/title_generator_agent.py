@@ -82,7 +82,7 @@ def to_title_case(text_str: str) -> str:
             title_cased_words.append(word)
             continue
 
-        cap_word = word.upper() + word[1:].lower() if len(word) > 1 else word.upper()
+        cap_word = word[0].upper() + word[1:].lower() if word else "" # Corrected capitalization
         if i == 0 or i == len(words) - 1 or word.lower() not in small_words:
             title_cased_words.append(cap_word)
         else:
@@ -218,16 +218,16 @@ def call_llm_for_titles(primary_keyword: str,
         try:
             logger.debug(f"Modal API call attempt {attempt + 1}/{LOCAL_MAX_RETRIES} for titles (PK: '{primary_keyword}')")
             
-            ModelClass = modal.Function.lookup(MODAL_APP_NAME, MODAL_CLASS_NAME)
-            if not ModelClass:
-                logger.error(f"Could not find Modal function {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
+            RemoteModelClass = modal.Cls.from_name(MODAL_APP_NAME, MODAL_CLASS_NAME)
+            if not RemoteModelClass:
+                logger.error(f"Could not find Modal class {MODAL_APP_NAME}/{MODAL_CLASS_NAME}. Ensure it's deployed.")
                 if attempt == LOCAL_MAX_RETRIES - 1: return None # Last attempt
                 delay = min(LOCAL_RETRY_DELAY_BASE * (2 ** attempt), 60)
-                logger.info(f"Waiting {delay}s for Modal function lookup before retry...")
+                logger.info(f"Waiting {delay}s for Modal class lookup before retry...")
                 time.sleep(delay)
                 continue
             
-            model_instance = ModelClass()
+            model_instance = RemoteModelClass() # Instantiate the remote class
 
             result = model_instance.generate.remote(
                 messages=messages_for_modal,
@@ -341,24 +341,23 @@ def _clean_and_validate_title(title_str: str | None, max_len: int, title_type: s
 
 def parse_llm_title_response(json_string: str | None, primary_keyword_for_fallback: str) -> dict:
     parsed_data = {'generated_title_tag': None, 'generated_seo_h1': None, 'title_strategy_notes': None, 'error': None}
-    pk_fallback_clean = primary_keyword_for_fallback or "Tech News"
+    pk_fallback_clean = (primary_keyword_for_fallback or "Tech News").replace(":", " ") # Ensure colon-free PK for fallback
 
-    def create_fallback_title_tag():
-        raw_fallback = DEFAULT_FALLBACK_TITLE_TAG_RAW.format(primary_keyword=pk_fallback_clean)
-        title_cased = to_title_case(raw_fallback)
-        # Truncate content part before adding suffix
-        content_part = truncate_text(title_cased, TITLE_TAG_CONTENT_TARGET_MAX_LEN)
-        return content_part + BRAND_SUFFIX_FOR_TITLE_TAG
+    def create_fallback_title_tag_content(): # Renamed to indicate it returns content part
+        raw_fallback_content = DEFAULT_FALLBACK_TITLE_TAG_RAW.format(primary_keyword=pk_fallback_clean)
+        # Pass through _clean_and_validate_title for consistent cleaning including colon removal
+        return _clean_and_validate_title(raw_fallback_content, TITLE_TAG_CONTENT_TARGET_MAX_LEN, "Fallback Title Tag Content", pk_fallback_clean, is_title_tag_content=True)
 
     def create_fallback_h1():
-        raw_fallback = DEFAULT_FALLBACK_H1_RAW.format(primary_keyword=pk_fallback_clean)
-        title_cased = to_title_case(raw_fallback)
-        return truncate_text(title_cased, SEO_H1_HARD_MAX_LEN)
+        raw_fallback_h1 = DEFAULT_FALLBACK_H1_RAW.format(primary_keyword=pk_fallback_clean)
+        # Pass through _clean_and_validate_title for consistent cleaning
+        return _clean_and_validate_title(raw_fallback_h1, SEO_H1_HARD_MAX_LEN, "Fallback SEO H1", pk_fallback_clean)
 
     if not json_string:
         parsed_data['error'] = "LLM response for titles was empty."
-        parsed_data['generated_title_tag'] = create_fallback_title_tag()
-        parsed_data['generated_seo_h1'] = create_fallback_h1()
+        fallback_title_content = create_fallback_title_tag_content()
+        parsed_data['generated_title_tag'] = (fallback_title_content + BRAND_SUFFIX_FOR_TITLE_TAG) if fallback_title_content else (DEFAULT_FALLBACK_TITLE_TAG_RAW.format(primary_keyword="Update") + BRAND_SUFFIX_FOR_TITLE_TAG) # Ultimate fallback if cleaning returns empty
+        parsed_data['generated_seo_h1'] = create_fallback_h1() or DEFAULT_FALLBACK_H1_RAW.format(primary_keyword="Breaking News") # Ultimate fallback
         logger.warning(f"Using fallback titles for '{pk_fallback_clean}' (empty LLM response).")
         return parsed_data
 
@@ -379,12 +378,13 @@ def parse_llm_title_response(json_string: str | None, primary_keyword_for_fallba
         if cleaned_title_tag_content:
             parsed_data['generated_title_tag'] = cleaned_title_tag_content + BRAND_SUFFIX_FOR_TITLE_TAG
         else:
-            parsed_data['generated_title_tag'] = create_fallback_title_tag()
+            fallback_title_content = create_fallback_title_tag_content()
+            parsed_data['generated_title_tag'] = (fallback_title_content + BRAND_SUFFIX_FOR_TITLE_TAG) if fallback_title_content else (DEFAULT_FALLBACK_TITLE_TAG_RAW.format(primary_keyword="Update") + BRAND_SUFFIX_FOR_TITLE_TAG)
             parsed_data['error'] = (parsed_data.get('error') or "") + "Missing/invalid title_tag_content from LLM. "
         
         seo_h1_raw = llm_output.get('generated_seo_h1')
         cleaned_seo_h1 = _clean_and_validate_title(seo_h1_raw, SEO_H1_HARD_MAX_LEN, "SEO H1", pk_fallback_clean)
-        parsed_data['generated_seo_h1'] = cleaned_seo_h1 if cleaned_seo_h1 else create_fallback_h1()
+        parsed_data['generated_seo_h1'] = cleaned_seo_h1 if cleaned_seo_h1 else (create_fallback_h1() or DEFAULT_FALLBACK_H1_RAW.format(primary_keyword="Breaking News"))
         if not cleaned_seo_h1: parsed_data['error'] = (parsed_data.get('error') or "") + "Missing/invalid seo_h1 from LLM. "
 
         parsed_data['title_strategy_notes'] = llm_output.get('title_strategy_notes')
@@ -395,8 +395,9 @@ def parse_llm_title_response(json_string: str | None, primary_keyword_for_fallba
     except Exception as e:
         logger.error(f"Error parsing LLM title response '{json_string[:200]}...': {e}", exc_info=True)
         parsed_data['error'] = str(e)
-        parsed_data['generated_title_tag'] = create_fallback_title_tag()
-        parsed_data['generated_seo_h1'] = create_fallback_h1()
+        fallback_title_content = create_fallback_title_tag_content()
+        parsed_data['generated_title_tag'] = (fallback_title_content + BRAND_SUFFIX_FOR_TITLE_TAG) if fallback_title_content else (DEFAULT_FALLBACK_TITLE_TAG_RAW.format(primary_keyword="Update") + BRAND_SUFFIX_FOR_TITLE_TAG)
+        parsed_data['generated_seo_h1'] = create_fallback_h1() or DEFAULT_FALLBACK_H1_RAW.format(primary_keyword="Breaking News")
     return parsed_data
 
 def run_title_generator_agent(article_pipeline_data: dict) -> dict:
@@ -497,14 +498,14 @@ if __name__ == "__main__":
         colon_fail = True
     
     if '�' in generated_title_tag or '�' in generated_seo_h1:
-        logger.error("TEST FAILED: Mojibake '�' character found in titles!")
+        logger.error("TEST FAILED: Unicode replacement characters (U+FFFD) found in titles!")
         problem_chars_fail = True
     if '—' in generated_title_tag or '—' in generated_seo_h1: # Check for em-dash
         logger.warning("STYLE WARNING: Em-dash '—' found in titles. Prompt discourages this.")
         # Not a hard fail for now, but a style deviation.
 
     if not colon_fail: logger.info("COLON TEST PASSED: No problematic colons found.")
-    if not problem_chars_fail: logger.info("MOJIBAKE TEST PASSED: No '�' found.")
+    if not problem_chars_fail: logger.info("MOJIBAKE TEST PASSED: No Unicode replacement characters (U+FFFD) found.")
     
     logger.info("\n--- Test Fallback (Colon-Free, ftfy Focus) ---")
     minimal_data = {'id': 'test_fallback_ftfy_002', 'primary_topic_keyword': "Quantum Computing: The Future?"} # Test with colon in PK
@@ -516,10 +517,10 @@ if __name__ == "__main__":
         logger.error("FALLBACK COLON TEST FAILED: Colon found in fallback title tag or H1 (excluding allowed patterns).")
     else:
         logger.info("FALLBACK COLON TEST PASSED: No problematic colons found in fallback titles.")
-    if '�' in result_minimal.get('generated_title_tag','') or '�' in result_minimal.get('generated_seo_h1',''):
-        logger.error("FALLBACK MOJIBAKE TEST FAILED: '�' found in fallback titles!")
+    if '�' in result_minimal.get('generated_title_tag','') or '�' in result_minimal.get('generated_seo_h1',''): # Check for literal replacement char
+        logger.error("FALLBACK MOJIBAKE TEST FAILED: Unicode replacement characters (U+FFFD) found in fallback titles!")
     else:
-        logger.info("FALLBACK MOJIBAKE TEST PASSED: No '�' found in fallback titles.")
+        logger.info("FALLBACK MOJIBAKE TEST PASSED: No Unicode replacement characters (U+FFFD) found in fallback titles.")
 
 
     logger.info("--- Standalone Test (Colon-Free, ftfy Focus) Complete ---")
